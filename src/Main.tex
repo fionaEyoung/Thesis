@@ -1,6 +1,6 @@
 % UCL Thesis LaTeX Template
 %  (c) Ian Kirker, 2014
-% 
+%
 % This is a template/skeleton for PhD/MPhil/MRes theses.
 %
 % It uses a rather split-up file structure because this tends to
@@ -23,12 +23,12 @@
 %  http://tex.stackexchange.com/questions/246/when-should-i-use-input-vs-include
 
 
-% Formatting and binding rules for theses are here: 
+% Formatting and binding rules for theses are here:
 %  https://www.ucl.ac.uk/students/exams-and-assessments/research-assessments/format-bind-and-submit-your-thesis-general-guidance
 
-% This package goes first and foremost, because it checks all 
+% This package goes first and foremost, because it checks all
 %  your syntax for mistakes and some old-fashioned LaTeX commands.
-% Note that normally you should load your documentclass before 
+% Note that normally you should load your documentclass before
 %  packages, because some packages change behaviour based on
 %  your document settings.
 % Also, for those confused by the RequirePackage here vs usepackage
@@ -40,7 +40,7 @@
 
 % ------ Main document class specification ------
 % The draft option here prevents images being inserted,
-%  and adds chunky black bars to boxes that are exceeding 
+%  and adds chunky black bars to boxes that are exceeding
 %  the page width (to show that they are).
 % The oneside option can optionally be replaced by twoside if
 %  you intend to print double-sided. Note that this is
@@ -51,15 +51,15 @@
 %  phd
 %  mres
 %  mphil
-%\documentclass[12pt,phd,draft,a4paper,oneside]{ucl_thesis}
-\documentclass[12pt,phd,a4paper,oneside]{ucl_thesis}
 
+\documentclass[11pt,phd,a4paper,oneside,draft]{ucl_thesis}
 
 % Package configuration:
-%  LaTeX uses "packages" to add extra commands and features.
-%  There are quite a few useful ones, so we've put them in a 
-%   separate file.
 \input{MainPackages}
+
+\raggedbottom
+\widowpenalty10000
+\clubpenalty10000
 
 % Sets up links within your document, for e.g. contents page entries
 %  and references, and also PDF metadata.
@@ -77,12 +77,17 @@
 \setcounter{tocdepth}{3}
 
 
+% Custom \note command for formatting big red notes
+\newcommand\note[1]{{\large \textcolor{red}{#1} }}
+
+%\includeonly{Introduction}
+
 \begin{document}
 
-\nobibliography*
+% \nobibliography*
 % ^-- This is a dumb trick that works with the bibentry package to let
 %  you put bibliography entries whereever you like.
-% I used this to put references to papers a chapter's work was 
+% I used this to put references to papers a chapter's work was
 %  published in at the end of that chapter.
 % For more information, see: http://stefaanlippens.net/bibentry
 
@@ -92,20 +97,22 @@
 % Uncomment to use.
 %\renewcommand{\cite}[1]{\emph{\textsuperscript{[#1]}}}
 
-% At last, content! Remember filenames are case-sensitive and 
+% At last, content! Remember filenames are case-sensitive and
 %  *must not* include spaces.
-\include{Preamble}
+
+
+\ifdraft{
+  \setcounter{tocdepth}{2}
+  \tableofcontents}
+{\include{Preamble}}
 \include{Introduction}
-\include{Chapter2}
-\include{Chapter3}
-\include{Conclusions}
-\include{Appendices} 
+\include{Appendices}
 % You could separate these out into different files if you have
 %  particularly large appendices.
 
-% Actually generates your bibliography. The fact that \include is 
+% Actually generates your bibliography. The fact that \include is
 % the last thing before this ensures that it is on a clear page.
-\bibliography{example}
+\printbibliography
 
 % All done. \o/
 \end{document}

@@ -1,1 +1,30 @@
-\bibliographystyle{unsrt}
+%\bibliographystyle{unsrt}
+
+% Bibliography and referencing settings
+
+\usepackage[doi=true,isbn=true,url=false,natbib=true,style=nature,backend=bibtex]{biblatex} % Add citation styles as needed (see docs for biblatex)
+\IfFileExists{\string~/Documents/Mendeley/bib_files/Neuroimaging.bib}
+          {\addbibresource{\string~/Documents/Mendeley/bib_files/Neuroimaging.bib}}
+          {\addbibresource{./Neuroimaging.bib}}
+\IfFileExists{\string~/Documents/Mendeley/bib_files/Neurosurgery.bib}
+          {\addbibresource{\string~/Documents/Mendeley/bib_files/Neurosurgery.bib}}
+          {\addbibresource{./Neurosurgery.bib}}
+\IfFileExists{\string~/Documents/Mendeley/bib_files/Figures.bib}
+          {\addbibresource{\string~/Documents/Mendeley/bib_files/Figures.bib}}
+          {\addbibresource{./Figures.bib}}
+% \addbibresource{./Neuroimaging.bib}
+% \addbibresource{./Neurosurgery.bib}
+
+
+% Make DOIs look normal
+\urlstyle{same}
+
+ % Path to bib file (e.g. generated from Mendeley)
+% \renewcommand*{\bibfont}{\small} % Make bibligraphy small
+
+% Use the below in conjunction with nature style referencing to get proper behaviour of textcite command (numeric citation still superscript rather than bracket)
+\usepackage{ifthen}
+\renewcommand{\textcite}[2][]{
+\ifthenelse { \equal {#1} {} }  %
+    {\citeauthor{#2}\autocite{#2}}   % if #1 == blank
+    {\citeauthor{#1}\autocite{#2}}}

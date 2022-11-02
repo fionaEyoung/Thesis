@@ -4,19 +4,75 @@
 % The \appendix command resets the chapter counter, and changes the chapter numbering scheme to capital letters.
 %\chapter{Appendices}
 \appendix
-\chapter{An Appendix About Stuff}
-\label{appendixlabel1}
-(stuff)
 
-\chapter{Another Appendix About Things}
-\label{appendixlabel2}
-(things)
+
+\chapter{Tractography parameters and ROI protocols}
+\label{app:rois}
+
+The following tracking parameters were used for all probabilistic streamline tractography experiments unless otherwise indicated:
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center}
+\begin{tabular}{ l l }
+  Parameter & Value \\
+ \hline
+ Algorithm      &   iFOD2\autocite{Tournier2010} \\
+ Number of streamlines selected &   5000 \\
+ Maximum angle  &   45\degree  \\
+ Step size & $0.5 \, \mathsf{x}$ voxel size \\
+ FOD amplitude threshold & 0.1 \\
+\end{tabular}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For all pathways, streamlines were generated separately for each hemisphere, before concatenation for further processing.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Appendix/OR.png}
+  \caption{Optic radiation ROIs. Top: Coronal slice of saggital stratum. Middle: Lateral geniculate nucleus. Bottom: Exclusion slices.}\label{fig:orrois}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Optic radiation}
+
+Streamlines for the optic radiation were generated according to the following protocol (Fig. \ref{fig:orrois}):
+Streamlines were seeded randomly and unidirectionally within a region of interest (ROI) placed on the lateral geniculate nucleus.
+An inclusion ROI was placed on two consecutive coronal slices covering the saggital stratum.
+Exclusion ROI slices were placed at the level of the superior boundary of the lateral ventricles, two axial slices inferior to the lowest extent the anterior horn of the lateral ventricles, two coronal slices anterior to the anterior horn of the lateral ventricles, along the saggital midline, coronally through the fornix and sagitally through the thalamus.
+Additional exclusion slices were used in some cases to exclude streamlines from the corpus callosum and brainstem.
+
+
+
+\section{Corticospinal Tract}
+
+Streamlines for the corticospinal tract were generated according to the following protocol (Fig. \ref{fig:cstrois}):
+Streamlines were seeded randomly and bidirectionally within an ROI placed on three consecutive axial slices of the posterior limb of the internal capsule.
+Inclusion ROIs were placed on the cerebral peduncles (two consecutive axial slices) and at the level of the pons.
+Exclusion ROIs were drawn for the cerebellar peduncles (single coronal slice), medial lemniscus (single axial slice), superior fronto-occipital fasciculus (consecutive axial slices), superior longitudinal fasciculus (consecutive axial slices) and saggital midline.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{Appendix/CST.png}
+  \caption{ROIs used in corticospinal tract tractography. Clockwise from bottom right: Posterior limb of internal capsule, CST at level of pons, cerebral peduncles, cerebellar peduncles, medial lemniscus, superior fronto-occipital fasciculus and anterior limb of internal capsule, superior longitudinal fasciculus}\label{fig:cstrois}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 
 \chapter{Colophon}
 \label{appendixlabel3}
 \textit{This is a description of the tools you used to make your thesis. It helps people make future documents, reminds you, and looks good.}
 
-\textit{(example)} This document was set in the Times Roman typeface using \LaTeX\ and Bib\TeX , composed with a text editor. 
+\textit{(example)} This document was set in the Times Roman typeface using \LaTeX\ and Bib\TeX , composed with a text editor.
  % description of document, e.g. type faces, TeX used, TeXmaker, packages and things used for figures. Like a computational details section.
 % e.g. http://tex.stackexchange.com/questions/63468/what-is-best-way-to-mention-that-a-document-has-been-typeset-with-tex#63503
 

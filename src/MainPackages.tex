@@ -1,9 +1,5 @@
 % -------- Packages --------
 
-% This package just gives you a quick way to dump in some sample text.
-% You can remove it -- it's just here for the examples.
-\usepackage{blindtext}
-
 % This package means empty pages (pages with no text) won't get stuff
 %  like chapter names at the top of the page. It's mostly cosmetic.
 \usepackage{emptypage}
@@ -21,6 +17,8 @@
 %  maths, including adding the align environment for aligned
 %  equations.
 \usepackage{amsmath}
+\usepackage{amssymb}
+
 
 % Use these two packages together -- they define symbols
 %  for e.g. units that you can use in both text and math mode.
@@ -33,7 +31,7 @@
 
 % The setspace package lets you use 1.5-sized or double line spacing.
 \usepackage{setspace}
-\setstretch{1.5}
+\setstretch{1.35}
 
 % That just does body text -- if you want to expand *everything*,
 %  including footnotes and tables, use this instead:
@@ -67,36 +65,22 @@
 %}
 
 
-% The mhchem package provides chemistry formula typesetting commands
-%  e.g. \ce{H2O}
-%\usepackage[version=3]{mhchem}
-
-% And the chemfig package gives a weird command for adding Lewis 
-%  diagrams, for e.g. organic molecules
-%\usepackage{chemfig}
-
-% The linenumbers command from the lineno package adds line numbers
-%  alongside your text that can be useful for discussing edits 
-%  in drafts.
-% Remove or comment out the command for proper versions.
-%\usepackage[modulo]{lineno}
-% \linenumbers 
-
-
 % Alternatively, you can use the ifdraft package to let you add
 %  commands that will only be used in draft versions
-%\usepackage{ifdraft}
+\usepackage{ifdraft}
+\ifdraft{
+  \usepackage[margin=1in]{geometry}
+  \usepackage{endfloat}
+  \usepackage[modulo]{lineno}
+  \linenumbers
+  \setstretch{1}
+  \setlength \topmargin{10mm}
+  \setlength \oddsidemargin {20mm} % Allow a mm for the bleed.
+  \setlength \evensidemargin {20mm}
+}
 
-% For example, the following adds a watermark if the draft mode is on.
-%\ifdraft{
-%  \usepackage{draftwatermark}
-%  \SetWatermarkText{\shortstack{\textsc{Draft Mode}\\ \strut \\ \strut \\ \strut}}
-%  \SetWatermarkScale{0.5}
-%  \SetWatermarkAngle{90}
-%}
 
-
-% The multirow package adds the option to make cells span 
+% The multirow package adds the option to make cells span
 %  rows in tables.
 \usepackage{multirow}
 
@@ -115,11 +99,11 @@
 
 % The bibentry package (along with the \nobibliography* command)
 %  allows putting full reference lines inline.
-%  See: 
+%  See:
 %   http://tex.stackexchange.com/questions/2905/how-can-i-list-references-from-bibtex-file-in-line-with-commentary
-\usepackage{bibentry} 
+\usepackage{bibentry}
 
-% The isorot package allows you to put things sideways 
+% The isorot package allows you to put things sideways
 %  (or indeed, at any angle) on a page.
 % This can be useful for wide graphs or other figures.
 %\usepackage{isorot}
@@ -129,6 +113,7 @@
 %  than the body text, and makes the label bold.
 % Highly recommended.
 \usepackage[format=hang,font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
 
 % If you're getting into defining your own commands, you might want
 %  to check out the etoolbox package -- it defines a few commands
@@ -138,3 +123,28 @@
 % The microtype package adds `micro-typographic extensions' which
 % generally makes text more readable and hyphenation less likely.
 \usepackage{microtype}
+
+% ---- Other Packages (PERSONALISED)
+
+\usepackage{pdflscape}
+\usepackage{rotating}
+
+
+% For multicolumns
+%\usepackage{multicol}
+%\setlength{\columnsep}{.7cm}
+% separate paragraphs with empty lines
+\usepackage[parfill]{parskip}
+% Create paragraph title format
+\usepackage{titlesec}
+\titleformat{\paragraph}[hang]{\normalfont\it\raggedright}{}{0pt}{\qquad}[]
+\titlespacing*{\paragraph}{0pt}{0pt}{0pt}
+% Code listings
+\usepackage{verbatim}
+\usepackage{spverbatim} % not sure what this is for but oh well
+% For formatting matlab code specifically, **MUST COPY mcode.sty FILE INTO FOLDER**
+%\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
+\usepackage{listings} % Use like this in place: \lstinputlisting{filname.ext}
+% Enumeration, lists
+\usepackage{enumerate, enumitem}
+\usepackage{framed, color}
