@@ -79,6 +79,9 @@
 
 % Custom \note command for formatting big red notes
 \newcommand\note[1]{{\large \textcolor{red}{#1} }}
+\usepackage{markdown}
+\def\markdownOptionOutputDir{./.build-files}
+
 
 %\includeonly{Introduction}
 
@@ -106,6 +109,12 @@
   \tableofcontents}
 {\include{Preamble}}
 \include{Introduction}
+\include{Chpt1-LitReview}
+\include{Chpt2-TractOrientationAtlas}
+\include{Chpt3-VIRTUE}
+\include{Chpt4-FORAGE}
+\include{Chpt5-Results}
+\include{Conclusions}
 \include{Appendices}
 % You could separate these out into different files if you have
 %  particularly large appendices.
