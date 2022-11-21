@@ -18,3 +18,18 @@
   - MNI space
 
 \end{markdown}
+
+\section{Purpose}
+
+The tract orientation atlas captures the typical spatial and orientational distribution of a give tract across a sample of healthy subjects. Being derived from carefully curated streamline tractography reconstructions, it can be considered a store of anatomical prior expectations which would otherwise be utilised to draw appropriate ROIs for tractography in a target image.
+
+
+An orientation distribution map is constructed from each subject streamline set using track orientation distribution mapping (\note{spelling? + cite}).\autocite{Dhollander2014}
+
+In order to justify the atlas creation steps, it is worth first considering the information channels aimed to be contained within the atlas and their interpretation.
+
+First is the orientation distribution, which will be determined from the TOD mapping of streamlines.
+Second is the spatial distribution, i.e. the likelihood of the tract residing in a given voxel.
+The latter concept is sometimes conflated with or loosely equated to streamline density derived from tractography, however this interpretation is highly flawed and biased.
+
+Instead, it is more useful to consider the binary state of tract belonging in each individual subject, and then determine the proportion of subjects in which a voxel belonged to the tract. 
