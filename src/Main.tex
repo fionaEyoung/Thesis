@@ -46,16 +46,10 @@
 %  you intend to print double-sided. Note that this is
 %  *specifically permitted* by the UCL thesis formatting
 %  guidelines.
-%
-% Valid options in terms of type are:
-%  phd
-%  mres
-%  mphil
-
 \documentclass[11pt,phd,a4paper,oneside,draft]{ucl_thesis}
 
 % Package configuration:
-\input{MainPackages}
+\input{setup/MainPackages}
 
 \raggedbottom
 \widowpenalty10000
@@ -64,11 +58,11 @@
 % Sets up links within your document, for e.g. contents page entries
 %  and references, and also PDF metadata.
 % You should edit this!
-\input{LinksAndMetadata}
+\input{setup/LinksAndMetadata}
 
 % And then some settings in separate files.
-\input{FloatSettings} % For things like figures and tables
-\input{BibSettings}   % For bibliographies
+\input{setup/FloatSettings} % For things like figures and tables
+\input{setup/BibSettings}   % For bibliographies
 
 % These control how many number sections your subsections will take
 %    e.g. Section 2.3.1.5.6.3
@@ -79,8 +73,8 @@
 
 % Custom \note command for formatting big red notes
 \newcommand\note[1]{{\large \textcolor{red}{#1} }}
-\usepackage{markdown}
-\def\markdownOptionOutputDir{./.build-files}
+% \usepackage{markdown}
+% \def\markdownOptionOutputDir{./.build-files}
 
 
 %\includeonly{Introduction}
@@ -94,33 +88,29 @@
 %  published in at the end of that chapter.
 % For more information, see: http://stefaanlippens.net/bibentry
 
-% If you haven't finished making your full BibTex file yet, you
-%  might find this useful -- it'll just replace all your
-%  citations with little superscript notes.
-% Uncomment to use.
-%\renewcommand{\cite}[1]{\emph{\textsuperscript{[#1]}}}
-
-% At last, content! Remember filenames are case-sensitive and
-%  *must not* include spaces.
-
 
 \ifdraft{
   \setcounter{tocdepth}{2}
   \tableofcontents}
-{\include{Preamble}}
-\include{Introduction}
-\include{Chpt1-LitReview}
-\include{Chpt2-TractOrientationAtlas}
-\include{Chpt3-VIRTUE}
-\include{Chpt4-FORAGE}
-\include{Chpt5-Results}
-\include{Conclusions}
-\include{Appendices}
-% You could separate these out into different files if you have
-%  particularly large appendices.
+{\include{FrontBack/Preamble}}
 
-% Actually generates your bibliography. The fact that \include is
-% the last thing before this ensures that it is on a clear page.
+\include{Introduction/Introduction}
+\include{Introduction/LitReview}
+
+\include{Atlas/Atlas.tex}
+\include{Atlas/Mapping.tex}
+
+\include{Alignment/Registration.tex}
+\include{Alignment/Virtue.tex}
+
+\include{Experiments/Data.tex}
+\include{Experiments/Validation.tex}
+\include{Experiments/Clinical.tex}
+
+\include{Conclusions}
+
+\include{FrontBack/Appendices}
+
 \printbibliography
 
 % All done. \o/
