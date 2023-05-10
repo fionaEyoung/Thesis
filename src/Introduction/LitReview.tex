@@ -1,21 +1,47 @@
-\chapter{Review of Literature}
-\label{chapterlabel1}
+\section{Review of Literature}
+\label{review}
 
-\section{Neuroanatomy: Micro to macro}
+\note{This section is more about the specific background of this project; the methodolgy and clinical practice.}
 
-The building blocks of living organisms begin at the level of molecules and atoms, through macromolecules such as proteins and lipids, cell organelles, cells, tissues, organs and finally whole organisms.
-For the purposes of this report, though, we can start at the cellular level, and focus on a single organ: the brain.
-Brain tissues consist of numerous cell types.
-The principle functional cells are neurons, which perform the computations underpinning all aspects of neural function. They are supported, and outnumbered ( by a \note{factor of?}), by a network of glial cells, each with specialised functions.
 
-\section{Diffusion magnetic resonance imaging}
+\subsection{Diffusion MRI analysis}
+%==================================
 
-\subsection{Diffusion in tissue}
+\note{All the computational methodological stuff}
 
-In living tissue, water molecules are not free to diffusion for long distances in all directions. Some tissue environments are highly constrained, with diffusion occurring principally along a single direction \note{too simplistic}, while in others, fewer barriers allow free diffusion.
+\subsubsection{Diffusion MRI as a white matter imaging tool}
 
-\subsection{Image acquisition}
+\note{I guess an overview? The usual ``it's all we've got!" litany}
 
-MRI images are obtained by detecting the spin relaxation resonance stuff of principally hydrogen atoms (which are abundant in the body in H2O molecules).
+\subsubsection{Fiber orientation modelling}
 
-The application of a strong linear magnetic field causes all spins to align themselves with the direction of the field. This is the bulk magnetisation, in its "relaxed" state (aligned with B0).
+\note{The goal of getting the fibre orientations from raw diffusion data, and how we get there.
+Cover DTI, crossing fibres, compartment models and CSD}
+
+\subsubsection{Streamline tractography}
+
+\note{Discuss as the mainstay of white matter bundle segmentation.
+Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
+
+\subsubsection{White matter segmentation}
+
+\note{Potentially a better section title? For covering direct segmentation, atlas methods and deep learning}
+
+
+\subsection{Neurosurgery}
+%========================
+
+\subsubsection{Indications for neurosurgery}
+
+\note{This is for all the reasons for surgery, including tumour, epilepsy DBS.
+Also more detail into the types of tumours, and locations in the brain}
+
+\subsubsection{Lesion resection}
+
+\note{Focus on tumours, but could also be epilepsy resections.
+Cover extent of resection (measurement, definitions etc.), biopsy, relationship between EOR and outcomes}
+
+\subsubsection{Surgical neuronavigation}
+
+\note{All the various tools and gizmos for guided surgery. Split into preoperative planning and intraoperative use.
+Include functional imaging (EEG, fMRI, EEG), structural, tractography, DES, awake surgery/monitoring and intraoperative imaging.}
