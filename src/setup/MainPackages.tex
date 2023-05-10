@@ -133,18 +133,28 @@
 % For multicolumns
 %\usepackage{multicol}
 %\setlength{\columnsep}{.7cm}
+
 % separate paragraphs with empty lines
 \usepackage[parfill]{parskip}
+
 % Create paragraph title format
 \usepackage{titlesec}
 \titleformat{\paragraph}[hang]{\normalfont\it\raggedright}{}{0pt}{\qquad}[]
 \titlespacing*{\paragraph}{0pt}{0pt}{0pt}
+
+% Section header spacing
+\titlespacing*{\section}{0pt}{3\baselineskip}{\baselineskip}
+\titlespacing*{\subsection}{0pt}{2\baselineskip}{\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{\baselineskip}{\baselineskip}
+
 % Code listings
 \usepackage{verbatim}
 \usepackage{spverbatim} % not sure what this is for but oh well
+
 % For formatting matlab code specifically, **MUST COPY mcode.sty FILE INTO FOLDER**
 %\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
 \usepackage{listings} % Use like this in place: \lstinputlisting{filname.ext}
+
 % Enumeration, lists
 \usepackage{enumerate, enumitem}
 \usepackage{framed, color}
