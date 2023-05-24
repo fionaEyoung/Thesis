@@ -1,0 +1,33 @@
+name: Build LaTeX document
+run-name: Building document
+on:
+  push:
+    tags:
+      - v*
+      - '!v*.*.*'
+jobs:
+  Build-LaTeX:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Rclone and get figures
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: ${{ secrets.RCLONE_CONFIG }}
+          disable_base64: true
+      - run: rclone copy OneDriveReadonly:UCL/test ${{ github.workspace }}/src/figs
+      - run: ls ${{ github.workspace }}/src/figs
+
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: Main.tex
+          working_directory: src/
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDF
+          path: src/Main.pdf
