@@ -13,21 +13,22 @@ It is to be expected that, save for extreme outliers, the additional information
 
 To investigate this, an experiment was conducted whereby the number of subjects included in atlas construction was varied, and the effect on segmentation accuracy compared.
 For this purpose the TractSeg HCP reference bundles were used.
-Using the same train - test data split as described in \note{??}, subsets of 15 and 30, as well as the full 63 training subjects were randomly selected, from which separate TOD atlases where constructed.
-Tractfinder tract maps were then generated in the 43 test subjects using each of the different subset atlases and compared with the reference segmentations using the DSC and density correlation metrics.
+Using the same train - test data split as described in \note{??}, subsets of 1, 3, 5, 10, 15 and 30, as well as the full 63 training subjects were randomly selected, from which separate TOD atlases where constructed.
+Tractfinder tract maps were then generated in the 42 test subjects using each of the different subset atlases and compared with the reference segmentations using the DSC and density correlation metrics.
 
 \begin{figure}
     \includegraphics{compare_ntrain.png}
-    \caption{Comparison of segmentation performance using different numbers of atlas training subjects. Results are grouped by tract, colour represents number of training subjects. AF = Arcuate Fasciculus, CST = Corticospinal tract, OR = Optic radiation}
+    \caption{Comparison of segmentation performance using different numbers of atlas training subjects. Results are grouped by tract, colour represents number of training subjects. The IFO and OR are in places indistinguishable. AF = Arcuate Fasciculus, CST = Corticospinal tract, OR = Optic radiation}
     \label{fig:ntrain}
 \end{figure}
 
+When using only a single subject's normalised TOD map as an ``atlas", mean DSCs ranged from 0.65 to 0.71 for the IFOF and CST respectively.
 % These figures are from using the script compare_atlas_size.py committed at sha 33777217
 The maximum increase in mean DSC between the 15 and 63 subjects atlases was only 0.00835, for the CST, representing only a 1\% increase from the lower score of 0.759.
 Across all tracts and both comparison metrics, differences in performance between the different atlases was consistently negligible.
 
-The results indicate that additional atlas subjects beyond a minimum \note{what about lower??} number of 15 do little to nothing to improve tractfinder results.
-This can be interpreted as the additional training subjects offering little in the way of additional information on inter-subject variability, as a lot of this variability is already smoothed out due to affine (instead of diffeomorphic) co-registration of training subjects into template space.
+The results indicate that additional atlas subjects beyond a minimum number of around 10 to 15 do little to nothing to improve tractfinder results.
+This can be interpreted as the additional training subjects offering minimal additional information on inter-subject variability, as a lot of this variability is already smoothed out due to affine (instead of diffeomorphic) co-registration of training subjects into template space.
 The effects of additional training data may present differently if the atlases are constructed with non-linear co-registration of training subjects.
 
 \note{this might belong somewhere else.}
