@@ -158,3 +158,12 @@
 % Enumeration, lists
 \usepackage{enumerate, enumitem}
 \usepackage{framed, color}
+
+% Better tables
+\usepackage{tabularx, bigstrut, multirow, booktabs, array}
+\newcolumntype{+}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+    #1\ignorespaces
+}% allows formatting of a whole row
+\usepackage[table]{xcolor}
