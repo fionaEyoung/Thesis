@@ -23,10 +23,53 @@ Cover DTI, crossing fibres, compartment models and CSD}
 \note{Discuss as the mainstay of white matter bundle segmentation.
 Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
 
+\paragraph{Streamline-based automatic tract segmentation}
+
+Several automated tractography approaches to bundle segmentation have been proposed, which broadly comprise atlas-based automatic ROI placement and streamline clustering approaches.
+TRACULA and TractQuerier are examples of the former which rely on FreeSurfer parcellations to apply anatomical priors to tractography, while XTRACT \autocite{Warrington2020} utilises a set of predefined ROIs to be registered to the subject.
+The additional step of either comprehensive and robust tissue parcellation, typically using computationally intensive tools such as FreeSurfer, or accurate registration, unfortunately limits the accessibility of these approaches to clinical and even (to a lesser extent) research applications.
+RecoBundles,\autocite{Garyfallidis2018} White Matter Analysis \autocite{ODonnell2017, ODonnell2007}, atlas based adaptive clustering \autocite{Tunc2014}, example-based automatic tract labelling \autocite{Yoo2015} are all examples of data driven, group-wise streamline clustering and matching approaches.
+In such approaches, the necessary generation of whole brain tractograms and in some cases the additional construction of example or reference tractography data, as well as long processing times and high memory requirements\autocite{Wasserthal2018} present barriers to application.
+Also, the above techniques ultimately still derive from streamline tractography, and are thus not free of its biases and inaccuracies already referenced.
+There have also been recent developments in the application of machine learning to tractography,\autocite{Poulin2019} a promising field that is still in its infancy and a while off from widespread adoption and clinical translation.
+
 \subsubsection{White matter segmentation}
 
 \note{Potentially a better section title? For covering direct segmentation, atlas methods and deep learning}
 
+\paragraph{Streamline free white matter segmentation}
+
+\note{copypasta from HBM manuscript}
+
+A further set of prior works address the problem of tract segmentation while forgoing the use of streamline tractography entirely.
+These include deep learning models for direct segmentation from fiber orientation representations (\textcite{Li2020, Wasserthal2018}), a multi-label supervised clustering approach (\textcite{Ratnarajah2014}) and level-set and front propagation situations (\textcite{Nazem-Zadeh2011, Hao2014}).
+Deep learning-based approaches have the advantage of producing highly reproducible results in short processing time, without, in the case of TractSeg, the need for template registration.
+However, drawbacks of direct, deep learning-based methods which produce binary segmentations include a lack of explainability, and a dependence on large volumes of annotated training data which are labour-intensive to produce.
+This limits their flexibility: if a user requires a tract segmentation which is either anatomically different or not covered by an existing pre-trained model, then the necessary production of new training data and subsequent model training represents a high logistical and computational barrier.
+There is also the question of robustness in clinical data, particularly those featuring gross structural pathologies such as tumours.
+In addition to healthy data, Neuro4Neuro\textcite{Li2020} was validated only in a dementia dataset, and TractSeg\autocite{Wasserthal2018} was qualitatively validated in schizophrenia and autism datasets in the original work.
+TractSeg has also been qualitatively validated in a tumour dataset with mostly successful results, with more complete segmentations in cases with minimally displacing tumours.\autocite{Richards2021}
+In \textcite{Moshe2022}, the authors trained their own TractSeg model, on approximately 500 datasets, to segment the corticospinal tract (CST) in brain tumour patients.
+The results were more reproducible than for the compared manual method, and obtained an average dice similarity score of 0.64, almost 25\% worse than the performance in healthy data reported in the original TractSeg study (for the same tract).
+The authors cite a lack of reliable and sufficient labelled training data as a reason for limiting their study to a single tract, despite the importance of other tracts in preoperative fiber mapping.
+
+Our aim is to develop a streamline free tract segmentation technique incorporating spatial and orientational priors, with a focus on computational simplicity, specificity, and intuitive output.
+Briefly, the proposed method consists of a tract-specific orientation distribution atlas, which encodes spatial and orientational prior information about each tract, which is then directly compared with the diffusion data derived fibre orientation distribution information in the target image via an inner product operation on the two spherical distributions.
+Here we report on extensive validation of our approach applied to the CST, optic radiation (OR) and arcuate fasciculus (AF).
+Those three tracts were chosen due to their high clinical relevance and frequent involvement with surgical targets: In \textcite{Toescu2020} they were cited by neurosurgeons as the most frequently reconstructed tracts, followed by the inferior fronto-occipital fasciculus and corpus callosum.
+Generalisation to additional tracts is straightforward and requires relatively few training subjects, which is ideal in clinical translation, where appropriate data is often hard to obtain.
+Preliminary results for this approach have been published in \textcite{Young2022}, where we focused on qualitative results in the context of neurosurgical subjects with significantly deforming tumours.
+Here we provide a more detailed description of the technique as well as extensive quantitative validation of general applicability to both healthy and clinical datasets.
+
+Our work bears much similarity of intuition and approach to that in \textcite{Bazin2011} (``Diffusion-Oriented Tract Segmentation", or DOTS), but with several practical differences.
+DOTS is based on diffusion tensor modelling, with the atlas' direction prior consisting of a single principal direction per voxel, rather than a full spherical distribution as in our approach.
+The comparison between the atlas and subject data to be segmented consists of several mathematical steps involving Markov random field models, neighbouring tensor connectivity, and propagation of probabilities, compared to our approach of taking the inner product of two spherical distributions.
+The diffusion tensor atlas described in \textcite{Hagler2009} also proposes a similar concept.
+There, a fibre location and orientation atlas is created by averaging the diffusion tensor and tractography-derived information from multiple subjects and subsequently used to estimate the voxel-wise \textit{a posteriori} tract probability in a single subject.
+In contrast to our proposed atlas, orientation information was encoded by averaging diffusion tensor principal eigenvectors across subjects, instead of a tract-specific approach to orientation as in our case.
+And in \textcite{Hagler2009}, spatial probability is given by the averaged, normalised track density values from individual deterministic streamline tractography, even though equating streamline density with likelihood of tract location is problematic.\autocite{Rheault2019,Smith2013}
+Finally, there are similarities with the bundle specific tractography approach described in \textcite{Rheault2019}, in particular the use of a streamline-template and track orientation distribution (TOD) mapping,\autocite{Dhollander2014} and extension of track density imaging\autocite{Calamante2010} into the angular domain, to incorporate orientational priors.
+However, the purpose of the TOD prior in that work was to enhance tractography, whereas our aim is to forgo tractography entirely at the point of application in a new subject.
 
 \subsection{Neurosurgery}
 %========================
@@ -45,3 +88,23 @@ Cover extent of resection (measurement, definitions etc.), biopsy, relationship 
 
 \note{All the various tools and gizmos for guided surgery. Split into preoperative planning and intraoperative use.
 Include functional imaging (EEG, fMRI, EEG), structural, tractography, DES, awake surgery/monitoring and intraoperative imaging.}
+
+\note{Copied from HBM manuscript; this might be better placed as a summary in the "problem statement" part?}
+
+In neurosurgical settings, tractography is frequently based on diffusion tensor (DT) fibre orientation models \autocite{Toescu2020, Yang2021} and deterministic tracking algorithms, for example as implemented in Brainlab's iPlan\textregistered (single tensor)\autocite{Brainlab2012} and Elements (dual tensor)\autocite{Sollmann2020a} Fibre Tracking applications (Brainlab AG, Munich, Germany) which use a version of fibre assignment by continuous tracking, or FACT. \autocite{Mori1999}
+In research settings, diffusion tensor models and deterministic algorithms have long since given way to multi-fibre models and probabilistic algorithms.
+These include multi-tensor models,\autocite{Peled2006} Q-ball imaging\autocite{Tuch2004}, ball-and-sticks\autocite{Behrens2003} and constrained spherical deconvolution (CSD)-derived fibre orientation distribution functions on the modelling side, and probtrackx \autocite{Behrens2007}, first or second-order integration over FODs (iFOD1/iFOD2)\autocite{Tournier2010} and particle filter tractography \autocite{Girard2014} on the algorithms side.
+
+Regardless of the particular combination of fibre model, algorithm and tracking criteria, streamline tractography is compromised by weaknesses that can lead to flawed results or interpretations if not accounted for.\autocite{Rheault2020, Schilling2022, Schilling2019}
+Although probabilistic tractography is generally considered to be superior to deterministic tractography in its ability to reconstruct bundles more completely, especially ones with complex shapes, sharp bends and fanning, this improved sensitivity is accompanied by a high propensity for false positive streamlines.\autocite{Maier-Hein2017}
+As a result, targeted reconstruction of specific bundles using probabilistic tractography requires constraining with inclusion and exclusion regions of interest (ROIs), whose manual placement is labour intensive and demands expert neuroanatomical knowledge.
+
+Nonetheless, there is growing consensus that (pending appropriate regulatory approval) the clinical community ought to adopt probabilistic, non-DT tractography,\autocite{Yang2021, Beare2022, Petersen2017} given, among other issues, the low sensitivity of DT deterministic tractography particularly around lesions.\autocite{Ashmore2020}
+There is evidence that a shift is underway, at least in the context of presurgical planning,\autocite{Toescu2020} although there is the question of whether the adoption of advanced tractography is being driven from the supply or demand side.
+Until recently, commercially available neurosurgical navigation platforms have exclusively supported diffusion tensor modelling and deterministic tractography (a recent exception is the Medtronic Stealth\texttrademark{}  Tractography application (Medtronic, USA), which implements CSD-based tractography\autocite{Pozzilli2023} as well as DT).
+This lack of readily available alternatives in the neurosurgeon's workflow and certified for safe clinical use is undoubtedly a major factor in the persisting preference for deterministic methods in clinical practice.
+But perhaps demand for probabilistic tractography in neuronavigational software has also been understandably muted on account of its lower ease of use and practicality.
+DT acquisitions can have as few as 6 diffusion weighted directions, resulting in much shorter scan times compared to full HARDI acquisitions.
+Deterministic tracking itself is rapid, and the placement of ROI need not be as strict as with probabilistic tractography owing to a lower sensitivity to false positives.\autocite{ODonnell2017}
+A lack of availability of the necessary expertise and time limits neurosurgical centres' access to state-of-the-art tractography.\autocite{Toescu2020}
+There is thus an unmet need for reliable, automated tract segmentation techniques that can rapidly provide consistent and complete tract reconstructions for clinical use.
