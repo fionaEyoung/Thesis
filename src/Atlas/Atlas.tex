@@ -20,17 +20,107 @@ The latter concept is sometimes conflated with or loosely equated to streamline 
 
 Instead, it is more useful to consider the binary state of tract belonging in each individual subject, and then determine the proportion of subjects in which a voxel belonged to the tract.
 
+\textit{From HBM submission:}
+
+The key component of the proposed tract mapping method is the use of a tract-specific atlas of fibre bundle orientation and location. The purpose of the tract atlas is to capture and store prior anatomical knowledge of a given tract, including its typical location and orientation across subjects.
+While this is hereinafter referred to simply as a tract orientation atlas, and this section will focus on the orientation component, each tract atlas incorporates both orientational and spatial information.
+
 \section{Construction}
 
 \note{How each atlas is created in an artisanal Bloomsbury lab. Also general stuff like training data, preprocessing etc.}
 
-\subsection{Streamline tractography}
+
+The objective is to create a map in a template space capturing, at each location, the range of possible orientations the tract can take on as a single spherical distribution.
+A narrow distribution may be found where the tract's orientation is highly consistent across all subjects, whereas a more spread-out distribution would reflect a wider range of possible orientations, which may be seen in regions of fanning or sharp turning (Fig. \note{fig:mean}).
+
+\subsection{Streamline tractography and filtering}
 
 \note{The streamline tractography and ROI strategies for each tract. Somewhere, will want to include brief lit reviews on the tracts studies justifying the chosen cortical terminations. Maybe here?. Also include filtering in DSI studio, OFPs etc.}
+
+
+To obtain such a mapping, a combination of streamline tractography and TOD mapping \autocite{Dhollander2014} is used.
+While tractography has significant limitations as discussed above, it remains the standard way of segmenting white matter bundles from \textit{in vivo} dMRI data, and biases and errors can, with appropriate post-processing steps, be at least partially corrected for.
+In addition, tractography uniquely enables the extraction of orientation information specific to the reconstructed bundle, which would not be possible from a binary voxel-wise segmentation.
+
+A dataset of 16 healthy adult HARDI acquisitions (``EEG, fMRI and NODDI dataset",\autocite{Clayden2020} available online at osf.io/94c5t) was used in the creation of reference bundles for developing the atlas.
+In each subject, the bundle of interest was reconstructed in both hemispheres using probabilistic streamline tractography with iFOD2 \autocite{Tournier2010} and a consistent ROI strategy based on anatomical landmarks broadly agreed upon in prior works. (See \note{sec:tractography} for full details on tractography parameters and ROI strategies used for each tract.)
+
+After streamline generation, each streamline bundle was transformed into MNI space using affine registration implemented in FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002} between the subject's T1-weighted image and the MNI152 T1 template.\autocite{Fonov2011}
+Affine registration rather than non-linear, was used for this step to capture individual anatomical variation and minimise unrealistic warping of streamlines from local registration errors or overfitting.
+With all subject streamlines aggregated in MNI space, manual filtering of streamlines was performed (Fig. \note{fig:atlases}) to remove not only ``volumetric false positives", which depart from the accepted volume of the tract, but also ``orientational false positives" (OFPs), which remain entirely within the tract volume but are at least in part aligned with a different, intersecting bundle.
+An example of such OFPs are depicted in supplementary Figure \note{fig:ofp}. Such streamlines have little effect on any volumetric applications of the reconstruction, e.g. via a track density depiction.
+However, their removal is vital for the construction of the orientation atlas, which summarises the orientational distribution of streamlines on a voxel-wise basis.
+Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsolver.org/})\autocite{Yeh2021a}, which enables the filtering of streamlines based on angle of intersection with a cutting plane.
+The percentage of streamlines filtered for each tract and summarised reasons for removal are presented in Table \ref{tab:filt}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table*}[t]
+  \caption{Streamline filtering statistics. Abbreviations: AF, arcuate fasciculus; CrP, cerebellar peduncles; CC, corpus callosum; CST, corticospinal tract; EC, external capsule; SLF, superior longitudinal fasciculus; SFOF, superior fronto-occipital fasciculus }
+  \label{tab:filt}
+  \begin{tabularx}{\textwidth}{llllll X}
+   &  & Original & Filtered & Difference & Reduction & Reasons for discarding \\
+   \hline
+  CST & left & 148833 & 145300 & 3533 & 2.37\% & \multirow{4}{20em}{Contamination from: AF / SLF, SFOF, CC, CrP} \\
+   & right & 144759 & 139019 & 5740 & 3.97\% &  \\
+   & total & 293592 & 284319 & 9273 & 3.16\% &  \\
+   \\
+  AF & left & 61922 & 49778 & 12144 & 19.61\% & \multirow{4}{20em}{Contamination from:  EC, CST, CC\\ Overextension into: Motor cortex, anterior temporal cortex, superior frontal cortex} \\
+   & right & 61834 & 43027 & 18807 & 30.42\% &  \\
+   & total & 123756 & 92805 & 30951 & 25.01\% &  \\
+   \\
+  OR & left & 123842 & 99984 & 23858 & 19.26\% & \multirow{4}{20em}{Contamination from: Tapetum of CC, SLF} \\
+   & right & 122534 & 109265 & 13269 & 10.83\% &  \\
+   & total & 246376 & 209249 & 37127 & 15.07\% & \\
+   \\
+ \end{tabularx}
+\end{table*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{TOD mapping}
 
 \note{Registration to MNI space and TOD mapping. Includes the whole spiel about normalisation.}
+
+
+After aggregate filtering, the retained streamlines were re-separated into individual subject bundles and the TOD was computed from the individual bundles as described in \textcite{Dhollander2014} and implemented in MRtrix3. \autocite{Tournier2019}
+TOD mapping is the generalisation of track density imaging into the angular domain, creating a 5D spatio-angular representation of streamline tracks on a voxel-wise basis.
+The TOD image is represented in modified spherical harmonic basis \autocite{Descoteaux2006} using only even orders up to a maximum order $l_{max}=8$, meaning each image consists of 45 coefficients, denoted $t_j$, per voxel.
+The distribution is described by those coefficients and the modified spherical harmonic basis functions $Y_{l,m}$ \autocite{Descoteaux2006} as
+
+\begin{align}
+  T(\theta, \phi) = \sum_{l=0}^{l_{max}} \sum_{m=-l}^l t_{l,m} Y_{l,m}(\theta, \phi) = \sum_j t_jY_j(\theta, \phi)
+\end{align}
+
+The individual TOD images at this stage still contain significant density bias, with exaggerated differences in magnitude between the core bundle portions and fanning extremities owing to tractography's tendency towards early termination outside of the densest collinear tract regions.\autocite{Rheault2020,Smith2013}
+The purpose of the atlas is to capture only the likelihood of a tract's presence in any given voxel (spatial prior) and, in the case that it is present, its expected orientation (orientational prior).
+If the spatial prior is to be determined by considering the spatial variation of the tract between subjects, then the only information needed for each individual subject is a binary visitation map for the bundle and orientational data.
+Thus to remove the streamline density component, the TOD maps for each subject are normalised as follows.
+The spherical integral of each SH basis function $Y_{l,m}$ is
+
+\begin{align}
+  \int_{\Omega} Y^m_l(\theta, \phi) = \begin{cases}
+   \sqrt{4\pi} & \text{ if } l=m=0\\
+   0 & \text{ otherwise. }
+  \end{cases}
+\end{align}
+
+Using the sum and constant rules of integration, the spherical integral of $T(\theta,\phi)$ is
+\begin{align}
+  \int_{\Omega} T(\theta,\phi) = t_0 \sqrt{4\pi}
+\end{align}
+
+where $t_0$ is the first SH coefficient for $l=m=0$. Thus to remove density information the TOD map is normalised to unit integral as
+
+\begin{align}
+  \widetilde{T}(\theta, \phi) = \frac{T(\theta,\phi)}{\sqrt{4\pi} t_0}
+\end{align}
+
+After each individual TOD map has been normalised in MNI space, what remains contains only information about the tract's streamline orientations, and none about the number of streamlines passing through a given voxel in the original reconstruction.
+
+Finally, the mean of all individual normalised TOD maps is computed to produce the final population tract TOD atlas.
+Averaging all maps results in distributions that reflect all possible ranges of tract orientations in each voxel (Fig. \note{fig:mean}), while the first SH coefficient of the atlas will reflect the proportion of training subjects in which the tract was present in a given voxel.
+Outlier voxels visited by streamlines in only a single subject's reconstruction will contribute little weight to the final atlas.
+This atlas can then be registered to a target subject for further processing.
+Atlases have so far been created for the most commonly indicated pathways in neurosurgical planning and guidance, namely the corticospinal tract (CST), optic radiations (OR) and arcuate fasciculus (AF; Fig. \note{fig:atlases}), with the creation of further atlases to be the subject of future work.
 
 \subsection{Discussion}
 
