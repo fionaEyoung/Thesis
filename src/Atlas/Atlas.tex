@@ -10,11 +10,11 @@
 The tract orientation atlas captures the typical spatial and orientational distribution of a give tract across a sample of healthy subjects. Being derived from carefully curated streamline tractography reconstructions, it can be considered a store of anatomical prior expectations which would otherwise be utilised to draw appropriate ROIs for tractography in a target image.
 
 
-An orientation distribution map is constructed from each subject streamline set using track orientation distribution mapping (\note{spelling? + cite}).\autocite{Dhollander2014}
+An orientation distribution map is constructed from each subject streamline set using \gls{tod} mapping (\note{spelling? + cite}).\autocite{Dhollander2014}
 
 In order to justify the atlas creation steps, it is worth first considering the information channels aimed to be contained within the atlas and their interpretation.
 
-First is the orientation distribution, which will be determined from the TOD mapping of streamlines.
+First is the orientation distribution, which will be determined from the \gls{tod} mapping of streamlines.
 Second is the spatial distribution, i.e. the likelihood of the tract residing in a given voxel.
 The latter concept is sometimes conflated with or loosely equated to streamline density derived from tractography, however this interpretation is highly flawed and biased.
 
@@ -38,7 +38,7 @@ A narrow distribution may be found where the tract's orientation is highly consi
 \note{The streamline tractography and ROI strategies for each tract. Somewhere, will want to include brief lit reviews on the tracts studies justifying the chosen cortical terminations. Maybe here?. Also include filtering in DSI studio, OFPs etc.}
 
 
-To obtain such a mapping, a combination of streamline tractography and TOD mapping \autocite{Dhollander2014} is used.
+To obtain such a mapping, a combination of streamline tractography and \gls{tod} mapping \autocite{Dhollander2014} is used.
 While tractography has significant limitations as discussed above, it remains the standard way of segmenting white matter bundles from \textit{in vivo} dMRI data, and biases and errors can, with appropriate post-processing steps, be at least partially corrected for.
 In addition, tractography uniquely enables the extraction of orientation information specific to the reconstructed bundle, which would not be possible from a binary voxel-wise segmentation.
 
@@ -55,7 +55,7 @@ The percentage of streamlines filtered for each tract and summarised reasons for
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table*}[t]
-  \caption{Streamline filtering statistics. Abbreviations: AF, arcuate fasciculus; CrP, cerebellar peduncles; CC, corpus callosum; CST, corticospinal tract; EC, external capsule; SLF, superior longitudinal fasciculus; SFOF, superior fronto-occipital fasciculus }
+  \caption{Streamline filtering statistics. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof}}
   \label{tab:filt}
   \begin{tabularx}{\textwidth}{llllll X}
    &  & Original & Filtered & Difference & Reduction & Reasons for discarding \\
@@ -78,23 +78,23 @@ The percentage of streamlines filtered for each tract and summarised reasons for
 
 \subsection{TOD mapping}
 
-\note{Registration to MNI space and TOD mapping. Includes the whole spiel about normalisation.}
+\note{Registration to MNI space and \gls{tod} mapping. Includes the whole spiel about normalisation.}
 
 
-After aggregate filtering, the retained streamlines were re-separated into individual subject bundles and the TOD was computed from the individual bundles as described in \textcite{Dhollander2014} and implemented in MRtrix3. \autocite{Tournier2019}
-TOD mapping is the generalisation of track density imaging into the angular domain, creating a 5D spatio-angular representation of streamline tracks on a voxel-wise basis.
-The TOD image is represented in modified spherical harmonic basis \autocite{Descoteaux2006} using only even orders up to a maximum order $l_{max}=8$, meaning each image consists of 45 coefficients, denoted $t_j$, per voxel.
-The distribution is described by those coefficients and the modified spherical harmonic basis functions $Y_{l,m}$ \autocite{Descoteaux2006} as
+After aggregate filtering, the retained streamlines were re-separated into individual subject bundles and the \gls{tod} was computed from the individual bundles as described in \textcite{Dhollander2014} and implemented in MRtrix3. \autocite{Tournier2019}
+\gls{tod} mapping is the generalisation of track density imaging into the angular domain, creating a 5D spatio-angular representation of streamline tracks on a voxel-wise basis.
+The \gls{tod} image is represented in modified \gls{sh} basis \autocite{Descoteaux2006} using only even orders up to a maximum order $l_{max}=8$, meaning each image consists of 45 coefficients, denoted $t_j$, per voxel.
+The distribution is described by those coefficients and the modified \gls{sh} basis functions $Y_{l,m}$ \autocite{Descoteaux2006} as
 
 \begin{align}
   T(\theta, \phi) = \sum_{l=0}^{l_{max}} \sum_{m=-l}^l t_{l,m} Y_{l,m}(\theta, \phi) = \sum_j t_jY_j(\theta, \phi)
 \end{align}
 
-The individual TOD images at this stage still contain significant density bias, with exaggerated differences in magnitude between the core bundle portions and fanning extremities owing to tractography's tendency towards early termination outside of the densest collinear tract regions.\autocite{Rheault2020,Smith2013}
+The individual \gls{tod} images at this stage still contain significant density bias, with exaggerated differences in magnitude between the core bundle portions and fanning extremities owing to tractography's tendency towards early termination outside of the densest collinear tract regions.\autocite{Rheault2020,Smith2013}
 The purpose of the atlas is to capture only the likelihood of a tract's presence in any given voxel (spatial prior) and, in the case that it is present, its expected orientation (orientational prior).
 If the spatial prior is to be determined by considering the spatial variation of the tract between subjects, then the only information needed for each individual subject is a binary visitation map for the bundle and orientational data.
-Thus to remove the streamline density component, the TOD maps for each subject are normalised as follows.
-The spherical integral of each SH basis function $Y_{l,m}$ is
+Thus to remove the streamline density component, the \gls{tod} maps for each subject are normalised as follows.
+The spherical integral of each \gls{sh} basis function $Y_{l,m}$ is
 
 \begin{align}
   \int_{\Omega} Y^m_l(\theta, \phi) = \begin{cases}
@@ -108,19 +108,19 @@ Using the sum and constant rules of integration, the spherical integral of $T(\t
   \int_{\Omega} T(\theta,\phi) = t_0 \sqrt{4\pi}
 \end{align}
 
-where $t_0$ is the first SH coefficient for $l=m=0$. Thus to remove density information the TOD map is normalised to unit integral as
+where $t_0$ is the first \gls{sh} coefficient for $l=m=0$. Thus to remove density information the \gls{tod} map is normalised to unit integral as
 
 \begin{align}
   \widetilde{T}(\theta, \phi) = \frac{T(\theta,\phi)}{\sqrt{4\pi} t_0}
 \end{align}
 
-After each individual TOD map has been normalised in MNI space, what remains contains only information about the tract's streamline orientations, and none about the number of streamlines passing through a given voxel in the original reconstruction.
+After each individual \gls{tod} map has been normalised in MNI space, what remains contains only information about the tract's streamline orientations, and none about the number of streamlines passing through a given voxel in the original reconstruction.
 
-Finally, the mean of all individual normalised TOD maps is computed to produce the final population tract TOD atlas.
-Averaging all maps results in distributions that reflect all possible ranges of tract orientations in each voxel (Fig. \note{fig:mean}), while the first SH coefficient of the atlas will reflect the proportion of training subjects in which the tract was present in a given voxel.
+Finally, the mean of all individual normalised \gls{tod} maps is computed to produce the final population tract \gls{tod} atlas.
+Averaging all maps results in distributions that reflect all possible ranges of tract orientations in each voxel (Fig. \note{fig:mean}), while the first \gls{sh} coefficient of the atlas will reflect the proportion of training subjects in which the tract was present in a given voxel.
 Outlier voxels visited by streamlines in only a single subject's reconstruction will contribute little weight to the final atlas.
 This atlas can then be registered to a target subject for further processing.
-Atlases have so far been created for the most commonly indicated pathways in neurosurgical planning and guidance, namely the corticospinal tract (CST), optic radiations (OR) and arcuate fasciculus (AF; Fig. \note{fig:atlases}), with the creation of further atlases to be the subject of future work.
+Atlases have so far been created for the most commonly indicated pathways in neurosurgical planning and guidance, namely the \gls{cst}, \gls{or} and \gls{af} (Fig. \note{fig:atlases}), with the creation of further atlases to be the subject of future work.
 
 \subsection{Discussion}
 
