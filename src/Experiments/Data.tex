@@ -11,14 +11,14 @@
 
 \subsection{HCP}
 
-We accessed 49 scans from the WU-Minn HCP Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
+We accessed 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
 These images have been preprocessed as documented in \textcite{Glasser2013}.
 We additionally downsampled them to 2.5 mm isotropic voxels and extracted a subset of 60 directions at $b=1000 mm/s^2$.
 
 \subsection{TractoInferno}
 
 The recently released TractoInferno database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1}),\autocite{Poulin2022} created for the training of machine learning tractography approaches, contains diffusion and T1-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography reconstructions.
-Of the 284 subjects included in the full TractoInferno database, we selected the 144 subjects with tractography of the CST, OR and AF for our study.
+Of the 284 subjects included in the full TractoInferno database, we selected the 144 subjects with tractography of the \gls{cst}, \gls{or} and \gls{af} for our study.
 9 subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed in-house tractography, leaving a final 135 subjects.
 Diffusion acquisition parameters and preprocessing steps are described in \textcite{Poulin2022}, and we additionally resampled all data to 2.3 mm isotropic voxels, the lowest resolution present in the dataset and one in line with clinical acquisitions.
 
@@ -27,7 +27,7 @@ Diffusion acquisition parameters and preprocessing steps are described in \textc
 Tract segmentation comparisons are presented for 15 individual scans from eight different subjects from two different institutions.
 They include four adult glioma subjects acquired in 2009 at the National Hospital for Neurology and Neurosurgery, London (NHNN) (cases 4 and 5 from \textcite{Mancini2022}, others unpublished data),
 three paediatric subjects from Great Ormond Street Hospital, London (GOSH) (each with one preoperative and one intraoperative scan),
-a mock “intraoperative” scan on a healthy adult volunteer acquired with the GOSH intraoperative DTI protocol and using simulated intraoperative setup (flex-coils wrapped around the head instead of a head coil, head significantly displaced from scanner isocenter etc),
+a mock “intraoperative” scan on a healthy adult volunteer acquired with the GOSH intraoperative \gls{dti} protocol and using simulated intraoperative setup (flex-coils wrapped around the head instead of a head coil, head significantly displaced from scanner isocenter etc),
 and a partridge in a pear tree.
 For acquisition details see Table \ref{tab:datasets}.
 All clinical scans involved non-deforming tumours, in the sense that any lesions did not appreciably displace white matter structures from their typical positions.
@@ -38,7 +38,7 @@ In addition, the acquisition and use of some NHNN MRI data was also approved by 
 All clinical data was acquired within the course of routine clinical care, and as no identifying information of any subject is present, there is no need for informed consent.
 To protect patient confidentiality, clinical data will not be made openly available.
 
-Each dMRI scan was minimally preprocessed with Marchenko-Pastur principal component analysis denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction,\autocite{Zhang2001, Smith2004} as implemented in MRtrix3 \autocite{Tournier2019}.
+Each \gls{dmri} scan was minimally preprocessed with Marchenko-Pastur principal component analysis denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction,\autocite{Zhang2001, Smith2004} as implemented in MRtrix3 \autocite{Tournier2019}.
 Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} (MRtrix3 v3.0.3 and FMRIB Software Library (FSL, \url{https://fsl.fmrib.ox.ac.uk}) v6.0) applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
 No EPI distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times.\autocite{Yang2022}
 
