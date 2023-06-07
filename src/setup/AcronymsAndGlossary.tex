@@ -1,0 +1,62 @@
+%%
+%% Set up abbreviations and definitions
+\usepackage[acronym,
+            style=super,
+            nogroupskip=true,
+            nonumberlist,
+            nopostdot]
+            {glossaries}
+\makeglossaries
+
+%% MRI
+\newacronym{mri}{MRI}{magnetic resonance imaging}
+% Recursive acronym \protect solution from https://tex.stackexchange.com/a/502313
+\newacronym{dmri}{dMRI}{diffusion \protect\ifglsused{mri}{MRI}{magnetic resonance imaging}}
+\newacronym{csd}{CSD}{constrained spherical deconvolution}
+\newacronym{odf}{ODF}{orientation distribution function}
+\newacronym{fodf}{fODF}{fibre \protect\ifglused{odf}{ODF}{orientation distribution function}}
+\newacronym{fod}{FOD}{fibre orientation distribution}
+\newacronym{dti}{DTI}{diffusion tensor imaging}
+\newacronym{fa}{FA}{fractional anisotropy}
+\newacronym{ssst}{SSST}{single-shell, single-tissue}
+\newacronym{msmt}{MSMT}{multi-shell, multi-tissue}
+%% Neuroanatomy
+\newacronym{cst}{CST}{corticospinal tract}
+\newacronym{or}{OR}{optic radiation}
+\newacronym{af}{AF}{arcuate fasciculus}
+\newacronym{ifof}{IFOF}{inferior fronto-occipital fasciculus}
+\newacronym{uf}{UF}{uncinate fasciculus}
+\newacronym{wm}{WM}{white matter}
+\newacronym{gm}{GM}{grey matter}
+%% Other
+\newacronym{hcp}{HCP}{human connectome project}
+
+%% Here we set up a new command to generate a list of abbreviations, e.g. for
+%% float captions, formatted in a consistent way
+
+% Define the separtors between abbreviation and definition, and between list items
+% including any spaces!
+\def\acrodefsep{ = }
+\def\acrolistdelim{; }
+
+% Process list of arbitratry length
+\NewDocumentCommand{\acrolist}{>{\SplitList{,}}m}
+    {\ProcessList{#1}{\acroformat}\firstitemtrue}
+% Format the list using each item's glossary entry and the defined separators
+\newif\iffirstitem
+\firstitemtrue
+\newcommand\acroformat[1]{%
+  \iffirstitem
+    \firstitemfalse
+  \else
+    \acrolistdelim %
+  \fi
+  \glsname{#1}\acrodefsep \glsdesc{#1}}
+% ^ proper hangling of delimiter solution from https://tex.stackexchange.com/a/110906
+
+%% Alternative solution from https://tex.stackexchange.com/a/110909 if the above causes issues
+% \NewDocumentCommand{\acrolist}{>{\SplitList{,}}m}
+%     {%
+%     \def\acrodelim{\def\acrodelim{, }}%
+%     \ProcessList{#1}{\acroformat} }
+% \newcommand{\acroformat}[1]{\acrodelim\glsentryshort{#1} = \glsentrylong{#1}}

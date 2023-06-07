@@ -63,6 +63,7 @@
 % And then some settings in separate files.
 \input{setup/FloatSettings} % For things like figures and tables
 \input{setup/BibSettings}   % For bibliographies
+\input{setup/AcronymsAndGlossary}
 
 % These control how many number sections your subsections will take
 %    e.g. Section 2.3.1.5.6.3
@@ -70,14 +71,8 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
-
 % Custom \note command for formatting big red notes
 \newcommand\note[1]{{\large \textcolor{red}{#1} }}
-% \usepackage{markdown}
-% \def\markdownOptionOutputDir{./.build-files}
-
-
-%\includeonly{Introduction}
 
 \begin{document}
 
@@ -93,6 +88,8 @@
   \setcounter{tocdepth}{5}
   \tableofcontents}
 {\include{FrontBack/Preamble}}
+
+\printglossary[type=\acronymtype]
 
 \include{Introduction/Introduction}
 \include{Introduction/Theory}
