@@ -40,3 +40,26 @@ Then look at the mechanism of diffusion MRI acquisition, pulse sequence and para
 Also mention common artefacts.}
 
 In living tissue, water molecules are not free to diffusion for long distances in all directions. Some tissue environments are highly constrained, with diffusion occurring principally along a single direction \note{too simplistic}, while in others, fewer barriers allow free diffusion.
+
+\paragraph{Diffusion weighting}
+
+Any MR pulse sequence can be modified to introduce additional sensitisation to brownian motion, or diffusion weighting, in addition to the existing T1 and T2 based constrasts.
+This is achieved through the application of a pair of diffusion sensitisation graident pulses prior to echo generation and signal readout.
+
+To illustrate the concept, we will consider the application of diffusion weighting along a single orthogonal direction, e.g. $G_x$.
+After slice selection and \gls{rf} excitation, a gradient of magnitude $G_d$ is applied along $x$ for time period $\delta$ before it is reversed in polarity for subsequent $\delta$.
+Consider a spin which is stationary along $x=x_1$ throught the application of these gradients.
+Initially, it will gain a phase $\phi_1$ proportional to it's position along the gradient $x_1$ according to $\gamma G_d \delta x_1$.
+After gradient reversal, having not changed position $x=x_2=x_1$ it will gain the opposite phase $\phi_2 = -\phi_1$, resulting in a net phase change after diffusion sensitisation of $0$.
+Conversely, a spin which is net motion along $x$ will experience different gradient strengths across the two time points and will experience a net dephasing according to $\Delta\phi = \gamma G_d \delta (x_2 - x_1)$ \note{replace with integral form} and corresponding signal loss.
+On subsequent signal sampling, those voxels in which diffusion was high will have have a high degree of diffusion weighting-induced dephasing and exhibit a corresponding signal dropout.
+In those voxels with low diffusion, phase coherence will remain relatively intact after diffusion senistisation and signal loss will be correspondingly minimal.
+
+\paragraph{Echo planar imaging}
+
+Since diffusion imaging, in particular \gls{hardi}, involves the acquisition of numerous image volumes with different diffusion weightings, scan times can be particularly long.
+Depending on the image resolution, number of diffusion weighted directions, and many other factors, scan times can run into the tens of minutes and even hours.
+Aside from the cost and practicalities of longer scans, there is also the increased risk of motion artifacts.
+So it is that the dominant \note{only?} type of pulse sequence used in \gls{dmri} is \gls{epi}.
+In \gls{epi}, all phase encoding intervals are acquired after only a single \gls{rf} excitation.
+\Gls{epi} can employ both gradient and spin echos and there are numerous different variations and associated contrast \note(??), but for the purpose of this summary we will focus on the typical \gls{epi} sequence employed for diffusion weighted imaging.
