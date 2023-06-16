@@ -27,11 +27,37 @@ Discuss the lobes, cortical regions and functional divisions, then white matter 
 
 MRI images are obtained by detecting the spin relaxation resonance stuff of principally hydrogen atoms (which are abundant in the body in H2O molecules).
 
-The application of a strong linear magnetic field causes all spins to align themselves with the direction of the field. This is the bulk magnetisation, in its "relaxed" state (aligned with B0).
+The application of a strong linear magnetic field causes all spins to align themselves with the direction of the field. This is the bulk magnetisation $M_z$, in its "relaxed" state (aligned with B0).
+The ratio of spin magnetic moments aligned with the external field is increased, \note{as the field imparts energy or something causing magnetic moments to preferentially be aligned} resulting in a net magnetisation along the orientation of $B_0$, termed $M_z$.
+Alignment of a magnetic moment with $B_0$ (spin up) is energetically favourable of the opposite spin down state to the tune of $\Delta E = \gamma h B_0$ \note{explain vars}.
+Hence the stronger the external field, the larger the ratio of up to down spins and thus the a larger the magnitude of $M_z$.
+As the magnitude of this bulk magnetisation vector underpins the strength of any subsequently sampled signals, stronger bore fields, as a general rule \note{are there exceptions?}, produce images with better \gls{snr}.
+In thermal equlibrium, then, the magnetic moments within the sample are precessing at the larmor frequency and entirely out of phase with each other, resulting in no net transverse magnetisation, and with spins aligned preferentially along $B_0$, resulting in maximum longitudinal magnetisation $M_z$.
+
+The manipulation of this net magnetisation vector away from, and subsequent relaxation back to this equilibrium state, is the basis of all signal production in \gls{mri}.
+The application of a \gls{rf} pulse, that is, an oscilating magnetic field ($B_1$) precisely at the resonant larmor frequency and perpendicular to $B_0$, enacts two effects on this the bulk magnetisation.
+The first is the impartion \note{??} of energy which overcomes $\Delta E$ \note{this is the bit I understand the least} to increase the number of spins in the energetically unfavourable spin-down orientation and thus eliminate the net magnetisation along $B_0$.
+The second effect is to sycronise the spins' precession with the rotating \gls{rf} pulse, and by extension with each-other, resulting in a precessing net magnetisation in the transverse plane $M_{xy}$.
+\note{but what about 180 degree pulses?}
+As soon as the excitation field is switched off, the bulk magnetisation gradually relaxes to equilibrium as the induced effects on the individual moments revert:
+interaction with other spins \note{local magnetic fields?} in the molecular environment cause gradual dephasing and consequent reduction in $M_{xy}$ (spin-spin relaxation), while the energy gained from the \gls{rf} pulse is gradually dissipated among the lattice field \note{??} as the spins revert to the stistically fabourable lower energy state in alignment with $B_0$ causing gradual recovery of $M_z$ (spin-lattice relaxation).
+
+The recovery rate of $M_z$ and the rate of decay of $M_{xy}$ are described by the time constants $T1$ and $T2$ respectively, and each depend on the specific molecular environment and are thus tissue-dependent quantities.
+It is the varying values of $T1$ and $T2$, as well as the overall differences in proton densities ($PD$) between tissues which lend contrast to MR images.
 
 \subsubsection{Excitation and image acquisition}
 
 \note{How MRI machines work: excitation pulses, effects of different relaxation weightings, examples of different common pulse sequences and their uses}
+
+\paragraph{Pulse sequences}
+
+Immediatly after application of the \gls{rf} excitation pulse, magnetisation will rapidly return to equilbrium in a spiral pattern \note{see image}.
+This rotating magnetisation will induce an oscillating current within a detection coil placed near the sample in a process called \gls{fid}.
+This is the most basic form of NMR signal and, since it decays very rapidly \note{isn't useful on it's own for image formation?}
+In order to generate signal useful for spatial encoding and image acquisition \note{??} we make use of spin echos and/or gradient echos.
+
+To produce a gradient echo, a readout gradient $G_x$ \note{necessarily?} is applied across the sample causing spins to dephase a different rates according to their local magnetic field $B_0 + G_xx$.
+After a time $TE/2$ \note{how long?} the gradient polarity is reversed, causing 
 
 \subsubsection{Diffusion MRI}
 
