@@ -14,7 +14,7 @@ For the purposes of this report, though, we can start at the cellular level, and
 Brain tissues consist of numerous cell types.
 The principle functional cells are neurons, which perform the computations underpinning all aspects of neural function. They are supported, and outnumbered ( by a \note{factor of?}), by a network of glial cells, each with specialised functions.
 
-\subsubsection{Neuroanaomy}
+\subsubsection{Neuroanatomy}
 
 \note{Structure of the brain, including different sections (hind, mid, forbrain etc.) and tissue types.
 Discuss the lobes, cortical regions and functional divisions, then white matter tracts.}
@@ -56,8 +56,24 @@ This rotating magnetisation will induce an oscillating current within a detectio
 This is the most basic form of NMR signal and, since it decays very rapidly \note{isn't useful on it's own for image formation?}
 In order to generate signal useful for spatial encoding and image acquisition \note{??} we make use of spin echos and/or gradient echos.
 
-To produce a gradient echo, a readout gradient $G_x$ \note{necessarily?} is applied across the sample causing spins to dephase a different rates according to their local magnetic field $B_0 + G_xx$.
-After a time $TE/2$ \note{how long?} the gradient polarity is reversed, causing 
+To produce a gradient echo, a readout gradient $G_x$ \note{necessarily?} is applied across the sample causing spins to dephase at different rates according to their local magnetic field $B_0 + G_xx$.
+After a time $TE/2$ \note{how long?} the gradient polarity is reversed, and with it the rates of dephasing across the sample.
+The effect is that after experiencing equal amounts of time of gradient polarities, the spins find themselves momentarily realigned, forming a peak in bulk transverse magnetisation and associated signal (``echo") at the time period since excitation designated $TE$ (echo time).
+
+Since the reversal of gradient polarity effects only the gradient coil generated fields, the dephasing caused by local inhomogeneities in the $B_0$ field cannot be reversed, and the resulting signal is T2\* weighted. \note{explain T2*}
+The FID signal decay is accelerated by the effects of field inhomogeneities, but the signal is in fact not entirely destroyed, it merely becomes disorganised in a manner that can be symmetrically reversed, using the spine echo phenomenon.
+
+Spin echos are generated not through the manipulation of graident polarity, but through a complete inversion of spin orientation. \note{?}
+At time $TE/2$, an additional ``refocussing" \gls{rf} pulse introduces a 180$\deg$ rotation, effectively flipping the system in the $xy$ plane \note{how to describe this more mathematically?}.
+Now, those spins that are, due to slightly higher local field strength, precessing fastest, have accumulated a certain amount of phase ``ahead" of the average.
+After being flipped, they are precessing at the same speed but no lag behind the average by the same phase difference.
+Thus after an additional symmetrical time span of $TE/2$, the uneven effects of field inhomogeneities have been cancelled out and the spins find themselves briefly refocussed, producing a spin echo signal peak at $TE$.
+
+Spin echo sequences benefit from the overcoming of T2* decay to produce signals with pure T2 weighting. \note{why is this useful?}
+On the other hand, the need for an additional \gls{rf} pulse introduces instrumentation delay times and corresponding loss of signal magnitude.
+Gradient echo sequences can work with shorter TEs \note{true?} and \note{...thus?}
+
+\note{this section is pretty ropey but will do for now as a scaffold}
 
 \subsubsection{Diffusion MRI}
 
