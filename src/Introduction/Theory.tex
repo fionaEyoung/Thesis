@@ -99,6 +99,12 @@ Slice selection ensures that the \gls{rf} pulse only excites a specific slab wit
 A \gls{rf} pulse with (central) frequency $\frac{1}{2\pi}\omega_0 + \gamma G_zz_c$ \note{the 2 pi thing is about converting from angular frequency?} will excite spins located only at position $z_c$.
 All other spins in the sample will be unaffected by subsequent manipulation of the magnetisation vector throughout the pulse sequence.
 
+Within the selected plain, the manipulation of two spin quantities determines 2D localisation.
+The first is spin precession frequency, which can be modulated along an axis in the same manner as is used in slice selection -- a magnetic field gradient $G_f$ (applied, for the purposes of this description, along $x$) imparts spatially varying frequencies according to $\omega_0 + \gamma G_fx$.
+The frequency encoding gradient is applied throughout signal readout. \note{explain more?}
+
+The second is spin phase, or a spin's instantaneous angle in the $xy$ plane relative to \note{what?}.
+Before signal readout, a phase encoding gradient is applied along $y$ for a time $\Delta t_{pe}$, during which spins accumulate
 
 \paragraph{Pulse sequences}
 
