@@ -178,15 +178,20 @@ The number of phase encoding steps corresponds to the image matrix size along th
 
 \paragraph{Pulse sequences}
 
-
-
 \subsubsection{Diffusion MRI}
 
 \note{First describe diffusion in general but stick to tissue, i.e. restricted diffusion. Cover the different types of diffusion in different tissues in the brain, timescales etc.
 Then look at the mechanism of diffusion MRI acquisition, pulse sequence and parameters e.g. b values.
 Also mention common artefacts.}
 
-In living tissue, water molecules are not free to diffusion for long distances in all directions. Some tissue environments are highly constrained, with diffusion occurring principally along a single direction \note{too simplistic}, while in others, fewer barriers allow free diffusion.
+Molecules travel through their environment in a stochastic pattern of thermal motion called diffusion, the basis for the contrast formed in \gls{dmri}. \note{lofty}
+In living tissue, water molecules are not as free to diffuse for long distances in all directions as they would be in a pure, endless medium.
+The notable exception for neuroimaging is \gls{csf}, in which, over the timescales relevant to \gls{dmri}, water diffusion is free and unrestricted. \note{true?}
+Elsewhere in the brain, the presence of highly organised biochemical structures, cell membranes, and cytoskeletons, places varying degrees of restriction \note{hindering?} on the diffusion of water molecules.
+In \gls{gm}, the cell membranes of somae, glial cells, dendrites and \note{short, unmyelinated axons} as well as subcellular structures and organelles all present obstacles to diffusing molecules, resulting in a hindered diffusion pattern.
+However, since these barriers are arranged in a random fashion, and are to be encountered equally likely in any direction, there is no preferential direction in which diffusion is freer than in others, thus the diffusivity is isotropic.
+In \gls{wm}, conversely, the highly coherent arrangement of axons poses very strong restrictions on diffusion occuring perpendicular to those axons, while diffusivity is relatively higher along the direction parallel to the bundled axon fibres.
+In such an environment, diffusion is anisotropic.
 
 \paragraph{Diffusion weighting}
 
