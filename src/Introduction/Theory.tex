@@ -174,9 +174,20 @@ A single application of the phase encoding gradient provides insufficient inform
 The excitation--phase-encoding--echo-readout sequence is repeated with varying phase-encoding magnitudes.
 The number of phase encoding steps corresponds to the image matrix size along the $y$ axis.
 
-\note{Complete this section with 2D fourier transform}
+The raw signal read by the reciever encodes the image in dimensions of frequency and phase.
+These can be represented in the 2-dimensional frame known as $k$-space, an intermediate space defined as the \gls{2dft} of the measured image.
+Pulse sequence parameters encode the trajectory and resolution in which datapoints in $k$-space are measured.
+At the end of the sequence, when $k$-space has been filled, an inverse \gls{2dft} is computed to reconstruct the image in the spatial domain.
+\Gls{2dft} imaging, in which full 3D image volumes are acquired as a series of individually reconstructed 2D slices \note{is this true?}, remains the most common \note{and efficient?} mode of image formation in MR imaging.
 
 \paragraph{Pulse sequences}
+
+MR imaging is a stunningly diverse modality.
+Beyond the basics of spatial encoding and echo signal generation, there lies a whole host of techniques for generating specific contrasts, neutralising unwanted signals and artefacts and accelerating acquisition times which are outside of the scope of this introduction.
+The unique combination of these \note{which} parameters which produces a specific image is described by its pulse sequence.
+A pulse sequence refers to the specific timeline of \gls{rf} excitations, gradient field manipulations and signal readouts programmed to form an image.
+The development of novel pulse sequences and contrasts is a perennial and active field of research which will continue to expand and improve the capabilities of \gls{mri} for years to come.
+\note{this paragraph feels a bit wet. and what about image reconstruction?}
 
 \subsubsection{Diffusion MRI}
 
@@ -191,7 +202,7 @@ Elsewhere in the brain, the presence of highly organised biochemical structures,
 In \gls{gm}, the cell membranes of somae, glial cells, dendrites and \note{short, unmyelinated axons} as well as subcellular structures and organelles all present obstacles to diffusing molecules, resulting in a hindered diffusion pattern.
 However, since these barriers are arranged in a random fashion, and are to be encountered equally likely in any direction, there is no preferential direction in which diffusion is freer than in others, thus the diffusivity is isotropic.
 In \gls{wm}, conversely, the highly coherent arrangement of axons poses very strong restrictions on diffusion occuring perpendicular to those axons, while diffusivity is relatively higher along the direction parallel to the bundled axon fibres.
-In such an environment, diffusion is anisotropic.
+In such an environment, diffusion is anisotropic, biased towards certain directions over others.
 
 \paragraph{Diffusion weighting}
 
