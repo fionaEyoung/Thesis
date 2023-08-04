@@ -11,28 +11,90 @@
 
 \subsubsection{Diffusion MRI as a white matter imaging tool}
 
-\note{I guess an overview? The usual ``it's all we've got!" litany}
-
 Though tools for sudying \gls{wm} grow increasingly numerous, \gls{dmri} remains the only available technique capable of depicting macroscopic \note{meaning, global throughout the brain; but level is microscopic?} human \gls{wm} structure \textit{in vivo}.
 This is thanks to the \note{fibrous} organisation of \gls{wm} fibres, which group together in bundles forming a restrictive diffusion environment in which axon membranes and myeling sheaths form barriers to diffusing water molecules.
 The resulting anisotropic diffusion pattern, with preferential diffusion along the axon direction, forms the basis for \gls{dmri}-based glswm analysis.
 
 The journey from raw glsdmri data to meaningful representations of glswm microstructure is far from direct.
-\Gls{dmri} image voxels are on the order of cubic millimeters, and in such a volume are contained \note{gamegazillions} of individual axons and cells.
+\Gls{dmri} image \glspl{voxel} are on the order of cubic millimeters, and in such a volume are contained \note{gamegazillions} of individual axons and cells.
 Also at that scale, all the axons are not necessarily, in fact are rarely, oriented completely uniformly along one direction.
 Throughout the brain, fibre tracts mingle and intersect, bundles of fibres fan out as their paths diverge, and two entirely independent tracts, travelling in different directions, may sit next to eachother and both partly occupy the same voxel.
 The physical diffusion processes in such complex configurations and multicellular environments cannot be known, only approximated and modelled through a choice of assumptions and simplifications.
 In this there are, of course, many contrasting approaches, developed for different applications and the directed study of certain quantities.
 
-\subsubsection{Fiber orientation modelling}
+\subsubsection{Fibre orientation modelling}
 
 \note{The goal of getting the fibre orientations from raw diffusion data, and how we get there.
 Cover DTI, crossing fibres, compartment models and CSD}
+
+There are many target properties of diffusion MRI analysis, including cellular composition of \gls{gm}, intra- and extracellular water content, and diffusivity perpendicular to axonal orientation.
+For the purposes of stying the organisation of fibre tracts, the key information we are interested in determining from the raw \gls{dmri} data are the orientations of axons inside each voxel, encapsulated mathematically in an \gls{odf}.
+
+The first and most significant approach for modelling fibre orientations came in the form of \gls{dti}, which remains the dominant choice \note{of what} in many applications today, particularly in clinical environments.
+The diffusion pattern within a \gls{wm} voxel is modelled as a directionally dependent gaussian process \note{right?}, with the individual directional components described by a diffusion tensor.
+Acquiring at least 6 different diffusion weighted directions provides sufficient data to compute the tensor coefficients, from which, in turn, a host of metrics and other quantities can be computed to describe varying aspects of the underlying tissue structure within the voxel. \note{yikes}
+Significantly, the diffusion tensor model gives rise to a \note{kind of} \gls{odf} in the shape of a zepplin, featuring a single peak.
+The direction of this peak, given by the tensor's primary eigenvector, is labelled ``principal diffusion direction" and acts as a representation of the fibre orientations within the voxel.
+In fact, it is rare for a voxel of \gls{wm} to contain only a single uniformly oriented bundle of axons.
+In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture: a smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the principal diffusion vector.
+
+The crossing fibre problem led to \gls{dti}, at least in research imaging, gradually giving way to more sophisticated fibre orientation modelling techniques which aim to account for an arbitrary number of distinctly oriented fibre populations.
+\note{here comes multicompartment models and bedpost, can't be bothered with this right now}
+An alternative approach to explicitly modelling the diffusion processes in each tissue compartment and fitting the associated parameters to the raw data, is a data-driven \note{is it?} approach of estimating the \gls{odf} directly from the signal data and the assumed signal of a single fibre population.
+This is the idea behind another popular fibre orientation modelling method called \gls{csd}.
+The objective is to disentangle the individual orientations by conceptualising the obtained directionally dependent diffusion signal (the diffusion \gls{odf}, $S(\theta,\phi)$) as a convolution over the spherical angular domain of the \gls{fod} function $F(\theta,\phi)$ and the expected signal measured from a single collinear fibre population (``response function" $R(\theta)$):
+
+\begin{align}
+  S(\theta,\phi) = F(\theta,\phi) \otimes R(\theta)
+\end{align}\label{eq:csd}
+
+Solving (\ref{eq:csd}) for the \gls{fod} means perfoming the inverse operation, a spherical \textit{de}convolution of the signal with the response function.
+\note{wrap this up}
 
 \subsubsection{Streamline tractography}
 
 \note{Discuss as the mainstay of white matter bundle segmentation.
 Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
+
+Until now, we have only discussed the processing and analysis of diffusion MRI data, and what it can / cannot reveal about \gls{wm} microstructure, at the level of individual image \glspl{voxel}.
+However, the individual axons that form fibre tracts traverse \note{thousands} of voxels, and it is this macroscopic picture that further downstream processing of \gls{dmri} data aims to provide.
+\note{I don't like all this use of the term ``dmri data"}
+To this end, not long after the introduction of \gls{dti} came the idea of treating the derived orientations as a vector field through which the paths of virtual neural fibres could be traced, a process called streamline tractography.
+Importantly, the paths of individual \textit{in vivo} axons are entirely nondiscernable from \gls{dmri}.
+The individual streamlines of tractography are entirely abstract mathematical objects, each merely a collection of vertices, which aim to capture the \textit{potential} pathways of axons based on the derived \gls{fod}.
+Tractography is an immensely powerful and useful tool, and at the same time full of flaws \note{aww, relatable} due to this abstract and indirect nature.
+
+All \note{?} tractography algorithms consist at their core of the following steps:
+
+\begin{verbatim}
+while number_streamlines < N
+  - Initialise, or "seed", a streamline with a single point;
+  while not STOP_CONDITION:
+    - Determine a propagation direction v based on the surrounding FOD field;
+    - Take a step, of predetermined length, along v
+    - Evaluate stopping condition;
+  - Append streamline to list;
+\end{verbatim}
+
+Within this simple algorithm lies a whole family of parameters and decisions which affect the result.
+The seed location, step length, conditions for terminating or entirely rejecting streamlines, interpolation of the surrounding vector field, number of streamlines to generate -- all considerations to be determined by the user (although in practice many parameters will be automatically determined or set to default values by the chosen algorithm).
+There are two choices that most fundamentally affect the tractography process and which feature most heavily in discussions on its use.
+
+First is the choice of method for representing orientation information from the underlying data.
+Initially, this was diffusion tensor modelling and the principal diffusion direction.
+With only a single possible direction at each location, which, as discussed above, may have little to do with any true axon orientations at that point, diffusion tensor based tractography can only track fibre pathways with rather limited accuracy.
+Against this background, tractography based on crossing fibre models represents a vast improvement in the ability to contend with tracking in the complex configurations of \gls{wm}.
+However, this flexibility comes with additional headaches, as when there are multiple distinct possible directions in which to propagate the streamline at any position, the decision of which direction to take becomes far more complex.
+
+Secondly comes the distinction between deterministic and probabilistic tracking approaches.
+In deterministic tractography, there is exactly one precise direction in which a streamline can be propagated from any given point.
+Two streamlines seeded in exactly the same location will be identical in this paradigm.
+But as previously described, tractography operates in a domain far removed from the reality of individual axons, and the certainty implied by such an \note{immutable} approach is wholly unwarranted.
+Probabilistic tractography algorithms are here to acknowledge the uncertainty inherent in the tracking process.
+Numerous probabilistic tracking algorithms have been developed, and while the end effect is essentially the same, whereby seeding in the exact same location will not give rise to identical streamlines, there are two subtly different schools in what sort of uncertainty is being considered.
+One consideres the \textit{measurement} uncertainty of the calcualted orientations.
+Under this approach, the general direction to take is not under question, but the accuracy of that direction is.
+The second school regards the uncertainty as lying in the figuring out which of the possible general directions, representing distinct fibre populations, is the correct one according the the current journey the streamline finds itself on. \note{lol}
 
 \paragraph{Streamline-based automatic tract segmentation}
 
