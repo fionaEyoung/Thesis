@@ -71,6 +71,22 @@ And in \textcite{Hagler2009}, spatial probability is given by the averaged, norm
 Finally, there are similarities with the bundle specific tractography approach described in \textcite{Rheault2019}, in particular the use of a streamline-template and track orientation distribution (TOD) mapping,\autocite{Dhollander2014} and extension of track density imaging\autocite{Calamante2010} into the angular domain, to incorporate orientational priors.
 However, the purpose of the TOD prior in that work was to enhance tractography, whereas our aim is to forgo tractography entirely at the point of application in a new subject.
 
+\subsubsection{Tumour deformation modelling}
+
+\note{copied from upgrade / IJCARS}
+
+Anatomical non-correspondence between subject and template images caused by space-occupying lesions poses a substantial challenge to the use of atlas-based white matter segmentation methods in clinical subjects.
+Deformable registration alone is often insufficient for handling this missmatch \autocite{Elazab2018, Visser2020}, and so using tumour growth models to simulate the deformation in the atlas prior to registration is the commonly preferred approach \autocite{Cabezas2011, Mang2020}.
+Numerous previously proposed tumour deformation models aim to achieve highly accurate modelling of tumour growth dynamics and the effects on surrounding tissues, by taking into account elastic tissue properties and microspcopic tumour growth modelling.
+The resulting algorithms are mathematically complex \autocite{Elazab2018}, require optimisation of tumour parameters through problem inversion or by other means \autocite{Mohamed2006, Zacharaki2009, Mang2020} and take anywhere between 1 and 36 hours to run \autocite{Zacharaki2009,Bauer2012, Bauer2013,Mang2012}, even on high performance computing setups.
+
+Given the time constraints of intraoperative imaging and the practical constraints of the computing capacity which can reasonably be assumed to be available in an operating room, the aim for this project was to achieve an estimate of tract displacement with low computational complexity.
+The first component of the framework described in Section \ref{sec:progress}, the tract orientation atlas, provides a degree of spatial tolerance that alleviates the need for voxel-perfect registration and deformation, allowing the implementation of a minimal deformation algorithm.
+
+%########################
+%########################
+%########################
+%########################
 \subsection{Neurosurgery}
 %========================
 
