@@ -1,5 +1,5 @@
 ## Symlinks
-src/figs
+src/*figs
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
