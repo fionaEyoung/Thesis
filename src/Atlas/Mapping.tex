@@ -54,3 +54,62 @@ It is conceivable for example that the final map value is predominantly determin
 
 
 \subsection{Fixel analysis}
+
+The value of the inner product between an estimated orientation distribution representing a mixture of fibre populations and the expected orientation distribution for a specific isolated population will depend on a range of interacting components, making interpretation of the final value a complicated task.
+
+\note{missing figure: fantasy voxels comparing different atlas/fod combo scenarios (same amp, matching, crossing etc.)}
+
+For example, consider two voxels, both containing FOD lobes of equal amplitude perfectly aligned with the expected orientation represented by the atlas TOD.
+\note{I actually can't describe these scenarios without running some simulations}
+
+To disentangle the competing effects in crossing fibre voxels, we consider an extension of the inner product analysis using the concept of fixels.
+A portmanteau of ``fibre" and ``voxel", a fixel describes a sub-voxel element representing a single fibre population.
+A voxel can contain any number of fixels, and each can be analysed in isolation with fixel-level properties such as orientation, dispersion and fibre density.
+By segmenting a full \gls{fod} into individual lobes and computing properties on those sub-distributions, we can separate the effects of different fibre populations within a single voxel.
+
+The fixel framework has been adapted here to extend the inner product to consider individual \gls{fod} lobes in isolation.
+\gls{fod} segmentation works by sampling the \gls{sh} distribution on a dense set of directions (>1000).
+Each of these direction samples is binned into a fixel based on its neighbourhood, resulting in each fixel being represented by a collection of directional samples \note{and zero everywhere else. ? better explanation of FMLS algorithm}
+These fixel samples are then converted to their \gls{sh} decomposition via a linear least-squares fit \note{to what? the basis functions or amplitudes?}
+The result is a set of individual \gls{sh} distributions per voxel, each representing a different fixel.
+
+The amplitude of the fixel \glspl{odf} will reflect that of the corresponding lobe in the original full multi-fibre distribution, and thus the integral of the fixel \gls{odf} will always be smaller or equal to that of the original \gls{fod}.
+However, we are interested in whether the fibre population of interest is present in a voxel based on orientation alone, regardless of its relative weight to the other fibres occupying the same voxel.
+The location probability, in other words, should be influenced only by the expected location probability \note{$t_0$} and the overall white matter signal integral \note{$FOD_0$}.
+\note{need to figure out these notations!!}
+To remove the relative weighting effect of crossing fibres, we renormalise each fixel \gls{odf} to the overall \gls{fod} amplitude:
+
+\begin{align}
+  \overline{I} = \frac{I f_0}{i_0}
+\end{align}
+
+where the fixel \gls{odf} is $I(\theta, \phi) = \sum_j i_j Y_j(\theta,\phi)$.
+Then we compute the inner product of the atlas \gls{tod} and each fixel \gls{odf} $I_k$, taking the maximum value as the result:
+
+\begin{align}
+  p = \operatorname*{argmax}_k \int_\Omega I_k(\theta,\phi) T(\theta,\phi) \sin\theta d\theta d\phi
+\end{align}
+
+The result is improved tract sensitivity in areas of crossing fibres where there is otherwise sufficient evidence that the tract is present in the voxel.
+During the \gls{fod} segmentation process, a minimum threshold can be placed on the lobe amplitude for a single fixel, reducing noise amplification.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+  \centering
+  \includegraphics[width=\textwidth,draft=false]{chapter_2/FCF_ground_truth_fibres.png}
+  \caption{Ground truth fibres}
+  \label{}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.3\textwidth}
+  \includegraphics[width=\textwidth,draft=false]{chapter_2/normal_ip_FCF.png}
+  \caption{Simple inner product}
+  \label{}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.3\textwidth}
+  \includegraphics[width=\textwidth,draft=false]{chapter_2/fixel_ip_FCF.png}
+  \caption{Fixel inner product}
+  \label{}
+  \end{subfigure}
+  \caption{Crossing fibres results in low signal for the brown tract in upper intersection region. In fixel IP this signal drop is eliminated resulting in smooth tract map.}\label{fig:fixip}
+\end{figure}
