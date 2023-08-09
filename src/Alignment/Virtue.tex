@@ -1,8 +1,58 @@
 \section{Tumour deformation modelling}
 \label{chapterlabel3}
 
-\note{This is where the tumour model is described. There will be maths!}
+\note{this has been dumped from IJCARS paper}
 
-\note{There will be stuff about the forward and reverse models, the different options for $k$ (linear, exponential etc.)}
+The tract orientation atlas represents the expected orientation and location of the tract for a typical healthy subject.
+In order to correct for displacement of white matter tracts due to space occupying lesions, a simple radial tumour expansion model is employed.
+
+The model has been adapted from the one described by Nowinski and Belov \citep{Nowinski2005}.
+The model inputs are the segmentations of the tumour and brain volumes.
+Tumour segmentations were drawn manually for this study, while brain masks are readily computed by standard MRI analysis software.
+We define the direction $\mathbf{\hat{e}}$, which is the unit vector along the line connecting a point $P(x,y,z)$ to the tumour centre of mass, $S$.
+Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarrow{SP}\|$, $D_b$ as the distance from $S$ to the brain surface and $D_t$ as the distance from $S$ to the tumour surface (Fig. \note{fig:virtue}).
+
+Then for a point in the original image $P = (x,y,z)$ the transformed location in the deformed image $P' = (x',y',z')$ is
+
+\begin{align}\label{eq:forwardP}
+  P' = f(P) = P + \mathbf{\hat{e}}kD_ts.
+\end{align}
+
+An exponentially decaying function is used to model the displacement of each voxel (Fig. \ref{fig:virtue-demo}).
+This choice was made in contrast to the linear relationship used in \citep{Nowinski2005} as it provides a better approximation to typically observed tumour displacement patterns, while remaining an easily computable, closed-form and invertible function.
+The amount of displacement depends exponentially on the relative distance to the tumour and brain surfaces via the following relationship:
+
+\begin{align}\label{eq:forwardk}
+  k(P) = (1-c)e^{-\lambda \frac{D_p}{D_b}} +c
+\end{align}
+
+where the normalisation constant $ c = \frac{e^{-\lambda}}{e^{-\lambda}-1} $ ensures that $k = 1$ when $D_P = 0$ and $k = 0$ when $D_p = D_b$. The appropriate value for the decay parameter $\lambda$ will depend on the specific lesion being modelled. For example, smaller lesions (20-30mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved. In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger decay of deformation, would be appropriate (Figure \ref{fig:virtue}).
+
+Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the deformation field in forward warp convention. To deform an image using reverse warp (``pull-back") convention, the inverse mapping $P' = f^{-1}(P)$ is needed, which is obtained by solving equation (\ref{eq:forwardP}) for $P$:
+
+\begin{align}
+  P = P' - \mathbf{\hat{e}}(D_t c - \frac{D_b}{\lambda}\mathcal{W}_0(\frac{-\lambda D_t (1-c) e^{-\lambda(D_p'-D_tc)/D_b}}{D_b}))
+\end{align}
+
+where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$.
+
+If the lesion is not invading the surrounding tissue but instead fully displacing it (non-infiltrative), then under the simplified assumption that no original, healthy tissue is destroyed, $\lambda$ should be set to a value that ensures that every point $P$ within the lesion boundary is displaced to a new position $P'$ that is strictly outside the boundary. In other words,
+
+\begin{equation}\label{eq:lambdabound}
+  k(P) = (1-c)e^{-\lambda \frac{D_P}{D_b}} +c \geq 1 - \frac{D_P}{D_t}
+\end{equation}
+
+must hold for all $P$.
+
+Given that the gradient of $k$ is strictly decreasing and $g(D_P) = 1 - \frac{D_P}{D_t}$ is linear, it is sufficient to set
+\begin{align}
+  \frac{d}{dP}\bigg\rvert_{D_P=0}k(D_P) = \frac{d}{dP}\bigg\rvert_{D_P=0}g(D_P)
+\end{align}.
+
+Differentiating both functions at $D_P=0$ and solving for $\lambda$, we have $\lambda_{max} = \frac{D_b}{D_t (1-c)}$.
+Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified. Note that $\lambda_{max}$ varies throughout the brain, as it depends on the relative distances to brain and tumour surfaces for each specific $P$.
+
+The tumour deformation model is implemented in Python, and full execution takes on average 1 min for a 208 x 256 x 256 voxel image.
+If lookup tables for $ D_t$ and $D_b$ are precomputed and saved, then subsequent executions of the model (e.g. with different values for $\lambda$ and $s$, as appropriate for a given tumour) take less than 10 seconds, as long as the tumour and brain segmentations remain unchanged.
 
 \note{Maybe also some speculative stuff about infiltration}
