@@ -1,14 +1,15 @@
-\chapter{Aligning Atlas and data}
+\chapter{Aligning atlas and data}
 
-\note{This chapter is about bringing the atlas into alignment with the data. This could be simple registration, as in the healthy cases, non-linear registration or registration combined with tumour deformation modelling.}
+Each tract atlas exists only in a standard template space, and before being used to estimate the location of a tract in a new patient it must first be aligned with that patient's anatomy.
+In order to achieve this, some sort of registration strategy is needed.
+Depending on the specifics of the target data, simple linear registration may be sufficient to bring the two images into alignment.
+In more \note{abnormal} cases, for example patients with space-occupying tumours, intraoperative brain shift or hydrocephalus, further more advanced processing is needed to match the atlas to the subject.
 
 \section{Registration}
 
 \note{Cover all the registration options (there aren't many). Maybe discuss T1+FA registration}
 
-Each tract atlas exists only in a standard template space, and before being used to estimate the location of a tract in a new patient it must first be aligned with that patient's anatomy.
-In order to achieve this, some sort of registration strategy is needed.
-
+At a minimum, atlas and subject data must be co-registered before tract mapping can be performed.
 Given that atlases are created from linearly registered training subject data, it makes sense to mirror this relationship and linearly register the atlas to new subject space.
 The inter-subject variability in the atlas stems, due to the use of linear as opposed to diffeomorphic registration, not just from the differences in tract location relative to the rest of the white matter, but also from the global anatomical differences in position and shape of the brain landmarks. \note{how to explain this??}
 In using diffeomorphic registration to transform the atlas into subject space would effectively maintain an excessive degree of spatial variability in the atlas which should have been effectively ``registered out" with diffeomorphic transformation.
