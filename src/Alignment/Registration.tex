@@ -5,3 +5,29 @@
 \section{Registration}
 
 \note{Cover all the registration options (there aren't many). Maybe discuss T1+FA registration}
+
+Each tract atlas exists only in a standard template space, and before being used to estimate the location of a tract in a new patient it must first be aligned with that patient's anatomy.
+In order to achieve this, some sort of registration strategy is needed.
+
+Given that atlases are created from linearly registered training subject data, it makes sense to mirror this relationship and linearly register the atlas to new subject space.
+The inter-subject variability in the atlas stems, due to the use of linear as opposed to diffeomorphic registration, not just from the differences in tract location relative to the rest of the white matter, but also from the global anatomical differences in position and shape of the brain landmarks. \note{how to explain this??}
+In using diffeomorphic registration to transform the atlas into subject space would effectively maintain an excessive degree of spatial variability in the atlas which should have been effectively ``registered out" with diffeomorphic transformation.
+The choice of affine registration also dovetails with the stated aim of keeping the overall segmentation methodology as computationally streamlined as possible for the intraoperative environment.
+There can be no ignoring the disadvantages of linear registration.
+Particularly in brains with modest deformations or other lesions, the accuracy of anatomical alignment can be quite limited.
+There is a risk of both spatial and orientational alignment falling too far outside the atlases forgiving range \note{??}, resulting in missed areas (false negative) or erroneously included regions (false positives).
+To illustrate, consider two separate tracts oriented the same way at a given location, in relative spatial proximity.
+An example of this scenario can be seen at the temporoparietal fibre intersection area, where at least 7 different \note{[citation needed]} identified bundles converge.
+Here the vertical portion of the arcuate fasciculus lies lateral to the sagittal stratum containing antero-posterially oriented association fibres including the \gls{ifof} and \gls{or}, which in turn lies lateral to the tapetum of the corpus callosum.
+The similar orientations of the the \gls{af} and tapetum in this region, together with their close proximity, can lead to fibres of one wrongly being attributed to the other if the atlas is too broad.
+\note{anything else to say about affine registration??}
+
+Certainly in healthy applications, affine registration is sufficient for accounting for most inter-subject variability.
+In come clinical applications, however, where patient anatomy is far from the norm, linear registration becomes inadequate.
+Where diffeomorphic registration may become necessary is in cases with significant amounts of brain shift.
+These include deformations which are not exclusively described by tumour debulking, and cannot be modelled using tumour deformation modelling as described in the \note{next} chapter.
+In this scenario, heavily regularised non-linear registration could be employed to co-register pre- and intraoperative scans of the same patient.
+This is an easier registration than between standard space and intraoperative space and could feasibly be performed robustly in an appropriate time frame.
+\note{show examples of T1+FA reg??}
+Unfortunately, even with regularisation, diffeomorphic registration algorithms are too complex to robustly generalise to the range of anatomies encountered in intraoperative imaging, and would require excessive amounts of manual parameter adjustments to be useful for an automated pipeline.
+\note{this will just devolve into a lit review about tumour registration??}
