@@ -3,8 +3,6 @@
 \note{How the method was validated. This is all the Tractoinferno / HCP data stuff, plus maybe qualitative results?}
 \note{Also discussion about lack of ground truth data and different validation metrics.}
 
-\subsection{Comparison with benchmark methods}
-
 \note{Largescale validation in HCP and tractoinferno datasets, comparing to reference tractography and TractSeg}
 
 While a ground truth for white matter tract segmentation is not obtainable \textit{in vivo}, we compare our technique with two other widely adopted methods for a quantitative estimation of reliability and accuracy.
@@ -13,8 +11,6 @@ In segmentation tasks, it is common to present a single numeric score of similar
 However, in the absence of a ground truth for this particular task, we aim to present as rounded a picture as possible of the differences and characteristic features of each method through a range of different volumetric distance-based similarity metrics.
 The purpose of this validation is therefore not to determine which method is best, as indeed cannot be determined without a reliable reference point, but to highlight the ways in which they are similar, and their characteristic tendencies.
 
-\subsubsection{Data}
-
 We considered three different datasets with which to compare the proposed method against alternative tract segmentation methods.
 Each dataset and any dataset-specific preprocessing is described below. \note{In section \ref{sec:data}}
 In addition, for all subjects we performed brain masking,\autocite{Tournier2019} linear registration\autocite{Jenkinson2001,Jenkinson2002} (FSL v.6.0 Linear Image Registration Tool) between subject space and MNI152\autocite{Fonov2011} space and two versions of \gls{csd}: \gls{ssst} \gls{csd} (``original flavour")\autocite{Tournier2007,Tournier2019} and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to white matter and grey matter tissue compartments.
@@ -22,11 +18,11 @@ In both cases, response functions were obtained using the Dhollander unsupervise
 All \gls{csd} processing was conducted using the MRtrix3 image processing software package v3.0.2-3.0.3 (\url{https://www.mrtrix.org/}).\autocite{Tournier2019}
 Processing and analysis pipelines for the two openly available datasets are available at \url{https://github.com/fionaEyoung/pipelines}
 
-\subsubsection{Compared methods}
+\subsection{Benchmark methods}
 
 We considered three alternative segmentation approaches and compared each with the proposed method: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
 
-\paragraph{Streamline tractography}
+\paragraph*{Streamline tractography}
 
 We ran targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3) in each scan using an in-house ROI strategy (see \ref{sec:rois} for ROI details), with tractography input \gls{fod}s derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} with white matter and grey matter tissue compartments.
 In the clinical dataset, ROIs were placed manually for each subject.
@@ -34,19 +30,19 @@ For 193 HCP and TractoInferno subjects, manual ROI placement was infeasible.
 Instead the same ROIs were drawn in MNI152 space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration (HCP data includes MNI transformation warps, while warps were created for the TractoInferno data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/).\autocite{Tustison2013,Avants2011}).
 This in-house tractography is subsequently abbreviated to ``TG", while the reference TractoInferno bundles are referred to as ``TGR".
 
-\paragraph{TractSeg}
+\paragraph*{TractSeg}
 
 TractSeg \autocite{Wasserthal2018} is a deep learning tract segmentation model which produces volumetric segmentations for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3-2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
 There are two models available: one (``DKFZ") trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018}, and a second (``XTRACT") trained on streamline density maps output by FSL's XTRACT application. \autocite{Warrington2020}
 We compared with both versions, as they feature significant differences in anatomical tract definition.
 Input peaks were derived from the SSST \gls{csd} \gls{fod}s.
 
-\paragraph{Atlas registration}
+\paragraph*{Atlas registration}
 
 As well as the full tractfinder method, we compared our results with a ``naive" tract atlas approach, taking the density component (first SH coefficient) of the linearly registered tract atlases.
 This amounts to a segmentation based on prior expectation only, without taking into account the diffusion data.
 
-\subsubsection{Comparison metrics}
+\subsection{Comparison metrics}
 
 We compared each technique against the others, rather than designating any single technique as ``ground truth".
 Several comparison metrics were computed, to capture different kinds of agreement between segmentations.
@@ -108,9 +104,7 @@ where $| \cdot |$ denotes set cardinality and $d_i(X)$ is the Euclidean distance
   \label{fig:BD}
 \end{figure}
 
-\subsection{Benchmark comparison results}
-
-\subsubsection{Processing times}
+\subsection{Processing times}
 
 Atlas transformation and inner product computation time per subject for all three tracts and both hemispheres was $18\pm5 s$, plus 1-2 minutes for MSMT-\gls{csd} and 20 seconds for MNI registration.
 For TractSeg (DKFZ or XTRACT), mean processing time (for all tracts, 72 for DKFZ and 23 for XTRACT, both hemispheres) was 4:00$\pm$1:00 $min$, plus $15-20 s$ for SSST-\gls{csd}.
@@ -145,7 +139,7 @@ However, since the time taken depends greatly on several factors, including numb
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsubsection{Qualitative results}
+\subsection{Qualitative results}
 
 Qualitative results can be seen in Figures \note{fig:SURFACE}, \note{fig:lb.cst}-\note{fig:lb.clin}.
 The raw tract maps typically have values ranging from 0 to 0.5 (in arbitrary units, derived from the magnitudes of \gls{fod} and atlas distribution functions).
@@ -153,7 +147,7 @@ Due to the combined effects of \gls{odf} amplitude and orientation information, 
 
 Thus combining information from the atlas and data-derived \gls{fod}s improves the tract map estimation over the ``raw" registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
 
-\subsubsection{Quantitative results in healthy data}
+\subsection{Quantitative results in healthy data}
 
 Volumetric and agreement metrics indicate consistent, if not always high, levels of agreement between tractfinder and compared techniques, TractSeg and tractography.
 Visual assessment reveals that differences in the spatial extent of the segmented tracts accounts for a large part of the discrepancy between methods.
@@ -170,7 +164,7 @@ Density correlation and \gls{gdice} help illustrate the cases where the choice o
 For example, in the HCP dataset and for the corticospinal tract, mean binary \gls{dice} was $0.69$ between tractfinder and tractography and $0.51$ between TractSeg (XTRACT) and tractography (a difference of $0.18$).
 For the same two comparisons, the density correlations differed only by $0.04$ ($0.63$ and $0.59$) respectively, indicating strong agreement between areas of high confidence (``density'').
 
-\paragraph{HCP data}
+\paragraph*{HCP data}
 
 Volume surface visualisations obtained with tractfinder are shown for the three tracts in a single HCP subject in Figure \note{fig:SURFACE}.
 Figure \note{fig:HCPDICE} gives an indication of how the five different segmentation methods compare, across all HCP dataset subjects.
@@ -183,7 +177,7 @@ Agreement is similarly high in the optic radiations, with slightly lower \gls{di
 
 Tractfinder segmentations are highly consistent, with comparison metrics with alternative methods varying by little across subjects (Tab. \note{tab:DATAHCP}).
 
-\paragraph{TractoInferno}
+\paragraph*{TractoInferno}
 
 Qualitative results for a representative subject (identified as the only subject within the top 30 smallest deviations from the mean scores for all three of bundle distance, binary \gls{dice} and density correlation) are shown in Figures \note{fig:lb.afr}-\note{fig:lb.or}.
 
@@ -203,7 +197,7 @@ For example, in several cases, optic radiation streamlines only reach the superi
 In others, the right arcuate fasciculus is significantly smaller than the left (Fig. \note{fig:DUDSAF}).
 There is lower variability in the pairwise comparisons between the other four methods: the results for tractfinder and TractSeg remain in more consistent agreement with each other across the TractoInferno dataset (Fig. \note{fig:TIDICE}).
 
-\subsubsection{Results in clinical data}
+\subsection{Results in clinical data}
 
 For the present analysis we included clinical scans with non-deforming lesions, meaning the orientation atlas could be registered to the target image using only affine registration without the need for tumour deformation modelling.
 For qualitative results in clinical scans featuring deforming lesions, see \textcite{Young2022}

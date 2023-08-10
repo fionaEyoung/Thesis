@@ -3,7 +3,7 @@
 
 \note{All of the validation in clinical and control data. Also other random stuff like the diffusion workshop data quality stuff?}
 
-\section{Data}
+\section{Datasets}
 \label{sec:data}
 
 \note{A description of the various datasets used, maybe a big overview table with names etc. Maybe also preprocessing? Although that may be specific to each experiment...}
@@ -22,7 +22,7 @@ Of the 284 subjects included in the full TractoInferno database, we selected the
 9 subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed in-house tractography, leaving a final 135 subjects.
 Diffusion acquisition parameters and preprocessing steps are described in \textcite{Poulin2022}, and we additionally resampled all data to 2.3 mm isotropic voxels, the lowest resolution present in the dataset and one in line with clinical acquisitions.
 
-\subsection{Clinical}
+\subsection{Clinical (GOSH \& NHNN)}
 
 Tract segmentation comparisons are presented for 15 individual scans from eight different subjects from two different institutions.
 They include four adult glioma subjects acquired in 2009 at the National Hospital for Neurology and Neurosurgery, London (NHNN) (cases 4 and 5 from \textcite{Mancini2022}, others unpublished data),
@@ -82,3 +82,7 @@ The 10 selected subjects include 4 with tumours large enough (3 meningioma and 1
 
 dMRI data was preprocessed with denoising, bias field correction and EPI distortion correction (\note{eddy cuda version}).
 \gls{msmt}-\gls{csd}, tractfinder, TractSeg and manual tractography of the \gls{af}, \gls{cst}, \gls{ifof} and \gls{or} were performed as previously described.
+
+\subsection{Fibercup phantom}
+
+\note{synthetic phantom data description}
