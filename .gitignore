@@ -1,5 +1,6 @@
 ## Symlinks
 src/*figs
+src/bibliographies
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
