@@ -17,7 +17,7 @@ The effects on the perfomance of TractSeg and tractography are compared as well.
 
 49 Preprocessed dMRI datasets from the HCP 1200 data release were spatially resampled to 2.5mm isotropic voxel size (from the original of 1mm isotropic), a resolution far more common in both clinical and research settings.
 Then, for each subject, the following 5 subsampled diffusion schemes were extracted from the full dataset:
-60 directions each at b=1000s/mm^2 and b=2000s/mm^2 (120 directions total, ``DWI-1”), 30 directions each at b=1000s/mm^2 and b=2000s/mm^2 (60 directions total, ``DWI-2”), 60 directions at b=1000s/mm^2 (``DWI-3”), 30 directions at b=1000s/mm^2 (``DWI-4”) and 12 directions at b=1000s/mm^2 (``DWI-5”).
+60 directions each at $b=1000s/mm^2$ and $b=2000s/mm^2$ (120 directions total, ``DWI-1”), 30 directions each at $b=1000s/mm^2$ and $b=2000s/mm^2$ (60 directions total, ``DWI-2”), 60 directions at $b=1000s/mm^2$ (``DWI-3”), 30 directions at $b=1000s/mm^2$ (``DWI-4”) and 12 directions at $b=1000s/mm^2$ (``DWI-5”).
 For each dataset four different tract segmentations are produced using three different approaches: Tractfinder, targeted ROI-based, probabilistic streamline tractography (iFOD2), and TractSeg.
 TractSeg, a deep learning-based direct segmentation technique, ships with two different pre-trained models:
 one trained on tract segmentations obtained as described in Wasserthal et al. (2018) (``TractSeg - DKFZ”), and another trained on XTRACT7 outputs (``TractSeg - XTRACT”).
