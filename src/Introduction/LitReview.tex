@@ -263,3 +263,18 @@ DT acquisitions can have as few as 6 diffusion weighted directions, resulting in
 Deterministic tracking itself is rapid, and the placement of ROI need not be as strict as with probabilistic tractography owing to a lower sensitivity to false positives.\autocite{ODonnell2017}
 A lack of availability of the necessary expertise and time limits neurosurgical centres' access to state-of-the-art tractography.\autocite{Toescu2020}
 There is thus an unmet need for reliable, automated tract segmentation techniques that can rapidly provide consistent and complete tract reconstructions for clinical use.
+
+\paragraph*{Brain shift}
+
+The dynamic conditions of brain surgery results in the unpredictable and often significantly strong movement, compression and deformation of tissue referred to as brain shift.
+A range of factors contribute to this phenomenon, including the draining of \gls{csf}, sagging due to gravity, decompression of tissue surrounding resected tumour, swelling, craniotomy herniation \note{is that a thing?} and the effects of surgical instruments.
+These effects are often \note{competing}, for example swelling and tumour debulking can cause brain tissue to shift towards a craniotomy, while the effects of gravity and \gls{csf} drainage can have the opposite effect.
+The amount and direction of shifting is unpredictable, ranging from \note{1-10mm}, making accounting for it with predictive modelling very difficult.
+
+Brain shift can affect the neurosurgeons perception of the shape and location of the target lesion \note{pure speculation} and invalidate preoperative imaging used for navigation.
+\note{cue various studies backing this up.}
+There have been attempts to address the problem of brain shift by dynamically adjusting preoperative imaging according to (sparse) intraoperative data, for example optical imaging of the cortical surface, or using ultrasound. \note{does this belong in next section?}
+Many neurosurgeons rely on their intuition to update their mental map of the surgical site throughout the procedure.
+On more advanced neuronavigational platforms which integrate preoperative imaging and intraoperative data such as \gls{des} stimulation sites, brain shift can lead to misleading and inaccurate depictions of the spatial relationships between tumour and surrounding structures.
+
+\paragraph*{Intraoperative imaging}
