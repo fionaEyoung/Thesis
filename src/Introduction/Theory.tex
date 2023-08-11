@@ -1,14 +1,14 @@
-\chapter{Theory and Background}
-\label{chapterlabel1}
+% \chapter{Theory and Background}
+% \label{chapterlabel1}
 
-\section{Theory fundamentals}
+\chapter{Theory fundamentals}
 \label{theory}
 
 \note{This will cover the more theoretical background prerequisites, covering the fundamental concepts on the biological side (neuroanatomy and cellular physiology, maybe some oncology?) and physical side (MR physics)}
 
-\subsection{Neuroanatomy: Micro to macro}
+\section{Neuroanatomy: Micro to macro}
 
-\subsubsection{Cells of the brain}
+\subsection{Cells of the brain}
 
 \note{neurons, glial cells, axons and basics of neural signalling.}
 
@@ -31,7 +31,7 @@ They form processes which wrap around axons as myelin sheaths, with each oligden
 In the \gls{pns}, myelination is performed by Schwann cells, which each form a single myelin sheath.
 \note{add microglia}
 
-\subsubsection{Neural signalling}
+\subsection{Neural signalling}
 
 Neural impulses begin their life at the axon hillock, the transition between the soma and the axon.
 At resting state, an electrical potential exists across the axonal membrane, between the extra- and intraaxonal spaces.
@@ -51,7 +51,7 @@ It's the cumulative effects of all those impulses that determine whether a neuro
 
 \note{details to potentially add: different neurotransmitters and effects; more biochem details about ion channels and resting membrane/action potentials; nuances of signalling like firing patterns (lots of potentials usually fired in rapid succession)}
 
-\subsubsection{Neuroanatomy}
+\subsection{Neuroanatomy}
 
 \note{Structure of the brain, including different sections (hind, mid, forbrain etc.) and tissue types.
 Discuss the lobes, cortical regions and functional divisions, then white matter tracts.}
@@ -97,9 +97,9 @@ Blunt dissection remains the gold standard for anatomical identification, but it
 So it is that anatomical dissections \note{have given} rise to the identification and description of tracts which turned out to be entirely artefactual. \note{round off this soapbox about tract anatomy. Copied from notes on IFOF:}
 \textit{With association tracts, one can observe a backwards and forwards between deducing possible corical terminations based on observed function, e.g. particular functional deficits induced through stimulation of the core of the tract, and theorising on possible functions based on observed cortical terminations, e.g. through blunt postmortem dissections.}
 
-\subsection{MRI Physics}
+\section{MRI Physics}
 
-\subsubsection{Resonance and relaxation}
+\subsection{Resonance and relaxation}
 
 \note{Basics of resonance, magnetisation, spin-spin / spin-lattice relaxation}
 
@@ -123,11 +123,11 @@ interaction with other spins \note{local magnetic fields?} in the molecular envi
 The recovery rate of $M_z$ and the rate of decay of $M_{xy}$ are described by the time constants $T1$ and $T2$ respectively, and each depend on the specific molecular environment and are thus tissue-dependent quantities.
 It is the varying values of $T1$ and $T2$, as well as the overall differences in proton densities ($PD$) between tissues which lend contrast to MR images.
 
-\subsubsection{Excitation and image acquisition}
+\subsection{Excitation and image acquisition}
 
 \note{How MRI machines work: excitation pulses, effects of different relaxation weightings, examples of different common pulse sequences and their uses}
 
-\paragraph{Generating echos}
+\paragraph*{Generating echos}
 
 Immediatly after application of the \gls{rf} excitation pulse, magnetisation will rapidly return to equilbrium in a spiral pattern \note{see image}.
 This rotating magnetisation will induce an oscillating current within a detection coil placed near the sample in a process called \gls{fid}.
@@ -153,7 +153,7 @@ Gradient echo sequences can work with shorter TEs \note{true?} and \note{...thus
 
 \note{this section is pretty ropey but will do for now as a scaffold}
 
-\paragraph{Spatial encoding}
+\paragraph*{Spatial encoding}
 
 The signal induced in a reciever coil is a combination of contributions from spins located throughout the excited sample.
 The attribution of signal contributions to positions in 3D space is achieved with slice selection, phase encoding and frequency encoding.
@@ -183,7 +183,7 @@ Pulse sequence parameters encode the trajectory and resolution in which datapoin
 At the end of the sequence, when $k$-space has been filled, an inverse \gls{2dft} is computed to reconstruct the image in the spatial domain.
 \Gls{2dft} imaging, in which full 3D image volumes are acquired as a series of individually reconstructed 2D slices \note{is this true?}, remains the most common \note{and efficient?} mode of image formation in MR imaging.
 
-\paragraph{Pulse sequences}
+\paragraph*{Pulse sequences}
 
 MR imaging is a stunningly diverse modality.
 Beyond the basics of spatial encoding and echo signal generation, there lies a whole host of techniques for generating specific contrasts, neutralising unwanted signals and artefacts and accelerating acquisition times which are outside of the scope of this introduction.
@@ -192,7 +192,7 @@ A pulse sequence refers to the specific timeline of \gls{rf} excitations, gradie
 The development of novel pulse sequences and contrasts is a perennial and active field of research which will continue to expand and improve the capabilities of \gls{mri} for years to come.
 \note{this paragraph feels a bit wet. and what about image reconstruction?}
 
-\subsubsection{Diffusion MRI}
+\subsection{Diffusion MRI}
 
 \note{First describe diffusion in general but stick to tissue, i.e. restricted diffusion. Cover the different types of diffusion in different tissues in the brain, timescales etc.
 Then look at the mechanism of diffusion MRI acquisition, pulse sequence and parameters e.g. b values.
@@ -207,7 +207,7 @@ However, since these barriers are arranged in a random fashion, and are to be en
 In \gls{wm}, conversely, the highly coherent arrangement of axons poses very strong restrictions on diffusion occuring perpendicular to those axons, while diffusivity is relatively higher along the direction parallel to the bundled axon fibres.
 In such an environment, diffusion is anisotropic, biased towards certain directions over others.
 
-\paragraph{Diffusion weighting}
+\paragraph*{Diffusion weighting}
 
 Any MR pulse sequence can be modified to introduce additional sensitisation to brownian motion, or diffusion weighting, in addition to the existing T1 and T2 based constrasts.
 This is achieved through the application of a pair of diffusion sensitisation graident pulses prior to echo generation and signal readout.
@@ -243,7 +243,7 @@ The simplest map, used for diagnostic images, is computed from the geometric mea
 In modern acquisitions, anywhere from 12 to 100s of directions are measured, and the number of scans may be additionally multiplied by signal averages \note{repeats?} to boost \gls{snr}.
 Consequently, \Gls{dmri} scan times can be exceedingly long, from several minutes for clinical quality sequences into hours for advanced research studies, prompting efforts to reduce scan time by means of accererated and parallel imaging techniques.
 
-\paragraph{Echo planar imaging}
+\paragraph*{Echo planar imaging}
 
 Since diffusion imaging, in particular \gls{hardi}, involves the acquisition of numerous image volumes with different diffusion weightings, scan times can be particularly long.
 Depending on the image resolution, number of diffusion weighted directions, and many other factors, scan times can run into the tens of minutes and even hours.
@@ -252,11 +252,11 @@ So it is that the dominant \note{only?} type of pulse sequence used in \gls{dmri
 In \gls{epi}, all phase encoding intervals are acquired after only a single \gls{rf} excitation.
 \Gls{epi} can employ both gradient and spin echos and there are numerous different variations and associated contrast \note{??}, but for the purpose of this summary we will focus on the typical \gls{epi} sequence employed for diffusion weighted imaging.
 
-\paragraph{Artefacts}
+\paragraph*{Artefacts}
 
 \note{missing section: epi artefacts, T2 shine etc.}
 
-\subsection{Representing spherical functions}
+\section{Representing spherical functions}
 
 \note{move this to fibre orientation modelling section? but also relevant for tod etc. Appendix?}
 

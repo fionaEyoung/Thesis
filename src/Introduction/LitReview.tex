@@ -1,15 +1,15 @@
-\section{Review of Literature}
+\chapter{Review of Literature}
 \label{review}
 
 \note{This section is more about the specific background of this project; the methodolgy and clinical practice.}
 
 
-\subsection{Diffusion MRI analysis}
+\section{Diffusion MRI analysis}
 %==================================
 
 \note{All the computational methodological stuff}
 
-\subsubsection{Diffusion MRI as a white matter imaging tool}
+\subsection{Diffusion MRI as a white matter imaging tool}
 
 Though tools for sudying \gls{wm} grow increasingly numerous, \gls{dmri} remains the only available technique capable of depicting macroscopic \note{meaning, global throughout the brain; but level is microscopic?} human \gls{wm} structure \textit{in vivo}.
 This is thanks to the \note{fibrous} organisation of \gls{wm} fibres, which group together in bundles forming a restrictive diffusion environment in which axon membranes and myeling sheaths form barriers to diffusing water molecules.
@@ -22,7 +22,7 @@ Throughout the brain, fibre tracts mingle and intersect, bundles of fibres fan o
 The physical diffusion processes in such complex configurations and multicellular environments cannot be known, only approximated and modelled through a choice of assumptions and simplifications.
 In this there are, of course, many contrasting approaches, developed for different applications and the directed study of certain quantities.
 
-\subsubsection{Fibre orientation modelling}
+\subsection{Fibre orientation modelling}
 
 \note{The goal of getting the fibre orientations from raw diffusion data, and how we get there.
 Cover DTI, crossing fibres, compartment models and CSD}
@@ -51,7 +51,7 @@ The objective is to disentangle the individual orientations by conceptualising t
 Solving (\ref{eq:csd}) for the \gls{fod} means perfoming the inverse operation, a spherical \textit{de}convolution of the signal with the response function.
 \note{wrap this up}
 
-\subsubsection{Streamline tractography}
+\subsection{Streamline tractography}
 
 \note{Discuss as the mainstay of white matter bundle segmentation.
 Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
@@ -96,7 +96,12 @@ One consideres the \textit{measurement} uncertainty of the calcualted orientatio
 Under this approach, the general direction to take is not under question, but the accuracy of that direction is.
 The second school regards the uncertainty as lying in the figuring out which of the possible general directions, representing distinct fibre populations, is the correct one according the the current journey the streamline finds itself on. \note{lol}
 
-\paragraph{Streamline-based automatic tract segmentation}
+\subsection{White matter segmentation}
+
+\note{Potentially a better section title? For covering direct segmentation, atlas methods and deep learning.}
+\note{MISSING: genearl WM segmentation with tractography (manual and automated)}
+
+\paragraph*{Streamline-based automatic tract segmentation}
 
 Several automated tractography approaches to bundle segmentation have been proposed, which broadly comprise atlas-based automatic ROI placement and streamline clustering approaches.
 TRACULA and TractQuerier are examples of the former which rely on FreeSurfer parcellations to apply anatomical priors to tractography, while XTRACT \autocite{Warrington2020} utilises a set of predefined ROIs to be registered to the subject.
@@ -106,12 +111,7 @@ In such approaches, the necessary generation of whole brain tractograms and in s
 Also, the above techniques ultimately still derive from streamline tractography, and are thus not free of its biases and inaccuracies already referenced.
 There have also been recent developments in the application of machine learning to tractography,\autocite{Poulin2019} a promising field that is still in its infancy and a while off from widespread adoption and clinical translation.
 
-\subsubsection{White matter segmentation}
-
-\note{Potentially a better section title? For covering direct segmentation, atlas methods and deep learning.}
-\note{MISSING: genearl WM segmentation with tractography (manual and automated)}
-
-\paragraph{Streamline free white matter segmentation}
+\paragraph*{Streamline free white matter segmentation}
 
 \note{copypasta from HBM manuscript}
 
@@ -145,7 +145,7 @@ And in \textcite{Hagler2009}, spatial probability is given by the averaged, norm
 Finally, there are similarities with the bundle specific tractography approach described in \textcite{Rheault2019}, in particular the use of a streamline-template and track orientation distribution (TOD) mapping,\autocite{Dhollander2014} and extension of track density imaging\autocite{Calamante2010} into the angular domain, to incorporate orientational priors.
 However, the purpose of the TOD prior in that work was to enhance tractography, whereas our aim is to forgo tractography entirely at the point of application in a new subject.
 
-\subsubsection{Tumour deformation modelling}
+\subsection{Tumour deformation modelling}
 
 \note{copied from upgrade / IJCARS}
 
@@ -161,10 +161,10 @@ The first component of the framework described in Section \ref{sec:progress}, th
 %########################
 %########################
 %########################
-\subsection{Neurosurgery}
+\section{Neurosurgery}
 %========================
 
-\subsubsection{Indications for neurosurgery}
+\subsection{Indications for neurosurgery}
 
 \note{This is for all the reasons for surgery, including tumour, epilepsy DBS.
 Also more detail into the types of tumours, and locations in the brain}
@@ -189,7 +189,7 @@ This is generally not the case for posterior fossa and suprasellar lesions.
 Brainstem tumours are often not candidates for surgical removal, due to their precarious locations limiting access and posing too high risks to vital brainstem function.
 The following discussions apply to lesions in the cerebral hemispheres and thalamus, candidates for biopsy or resection via craniotomy.
 
-\subsubsection{Lesion resection}
+\subsection{Lesion resection}
 
 \note{Focus on tumours, but could also be epilepsy resections.
 Cover extent of resection (measurement, definitions etc.), biopsy, relationship between EOR and outcomes}
@@ -223,7 +223,7 @@ In some surgeries, there is no hope whatsoever of completly removing the tumour,
 In these cases, the goal of surgery may be debulking of the lesion to relieve pressure on the brain and reduce neurological deficits.
 In debulking surgeries, there is no need to attempt to fully resect the tumour, instead a conservative strategy is chosen and no risks involving surrounding functional tissue is taken.
 
-\subsubsection{Surgical neuronavigation}
+\subsection{Surgical neuronavigation}
 
 \note{All the various tools and gizmos for guided surgery. Split into preoperative planning and intraoperative use.
 Include functional imaging (EEG, fMRI, EEG), structural, tractography, DES, awake surgery/monitoring and intraoperative imaging.}
@@ -242,7 +242,7 @@ Structural imaging also play an important role in planning.
 Multi-contrast \gls{mri}, including FLAIR, T1w and T2w imaging sequences, each provide unique contrasts for visualising different aspects of a tumour, such as necrotic and infiltrating regions, which can aid in determining what \gls{eor} to aim for or which region of the tumour to target for biopsy.
 Angiography \note{mri, ct?} can also be employed for determining the tumour's and surrounding vasculature.
 
-\paragraph{White matter mapping}
+\paragraph*{White matter mapping}
 
 \note{Copied from HBM manuscript; this might be better placed as a summary in the "problem statement" part?}
 
