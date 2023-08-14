@@ -1,47 +1,319 @@
-\section{Review of Literature}
+\chapter{Review of Literature}
 \label{review}
 
 \note{This section is more about the specific background of this project; the methodolgy and clinical practice.}
 
 
-\subsection{Diffusion MRI analysis}
+\section{Diffusion MRI analysis}
 %==================================
 
 \note{All the computational methodological stuff}
 
-\subsubsection{Diffusion MRI as a white matter imaging tool}
+\subsection{Diffusion MRI as a white matter imaging tool}
 
-\note{I guess an overview? The usual ``it's all we've got!" litany}
+Though tools for sudying \gls{wm} grow increasingly numerous, \gls{dmri} remains the only available technique capable of depicting macroscopic \note{meaning, global throughout the brain; but level is microscopic?} human \gls{wm} structure \textit{in vivo}.
+This is thanks to the \note{fibrous} organisation of \gls{wm} fibres, which group together in bundles forming a restrictive diffusion environment in which axon membranes and myeling sheaths form barriers to diffusing water molecules.
+The resulting anisotropic diffusion pattern, with preferential diffusion along the axon direction, forms the basis for \gls{dmri}-based glswm analysis.
 
-\subsubsection{Fiber orientation modelling}
+The journey from raw glsdmri data to meaningful representations of glswm microstructure is far from direct.
+\Gls{dmri} image \glspl{voxel} are on the order of cubic millimeters, and in such a volume are contained \note{gamegazillions} of individual axons and cells.
+Also at that scale, all the axons are not necessarily, in fact are rarely, oriented completely uniformly along one direction.
+Throughout the brain, fibre tracts mingle and intersect, bundles of fibres fan out as their paths diverge, and two entirely independent tracts, travelling in different directions, may sit next to eachother and both partly occupy the same voxel.
+The physical diffusion processes in such complex configurations and multicellular environments cannot be known, only approximated and modelled through a choice of assumptions and simplifications.
+In this there are, of course, many contrasting approaches, developed for different applications and the directed study of certain quantities.
+
+\subsection{Fibre orientation modelling}
 
 \note{The goal of getting the fibre orientations from raw diffusion data, and how we get there.
 Cover DTI, crossing fibres, compartment models and CSD}
 
-\subsubsection{Streamline tractography}
+There are many target properties of diffusion MRI analysis, including cellular composition of \gls{gm}, intra- and extracellular water content, and diffusivity perpendicular to axonal orientation.
+For the purposes of stying the organisation of fibre tracts, the key information we are interested in determining from the raw \gls{dmri} data are the orientations of axons inside each voxel, encapsulated mathematically in an \gls{odf}.
+
+The first and most significant approach for modelling fibre orientations came in the form of \gls{dti}, which remains the dominant choice \note{of what} in many applications today, particularly in clinical environments.
+The diffusion pattern within a \gls{wm} voxel is modelled as a directionally dependent gaussian process \note{right?}, with the individual directional components described by a diffusion tensor.
+Acquiring at least 6 different diffusion weighted directions provides sufficient data to compute the tensor coefficients, from which, in turn, a host of metrics and other quantities can be computed to describe varying aspects of the underlying tissue structure within the voxel. \note{yikes}
+Significantly, the diffusion tensor model gives rise to a \note{kind of} \gls{odf} in the shape of a zepplin, featuring a single peak.
+The direction of this peak, given by the tensor's primary eigenvector, is labelled ``principal diffusion direction" and acts as a representation of the fibre orientations within the voxel.
+In fact, it is rare for a voxel of \gls{wm} to contain only a single uniformly oriented bundle of axons.
+In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture: a smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the principal diffusion vector.
+
+The crossing fibre problem led to \gls{dti}, at least in research imaging, gradually giving way to more sophisticated fibre orientation modelling techniques which aim to account for an arbitrary number of distinctly oriented fibre populations.
+\note{here comes multicompartment models and bedpost, can't be bothered with this right now}
+An alternative approach to explicitly modelling the diffusion processes in each tissue compartment and fitting the associated parameters to the raw data, is a data-driven \note{is it?} approach of estimating the \gls{odf} directly from the signal data and the assumed signal of a single fibre population.
+This is the idea behind another popular fibre orientation modelling method called \gls{csd}.
+The objective is to disentangle the individual orientations by conceptualising the obtained directionally dependent diffusion signal (the diffusion \gls{odf}, $S(\theta,\phi)$) as a convolution over the spherical angular domain of the \gls{fod} function $F(\theta,\phi)$ and the expected signal measured from a single collinear fibre population (``response function" $R(\theta)$):
+
+\begin{align}
+  S(\theta,\phi) = F(\theta,\phi) \otimes R(\theta)
+\end{align}\label{eq:csd}
+
+Solving (\ref{eq:csd}) for the \gls{fod} means perfoming the inverse operation, a spherical \textit{de}convolution of the signal with the response function.
+\note{wrap this up}
+
+\subsection{Streamline tractography}
 
 \note{Discuss as the mainstay of white matter bundle segmentation.
 Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
 
-\subsubsection{White matter segmentation}
+Until now, we have only discussed the processing and analysis of diffusion MRI data, and what it can / cannot reveal about \gls{wm} microstructure, at the level of individual image \glspl{voxel}.
+However, the individual axons that form fibre tracts traverse \note{thousands} of voxels, and it is this macroscopic picture that further downstream processing of \gls{dmri} data aims to provide.
+\note{I don't like all this use of the term ``dmri data"}
+To this end, not long after the introduction of \gls{dti} came the idea of treating the derived orientations as a vector field through which the paths of virtual neural fibres could be traced, a process called streamline tractography.
+Importantly, the paths of individual \textit{in vivo} axons are entirely nondiscernable from \gls{dmri}.
+The individual streamlines of tractography are entirely abstract mathematical objects, each merely a collection of vertices, which aim to capture the \textit{potential} pathways of axons based on the derived \gls{fod}.
+Tractography is an immensely powerful and useful tool, and at the same time full of flaws \note{aww, relatable} due to this abstract and indirect nature.
 
-\note{Potentially a better section title? For covering direct segmentation, atlas methods and deep learning}
+All \note{?} tractography algorithms consist at their core of the following steps:
 
+\begin{verbatim}
+while number_streamlines < N
+  - Initialise, or "seed", a streamline with a single point;
+  while not STOP_CONDITION:
+    - Determine a propagation direction v based on the surrounding FOD field;
+    - Take a step, of predetermined length, along v
+    - Evaluate stopping condition;
+  - Append streamline to list;
+\end{verbatim}
 
-\subsection{Neurosurgery}
+Within this simple algorithm lies a whole family of parameters and decisions which affect the result.
+The seed location, step length, conditions for terminating or entirely rejecting streamlines, interpolation of the surrounding vector field, number of streamlines to generate -- all considerations to be determined by the user (although in practice many parameters will be automatically determined or set to default values by the chosen algorithm).
+There are two choices that most fundamentally affect the tractography process and which feature most heavily in discussions on its use.
+
+First is the choice of method for representing orientation information from the underlying data.
+Initially, this was diffusion tensor modelling and the principal diffusion direction.
+With only a single possible direction at each location, which, as discussed above, may have little to do with any true axon orientations at that point, diffusion tensor based tractography can only track fibre pathways with rather limited accuracy.
+Against this background, tractography based on crossing fibre models represents a vast improvement in the ability to contend with tracking in the complex configurations of \gls{wm}.
+However, this flexibility comes with additional headaches, as when there are multiple distinct possible directions in which to propagate the streamline at any position, the decision of which direction to take becomes far more complex.
+
+Secondly comes the distinction between deterministic and probabilistic tracking approaches.
+In deterministic tractography, there is exactly one precise direction in which a streamline can be propagated from any given point.
+Two streamlines seeded in exactly the same location will be identical in this paradigm.
+But as previously described, tractography operates in a domain far removed from the reality of individual axons, and the certainty implied by such an \note{immutable} approach is wholly unwarranted.
+Probabilistic tractography algorithms are here to acknowledge the uncertainty inherent in the tracking process.
+Numerous probabilistic tracking algorithms have been developed, and while the end effect is essentially the same, whereby seeding in the exact same location will not give rise to identical streamlines, there are two subtly different schools in what sort of uncertainty is being considered.
+One consideres the \textit{measurement} uncertainty of the calcualted orientations.
+Under this approach, the general direction to take is not under question, but the accuracy of that direction is.
+The second school regards the uncertainty as lying in the figuring out which of the possible general directions, representing distinct fibre populations, is the correct one according the the current journey the streamline finds itself on. \note{lol}
+
+\subsection{White matter segmentation}
+
+\note{Potentially a better section title? For covering direct segmentation, atlas methods and deep learning.}
+\note{MISSING: genearl WM segmentation with tractography (manual and automated)}
+
+\paragraph*{Streamline-based automatic tract segmentation}
+
+Several automated tractography approaches to bundle segmentation have been proposed, which broadly comprise atlas-based automatic ROI placement and streamline clustering approaches.
+TRACULA and TractQuerier are examples of the former which rely on FreeSurfer parcellations to apply anatomical priors to tractography, while XTRACT \autocite{Warrington2020} utilises a set of predefined ROIs to be registered to the subject.
+The additional step of either comprehensive and robust tissue parcellation, typically using computationally intensive tools such as FreeSurfer, or accurate registration, unfortunately limits the accessibility of these approaches to clinical and even (to a lesser extent) research applications.
+RecoBundles,\autocite{Garyfallidis2018} White Matter Analysis \autocite{ODonnell2017, ODonnell2007}, atlas based adaptive clustering \autocite{Tunc2014}, example-based automatic tract labelling \autocite{Yoo2015} are all examples of data driven, group-wise streamline clustering and matching approaches.
+In such approaches, the necessary generation of whole brain tractograms and in some cases the additional construction of example or reference tractography data, as well as long processing times and high memory requirements\autocite{Wasserthal2018} present barriers to application.
+Also, the above techniques ultimately still derive from streamline tractography, and are thus not free of its biases and inaccuracies already referenced.
+There have also been recent developments in the application of machine learning to tractography,\autocite{Poulin2019} a promising field that is still in its infancy and a while off from widespread adoption and clinical translation.
+
+\paragraph*{Streamline free white matter segmentation}
+
+\note{copypasta from HBM manuscript}
+
+A further set of prior works address the problem of tract segmentation while forgoing the use of streamline tractography entirely.
+These include deep learning models for direct segmentation from fiber orientation representations (\textcite{Li2020, Wasserthal2018}), a multi-label supervised clustering approach (\textcite{Ratnarajah2014}) and level-set and front propagation situations (\textcite{Nazem-Zadeh2011, Hao2014}).
+Deep learning-based approaches have the advantage of producing highly reproducible results in short processing time, without, in the case of TractSeg, the need for template registration.
+However, drawbacks of direct, deep learning-based methods which produce binary segmentations include a lack of explainability, and a dependence on large volumes of annotated training data which are labour-intensive to produce.
+This limits their flexibility: if a user requires a tract segmentation which is either anatomically different or not covered by an existing pre-trained model, then the necessary production of new training data and subsequent model training represents a high logistical and computational barrier.
+There is also the question of robustness in clinical data, particularly those featuring gross structural pathologies such as tumours.
+In addition to healthy data, Neuro4Neuro\textcite{Li2020} was validated only in a dementia dataset, and TractSeg\autocite{Wasserthal2018} was qualitatively validated in schizophrenia and autism datasets in the original work.
+TractSeg has also been qualitatively validated in a tumour dataset with mostly successful results, with more complete segmentations in cases with minimally displacing tumours.\autocite{Richards2021}
+In \textcite{Moshe2022}, the authors trained their own TractSeg model, on approximately 500 datasets, to segment the \gls{cst} in brain tumour patients.
+The results were more reproducible than for the compared manual method, and obtained an average dice similarity score of 0.64, almost 25\% worse than the performance in healthy data reported in the original TractSeg study (for the same tract).
+The authors cite a lack of reliable and sufficient labelled training data as a reason for limiting their study to a single tract, despite the importance of other tracts in preoperative fiber mapping.
+
+Our aim is to develop a streamline free tract segmentation technique incorporating spatial and orientational priors, with a focus on computational simplicity, specificity, and intuitive output.
+Briefly, the proposed method consists of a tract-specific orientation distribution atlas, which encodes spatial and orientational prior information about each tract, which is then directly compared with the diffusion data derived fibre orientation distribution information in the target image via an inner product operation on the two spherical distributions.
+Here we report on extensive validation of our approach applied to the \gls{cst}, \gls{or} and \gls{af}.
+Those three tracts were chosen due to their high clinical relevance and frequent involvement with surgical targets: In \textcite{Toescu2020} they were cited by neurosurgeons as the most frequently reconstructed tracts, followed by the \gls{ifof} and corpus callosum.
+Generalisation to additional tracts is straightforward and requires relatively few training subjects, which is ideal in clinical translation, where appropriate data is often hard to obtain.
+Preliminary results for this approach have been published in \textcite{Young2022}, where we focused on qualitative results in the context of neurosurgical subjects with significantly deforming tumours.
+Here we provide a more detailed description of the technique as well as extensive quantitative validation of general applicability to both healthy and clinical datasets.
+
+Our work bears much similarity of intuition and approach to that in \textcite{Bazin2011} (``Diffusion-Oriented Tract Segmentation", or DOTS), but with several practical differences.
+DOTS is based on \gls{dt} modelling, with the atlas' direction prior consisting of a single principal direction per voxel, rather than a full spherical distribution as in our approach.
+The comparison between the atlas and subject data to be segmented consists of several mathematical steps involving Markov random field models, neighbouring tensor connectivity, and propagation of probabilities, compared to our approach of taking the inner product of two spherical distributions.
+The \gls{dt} atlas described in \textcite{Hagler2009} also proposes a similar concept.
+There, a fibre location and orientation atlas is created by averaging the \gls{dt} and tractography-derived information from multiple subjects and subsequently used to estimate the voxel-wise \textit{a posteriori} tract probability in a single subject.
+In contrast to our proposed atlas, orientation information was encoded by averaging \gls{dt} principal eigenvectors across subjects, instead of a tract-specific approach to orientation as in our case.
+And in \textcite{Hagler2009}, spatial probability is given by the averaged, normalised track density values from individual deterministic streamline tractography, even though equating streamline density with likelihood of tract location is problematic.\autocite{Rheault2019,Smith2013}
+Finally, there are similarities with the bundle specific tractography approach described in \textcite{Rheault2019}, in particular the use of a streamline-template and track orientation distribution (TOD) mapping,\autocite{Dhollander2014} and extension of track density imaging\autocite{Calamante2010} into the angular domain, to incorporate orientational priors.
+However, the purpose of the TOD prior in that work was to enhance tractography, whereas our aim is to forgo tractography entirely at the point of application in a new subject.
+
+\subsection{Tumour deformation modelling}
+
+\note{copied from upgrade / IJCARS}
+
+Anatomical non-correspondence between subject and template images caused by space-occupying lesions poses a substantial challenge to the use of atlas-based white matter segmentation methods in clinical subjects.
+Deformable registration alone is often insufficient for handling this missmatch \autocite{Elazab2018, Visser2020}, and so using tumour growth models to simulate the deformation in the atlas prior to registration is the commonly preferred approach \autocite{Cabezas2011, Mang2020}.
+Numerous previously proposed tumour deformation models aim to achieve highly accurate modelling of tumour growth dynamics and the effects on surrounding tissues, by taking into account elastic tissue properties and microscopic tumour growth modelling.
+The resulting algorithms are mathematically complex \autocite{Elazab2018}, require optimisation of tumour parameters through problem inversion or by other means \autocite{Mohamed2006, Zacharaki2009, Mang2020} and take anywhere between 1 and 36 hours to run \autocite{Zacharaki2009,Bauer2012, Bauer2013,Mang2012}, even on high performance computing setups.
+
+Given the time constraints of intraoperative imaging and the practical constraints of the computing capacity which can reasonably be assumed to be available in an operating room, the aim for this project was to achieve an estimate of tract displacement with low computational complexity.
+The first component of the framework described in Section \ref{sec:progress}, the tract orientation atlas, provides a degree of spatial tolerance that alleviates the need for voxel-perfect registration and deformation, allowing the implementation of a minimal deformation algorithm.
+
+%########################
+%########################
+%########################
+%########################
+\section{Neurosurgery}
 %========================
 
-\subsubsection{Indications for neurosurgery}
+\subsection{Indications for neurosurgery}
 
 \note{This is for all the reasons for surgery, including tumour, epilepsy DBS.
 Also more detail into the types of tumours, and locations in the brain}
 
-\subsubsection{Lesion resection}
+Many types of interventions fall under the remit of neurosurgery.
+\note{research most common procedures}
+Common ones include inserting electrodes for \gls{dbs}, extraction of tissue biopsies, vascular surgeries, and placement of shunts.
+All of these examples involve invasive procedures for which accurate neuronavigation is a vital component, and as such the following discussions on surgical planning and navigation pertain to them too.
+
+This review will focus on the most complex and invasive types of neurosurgery: tissue resections, most commonly the removal of tumours and epileptogenic brain tissue. \note{includes biopsy?}
+In particular, tumour resections involve a unique combination of complexities and a high degree of variability.
+Indeed, it is sort of misleading to sweepingly refer to all neurosurgical procedures involving \note{cranial?supracellar?} \gls{cns} neoplasms as ``brain tumour resesctions", so diverse are those conditions in presentation, neurophysiology, microbiology, treatment plans, and prognosis.
+Such diversity presents a significant barrier to the development of image processing methods intended for generalisation to use in tumour patients.
+For example, tumours occur throughout the brain, and the location has an impact on the effects on surrounding brain structures.
+Midline tumours can affect both hemispheres, while tumours far from the midline may enact no effects whatsoever on the contralateral hemisphere, in which case for image processing purposes, the contralateral hemisphere could be considered ``normal".
+A tumour's \note{origin} and microbilogy also play a large role in determining its effects on its environment.
+Gliomas are often of complex structure, with infiltrating portions and peri-tumoural edoema blurring the distinction between tumour and non-tumour tissue.
+Meningiomas, on the other hand, and some types of astrocytoma, are entirely \note{??} separate from brain tissues and can strongly displace neighbouring structures instead of infiltrating.
+
+This project is concerned with the visualisation of cerebral white matter tracts, and therefore this review with focus on those indications and interventions in which damage to and navigation of such structures is of concern.
+This is generally not the case for posterior fossa and suprasellar lesions.
+Brainstem tumours are often not candidates for surgical removal, due to their precarious locations limiting access and posing too high risks to vital brainstem function.
+The following discussions apply to lesions in the cerebral hemispheres and thalamus, candidates for biopsy or resection via craniotomy.
+
+\subsection{Lesion resection}
 
 \note{Focus on tumours, but could also be epilepsy resections.
 Cover extent of resection (measurement, definitions etc.), biopsy, relationship between EOR and outcomes}
 
-\subsubsection{Surgical neuronavigation}
+One might think that the goal of a resection surgery would be the removal of the target lesions.
+However, things are not so simple.
+While the ideal outcome may, in many cases, be the complete removal of all diseased tissue, in many cases this scenario would conflict with other factors to be balanced, such as the health of surrounding brain structures and other postoperative outcomes.
+A central concept to these trade-offs is that of \gls{eor}, or the amount of diseased tissue \note{just say tumour? does eor apply to epilepsy too?} successfully removed by surgery.
+While on the surface, \gls{eor} appears a straightforward concept, it nonetheless warrents its own discussion as its definition is often illdefined while at the same time \gls{eor} plays a central role in studies of surgery efficacy and outcomes.
+
+On paper, \gls{eor} is easily defined: the percentage of tumour tissue resected.
+In practice, accurately measuring \gls{eor} is essentially impossible.
+The most natural approach is to measure the volume of the lesion before and after surgery as it appears on imaging.
+In nearly all cases \note{?}, this measurement is simply done by taking the diameter of the lesion on a single or maybe multiple slices, which will give an accurate result only for perfectly spherical tumours.
+This also can't account for resected portions of the tumour being filled with fluid, or differing amounts of tissue compression caused by mass effect and postoperative brain shift.
+Volumetric analysis, in which the entire lesion is segmented on pre- and postoperative imaging, is becoming more common and provides a far closer \gls{eor} estimate.
+This still relies on accurate segmentation, whether manual or automatic, which poses a problem when tumour tissue, healthy brain tissue or odoema become radiologically indistinguishable.
+In any case, unless a tumour is entirely encapsulated \note{by a membrane? is this possible?} or supratotal resection is performed \note{define}, microscopic tumour cell residues, invisible to the eye and on scans, are bound to remain.
+
+Studies reporting \gls{eor} often don't report to specific numerical values, but instead group resections into broad categories, the most common being subtotal resection (STR), near total resection \note{?}, gross total resection (GTR) and supratotal resection.
+Most commonly, these categories are judged by the neurosurgeon or radiologist using subjective assessments such as whether or not tumour residue is visible in the resection cavity or on postoperative scan.
+There is no general consensus on how these categories are defined, which makes comparison between studies difficult.
+
+This inconsistency in the reporting of \gls{eor} is one factor complicating the study of the effect of \gls{eor} on clinical outcomes.
+For many tumour types, particularly aggressive tumours such as \glspl{hgg}, subtotal resection is \note{never} curative even with adjuvant therapy.
+Sometimes the risk to quality of life and postoperative neurological function associated with \gls{gtr} negates the potential oncological benefits, especially where even \gls{gtr} cannot elimante the chances of recurrence.
+In \gls{lgg}, particulary in paediatric patients, \gls{gtr} is becoming the most recommended treatment, as it complete resection leads to very low chance of recurrence.
+In particular, \glspl{lgg} residues risk evolving into malignant \glspl{hgg} which are far harder to treat.
+
+In some surgeries, there is no hope whatsoever of completly removing the tumour, as treatment will be delivered via adjuvant therapy.
+In these cases, the goal of surgery may be debulking of the lesion to relieve pressure on the brain and reduce neurological deficits.
+In debulking surgeries, there is no need to attempt to fully resect the tumour, instead a conservative strategy is chosen and no risks involving surrounding functional tissue is taken.
+In certain types of tumour, particularly when a combined treatment approach of surgery and radiotherapy is taken, little evidence has been found that \gls{gtr} offers greater tumour-related (that is to say, neurological condition affected by the presence of the tumour) outcomes than subtotal resection, while increasing risk to surrounding brain tissue.
+On the other hand, certain types of tumour, in particular lower grade and less aggressive types, show a lower risk of recurrence and malignant transformation when radically resected, offering a particularly good long-term outlook.
+Increasingly, physicians are advocating for \gls{gtr} to become the standard treatment for \gls{lgg} \note{made this all up; check it!}
+
+\note{more about preserving eloquent tissue}
+
+\subsection{Surgical neuronavigation}
 
 \note{All the various tools and gizmos for guided surgery. Split into preoperative planning and intraoperative use.
 Include functional imaging (EEG, fMRI, EEG), structural, tractography, DES, awake surgery/monitoring and intraoperative imaging.}
+
+The successul balancing of maximum safe resection and preservation of neurological function is the overall goal of neurosurgical resection.
+Tumours can interact with their surroundings in a number of ways, depending on the nature and location of the neoplasm.
+\note{anything about de novo vs secondary tumours?}
+Some tumours are encapsulated and displace tissue as they grow.
+On the one hand, such separation can make operating easier as the distinction between tumour and healthy tissue is clear, but on the other hand, such tumours can exert dangerous amounts of pressure on displaced tissues, leading to neurological impairments and urgent need for surgical debulking.
+Other tumours cause almost no spatial displacement of brain tissue, with cancer cells instead infiltrating the brain and blurring the boundaries between disease and healthy brain.
+Infiltrating tumours are difficult to operate on due to the risk if injury to eloquent tissue, and are instead often conservatively debulked and treated with radiation or chemotherapy.
+Many tumours are of \note{combination type}, with both a tumour core and infiltrating boundary.
+
+In order to minimise risk to adjacent structures, a neurosurgical team has a wealth of tools at their disposal, including structural imaging and functional mapping.
+
+\paragraph*{Preoperative imaging}
+
+Preoperatively, structural and functional non-invasive imaging are used for surgical planning.
+At this stage the goal is to assess the interaction between diseased and healthy tissues, map out a safe operative corridor to access the lesion, and determine the appropriate \gls{eor} to aim for based on risk to surrounding structures and degree of infiltration.
+Functional \gls{mri} is used at this stage to map out cortical areas of functional importance that lie in proximity to the lesion, principally the motor and language cortices \note{but also others?}.
+Navigated transcranial magnetic stimulation is another non-invasive functional mapping technique.
+In epilepsy cases, \gls{eeg} may be employed to monitor epileptogenic regions.
+Structural imaging also play an important role in planning.
+\Gls{ct} can indicate calcified regions \note{is ct actually used for planning??}.
+Multi-contrast \gls{mri}, including FLAIR, T1w and T2w imaging sequences, each provide unique contrasts for visualising different aspects of a tumour, such as necrotic and infiltrating regions, which can aid in determining what \gls{eor} to aim for or which region of the tumour to target for biopsy.
+Angiography \note{mri, ct?} can also be employed for determining the tumour's and surrounding vasculature.
+Preoperative imaging has greatly improved the scope of cases for which surgical resection is now a possibility, by enabling the planning of safe routes to regions of the brain previously considered inoperable, for example thalamic tumours \note{and some brain stem?}.
+These preoperative images can also be used intraoperatively for guidance throughout the procedure.
+Functional MRI can guide the use of DES-based functional mapping after craniotomy, and in some cases, for example surgery near the language centres in patients where awake surgery is not possible, action as a substitute for DES.\note{??}
+
+\paragraph*{White matter mapping}
+
+\note{Copied from HBM manuscript; this might be better placed as a summary in the "problem statement" part?}
+
+In neurosurgical settings, tractography is frequently based on \gls{dt} fibre orientation models \autocite{Toescu2020, Yang2021} and deterministic tracking algorithms, for example as implemented in Brainlab's iPlan\textregistered (single tensor)\autocite{Brainlab2012} and Elements (dual tensor)\autocite{Sollmann2020a} Fibre Tracking applications (Brainlab AG, Munich, Germany) which use a version of fibre assignment by continuous tracking, or FACT. \autocite{Mori1999}
+In research settings, \gls{dt} models and deterministic algorithms have long since given way to multi-fibre models and probabilistic algorithms.
+These include multi-tensor models,\autocite{Peled2006} Q-ball imaging\autocite{Tuch2004}, ball-and-sticks\autocite{Behrens2003} and \gls{csd}-derived fibre orientation distribution functions on the modelling side, and probtrackx \autocite{Behrens2007}, first or second-order integration over FODs (iFOD1/iFOD2)\autocite{Tournier2010} and particle filter tractography \autocite{Girard2014} on the algorithms side.
+
+Regardless of the particular combination of fibre model, algorithm and tracking criteria, streamline tractography is compromised by weaknesses that can lead to flawed results or interpretations if not accounted for.\autocite{Rheault2020, Schilling2022, Schilling2019}
+Although probabilistic tractography is generally considered to be superior to deterministic tractography in its ability to reconstruct bundles more completely, especially ones with complex shapes, sharp bends and fanning, this improved sensitivity is accompanied by a high propensity for false positive streamlines.\autocite{Maier-Hein2017}
+As a result, targeted reconstruction of specific bundles using probabilistic tractography requires constraining with inclusion and exclusion regions of interest (ROIs), whose manual placement is labour intensive and demands expert neuroanatomical knowledge.
+
+Nonetheless, there is growing consensus that (pending appropriate regulatory approval) the clinical community ought to adopt probabilistic, non-DT tractography,\autocite{Yang2021, Beare2022, Petersen2017} given, among other issues, the low sensitivity of DT deterministic tractography particularly around lesions.\autocite{Ashmore2020}
+There is evidence that a shift is underway, at least in the context of presurgical planning,\autocite{Toescu2020} although there is the question of whether the adoption of advanced tractography is being driven from the supply or demand side.
+Until recently, commercially available neurosurgical navigation platforms have exclusively supported \gls{dt} modelling and deterministic tractography (a recent exception is the Medtronic Stealth\texttrademark{}  Tractography application (Medtronic, USA), which implements \gls{csd}-based tractography\autocite{Pozzilli2023} as well as DT).
+This lack of readily available alternatives in the neurosurgeon's workflow and certified for safe clinical use is undoubtedly a major factor in the persisting preference for deterministic methods in clinical practice.
+But perhaps demand for probabilistic tractography in neuronavigational software has also been understandably muted on account of its lower ease of use and practicality.
+DT acquisitions can have as few as 6 diffusion weighted directions, resulting in much shorter scan times compared to full HARDI acquisitions.
+Deterministic tracking itself is rapid, and the placement of ROI need not be as strict as with probabilistic tractography owing to a lower sensitivity to false positives.\autocite{ODonnell2017}
+A lack of availability of the necessary expertise and time limits neurosurgical centres' access to state-of-the-art tractography.\autocite{Toescu2020}
+There is thus an unmet need for reliable, automated tract segmentation techniques that can rapidly provide consistent and complete tract reconstructions for clinical use.
+
+\paragraph*{Brain shift}
+
+The dynamic conditions of brain surgery results in the unpredictable and often significantly strong movement, compression and deformation of tissue referred to as brain shift.
+A range of factors contribute to this phenomenon, including the draining of \gls{csf}, sagging due to gravity, decompression of tissue surrounding resected tumour, swelling, craniotomy herniation \note{is that a thing?} and the effects of surgical instruments.
+These effects are often \note{competing}, for example swelling and tumour debulking can cause brain tissue to shift towards a craniotomy, while the effects of gravity and \gls{csf} drainage can have the opposite effect.
+The amount and direction of shifting is unpredictable, ranging from \note{1-10mm}, making accounting for it with predictive modelling very difficult.
+
+Brain shift can affect the neurosurgeons perception of the shape and location of the target lesion \note{pure speculation} and invalidate preoperative imaging used for navigation.
+\note{cue various studies backing this up.}
+There have been attempts to address the problem of brain shift by dynamically adjusting preoperative imaging according to (sparse) intraoperative data, for example optical imaging of the cortical surface, or using ultrasound. \note{does this belong in next section?}
+Many neurosurgeons rely on their intuition to update their mental map of the surgical site throughout the procedure.
+On more advanced neuronavigational platforms which integrate preoperative imaging and intraoperative data such as \gls{des} stimulation sites, brain shift can lead to misleading and inaccurate depictions of the spatial relationships between tumour and surrounding structures.
+
+\paragraph*{Intraoperative imaging}
+
+To mitigate the effects of brain shift on neuronavigational accuracy, new structural and functional guidance information can be acquired intraoperatively.
+Once more, different modalities offer different strengths and weaknesses depending on the circumsances.
+Ultrasound imaging can probe into tisse, is safe \note{?} and can be operated at the surgical table without needing to move the patient.
+With the skull, which usually hinders the use of \gls{us} in the brain, out of the way, \gls{us} is an effective way of assessing the situation behind the resection cavity wall.
+\note{is it used for doppler? tumour?}
+Image quality is limited and can be difficult to compare with other imaging modalities such as \gls{mri}.
+Specialised \gls{ct} systems can also be utlisied intraoperatively \note{[examples]}, but they present additional patient exposure to ionising radiation which is to be avoided whereever possible.
+
+Intraoperative \gls{mri} is becoming and increasingly common addition to neurosurgical set-ups.
+This inculdes low field open bore systems which can be installed in the operating room, and allow for easy transfer of the patient into the scanner, as well as full high-field (\note{>1T}) systems which acquire far higher quality images at the expense of practicality, as interupting surgery for an extended scan session and safely transferring a patient from the operating table to inside the bore of the scanner is a substantial logistical and medical challenge.
+Challenges notwithstanding, intraoperative \gls{mri} is incredibly valuable for determining surgical margins and providing guidance after the effects of intraoperative deformations.
+
+Numerous works demonstrate the effect of \gls{imri} in improving postsurgical outcomes.
+In many cases the alternative is acquiring post-operative imaging to assess the extent of resection, presenting additional burden to already very sick patients, perhaps sedation to paediatric patients.
+If it is determined on post-operative imaging that intolerable tumour residue remains, then the subsequent re-operation, re-opening of the craniotomy, general anaesthetic and all the medical and practical burdens they represent could have been avoided using \gls{imri}.
+Most commonly, sequences providing good anatomical tissue contrast are used to determine the tumour boundaries, any residue that can be safely resected.
+Simple diffusion sequences may also be utilised to assess changes to perfusion \note{?}.
+Higher angular resolution diffusion sequences are far less common in intraoperative settings, thanks to longer scan times and a lack of computational infrastructure for processing the raw data \note{fair?}, however they are still valuable for imaging white matter.
+Modern scanners can compute basic diffusion tensor directionally encoded colour maps which can help radiologists coarsely identify white matter pathways in the tumour neighbourhood.
+In \note{nimsky??} intraoperative diffusion \gls{mri} succesfully imaged the shifting of white matter tracts, and \note{??} measured the directions and magnitude of shifting, determining that it was all quite variable and unpredictable.
+\note{expand on studies using iop dti}

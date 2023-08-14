@@ -1,42 +1,270 @@
-\section{Theory fundamentals}
+% \chapter{Theory and Background}
+% \label{chapterlabel1}
+
+\chapter{Theory fundamentals}
 \label{theory}
 
 \note{This will cover the more theoretical background prerequisites, covering the fundamental concepts on the biological side (neuroanatomy and cellular physiology, maybe some oncology?) and physical side (MR physics)}
 
-\subsection{Neuroanatomy: Micro to macro}
+\section{Neuroanatomy: Micro to macro}
 
-\subsubsection{Cells of the brain}
+\subsection{Cells of the brain}
 
 \note{neurons, glial cells, axons and basics of neural signalling.}
 
-The building blocks of living organisms begin at the level of molecules and atoms, through macromolecules such as proteins and lipids, cell organelles, cells, tissues, organs and finally whole organisms.
+The building blocks of living complex organisms begin at the level of molecules and atoms, through macromolecules such as proteins and lipids, organelles, cells, tissues, organs and finally whole organisms.
 For the purposes of this report, though, we can start at the cellular level, and focus on a single organ: the brain.
 Brain tissues consist of numerous cell types.
-The principle functional cells are neurons, which perform the computations underpinning all aspects of neural function. They are supported, and outnumbered ( by a \note{factor of?}), by a network of glial cells, each with specialised functions.
+The principle functional cells of the human nervous system are neurons, which perform the integration and transmission of signals underpinning all aspects of neural function.
+They are supported, and outnumbered ( by a \note{factor of?}), by a network of glial cells, each with specialised functions.
+There are countless types of neurons covering the spectrum of specialised function, however they all have the following basic components \note{true?}:
+The cell body, or soma, houses the cell nucleus, metabolic activity and organelles responsible for the day-to-day upkeep and maintenance of the entire cell.
+Neurons recieve signal inputs from other neurons via a web of protrusions called dendrites. \note{anything else to say about dendrites?}
+Signals are sent via a single, specialised protrusion called an axon.
+Axon terminals interface with the dentrites of other neurons or, in the peripheral nervous system, with muscles and other innervated tissues.
+The \note{nanoscopic?} gap between the axon terminal and the receving cell is called a synapse.
 
-\subsubsection{Neuroanaomy}
+Glial cells are the other major class of nervous system residents, previously thought to outnumber neurons \note{10:1, although this figure is now disputed.}
+Astrocytes are supportive glial cells provide a range of services including phagocytosis, scar tissue formation and blood-brain barrier formation.
+Oligodendrocytes are the \gls{cns}'s myelinating glia.
+They form processes which wrap around axons as myelin sheaths, with each oligdendrocyte able to mylenate multiple axons simultaneously.
+In the \gls{pns}, myelination is performed by Schwann cells, which each form a single myelin sheath.
+\note{add microglia}
+
+\subsection{Neural signalling}
+
+Neural impulses begin their life at the axon hillock, the transition between the soma and the axon.
+At resting state, an electrical potential exists across the axonal membrane, between the extra- and intraaxonal spaces.
+This membrane potential is maintained by active ion pumps \note{wiki says NaK pumps have low impact on membrane potential?} which continuously exchange two potassium for three sodium ions across the membrane.
+The consequences of this unequal exchange are three-fold: two opposing chemical potential gradients are established, where the extracellular sodium and intracellular potassium concentrations, respecitively, are high, while the three-for-two exchange ratio establishes a net extracellular positive charge.
+When the membrane potential at the axon hillock is depolarised to reach a threshold \note{?}, a wave of depolarisation is triggered which propagates down the axon as an action potential. \note{add more deets on axon potential: phases, repolarisation, channel mechanisms etc}
+In myelinated axons, propagation of the axon potential is greatly accelerated by the insulating effects of the myelin sheaths, separate only by the narrow myelin-free nodes of Ranvier.
+Instead of the axon membrane depolarising in a continuous wave, depolarisation cannot occur at the electrically insulated sections, and instead the signal appears to ``jump" from node to node, where depolarisation replenishes the signal preventing degradatio. \note{big ol simplification}
+In myelinated axons, action potentials travel at speeds of \note{??} mm/s, compared to \note{??} in unmyelinated axons.
+
+Upon reaching the axon terminal and synapse, the signal is converted from electrical to chemical.
+The arrival of the action potential triggers the release of signalling molecules called neurotransmitters, which diffuse across the synaptic cleft to ligase with receptors in the receiving cell to influence the mebrane potential on the other side of the cleft.
+The effect on the target neuron depends on the neurotransmitter: it may induce hyperpolarisation, in effect an inhibitory signal which decreases the likelihood of the target cell firing itself, or depolarisation, which brings the target cell closer to firing threshold.
+A neuron may recieve synaptic inputs from \note{millions?} of neurons across its dedrites.
+Each impulse cases a slight de- or hyperpolarisation of the membrane, which diffuses towards the soma and axon hillock.
+It's the cumulative effects of all those impulses that determine whether a neuron fires, transmitting a new action potential down its axon.
+
+\note{details to potentially add: different neurotransmitters and effects; more biochem details about ion channels and resting membrane/action potentials; nuances of signalling like firing patterns (lots of potentials usually fired in rapid succession)}
+
+\subsection{Neuroanatomy}
 
 \note{Structure of the brain, including different sections (hind, mid, forbrain etc.) and tissue types.
 Discuss the lobes, cortical regions and functional divisions, then white matter tracts.}
 
-\subsection{MRI Physics}
+On the macro scale, the human brain can be divided into \note{several} different divisions, starting with the at the most macro scale the hind-, mid- and forebrain.
+The hind brain comprises the caudal brainstem (pons and medulla) and cerebellum.
+The former forms a continuum between the forebrain to the spinal cord and houses the bodies vital and involuntary functions and control of the cranial nerves.
 
-\subsubsection{Resonance and relaxation}
+The brainstem is further divided into, moving inferior to superior, the medulla, pons and midbrain.
+Posterior to the brainstem, and seated within the posterior fossa, sits the cerebellum, or "little brain",
+a highly specialised and complex structure whose full significance in cerebral function is yet to be fully described, but which is conventionally known to play an integral role in automated motor and speech functions.
+The cerebellum connects with the brain via three white matter bundles, the inferior, middle and superior cerebellar peduncles, of which the middle is the largest and forms the bulk of the pons. \note{?}
+
+The forebrain consists of the diencephalon (thalamus and hypothalamus) and the telecephalon (cerebral hemispheres).
+Evolutionarily speaking, the cerebral hemispheres are the youngest developments, responsible for much of the complex neural functionality we associated with the general intelligence of modern humans, as well as personality and consciousness \note{??}.
+
+The surface of the cerebral hemispheres, or cortex, is the site of integration of neural signals and complex neural computation.
+The cortical tissue is a form of grey matter, meaning it consists of dense layers of neural somae, dendrites, interneurons \note{and short range / local axonal connections (like inhibitory stuff?)}.
+Since antiquity \note{??} scientists suspected that various cognitive functions, rather than being all equally distributed throughout the brain, arise from distinct locations.
+While early incarnations of this idea may have featured wildly unfounded and \note{wrong} conclusions regarding both the functions that can be ascribed to specific localities, the underlying principle of functional localisation has been subsequently borne out and continuously refined.
+\note{mention Brodmann?}
+Historically, much of the understanding of the functions seated in a given cortical region was predicated on case studies involving injury (e.g. through trauma or stroke) to that region.
+This resulted in inevitably imperfect understanding of the affected areas and functions, given that such random injuries invariably span multiple functional regions. \note{hmm}
+Modern non-invasive imaging techniques \note{does this include stimulation like ntms?} have vastly accelerated our study of the brain, however, clinical case studies remain significant contributors to the field. \note{weak!}
+Some cortical regions have been studied and mapped extensively, particularly those linked with easy to measure quantities like external stimuli and motor outputs.
+Consequenty, the organisation of the visual, motor, and to lesser extent \note{based on what?} auditory, somatosensory and \note{primitive, like basic syntax?} language cortices are well described.
+Conversely, the precise localisation of high-level functions such as advanced language, planning, personality, not least because such complex multifaceted phenomena are unlikely to be associated with just a single structual-functional unit.
+Indeed, modern neuroscience understands that even seemingly primitive functions, such as visual object identification, involve the integration of information and processing across multiple, often distant cortical loci, and thus there can be no understanding of any cognitive function by considering only \note{artificially} demarcated cortical areas in isolation: the brain is a network, and the unit of connection between nodes is the neural axon.
+
+Medium (between neighbouring gyri) and long range connecting axons project from the cortex to enter the dense network of axons that lies beneath.
+Myelin, the fatty substance providing electrical insulation to axons, gives this tissue consisting of densely packed axons a pale appearence, hence its name "\glsdesc{wm}".
+White matter axons, rather than existing as an incoherent \note{spaghetti salad}, form \note{coherent} bundles, or tracts, comprising fibres connecting similar brain regions.
+There are three categories of white matter tracts.
+Projection tracts connect the cortex with other, non-cortical brain structures and the spinal cord.
+They include both efferent (motor) and afferent (sensory) connections.
+Association tracts connect different cortical regions within the same cerebral hemisphere, while commisural tracts form interhemispheric connections.
+While an understanding of white matter tracts introduces a certain level of \note{coherence/clarity/?} to the intricate brain network, their anatomical and functional definitions are far from clear-cut.
+Mirroring what we saw in the problem of cortical functional localisation, the projection tracts, which have clear physiological correlates \note{?} are relatively easy to study and have been correspondingly well defined, arguably none more so than the corticospinal tract \note{getting too detailed?}.
+Meanwhile, the precise spatial delineation of and \note{ascribing of functional correlates} to the many association tracts is a monumental and woefully incomplete task.
+Fibres from different tracts cross and mingle throughout the white matter, and while bundles may be tight and strongly coherent for a portion of their length, they diverge and fan out to terminate in broad swathes of cortex.
+There is no perfect method for observing the full extent of a tract from one end to another.
+Blunt dissection remains the gold standard for anatomical identification, but it's delicate work and disentangling the full course of one bundel of fibres from all other surrounding ones is impossible.
+So it is that anatomical dissections \note{have given} rise to the identification and description of tracts which turned out to be entirely artefactual. \note{round off this soapbox about tract anatomy. Copied from notes on IFOF:}
+\textit{With association tracts, one can observe a backwards and forwards between deducing possible corical terminations based on observed function, e.g. particular functional deficits induced through stimulation of the core of the tract, and theorising on possible functions based on observed cortical terminations, e.g. through blunt postmortem dissections.}
+
+\section{MRI Physics}
+
+\subsection{Resonance and relaxation}
 
 \note{Basics of resonance, magnetisation, spin-spin / spin-lattice relaxation}
 
 MRI images are obtained by detecting the spin relaxation resonance stuff of principally hydrogen atoms (which are abundant in the body in H2O molecules).
 
-The application of a strong linear magnetic field causes all spins to align themselves with the direction of the field. This is the bulk magnetisation, in its "relaxed" state (aligned with B0).
+The application of a strong linear magnetic field causes all spins to align themselves with the direction of the field. This is the bulk magnetisation $M_z$, in its "relaxed" state (aligned with B0).
+The ratio of spin magnetic moments aligned with the external field is increased, \note{as the field imparts energy or something causing magnetic moments to preferentially be aligned} resulting in a net magnetisation along the orientation of $B_0$, termed $M_z$.
+Alignment of a magnetic moment with $B_0$ (spin up) is energetically favourable of the opposite spin down state to the tune of $\Delta E = \gamma h B_0$ \note{explain vars}.
+Hence the stronger the external field, the larger the ratio of up to down spins and thus the a larger the magnitude of $M_z$.
+As the magnitude of this bulk magnetisation vector underpins the strength of any subsequently sampled signals, stronger bore fields, as a general rule \note{are there exceptions?}, produce images with better \gls{snr}.
+In thermal equlibrium, then, the magnetic moments within the sample are precessing at the larmor frequency and entirely out of phase with each other, resulting in no net transverse magnetisation, and with spins aligned preferentially along $B_0$, resulting in maximum longitudinal magnetisation $M_z$.
 
-\subsubsection{Excitation and image acquisition}
+The manipulation of this net magnetisation vector away from, and subsequent relaxation back to this equilibrium state, is the basis of all signal production in \gls{mri}.
+The application of a \gls{rf} pulse, that is, an oscilating magnetic field ($B_1$) precisely at the resonant larmor frequency and perpendicular to $B_0$, enacts two effects on this the bulk magnetisation.
+The first is the impartion \note{??} of energy which overcomes $\Delta E$ \note{this is the bit I understand the least} to increase the number of spins in the energetically unfavourable spin-down orientation and thus eliminate the net magnetisation along $B_0$.
+The second effect is to sycronise the spins' precession with the rotating \gls{rf} pulse, and by extension with each-other, resulting in a precessing net magnetisation in the transverse plane $M_{xy}$.
+\note{but what about 180 degree pulses?}
+As soon as the excitation field is switched off, the bulk magnetisation gradually relaxes to equilibrium as the induced effects on the individual moments revert:
+interaction with other spins \note{local magnetic fields?} in the molecular environment cause gradual dephasing and consequent reduction in $M_{xy}$ (spin-spin relaxation), while the energy gained from the \gls{rf} pulse is gradually dissipated among the lattice field \note{??} as the spins revert to the stistically fabourable lower energy state in alignment with $B_0$ causing gradual recovery of $M_z$ (spin-lattice relaxation).
+
+The recovery rate of $M_z$ and the rate of decay of $M_{xy}$ are described by the time constants $T1$ and $T2$ respectively, and each depend on the specific molecular environment and are thus tissue-dependent quantities.
+It is the varying values of $T1$ and $T2$, as well as the overall differences in proton densities ($PD$) between tissues which lend contrast to MR images.
+
+\subsection{Excitation and image acquisition}
 
 \note{How MRI machines work: excitation pulses, effects of different relaxation weightings, examples of different common pulse sequences and their uses}
 
-\subsubsection{Diffusion MRI}
+\paragraph*{Generating echos}
+
+Immediatly after application of the \gls{rf} excitation pulse, magnetisation will rapidly return to equilbrium in a spiral pattern \note{see image}.
+This rotating magnetisation will induce an oscillating current within a detection coil placed near the sample in a process called \gls{fid}.
+This is the most basic form of NMR signal and, since it decays very rapidly \note{isn't useful on it's own for image formation?}
+In order to generate signal useful for spatial encoding and image acquisition \note{??} we make use of spin echos and/or gradient echos.
+
+To produce a gradient echo, a readout gradient $G_x$ \note{necessarily?} is applied across the sample causing spins to dephase at different rates according to their local magnetic field $B_0 + G_xx$.
+After a time $TE/2$ \note{how long?} the gradient polarity is reversed, and with it the rates of dephasing across the sample.
+The effect is that after experiencing equal amounts of time of gradient polarities, the spins find themselves momentarily realigned, forming a peak in bulk transverse magnetisation and associated signal (``echo") at the time period since excitation designated $TE$ (echo time).
+
+Since the reversal of gradient polarity effects only the gradient coil generated fields, the dephasing caused by local inhomogeneities in the $B_0$ field cannot be reversed, and the resulting signal is T2\* weighted. \note{explain T2*}
+The FID signal decay is accelerated by the effects of field inhomogeneities, but the signal is in fact not entirely destroyed, it merely becomes disorganised in a manner that can be symmetrically reversed, using the spine echo phenomenon.
+
+Spin echos are generated not through the manipulation of graident polarity, but through a complete inversion of spin orientation. \note{?}
+At time $TE/2$, an additional ``refocussing" \gls{rf} pulse introduces a 180$\deg$ rotation, effectively flipping the system in the $xy$ plane \note{how to describe this more mathematically?}.
+Now, those spins that are, due to slightly higher local field strength, precessing fastest, have accumulated a certain amount of phase ``ahead" of the average.
+After being flipped, they are precessing at the same speed but no lag behind the average by the same phase difference.
+Thus after an additional symmetrical time span of $TE/2$, the uneven effects of field inhomogeneities have been cancelled out and the spins find themselves briefly refocussed, producing a spin echo signal peak at $TE$.
+
+Spin echo sequences benefit from the overcoming of T2* decay to produce signals with pure T2 weighting. \note{why is this useful?}
+On the other hand, the need for an additional \gls{rf} pulse introduces instrumentation delay times and corresponding loss of signal magnitude.
+Gradient echo sequences can work with shorter TEs \note{true?} and \note{...thus?}
+
+\note{this section is pretty ropey but will do for now as a scaffold}
+
+\paragraph*{Spatial encoding}
+
+The signal induced in a reciever coil is a combination of contributions from spins located throughout the excited sample.
+The attribution of signal contributions to positions in 3D space is achieved with slice selection, phase encoding and frequency encoding.
+In theory, these three encoding dimensions can apply to any permutation of the three spatial axes, but in practice, and for the purposes of this description, it's easiest and conventional to select slices along the $z$-axis, parallel with the main magnetic field. \note{the other two are often interchanged in practice}
+
+\note{the following description is specifically 2DFT method, mention?}
+
+Slice selection ensures that the \gls{rf} pulse only excites a specific slab within the sample, and is achieved by overlaying a magnetic field gradient along $z$, altering the larmor frequencies of the spins along $z$ according to $\omega_0 + \gamma G_zz$.
+A \gls{rf} pulse with (central) frequency $\frac{1}{2\pi}\omega_0 + \gamma G_zz_c$ \note{the 2 pi thing is about converting from angular frequency?} will excite spins located only at position $z_c$.
+All other spins in the sample will be unaffected by subsequent manipulation of the magnetisation vector throughout the pulse sequence.
+
+Within the selected plain, the manipulation of two spin quantities determines 2D localisation.
+The first is spin precession frequency, which can be modulated along an axis in the same manner as is used in slice selection -- a magnetic field gradient $G_{fe}$ (applied, for the purposes of this description, along $x$) imparts spatially varying frequencies according to $\omega_0 + \gamma G_{fe}x$.
+The frequency encoding gradient is applied throughout signal readout. \note{explain more?}
+The reciever coil digitally samples the echo signal a discreet points, with the number of samples corresponding to the image matrix size along the $x$ axis.
+
+The second is spin phase, or a spin's instantaneous angle in the $xy$ plane relative to \note{what?}.
+Before signal readout, a phase encoding gradient is applied along $y$ for a time $\Delta t_{pe}$, after which spins precessing faster have accummulated a larger phase difference $\phi_{pe}$ over those experiencing lower total field strength, to the tune of $\phi_{pe}=\gamma G_{pe}y \Delta t_{pe}$.
+Since the phase encoding gradient is switched off before signal readout, those phase differences become locked in and serve to localise spins along the phase encoding direction.
+A single application of the phase encoding gradient provides insufficient information for determining $y$-coordinates of recieved signal components.
+The excitation--phase-encoding--echo-readout sequence is repeated with varying phase-encoding magnitudes.
+The number of phase encoding steps corresponds to the image matrix size along the $y$ axis.
+
+The raw signal read by the reciever encodes the image in dimensions of frequency and phase.
+These can be represented in the 2-dimensional frame known as $k$-space, an intermediate space defined as the \gls{2dft} of the measured image.
+Pulse sequence parameters encode the trajectory and resolution in which datapoints in $k$-space are measured.
+At the end of the sequence, when $k$-space has been filled, an inverse \gls{2dft} is computed to reconstruct the image in the spatial domain.
+\Gls{2dft} imaging, in which full 3D image volumes are acquired as a series of individually reconstructed 2D slices \note{is this true?}, remains the most common \note{and efficient?} mode of image formation in MR imaging.
+
+\paragraph*{Pulse sequences}
+
+MR imaging is a stunningly diverse modality.
+Beyond the basics of spatial encoding and echo signal generation, there lies a whole host of techniques for generating specific contrasts, neutralising unwanted signals and artefacts and accelerating acquisition times which are outside of the scope of this introduction.
+The unique combination of these \note{which} parameters which produces a specific image is described by its pulse sequence.
+A pulse sequence refers to the specific timeline of \gls{rf} excitations, gradient field manipulations and signal readouts programmed to form an image.
+The development of novel pulse sequences and contrasts is a perennial and active field of research which will continue to expand and improve the capabilities of \gls{mri} for years to come.
+\note{this paragraph feels a bit wet. and what about image reconstruction?}
+
+\subsection{Diffusion MRI}
 
 \note{First describe diffusion in general but stick to tissue, i.e. restricted diffusion. Cover the different types of diffusion in different tissues in the brain, timescales etc.
 Then look at the mechanism of diffusion MRI acquisition, pulse sequence and parameters e.g. b values.
 Also mention common artefacts.}
 
-In living tissue, water molecules are not free to diffusion for long distances in all directions. Some tissue environments are highly constrained, with diffusion occurring principally along a single direction \note{too simplistic}, while in others, fewer barriers allow free diffusion.
+Molecules travel through their environment in a stochastic pattern of thermal motion called diffusion, the basis for the contrast formed in \gls{dmri}. \note{lofty}
+In living tissue, water molecules are not as free to diffuse for long distances in all directions as they would be in a pure, endless medium.
+The notable exception for neuroimaging is \gls{csf}, in which, over the timescales relevant to \gls{dmri}, water diffusion is free and unrestricted. \note{true?}
+Elsewhere in the brain, the presence of highly organised biochemical structures, cell membranes, and cytoskeletons, places varying degrees of restriction \note{hindering?} on the diffusion of water molecules.
+In \gls{gm}, the cell membranes of somae, glial cells, dendrites and \note{short, unmyelinated axons} as well as subcellular structures and organelles all present obstacles to diffusing molecules, resulting in a hindered diffusion pattern.
+However, since these barriers are arranged in a random fashion, and are to be encountered equally likely in any direction, there is no preferential direction in which diffusion is freer than in others, thus the diffusivity is isotropic.
+In \gls{wm}, conversely, the highly coherent arrangement of axons poses very strong restrictions on diffusion occuring perpendicular to those axons, while diffusivity is relatively higher along the direction parallel to the bundled axon fibres.
+In such an environment, diffusion is anisotropic, biased towards certain directions over others.
+
+\paragraph*{Diffusion weighting}
+
+Any MR pulse sequence can be modified to introduce additional sensitisation to brownian motion, or diffusion weighting, in addition to the existing T1 and T2 based constrasts.
+This is achieved through the application of a pair of diffusion sensitisation graident pulses prior to echo generation and signal readout.
+
+To illustrate the concept, we will consider the application of diffusion weighting along a single orthogonal direction, e.g. $G_x$.
+After slice selection and \gls{rf} excitation, a gradient of magnitude $G_d$ is applied along $x$ for time period $\delta$ before it is reversed in polarity for subsequent $\delta$.
+Consider a spin which is stationary along $x=x_1$ throught the application of these gradients.
+Initially, it will gain a phase $\phi_1$ proportional to it's position along the gradient $x_1$ according to $\gamma G_d \delta x_1$.
+After gradient reversal, having not changed position $x=x_2=x_1$ it will gain the opposite phase $\phi_2 = -\phi_1$, resulting in a net phase change after diffusion sensitisation of $0$.
+Conversely, a spin which is net motion along $x$ will experience different gradient strengths across the two time points and will experience a net dephasing according to $\Delta\phi = \gamma G_d \delta (x_2 - x_1)$ \note{replace with integral form} and corresponding signal loss.
+On subsequent signal sampling, those voxels in which diffusion was high will have have a high degree of diffusion weighting-induced dephasing and exhibit a corresponding signal dropout.
+In those voxels with low diffusion, phase coherence will remain relatively intact after diffusion sensitisation and signal loss will be correspondingly minimal.
+
+There are variations on diffusion encoding pulse sequences, with the most influencial, described by Stejskal and Tanner \note{cite} in 1965, forming the basis for most modern \gls{dmri} sequence designs.
+The Stejskal-Tanner sequence is a spin-echo method, featuring two gradient pulses separated by a 180\textdegree refocussing pulse.
+The spin-echo signal magnitude is then determined by
+
+\begin{align}
+    S = S_0e^{-bD}
+\end{align}\label{eq:S}
+
+where $S_0$ is the baseline signal value without diffusion weighting, $D$ is the \note{effective??} diffusion coefficient (a quantity that depends on the molecular environment) and $b$ is the gradient factor, first described in \autocite{LeBihan1991} \note{Intravoxel Incoherent Motion Imaging Using Spin Echoes} and since commonly termed the $b$-value.
+In the Stejskal-Tanner sequence, $b = \gamma^2 G_d^2 \delta^2 (\Delta-\delta/3)$, where $\Delta$ is the time separating onset of the two gradient pulses.
+The choice of $b$-value is highly influential on the final image, and typically values between $600--3000 s/mm^2$ are used.
+Higher $b$-values reflect stronger diffusion sensitisation, but also produce far noisier images and require more advanced scanner hardware and \note{higher field strengths?}.
+Values up to 1000 are more common in routine and clinical settings, while higher values are employed in more advanced research methods.
+
+A single, full diffusion weighted MR image only employs a diffusion weighted gradient along a single direction, with all signal samples pertaining to the diffusivity along that specific orientation.
+As described above, in much of the brain, diffusion is not isotropic, but directionally biased.
+In medical MR imaging, therefore, diffusion weighting is applied along multiple (at least three) directions, with each direction producing a whole image volume.
+The series of measurments from these source images is then combined into the desired parametric map or further processed in advanced techniques.
+The simplest map, used for diagnostic images, is computed from the geometric mean of three orthogonal diffusion gradient directions, commonly referred to as a trace image.
+In modern acquisitions, anywhere from 12 to 100s of directions are measured, and the number of scans may be additionally multiplied by signal averages \note{repeats?} to boost \gls{snr}.
+Consequently, \Gls{dmri} scan times can be exceedingly long, from several minutes for clinical quality sequences into hours for advanced research studies, prompting efforts to reduce scan time by means of accererated and parallel imaging techniques.
+
+\paragraph*{Echo planar imaging}
+
+Since diffusion imaging, in particular \gls{hardi}, involves the acquisition of numerous image volumes with different diffusion weightings, scan times can be particularly long.
+Depending on the image resolution, number of diffusion weighted directions, and many other factors, scan times can run into the tens of minutes and even hours.
+Aside from the cost and practicalities of longer scans, there is also the increased risk of motion artifacts.
+So it is that the dominant \note{only?} type of pulse sequence used in \gls{dmri} is \gls{epi}.
+In \gls{epi}, all phase encoding intervals are acquired after only a single \gls{rf} excitation.
+\Gls{epi} can employ both gradient and spin echos and there are numerous different variations and associated contrast \note{??}, but for the purpose of this summary we will focus on the typical \gls{epi} sequence employed for diffusion weighted imaging.
+
+\paragraph*{Artefacts}
+
+\note{missing section: epi artefacts, T2 shine etc.}
+
+\section{Representing spherical functions}
+
+\note{move this to fibre orientation modelling section? but also relevant for tod etc. Appendix?}
+
+The study of macroscopic \gls{wm} structure involves descriptions of orientations in 3D space.
+This often requires the description of in terms of spherical functions, that is to say, mathematical representations of some quantity and its distribution on the sphere.
+
+One common such representation, and the one employed throught this thesis are the \gls{sh} basis functions.
+The origin of this set of basis function lies in quantum mechanics \note{does it?} but their use extends to the general representation of any spherical function.
+The \gls{sh} functions form a complete orthonormal basis such that any \note{well behaved} function can be expressed as a linear combination of them.
+
+\note{to complete: functions expression, (modified) real functions (used in dmri),..??}

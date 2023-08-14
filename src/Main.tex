@@ -72,7 +72,6 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
-% Custom \note command for formatting big red notes
 \newcommand\note[1]{{\large \textcolor{red}{#1} }}
 %TC:macro \note [ignore]
 
@@ -92,8 +91,11 @@
 {\include{FrontBack/Preamble}}
 
 \printglossary[type=\acronymtype]
+\glsaddallunused[main]
+\printglossary
 
 \include{Introduction/Introduction}
+\epigraph{Too much knowledge never makes for simple decisions.}{Frank Herbert, \textit{Children of Dune}}
 \include{Introduction/Theory}
 \include{Introduction/LitReview}
 \include{Introduction/Project}

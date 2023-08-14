@@ -1,12 +1,42 @@
-\chapter{Introductory Material}
+\chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
 \label{chapterlabel0}
 
-\section{Opening}
+Few objects of our scientific endeavours, from the depths of Earth's oceans to the Milky Way galaxy, rival the human brain in mystery and complexity.
+\note{link}
+Understanding the brain's structure and function has been a scientific \note{priority?endeavour} for centuries, and yet we are still far from forming a complete picture.
+At the same time, the scientific and medical needs and for such knowledge are \note{growing/more urgent}.
+Much of the world is caught in a mental health crisis, in our ageing population the devastation wrought by neurodegenerative diseases is \note{accelerating}, after leukaemia, paediatric cancers arise most frequently in the brain and spinal cord.
 
-\note{Here comes a brief overview of the background and context,
-setting the stage for the more detailed literature review and later the problem statement and project aims.
-For example:}
+For many years, study of the brain was limited to postmortem dissections, or the study of patients who had suffered life-altering brain injuries.
+\note{stuff about other in vivo imgaing techniques and how they're bad at brains}
+With the development of \gls{mri} came an entirely new medium for peering into the brain.
+It has since become the single most important \note{? flouroscopy, two photon imaging? check nr of citations or whatever} technology for conducting \textit{in vivo} neuroscience.
+\Gls{mri} has also gained indispensible importance in clinical neuroimaging.
+\note{link}
+Among the clinical applications of \gls{mri} lies the ability to map the critical structures of the brain as they relate to a neurosurgical target, such as a tumour.
+In clinics around the \note{rich??} world, presurgical planning is informed by the insights provided by \note{diffusion} \gls{mri}.
+This is thanks, in part, to the techniques of \gls{dti} and streamline tractography, which exploit the directional coherence of white matter bundles \note{... give insight into white matter structure/organisation}
 
-% -- DELETE AND REWRITE THIS; DEMO ONLY
+tractography great and all but it has its flaws, such as the amount of time and effort and computational expertise needed to get good results.
+This is fine if you have loads of resources, but lots of places don't, so presurgical planning with tractograph is limited to centres with access to these resources.
+strike one against tractography.
+But there is another reason why the impracticalities of tractography are getting in the way.
+Or are unable to step up to the table for the new potential untapped ground of intraoperative imaging.
+Surgical planning is great and all, but it only gets you so far into surgery.
+After a while, the effects of brain shift leave the preoperative images in the dust.
+Intraoperative MRI can be used to scan again during surgery, throwing fresh light on the surgical field and surrounding brain structure.
+It's mostly used to check for residual tumour and/or confirm resection.
+But what if further surgery is necessary?
+Wouldn't it be great if we could use the intraoperative MRI to provide updated white matter mapping and navigation?
+Well this is where tractography falls short, as it's current implementations are really impractical for use intraoperatively.
+All the more reason to develop a novel means of identifying white matter bundles from diffusion MRI images as an alternative to tractography.
+
 Intraoperative dMRI has the potential to supplement existing imaging practices by offering a means of imaging fibre tracts after brain shift has invalidated preoperative imaging.\autocite{Nimsky2001}
-Thus informed, surgeons would be better equipped to resect as much tumour as possible while leaving eloquent brain tissue intact. \note{(...)}
+Thus informed, surgeons would be better equipped to resect as much tumour as possible while leaving eloquent brain tissue intact.
+
+This research project was motivated by the need for a white matter bundle mapping technique that could potentially be applied to intraoperative diffusion MRI images, or any other environment where resources are limited.
+The basic premise is that we already have, in most cases, a lot of prior information about the shape and location of the target bundle.
+These expectations on shape and location could be exploited to directly estimate the location of the bundle in a new diffusion MRI scan.
+Of course, the reality is that inter-subject variability and in particular the complexly anonamlous anatomies of brains harbouring tumours or other space-occupying lesions present challenges to this relatively simple premise, as indeed to do to streamline tractography.
+This report will describe how this concept nevertheless holds up in healthy brains and, with appropriate adaptation, in diseased brains as well.
+\note{dramatic finishing sentence!}
