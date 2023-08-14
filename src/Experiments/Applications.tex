@@ -6,6 +6,8 @@
 
 \note{Would be nice to also have e.g. epilepsy cases in here?}
 
+\subsection{Tumour deformations}
+
 \note{dump from IJCARS manuscript}
 
 The target application is in intraoperative imaging.
@@ -30,3 +32,6 @@ This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection 
   \caption{Sample results in 4 different clinical subjects. First column: linearly registered tract atlas (spatial component only). Second column: atlas after tumour deformation. Third column: Final tract map. Fourth column: Track density image from streamline tractography, where intensity corresponds to streamline count per $(2.5mm)^3$ voxel (thresholded at 10 streamlines).}
   \label{fig:res}
 \end{figure*}
+
+In the \gls{btc} dataset, tumour deformation modelling succesfully improved tract and subject alignment and consequently tract mapping in all preoperative cases where it was necessary.
+Examples in \note{figure ??} demonstrate how tractfinder including tumour deformation produces tract margins closer to those indicated by tractography, in contrast to the deep learning method TractSeg which appears to still rely on a learned healthy anatomical configuration without generalising to displaced tracts.
