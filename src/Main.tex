@@ -72,7 +72,7 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
-\newcommand\note[1]{{\large \textcolor{red}{#1} }}
+\newcommand\note[1]{\ifdraft{\large \textcolor{red}{#1} }{}}
 %TC:macro \note [ignore]
 
 \begin{document}
