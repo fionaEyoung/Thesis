@@ -14,20 +14,26 @@ jobs:
         with:
           rclone_config: ${{ secrets.RCLONE_CONFIG }}
           disable_base64: true
-      - run: rclone copy OneDriveReadonly:UCL/test ${{ github.workspace }}/src/figs
-      - run: ls ${{ github.workspace }}/src/figs
 
       - name: Set up Git repository
         uses: actions/checkout@v3
 
+      - run: rclone copy OneDriveReadonly:UCL/test ${{ github.workspace }}/src/figs
+      - run: ls ${{ github.workspace }}/src/figs
+
+      - name: Create an integrated figs source file
+        run: echo "\\PassOptionsToPackage{disable}{endfloat}" > src/Main-with-figs.tex && cat src/Main.tex >> src/Main-with-figs.tex
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: Main.tex
+          root_file: |
+            Main.tex
+            Main-with-figs.tex
           working_directory: src/
 
       - name: Upload PDF
         uses: actions/upload-artifact@v3
         with:
           name: PDF
-          path: src/Main.pdf
+          path: src/Main*.pdf
