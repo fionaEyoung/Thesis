@@ -1,3 +1,91 @@
 \section{Data requirements}
 
 \note{Basically the findings from ISMRM diffusion workshop with different data inputs.}
+
+
+It is important to assess the applicability of image processing techniques developed with research quality data in acquisitions more typical of a clinical setting.
+It is common for advanced \gls{dmri} processing techniques to \note{require} a certain set of constraints on the input data, such as recommending or requiring a minimum number of diffusion weighted volumes (angular resolution), $b$-values or spatial resolution.
+
+If you can demonstrate that an image processing pipeline produces excellent results in a high quality research dataset, which can be interpreted with confidence, then the question follows: where one to acquire a lower quality dataset of the same subject, and perform the same data processing, how comparable would the resulting segmentation be to that of the high quality scan?
+
+It is fairly straightforward to explore this question, given a high quality sample dataset.
+Such data can be downsampled, in both the spatial and angular domains, to produce a simulated lower quality scan of the same subject.
+Here we set out to determine the minimum data requirements to obtain successful segmentation, comparing different numbers of direction samples, $b$-values and post-processing strategies, as well as the affects of decreasing data quality on segmentation stability.
+The effects on the perfomance of TractSeg and tractography are compared as well.
+
+\subsection{Data and methods}
+
+49 Preprocessed dMRI datasets from the HCP 1200 data release were spatially resampled to 2.5mm isotropic voxel size (from the original of 1mm isotropic), a resolution far more common in both clinical and research settings.
+Then, for each subject, the following 5 subsampled diffusion schemes were extracted from the full dataset:
+60 directions each at $b=1000s/mm^2$ and $b=2000s/mm^2$ (120 directions total, ``DWI-1”), 30 directions each at $b=1000s/mm^2$ and $b=2000s/mm^2$ (60 directions total, ``DWI-2”), 60 directions at $b=1000s/mm^2$ (``DWI-3”), 30 directions at $b=1000s/mm^2$ (``DWI-4”) and 12 directions at $b=1000s/mm^2$ (``DWI-5”).
+For each dataset four different tract segmentations are produced using three different approaches: Tractfinder, targeted ROI-based, probabilistic streamline tractography (iFOD2), and TractSeg.
+TractSeg, a deep learning-based direct segmentation technique, ships with two different pre-trained models:
+one trained on tract segmentations obtained as described in Wasserthal et al. (2018) (``TractSeg - DKFZ”), and another trained on XTRACT7 outputs (``TractSeg - XTRACT”).
+Two different TractSeg results were obtained by running both models.
+Segmentations were compared for the three tracts most commonly reconstructed in neurosurgical applications: the corticospinal tract, arcuate fasciculus and optic radiations.
+All tract segmentation methods are predicated on fibre orientation distributions (FOD) modelled from diffusion data, and although tractography and TractSeg could both use other FOD modelling outputs such as BedpostX, the current analysis is kept to constrained spherical deconvolution (CSD) only.
+For the two-shelled datasets, multi-shell multi-tissue (MSMT) CSD10 can be run to separate the signal contributions from white matter (WM), grey matter (GM) and cerebrospinal fluid (CSF) and thus obtain an optimal WM FOD image free of noisy extraneous signal in non-WM regions.
+For the single-shelled datasets, full, direct MSMT with all three tissue types is not possible.
+Instead, the following approaches are compared: 1) Modelling two tissue types with MSMT.
+MSMT CSD is performed twice, once modelling WM and GM compartments, and once modelling WM and CSF compartments; 2) Standard single shell CSD ``original flavour".
+
+To investigate the effects of different data quality and modelling on a given method, the Dice similarity coefficient (DSC) is computed between each segmentation in datasets DWI 2-5 and the corresponding segmentation of the same method in DWI 1 using MSMT (considered the baseline segmentation).
+This ``self-similarity" approach is intended to answer the question put forward above: how close to the results produced from an ``ideal" dataset be achieved from a lower quality dataset.
+This comparison was made for each combination of data quality and CSD approach.
+
+\subsection{Findings}
+
+DSC results are plotted in \note{FIG}.
+Each datapoint corresponds to the segmentation produced from a particular dataset, method and pipeline \textit{compared against} the result obtained from the highest quality dataset.
+
+The consistency in segmentation results differed significantly with both data quality and CSD approach.
+The high sensitivity to CSD approach in the tractography and Tractfinder results, particularly the large differences between MSMT WM+CSF / SSST and MSMT WM+GM, can be attributed to the amount of spurious grey matter signal included in the WM FOD reconstructions.
+In the former two approaches, the GM compartment is not as aggressively suppressed from the WM reconstruction, resulting in WM ``signal” in grey matter areas (which is then incorporated into the segmentation: in tractography via the further propagation of streamlines into GM, and in Tractfinder directly due to higher WM signal amplitude in GM).
+TractSeg, while not immune, appears less sensitive to CSD reconstruction technique.
+When considering only the best results (MSMT in DWI-2 and, in the single-shelled datasets, MSMT WM+GM for tractography and Tractfinder and SSST for TractSeg; Fig. 2), tractography displays the greatest instability with decreasing data quality, with the similarity score between DWI-5 MSMT WM+GM and DWI-1 MSMT falling as low as 0.78 (subject and cerebral hemisphere mean) for the arcuate fasciculus.
+TractSeg is trained on SSST CSD in single-shelled data as well as multi-shelled data, explaining why it does best with either SSST or MSMT WM+CSF in our single-shell results.
+
+The comparatively high sensitivity of probabilistic tractography to acquisition and processing pipelines is consistent with the well-established reproducibility and noise sensitivity problems associated with tractography.
+Meanwhile, voxel-wise segmentation methods are not susceptible to error propagation along the tract and are more robust to lower angular resolution.
+Understanding the behaviour of different tract segmentation techniques when applied to varying qualities of dMRI acquisition and post-processing approaches is important if segmentation methods developed in research settings are to be consistently and reproducibly applied to clinical quality acquisitions.
+It is useful to know how comparable segmentation results in a single-shelled, 30 direction dataset are to those one might have obtained with a HARDI dataset and state-of-the-art post-processing.
+This is particularly relevant for longitudinal studies, or when comparing different acquisitions of the same subject in a clinical context (e.g., for monitoring disease progressions, post-operative changes etc.).
+
+
+\section{Atlas specifications}
+
+\note{different title? nr of training subjects requirements}
+
+In segmentation methods relying on seen data from which to ``learn" patterns to apply to unseen data, the volume and range of training data influences the prediction accuracy and generalisability. \note{says who?}
+For complex deep learning models, which have many thousands of network parameters to learn, the amount of training data required to achieve accurate and stable performance can be immense, posing a particular barrier to the use of such models in applications where suitably annotated data is scarce.
+In the case of TractSeg, for example, 105 subjects in total were used for cross-validation training, which each fully trained model having seen 63 unique subjects \note{also mention augmentation?}.
+
+In tractfinder, the influence of the number of subjects used to construct each atlas is on the amount of inter-subject anatomical variation reflected in the spatial and orientational components.
+It is to be expected that, save for extreme outliers, the additional information gained from adding more training subjects would reach a point of saturation.
+
+To investigate this, an experiment was conducted whereby the number of subjects included in atlas construction was varied, and the effect on segmentation accuracy compared.
+For this purpose the TractSeg \gls{hcp} reference bundles were used.
+Using the same train - test data split as described in \note{??}, subsets of 1, 3, 5, 10, 15 and 30, as well as the full 63 training subjects were randomly selected, from which separate \gls{tod} atlases where constructed.
+Tractfinder tract maps were then generated in the 42 test subjects using each of the different subset atlases and compared with the reference segmentations using the \gls{dice} and density correlation metrics.
+
+\begin{figure}
+    \includegraphics{compare_ntrain.png}
+    \caption{Comparison of segmentation performance using different numbers of atlas training subjects. Results are grouped by tract, colour represents number of training subjects. The IFO and \gls{or} are in places indistinguishable. \acrolist{af,cst,or}}
+    \label{fig:ntrain}
+\end{figure}
+
+When using only a single subject's normalised \gls{tod} map as an ``atlas", mean \gls{dice}s ranged from 0.65 to 0.71 for the IFOF and \gls{cst} respectively.
+% These figures are from using the script compare_atlas_size.py committed at sha 33777217
+The maximum increase in mean \gls{dice} between the 15 and 63 subjects atlases was only 0.00835, for the \gls{cst}, representing only a 1\% increase from the lower score of 0.759.
+Across all tracts and both comparison metrics, differences in performance between the different atlases was consistently negligible.
+
+The results indicate that additional atlas subjects beyond a minimum number of around 10 to 15 do little to nothing to improve tractfinder results.
+This can be interpreted as the additional training subjects offering minimal additional information on inter-subject variability, as a lot of this variability is already smoothed out due to affine (instead of diffeomorphic) co-registration of training subjects into template space.
+The effects of additional training data may present differently if the atlases are constructed with non-linear co-registration of training subjects.
+
+\note{this might belong somewhere else.}
+There are two sources of inter-subject variability wrapped up in the atlas: the first is the global anatomical variability including skull shape and differences in cortical shape and arrangement \note{better word for this}.
+The second is the variability in position and shape of the tract itself.
+Under ideal circumstances, diffeomorphic registration of training subjects would eliminate the first of these effects (global variability), leaving only the tract specific variation.
+However, such an atlas would necessitate subsequent applications in new target subjects to also involve diffeomorphic registration between subject and template space, as the atlas would contain no global variability ``allowance", and would therefore expect to be perfectly aligned with a target image, globally speaking \note{good lord}.
+Requiring diffeomorphic registration at the point of application would greatly inhibit the robustness and speed of tractfinder, and is therefore not the preferred approach.

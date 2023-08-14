@@ -34,9 +34,17 @@
 %  \end{figure}
 
 
-% Figure path
 \ifdraft{
+  % Figure path
   \graphicspath{{draft_figs/}{figs/}}
+  % Endfloats with chapter counters
+  \usepackage[nolists]{endfloat}
+  \renewcommand\thepostfigure{\arabic{chapter}.\arabic{postfig}}
+  \renewcommand\theposttable{\arabic{chapter}.\arabic{posttbl}}
+  \AddToHook{cmd/chapter/before}{%
+    \processdelayedfloats
+    \setcounter{postfig}{0}
+    \setcounter{posttbl}{0}}
 }{
   \graphicspath{{figs/}}
 }
