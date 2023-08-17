@@ -18,8 +18,9 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v3
 
-      - run: rclone copy OneDriveReadonly:UCL/test ${{ github.workspace }}/src/figs
-      - run: ls ${{ github.workspace }}/src/figs
+      - run: rclone copy OneDriveReadonly:UCL/Thesis/src/figures ${{ github.workspace }}/src/figs
+      - run: rclone copy OneDriveReadonly:UCL/Thesis/src/draft_figures ${{ github.workspace }}/src/draft_figs
+      - run: ls ${{ github.workspace }}/src/*figs
 
       - name: Create an integrated figs source file
         run: echo "\\PassOptionsToPackage{disable}{endfloat}" > src/Main-with-figs.tex && cat src/Main.tex >> src/Main-with-figs.tex
@@ -29,8 +30,13 @@ jobs:
         with:
           root_file: |
             Main.tex
+            Main.tex
+            Main-with-figs.tex
             Main-with-figs.tex
           working_directory: src/
+          args: '-pdf -file-line-error -interaction=nonstopmode -f'
+          continue_on_error: true
+        continue-on-error: true
 
       - name: Upload PDF
         uses: actions/upload-artifact@v3

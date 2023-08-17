@@ -3,16 +3,16 @@
 % Bibliography and referencing settings
 
 \usepackage[doi=true,isbn=true,url=false,natbib=true,style=nature,backend=bibtex]{biblatex} % Add citation styles as needed (see docs for biblatex)
-\IfFileExists{\string~/Documents/Mendeley/bib_files/Neuroimaging.bib}
-          {\addbibresource{\string~/Documents/Mendeley/bib_files/Neuroimaging.bib}}
-          {\addbibresource{./Neuroimaging.bib}}
-\IfFileExists{\string~/Documents/Mendeley/bib_files/Neurosurgery.bib}
-          {\addbibresource{\string~/Documents/Mendeley/bib_files/Neurosurgery.bib}}
-          {\addbibresource{./Neurosurgery.bib}}
-\IfFileExists{\string~/Documents/Mendeley/bib_files/Figures.bib}
-          {\addbibresource{\string~/Documents/Mendeley/bib_files/Figures.bib}}
-          {\addbibresource{./Figures.bib}}
-\addbibresource{bibliographies/Neuroimaging.bib}
+\IfFileExists{bibliographies/Neuroimaging.bib}
+          {\addbibresource{bibliographies/Neuroimaging.bib}}
+          {\addbibresource{bibs/Neuroimaging.bib}}
+\IfFileExists{bibliographies/Neurosurgery.bib}
+          {\addbibresource{bibliographies/Neurosurgery.bib}}
+          {\addbibresource{bibs/Neurosurgery.bib}}
+\IfFileExists{bibliographies/Figures.bib}
+          {\addbibresource{bibliographies/Figures.bib}}
+          {\addbibresource{bibs/Figures.bib}}
+% \addbibresource{bibliographies/Neuroimaging.bib}
 % \addbibresource{./Neurosurgery.bib}
 
 
