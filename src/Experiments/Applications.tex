@@ -33,5 +33,37 @@ This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection 
   \label{fig:res}
 \end{figure*}
 
-In the \gls{btc} dataset, tumour deformation modelling succesfully improved tract and subject alignment and consequently tract mapping in all preoperative cases where it was necessary.
+In the \gls{btc} dataset, tumour deformation modelling successfully improved tract and subject alignment and consequently tract mapping in all preoperative cases where it was necessary.
 Examples in \note{figure ??} demonstrate how tractfinder including tumour deformation produces tract margins closer to those indicated by tractography, in contrast to the deep learning method TractSeg which appears to still rely on a learned healthy anatomical configuration without generalising to displaced tracts.
+
+\section{iMRI case studies}
+
+From \note{early 2022 to mid 2023}, 8 \note{verify!} tumour resections where carried out at Great Ormond Street Hospital for Children with intraoperative MRI guidance including multi-directional diffusion weighted imaging.
+Throughout this period, neurosurgical and radiological staff were continually learning how best to integrate the iMRI facility into their practice.
+
+The subjects included two posterior fossa tumour, two midline (thalamic) glioma and four hemispheric tumour patients.
+Of these, thalamic tumours are the indications with potentially the most to gain from advanced intraoperative guidance, given their complex functional environment and difficult access.
+Indeed, such tumours have widely been considered inoperable and have only recently seen surgical treatment thanks in part to changing attitudes\autocite{Souweidane1996,Puget2007} advances in neuronavigation.\autocite{Sunderland2021}
+Paediatric patients in particular\autocite{Ferroli2023} experience better overall survival rates when thalamic tumours are more radically resected compared to subtotal resection or biopsy.\autocite{Cinalli2018a}
+The Alder Hey Children's Hospital in Liverpool, UK experienced an increase in substantial resection \note{define} rates from 37\% to 94\% with the introduction of intraoperative MRI navigation, without any associated increase in postoperative morbidity.\autocite{Sunderland2021}
+Similarly, a review of 38 thalamic tumour patients (paediatric and adult) treated at the Chinese PLA General Hospital in Beijing, China found that the use of iMRI increased GTR rates from 42\% to 68\%.\autocite{Zheng2016}
+Motor deficits are the most common functional symptoms of thalamic tumours,\autocite{Puget2007, Zheng2016, Palmisciano2021} and preservation of the posterior limb of the internal capsule, containing the corticospinal tract, is a major concern when resecting them.
+\note{to cite: Grewal2019, Wong2016, Kis2014, Dorfer2021, Steinbok2016, Celtikci2017}
+
+\note{add some sort of disclaimer about how this is all hearsay based on MDT / scanner room notes?}
+
+The first of the two patients harboured a low-grade pilocytic astrocytoma in the left thalamus and presented with progressive right side weakness.
+The unusual radiological presentation showed part of the CST travelling through the tumour, while the rest of the tract was displaced.
+Due to this complicated involvement of the internal capsule a debulking surgery under iMRI guidance was indicated.
+Confirming the location of the CST, divided as it apparently was into an intratumoural and a displaced portion, was particularly difficult in this case.
+A partial resection was completed, and as the intraoperative frozen section \note{??} was reported as appearing high grade, the decision was made not to pursue extensive resection, given the risk of functional injury and the unlikelihood of achieving curative resection for a high grade lesion \note{????}.
+There was concern of an area of infarction involving the CST, however the patient, after experiencing worsened motor deficit immediately postoperatively, approved to preoperative levels of the following days.
+\note{complete with imaging analysis for patient 5: imaging features preop and intraop, and tractography / tractfinder reconstructions}
+
+The second thalamic tumour case study involves a \note{X} year old with a diffuse midline astrocytoma (WHO grade IV) also in the left thalamus.
+The diffuse and infiltrative nature of this tumour made identifying the posterior capsule, thalamus and tumour margins exceedingly difficult.
+Intraoperative DTI was requested by the radiologist after extensive discussion of the already acquired conventional contrast scans, from which the extent of PLIC infiltration was indiscernible.
+Colour FA showed a largely intact and slightly displaced internal capsule with extensive tumour infiltration, so the decision was made not to attempt further resection of that part of the tumour.
+In the end, roughly 50\% of the lesion was resected, predominantly in the ventral and medial parts.
+Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy \note{did they? only have this down as planned} after confirmation of high-grade histology.
+\note{complete with imaging analysis for patient 8: imaging features preop and intraop, and tractography / tractfinder reconstructions}
