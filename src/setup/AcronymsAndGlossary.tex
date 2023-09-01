@@ -4,6 +4,7 @@
             style=super,
             nogroupskip=true,
             nonumberlist,
+            seeautonumberlist,
             nopostdot]
             {glossaries}
 \makeglossaries
@@ -12,6 +13,16 @@
 \newacronym{mri}{MRI}{magnetic resonance imaging}
 % Recursive acronym \protect solution from https://tex.stackexchange.com/a/502313
 \newacronym{dmri}{dMRI}{diffusion \protect\ifglsused{mri}{MRI}{magnetic resonance imaging}}
+\newacronym{imri}{iMRI}{intraoperative \protect\ifglsused{mri}{MRI}{magnetic resonance imaging}}
+\newacronym{hardi}{HARDI}{high angular resolution diffusion imaging}
+\newacronym{epi}{EPI}{echo planar imaging}
+\newacronym{rsepi}{RS-EPI}{readout-segmented \protect\ifglsused{epi}{EPI}{echo planar imaging}}
+\newacronym{rf}{RF}{radio frequency}
+\newacronym{snr}{SNR}{signal to noise ratio}
+\newacronym{fid}{FID}{free induction decay}
+\newacronym{2dft}{2DFT}{2D Fourier transform}
+\newacronym{ft}{FT}{Fourier transform}
+% Image computing
 \newacronym{csd}{CSD}{constrained spherical deconvolution}
 \newacronym{odf}{ODF}{orientation distribution function}
 \newacronym{fodf}{fODF}{fibre \protect\ifglused{odf}{ODF}{orientation distribution function}}
@@ -23,6 +34,8 @@
 \newacronym{ssst}{SSST}{single-shell, single-tissue}
 \newacronym{msmt}{MSMT}{multi-shell, multi-tissue}
 %% Neuroanatomy
+\newacronym{cns}{CNS}{central nervous system}
+\newacronym{pns}{PNS}{peripheral nervous system}
 \newacronym{cst}{CST}{corticospinal tract}
 \newacronym{or}{OR}{optic radiation}
 \newacronym{af}{AF}{arcuate fasciculus}
@@ -30,17 +43,59 @@
 \newacronym{uf}{UF}{uncinate fasciculus}
 \newacronym{wm}{WM}{white matter}
 \newacronym{gm}{GM}{grey matter}
+\newacronym{csf}{CSF}{cerebrospinal fluid}
 \newacronym{crp}{CrP}{cerebellar peduncles}
 \newacronym{cp}{CP}{cerebral peduncles}
 \newacronym{cc}{CC}{corpus callosum}
 \newacronym{ec}{EC}{external capsule}
 \newacronym{slf}{SLF}{superior longitudinal fasciculus}
 \newacronym{sfof}{SFOF}{superior fronto-occipital fasciculus}
+%% Neurosurgery & Neurology
+\newacronym{dbs}{DBS}{deep brain stimulation}
+\newacronym{eor}{EOR}{extent of resection}
+\newacronym{gtr}{GTR}{gross total resection}
+\newacronym{hgg}{HGG}{high grade glioma}
+\newacronym{lgg}{LGG}{low grade glioma}
+\newacronym{eeg}{EEG}{electroencephalography}
+\newacronym{ct}{CT}{computed tomography}
+\newacronym{us}{US}{ultrasound}
+\newacronym{des}{DES}{direct electrical stimulation}
 %% Other
 \newacronym{hcp}{HCP}{human connectome project}
+\newacronym{btc}{BTCD}{Brain Tumour Connectomics}
 \newacronym{dice}{DSC}{Dice similarity coefficient}
 \newacronym{gdice}{gDSC}{generalised Dice similarity coefficient}
 \newacronym{sh}{SH}{spherical harmonic}
+
+%% Definitions
+\newglossaryentry{tract}{
+name=tract,
+description={an anatomical structure of a group of neuron fibres with a common functional or anatomical organisation}
+}
+\newglossaryentry{fibrebundle}{
+name=fibre bundle,
+description={\emph{see} \gls{tract}}
+}
+\newglossaryentry{streamline}{
+name=streamline,
+description={a collection of points, in the context of tractography forming an abstraction of a single fibre}
+}
+\newglossaryentry{track}{
+name=track,
+description={\emph{see} \gls{streamline}}
+}
+\newglossaryentry{bundle}{
+name=bundle,
+description={\emph{see} \gls{streamlinebundle}}
+}
+\newglossaryentry{streamlinebundle}{
+name=streamline bundle,
+description={a collection of tractography streamlines, usually serving as a representation of, but not synonymous with, a corresponding anatomical tract}
+}
+\newglossaryentry{voxel}{
+name=voxel,
+description={``volume pixel"; the smallest spatial unit of a 3D digital image, akin to an image pixel in three dimensions }
+}
 
 %% Here we set up a new command to generate a list of abbreviations, e.g. for
 %% float captions, formatted in a consistent way

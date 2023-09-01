@@ -34,9 +34,22 @@
 %  \end{figure}
 
 
-% Figure path
-\ifdraft{
+\ifdraft{%
+  % Figure path
   \graphicspath{{draft_figs/}{figs/}}
-}{
-  \graphicspath{{figs/}}
+  % Endfloats with chapter counters
+  \usepackage[nolists, figuresonly]{endfloat}
+}{%
+  \graphicspath{{figs/}{draft_figs/}}
+  \usepackage[disable]{endfloat}
 }
+
+\makeatletter%
+  \@ifpackagewith{endfloat}{disable}{%
+    \setkeys{Gin}{draft=false}}{%
+    \renewcommand{\efloatseparator}{}
+    \renewcommand\thepostfigure{\arabic{chapter}.\arabic{postfig}}
+    \AddToHook{cmd/chapter/before}{%
+      \processdelayedfloats
+      \setcounter{postfig}{0}}}
+\makeatother%

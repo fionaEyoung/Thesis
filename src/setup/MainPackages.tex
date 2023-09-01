@@ -69,14 +69,15 @@
 %  commands that will only be used in draft versions
 \usepackage{ifdraft}
 \ifdraft{
+  % Draft mode geometry
   \usepackage[margin=1in]{geometry}
-  \usepackage{endfloat}
-  \usepackage[modulo]{lineno}
-  \linenumbers
   \setstretch{1}
   \setlength \topmargin{10mm}
   \setlength \oddsidemargin {20mm} % Allow a mm for the bleed.
   \setlength \evensidemargin {20mm}
+  % Line numbers
+  \usepackage[modulo]{lineno}
+  \linenumbers
 }
 
 
@@ -139,7 +140,7 @@
 
 % Create paragraph title format
 \usepackage{titlesec}
-\titleformat{\paragraph}[hang]{\normalfont\it\raggedright}{}{0pt}{\qquad}[]
+\titleformat{\paragraph}[hang]{\normalfont\itshape\raggedright}{}{0pt}{\qquad}[]
 \titlespacing*{\paragraph}{0pt}{\baselineskip}{0pt}
 
 % Section header spacing

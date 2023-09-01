@@ -5,29 +5,79 @@ on:
     tags:
       - v*
       - '!v*.*.*'
+    branches:
+        test*
 jobs:
   Build-LaTeX:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Rclone and get figures
+      - name: Set up Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Rclone
         uses: AnimMouse/setup-rclone@v1
         with:
           rclone_config: ${{ secrets.RCLONE_CONFIG }}
           disable_base64: true
-      - run: rclone copy OneDriveReadonly:UCL/test ${{ github.workspace }}/src/figs
-      - run: ls ${{ github.workspace }}/src/figs
 
-      - name: Set up Git repository
-        uses: actions/checkout@v3
+      - name: Get figures from OneDrive
+        run: |
+          rclone copy OneDriveReadonly:UCL/Thesis/src/figures ${{ github.workspace }}/src/figs
+          rclone copy OneDriveReadonly:UCL/Thesis/src/draft_figures ${{ github.workspace }}/src/draft_figs
+          ls ${{ github.workspace }}/src/*figs
 
-      - name: Compile LaTeX document
+      - name: Create an integrated figs source file
+        run: echo "\\PassOptionsToPackage{disable}{endfloat}" > src/Main-with-figs.tex && cat src/Main.tex >> src/Main-with-figs.tex
+
+      - name: Create list of bib files
+        id: bib_files
+        working-directory: src
+        run : |
+          echo "files=$(printf -- '--bibliography %s ' bibs/*.bib)" > $GITHUB_OUTPUT
+
+      - name: Compile LaTeX to PDF
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: Main.tex
+          root_file: |
+            Main.tex
+            Main.tex
+            Main-with-figs.tex
+            Main-with-figs.tex
           working_directory: src/
+          args: '-pdf -file-line-error -interaction=nonstopmode -f'
+          continue_on_error: true
+        continue-on-error: true
 
-      - name: Upload PDF
+      - name: Convert to Word
+        uses: docker://pandoc/core:3.1
+        with:
+          entrypoint: /bin/sh
+          args: -c "cd src; /usr/local/bin/pandoc Main.tex -s -o ${{github.ref_name}}.docx --citeproc ${{ steps.bib_files.outputs.files }} --resource-path draft_figs --resource-path figs"
+
+      - name: Move build targets to root dir
+        run: |
+          mv src/Main.pdf ${{github.ref_name}}.pdf || ( echo "Main.pdf failed to build" >> build_error.txt && mv src/Main.log src/Main.blg . )
+          mv src/Main-with-figs.pdf ${{github.ref_name}}-with-figs.pdf || ( echo "Main-with-figs failed to build" >> build_error.txt && mv src/Main-with-figs.log src/Main-with-figs.blg . )
+          mv src/${{github.ref_name}}.docx . || echo "Pandoc conversion failed" >> build_error.txt
+
+      - name: Upload build targets to workflow
         uses: actions/upload-artifact@v3
         with:
-          name: PDF
-          path: src/Main.pdf
+          name: ${{github.ref_name}}
+          path: |
+            ./*.pdf
+            ./${{github.ref_name}}.docx
+            ./*.log
+            ./*.blg
+
+      - name: Create release with artifacts
+        uses: softprops/action-gh-release@v1
+        with:
+          fail_on_unmatched_files: false
+          files: |
+            *.pdf
+            ${{github.ref_name}}.docx
+            *.log
+            *.blg
+            build_error.txt
+          tag_name: ${{github.ref_name}}

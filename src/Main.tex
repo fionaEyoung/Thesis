@@ -72,8 +72,7 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
-% Custom \note command for formatting big red notes
-\newcommand\note[1]{{\large \textcolor{red}{#1} }}
+\newcommand\note[1]{\ifdraft{\large \textcolor{red}{#1} }{}}
 %TC:macro \note [ignore]
 
 \includeonly{%
@@ -97,12 +96,16 @@ Alignment/Virtue
 {\include{FrontBack/Preamble}}
 
 \printglossary[type=\acronymtype]
+\glsaddallunused[main]
+\printglossary
 
 \include{Introduction/Introduction}
+\epigraph{Too much knowledge never makes for simple decisions.}{Frank Herbert, \textit{Children of Dune}}
 \include{Introduction/Theory}
 \include{Introduction/LitReview}
 \include{Introduction/Project}
 
+\epigraph{I've spent my life trying to make things simpler. \\ Because I find ultimately that complicated doesn't reach the heart.}{Hans Zimmer}
 \include{Atlas/Atlas}
 \include{Atlas/Mapping}
 
@@ -110,10 +113,12 @@ Alignment/Virtue
 \include{Alignment/Registration}
 \include{Alignment/Virtue}
 
+% \epigraph{What could be more natural than complexity?}{Hank Green}
+\epigraph{The most natural thing in the world is complexity}{Hank Green}
 \include{Experiments/Data}
-\include{Experiments/Validation}
 \include{Experiments/Effects}
-\include{Experiments/Clinical}
+\include{Experiments/Validation}
+\include{Experiments/Applications}
 
 \include{Conclusion/Conclusions}
 

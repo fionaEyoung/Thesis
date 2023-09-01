@@ -1,0 +1,37 @@
+\section{Applications}
+
+\note{qualitative demos, clinical cases with intraop deformation }
+
+\note{More qualitative validation in as many sample datasets as possible, including intraoperative data, tumour deformation and debulking cases. Show specific cases where differs from e.g. tractography or TractSeg in specific areas like peritumoural oedema. Also analyse failure cases.}
+
+\note{Would be nice to also have e.g. epilepsy cases in here?}
+
+\subsection{Tumour deformations}
+
+\note{dump from IJCARS manuscript}
+
+The target application is in intraoperative imaging.
+The main difference therein is the need to account for brain shift, which is unpredictable: differing effects stem from drainage of fluid, pressure changes, tumour debulking and gravitational sag.
+Nevertheless, we aim to achieve intraoperative tract segmentation while avoiding the need to perform additional tumour and / or resection cavity segmentation intraoperatively.
+
+As the atlas is designed to be spatially inclusive, with the inner product acting to correct small spatial inaccuracies, it is possible in some cases where brain shift is minimal to reuse the properative tumour deformation field.
+In cases of significant tumour debulking, the deformation field can be recomputed from the preoperative tumour segmentation by adjusting the value of $s$ to simulate a reduction in tumour volume.
+
+This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection of a large temporal epidermoid cyst. There is significant reduction in cyst volume and the adjacent corticospinal tract has shifted accordingly, however by reusing the preoperative lesion segmentation and setting $s=0.8$, the resulting deformation field is able to capture the rough location of the shifted tract. By only adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ and $D_b$, we can avoid time and resource-intensive intraoperative lesion segmentation, brain shift modelling or non-linear registration.
+
+\begin{figure*}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{chapter_4/figure_4.png}
+  \caption{Example results in intraoperative image using scaled preoperative tumour segmentation. Blue outline: Tumour segmentation. Green outline: effective tumour boundary with $s=0.8$ used for intraoperative segmentation}
+  \label{fig:shrink}
+\end{figure*}
+
+\begin{figure*}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{chapter_4/figure_5_revised.png}
+  \caption{Sample results in 4 different clinical subjects. First column: linearly registered tract atlas (spatial component only). Second column: atlas after tumour deformation. Third column: Final tract map. Fourth column: Track density image from streamline tractography, where intensity corresponds to streamline count per $(2.5mm)^3$ voxel (thresholded at 10 streamlines).}
+  \label{fig:res}
+\end{figure*}
+
+In the \gls{btc} dataset, tumour deformation modelling succesfully improved tract and subject alignment and consequently tract mapping in all preoperative cases where it was necessary.
+Examples in \note{figure ??} demonstrate how tractfinder including tumour deformation produces tract margins closer to those indicated by tractography, in contrast to the deep learning method TractSeg which appears to still rely on a learned healthy anatomical configuration without generalising to displaced tracts.
