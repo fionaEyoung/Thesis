@@ -62,10 +62,10 @@ Forward warping works well for continuous valued data, for example streamlines.
 However, for discreet data such as pixels (or voxels), forward warping brings the problem of ``holes", when a mapped location in the destination image falls between coordinates on the discreet voxel grid, and the original sample value has to be distributed among the neighbouring grid points.
 Thus it is usually preferable, if the warping function is invertible, to determine for each grid point in the transformed image, the corresponding continuous-valued point in the source image from which the appropriate value can be interpolated from the surrounding grid points. \note{does this make sense??}
 Reverse warp convention is used by most \note{??} medical image manipulation packages to deform (and resample) a gridded image.
-Thus we need to obtain the inverse mapping $P' = f^{-1}(P)$ by solving equation (\ref{eq:forwardP}) for $P$:
+Thus we need to obtain the inverse mapping $P = f^{-1}(P')$ by solving equation (\ref{eq:forwardP}) for $P$:
 
 \begin{align}
-  P = P' - \mathbf{\hat{e}}(D_t c - \frac{D_b}{\lambda}\mathcal{W}_0(\frac{-\lambda D_t (1-c) e^{-\lambda(D_p'-D_tc)/D_b}}{D_b}))
+  P = P' - \mathbf{\hat{e}}(D_t c - \frac{D_b}{\lambda}\mathcal{W}_0(\frac{-\lambda D_t (1-c) e^{-\lambda(D_{p'}-D_tc)/D_b}}{D_b}))
 \end{align}
 
 where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$. \note{derive this ?in appendix??}
