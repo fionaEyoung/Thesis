@@ -57,14 +57,29 @@ The presence of crossing fibres will reduce the map amplitude, even if one of th
 If the objective is to obtain a likelihood score for a particular tract, regardless of whether or not the tract is sharing a voxel with another fibre population, then the current inner product framework, which slightly penalises crossing fibre voxels over single fibre ones, is inadequate. \note{expand on this?}
 See section \ref{sec:fixel}.
 
-\subsubsection{Components of final value}
+\subsection{Alternative similarity metrics}
 
-The tract atlases and FOD data contain both spatial and directional information, all of which contribute to the final inner product value.
-It is worth investigating, however, to what extent those two factors influence the final result.
-It is conceivable for example that the final map value is predominantly determined by the overall amplitude of one or both of the ODFs, with the non-zeroth SH coefficients having little additional effect.
+The inner product is a simple comparison metric for the similarity of two vectors or distributions, each being equally weighted.
+There are plenty of other possible similarity measures which could be computed, each with slightly different interpretations.
+One options considered (although not strictly a similarity metric) is the Kullback-Leibler (KL) divergence, a type of statistical distance for determining the information gained (\note{or lost?}) by approximating a measured reference distribution $Q$ with an estimated model distribution $P$.
 
+\begin{equation}
+  KL(P||Q) = \sum_x P(x) ln frac{P(x)}{Q(x)} \label{eq:kl}
+\end{equation}
 
-\subsection{Fixel analysis}
+KL divergence is an asymmetric quantity, meaning $KL(P||Q) \neq KL(Q||P)$, where $KL(Q||P)$ can be called the reverse KL divergence.
+It is of interest for our purposes because a common \note{?} use case is to see how well an observed bimodal distribution $Q$ can be approximated with a unimodal $P$.
+This is similar to the problem of considering a \gls{tod} prior with a single orientation peak with a crossing fibre \gls{fod}, in which one of the crossing fibre populations aligns with the prior, and the other is of a different, irrelevant tract.
+In this scenario, it would be useful to measure how well the \gls{tod} represents \textit{one} of the \gls{fod} lobes, while ignoring the contributions of $F$ where $T$ is zero.
+This is effectively what the reverse KL divergence $KL(T||F) = \sum_x T(x) ln frac{T(x)}{P(x)}$ would represent, as the weighting by $T$ suppresses any contributions to the sum where $T$ is zero, regardless of the value of $F$.
+
+After initial investigations, however, the use of a KL divergence-based mapping hasn't been further pursued for a few reasons.
+Firstly, the interpretation of the computed value is difficult, as higher similarity is indicated by lower divergence, and the values can be infinitely high.
+Secondly, as the measure only applies to probability distributions (with unit integral), it could be only used for measuring angular agreement, leaving the question of how to reintroduce the spatial information in the \gls{tod} and \gls{fod} amplitudes.
+Next, prototyping experiments indicated that in practice, little advantage \note{meaning??} could be gained from considering the KL  divergence over the inner product or other options (see \ref{sec:fixel}).
+Finally, an analytical expression for the multiplication of two arbitrary \gls{sh} functions, which would be needed to compute the metric for continuous spherical distributions, is not known for the real spherical harmonics used in \gls{dmri} analysis, meaning it can currently only be calculated discretely, requiring the distributions to be densely sampled at great computational and storage cost.
+
+\subsection{Fixel analysis}\label{sec:fixel}
 
 The value of the inner product between an estimated orientation distribution representing a mixture of fibre populations and the expected orientation distribution for a specific isolated population will depend on a range of interacting components, making interpretation of the final value a complicated task.
 
