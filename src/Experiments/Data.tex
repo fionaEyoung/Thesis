@@ -15,6 +15,9 @@ We accessed 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (
 These images have been preprocessed as documented in \textcite{Glasser2013}.
 We additionally downsampled them to 2.5 mm isotropic voxels and extracted a subset of 60 directions at $b=1000 mm/s^2$.
 
+The authors of TractSeg\autocite{Wasserthal2018} published the curated streamline bundles of 105 HCP subjects used in the training and validation of their deep learning method.\note{zenodo ref}
+These reference bundles enabled a direct comparison between the deep learning method and tractfinder.
+
 \subsection{TractoInferno}
 
 The recently released TractoInferno database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1}),\autocite{Poulin2022} created for the training of machine learning tractography approaches, contains diffusion and T1-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography reconstructions.
