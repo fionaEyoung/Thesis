@@ -7,6 +7,30 @@
 
 \note{Summary of main findings and outputs, pros and highlight specific achievements}
 
+The reality of achieving reliable white matter neuronavigation with intraoperative diffusion MRI is not simply a matter of replacing tractography with a ``better" automated tract segmentation pipeline.
+As we have seen, the problem of brain shift and tumour mass effect is substantial and will unlikely be solved with a single one-size-fits-all approach.
+Simple radial tumour expansion modelling can go a long way towards expanding the applicability of atlas-based tract mapping to cases involving mass effect.
+This works particularly well for encapsulated tumours and for tumours with a relatively simple shape and location.
+Lesions growing in the cortex or subcortical white matter tend to displace tissue around them in a fairly predictable way which is captured in a radial model.
+By contrast, tumours of the diencephalon or midbrain can produce unexpected deformations, owing to the complex arrangement of surrounding structures and their biomechanical relationships to each other: cranial nerves, peduncles, thalamic nuclei and subcortical grey matter. \note{point? clearer!}
+In addition, a notable shortcoming of the radial deformation model is its ignoring of varying compressibilities of the brain's tissues, and in particular of the ventricles.
+The ability of the fluid filled ventricles to absorb a sizeable amount of displacement force and prevent the mass effect from propagating further through the brain than it otherwise might in a medium of uniform elasticity (as assumed by the simple model presented here) is what most often \note{?} causes atlas registration inaccuracies in tumour cases.
+This shortcoming should be the first to be addressed in any future modification and improvements of the tumour deformation model.
+Another significant simplification is the requirement \note{?} that all healthy tissue is displaced to beyond the tumour boundary, effectively assuming a perfectly encapsulated lesion in which no healthy brain is either destroyed or infiltrated.
+Indeed this assumption is necessary to ensure the formula for the displacement factor $k$ remains well-behaved and invertible.
+Support infiltrating lesions is less of a priority, as rarely \note{ever?} would they be operated on with a goal of total or near-total resection.
+As seen in the case of \note{ref: case study 2}, where resection of the infiltrating tumour portion was abandoned to protect the corticospinal tract.
+And indeed, as seen in that case, tumour deformation modelling can still be effective in such cases, if only the solid component is segmented, or a scale factor $s<1$ is employed to reduce the effective tumour radius.
+In this way, dMRI-based white matter mapping could play a role together with direct stimulation functional monitoring in subtotal resections and biopsies in high risk locations close to critical white matter.
+
+\section{Dissemination}
+
+\note{Chris wants me to put stuff in here but what exactly??}
+
+Some people in the office have tried it out, yay!
+Maybe one day it will be available to the public, that would be nice.
+The research charity Children with Cancer UK have granted funding for a follow-on two year study to prospectively validate tractfinder in a clinical iMRI setup.
+
 \section{Limitations}
 
 \note{I'm sure there will be lots to put here}
