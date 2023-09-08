@@ -57,6 +57,13 @@ The presence of crossing fibres will reduce the map amplitude, even if one of th
 If the objective is to obtain a likelihood score for a particular tract, regardless of whether or not the tract is sharing a voxel with another fibre population, then the current inner product framework, which slightly penalises crossing fibre voxels over single fibre ones, is inadequate. \note{expand on this?}
 See section \ref{sec:fixel}.
 
+Since the result of comparing both spatial and angular information from two different source images is captured only in a single scalar value, the interpretation of this value is not straightforward \note{direct contradiction to ``its nice and interpretable"!}.
+The combined effects of these factors means that a lower mapped value could be driven by a low amplitude in the atlas (``tract is unlikely to be found here"), low amplitude in the \gls{fod} (``there is not much white matter signal here") or low degree of overlap in the angular domain (``the fibre orientations here to not match what would be expected for the tract").
+This is the desired behaviour, as rather than overly relying on the atlas or registration accuracy as in purely atlas-based methods, or purely on the \gls{dmri} data which is \note{non-tract specific} as in streamline tractography, we are leveraging both streams of information to \note{correct each other / bring a more tailored result}.
+Even so, an understanding of these effects is important for interpreting the results.
+For example, when using single-tissue \gls{csd} to compute the \gls{fod} image, instead of multi-tissue, the tissue volume fractions \note{don't get separated} resulting in a far more uniform amplitude across the \gls{fod} image, including within the grey matter.
+This results in far more extensive segmentations particularly into the cortex. \note{not necessarily a bad thing}
+
 \subsection{Alternative similarity metrics}
 
 The inner product is a simple comparison metric for the similarity of two vectors or distributions, each being equally weighted.
