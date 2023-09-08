@@ -87,11 +87,23 @@ In other words,
 must hold for all $P$.
 
 Given that the gradient of $k$ is strictly decreasing and $g(D_P) = 1 - \frac{D_P}{D_t}$ is linear, it is sufficient to set
-\begin{align}
-  \frac{d}{dP}\bigg\rvert_{D_P=0}k(D_P) = \frac{d}{dP}\bigg\rvert_{D_P=0}g(D_P)
-\end{align}.
+\begin{align*}
+  \frac{d}{dP}\bigg\rvert_{D_P=0}k(D_P) &= \frac{d}{dP}\bigg\rvert_{D_P=0}g(D_P) &\text{ where } \frac{dk}{dP} &= -\frac{\lambda}{D_b}(1-c)e^{-D_p/D_b} &\text{ and } \frac{dg}{dP} &= -\frac{1}{D_t}
+\end{align*}
 
-Differentiating both functions at $D_P=0$ and solving for $\lambda$, we have $\lambda_{max} = \frac{D_b}{D_t (1-c)}$.
+We solve for $\lambda$:
+
+\begin{align*}
+  -\frac{\lambda_{max}}{D_b}(1-c) &= -\frac{1}{D_t} \\
+  \lambda_{max} &= \frac{D_b}{D_t (1-c)}
+\end{align*}
+
+This value can be determined iteratively, or analytically with the expression
+
+\begin{equation}
+  \lambda_{max} = \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t})+\frac{D_b}{D_t}
+\end{equation}
+
 Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified. Note that $\lambda_{max}$ varies throughout the brain, as it depends on the relative distances to brain and tumour surfaces for each specific $P$.
 
 The tumour deformation model is implemented in Python, and full execution takes on average 1 min for a 208 x 256 x 256 voxel image.
