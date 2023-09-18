@@ -98,8 +98,33 @@ The second school regards the uncertainty as lying in the figuring out which of 
 
 \subsection{White matter segmentation}
 
-\note{Potentially a better section title? For covering direct segmentation, atlas methods and deep learning.}
-\note{MISSING: genearl WM segmentation with tractography (manual and automated)}
+As discussed above, \gls{dmri} provides a unique basis for examining the structure of human white matter, \textit{in vivo}, at the macroscopic scale.
+The functional division of white matter into distinct tracts is of great consequence to the efforts of neuroscience and psychology to analyse brain structure and function, and thus the spatial delineation of tracts is a key step in many such analysis pipelines.
+As we will see later, this task of identifying tracts is also of vital importance in neurosurgery.
+Streamline tractography was the first, and has long been the dominant answer to this task.
+
+There are two \note{ways} in which individual tract segmentations can be achieved using tractography.
+The first, sometimes \note{referred} to as ``virtual fibre dissection", is to initially generate a large (on the order of 10s of millions) number of streamlines seeded at random throughout the entire white matter.
+Streamline tracking proceeds virtually uninhibited, terminating only according to broad streamline selection parameters (e.g. maximum length) and when leaving the white matter (\note{based on mask and / or anisotropy / amplitude threshold}).
+After tracking, streamlines to be assigned to a target tract are selected using a combination of inclusion and exclusion regions of interest (ROIs), which impose known anatomical priors on the tract.
+The resulting bundle, comprising only the streamlines fulfilling selection criteria, represents the segmented tract.
+This approach is computationally extremely wasteful, since the a vast number of streamlines generated will not even represent \textit{any} anatomically valid pathway through the brain, let alone one that belongs to the tract of interest.
+Furthermore, it is well understood that tracking algorithms will tend to selecting streamlines that follow the densest routes with a high degree of fibre coherence, and will tend to continue straight on when encountering a region of crossing fibres.
+The result is a whole brain tractogram strongly biased towards such easily tracked routes, with some tracts (or sections of tracts) massively overrepresented.
+\note{more clarity about fibre density bias}
+All this means that, after perhaps ours of tracking and millions of streamlines created, only a handful may be included in the final bundle reconstruction.
+
+The second approach may be called ``targeted tractography", an involves only generating streamlines that fulfil the inclusion and exclusion criteria in the first place.
+In this version, rather than seeding throughout the brain, seeding is restricted to a known part of the target bundle, effectively acting as an include region.
+A seed region can be but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract, with additional include regions placed at the ends to ensure complete coverage.
+This approach does not mean that no streamlines are discarded (seeded fibres may be terminated before fulfilling all inclusion criteria, or stray into exclusion regions) but targeted seeding and selection certainly leads to a higher number of admissible streamlines being generated in less time.
+Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery.
+The streamlines may be displayed as-is, or further processed to produce volumetric segmentations via streamline density maps.\autocite{Calamante2010}
+A good understanding of the anatomy of a tract is not sufficient to manage the whims of tracking algorithms, and a user will be required to understand a the quirks and biases in tracking algorithms as well as the appropriate anatomical priors in order to generate acceptable results.
+This obfuscation seriously limits the accessibility of tractography to users of different backgrounds, and can lead to potentially dangerous misinterpretations. \note{I hate it do something}
+Even to an experienced user, producing quality bundles is time-consuming and tedious.
+
+In view of these limitations, efforts in recent years have focussed on either a) improving the behaviour of tracking algorithms to produce fewer false positives (while maintaining sensitivity) b) automating the bundle dissection process, e.g. through automatic placement of ROIs and post-filtering and c) foregoing tractography entirely in favour of alternative, direct volumetric tract segmentation methods.
 
 \paragraph*{Streamline-based automatic tract segmentation}
 
