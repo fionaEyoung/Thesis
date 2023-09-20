@@ -1,11 +1,13 @@
 \newcommand\epigraph[2]{%
-\clearpage\thispagestyle{empty}
-\begin{flushright}
+\ifdraft{}{%
+  \clearpage\thispagestyle{empty}
+  \begin{flushright}
 
-  \vspace*{\fill}
-  \textit{#1}
+    \vspace*{\fill}
+    \textit{#1}
 
-  --- #2
-  \vspace*{\fill}
-\end{flushright}%
+    --- #2
+    \vspace*{\fill}
+  \end{flushright}%
+}
 }
