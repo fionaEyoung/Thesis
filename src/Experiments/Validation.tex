@@ -219,3 +219,17 @@ The mean score results for all tracts and comparisons are given in Supplementary
 \subsection{TractSeg atlas}
 
 \note{Direct comparison with TractSeg using their training data to create atlases}
+
+In order to directly compare tractfinder with the popular deep learning method TractSeg, a new set of tract atlases were created from the TractSeg reference bundles, using the same split into training and testing subjects as used in the deep learning model (published version).
+TractSet was trained on 63 subjects and tested on the remaining 42, and the same was done for tractfinder (where ``training" means computing the atlas from individual bundles), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
+
+\begin{figure}
+  \includegraphics{tractfinder_trained_on_tractseg.png}
+  \caption{Scores for tractfinder (using atlases constructed from the TractSeg training data) and TractSeg validated on the TractSeg reference bundles.}
+  \label{fig:ts_atlas}
+\end{figure}
+
+Tractfinder scores equally well or better on all metrics with the exception of the Dice coefficient, where in particular the scores for the IFOF and OR are lower.
+\note{could redo for every tract}
+
+\note{what else is there to say about this??}

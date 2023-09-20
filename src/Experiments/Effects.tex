@@ -52,7 +52,7 @@ It is useful to know how comparable segmentation results in a single-shelled, 30
 This is particularly relevant for longitudinal studies, or when comparing different acquisitions of the same subject in a clinical context (e.g., for monitoring disease progressions, post-operative changes etc.).
 
 
-\section{Atlas specifications}
+\section{Atlas specifications}\label{sec:ntrain}
 
 \note{different title? nr of training subjects requirements}
 
@@ -69,7 +69,7 @@ Using the same train - test data split as described in \note{??}, subsets of 1, 
 Tractfinder tract maps were then generated in the 42 test subjects using each of the different subset atlases and compared with the reference segmentations using the \gls{dice} and density correlation metrics.
 
 \begin{figure}
-    \includegraphics{compare_ntrain.png}
+    \includegraphics{compare_ntrain_.png}
     \caption{Comparison of segmentation performance using different numbers of atlas training subjects. Results are grouped by tract, colour represents number of training subjects. The IFO and \gls{or} are in places indistinguishable. \acrolist{af,cst,or}}
     \label{fig:ntrain}
 \end{figure}
@@ -89,3 +89,21 @@ The second is the variability in position and shape of the tract itself.
 Under ideal circumstances, diffeomorphic registration of training subjects would eliminate the first of these effects (global variability), leaving only the tract specific variation.
 However, such an atlas would necessitate subsequent applications in new target subjects to also involve diffeomorphic registration between subject and template space, as the atlas would contain no global variability ``allowance", and would therefore expect to be perfectly aligned with a target image, globally speaking \note{good lord}.
 Requiring diffeomorphic registration at the point of application would greatly inhibit the robustness and speed of tractfinder, and is therefore not the preferred approach.
+
+% Query link: https://www.webofscience.com/wos/woscc/summary/28ab4b31-92c1-4d9e-b117-d5cd310c9927-a4fe70c6/relevance/1
+The issue of deep learning's data requirements has been attracting increased attention.
+A search on the online publication database Web of Science for \verb|(few OR single OR one) AND shot AND learning|, (excluding results about singl-shot echo planar imaging) revealed a sharply increasing trend in the broad field of medical imaging alone \note{as in, broadly defined} (Fig. \ref{fig:pubs}).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{pubs.png}
+  \caption{Publication records by year including the term "single/one/few shot learning" (or similar) on the database Web of Science.}
+  \label{fig:pubs}
+\end{figure}
+
+A recent example, by \textcite{Liu2023a} and building on previous work in \textcite{Lu2021}, looked at using single-shot learning to train a deep neural detwork, an extension of the TractSeg architecture, for white matter tract segmentation.
+They trained a network on 60 of the 72 total TractSeg white matter tracts, and applied data-augmentation and transfer learning techniques to adapt the model to segment the remaining 12 tracts using only a single exemplar training dataset for these novel tracts.
+In their results, they include both the CST and OR as novel tracts, as well as others which aren't covered by tractfinder.
+Considering only the best results (which different depending on how many novel tracts the network was extended to) for these two tracts, they achieved a mean Dice score of 0.719 for the CST and 0.624 for the OR, equally good or worse than for tractfinder ``trained" even on only a single dataset (Fig. \ref{fig:ntrain}).
+While the computational time spent on performing the prerequisite data augmentation training the network for these novel tracts is not disclosed in either \textcite{Liu2023a} or \textcite{Wasserthal2018}, with \note{3-500} epochs of batch size \note{162}, on a dataset of at least 6GB (before augmentation), one can assume \note{several hours} of training.
+Even so, one-shot training of a deep neural network appears to be no better than simply registering a segmentation from one subject to another and calling it a day.
