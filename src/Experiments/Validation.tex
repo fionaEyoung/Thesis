@@ -1,3 +1,41 @@
+\section{Qualitative evaluation}
+
+Qualitative results can be seen in Figures \note{fig:SURFACE}, \note{fig:lb.cst}-\note{fig:lb.clin}.
+The raw tract maps typically have values ranging from 0 to 0.5 (in arbitrary units, derived from the magnitudes of \gls{fod} and atlas distribution functions).
+Due to the combined effects of \gls{odf} amplitude and orientation information, a low tract map value can have several causes: a) the \gls{fod} amplitude is low, indicating low evidence for white matter tissue in the voxel in question; b) the atlas amplitude is low, indicating low prior likelihood of the tract being present in that location; c) the peak orientations between the \gls{fod} and atlas are poorly aligned.
+
+Thus combining information from the atlas and data-derived \gls{fod}s improves the tract map estimation over the ``raw" registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
+
+% Fullpage figures
+\begin{figure}
+  \begin{subfigure}{\textwidth}
+    \includegraphics{chapter_4/tractfinder_cst.png}
+    \caption{}
+    \label{}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \includegraphics{chapter_4/tractfinder_or.png}
+    \caption{}
+    \label{}
+  \end{subfigure}
+  \caption{Lightboxes for the projection bundles CST and OR}
+  \label{fig:lbcstor}
+\end{figure}
+\begin{figure}
+  \begin{subfigure}{\textwidth}
+    \includegraphics{chapter_4/tractfinder_af.png}
+    \caption{}
+    \label{}
+  \end{subfigure}
+  \begin{subfigure}{\textwidth}
+    \includegraphics{chapter_4/tractfinder_ifo.png}
+    \caption{}
+    \label{}
+  \end{subfigure}
+  \caption{Lightboxes for association bundles AF and IFO}
+  \label{fig:lbcstor}
+\end{figure}
+
 \section{Validation}
 
 \note{How the method was validated. This is all the Tractoinferno / HCP data stuff, plus maybe qualitative results?}
@@ -115,7 +153,7 @@ For manual streamline tractography, processing time was not explicitly measured,
 However, since the time taken depends greatly on several factors, including number of streamlines to select and streamline acceptance rate (often low in pathological brains due to oedema, deformation etc.), a detailed time analysis for manual tractography is not provided here.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table*}[t]
+\begin{table*}[htp]
   \caption{Measured processing times mean and standard deviation for TractoInferno dataset. Individual steps shown and total average for the four different pipelines. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography ROIs were drawn once for the whole dataset, whereas for clinical datasets manual ROI delineation will have to be repeated for each subject. \dag Desktop Mac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, 1 node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz cores per node.}
   \label{tab:time}
   \small
@@ -139,15 +177,8 @@ However, since the time taken depends greatly on several factors, including numb
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Qualitative results}
 
-Qualitative results can be seen in Figures \note{fig:SURFACE}, \note{fig:lb.cst}-\note{fig:lb.clin}.
-The raw tract maps typically have values ranging from 0 to 0.5 (in arbitrary units, derived from the magnitudes of \gls{fod} and atlas distribution functions).
-Due to the combined effects of \gls{odf} amplitude and orientation information, a low tract map value can have several causes: a) the \gls{fod} amplitude is low, indicating low evidence for white matter tissue in the voxel in question; b) the atlas amplitude is low, indicating low prior likelihood of the tract being present in that location; c) the peak orientations between the \gls{fod} and atlas are poorly aligned.
-
-Thus combining information from the atlas and data-derived \gls{fod}s improves the tract map estimation over the ``raw" registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
-
-\subsection{Quantitative results in healthy data}
+\subsection{Results}
 
 Volumetric and agreement metrics indicate consistent, if not always high, levels of agreement between tractfinder and compared techniques, TractSeg and tractography.
 Visual assessment reveals that differences in the spatial extent of the segmented tracts accounts for a large part of the discrepancy between methods.
@@ -197,7 +228,7 @@ For example, in several cases, optic radiation streamlines only reach the superi
 In others, the right arcuate fasciculus is significantly smaller than the left (Fig. \note{fig:DUDSAF}).
 There is lower variability in the pairwise comparisons between the other four methods: the results for tractfinder and TractSeg remain in more consistent agreement with each other across the TractoInferno dataset (Fig. \note{fig:TIDICE}).
 
-\subsection{Results in clinical data}
+\paragraph*{Clinical (GOSH \& NHNN)}
 
 For the present analysis we included clinical scans with non-deforming lesions, meaning the orientation atlas could be registered to the target image using only affine registration without the need for tumour deformation modelling.
 For qualitative results in clinical scans featuring deforming lesions, see \textcite{Young2022}
@@ -216,7 +247,7 @@ Equally, no systematic difference was observed between intraoperative and preope
 The mean score results for all tracts and comparisons are given in Supplementary Table \note{tab:DATACL}.
 
 
-\subsection{TractSeg atlas}
+\subsection{Two methods, same training data}
 
 \note{Direct comparison with TractSeg using their training data to create atlases}
 
@@ -224,7 +255,7 @@ In order to directly compare tractfinder with the popular deep learning method T
 TractSet was trained on 63 subjects and tested on the remaining 42, and the same was done for tractfinder (where ``training" means computing the atlas from individual bundles), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
 
 \begin{figure}
-  \includegraphics{tractfinder_trained_on_tractseg.png}
+  \includegraphics[width=\textwidth]{chapter_4/tractfinder_trained_on_tractseg.png}
   \caption{Scores for tractfinder (using atlases constructed from the TractSeg training data) and TractSeg validated on the TractSeg reference bundles.}
   \label{fig:ts_atlas}
 \end{figure}
