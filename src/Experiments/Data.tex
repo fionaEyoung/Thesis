@@ -35,12 +35,6 @@ and a partridge in a pear tree.
 For acquisition details see Table \ref{tab:datasets}.
 All clinical scans involved non-deforming tumours, in the sense that any lesions did not appreciably displace white matter structures from their typical positions.
 
-This study and the use of GOSH clinical data was approved by UCL REC (ID2780/003) and the UCL Institute of Child Health/GOSH joint R\&D office (reference 19NI12).
-Use of NHNN data was approved under retrospective research ethics by the NHNN (University College London Hospitals NHS Foundation Trust) and UCL Institute of Neurology Joint Research Ethics Committee (REC 18/NW/0395, IRAS No: 213920).
-In addition, the acquisition and use of some NHNN MRI data was also approved by the NHNN (University College London Hospitals NHS Foundation Trust) and UCL Institute of Neurology Joint Research Ethics Committee (REC 12/LO/1977).
-All clinical data was acquired within the course of routine clinical care, and as no identifying information of any subject is present, there is no need for informed consent.
-To protect patient confidentiality, clinical data will not be made openly available.
-
 Each \gls{dmri} scan was minimally preprocessed with Marchenko-Pastur principal component analysis denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction,\autocite{Zhang2001, Smith2004} as implemented in MRtrix3 \autocite{Tournier2019}.
 Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} (MRtrix3 v3.0.3 and FMRIB Software Library (FSL, \url{https://fsl.fmrib.ox.ac.uk}) v6.0) applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
 No EPI distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times.\autocite{Yang2022}
