@@ -99,19 +99,61 @@ So it is that anatomical dissections \note{have given} rise to the identificatio
 
 \section{MRI Physics}
 
-Having remained in our exploration of neuroanatomy at the microscopic scale or above, we now need to \note{journey} down to the atomic, even subatomic scale to cover the mechanisms of nuclear magnetic resonance.
+Having remained in our exploration of neuroanatomy at the microscopic scale or above, we now need to \note{journey} down to the atomic, even subatomic scale to cover the mechanisms of \gls{nmr}.
 \note{describe atoms and quantum fun stuff}
 
 \subsection{Nuclei and spin}
 
-The nucleus of a hydrogen atom, in its most abundant isotope, is a single, positively charged proton.
+The nucleus of a hydrogen atom, in its most abundant isotope (Protium), is a single, positively charged proton.
 \note{something about x nuclei, but we will only consider single protons}
+While magnetic resonance can be \note{activated} in any nucleus with non-zero spin,
+
+Atomic nuclei are made up of protons and neutrons (collectively termed nucleons) held together, dispite the electrostatic forces repelling the positively charged protons, by the nuclear force, or residual strong force.
+The number of protons, or atomic number, in a nucleus determines the element: Every Hydrogen atom has exactly one proton, every Oxygen atom exactly eight, and so on.
+A given element can have a variable number of neutrons, with the total number of nucleons determining the \textit{isotope} of that atom.
+The particular combination of nucleons determines that nucleus' spin and quantum magnetic moment, proterties which in turn determine the effects on that nucleus brought by an external magnetic field.
+
+Spin (or spin angular momentum) $S$ is an intrinsic property of elemental particles, and of their composites, including nuclei.
+Each particle has a fixed, dimensionless spin quantum number $s$, which is $\frac{1}{2}$ for single electrons, protons and neutrons.
+Nuclei, too, possess a unique spin $I$, arising non-trivially from the interactions of the individual spins of its constituent nucleons.
+Spin is a vector quantity.
+It's magnitude is given by $S = \hslash \sqrt{s(s+1)}$, however, according to the uncertainty principle, the total spin angular momentum vector (magnitude \textit{and} direction) cannot be measured.
+Instead, the associated observable quantity is the component of $S$ along the observed direction, typically chosen to be the $z$-axis, which is determined by the spin magnetic quantum number $m_s$: $S_z = \hslash m_s$.
+
+$m_s$ is a quantised property, meaning it can inhabit a discrete number $2s+1$ of values ranging from $-s$ to $+s$.
+Any nucleus with non-zero spin can be studied under \gls{nmr} theory and experiments, however it suffices for our purposes to consider only the simplest species:
+The nucleus of a hydrogen atom, in its most abundant isotope (Protium), which is a single proton.
+As a spin-$\frac{1}{2}$ particle, the proton has two possible spin states, commonly called ``spin-up" and ``spin-down".
+
+The existence of an intrinsinc angular momentum of a particle with electrical charge (i.e. a single electron, proton or nucleus) gives rise directly to another vector quantity, a magnetic moment $\mu$.
+Following directly from the spin picture, the observable component $\mu_z$ is related to the spin angular momentum: $\mu_z = \gamma S_z = \gamma m_s \hslash$.
+where $\gamma$ is the \textit{gyromagnetic ratio}, a species-specific quantity derived from its charge, mass and intrinsic $g$-factor.
+
+Under quantum mechanics, the temporally and spatially evolving wave function $\Psi(x,t)$ of a particle system is described by the famous Schrödinger equation
+
+\begin{equation}
+  \frac{\hslash^2}{2m}\frac{\delta^2 \Psi(x,t)}{\delta x^2} + V(x,t)\Psi(x,t) = i\hslash \frac{\delta \Psi(x,t)}{\delta t}
+\end{equation}.
+
+Solutions to SE can take the form of eigenfunctions described by the quantum numbers $n,l,m_l$ and $m_s$, the latter of which we are now familiar with.
+
+Where the eigenvalues are the possible energy states of the system.
+
+Under a magnetic field, the eignestates $m_s = \pm \frac{1}{2}$ are no longer degnerate (of equal energy), but split into different energy levels, a phenomenon called the Zeemann effect.
+The ratio of states in spin up vs spin down state is a tiny fraction, but big enough to be measured.
+It's given by the Bolzmann distribution, which gives the expected value of the energy states over all possible quantum superpositions:
+$\frac{N_{\uparrow}}{N_{\downarrow}} = e^{\Delta E / k T}$, where $\Delta E$ is the difference in engery between the two states.
+A spin could be excited from the lower energy to higher energy state if absorbing a photon of a specfic frequency: the Larmor frequency $\omega = \gamma B_0$.
+
+\note{boldify vectors}
+
+\note{Round off explanation and polish wave energy function bit.}
 
 \subsection{Resonance and relaxation}
 
 \note{Basics of resonance, magnetisation, spin-spin / spin-lattice relaxation}
 
-MRI images are obtained by detecting the spin relaxation resonance stuff of principally hydrogen atoms (which are abundant in the body in H2O molecules).
+MRI images are obtained by detecting the spin relaxation resonance stuff of principally hydrogen atoms (which are abundant in the body in H$_2$O molecules).
 
 The application of a strong linear magnetic field causes all spins to align themselves with the direction of the field. This is the bulk magnetisation $M_z$, in its "relaxed" state (aligned with B0).
 The ratio of spin magnetic moments aligned with the external field is increased, \note{as the field imparts energy or something causing magnetic moments to preferentially be aligned} resulting in a net magnetisation along the orientation of $B_0$, termed $M_z$.
