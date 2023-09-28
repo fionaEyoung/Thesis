@@ -35,6 +35,7 @@ This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection 
 In the \gls{btc} dataset, tumour deformation modelling successfully improved tract and subject alignment and consequently tract mapping in all preoperative cases where it was necessary.
 Examples in \note{figure ??} demonstrate how tractfinder including tumour deformation produces tract margins closer to those indicated by tractography, in contrast to the deep learning method TractSeg which appears to still rely on a learned healthy anatomical configuration without generalising to displaced tracts.
 
+\clearpage
 \section{iMRI case studies}
 
 From \note{early 2022 to mid 2023}, 8 \note{verify!} tumour resections where carried out at Great Ormond Street Hospital for Children with intraoperative MRI guidance including multi-directional diffusion weighted imaging.
@@ -49,20 +50,117 @@ Similarly, a review of 38 thalamic tumour patients (paediatric and adult) treate
 Motor deficits are the most common functional symptoms of thalamic tumours,\autocite{Puget2007, Zheng2016, Palmisciano2021} and preservation of the posterior limb of the internal capsule, containing the corticospinal tract, is a major concern when resecting them.
 \note{to cite: Grewal2019, Wong2016, Kis2014, Dorfer2021, Steinbok2016, Celtikci2017}
 
+The following will look at two of the GOSH diffusion iMRI cases in detail, considering the imaging features, tumours and peri-operative clinical presentation and neurolgoy.
+Hopefully this will provide a unique an balance perspective into the challenges and potential of intraoperative \gls{dmri} for such cases.
+
+\subsection{Patient 5: Low grade pilocytic astrocytoma}
+
 \note{add some sort of disclaimer about how this is all hearsay based on MDT / scanner room notes?}
 
-The first of the two patients harboured a low-grade pilocytic astrocytoma in the left thalamus and presented with progressive right side weakness.
-The unusual radiological presentation showed part of the CST travelling through the tumour, while the rest of the tract was displaced.
-Due to this complicated involvement of the internal capsule a debulking surgery under iMRI guidance was indicated.
-Confirming the location of the CST, divided as it apparently was into an intratumoural and a displaced portion, was particularly difficult in this case.
+The first of the two patients harboured a low-grade pilocytic astrocytoma in the left thalamus and presented at 23 months old with progressive right side weakness.
+The unusual radiological presentation showed a sliver of tissue within the tumour, presumed to be a part of the CST, while the rest of the tract was displaced (Fig. \ref{fig:5p}).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{case_studies/5_preop}
+  \caption{Preoperative radiological presentation of patient 5, with a low-grade astrocytoma of the left thalamus. Top: T1, bottom: DTI FA. Arrow heads indicate the CST, partially travelling through the tumour.}
+  \label{fig:5p}
+\end{figure}
+
+Confirming the location of the CST, divided as it appeared to be into an intratumoural and a displaced portion, was particularly difficult in this case.
+A \gls{dmri} sequence with colour FA visualisation was able to confirm that the strip of tissue inside the tumour indeed constituted part of the CST.
+Streamline tractography also reconstructed the CST as both within and displaced posteriorly around the tumour.
+The part of the pathway involved is at the cerebral peduncle level, which in healthy cases is a relatively narrow bundle.
+Consequently, the tractfinder atlas was unable to account for both the tumour-engulfed section, which remained spatially relatively unmoved, and the posteriorly displaced portion simultaneously.
+Basic tract mapping reconstructed only the first part, while additional tumour deformation modelling enabled detection of the second part (Fig. \ref{fig:5p_cst}).
+Of course, such a hacked-together reconstruction would be entirely impractical and difficult to interpret, compared to tractography which is better at exploring the available pathways regardless of anatomical prior expectations.
+As such, this is a case for which tractfinder is entirely unsuited.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{case_studies/5_preop_tf}
+  \caption{Reconstruction of the corticospinal tract on preop imaging. Top: track density imaging, bottom: tractfinder (combined with and without deformation modelling), with tractography outlined in white for comparison.}
+  \label{fig:5p_cst}
+\end{figure}
+
+Due to this complicated involvement of the internal capsule a debulking resection under iMRI guidance was indicated to relieve pressure on the \gls{cst}.
+After a large part of the tumour was resected, the patient was brought through to \gls{imri} (Fig \ref{fig:5i}).
+Here, again, reconstruction of the \gls{cst} proved difficult.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{case_studies/5_iop}
+  \caption{Intraoperative T1w (top) and diffusion colour FA (bottom) for patient 5, showing left craniotomy and surgical corridor through the temporal lobe}
+  \label{fig:5i}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{case_studies/5_iop_tf}
+  \caption{Reconstruction of the CST on intraoperative imaging using tractography (top) and tractfinder (bottom) with standard affine registration.}
+  \label{fig:5i_cst}
+\end{figure}
+
+This time, significant brain shift away from the craniotomy prevented accurate atlas registration, again resulting in a mismatch in anatomical alignement between atlas and target image (Fig \ref{fig:5i_cst}).
+Non-linear registration, with harsh penalties on excessive local deformation  \note{why?}, could mitigate this, but would be impractical for regular use.
+
 A partial resection was completed, and as the intraoperative frozen section \note{??} was reported as appearing high grade, the decision was made not to pursue extensive resection, given the risk of functional injury and the unlikelihood of achieving curative resection for a high grade lesion \note{????}.
 There was concern of an area of infarction involving the CST, however the patient, after experiencing worsened motor deficit immediately postoperatively, approved to preoperative levels of the following days.
-\note{complete with imaging analysis for patient 5: imaging features preop and intraop, and tractography / tractfinder reconstructions}
+The patient went on to recieve ajuvant chemotherapy and showed further improvement to their hemiparesis compared to their preoperative condition.
 
-The second thalamic tumour case study involves a \note{X} year old with a diffuse midline astrocytoma (WHO grade IV) also in the left thalamus.
+\subsection{Patient 8: High grade glioma}
+
+The second thalamic tumour case study involves a seven year old with a diffuse midline astrocytoma (WHO grade IV) also in the left thalamus.
+A high degree of mass effect called for tumour deformation modelling, so the lesion was segmented on the preoperative structural scan (Fig. \ref{fig:8p}).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{case_studies/8_preop}
+  \caption{Preoperative T1 weighted scan (top) of patient 8 with high grade left thalamic glioma. Bottom row shows tumour deformation modelling applied to a coregistered MNI template image.}
+  \label{fig:8p}
+\end{figure}
+
 The diffuse and infiltrative nature of this tumour made identifying the posterior capsule, thalamus and tumour margins exceedingly difficult.
-Intraoperative DTI was requested by the radiologist after extensive discussion of the already acquired conventional contrast scans, from which the extent of PLIC infiltration was indiscernible.
+Intraoperative DTI was requested by the radiologist after extensive discussion of the already acquired conventional contrast scans, from which the extent of PLIC infiltration was indiscernible (Fig. \ref{fig:8i}).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{case_studies/8_iop}
+  \caption{Intraoperative imaging showing transcollosal approach to thalamic glioma. Top: T1w, bottom: DTI colour FA. White arrowhead on DTI indicates partially infiltrated and displaced internal capsule.}
+  \label{fig:8i}
+\end{figure}
+
 Colour FA showed a largely intact and slightly displaced internal capsule with extensive tumour infiltration, so the decision was made not to attempt further resection of that part of the tumour.
+In this situation, identification of the internal capsule and assessment of its condition could have been significantly assisted with more advanced \gls{dmri} analysis.
+The smearing of colours on the directional FA map make it difficult to discern what affect is leading to the change from the expected indigo colour of a healthy internal capsule.
+What is unclear is the state of the neuronal fibres in the infiltrated portion: are they intact but surrounded with odoema/tumour tissue, or simply in a rotated orientation, or destroyed?
+Visualising the fibre \glspl{odf} using \gls{csd} gets us closer to the answer (Fig. \ref{fig:8i_fod}).
+
+\begin{figure}
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{case_studies/8_iop_csd}
+    \caption{CSD FOD}
+    \label{fig:8i_csd}
+  \end{subfigure}%
+  \begin{subfigure}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{case_studies/8_iop_dt}
+    \caption{Diffusion Tensor}
+    \label{fig:8i_dt}
+  \end{subfigure}
+  \caption{Partial view of partially resected tumour and internal capsule on coronal slice and two different fibre orientation models: diffusion tensor and constrained spherical deconvolution. The multi-fibre FODs make it easier to identify where the descending fibres a likely to remain in tact.}
+  \label{fig:8i_fod}
+\end{figure}
+
+Using the tumour deformation field modelled from the preoperative scan, tractfinder reconstructs the corticospinal tract in very close accordance with probabilistic streamline tractography.
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{case_studies/8_iop_tf}
+  \caption{Coronal slices in 5mm increments from intraoperative imaging for patient 8. Tractfinder CST map is overlaid along with tractography track density image outline in white for comparison (\note{100 streamline isosurface})}
+  \label{fig:8i_tf}
+\end{figure}
+
 In the end, roughly 50\% of the lesion was resected, predominantly in the ventral and medial parts.
 Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy \note{did they? only have this down as planned} after confirmation of high-grade histology.
 \note{complete with imaging analysis for patient 8: imaging features preop and intraop, and tractography / tractfinder reconstructions}
