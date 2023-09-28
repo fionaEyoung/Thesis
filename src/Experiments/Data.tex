@@ -8,6 +8,17 @@
 
 \note{A description of the various datasets used, maybe a big overview table with names etc. Maybe also preprocessing? Although that may be specific to each experiment...}
 
+A range of datasets are considered in which to compare the tractfinder approach against alternative tract segmentation methods.
+Each dataset and any dataset-specific preprocessing is described in the following subsections.
+In addition, the following default preprocessing steps where applied to all scans, unless otherwise specified:
+
+\begin{description}
+  \item[brain masking\autocite{Tournier2019}]
+  \item[linear registration] using FSL v.6.0 Linear Image Registration Tool\autocite{Jenkinson2001,Jenkinson2002} between subject space and MNI152\autocite{Fonov2011} space
+  \item[constrained spherical deconvolution] Depending on the dataset and / or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd} (``original flavour")\autocite{Tournier2007,Tournier2019} and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to white matter and grey matter tissue compartments For single shell acquisitions \note{define}. \gls{msmt} \gls{csd} with three tissue compartments (WM, GM, CSF) for multi-shelled acquisitions. In all cases, response functions were obtained using the Dhollander unsupervised 3-tissue response function estimation algorithm.\autocite{Dhollander2016,Dhollander2019}
+  All \gls{csd} processing was conducted using the MRtrix3 image processing software package v3.0.2-3.0.3 (\url{https://www.mrtrix.org/}).\autocite{Tournier2019}
+\end{description}
+
 
 \subsection{HCP}
 

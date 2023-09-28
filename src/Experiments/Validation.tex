@@ -7,7 +7,7 @@ Due to the combined effects of \gls{odf} amplitude and orientation information, 
 Thus combining information from the atlas and data-derived \gls{fod}s improves the tract map estimation over the ``raw" registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
 
 % Fullpage figures
-\begin{figure}
+\begin{figure}[htb!]
   \begin{subfigure}{\textwidth}
     \includegraphics{chapter_4/tractfinder_cst.png}
     \caption{}
@@ -21,7 +21,7 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
   \caption{Lightboxes for the projection bundles CST and OR}
   \label{fig:lbcstor}
 \end{figure}
-\begin{figure}
+\begin{figure}[htb!]
   \begin{subfigure}{\textwidth}
     \includegraphics{chapter_4/tractfinder_af.png}
     \caption{}
@@ -49,16 +49,9 @@ In segmentation tasks, it is common to present a single numeric score of similar
 However, in the absence of a ground truth for this particular task, we aim to present as rounded a picture as possible of the differences and characteristic features of each method through a range of different volumetric distance-based similarity metrics.
 The purpose of this validation is therefore not to determine which method is best, as indeed cannot be determined without a reliable reference point, but to highlight the ways in which they are similar, and their characteristic tendencies.
 
-We considered three different datasets with which to compare the proposed method against alternative tract segmentation methods.
-Each dataset and any dataset-specific preprocessing is described below. \note{In section \ref{sec:data}}
-In addition, for all subjects we performed brain masking,\autocite{Tournier2019} linear registration\autocite{Jenkinson2001,Jenkinson2002} (FSL v.6.0 Linear Image Registration Tool) between subject space and MNI152\autocite{Fonov2011} space and two versions of \gls{csd}: \gls{ssst} \gls{csd} (``original flavour")\autocite{Tournier2007,Tournier2019} and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to white matter and grey matter tissue compartments.
-In both cases, response functions were obtained using the Dhollander unsupervised 3-tissue response function estimation algorithm.\autocite{Dhollander2016,Dhollander2019}
-All \gls{csd} processing was conducted using the MRtrix3 image processing software package v3.0.2-3.0.3 (\url{https://www.mrtrix.org/}).\autocite{Tournier2019}
-Processing and analysis pipelines for the two openly available datasets are available at \url{https://github.com/fionaEyoung/pipelines}
-
 \subsection{Benchmark methods}
 
-We considered three alternative segmentation approaches and compared each with the proposed method: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
+We'll consider three alternative segmentation approaches and compare each with the proposed method: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
 
 \paragraph*{Streamline tractography}
 
@@ -135,7 +128,7 @@ Thus $BD$ and $BD_s$ are defined as
 
 where $| \cdot |$ denotes set cardinality and $d_i(X)$ is the Euclidean distance transform (defined relative to the foreground of segmentation $X$, i.e. $d_i(X) = 0$ when $i \in X $ and $d_i(X) = |\overrightarrow{ij}|$ when $i \not\in X$ and where $j \in X$ is the voxel in $X$ closest to voxel $i$)  of segmentation $X$ at voxel $i$.
 
-\begin{figure}
+\begin{figure}[htbp!]
   \centering
   \includegraphics[width=0.3\textwidth]{segmentations_distance_euc.pdf}
   \caption{Illustration of regions involved in calculating bundle distance metric. Light grey is $A\setminus B$, dark grey area is $B\setminus A$. To compute bundle distance $BD(A,B)$ (Eq. \ref{eq:bd}), the mean minimum absolute distance to the intersection (solid black) is taken across all voxels in the two grey areas $BD(A,B) = (14+4\sqrt{2}+3\sqrt{5})/17 = 1.55$. To compute the signed bundle distance $BD_s(A,B)$ (Eq. \ref{eq:bds}), distance values in A are negated. $BD_s(A,B) = (2-2\sqrt{2}-\sqrt{5})/17 = -0.18$. The Dice score for these two segmentations would be $DSC = 2*4/(13+12) = 0.32$}
