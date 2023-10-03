@@ -257,3 +257,22 @@ Tractfinder scores equally well or better on all metrics with the exception of t
 \note{could redo for every tract}
 
 \note{what else is there to say about this??}
+
+\subsection{The effect of deformation modelling}
+
+The BTC dataset, with its range of tumour types, high quality \gls{dmri} scans and tumour masks, provides an ideal \note{opportunity} to evaluate the effect of tumour deformation modelling on segmentation accuracy.
+Four out of the ten selected BTCD subjects had tumours substantial enough to warrant deformation modelling, which was done using \note{the same parameters which ones?? automatic lambda} for all subjects.
+
+\begin{figure}
+  \includegraphics{chapter_4/btcd_deformation.png}
+  \caption{Effect of deformation modelling on segmentation accuracy, compared to tractfinder without deformation modelling, and TractSeg. Each datapoint represents the average across tracts for a single subject. There are only three contralateral datapoints because one of the four subjects had a midline tumour (all tracts considered ipsilateral).}
+  \label{fig:btcd_def}
+\end{figure}
+
+Figure \ref{fig:btcd_def} shows how tractfinder with deformation modelling improves on average segmentation technique.
+Notably in these subjects, where large mass effect was present, TractSeg performed significantly worse than tractfinder (although it should be noted that the reference tractography more closely follows the tract definitions used to train tractfinder).
+There are two subjects worth considering in detail, where there is no clear improvement with the addition of deformation modelling.
+For subject 11 (highest scores in Fig. \ref{fig:btcd_def}), the superior frontal location of the tumour barely affected any of the studied tracts, hence the overall high score and imperceptible improvement with the addition of deformation modelling.
+In subject 26, which in Fig. \ref{fig:btcd_def} is the only subject showing an average decrease in DSC with the addition of deformation modelling, the \gls{cst} and \gls{af} actually saw an increase in scores, while the \gls{ifof} and \gls{or} saw a decrease.
+In this case, the deformation modelled in the direct vicinity of the temporal lobe tumour was too strong, leading to slightly worse detection of the \gls{ifof} and \gls{or}.
+At a greater distance from the tumour, however, the deformation modelled accurately matched the patient anatomy, leading to improved detection of more distant tracts, the \gls{af} and \gls{cst}.

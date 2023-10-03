@@ -86,9 +86,14 @@ Of the total 25 patients in the original dataset, 10 with visible, non-infiltrat
 The data consists of high quality HARDI acquisitions, including reverse phase encoding for susceptibility distortion, and structural T1w images.
 In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which can be used for tumour deformation modelling in those patients with strong tumour deformation.
 The 10 selected subjects include 4 with tumours large enough (3 meningioma and 1 anaplastic astrocytoma) to warrant the use of tumour deformation modelling to improve atlas alignment.
+Of these 4 subjects, one had a large frontal meningioma situated on the midline affecting both hemispheres, and for this subject all tracts were considered "ipsilateral" tracts.
+In all other subjects, the tracts were labelled ipsilateral or contralateral if they were in the same or opposite hemisphere as the tumour respectively.
 
 dMRI data was preprocessed with denoising, bias field correction and EPI distortion correction (\note{eddy cuda version}).
 \gls{msmt}-\gls{csd}, tractfinder, TractSeg and manual tractography of the \gls{af}, \gls{cst}, \gls{ifof} and \gls{or} were performed as previously described.
+Given the disruption caused by the space-occupying and in cases infiltrating lesions, manual tractography using multi-ROI targeting alone did not produce acceptable results.
+Instead, the bundles were manually filtered to remove spurious and implausible streamlines using the same process as was used when curating the atlas training data.
+These filtered bundles are used as reference segmentations for the 10 BTCD subjects.
 
 \subsection{Fibercup phantom}
 
@@ -98,6 +103,6 @@ While testing and validating on \textit{in vivo} human data is irreplaceable, th
 This is where synthetic phantom data, with known parameters inputs \note{``anatomy" is known, better way of saying ground truth?}, are valuable for protoyping and validating methods.
 Within the white matter imaging space there is a synthetic phantom known as the Fibre Cup phantom after a tractography challenge held for the 12th international conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) in 2009.
 The phantom features seven bundles arranged in a way that aims to mimic the range of configurations found in the brain, including sharp curves, multi-way crossings, kissing and fanning fibres.
-While the original data is not available \note{??}, a digital recreation was constructed in \note{??} and is openly available, along with a set of ground truth streamline bundles representing each tract. 
+While the original data is not available \note{??}, a digital recreation was constructed in \note{??} and is openly available, along with a set of ground truth streamline bundles representing each tract.
 
 \note{this was useful for prototyping but there's not much of interest to say about it now; it's too trivial for validation of tractfinder.}
