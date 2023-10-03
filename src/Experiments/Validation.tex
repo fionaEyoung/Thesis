@@ -43,10 +43,11 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
 
 \note{Largescale validation in HCP and tractoinferno datasets, comparing to reference tractography and TractSeg}
 
-While a ground truth for white matter tract segmentation is not obtainable \textit{in vivo}, we compare our technique with two other widely adopted methods for a quantitative estimation of reliability and accuracy.
-Results are presented for three different datasets: Two large healthy datasets and one smaller dataset of clinical neurosurgical acquisitions, together covering a range of acquisition protocols and scanner specifications.
+While a ground truth for white matter tract segmentation is not obtainable \textit{in vivo}, it is nevertheless instructive to compare the tractfinder technique with two other widely adopted methods for a quantitative estimation of reliability and accuracy.
+We'll quantitatively evaluate tractfinder in three different datasets: Two large healthy datasets (HCP and TractoInferno, see \ref{sec:data}) and one smaller dataset of clinical neurosurgical acquisitions (NHNN and GOSH combined), together covering a range of acquisition protocols and scanner specifications.
+
 In segmentation tasks, it is common to present a single numeric score of similarity with a ground truth by way of establishing accuracy.
-However, in the absence of a ground truth for this particular task, we aim to present as rounded a picture as possible of the differences and characteristic features of each method through a range of different volumetric distance-based similarity metrics.
+However, in the absence of a ground truth for this particular task, we'll instead aim to present as rounded a picture as possible of the differences and characteristic features of each method through a range of different volumetric distance-based similarity metrics.
 The purpose of this validation is therefore not to determine which method is best, as indeed cannot be determined without a reliable reference point, but to highlight the ways in which they are similar, and their characteristic tendencies.
 
 \subsection{Benchmark methods}
@@ -55,69 +56,74 @@ We'll consider three alternative segmentation approaches and compare each with t
 
 \paragraph*{Streamline tractography}
 
-We ran targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3) in each scan using an in-house ROI strategy (see \ref{sec:rois} for ROI details), with tractography input \gls{fod}s derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} with white matter and grey matter tissue compartments.
+Targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3)  was run in each scan using a multi-ROI approach (see \ref{sec:rois} for ROI details), with tractography input \glspl{fod} derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} with white matter and grey matter tissue compartments.
 In the clinical dataset, ROIs were placed manually for each subject.
 For 193 HCP and TractoInferno subjects, manual ROI placement was infeasible.
-Instead the same ROIs were drawn in MNI152 space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration (HCP data includes MNI transformation warps, while warps were created for the TractoInferno data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/).\autocite{Tustison2013,Avants2011}).
+Instead the same ROIs were drawn in MNI152 template space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration
+(HCP data includes MNI transformation warps, while warps were created for the TractoInferno data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/).\autocite{Tustison2013,Avants2011}).
 This in-house tractography is subsequently abbreviated to ``TG", while the reference TractoInferno bundles are referred to as ``TGR".
+\note{same for btcd?}
 
 \paragraph*{TractSeg}
 
 TractSeg \autocite{Wasserthal2018} is a deep learning tract segmentation model which produces volumetric segmentations for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3-2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
 There are two models available: one (``DKFZ") trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018}, and a second (``XTRACT") trained on streamline density maps output by FSL's XTRACT application. \autocite{Warrington2020}
-We compared with both versions, as they feature significant differences in anatomical tract definition.
-Input peaks were derived from the SSST \gls{csd} \gls{fod}s.
+Here both versions are compared, as they feature significant differences in anatomical tract definition.
+Input peaks were derived from the SSST \gls{csd} \glspl{fod}.
 
 \paragraph*{Atlas registration}
 
-As well as the full tractfinder method, we compared our results with a ``naive" tract atlas approach, taking the density component (first SH coefficient) of the linearly registered tract atlases.
-This amounts to a segmentation based on prior expectation only, without taking into account the diffusion data.
+As well as the full tractfinder method (atlas alignment and inner product), we compared our results with a ``naive" tract atlas approach, taking only the density component (first SH coefficient) of the linearly registered tract atlases without any comparison with the native \glspl{fod}.
+This amounts to a segmentation based on prior spatial expectation only, without taking into account the diffusion data.
 
 \subsection{Comparison metrics}
 
-We compared each technique against the others, rather than designating any single technique as ``ground truth".
-Several comparison metrics were computed, to capture different kinds of agreement between segmentations.
-Dice-Soerensen similarity coefficient (\gls{dice}) \autocite{Dice1945} is a popular, symmetric measure of segmentation similarity given by
+Each technique is compared against the others, rather than designating any single technique as ``ground truth", with the exception of the TractoInferno dataset, where the published streamlines are regarded as a sort of independent reference \note{still problematic}.
+Several comparison metrics are computed, to capture different kinds of agreement between segmentations.
+The Dice-Soerensen similarity coefficient (\gls{dice}) \autocite{Dice1945} is a popular, symmetric measure of segmentation similarity given by
 
 \begin{align}
   DSC &= \frac{2 |A \cap B|}{|A| + |B|} \\
 \end{align}
 
 for two binary voxel sets $A$ and $B$.
-Since \gls{dice} is a measure for binary segmentations, it requires the thresholding of continuous-valued maps such as track density maps and the pseudo-probability maps produced by tractfinder.
+Since \gls{dice} is a measure for binary segmentations, it requires the thresholding of continuous-valued maps such as track density maps and the pseudo-probability maps produced by tractfinder, which is unideal for this task \note{?}.
 Firstly, the conversion from continuous-valued to binary representation introduces a high degree of ambiguity over the appropriate choice of threshold value.
-While the simplest approach may be to include all voxels with value $>0$ in the segmentation, this makes little sense in practice.
+While the simplest and least ambigiuous approach may be to include all voxels with value $>0$ in the segmentation, this makes little sense in practice.
 In the case of tractography, a small number of rogue false positive streamlines can massively increase the extent of the binary segmentation, and in the case of TractSeg, very few voxels actually are assigned a probability of 0.
 The following thresholds were used throughout, wherever binary segmentations are concerned, are given in Table \ref{tab:thresh}.
 
 \captionof{table}{\label{tab:thresh}}
-\begin{tabularx}{0.5\textwidth}{X c}
-  Method    & Threshold value \\
+\begin{tabularx}{0.5\textwidth}{X c c}
+  Method    & Threshold value & Reasoning \\
   \hline
-  Tractfinder   & 0.05 \\
-  Tractography (streamline density)  & 10 \\
-  Reference tractography (TractoInferno only) & 0 \\
-  Atlas         & 0.1 \\
-  TractSeg      & 0.5 \\
+  Tractfinder   & 0.05 & empirically determined \\
+  Tractography (streamline density) & 10 & enough to exclude false positives \\
+  Reference tractography (TractoInferno only) & 0 & Assume no false positives \\
+  Atlas         & 0.1 & values are roughly double those of tractfinder \\
+  TractSeg      & 0.5 & consistent with default TractSeg behaviour \\
   \hline
 \end{tabularx}
 
-Secondly, the binary nature of \gls{dice} discounts the additional confidence information present in density and probability maps.
-In addition to the binary \gls{dice} measure, therefore, we consider a generalisation of the \gls{dice} (\gls{gdice}) for continuous valued segmentations.
+Secondly, the binary nature of a \gls{dice} discounts the additional confidence information present in density and probability maps.
+In addition to the binary \gls{dice} measure, therefore, we consider two candidates for a measure of agreement between two continuous valued segmentations.
+The first is a generalisation of the \gls{dice} (\gls{gdice}):
 
 \begin{align}
   gDSC &= \frac{2 \sum_i \sqrt{a_ib_i} }{\sum_ia_i + \sum_ib_i}
-   =  \frac{2 \sum_i \sqrt{a_ib_i} }{||\mathbf{a}||_1 + ||\mathbf{b}||_1}
+  =  \frac{2 \sum_i \sqrt{a_ib_i} }{||\mathbf{a}||_1 + ||\mathbf{b}||_1}
 \end{align}
 
-The density correlation metric provides an alternative measure of agreement between two continuous valued segmentations with different scales:
+The density correlation metric provides an alternative option:
 it is simply the Pearson correlation coefficient between the two sets of voxel values.
+After considering computing and considering both the \gls{gdice} and density correlation for this analysis, it was determined that one did not provide any further information over the other.
+Since the density correlation has been used in other studies for comparing streamline density \note{cite}, we will not consider the \gls{gdice} further in this evaluation.
 
-In addition to the volumetric overlap and density metrics \gls{dice}, \gls{gdice} and density correlation, we measured the volumetric bundle adjacency as defined in \textcite{Schilling2021a}.
+In addition to the volumetric overlap and density metrics, the volumetric bundle adjacency as defined in \textcite{Schilling2021a} is also measured.
 However, to avoid confusion with the streamline-based bundle adjacency\autocite{Radwan2022, Garyfallidis2012, Rheault2022} metric previously defined in \textcite{Garyfallidis2012},
 and to give more intuitive meaning to the obtained values, we will refer to it as bundle distance $BD$.
 It is computed by taking the mean of minimum distances from every non-overlapping voxel, in each segmentation, to the closest voxel in the other segmentation (Fig. \ref{fig:BD}).
-Finally, to give a sense of whether the boundary of one segmentation is within or outside that of a second segmentation, we also measured the \textit{signed} bundle distance $BD_s$.
+Finally, to give a sense of whether the boundary of one segmentation is within or outside that of a second segmentation, we'll also consider the \textit{signed} bundle distance $BD_s$.
 This metric is asymmetric, with $BD_s (A,B) = -BD_s(B,A)$.
 Thus $BD$ and $BD_s$ are defined as
 
@@ -137,7 +143,7 @@ where $| \cdot |$ denotes set cardinality and $d_i(X)$ is the Euclidean distance
 
 \subsection{Processing times}
 
-Atlas transformation and inner product computation time per subject for all three tracts and both hemispheres was $18\pm5 s$, plus 1-2 minutes for MSMT-\gls{csd} and 20 seconds for MNI registration.
+Atlas transformation and inner product computation time per subject for all three \note{four!} tracts and both hemispheres was $18\pm5 s$, plus 1-2 minutes for MSMT-\gls{csd} and 20 seconds for MNI registration.
 For TractSeg (DKFZ or XTRACT), mean processing time (for all tracts, 72 for DKFZ and 23 for XTRACT, both hemispheres) was 4:00$\pm$1:00 $min$, plus $15-20 s$ for SSST-\gls{csd}.
 For a full processing time breakdown see Table \ref{tab:time}.
 
@@ -151,29 +157,29 @@ However, since the time taken depends greatly on several factors, including numb
   \label{tab:time}
   \small
   \begin{tabularx}{\textwidth}{+>{\raggedright}X ^c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
-  \rowstyle{\rmfamily}
-  Step & Processing time (per subject) & tractfinder & TractSeg & Atlas & tractography \\
-  \hline
-  \dag Brain masking & 3 $\pm$ 2 s & x & x & x & x\\
-  \dag Affine MNI registration & 20 $\pm$ 4s & x &  & x &  \\
-  \dag Response function & 5 $\pm$ 3 s & x & x & x & x\\
-  \dag MSMT CSD & 01:50 min $\pm$ 55 s & x &  & x & x\\
-  \dag SSST CSD + peaks estimation & 18 $\pm$ 8 s &  & x &  &  \\
-  \dag Atlas transformation + inner product (3 tracts) & 18 $\pm$ 5 s & x &  & (x) &  \\
-  \dag TractSeg (72 / 23 tracts) & 04:00 $\pm$ 01:00 min &  & x & & \\
-  \dag Manual ROI delineation (once for whole dataset) & 20:00 min & & & & x \\
-  \ddag Non-linear ROI registration + tractography (3 tracts, 2 hemispheres) & 4:05 $\pm$ 2:08 min & & & & x \\
-  \rowstyle{\bfseries\rmfamily}
-  Total &  & 2:36 min & 4:25 min & \textless2:36min & $\gtrsim$26:03 min
+    \rowstyle{\rmfamily}
+    Step & Processing time (per subject) & tractfinder & TractSeg & Atlas & tractography \\
+    \hline
+    \dag Brain masking & 3 $\pm$ 2 s & x & x & x & x\\
+    \dag Affine MNI registration & 20 $\pm$ 4s & x &  & x &  \\
+    \dag Response function & 5 $\pm$ 3 s & x & x & x & x\\
+    \dag MSMT CSD & 01:50 min $\pm$ 55 s & x &  & x & x\\
+    \dag SSST CSD + peaks estimation & 18 $\pm$ 8 s &  & x &  &  \\
+    \dag Atlas transformation + inner product (3 tracts) & 18 $\pm$ 5 s & x &  & (x) &  \\
+    \dag TractSeg (72 / 23 tracts) & 04:00 $\pm$ 01:00 min &  & x & & \\
+    \dag Manual ROI delineation (once for whole dataset) & 20:00 min & & & & x \\
+    \ddag Non-linear ROI registration + tractography (3 tracts, 2 hemispheres) & 4:05 $\pm$ 2:08 min & & & & x \\
+    \rowstyle{\bfseries\rmfamily}
+    Total &  & 2:36 min & 4:25 min & \textless2:36min & $\gtrsim$26:03 min
   \end{tabularx}
 \end{table*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
 \subsection{Results}
 
-Volumetric and agreement metrics indicate consistent, if not always high, levels of agreement between tractfinder and compared techniques, TractSeg and tractography.
+\paragraph*{general observations}
+
+Volumetric and distance metrics indicate consistent, if not always high, levels of agreement between tractfinder and compared techniques, TractSeg and tractography.
 Visual assessment reveals that differences in the spatial extent of the segmented tracts accounts for a large part of the discrepancy between methods.
 This is most apparent in the arcuate fasciculus, where anatomical definitions differ widely (Fig. \note{fig:lb.afr}, \note{fig:lb.afl}).
 For example, TractSeg (DKFZ) includes extensive coverage of the frontal and temporal lobe in its \gls{af} segmentations, including parts of the primary motor cortex.
@@ -184,28 +190,32 @@ For example, in the HCP dataset and for the arcuate fasciculus, mean bundle dist
 However, the signed bundle distances for those same two comparisons were $+2.57 mm$ and $-2.68 mm$ respectively.
 This indicates that, while if only considering the bundle distance metric, both TractSeg and the atlas appear to agree to a similar degree with tractography, TractSeg actually systematically over-segments the \gls{af} (relative to tractography), while the naive atlas segmentation tends towards under-segmentation.
 
-Density correlation and \gls{gdice} help illustrate the cases where the choice of threshold may have a disproportionate influence on subsequent binary comparisons.
+The density correlation helps illustrate the cases where the choice of threshold may have a disproportionate influence on subsequent binary comparisons.
 For example, in the HCP dataset and for the corticospinal tract, mean binary \gls{dice} was $0.69$ between tractfinder and tractography and $0.51$ between TractSeg (XTRACT) and tractography (a difference of $0.18$).
-For the same two comparisons, the density correlations differed only by $0.04$ ($0.63$ and $0.59$) respectively, indicating strong agreement between areas of high confidence (``density'').
+For the same two comparisons, the density correlations differed only by $0.04$ ($0.63$ and $0.59$) respectively, indicating strong agreement around areas of high confidence and divergence only in peripheral areas of lower density values.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{all_metrics_tractoinferno+hcp.png}
+  \caption{All methods compared against multi-ROI targeted tracotgraphy for the hcp and tractoinferno datasets combined (except TGR, which is tractoinferno data only)}
+  \label{fig:combobox}
+\end{figure}
 
 \paragraph*{HCP data}
 
-Volume surface visualisations obtained with tractfinder are shown for the three tracts in a single HCP subject in Figure \note{fig:SURFACE}.
 Figure \note{fig:HCPDICE} gives an indication of how the five different segmentation methods compare, across all HCP dataset subjects.
 There is considerable variance between tracts, however some observations remain consistent.
 
-Comparisons with tractography exhibit very low \gls{gdice} values.
-Binary \gls{dice}s are low across the board for the arcuate fasciculus, owing to the dramatically different spatial extents of the segmentations.
+Binary \glspl{dice} are low across the board for the arcuate fasciculus, owing to the dramatically different spatial extents of the segmentations.
 For the corticospinal tracts, tractfinder agrees well with each of the other methods, both using binary and generalised comparisons.
-Agreement is similarly high in the optic radiations, with slightly lower \gls{dice}s compared to the two TractSeg methods, which tend to include more thalamus and a lesser extent of Meyer's loop.
-
-Tractfinder segmentations are highly consistent, with comparison metrics with alternative methods varying by little across subjects (Tab. \note{tab:DATAHCP}).
+Agreement is similarly high in the optic radiations, with slightly lower \glspl{dice} compared to the two TractSeg methods, which tend to include more thalamus and a lesser extent of Meyer's loop.
+Tractfinder segmentations are also highly consistent, with comparison metrics with alternative methods varying by little across subjects (Tab. \note{tab:DATAHCP}).
 
 \paragraph*{TractoInferno}
 
 Qualitative results for a representative subject (identified as the only subject within the top 30 smallest deviations from the mean scores for all three of bundle distance, binary \gls{dice} and density correlation) are shown in Figures \note{fig:lb.afr}-\note{fig:lb.or}.
 
-Figure \note{fig:METRICSBOXPLOTS} compares each studied method against the reference streamline bundles in the TractoInferno dataset.
+Figure \ref{fig:combobox} compares each studied method against the reference streamline bundles in the TractoInferno dataset.
 Noticeably, the differences in scores within a single method, between different tracts, are in places greater than the differences between methods within a tract.
 For example, the binary \gls{dice} scores for the \gls{cst} are similar for tractfinder and TractSeg (DKFZ) ($0.48$ and $0.45$ on average respectively), however the binary \gls{dice}s of TractSeg (DKFZ) are markedly different between the \gls{cst} and \gls{or} ($0.45$ and $0.59$ on average respectively).
 These differences highlight the difficulty in assessing the ``accuracy" of white matter segmentation methods given limited consensus on the precise anatomical definitions of different pathways.
