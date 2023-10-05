@@ -1,11 +1,6 @@
 
 \section{Validation: methods}
 
-\note{How the method was validated. This is all the Tractoinferno / HCP data stuff, plus maybe qualitative results?}
-\note{Also discussion about lack of ground truth data and different validation metrics.}
-
-\note{Largescale validation in HCP and tractoinferno datasets, comparing to reference tractography and TractSeg}
-
 While a ground truth for white matter tract segmentation is not obtainable \textit{in vivo}, it is nevertheless instructive to compare the tractfinder technique with two other widely adopted methods for a quantitative estimation of reliability and accuracy.
 We'll quantitatively evaluate tractfinder in three different datasets: Two large healthy datasets (HCP and TractoInferno, see \ref{sec:data}) and one smaller dataset of clinical neurosurgical acquisitions (NHNN and GOSH combined), together covering a range of acquisition protocols and scanner specifications.
 
@@ -183,14 +178,14 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
 
 Qualitative results for a representative subject (identified as the only subject within the top 30 smallest deviations from the mean scores for all three of bundle distance, binary \gls{dice} and density correlation) are shown in Figures \note{fig:lb.afr}-\note{fig:lb.or}. \note{tractoinferno data}
 
+\subsection{Quantitative results}
+
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{chapter_4/all_metrics_by_tract_tractoinferno+hcp.png}
   \caption{All methods compared against multi-ROI targeted tracotgraphy for the hcp and tractoinferno datasets combined (except TGR, which is tractoinferno data only)}
   \label{fig:combobox}
 \end{figure}
-
-\subsection{Quantitative results}
 
 \paragraph*{Performance}
 
@@ -245,9 +240,8 @@ Our measured \gls{dice}s between TractSeg (DKFZ) and reference tractography (whi
 
 \paragraph*{TractoInferno}
 
-
-\textit{\gls{dice}, \gls{gdice} and density correlation values for tractfinder were on par with TractSeg (XTRACT) in all three tracts, with the exception of density correlation in \gls{af}, while \gls{gdice} and density correlation were higher than TractSeg (DKFZ) in all tracts.
-Binary \gls{dice} scores were highest for TractSeg (DKFZ) in the \gls{cst} and \gls{af}, and equal between tractography, tractfinder and TractSeg (DKFZ)  for the optic radiation.}
+% \textit{\gls{dice}, \gls{gdice} and density correlation values for tractfinder were on par with TractSeg (XTRACT) in all three tracts, with the exception of density correlation in \gls{af}, while \gls{gdice} and density correlation were higher than TractSeg (DKFZ) in all tracts.
+% Binary \gls{dice} scores were highest for TractSeg (DKFZ) in the \gls{cst} and \gls{af}, and equal between tractography, tractfinder and TractSeg (DKFZ)  for the optic radiation.}
 
 While initially we intended to make use of the published TractoInferno streamlines as an unbiased reference for comparison, it became apparent that they were unsuited for this application.
 Regardless of tract, metric, or compared methods, the tractofinderno reference streamlines yielded extremely variable results with large numbers of outliers.
@@ -275,8 +269,6 @@ Equally, no systematic difference was observed between intraoperative and preope
 The mean score results for all tracts and comparisons are given in Supplementary Table \note{tab:DATACL}.
 
 \subsection{Two methods, same training data}
-
-\note{Direct comparison with TractSeg using their training data to create atlases}
 
 In order to directly compare tractfinder with the popular deep learning method TractSeg, a new set of tract atlases were created from the TractSeg reference bundles, using the same split into training and testing subjects as used in the deep learning model (published version).
 TractSet was trained on 63 subjects and tested on the remaining 42, and the same was done for tractfinder (where ``training" means computing the atlas from individual bundles), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
