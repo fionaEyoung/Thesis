@@ -1,9 +1,20 @@
 \chapter{Practical application}
 
-\section{Data requirements}
+\note{More qualitative validation in as many sample datasets as possible, including intraoperative data, tumour deformation and debulking cases. Show specific cases where differs from e.g. tractography or TractSeg in specific areas like peritumoural oedema. Also analyse failure cases.}
 
-\note{Basically the findings from ISMRM diffusion workshop with different data inputs.}
+\note{Would be nice to also have e.g. epilepsy cases in here?}
 
+
+\section{Technical considerations}
+
+The technical feasibility of tractfinder for intraoperative application depends not only on the capabilities of the method itself in terms of speed and reliability, but also on the achievable image quality.
+Intraoperative scanning must occur under significant time pressure, and the concessions made to achieve this will have profound consequences for the image quality and subsequent image processing.
+In general, two strategies exist for reducing diffusion MRI scan time:
+The first is to reduce the \note{data richness} of the acquisition.
+This could mean lower spatial resolution (larger voxels), lower angular resolution (fewer diffusion-weighted directions), sorter diffusion weightings (lower $b$-values) or fewer unique $b$-values ("shells").
+The second is to use accelerated imaging techniques.
+
+\subsection{Data requirements}
 
 It is important to assess the applicability of image processing techniques developed with research quality data in acquisitions more typical of a clinical setting.
 It is common for advanced \gls{dmri} processing techniques to \note{require} a certain set of constraints on the input data, such as recommending or requiring a minimum number of diffusion weighted volumes (angular resolution), $b$-values or spatial resolution.
@@ -15,7 +26,7 @@ Such data can be downsampled, in both the spatial and angular domains, to produc
 Here we set out to determine the minimum data requirements to obtain successful segmentation, comparing different numbers of direction samples, $b$-values and post-processing strategies, as well as the affects of decreasing data quality on segmentation stability.
 The effects on the perfomance of TractSeg and tractography are compared as well.
 
-\subsection{Data and methods}
+\paragraph*{Data and methods}
 
 49 Preprocessed dMRI datasets from the HCP 1200 data release were spatially resampled to 2.5mm isotropic voxel size (from the original of 1mm isotropic), a resolution far more common in both clinical and research settings.
 Then, for each subject, the following 5 subsampled diffusion schemes were extracted from the full dataset (see Tab. \ref{tab:subschemes}):
@@ -51,7 +62,7 @@ To investigate the effects of different data quality and modelling on a given me
 This ``self-similarity" approach is intended to answer the question put forward above: how close to the results produced from an ``ideal" dataset be achieved from a lower quality dataset.
 This comparison was made for each combination of data quality and CSD approach.
 
-\subsection{Findings}
+\paragraph*{Findings}
 
 \begin{figure}
   \includegraphics{chapter_4/self_dice.png}
@@ -74,3 +85,37 @@ Meanwhile, voxel-wise segmentation methods are not susceptible to error propagat
 Understanding the behaviour of different tract segmentation techniques when applied to varying qualities of dMRI acquisition and post-processing approaches is important if segmentation methods developed in research settings are to be consistently and reproducibly applied to clinical quality acquisitions.
 It is useful to know how comparable segmentation results in a single-shelled, 30 direction dataset are to those one might have obtained with a HARDI dataset and state-of-the-art post-processing.
 This is particularly relevant for longitudinal studies, or when comparing different acquisitions of the same subject in a clinical context (e.g., for monitoring disease progressions, post-operative changes etc.).
+
+\subsection{Fast imaging and artefacts}
+
+Because high angular resolution \gls{dmri} acquisitions involve acquiring many volumes of data, they would have prohibitively long scan times without the use of \gls{epi}.
+A common complaint about \gls{epi} concerns the geometric image distortions that commonly arise at the boundaries between areas of different magnetic susceptibility, typically at tissue/air interfaces.
+For intraoperative scanning, this poses a particular problem in which the very region of interest, the operative field and surgical cavity, can suffer from the strongest distortions, affecting nearby structures (such as white matter tracts) that are of neuronavigational importance.\autocite{Yang2022}
+In most applications, these artifacts are tolerated as they can be fairly robustly corrected for offline at the image proprocessing stage.
+However, not only can the distortions around resection cavities be especially severe, neither can they be easily corrected for intraoperatively, as the current tools take on the order of tens of minutes to hours to run.
+
+\note{figure of bad distortion!}
+
+As an alternative to \gls{ssepi}, multi-shot (MS) sequences have been proposed.
+These include interleaved and readout-segmented (RS) sequences which, in general, only traverse a portion of k-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) but increasing scan time.\autocite{Wang2018}
+RESOLVE (readout segmentation of long variable echo-trains), a Siemens \note{product}, is one example of a commonly used \gls{rsepi} sequence.
+
+While RESOLVE can be combined with generalised autocalibrating partially parallel acquision (GRAPPA) and simultaneous multislice (SMS) acceleration tecniques, they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
+For example, in \textcite{Wang2018} the authors compared readout-segemented and interleaved EPI sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4mm thickness!
+In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE DTI sequence with 15 segments, 6 DW directions, and a scan time of 10:34.
+For comparison, the clinical DTI sequence currently used intraoperatively at GOSH is a 30xb1000 acquisition lasting just 4:57 with 2.3mm isotropic voxels.
+
+We set out to explore the feasibility of setting up a \gls{rsepi} DTI sequence for intraoperative use at GOSH.
+An (approximately) isotropic voxel size is generally considered optimal for DTI modelling and tractography \autocite{Vos2011, Neher2013}, although tractography with high in plane resolution and thick slices is certainly possible.
+Additionally, sufficient diffusion weighted directions for crossing fibre modelling (e.g CSD) would be ideal.
+In the end, we tested 3 different DTI sequences as well as several different 3-scan trace RESOLVE sequences (not discussed here).
+
+% [1] Yang, J. Y.-M. *et al.* Assessment of intraoperative diffusion EPI distortion and its impact on estimation of supratentorial white matter tract positions in pediatric epilepsy surgery. *NeuroImage: Clinical* **35**, 103097 (2022).  https://www.sciencedirect.com/science/article/pii/S2213158222001620
+%
+% [2] Wang, Y. *et al.* A comparison of readout segmented EPI and interleaved EPI in high-resolution diffusion weighted imaging. *Magnetic Resonance Imaging* **47**, 39–47 (2018). DOI: 10.1016/j.mri.2017.11.011
+%
+% [3] Elliott, C. A. *et al.* Intraoperative acquisition of DTI in cranial neurosurgery: readout-segmented DTI versus standard single-shot DTI. *Journal of Neurosurgery* **133**, 1210–1219 (2020). http://dx.doi.org/10.3171/2019.5.JNS19890
+%
+% [4] https://archive.ismrm.org/2011/1945.html
+%
+% [5] https://www.researchgate.net/publication/236022704_Analysis_of_tractography_biases_introduced_by_anisotropic_voxels
