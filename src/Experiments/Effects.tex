@@ -14,7 +14,7 @@ The first is to reduce the \note{data richness} of the acquisition.
 This could mean lower spatial resolution (larger voxels), lower angular resolution (fewer diffusion-weighted directions), sorter diffusion weightings (lower $b$-values) or fewer unique $b$-values ("shells").
 The second is to use accelerated imaging techniques.
 
-\subsection{Data requirements}
+\subsection{Data requirements}\label{sec:ismrmdiff}
 
 It is important to assess the applicability of image processing techniques developed with research quality data in acquisitions more typical of a clinical setting.
 It is common for advanced \gls{dmri} processing techniques to \note{require} a certain set of constraints on the input data, such as recommending or requiring a minimum number of diffusion weighted volumes (angular resolution), $b$-values or spatial resolution.
@@ -92,9 +92,13 @@ Because high angular resolution \gls{dmri} acquisitions involve acquiring many v
 A common complaint about \gls{epi} concerns the geometric image distortions that commonly arise at the boundaries between areas of different magnetic susceptibility, typically at tissue/air interfaces.
 For intraoperative scanning, this poses a particular problem in which the very region of interest, the operative field and surgical cavity, can suffer from the strongest distortions, affecting nearby structures (such as white matter tracts) that are of neuronavigational importance.\autocite{Yang2022}
 In most applications, these artifacts are tolerated as they can be fairly robustly corrected for offline at the image proprocessing stage.
-However, not only can the distortions around resection cavities be especially severe, neither can they be easily corrected for intraoperatively, as the current tools take on the order of tens of minutes to hours to run.
+However, not only can the distortions around resection cavities be especially severe due to the large exposed area of brain (Fig. \ref{fig:epi}), neither can they be easily corrected for intraoperatively, as the current tools take on the order of tens of minutes to hours to run.
 
-\note{figure of bad distortion!}
+\begin{figure}[h!]
+  \includegraphics[width=\textwidth]{chapter_4/epidist}
+  \caption{\note{draft}Examples of strong susceptibility distortions on intraoperative \gls{epi} acquisitions}
+  \label{fig:epi}
+\end{figure}
 
 As an alternative to \gls{ssepi}, multi-shot (MS) sequences have been proposed.
 These include interleaved and readout-segmented (RS) sequences which, in general, only traverse a portion of k-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) but increasing scan time.\autocite{Wang2018}
@@ -108,14 +112,124 @@ For comparison, the clinical DTI sequence currently used intraoperatively at GOS
 We set out to explore the feasibility of setting up a \gls{rsepi} DTI sequence for intraoperative use at GOSH.
 An (approximately) isotropic voxel size is generally considered optimal for DTI modelling and tractography \autocite{Vos2011, Neher2013}, although tractography with high in plane resolution and thick slices is certainly possible.
 Additionally, sufficient diffusion weighted directions for crossing fibre modelling (e.g CSD) would be ideal.
-In the end, we tested 3 different DTI sequences as well as several different 3-scan trace RESOLVE sequences (not discussed here).
+In the end, we tested three different DTI sequences as well as several different 3-scan trace RESOLVE sequences (not discussed here), all acquired on GOSH’s intraoperative Siemens VIDA (3T) system from a healthy adult volunteer.
+The acquisition parameters of the three test sequences, along with the standard GOSH \gls{dmri} sequences for comparison, are shown in Table \ref{tab:rsepi}.
 
 % [1] Yang, J. Y.-M. *et al.* Assessment of intraoperative diffusion EPI distortion and its impact on estimation of supratentorial white matter tract positions in pediatric epilepsy surgery. *NeuroImage: Clinical* **35**, 103097 (2022).  https://www.sciencedirect.com/science/article/pii/S2213158222001620
-%
 % [2] Wang, Y. *et al.* A comparison of readout segmented EPI and interleaved EPI in high-resolution diffusion weighted imaging. *Magnetic Resonance Imaging* **47**, 39–47 (2018). DOI: 10.1016/j.mri.2017.11.011
-%
 % [3] Elliott, C. A. *et al.* Intraoperative acquisition of DTI in cranial neurosurgery: readout-segmented DTI versus standard single-shot DTI. *Journal of Neurosurgery* **133**, 1210–1219 (2020). http://dx.doi.org/10.3171/2019.5.JNS19890
-%
 % [4] https://archive.ismrm.org/2011/1945.html
-%
 % [5] https://www.researchgate.net/publication/236022704_Analysis_of_tractography_biases_introduced_by_anisotropic_voxels
+
+\begin{table}
+  \caption{RS-EPI test scan parameters}
+  \label{tab:rsepi}
+  \small
+  \begin{tabularx}{\textwidth}{l X X X X X}
+    & GOSH VIDA “clinical” (RESOLVE) & GOSH VIDA Clinical DTI & Test scan 1: 7seg 6xb800 & Test scan 2: 3seg 12xb1000 & Test scan 3: 3seg 20xb1000 \\
+  \hline
+   $n$ directions & 3 & 30 & 6 & 12 & 20 \\
+   b values & 0, 800 & 0, 1000 & 0, 800 & 0, 1000 & 0, 1000 \\
+   scan time (min) & 4:53 & 4:57 & 4:57 & 7:30 & ? \\
+   voxel size (mm) & 1.198 x 1.198 x 4 & 2.3 x 2.3 x 2.3 & 2.3 x 2.3 x 2.1 & 2.5 x 2.5 x 2.5 & 2.3 x 2.3 x 2.3 \\
+   size (voxels) & 192 x 192 x 35  & 96 x 96 x 62 & 96 x 96 x 47 & 88 x 88 x 58 & 96 x 96 x 58 \\
+   FOV (mm)  & 230 x 230  & 220 x 220 & 220 x 220 & 220 x 220 & 220 x 220 \\
+   TR (ms) &  & 6600 & 6570 & 8960 & 3850 \\
+   segments & 7 & 1 & 7 & 3 & 3 \\
+   GRAPPA & 2 & 2 & 2 & 2 & - \\
+   SMS &  &  &  &  & 2 \\
+  \end{tabularx}
+\end{table}
+
+For each scan, minimal preprocessing was done in MRtrix3:\autocite{Tournier2019} MPPCA denoising and bias field correction, followed by diffusion tensor modelling and colour (DEC) FA mapping and single-shell single-tissue CSD.
+For CSD, $l_{max}$ was set to 8 except for the six direction scan where $l_{max}=6$ was used.
+No distortion correction was applied.
+Finally, a simple \gls{cst} probabilistic tractography protocol was applied, using the internal capsule as a seed region and an inclusion ROI at brain stem level, along with exclusion ROIs for common false positives.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.65\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/ortho0.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[height=0.7\textwidth]{chapter_4/rsepi/cofa0.png}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.65\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/ortho1.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[height=0.7\textwidth]{chapter_4/rsepi/cofa1.png}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.65\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/ortho2.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[height=0.7\textwidth]{chapter_4/rsepi/cofa2.png}
+  \end{subfigure}
+  %
+  \begin{subfigure}[b]{0.65\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/ortho3.png}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[height=0.7\textwidth]{chapter_4/rsepi/cofa3.png}
+  \end{subfigure}
+  \caption{From top: baseline (30xb1000 SSEPI DTI), 7seg 6xb800, 3seg 12xb1000, 3seg 20xb1000}
+  \label{fig:rsepi}
+\end{figure}
+
+Based on visual assessment alone, the degree of distortion reduction is difficult to evaluate for all compared sequences (Fig. \ref{fig:rsepi}).
+It’s unclear whether, in the case of intraoperative scans with high levels of distortion at the resection site, the amount of distortion improvement would be comparatively greater than is apparent in a healthy scan with minimal distortion to begin with.
+The third teset scan used simultaneous multislice (SMS) acceleration which appears to have significantly degraded and even corrupted the scan.
+\note{Siemends advertises RESOLVE with SMS}
+\footnote[2]{\url{https://www.siemens-healthineers.com/en-uk/magnetic-resonance-imaging/options-and-upgrades/clinical-applications/syngo-resolve} retrieved 06-Oct-2023}
+
+
+\begin{figure}[h!]
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/fod0.png}
+  \end{subfigure}%
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/cst0.png}
+  \end{subfigure}
+  %
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/fod1.png}
+  \end{subfigure}%
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/cst1.png}
+  \end{subfigure}
+  %
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/fod2.png}
+  \end{subfigure}%
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/cst2.png}
+  \end{subfigure}
+  %
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/fod3.png}
+  \end{subfigure}%
+  \begin{subfigure}{0.22\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/rsepi/cst3.png}
+  \end{subfigure}
+  \caption{From left to right, top to bottom: baseline (30xb1000 SSEPI DTI), 7seg 6xb800, 3seg 12xb1000, 3seg 20xb1000}
+  \label{fig:rsepi-fod}
+\end{figure}
+
+Figure \ref{fig:rsepi-fod} demonstrates the \glspl{fod} and tractography reconstructions obtained from each sequence.
+The 6 direction scan results in poorly resolved \glspl{fod} and correspondingly noisy streamlines and the third test scan which was degraded due to the use of SMS produced entirely unusable \glspl{fod}.
+Most promising are the results obtained from the 12 direction scan, despite the low angular resolution, although there is certainly still a lot of noise.
+The findings presented in \ref{sec:ismrmdiff} indicate that a 12 direction scan, while far from ideal, could still be used to obtained reliable tract segmentations.
+It is simply a question of priorities: is the achievable reduction in susceptibility distortion worth the implications of lower angular resolution?
+This is a question that cannot be answered from such exploratory data, and indeed the answer is likely to be case-specific, given that the amount of distortion varies significantly from scan to scan depending on the specific patient and surgical setup.
+While further exploration of distortion reduction was not a priority of this project, it remains an interesting avenue for future research, and these preliminary findings provide an indication that a readout-segmented \gls{epi} for intraoperative imaging remains an open possibility.
