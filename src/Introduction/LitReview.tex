@@ -68,7 +68,7 @@ Tractography is an immensely powerful and useful tool, and at the same time full
 
 All \note{?} tractography algorithms consist at their core of the following steps:
 
-\begin{verbatim}
+\begin{lstlisting}
 while number_streamlines < N
   - Initialise, or "seed", a streamline with a single point;
   while not STOP_CONDITION:
@@ -76,7 +76,7 @@ while number_streamlines < N
     - Take a step, of predetermined length, along v
     - Evaluate stopping condition;
   - Append streamline to list;
-\end{verbatim}
+\end{lstlisting}
 
 Within this simple algorithm lies a whole family of parameters and decisions which affect the result.
 The seed location, step length, conditions for terminating or entirely rejecting streamlines, interpolation of the surrounding vector field, number of streamlines to generate -- all considerations to be determined by the user (although in practice many parameters will be automatically determined or set to default values by the chosen algorithm).
