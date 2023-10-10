@@ -282,6 +282,24 @@ Tractfinder scores equally well or better on all metrics with the exception of t
   \label{fig:ts_atlas}
 \end{figure}
 
+Since the original TractSeg paper includes 72 tracts (including both left and right instances of non-commisural tracts and multiple subdivisions of tracts such as the corpus callosum or anterior thalamic radiation) and the performance varied substantially across tracts, we'll apply tractfinder to the full dataset for completeness.
+This is shown in Figure \ref{fig:ts_all_tracts}, analagous to Figure 6 in \textcite{Wasserthal2018}.
+Neither method convincingly outperforms the other, although TractSeg does score higher when measured by \gls{dice} on more tracts.
+An important difference between the two lies in how the fibre orientations, which serve as input to the two methods (as full \glspl{fodf} for tractfinder and as peaks for TractSeg) are computed.
+For single shell data, we have chosen to use \gls{msmt} \gls{csd} for tractfinder, using \gls{wm} and \gls{gm} compartments, to reduce the amount of noise and spurious white matter signal in non-white matter areas (most notably the cortex).
+This is motivated by the need for spatial information with a high specificity for white matter with which to compare the tract-specific spatial prior in the atlas.
+Unfortunately, using only two tisse compartments for \gls{msmt} \gls{csd} in this manner can produce inaccurate reconstructions at tissue boundaries, in particular a "cannibilisiation" of weak white matter signal in \gls{csf} partial volume voxels, leading to missing white matter \glspl{odf} in these areas.
+This is the case for tracts like the anterior commisure (CA) and fornices (FX\_left, FX\_right) which are small structures in places directly adjacent to \gls{csf}.
+Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small structures, at the expense of producing more extensive (less specific) overall tract maps.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{chapter_4/tf_ts_all_tracts.png}
+  \caption{\note{draft} Dice similarity and density correlation scores for tractfinder and TractSeg using the same training and testing data. Mean over all subjects is shown for each tract separately.}
+  \label{fig:ts_all_tracts}
+\end{figure}
+
+
 \subsection{The effect of deformation modelling}
 
 The BTC dataset, with its range of tumour types, high quality \gls{dmri} scans and tumour masks, provides an ideal \note{opportunity} to evaluate the effect of tumour deformation modelling on segmentation accuracy.
