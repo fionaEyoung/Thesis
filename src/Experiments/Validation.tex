@@ -18,7 +18,7 @@ What is more, many of those alternatives have already been systematically compar
 
 \paragraph*{Streamline tractography}
 
-Targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3)  was run in each scan using a multi-ROI approach (see \ref{sec:rois} for ROI details), with tractography input \glspl{fod} derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} with white matter and grey matter tissue compartments.
+Targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3)  was run in each scan using a multi-ROI approach (see \ref{app:rois} for ROI details), with tractography input \glspl{fod} derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} with white matter and grey matter tissue compartments.
 In the clinical dataset, ROIs were placed manually for each subject.
 For 193 HCP and TractoInferno subjects, manual ROI placement was infeasible.
 Instead the same ROIs were drawn in MNI152 template space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration
@@ -105,6 +105,7 @@ where $| \cdot |$ denotes set cardinality and $d_i(X)$ is the Euclidean distance
 \end{figure}
 
 \section{Validation: results}
+\label{sec:validation}
 
 \subsection{Processing times}
 
@@ -146,12 +147,10 @@ However, since the time taken depends greatly on several factors, including numb
   \begin{subfigure}{\textwidth}
     \includegraphics{chapter_4/tractfinder_cst.png}
     \caption{}
-    \label{}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
     \includegraphics{chapter_4/tractfinder_or.png}
     \caption{}
-    \label{}
   \end{subfigure}
   \caption{Lightboxes for the projection bundles CST and OR}
   \label{fig:lbcstor}
@@ -160,12 +159,10 @@ However, since the time taken depends greatly on several factors, including numb
   \begin{subfigure}{\textwidth}
     \includegraphics{chapter_4/tractfinder_af.png}
     \caption{}
-    \label{}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
     \includegraphics{chapter_4/tractfinder_ifo.png}
     \caption{}
-    \label{}
   \end{subfigure}
   \caption{Lightboxes for association bundles AF and IFO}
   \label{fig:lbcstor}
