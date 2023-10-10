@@ -11,6 +11,10 @@ The purpose of this validation is therefore not to determine which method is bes
 \subsection{Benchmark methods}
 
 We'll consider three alternative segmentation approaches and compare each with the proposed method: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
+There are numerous alternative techniques, many based on streamline clustering or automatic \gls{roi} registration, including White Matter Analysis (WMA)\autocite{ODonnell2017} RecoBundles \autocite{Garyfallidis2018}, and Tracula \note{cite}.
+We will not be comparing tractfinder with all of these alternatives because such a comparison would hardly provide any additional useful information:
+In those methods which rely on a predefined atlas of streamlines or \glspl{roi}, the anatomical assumptions \note{inherent} in those predefinitions would influence the similarity metrics more than any methodoligical differences, as indeed they do for TractSeg.
+What is more, many of those alternatives have already been systematically compared with TractSeg\autocite{Wasserthal2018}, and so in comparing tractfinder with the latter we can infer relative performance against them.
 
 \paragraph*{Streamline tractography}
 

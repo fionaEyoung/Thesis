@@ -1,7 +1,18 @@
 \chapter{Methodological evaluation}
 \label{}
 
-\note{Add introductory paragraph to set out chapter contents}
+The following sections set out to provide an evaluation of the tractfinder method from a range of perspectives.
+A common complaint in the realm of white matter imaging is the lack of reliable ground truth for fibre tract identification.
+The truth is, there is no such ground truth.
+This goes deeper than the limitations of our scientific instruments: micrometer-resolution \gls{mri} or infallible tractography algorithms are not the answer.
+As was explored in \ref{chap:atlas}, our \note{knowledge} of white matter anatomy, connection and function is neither fixed nor universal, such that a single definition that can be agreed upon by all does not even exist for a single time point, let alone one to last over time.
+
+We can nontheless arrive at a reasonable assessment of tractfinder's accuracy, reliability and applicability by making justifiable assumptions and comparing it, quantitatively and visually, with benchmark methods in a variety of datasets and case studies.
+The missing ground truth problem comes to the fore when comparing different methods, as we will see in (\ref{sec:validation}), but the results are still instructive in assessing their respective characteristics.
+To balance this issue, we provide a further analysis directly comparing tractfinder against the deep learning method TractSeg by constructing new \gls{tod} atlases from the TractSeg model training data.
+We'll further attempt to quantitatively evaluate the effect of tumour deformation modelling on improving segmentation performance in affected patients.
+
+Finally, we'll move on from endless Dice scores and box plots to explore the practical applicability of tractfinder, considering the technical aspects of bringing to the bedside, and illustrating the potentials and \note{remaining roadbloclks} through a series of case studies.
 
 \section{Datasets and image processing}
 \label{sec:data}
