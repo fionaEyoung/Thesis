@@ -52,7 +52,7 @@ The unusual radiological presentation showed a sliver of tissue within the tumou
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.6\textwidth]{case_studies/5_preop}
+  \includegraphics[width=0.8\textwidth]{case_studies/5_preop.png}
   \caption{Preoperative radiological presentation of patient 5, with a low-grade astrocytoma of the left thalamus. Top: T1, bottom: DTI FA. Arrow heads indicate the CST, partially travelling through the tumour.}
   \label{fig:5p}
 \end{figure}
@@ -68,7 +68,7 @@ As such, this is a case for which tractfinder is entirely unsuited.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.6\textwidth]{case_studies/5_preop_tf}
+  \includegraphics[width=0.8\textwidth]{case_studies/5_preop_tf.png}
   \caption{Reconstruction of the corticospinal tract on preop imaging. Top: track density imaging, bottom: tractfinder (combined with and without deformation modelling), with tractography outlined in white for comparison.}
   \label{fig:5p_cst}
 \end{figure}
@@ -79,14 +79,14 @@ Here, again, reconstruction of the \gls{cst} proved difficult.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{case_studies/5_iop}
+  \includegraphics[width=0.6\textwidth]{case_studies/5_iop.png}
   \caption{Intraoperative T1w (top) and diffusion colour FA (bottom) for patient 5, showing left craniotomy and surgical corridor through the temporal lobe}
   \label{fig:5i}
 \end{figure}
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.6\textwidth]{case_studies/5_iop_tf}
+  \includegraphics[width=0.8\textwidth]{case_studies/5_iop_tf.png}
   \caption{Reconstruction of the CST on intraoperative imaging using tractography (top) and tractfinder (bottom) with standard affine registration.}
   \label{fig:5i_cst}
 \end{figure}
@@ -105,7 +105,7 @@ A high degree of mass effect called for tumour deformation modelling, so the les
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{case_studies/8_preop}
+  \includegraphics[width=0.7\textwidth]{case_studies/8_preop.png}
   \caption{Preoperative T1 weighted scan (top) of patient 8 with high grade left thalamic glioma. Bottom row shows tumour deformation modelling applied to a coregistered MNI template image.}
   \label{fig:8p}
 \end{figure}
@@ -115,7 +115,7 @@ Intraoperative DTI was requested by the radiologist after extensive discussion o
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{case_studies/8_iop}
+  \includegraphics[width=0.7\textwidth]{case_studies/8_iop.png}
   \caption{Intraoperative imaging showing transcollosal approach to thalamic glioma. Top: T1w, bottom: DTI colour FA. White arrowhead on DTI indicates partially infiltrated and displaced internal capsule.}
   \label{fig:8i}
 \end{figure}
@@ -127,18 +127,19 @@ What is unclear is the state of the neuronal fibres in the infiltrated portion: 
 Visualising the fibre \glspl{odf} using \gls{csd} gets us closer to the answer (Fig. \ref{fig:8i_fod}).
 
 \begin{figure}
-  \begin{subfigure}{0.45\textwidth}
+  \centering
+  \begin{subfigure}{0.3\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{case_studies/8_iop_csd}
+    \includegraphics[width=\textwidth]{case_studies/8_iop_dt.png}
+    \caption{Diffusion Tensor}
+    \label{fig:8i_dt}
+  \end{subfigure}%
+  \begin{subfigure}{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{case_studies/8_iop_csd.png}
     \caption{CSD FOD}
     \label{fig:8i_csd}
   \end{subfigure}%
-  \begin{subfigure}{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{case_studies/8_iop_dt}
-    \caption{Diffusion Tensor}
-    \label{fig:8i_dt}
-  \end{subfigure}
   \caption{Partial view of partially resected tumour and internal capsule on coronal slice and two different fibre orientation models: diffusion tensor and constrained spherical deconvolution. The multi-fibre FODs make it easier to identify where the descending fibres a likely to remain in tact.}
   \label{fig:8i_fod}
 \end{figure}
@@ -150,7 +151,7 @@ Postoperatively the patient's right side weakness was slightly improved and the 
 Over the following weeks the patient's hemiparesis persisted, consistent with the infiltrative nature of the tumour.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{case_studies/8_iop_tf}
+  \includegraphics[width=\textwidth]{case_studies/8_iop_tf.png}
   \caption{Coronal slices in 5mm increments from intraoperative imaging for patient 8. Tractfinder CST map is overlaid along with tractography track density image outline in white for comparison (\note{100 streamline isosurface})}
   \label{fig:8i_tf}
 \end{figure}

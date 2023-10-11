@@ -35,14 +35,14 @@ Then, for each subject, the following 5 subsampled diffusion schemes were extrac
 
 \begin{table}
   \centering
-  \begin{tabular}{c c c}
+  \begin{tabular}{c c c} \toprule
     Identifier & $b = 1000$ & $b=2000$ \\
-    \hline
+    \midrule
     DWI-1 & 60 & 60 \\
     DWI-2 & 30 & 30 \\
     DWI-3 & 60 &    \\
     DWI-4 & 30 &    \\
-    DWI-5 & 12 &    \\
+    DWI-5 & 12 &    \\ \bottomrule
   \end{tabular}
   \caption{Subsampled diffusion schemes}
   \label{tab:subschemes}
@@ -67,6 +67,7 @@ This comparison was made for each combination of data quality and CSD approach.
 \paragraph*{Findings}
 
 \begin{figure}
+  \centering
   \includegraphics{chapter_4/self_dice.png}
   \caption{Self dice scores \note{caption}}
   \label{fig:self_dice}
@@ -97,7 +98,7 @@ In most applications, these artifacts are tolerated as they can be fairly robust
 However, not only can the distortions around resection cavities be especially severe due to the large exposed area of brain (Fig. \ref{fig:epi}), neither can they be easily corrected for intraoperatively, as the current tools take on the order of tens of minutes to hours to run.
 
 \begin{figure}[h!]
-  \includegraphics[width=\textwidth]{chapter_4/epidist}
+  \includegraphics[width=\textwidth]{chapter_4/epidist.png}
   \caption{\note{draft}Examples of strong susceptibility distortions on intraoperative \gls{epi} acquisitions}
   \label{fig:epi}
 \end{figure}
@@ -127,9 +128,9 @@ The acquisition parameters of the three test sequences, along with the standard 
   \caption{RS-EPI test scan parameters}
   \label{tab:rsepi}
   \small
-  \begin{tabularx}{\textwidth}{l X X X X X}
+  \begin{tabularx}{\textwidth}{l X X X X X} \toprule
     & GOSH VIDA “clinical” (RESOLVE) & GOSH VIDA Clinical DTI & Test scan 1: 7seg 6xb800 & Test scan 2: 3seg 12xb1000 & Test scan 3: 3seg 20xb1000 \\
-  \hline
+  \midrule
    $n$ directions & 3 & 30 & 6 & 12 & 20 \\
    b values & 0, 800 & 0, 1000 & 0, 800 & 0, 1000 & 0, 1000 \\
    scan time (min) & 4:53 & 4:57 & 4:57 & 7:30 & ? \\
@@ -139,7 +140,7 @@ The acquisition parameters of the three test sequences, along with the standard 
    TR (ms) &  & 6600 & 6570 & 8960 & 3850 \\
    segments & 7 & 1 & 7 & 3 & 3 \\
    GRAPPA & 2 & 2 & 2 & 2 & - \\
-   SMS &  &  &  &  & 2 \\
+   SMS &  &  &  &  & 2 \\ \bottomrule
   \end{tabularx}
 \end{table}
 

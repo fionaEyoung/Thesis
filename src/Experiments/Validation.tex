@@ -54,18 +54,21 @@ While the simplest and least ambigiuous approach may be to include all voxels wi
 In the case of tractography, a small number of rogue false positive streamlines can massively increase the extent of the binary segmentation, and in the case of TractSeg, very few voxels actually are assigned a probability of 0.
 The following thresholds were used throughout, wherever binary segmentations are concerned, are given in Table \ref{tab:thresh}.
 
-\captionof{table}{\label{tab:thresh}}
-\begin{tabularx}{\textwidth}{X c X}
-  Method    & Threshold value & Reasoning \\
-  \hline
-  Tractfinder   & 0.05 & empirically determined \\
-  Tractography (streamline density) & 10 & enough to exclude false positives \\
-  Reference tractography (TractoInferno only) & 0 & Assume no false positives \\
-  Atlas         & 0.1 & values are roughly double those of tractfinder \\
-  TractSeg      & 0.5 & consistent with default TractSeg behaviour \\
-  \hline
-  \vspace{\baselineskip}
-\end{tabularx}
+\begin{table}[h!]
+  \caption{}
+  \label{tab:thresh}
+  \small
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X c >{\raggedright\arraybackslash}X}
+    \toprule
+    Method    & Threshold value & Reasoning \\
+    \midrule
+    Tractfinder   & 0.05 & empirically determined \\
+    Tractography (streamline density) & 10 & enough to exclude false positives \\
+    Reference tractography (TractoInferno only) & 0 & Assume no false positives \\
+    Atlas         & 0.1 & values are roughly double those of tractfinder \\
+    TractSeg      & 0.5 & consistent with default TractSeg behaviour \\ \bottomrule
+  \end{tabularx}
+\end{table}
 
 Secondly, the binary nature of a \gls{dice} discounts the additional confidence information present in density and probability maps.
 In addition to the binary \gls{dice} measure, therefore, we consider two candidates for a measure of agreement between two continuous valued segmentations.
@@ -96,12 +99,12 @@ Thus $BD$ and $BD_s$ are defined as
 
 where $| \cdot |$ denotes set cardinality and $d_i(X)$ is the Euclidean distance transform (defined relative to the foreground of segmentation $X$, i.e. $d_i(X) = 0$ when $i \in X $ and $d_i(X) = |\overrightarrow{ij}|$ when $i \not\in X$ and where $j \in X$ is the voxel in $X$ closest to voxel $i$)  of segmentation $X$ at voxel $i$.
 
-\begin{figure}[htbp!]
+\begin{SCfigure}[50][htbp!]
   \centering
   \includegraphics[width=0.3\textwidth]{segmentations_distance_euc.pdf}
   \caption{Illustration of regions involved in calculating bundle distance metric. Light grey is $A\setminus B$, dark grey area is $B\setminus A$. To compute bundle distance $BD(A,B)$ (Eq. \ref{eq:bd}), the mean minimum absolute distance to the intersection (solid black) is taken across all voxels in the two grey areas $BD(A,B) = (14+4\sqrt{2}+3\sqrt{5})/17 = 1.55$. To compute the signed bundle distance $BD_s(A,B)$ (Eq. \ref{eq:bds}), distance values in A are negated. $BD_s(A,B) = (2-2\sqrt{2}-\sqrt{5})/17 = -0.18$. The Dice score for these two segmentations would be $DSC = 2*4/(13+12) = 0.32$}
   \label{fig:BD}
-\end{figure}
+\end{SCfigure}
 
 \section{Validation: results}
 \label{sec:validation}
@@ -121,10 +124,11 @@ However, since the time taken depends greatly on several factors, including numb
   \caption{Measured processing times mean and standard deviation for TractoInferno dataset. Individual steps shown and total average for the four different pipelines. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography ROIs were drawn once for the whole dataset, whereas for clinical datasets manual ROI delineation will have to be repeated for each subject. \dag Desktop Mac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, 1 node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz cores per node.}
   \label{tab:time}
   \small
-  \begin{tabularx}{\textwidth}{+>{\raggedright}X ^c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
+  \begin{tabularx}{\textwidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
+    \toprule
     \rowstyle{\rmfamily}
     Step & Processing time (per subject) & tractfinder & TractSeg & Atlas & tractography \\
-    \hline
+    \midrule
     \dag Brain masking & 3 $\pm$ 2 s & x & x & x & x\\
     \dag Affine MNI registration & 20 $\pm$ 4s & x &  & x &  \\
     \dag Response function & 5 $\pm$ 3 s & x & x & x & x\\
@@ -133,9 +137,9 @@ However, since the time taken depends greatly on several factors, including numb
     \dag Atlas transformation + inner product (3 tracts) & 18 $\pm$ 5 s & x &  & (x) &  \\
     \dag TractSeg (72 / 23 tracts) & 04:00 $\pm$ 01:00 min &  & x & & \\
     \dag Manual ROI delineation (once for whole dataset) & 20:00 min & & & & x \\
-    \ddag Non-linear ROI registration + tractography (3 tracts, 2 hemispheres) & 4:05 $\pm$ 2:08 min & & & & x \\
+    \ddag Non-linear ROI registration + tractography (3 tracts, 2 hemispheres) & 4:05 $\pm$ 2:08 min & & & & x \\ \addlinespace
     \rowstyle{\bfseries\rmfamily}
-    Total &  & 2:36 min & 4:25 min & \textless2:36min & $\gtrsim$26:03 min
+    Total &  & 2:36 min & 4:25 min & \textless2:36min & $\gtrsim$26:03 min \\ \bottomrule
   \end{tabularx}
 \end{table*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -143,28 +147,30 @@ However, since the time taken depends greatly on several factors, including numb
 
 % Fullpage figures
 \begin{figure}[htb!]
-  \begin{subfigure}{\textwidth}
-    \includegraphics{chapter_4/tractfinder_cst.png}
+  \centering
+  \begin{subfigure}{0.8\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/tractfinder_cst.png}
     \caption{}
   \end{subfigure}
-  \begin{subfigure}{\textwidth}
-    \includegraphics{chapter_4/tractfinder_or.png}
+  \begin{subfigure}{0.8\textwidth}
+    \includegraphics[width=\textwidth]{chapter_4/tractfinder_or.png}
     \caption{}
   \end{subfigure}
-  \caption{Lightboxes for the projection bundles CST and OR}
-  \label{fig:lbcstor}
+  \caption{\note{draft} Lightboxes for the projection bundles CST and OR}
+  \label{fig:lb.cstor}
 \end{figure}
 \begin{figure}[htb!]
+  \centering
   \begin{subfigure}{\textwidth}
-    \includegraphics{chapter_4/tractfinder_af.png}
+    \includegraphics[width=\textwidth]{chapter_4/tractfinder_af.png}
     \caption{}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
-    \includegraphics{chapter_4/tractfinder_ifo.png}
+    \includegraphics[width=\textwidth]{chapter_4/tractfinder_ifo.png}
     \caption{}
   \end{subfigure}
-  \caption{Lightboxes for association bundles AF and IFO}
-  \label{fig:lbcstor}
+  \caption{\note{draft} Lightboxes for association bundles AF and IFO}
+  \label{fig:lb.afifo}
 \end{figure}
 
 \clearpage
@@ -181,7 +187,7 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{chapter_4/all_metrics_by_tract_tractoinferno+hcp.png}
-  \caption{All methods compared against multi-ROI targeted tracotgraphy for the hcp and tractoinferno datasets combined (except TGR, which is tractoinferno data only)}
+  \caption{All methods compared against multi-ROI targeted tracotgraphy for the hcp and tractoinferno datasets combined (except TGR, which is tractoinferno data only). \acrolist{af, cst, or, tf, at, tsx, tsd, tgr}}
   \label{fig:combobox}
 \end{figure}
 
