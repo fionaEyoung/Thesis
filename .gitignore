@@ -25,6 +25,7 @@ src/bibliographies
 # *.ps
 # *.eps
 *.pdf
+*.docx
 
 ## Generated if empty string is given at "Please type another file name for output:"
 .pdf
@@ -46,8 +47,7 @@ src/bibliographies
 *.pdfsync
 
 ## Build tool directories for auxiliary files
-# latexrun
-latex.out/
+.build
 
 ## Auxiliary and intermediate files from other packages:
 # algorithms

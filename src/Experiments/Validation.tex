@@ -48,7 +48,7 @@ The Dice-Soerensen similarity coefficient (\gls{dice}) \autocite{Dice1945} is a 
 \end{align}
 
 for two binary voxel sets $A$ and $B$.
-Since \gls{dice} is a measure for binary segmentations, it requires the thresholding of continuous-valued maps such as track density maps and the pseudo-probability maps produced by tractfinder, which is unideal for this task \note{?}.
+Since \gls{dice} is a measure for binary segmentations, it requires the thresholding of continuous-valued maps such as track density maps and the pseudo-probability maps produced by tractfinder, which poses some problems.
 Firstly, the conversion from continuous-valued to binary representation introduces a high degree of ambiguity over the appropriate choice of threshold value.
 While the simplest and least ambigiuous approach may be to include all voxels with value $>0$ in the segmentation, this makes little sense in practice.
 In the case of tractography, a small number of rogue false positive streamlines can massively increase the extent of the binary segmentation, and in the case of TractSeg, very few voxels actually are assigned a probability of 0.
@@ -277,7 +277,7 @@ The mean score results for all tracts and comparisons are given in Supplementary
 \subsection{Two methods, same training data}
 
 In order to directly compare tractfinder with the popular deep learning method TractSeg, a new set of tract atlases were created from the TractSeg reference bundles, using the same split into training and testing subjects as used in the deep learning model (published version).
-TractSet was trained on 63 subjects and tested on the remaining 42, and the same was done for tractfinder (where ``training" means computing the atlas from individual bundles), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
+TractSeg was trained on 63 subjects and tested on the remaining 42, and the same was done for tractfinder (where ``training" means computing the atlas from individual bundles), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
 
 \begin{figure}[htb!]
   \includegraphics[width=\textwidth]{chapter_4/tractfinder_trained_on_tractseg.png}
@@ -298,7 +298,7 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=\textwidth]{chapter_4/tf_ts_all_tracts.png}
+  \includegraphics[width=0.9\textwidth]{chapter_4/tf_ts_all_tracts.png}
   \caption{\note{draft} Dice similarity and density correlation scores for tractfinder and TractSeg using the same training and testing data. Mean over all subjects is shown for each tract separately.}
   \label{fig:ts_all_tracts}
 \end{figure}
