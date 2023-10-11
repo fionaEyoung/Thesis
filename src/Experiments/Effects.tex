@@ -17,9 +17,10 @@ The second is to use accelerated imaging techniques.
 \subsection{Data requirements}\label{sec:ismrmdiff}
 
 It is important to assess the applicability of image processing techniques developed with research quality data in acquisitions more typical of a clinical setting.
-It is common for advanced \gls{dmri} processing techniques to \note{require} a certain set of constraints on the input data, such as recommending or requiring a minimum number of diffusion weighted volumes (angular resolution), $b$-values or spatial resolution.
+It is common for advanced \gls{dmri} processing techniques to set constraints on the input data, such as recommending or requiring a minimum number of diffusion weighted volumes (angular resolution), $b$-values or spatial resolution.
 
-If you can demonstrate that an image processing pipeline produces excellent results in a high quality research dataset, which can be interpreted with confidence, then the question follows: where one to acquire a lower quality dataset of the same subject, and perform the same data processing, how comparable would the resulting segmentation be to that of the high quality scan?
+If you can demonstrate that an image processing pipeline produces excellent results in a high quality research dataset, which can be interpreted with confidence, then the question follows:
+Were one to acquire a lower quality dataset of the same subject, and perform the same data processing, how comparable would the resulting segmentation be to that of the high quality scan?
 
 It is fairly straightforward to explore this question, given a high quality sample dataset.
 Such data can be downsampled, in both the spatial and angular domains, to produce a simulated lower quality scan of the same subject.
@@ -52,6 +53,7 @@ TractSeg, a deep learning-based direct segmentation technique, ships with two di
 one trained on tract segmentations obtained as described in Wasserthal et al. (2018) (``TractSeg - DKFZ”), and another trained on XTRACT7 outputs (``TractSeg - XTRACT”).
 Two different TractSeg results were obtained by running both models.
 Segmentations were compared for the three tracts most commonly reconstructed in neurosurgical applications: the corticospinal tract, arcuate fasciculus and optic radiations.
+
 All tract segmentation methods are predicated on fibre orientation distributions (FOD) modelled from diffusion data, and although tractography and TractSeg could both use other FOD modelling outputs such as BedpostX, the current analysis is kept to constrained spherical deconvolution (CSD) only.
 For the two-shelled datasets, multi-shell multi-tissue (MSMT) CSD10 can be run to separate the signal contributions from white matter (WM), grey matter (GM) and cerebrospinal fluid (CSF) and thus obtain an optimal WM FOD image free of noisy extraneous signal in non-WM regions.
 For the single-shelled datasets, full, direct MSMT with all three tissue types is not possible.
@@ -72,10 +74,10 @@ This comparison was made for each combination of data quality and CSD approach.
 
 DSC results are plotted in Figure \ref{fig:self_dice}.
 Each datapoint corresponds to the segmentation produced from a particular dataset, method and pipeline \textit{compared against} the result obtained from the highest quality dataset.
-
 The consistency in segmentation results differed significantly with both data quality and CSD approach.
 The high sensitivity to CSD approach in the tractography and Tractfinder results, particularly the large differences between MSMT WM+CSF / SSST and MSMT WM+GM, can be attributed to the amount of spurious grey matter signal included in the WM FOD reconstructions.
 In the former two approaches, the GM compartment is not as aggressively suppressed from the WM reconstruction, resulting in WM ``signal” in grey matter areas (which is then incorporated into the segmentation: in tractography via the further propagation of streamlines into GM, and in Tractfinder directly due to higher WM signal amplitude in GM).
+
 TractSeg, while not immune, appears less sensitive to CSD reconstruction technique.
 When considering only the best results (MSMT in DWI-2 and, in the single-shelled datasets, MSMT WM+GM for tractography and Tractfinder and SSST for TractSeg; Fig. 2), tractography displays the greatest instability with decreasing data quality, with the similarity score between DWI-5 MSMT WM+GM and DWI-1 MSMT falling as low as 0.78 (subject and cerebral hemisphere mean) for the arcuate fasciculus.
 TractSeg is trained on SSST CSD in single-shelled data as well as multi-shelled data, explaining why it does best with either SSST or MSMT WM+CSF in our single-shell results.
@@ -102,7 +104,7 @@ However, not only can the distortions around resection cavities be especially se
 
 As an alternative to \gls{ssepi}, multi-shot (MS) sequences have been proposed.
 These include interleaved and readout-segmented (RS) sequences which, in general, only traverse a portion of k-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) but increasing scan time.\autocite{Wang2018}
-RESOLVE (readout segmentation of long variable echo-trains), a Siemens \note{product}, is one example of a commonly used \gls{rsepi} sequence.
+RESOLVE (readout segmentation of long variable echo-trains), a Siemens product, is one example of a commonly used \gls{rsepi} sequence.
 
 While RESOLVE can be combined with generalised autocalibrating partially parallel acquision (GRAPPA) and simultaneous multislice (SMS) acceleration tecniques, they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
 For example, in \textcite{Wang2018} the authors compared readout-segemented and interleaved EPI sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4mm thickness!
@@ -189,8 +191,7 @@ Finally, a simple \gls{cst} probabilistic tractography protocol was applied, usi
 
 Based on visual assessment alone, the degree of distortion reduction is difficult to evaluate for all compared sequences (Fig. \ref{fig:rsepi}).
 It’s unclear whether, in the case of intraoperative scans with high levels of distortion at the resection site, the amount of distortion improvement would be comparatively greater than is apparent in a healthy scan with minimal distortion to begin with.
-The third teset scan used simultaneous multislice (SMS) acceleration which appears to have significantly degraded and even corrupted the scan.
-\note{Siemends advertises RESOLVE with SMS}
+The third teset scan used simultaneous multislice (SMS) acceleration which appears to have significantly degraded and even corrupted the scan, \note{even though iemens advertises RESOLVE with SMS}
 \footnote[2]{\url{https://www.siemens-healthineers.com/en-uk/magnetic-resonance-imaging/options-and-upgrades/clinical-applications/syngo-resolve} retrieved 06-Oct-2023}
 
 

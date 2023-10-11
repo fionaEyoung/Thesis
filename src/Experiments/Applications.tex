@@ -1,15 +1,15 @@
 \section{Intraoperative brain shift}
+\label{sec:imri}
 
-\note{dump from IJCARS manuscript}
-
-The target application is in intraoperative imaging.
-The main difference therein is the need to account for brain shift, which is unpredictable: differing effects stem from drainage of fluid, pressure changes, tumour debulking and gravitational sag.
+When considering the application of tractfinder for intraoperative imaging, we need to take brain shift into account, which is unpredictable: differing effects stem from drainage of fluid, pressure changes, tumour debulking and gravitational sag.
 Nevertheless, we aim to achieve intraoperative tract segmentation while avoiding the need to perform additional tumour and / or resection cavity segmentation intraoperatively.
 
 As the atlas is designed to be spatially inclusive, with the inner product acting to correct small spatial inaccuracies, it is possible in some cases where brain shift is minimal to reuse the properative tumour deformation field.
-In cases of significant tumour debulking, the deformation field can be recomputed from the preoperative tumour segmentation by adjusting the value of $s$ to simulate a reduction in tumour volume.
+In cases of significant tumour debulking, the deformation field can be recomputed from the preoperative tumour segmentation by adjusting the value of $s$ in (\ref{eq:forwardP}) to simulate a reduction in tumour volume.
 
-This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection of a large temporal epidermoid cyst. There is significant reduction in cyst volume and the adjacent corticospinal tract has shifted accordingly, however by reusing the preoperative lesion segmentation and setting $s=0.8$, the resulting deformation field is able to capture the rough location of the shifted tract. By only adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ and $D_b$, we can avoid time and resource-intensive intraoperative lesion segmentation, brain shift modelling or non-linear registration.
+This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection of a large temporal epidermoid cyst.
+There is significant reduction in cyst volume and the adjacent corticospinal tract has shifted accordingly, however by reusing the preoperative lesion segmentation and setting $s=0.8$, the resulting deformation field is able to capture the rough location of the shifted tract.
+By only adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ and $D_b$, we can avoid time and resource-intensive intraoperative lesion segmentation, brain shift modelling, or non-linear registration.
 
 \begin{figure*}[h!]
   \centering
@@ -24,9 +24,6 @@ This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection 
   \caption{Sample results in 4 different clinical subjects. First column: linearly registered tract atlas (spatial component only). Second column: atlas after tumour deformation. Third column: Final tract map. Fourth column: Track density image from streamline tractography, where intensity corresponds to streamline count per $(2.5mm)^3$ voxel (thresholded at 10 streamlines).}
   \label{fig:res}
 \end{figure*}
-
-In the \gls{btc} dataset, tumour deformation modelling successfully improved tract and subject alignment and consequently tract mapping in all preoperative cases where it was necessary.
-Examples in \note{figure ??} demonstrate how tractfinder including tumour deformation produces tract margins closer to those indicated by tractography, in contrast to the deep learning method TractSeg which appears to still rely on a learned healthy anatomical configuration without generalising to displaced tracts.
 
 \clearpage
 \section{iMRI case studies}
@@ -95,9 +92,9 @@ Here, again, reconstruction of the \gls{cst} proved difficult.
 \end{figure}
 
 This time, significant brain shift away from the craniotomy prevented accurate atlas registration, again resulting in a mismatch in anatomical alignement between atlas and target image (Fig \ref{fig:5i_cst}).
-Non-linear registration, with harsh penalties on excessive local deformation  \note{why?}, could mitigate this, but would be impractical for regular use.
+Non-linear registration, with harsh penalties on strong local deformation to reduce overfitting around the resection surface, could mitigate this, but would be impractical for routine use.
 
-A partial resection was completed, and as the intraoperative frozen section \note{??} was reported as appearing high grade, the decision was made not to pursue extensive resection, given the risk of functional injury and the unlikelihood of achieving curative resection for a high grade lesion \note{????}.
+A partial resection was completed, and as the intraoperative frozen section \note{??} was reported as appearing high grade, the decision was made not to pursue extensive resection, given the risk of functional injury and the unlikelihood of achieving curative resection for a high grade lesion. \note{????}
 There was concern of an area of infarction involving the CST, however the patient, after experiencing worsened motor deficit immediately postoperatively, approved to preoperative levels of the following days.
 The patient went on to recieve ajuvant chemotherapy and showed further improvement to their hemiparesis compared to their preoperative condition.
 
@@ -147,13 +144,13 @@ Visualising the fibre \glspl{odf} using \gls{csd} gets us closer to the answer (
 \end{figure}
 
 Using the tumour deformation field modelled from the preoperative scan, tractfinder reconstructs the corticospinal tract in very close accordance with probabilistic streamline tractography.
+Both indicate a largely intact bundle slightly laterally displaced, although neither can necessarily rule out the presence of infiltrated fibres closer to the tumour, as the expected resulting decrease in anisotropy would produce fewer streamlines through that region and reduced tractfinder probability.
+In the end, roughly 50\% of the lesion was resected, predominantly in the ventral and medial parts.
+Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy \note{did they? only have this down as planned} after confirmation of high-grade histology.
+Over the following weeks the patient's hemiparesis persisted, consistent with the infiltrative nature of the tumour.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{case_studies/8_iop_tf}
   \caption{Coronal slices in 5mm increments from intraoperative imaging for patient 8. Tractfinder CST map is overlaid along with tractography track density image outline in white for comparison (\note{100 streamline isosurface})}
   \label{fig:8i_tf}
 \end{figure}
-
-In the end, roughly 50\% of the lesion was resected, predominantly in the ventral and medial parts.
-Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy \note{did they? only have this down as planned} after confirmation of high-grade histology.
-\note{complete with imaging analysis for patient 8: imaging features preop and intraop, and tractography / tractfinder reconstructions}
