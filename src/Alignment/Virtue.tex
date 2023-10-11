@@ -104,7 +104,8 @@ This value can be determined iteratively, or analytically with the expression
   \lambda_{max} = \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t})+\frac{D_b}{D_t}
 \end{equation}
 
-Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified. Note that $\lambda_{max}$ varies throughout the brain, as it depends on the relative distances to brain and tumour surfaces for each specific $P$.
+Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified (referred to as ``adaptive $\lambda$"). 
+Note that $\lambda_{max}$ varies throughout the brain, as it depends on the relative distances to brain and tumour surfaces for each specific $P$.
 
 The tumour deformation model is implemented in Python, and full execution takes on average 1 min for a 208 x 256 x 256 voxel image.
 If lookup tables for $ D_t$ and $D_b$ are precomputed and saved, then subsequent executions of the model (e.g. with different values for $\lambda$ and $s$, as appropriate for a given tumour) take less than 10 seconds, as long as the tumour and brain segmentations remain unchanged.
