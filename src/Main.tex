@@ -46,7 +46,7 @@
 %  you intend to print double-sided. Note that this is
 %  *specifically permitted* by the UCL thesis formatting
 %  guidelines.
-\documentclass[11pt,phd,a4paper,oneside,draft]{ucl_thesis}
+\documentclass[12pt,phd,a4paper,oneside,draft]{ucl_thesis}
 
 % Package configuration:
 \input{setup/MainPackages}
@@ -72,7 +72,7 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
-\newcommand\note[1]{\ifdraft{\large \textcolor{red}{#1} }{}}
+\newcommand\note[1]{\ifdraft{{\large\textcolor{red}{#1}}}{}}
 %TC:macro \note [ignore]
 
 \begin{document}

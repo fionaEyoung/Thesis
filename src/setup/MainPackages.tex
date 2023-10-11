@@ -138,11 +138,12 @@
 
 % separate paragraphs with empty lines
 \usepackage[parfill]{parskip}
+\setlength{\parskip}{1\baselineskip plus 1pt}
 
 % Create paragraph title format
 \usepackage{titlesec}
 \titleformat{\paragraph}[hang]{\normalfont\itshape\raggedright}{}{0pt}{\qquad}[]
-\titlespacing*{\paragraph}{0pt}{\baselineskip}{\baselineskip}
+\titlespacing*{\paragraph}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 
 % Section header spacing
 \titlespacing*{\section}{0pt}{3\baselineskip}{\baselineskip}
