@@ -3,47 +3,71 @@
 
 \note{Somehow also include the ``mapping" part in the chapter title?}
 
-\section{Purpose}
+The chosen approach to fulfill the aims laid out in \ref{sec:problem} combines aspects of both traditional atlas-based and direct data-driven approaches to segmentations.
+It is clear that the task of \gls{wm} tract identification cannot be accomplished without incorporating anatomical priors, and that those priors cannot account for individual differences.
+The incorporation of anatomical priors can be automated for streamline tractography, as is done for several prior works including the FSL tool XTRACT and the white matter query language framework.\autocite{Wassermann2016}
+These approaches still rely on tractography as the means for parsing the local orientation information in the test subject, and consequently inherit many associated drawbacks such as the computational time and power required for whole brain tractography, or the difficulties tracking through oedema or around tumours.
+As an alternative to tractography, in which the attribution of a voxel to a tract of interest is contingent on it being visited by a streamline which, based on its entire length, has been attributed to the tract, we will instead develop a voxel-wise approach, in which a voxel can be associated with a tract based on its local diffusion properties and global coordinates.
 
-\note{A general of the rationale behind the atlas}
+We'll thus consider a voxel's membership with a target tract to be determined by it's location in the brain and local directional diffusion characteristics, and how well they align with prior expectations for the tract.
+This chapter is concerned with the encoding of those expectations in the form of a tract-specific location and orientation atlas, and the voxel-wise comparison of those expectations with the captured directional diffusion information.
+The necessary intermediate step, of establishing spatial correspondence between the atlas and subject data, will be the subject of Chapter \ref{chap:reg}.
 
-The tract orientation atlas captures the typical spatial and orientational distribution of a give tract across a sample of healthy subjects. Being derived from carefully curated streamline tractography reconstructions, it can be considered a store of anatomical prior expectations which would otherwise be utilised to draw appropriate ROIs for tractography in a target image.
+\section{Theoretical motivation}
 
+The tract orientation atlas aims to capture the typical spatial and orientational distribution of the bundle across a sample of healthy subjects.
+In order to motivate the atlas creation steps, it is worth first considering the information channels aimed to be contained within the atlas and their interpretation.
 
-An orientation distribution map is constructed from each subject streamline set using \gls{tod} mapping (\note{spelling? + cite}).\autocite{Dhollander2014}
+First is the spatial distribution, i.e. the likelihood of finding the tract in a given voxel.
+This is sometimes conflated with or loosely equated to streamline density derived from tractography, however this interpretation is highly flawed and biased.\note{improve this sentence}
+Instead, we will model, at the individual level, the spatial distribution of the tract as a binary variable.
+This approach of course does not account for any measurement uncertainty, and effectively assumes that the location of the tract can be determined with absolute certainty.
 
-In order to justify the atlas creation steps, it is worth first considering the information channels aimed to be contained within the atlas and their interpretation.
+In fact, if we pick a voxel in the brain and ask
 
-First is the orientation distribution, which will be determined from the \gls{tod} mapping of streamlines.
-Second is the spatial distribution, i.e. the likelihood of the tract residing in a given voxel.
-The latter concept is sometimes conflated with or loosely equated to streamline density derived from tractography, however this interpretation is highly flawed and biased.
+Thought experiment: we pick a voxel in a brain scan and ask, ``are fibres of the corticospinal tract present in this voxel".
+In attempting to answer this question, we encounter several sources of uncertainty.
+a) Definitional uncertainty.
+While we can more or less agree that, at one end, it forms the pyramids of the medulla, and at the other it terminates in the primary motor cortex in the precentral gyrus, for the intermediate course the boundaries are less obvious.
+Within the corona radiata, for instance, where is the boundary, if there is one at all, between the motor fibres and the ascending sensory pathways?
+This lack of highly detailed neurophsyiological description leads to our first source of uncertainty.
+b) Inter-subject variability.
+Even if we could nail down, in a hypothetical ideal brain, the exact shape of a pathway, we would be left to contend with the individual differences in brain shape and organisation.
+How can we know if, in this particular subject, the transition from afferent to efferent fibres occurs slightly more posteriorly than on average?
+c) Measurement uncertainty.
+Suppose we have overcome our doubts about the expected shape of a tract in a particular individual.
+Our voxel is in or near the tract's domain, but it also sits adjacent to grey matter.
+The diffusion profile measured in this voxel is also consistent with the presence of some fibres travelling in the expected direction, but only according to one estimate of the \gls{fod}, using \gls{ssst} \gls{csd}.
+Using \gls{msmt} \gls{csd}, we get a different \gls{fod}, one which doesn't align with the expected \gls{cst} fibres, suggesting that data only weakly supports the presence of such fibres, and possibly only thanks to an artefact of noise.
+This measurement and modelling uncertainty, incidentally, is what is captured in the probabilistic tractography algorithm probtrackx.\autocite{Behrens2007}
 
-Instead, it is more useful to consider the binary state of tract belonging in each individual subject, and then determine the proportion of subjects in which a voxel belonged to the tract.
+Faced with this tangle of unknowns, we have chosen a simplistic route.
+At the individual level, we will decide upon a theoretical bundle structure that is best supported by known neuroanatomy, and attempt to faithfully reconstruct that structure using probabilistic streamline tractography and careful manual filtering of implausible streamlines.
+From this reconstruction we will derive a binary spatial segmentation. \note{disregarding all those uncertainties?}
+By repeating this process and considering the differences in segmentations across a population of reference subjects, we will in doing so capture an approximation of the inter-subject variability.
 
-\textit{From HBM submission:}
+% its true we cant trust the mri signal so theres some uncertainty associated with that but given that we don't have a definitive definition of where the tract is even in a perfect situation with zero measurement uncertainty, trying to disentangle the ``we don't know if this voxel contains the tract necessarily because the signal might be noisy" and ``we don't know if the tract is here because we don't actully have a specific definition of the tract's anatomy" is sort of pointless. So we might as well decide on a definition and, whereever that definition is supported by the data we have via the presence of anatomically plausible streamlines, we'll define that voxel as having the tract.
 
-The key component of the proposed tract mapping method is the use of a tract-specific atlas of fibre bundle orientation and location. The purpose of the tract atlas is to capture and store prior anatomical knowledge of a given tract, including its typical location and orientation across subjects.
-While this is hereinafter referred to simply as a tract orientation atlas, and this section will focus on the orientation component, each tract atlas incorporates both orientational and spatial information.
-
-\section{Construction}
-
-\note{How each atlas is created in an artisanal Bloomsbury lab. Also general stuff like training data, preprocessing etc.}
-
-
+The second channel of information conveyed in the atlas is the orientation distribution, meaning the spread of likely directions along which the fibres of the bundle might be travelling at a given location.
+This property, too, is subject to uncertainties as described above.
+However, once a tract's location is known, or at least assumed, we can in most cases be fairly certain of its local orientations based on our knowledge of its global shape and trajectory.
+In a multi-fibre voxel, the distinct population in the apparent \gls{fod} which corresponds to our tract of interest is assumed to be known.
+In this case, tractography which pobabilistically draws samples from that distribution will reconstruct some streamlines travelling through that voxel in a distribution of directions consistent with our expectations for that tract, alongside potential spurious streamlines traversing the voxel in the ``wrong" direction.
+After carefully ensuring, as much as is feasible, that only those consistent streamlines remain, we can retrieve the orientation distribution of the tract of interest in isolation from the other crossing populations using \gls{tod} mapping.
 The objective is to create a map in a template space capturing, at each location, the range of possible orientations the tract can take on as a single spherical distribution.
 A narrow distribution may be found where the tract's orientation is highly consistent across all subjects, whereas a more spread-out distribution would reflect a wider range of possible orientations, which may be seen in regions of fanning or sharp turning (Fig. \note{fig:mean}).
 
-\subsection{Streamline tractography and filtering}
-
-\note{The streamline tractography and ROI strategies for each tract. Somewhere, will want to include brief lit reviews on the tracts studies justifying the chosen cortical terminations. Maybe here?. Also include filtering in DSI studio, OFPs etc.}
-
-
 To obtain such a mapping, a combination of streamline tractography and \gls{tod} mapping \autocite{Dhollander2014} is used.
-While tractography has significant limitations as discussed above, it remains the standard way of segmenting white matter bundles from \textit{in vivo} dMRI data, and biases and errors can, with appropriate post-processing steps, be at least partially corrected for.
+While tractography has significant limitations as discussed previously, it remains the standard way of segmenting white matter bundles from \textit{in vivo} dMRI data, and biases and errors can, with appropriate post-processing steps, be at least partially corrected for.
 In addition, tractography uniquely enables the extraction of orientation information specific to the reconstructed bundle, which would not be possible from a binary voxel-wise segmentation.
+Being derived from carefully curated streamline tractography reconstructions, we can conceptualise the atlas as a store of anatomical prior expectations which would otherwise be utilised to draw appropriate ROIs for tractography in a target image.
+
+\section{Streamline tractography and filtering}
 
 A dataset of 16 healthy adult HARDI acquisitions (``EEG, fMRI and NODDI dataset",\autocite{Clayden2020} available online at osf.io/94c5t) was used in the creation of reference bundles for developing the atlas.
 In each subject, the bundle of interest was reconstructed in both hemispheres using probabilistic streamline tractography with iFOD2 \autocite{Tournier2010} and a consistent ROI strategy based on anatomical landmarks broadly agreed upon in prior works. (See \note{sec:tractography} for full details on tractography parameters and ROI strategies used for each tract.)
+
+
 
 After streamline generation, each streamline bundle was transformed into MNI space using affine registration implemented in FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002} between the subject's T1-weighted image and the MNI152 T1 template.\autocite{Fonov2011}
 Affine registration rather than non-linear, was used for this step to capture individual anatomical variation and minimise unrealistic warping of streamlines from local registration errors or overfitting.
@@ -57,26 +81,36 @@ The percentage of streamlines filtered for each tract and summarised reasons for
 \begin{table*}[t]
   \caption{Streamline filtering statistics. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof}}
   \label{tab:filt}
-  \begin{tabularx}{\textwidth}{llllll X}
+  \small
+  \begin{tabularx}{\textwidth}{llllll X}\toprule
    &  & Original & Filtered & Difference & Reduction & Reasons for discarding \\
-   \hline
-  CST & left & 148833 & 145300 & 3533 & 2.37\% & \multirow{4}{20em}{Contamination from: AF / SLF, SFOF, CC, CrP} \\
+   \midrule
+  CST & left & 148833 & 145300 & 3533 & 2.37\% & \multirow{3}{=}{Contamination from: AF / SLF, SFOF, CC, CrP} \\
    & right & 144759 & 139019 & 5740 & 3.97\% &  \\
-   & total & 293592 & 284319 & 9273 & 3.16\% &  \\
-   \\
-  AF & left & 61922 & 49778 & 12144 & 19.61\% & \multirow{4}{20em}{Contamination from:  EC, CST, CC\\ Overextension into: Motor cortex, anterior temporal cortex, superior frontal cortex} \\
+   & total & 293592 & 284319 & 9273 & 3.16\% &  \\ \addlinespace
+  AF & left & 61922 & 49778 & 12144 & 19.61\% & \multirow{3}{=}{Contamination from:  EC, CST, CC Overextension into: Motor, anterior temporal, and superior frontal cortex} \\
    & right & 61834 & 43027 & 18807 & 30.42\% &  \\
-   & total & 123756 & 92805 & 30951 & 25.01\% &  \\
-   \\
-  OR & left & 123842 & 99984 & 23858 & 19.26\% & \multirow{4}{20em}{Contamination from: Tapetum of CC, SLF} \\
+   & total & 123756 & 92805 & 30951 & 25.01\% &  \\ \addlinespace
+  OR & left & 123842 & 99984 & 23858 & 19.26\% & \multirow{3}{=}{Contamination from: Tapetum of CC, SLF} \\
    & right & 122534 & 109265 & 13269 & 10.83\% &  \\
-   & total & 246376 & 209249 & 37127 & 15.07\% & \\
-   \\
+   & total & 246376 & 209249 & 37127 & 15.07\% & \\ \toprule
  \end{tabularx}
 \end{table*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{TOD mapping}
+
+\subsection{Tract definitions}
+
+\subsubsection{Optic radiation}
+
+\subsubsection{Corticospinal tract}
+
+\subsubsection{Arcuate fasciculus}
+
+\subsubsection{Inferior fronto-occipital fasciculus}
+
+
+\section{TOD mapping}
 
 \note{Registration to MNI space and \gls{tod} mapping. Includes the whole spiel about normalisation.}
 
@@ -122,6 +156,6 @@ Outlier voxels visited by streamlines in only a single subject's reconstruction 
 This atlas can then be registered to a target subject for further processing.
 Atlases have so far been created for the most commonly indicated pathways in neurosurgical planning and guidance, namely the \gls{cst}, \gls{or} and \gls{af} (Fig. \note{fig:atlases}), with the creation of further atlases to be the subject of future work.
 
-\subsection{Discussion}
+\section{Discussion}
 
 \note{Consider different elements of the atlas construction, e.g. what is the effect (smoothing) of using only non-linear registration and possibly put the discussion on number of training subjects here too?}
