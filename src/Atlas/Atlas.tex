@@ -132,12 +132,17 @@ As a projection tract, the \gls{or} is among the more easily definable in terms 
 Arising from the \gls{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named Meyer's loop.\autocite{Sarubbo2015}
 As it projects towards the most posterior reaches of the occipital lobe, the \gls{or} forms part of the sagittal stratum, a confluence of fibres superficial to the trigone \note{define}, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes.\autocite{Maldonado2021}
 The fibres of the optic radiation, conferring low-level visual data on contrast, colour and shapes, then terminate in the primary visual areas of the occipital cortex surrounding the calcarine fissure.
+
 When it comes to the course of the optic radiations through the sagittal stratum and posterior termination in the occipital lobes, there is no disagreement between targeted tractography and other segmentation methods.
-However, there remain significant differences in the regions of the lateral geniculate nucleus (LGN) and Meyer's loop.
-The LGN is a small nucleus, its localisation on MRI images is not straightforward, resulting in ofter very generous \glspl{roi} including most of or even the entire contralateral thalamus.
+However, there remain significant differences in the regions of the \gls{lgn} and \gls{ml}.
+The \gls{lgn} is a small nucleus, its localisation on MRI images is not straightforward, resulting in ofter very generous \glspl{roi} including most of or even the entire contralateral thalamus.
 In addition, due to the complex arrangement of white matter structures in the upper midbrain and thalamus regions, it is easy for streamlines to extend into the entire posterior thalamus and fornix and even descend into the brainstem.
-This contributes to often broad OR segmentations in the thalamic portion at the start of the tract.
+This contributes to often broad \gls{or} segmentations in the thalamic portion at the start of the tract.
 Secondly, the full anterior extent of Meyer's loop is often not comprehensively reconstructed by tractography, due to the extreme and tight curvature.\autocite{Lilja2015,Chamberland2018}
+
+The \gls{or} is unsurprisingly an integral structure for visual function and thus quality of life.
+With the extension of \gls{ml} deep into the temporal pole, this structure is at high risk of injury in common surgeries for treatment of epilepsy, often resulting in postoperative visual field deficits.\autocite{Lacerda2020}
+Intraoperative mapping with subcortical \gls{des} can be used to assess for visual field deficits during surgery,\autocite{Duffau2004a,Mazerand2017} although \textcite{Shahar2018} have suggested that this may be of limited value if visual responses can only be elicited once the resection has already reached a critical proximity to the tract.
 
 To achieve the best possible representation of this important pathway, the LGN was segmentated with precision in all training subjects using the incoming optic tracts and relative positioning with the cerebral penduncles for orientation.
 Using the \gls{lgn} for seeding, an inclusion waypoint was drawn around the saggital stratum \gls{roi} on the coronal plane.
@@ -167,14 +172,14 @@ An exclusion \gls{roi} on the medial lemniscus in the mid-pons excludes afferent
 
 \subsubsection*{Arcuate fasciculus}
 
-\begin{quote}
-  In dieser Windung liegt der starke hakenförmige Markbündel, welcher beide Hirnlappen verbindet und gleichsam als der eigentliche Schlüssel zur Organisation der Sylvischen Grube angesehen werden muss.
+% \begin{quote}
+%   In dieser Windung liegt der starke hakenförmige Markbündel, welcher beide Hirnlappen verbindet und gleichsam als der eigentliche Schlüssel zur Organisation der Sylvischen Grube angesehen werden muss.
+%
+%   [In this curve lies the strongly hook-shaped matter bundle, which connects both brain lobes and must be regarded as the essential key to the organisation of the Sylvian fissure.] (\citeauthor{Reil1809}, \citeyear{Reil1809}\autocite{Reil1809})
+% \end{quote}
+% % In 1809,  wrote:
 
-  [In this curve lies the strongly hook-shaped matter bundle, which connects both brain lobes and must be regarded as the essential key to the organisation of the Sylvian fissure.] (\citeauthor{Reil1809}, \citeyear{Reil1809}\autocite{Reil1809})
-\end{quote}
-% In 1809,  wrote:
-
-The \gls{af} has long held the fascination of neuroscientists, anatomists and psychologists since its earliest descriptions in the 19th century.
+The \gls{af} has long held the fascination of neuroscientists, anatomists and psychologists since its earliest descriptions in the 19th century.\autocite{Burdach1822}
 Ever since, the nomenclature and anatomical description of the \gls{af} has been the subject of much disagreement and confusion, with researchers variably dividing it into a series of subcomponents, disputing its cortical terminals and declaring it synonymous with either part or all of the \gls{slf}.
 A comprehensive review of this jumble at its history can be read in \textcite{PortodeOliveira2021}.
 Intertwined with this discussion on the white matter connections between (and within) frontal and temporal lobes are the ever-evolving models of language reception, processing and production in the human brain.\autocite{Becker2022a}
@@ -190,49 +195,50 @@ By this defintion, we will exclude longer extensions into the anterior temporal 
 
 \subsubsection*{Inferior fronto-occipital fasciculus}
 
-\paragraph*{Anatomy and function}
+% \paragraph*{Anatomy and function}
 
-So it is with the inferior fronto-occipital fasciculus.
-The most commonly stated function of the IFOF is an involvement in language processing, in particular semantic processing.
-It is also said to be a major pathway of the ventral stream in the dual processing model\autocite{Duffau2013a,Rollans2018,Voets2017,DavidPoeppel2012}, however, there is a lot of confusion and ambiguity in the categorisation of the \gls{ifof} into a ``ventral stream" pathway, where the language system is referred to, even though some cited descriptions of the ventral language system barely make mention of the occipital lobe\autocite{DavidPoeppel2012,Hickok2004}.
-Similarly and confusingly, some sources describe the \gls{ifof} as originating, at least partly, in the language areas of the temporal lobe.\autocite{Bajada2015a,Weiller2021}
-Intraoperative sub-cortical stimulation of the IFOF has been shown to elicit semantic paraphasia, [...] and disruptions in visual semantic tasks such as picture naming \autocite{Rollans2018}\note{find original!} *list more findings indicative of functional classification*
-collectively leading to the widely accepted function of semantic processing being ascribed to the IFOF, additionally supported by functional MRI.
+Even compared to the arcuate fasciculus, whose canonical discription, however since disputed, was at least anchored in a strongly motivated connection between two well described cortical regions and an attached clear linguistic function, study of a direct white matter fiber connection between the occipital and frontal lobes has an unsettled history.\autocite{Forkel2014a}
+Thanks to a confusing mix of attempting to directly compare simian and human anatomy,\autocite{Schmahmann2007,ThiebautdeSchotten2012,Mandonnet2018,Sarubbo2019} the historical study of and extrapolation from atypically developed or lesioned brains,\autocite{Schmahmann2007,Forkel2014a} and the difficulty by any means of following long-range connections in the brain,
+\autocite{Martino2010} the \gls{ifof} is an exceedingly difficult tract to pin down from available literature.\autocite{Sarubbo2019,Weiller2021}
 
-On the anatomical side, Klingler dissections have found terminations in the inferior frontal gyrus where XX processing takes place, lending support to the idea of a role in the semantic network.
-As arising almolst definitionally in the occipital lobe, the hypothesised role in semantic comprehension involves the transmission of visual input, initally processed within the occipital cortex, to the frontal regions for higher order conceptual processing.
-Additional findings and speculation, however, point to a wider involvement in more complex cogintive processes including working memory and goal-oriented behaviour, awareness any elaboration of visual information for motor planning (\autocite{Sarubbo2013}; the original \autocite{Rizzolatti2003} only discusses the visual dorsal stream and role of inferior parietal lobe) as well as the very broadly described role of "multimodal integration" among distant brain regions \autocite{Sarubbo2013}.
+The most widely cited functional role of the \gls{ifof} is one of semantic processing and fluency as part of the wider language network, supported by lesion studies\autocite{Ille2018b,Almairac2015} and the eliciting of semantic paraphasia by \gls{des} along its entire course,\autocite{Duffau2013a,Herbet2017,Voets2017} while the connections to the occipital lobes point more specifically to lexical and visual-semantic involvement.
+\autocite{Martino2010,Rollans2017,Rollans2018}
+From a surgical perspective, damage to and infiltration of the \gls{ifof} has been associated with transient or permanent semantic deficits and is commonly dislocated or infiltrated by tumours. \autocite{Almairac2015,Voets2017,Altieri2019,Binding2023}
+Situated within the temporal lobe alongside the \gls{or} and the dense language association network, the \gls{ifof} is at risk of injury in temporal lobectomy surgeries common in the treatment of epilepsy. \autocite{Baran2020,Shah2022,Binding2023}
+Furthermore, \textcite{Bello2010d} found preoperative reconstruction of the \gls{ifof} from \gls{dmri} to be in strong ageement with inatraoperative funcional mapping with \gls{des}.
 
-\paragraph*{Posterior terminations}
+The \gls{ifof} is frequently described as the key pathway underpinning a proposed ventral stream of language prosessing\autocite{Duffau2013a,Rollans2018,Voets2017,DavidPoeppel2012} (inspired by the dual-stream ``what" and ``where" model of visual processing), even though early works on this dual-stream framework for language make practically no mention of the occipital cortex.\autocite{Hickok2004,DavidPoeppel2012,Kummerer2013}
+Others conflate it with the ``extreme capsule fibre system"\autocite{Friederici2013a,Zhang2018} (analgous to the structure described in non-human primates\autocite{Mandonnet2018,ThiebautdeSchotten2012}), said to connect the temporal and frontal cortices,\autocite{Kummerer2013}
+or otherwise declare the \gls{ifof}'s origins as being, at least partly, in the temporal lobe.\autocite{Bajada2015a}
+This casual blurring of functional and anatomical postulation and evidence has lead to a fair degree of uncertainty surrounding the cortical, in particular the posterior,\autocite{Martino2010,Forkel2014a,Weiller2021} terminations of the \gls{ifof} and how it ties in with the wider models of cerbral language networks.
+\autocite{Duffau2013a, Mandonnet2018, Rollans2018, Friederici2013a}
+The cognitive functions residing in the frontal cortex are often nebulously defined and difficult to study and pin down, making the anatomical definition of pathways associated with those functions correspondingly difficult.
+Beyond the commonly cited semantic functional role, researchers have also speculated, often based on at best tenuous evidence, on roles for the \gls{ifof} that include reading and writing functions associated with parts of the parietal cortex,\autocite{Motomura2014} sensorimotor processing\autocite{Martino2010} and planning,\autocite{Sarubbo2013} and involvement in goal-oriented behaviour.\autocite{Conner2018}
+% tenuous because e.g. Sarubbo2013 is referring to Rizzolatti and Matelli 2003 which actually is only talking about the dorsal visual stream in monkeys? and no mention of IFOF? and Conner because the goal oriented behaviour ref is a review of DTI studies.
+\textcite{Sarubbo2013}, \textcite{Martino2010}, and \textcite{Rollans2018}, considering terminations in the parietal lobe in addition to occipital regions, have all proposed possible subdivisions of the IFOF into language and non-language related functions.
+% \paragraph*{Posterior terminations}
 
-Despite the name, both \textcite{Sarubbo2013} and \textcite{Martino2010}, finding terminations in the parietal lobe in addition to occipital regions, proposed a possible subdivision of the IFOF into language and non-language related functions.
-
-In their detailed dissection studies, \textcite{Martino2010}, and \textcite{Sarubbo2013} all confirmed the extrastriate occipital cortex, in particular the middle occipital gyrus, as the primary poterior terminations of the IFOF. Lateral occipital lobe terminations were also studied in \textcite{Palejwala2020}.
-\textcite{Hau2016} agree aswell, however that study was based on tractography alone and therefore difficult to trust when it comes to detailed distinction of cortical terminations.
-For example, the lingual gyrus is cited in \textcite{Sarubbo2013} as one of three "main apparent origins" of the IFOF, albeit to a limited extent, while \textcite{Martino2010} (who studied the posterior terminations to a more thorough extent) asserted that any fibres connected to the lingual gyrus belonged to the optic radiations. \textcite{Hau2016} Reported tractography projections to the lingual gyrus "in almost all subejcts".
-Similarly, while \textcite{Sarubbo2013} performed detailed dissection of the frontal IFOF terminations, \textcite{Martino2010} maintained that "at the level of the frontal operculum, the fibers of the IFOF strongly intersect with the terminal branches of other long association fasciculus", making dissection extremely difficult, and indeed not possible for that particular study.
-
-The lingual gyrus (in \textcite{Sarubbo2013} and \textcite{Hau2016}) and in \textcite{Martino2010} the posterior fusiform gyrus, were also frequently found.
-In these dissection studies, however, the distinction between the fibres of the IFOF and those of the occipital radiations are very difficult to distinguish, adding further confusion to the specific anatomical defintion of the former.
+We will look for an anatomical consensus among post-mortem dissection studies aimed at uncovering the anatomical path of the \gls{ifof}, considering first the posterior and subsequently the frontal terminations.
+In their detailed dissection studies, \textcite{Martino2010}, and \textcite{Sarubbo2013} all confirmed the extrastriate occipital cortex, in particular the middle occipital gyrus, as primary posterior targets, while lateral occipital lobe terminations were also studied in \textcite{Palejwala2020}.
+% \textcite{Hau2016} agree aswell, however that study was based on tractography alone and therefore difficult to trust when it comes to detailed distinction of cortical terminations.
+In addition to the largely agreed upon occipital regions, additional terminations have been found in the parietal and temporal cortices, in particular the superior parietal lobe, fusiform and inferior temporal gyri in \textcite{Martino2010}, and the lingual gyrus in \textcite{Sarubbo2013}.
 The lingual gyrus and cuneus are cited as IFOF origination regions in \textcite{Palejwala2021}
+However, it must be pointed out that the \gls{ifof} fibres have not been unambiguously distinguished from other parietal-occipital bundles, including the \gls{or} and temporal association tracts.
+For example, the lingual gyrus is cited in \textcite{Sarubbo2013} as one of three ``main apparent origins" of the IFOF, albeit to a limited extent, while \textcite{Martino2010} asserted that any fibres connected to the lingual gyrus belonged to the optic radiations.
+% (\textcite{Hau2016} reported tractography projections to the lingual gyrus ``in almost all subejcts".)
 
-In addition to the largely agreed upon occipital regions, additional terminations have been found in the parietal and temporal cortices, in particular the superior parietal lobe, fusiform and inferior temporal gyri (\autocite{Martino2010}), and the lingual gyrus in \textcite{Sarubbo2013}.
-Indeed, one of the original descriptions of the IFOF, by Edward Curran in 1909, described the IFOF as also containing fibres "which join the frontal lobe with the posterior part of the temporal and parietal lobes". \autocite{Forkel2014a}
+After coursing through the temporal lobe above the roof of the temporal horn,\autocite{Martino2010,Kljajevic2014a} the \gls{ifof} converges into a narrow bundle to squeeze, alongside the \gls{uf}, through the temporal stem and into the frontal lobe.\autocite{Martino2010,Sarubbo2013}
+\textcite{Martino2010} maintained that ``at the level of the frontal operculum, the fibers of the IFOF strongly intersect with the terminal branches of other long association fasciculus", making dissection extremely difficult, and indeed not possible for that particular study.
+Nevertheless, \textcite{Sarubbo2013} have conducted the only dissection study to my knowledge analysing in detail of the frontal connections specifically of the IFOF.
+Other studies, e.g. \textcite{Burks2017}, focus on a particular cortical region and study all connections to the region.
+The disadvantage with such studies is in the aforementioned difficulty of simultaneously keeping the fibres of multiple bundles intact and traceable at once.
+Connections to the inferior frontal gyrus, the seat of Broca's area, were confirmed in \textcite{Sarubbo2013} as well as \textcite{Hau2016}, and are consistent with a linguistic function.
+\textcite{Sarubbo2013} also found terminations in the middle frontal gyrus (and more specfically the dorsolateral prefrontal cortex) ``in all specimens".
+Finally, the orbitofrontal cortex, which is considered to play an important role in decision making, and frontal pole terminations were found in \textcite{Sarubbo2013} as well as in \textcite{Burks2017}.
 
-Connections to the temporal lobe are also claimed in the literature where the IFOF (or "extreme capsule fibre system") is considered part of the ventral language system and thus connecting auditory and temporal language regions with frontal regions inculding Broca's area. \autocite{Friederici2013a} \autocite{Kummerer2013}
-
-*All the info is there, needs massively reorganising*
-
-\paragraph*{Frontal terminations}
-
-The cognitive functions residing in the frontal cortex are often nebulously defined and difficult to study and pin down, making the the anatomical definition of pathways associated with those functions correspondingly difficult.
-
-\textcite{Sarubbo2013} have conducted the only dissection study to my knowledge of detailed analysis of the frontal connections specifically of the IFOF. Other studies, e.g. \textcite{Burks2017} focus on a particular cortical region and study all connections to the region. The disadvantage with such studies is in the difficulty of simultaneously keeping the fibres of multiple bundles intact and traceable at once ==citation needed==.
-
-Connections to the inferior frontal gyrus, the seat of Broca's area, were confirmed in \textcite{Sarubbo2013} as well as \textcite{Hau2016}, and is in agreement with the common connection of the IFOF and language function.
-\textcite{Sarubbo2013} also found terminations in the middle frontal gyrus (and more specfically the dorsolateral prefrontal cortex) "in all specimens".
-Finally, the orbitofrontal cortex and frontal pole terminations were found in \textcite{Sarubbo2013} as well as in \textcite{Burks2017}.
-The orbitofrontal cortex is considered to play an important role in decision making. \autocite{Burks2017}
+Taken together, the dissection studies confirm (i.e. reported in all or most speciemens) primarily posterior terminations in the superior, middle, and inferior occipital gyri and anterior terminations in the middle and inferior frontal gyri, frontal pole, and orbito-frontal cortex.
+The evidence is less clear for wider connections to the parietal, posterior temporal and superior frontal cortices, so these will be excluded from the tractfinder atlas.
+Streamlines were seeded in the temporal stem (extreme capsule) and selected according to cortical targets derived from Freesurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation.\footnote{frontal labels: 1\{1,2\}1\{20,19,02,58,59\}; occipital labels: 1\{1,2\}1\{20,19,02,58,59\}}
 
 \section{TOD mapping}
 
