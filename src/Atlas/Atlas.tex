@@ -62,43 +62,7 @@ While tractography has significant limitations as discussed previously, it remai
 In addition, tractography uniquely enables the extraction of orientation information specific to the reconstructed bundle, which would not be possible from a binary voxel-wise segmentation.
 Being derived from carefully curated streamline tractography reconstructions, we can conceptualise the atlas as a store of anatomical prior expectations which would otherwise be utilised to draw appropriate ROIs for tractography in a target image.
 
-\section{Streamline tractography and filtering}
-
-A dataset of 16 healthy adult HARDI acquisitions (``EEG, fMRI and NODDI dataset",\autocite{Clayden2020} available online at osf.io/94c5t) was used in the creation of reference bundles for developing the atlas.
-In each subject, the bundle of interest was reconstructed in both hemispheres using probabilistic streamline tractography with iFOD2 \autocite{Tournier2010} and a consistent ROI strategy based on anatomical landmarks broadly agreed upon in prior works. (See \note{sec:tractography} for full details on tractography parameters and ROI strategies used for each tract.)
-
-
-After streamline generation, each streamline bundle was transformed into MNI space using affine registration implemented in FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002} between the subject's T1-weighted image and the MNI152 T1 template.\autocite{Fonov2011}
-Affine registration rather than non-linear, was used for this step to capture individual anatomical variation and minimise unrealistic warping of streamlines from local registration errors or overfitting.
-With all subject streamlines aggregated in MNI space, manual filtering of streamlines was performed (Fig. \note{fig:atlases}) to remove not only ``volumetric false positives", which depart from the accepted volume of the tract, but also ``orientational false positives" (OFPs), which remain entirely within the tract volume but are at least in part aligned with a different, intersecting bundle.
-An example of such OFPs are depicted in supplementary Figure \note{fig:ofp}. Such streamlines have little effect on any volumetric applications of the reconstruction, e.g. via a track density depiction.
-However, their removal is vital for the construction of the orientation atlas, which summarises the orientational distribution of streamlines on a voxel-wise basis.
-Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsolver.org/})\autocite{Yeh2021a}, which enables the filtering of streamlines based on angle of intersection with a cutting plane.
-The percentage of streamlines filtered for each tract and summarised reasons for removal are presented in Table \ref{tab:filt}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table*}[t]
-  \caption{Streamline filtering statistics. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof}}
-  \label{tab:filt}
-  \small
-  \begin{tabularx}{\textwidth}{llllll X}\toprule
-   &  & Original & Filtered & Difference & Reduction & Reasons for discarding \\
-   \midrule
-  CST & left & 148833 & 145300 & 3533 & 2.37\% & \multirow{3}{=}{Contamination from: AF / SLF, SFOF, CC, CrP} \\
-   & right & 144759 & 139019 & 5740 & 3.97\% &  \\
-   & total & 293592 & 284319 & 9273 & 3.16\% &  \\ \addlinespace
-  AF & left & 61922 & 49778 & 12144 & 19.61\% & \multirow{3}{=}{Contamination from:  EC, CST, CC Overextension into: Motor, anterior temporal, and superior frontal cortex} \\
-   & right & 61834 & 43027 & 18807 & 30.42\% &  \\
-   & total & 123756 & 92805 & 30951 & 25.01\% &  \\ \addlinespace
-  OR & left & 123842 & 99984 & 23858 & 19.26\% & \multirow{3}{=}{Contamination from: Tapetum of CC, SLF} \\
-   & right & 122534 & 109265 & 13269 & 10.83\% &  \\
-   & total & 246376 & 209249 & 37127 & 15.07\% & \\ \toprule
- \end{tabularx}
-\end{table*}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\subsection{Tract definitions}
+\section{Tract definitions}
 
 It is important that the atlases closely reflect the anatomical definitions most prevalent in the literature, and most useful for clinical applications.
 To this end, an extensive literature search was conducted for each tract before confirming the \gls{roi} strategy that would in turn determine the shape of its normative atlas.
@@ -126,14 +90,14 @@ There are, however, some examples of explicitly excluding streamlines that would
 For example, the definitions of the \gls{cst} include the afferent dorsal-column medial lemniscus system within the brainstem, whereas in tractfinder these fibres are explicitly excluded.
 Where relevant, such distinctions are described below.
 
-\subsubsection*{Optic radiation}
+\subsection{Optic radiation}
 
 As a projection tract, the \gls{or} is among the more easily definable in terms of its end points.
 Arising from the \gls{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named Meyer's loop.\autocite{Sarubbo2015}
-As it projects towards the most posterior reaches of the occipital lobe, the \gls{or} forms part of the sagittal stratum, a confluence of fibres superficial to the trigone \note{define}, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes.\autocite{Maldonado2021}
+As it projects towards the most posterior reaches of the occipital lobe, the \gls{or} forms part of the \gls{ss}, a confluence of fibres superficial to the \gls{trigone}, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes.\autocite{Maldonado2021}
 The fibres of the optic radiation, conferring low-level visual data on contrast, colour and shapes, then terminate in the primary visual areas of the occipital cortex surrounding the calcarine fissure.
 
-When it comes to the course of the optic radiations through the sagittal stratum and posterior termination in the occipital lobes, there is no disagreement between targeted tractography and other segmentation methods.
+When it comes to the course of the optic radiations through the \gls{ss} and posterior termination in the occipital lobes, there is no disagreement between targeted tractography and other segmentation methods.
 However, there remain significant differences in the regions of the \gls{lgn} and \gls{ml}.
 The \gls{lgn} is a small nucleus, its localisation on MRI images is not straightforward, resulting in ofter very generous \glspl{roi} including most of or even the entire contralateral thalamus.
 In addition, due to the complex arrangement of white matter structures in the upper midbrain and thalamus regions, it is easy for streamlines to extend into the entire posterior thalamus and fornix and even descend into the brainstem.
@@ -145,11 +109,11 @@ With the extension of \gls{ml} deep into the temporal pole, this structure is at
 Intraoperative mapping with subcortical \gls{des} can be used to assess for visual field deficits during surgery,\autocite{Duffau2004a,Mazerand2017} although \textcite{Shahar2018} have suggested that this may be of limited value if visual responses can only be elicited once the resection has already reached a critical proximity to the tract.
 
 To achieve the best possible representation of this important pathway, the LGN was segmentated with precision in all training subjects using the incoming optic tracts and relative positioning with the cerebral penduncles for orientation.
-Using the \gls{lgn} for seeding, an inclusion waypoint was drawn around the saggital stratum \gls{roi} on the coronal plane.
+Using the \gls{lgn} for seeding, an inclusion waypoint was drawn around the \gls{ss} \gls{roi} on the coronal plane.
 Finally, to improve the coverage of Meyer's loop, an anterior waypoint was positioned just posterior to the anterior pole of the temporal horn.
 Since not all of the \gls{or} takes the full scenic route, tractography was run with and without this additional anterior waypoint and the two sets of streamlines combined.
 
-\subsubsection*{Corticospinal tract}
+\subsection{Corticospinal tract}
 
 Standardised white matter atlases and tractography protocols varyingly describe the corticospinal and pyramidal tracts.
 These two terms are often used interchangeably in tractography-oriented publications, while in anatomical terms they are distinct:
@@ -170,7 +134,7 @@ First, streamlines were seeded from the entire precentral gyrus, with include re
 Then, a dilated mask of those coordinates was subtracted from the motor cortex mask, and the tracking was repeated from this modified low-count seed mask.
 An exclusion \gls{roi} on the medial lemniscus in the mid-pons excludes afferent fibres at the brainstem level.
 
-\subsubsection*{Arcuate fasciculus}
+\subsection{Arcuate fasciculus}
 
 % \begin{quote}
 %   In dieser Windung liegt der starke hakenförmige Markbündel, welcher beide Hirnlappen verbindet und gleichsam als der eigentliche Schlüssel zur Organisation der Sylvischen Grube angesehen werden muss.
@@ -193,7 +157,7 @@ Numerous lengthy articles and thesis chapters have been devoted to this discussi
 Instead, for the purposes of this report, we will consider only the narrowest and perhaps most canonical definition of the the \gls{af}: that of a bundle connecting the posterior-superior aspect of the temporal lobe with the inferior frontal gyrus.
 By this defintion, we will exclude longer extensions into the anterior temporal cortex\autocite{Giampiccolo2022a} and any frontal gyri other than the inferior frontal gyrus, and reject the tripartite paradigm which includes additional subdivisions connecting to Geschwind's territory of the parietal lobe.\autocite{Catani2005,Martino2013a}
 
-\subsubsection*{Inferior fronto-occipital fasciculus}
+\subsection{Inferior fronto-occipital fasciculus}
 
 % \paragraph*{Anatomy and function}
 
@@ -240,10 +204,50 @@ Taken together, the dissection studies confirm (i.e. reported in all or most spe
 The evidence is less clear for wider connections to the parietal, posterior temporal and superior frontal cortices, so these will be excluded from the tractfinder atlas.
 Streamlines were seeded in the temporal stem (extreme capsule) and selected according to cortical targets derived from Freesurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation.\footnote{frontal labels: 1\{1,2\}1\{20,19,02,58,59\}; occipital labels: 1\{1,2\}1\{20,19,02,58,59\}}
 
+\section{Streamline tractography and filtering}
+
+A dataset of 16 healthy adult HARDI acquisitions (``EEG, fMRI and NODDI dataset",\autocite{Clayden2020} available online at osf.io/94c5t) was used in the creation of reference bundles for developing the atlas.
+In each subject, the bundle of interest was reconstructed in both hemispheres using probabilistic streamline tractography with iFOD2 \autocite{Tournier2010} and an ROI strategy based on anatomical landmarks as described above. (See \ref{app:rois} for full details.)
+
+After streamline generation, each streamline bundle was transformed into MNI space using affine registration implemented in FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002} between the subject's T1-weighted image and the MNI152 T1 template.\autocite{Fonov2011}
+Affine registration rather than non-linear, was used for this step to capture individual anatomical variation and minimise unrealistic warping of streamlines from local registration errors or overfitting.
+With all subject streamlines aggregated in MNI space, manual filtering of streamlines was performed (Fig. \note{fig:atlases}) to remove not only ``volumetric false positives", which depart from the accepted volume of the tract, but also ``orientational false positives" (OFPs), which remain entirely within the tract volume but are at least in part aligned with a different, intersecting bundle.
+An example of such OFPs are depicted in supplementary Figure \note{fig:ofp}. Such streamlines have little effect on any volumetric applications of the reconstruction, e.g. via a track density depiction.
+However, their removal is vital for the construction of the orientation atlas, which summarises the orientational distribution of streamlines on a voxel-wise basis.
+Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsolver.org/})\autocite{Yeh2021a}, which enables the filtering of streamlines based on angle of intersection with a cutting plane.
+
+The percentage of streamlines filtered for each tract and summarised reasons for removal are presented in Table \ref{tab:filt}.
+What is immediately apparent is the large discrepancy between tracts in the number of streamlines filtered, an indication of how much easier it is to reconstruct some tracts over others.
+For the \gls{cst}, thanks to the well targeted cortical seeding and structurally highly distinct pathway, it was only necessary to remove a small percentage of streamlines, mostly OFPs in the centrum semiovale.
+By contrast, approximately half of all \gls{ifof} streamlines were discarded, due thanks to the tight association of multiple tracts in the \gls{ss} resulting in overwhelming contamination from abutting structures, in particular the \gls{vof}.
+The absolute number of retained streamlines is of little consequence to subsequent steps in creating the atlas, after ensuring full coverage of the tract in every training subject.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table*}[t]
+  \caption{Streamline filtering statistics. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof,vof}}
+  \label{tab:filt}
+  \small
+  \begin{tabularx}{\textwidth}{llllll X}\toprule
+   &  & Original & Filtered & Difference & Reduction & Reasons for discarding \\
+   \midrule
+  CST & left & 148833 & 145300 & 3533 & 2.37\% & \multirow{3}{=}{Contamination from: AF / SLF, SFOF, CC, CrP} \\
+   & right & 144759 & 139019 & 5740 & 3.97\% &  \\
+   & total & 293592 & 284319 & 9273 & 3.16\% &  \\ \addlinespace
+  AF & left & 61922 & 49778 & 12144 & 19.61\% & \multirow{3}{=}{Contamination from:  EC, CST, CC Overextension into: Motor, anterior temporal, and superior frontal cortex} \\
+   & right & 61834 & 43027 & 18807 & 30.42\% &  \\
+   & total & 123756 & 92805 & 30951 & 25.01\% &  \\ \addlinespace
+  OR & left & 123842 & 99984 & 23858 & 19.26\% & \multirow{3}{=}{Contamination from: Tapetum of CC, SLF} \\
+   & right & 122534 & 109265 & 13269 & 10.83\% &  \\
+   & total & 246376 & 209249 & 37127 & 15.07\% & \\ \addlinespace
+  IFOF & left & 80000 & 44224 & 35776 & 44.72\% & \multirow{3}{=}{Contamination from: Tapetum of CC, VOF, superior frontal cortex} \\
+   & right & 80000 & 31753 & 48247 & 60.31\% &  \\
+   & total & 160000 & 75977 & 84023 & 52.51 \% & \\ \toprule
+ \end{tabularx}
+\end{table*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 \section{TOD mapping}
-
-\note{Registration to MNI space and \gls{tod} mapping. Includes the whole spiel about normalisation.}
-
 
 After aggregate filtering, the retained streamlines were re-separated into individual subject bundles and the \gls{tod} was computed from the individual bundles as described in \textcite{Dhollander2014} and implemented in MRtrix3. \autocite{Tournier2019}
 \gls{tod} mapping is the generalisation of track density imaging into the angular domain, creating a 5D spatio-angular representation of streamline tracks on a voxel-wise basis.
