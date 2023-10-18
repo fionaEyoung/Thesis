@@ -23,6 +23,9 @@ In the clinical dataset, ROIs were placed manually for each subject.
 For the 184 HCP and TractoInferno subjects, manual ROI placement was infeasible.
 Instead the same ROIs were drawn in MNI152 template space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration
 (HCP data includes MNI transformation warps, while warps were created for the TractoInferno data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/) \autocite{Tustison2013,Avants2011}).
+In theory, the defintions behind the in-house tractography paradigm was the same as for creating the respective atlases.
+However, to avoid dependence on resource-intensive tools for cortical parcellation, only white matter \glspl{roi} were used.
+The result generally more extensive cortical terminations into gyri and sulci, for example the \gls{af}, not otherwise included in the atlases due to either the use of cortical \glspl{roi} or extensive manual filtering, while the core subcortical portions match the defintions reflected in the atlases. 
 This in-house tractography is subsequently abbreviated to ``TG", while the reference TractoInferno bundles are referred to as ``TGR".
 
 \paragraph*{TractSeg}

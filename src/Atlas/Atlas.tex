@@ -68,7 +68,6 @@ A dataset of 16 healthy adult HARDI acquisitions (``EEG, fMRI and NODDI dataset"
 In each subject, the bundle of interest was reconstructed in both hemispheres using probabilistic streamline tractography with iFOD2 \autocite{Tournier2010} and a consistent ROI strategy based on anatomical landmarks broadly agreed upon in prior works. (See \note{sec:tractography} for full details on tractography parameters and ROI strategies used for each tract.)
 
 
-
 After streamline generation, each streamline bundle was transformed into MNI space using affine registration implemented in FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002} between the subject's T1-weighted image and the MNI152 T1 template.\autocite{Fonov2011}
 Affine registration rather than non-linear, was used for this step to capture individual anatomical variation and minimise unrealistic warping of streamlines from local registration errors or overfitting.
 With all subject streamlines aggregated in MNI space, manual filtering of streamlines was performed (Fig. \note{fig:atlases}) to remove not only ``volumetric false positives", which depart from the accepted volume of the tract, but also ``orientational false positives" (OFPs), which remain entirely within the tract volume but are at least in part aligned with a different, intersecting bundle.
@@ -101,14 +100,139 @@ The percentage of streamlines filtered for each tract and summarised reasons for
 
 \subsection{Tract definitions}
 
-\subsubsection{Optic radiation}
+It is important that the atlases closely reflect the anatomical definitions most prevalent in the literature, and most useful for clinical applications.
+To this end, an extensive literature search was conducted for each tract before confirming the \gls{roi} strategy that would in turn determine the shape of its normative atlas.
+A combination of neuroanatomical studies using blunt dissection, functional studies using either non-invasive methods including \gls{fmri} or intraoperative functional stimulation were sought out as well as tractography studies detailing recommended \gls{roi} strategies.
 
-\subsubsection{Corticospinal tract}
+There is of yet no perfect method for determining the exact course of individual white matter fibres in the human brain.
+A technique called tract-tracing, which involves the invasive injection of tracer compounds \textit{in vivo} and subsequent post-mortem histological analysis, is widely accepted as the gold standard, but only ethically feasible in monkeys, and there is disagreement and controversy surrounding the transferability of tract definitions between no-human primates and humans.\autocite{Becker2022,ThiebautdeSchotten2012}
+Blunt dissection in post-mortem specimens, greatly advanced through the fixation methods developed by Joseph Klingler (1888-1963) in the early 20th century,\autocite{Agrawal2011} is therefore the most direct technique available for studying global white matter anatomy in humans.
+Though greatly advancing the study of white matter anatomy and widely used to evaluate the findings of tractography studies, post-mortem dissections, in which layers of white matter fibres are painstakingly separated and isolated, cannot flawlessly uncover the complete and intact extent of an entire bundle,\autocite{Martino2010, Dick2012} and it's findings have also been subject of rigourous debate (see, for example, \textcite{Giampiccolo2022a,Becker2022,Giampiccolo2022b}).
+Nevertheless, post-mortem dissection and \textit{in vivo} functional evidence from intraoperative \gls{des} are preferred over purely non-invasive tractography-based conclusions for informing our tract definitions.
+By relying whereever possible on such ``primary source" evidence, we hope to avoid the circularity of basing our understanding of a tract's anatomy on tractography studies alone.\note{explain this better}
+For example, there are several studies describing the cortical terminations of streamlines in tract reconstructions and presenting them as evidence for connectivity,\autocite{Conner2018,Hau2016} when in reality inferring the existence of a physical connection based on tractography alone is highly unadvisable.\autocite{Rheault2020}
 
-\subsubsection{Arcuate fasciculus}
+For projection tracts, such as the optic radiation, the function and anatomy almost define eachother: the optic radiation transmits optical signals from the thalamus to the first point of contact in the cortex, the primary visual cortex.
+With association tracts, one can observe a backwards and forwards between deducing possible corical terminations based on observed function, e.g. particular functional deficits induced through stimulation of the core of the tract, and theorising on possible functions based on observed cortical terminations, e.g. through blunt postmortem dissections.
 
-\subsubsection{Inferior fronto-occipital fasciculus}
+Once an anatomical definition was decided upon based on the balance of available evidence, tractography studies detailing recommended \gls{roi} strategies were compared.
+Prior studies acted as guidance for the choice of \glspl{roi} used for each tract if a clear consus consistent with the chosen definition emerged.
+Due to the difficulties in constraining tractography streamlines as they approach the cortex, grey matter \glspl{roi} derived from cortical parcellations were used wherever practical.
 
+As is invariably necessary for probabilistic tractography, additional exclusion ROIs are needed to filter false positive streamlines that are clearly not part of the tract, and would not feasibly be included in the tract in an alternative definition.
+These include, for example, midline exclusion ROIs to remove \gls{cst} streamlines straying into the corpus callosum, or a posterior ROI to exclude \gls{af} streamlines from propagating into the occipital lobe.
+These exclusion ROIs will not be described, as their motivation is trivial.
+There are, however, some examples of explicitly excluding streamlines that would be included in another definition of the same bundle.
+For example, the definitions of the \gls{cst} include the afferent dorsal-column medial lemniscus system within the brainstem, whereas in tractfinder these fibres are explicitly excluded.
+Where relevant, such distinctions are described below.
+
+\subsubsection*{Optic radiation}
+
+As a projection tract, the \gls{or} is among the more easily definable in terms of its end points.
+Arising from the \gls{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named Meyer's loop.\autocite{Sarubbo2015}
+As it projects towards the most posterior reaches of the occipital lobe, the \gls{or} forms part of the sagittal stratum, a confluence of fibres superficial to the trigone \note{define}, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes.\autocite{Maldonado2021}
+The fibres of the optic radiation, conferring low-level visual data on contrast, colour and shapes, then terminate in the primary visual areas of the occipital cortex surrounding the calcarine fissure.
+When it comes to the course of the optic radiations through the sagittal stratum and posterior termination in the occipital lobes, there is no disagreement between targeted tractography and other segmentation methods.
+However, there remain significant differences in the regions of the lateral geniculate nucleus (LGN) and Meyer's loop.
+The LGN is a small nucleus, its localisation on MRI images is not straightforward, resulting in ofter very generous \glspl{roi} including most of or even the entire contralateral thalamus.
+In addition, due to the complex arrangement of white matter structures in the upper midbrain and thalamus regions, it is easy for streamlines to extend into the entire posterior thalamus and fornix and even descend into the brainstem.
+This contributes to often broad OR segmentations in the thalamic portion at the start of the tract.
+Secondly, the full anterior extent of Meyer's loop is often not comprehensively reconstructed by tractography, due to the extreme and tight curvature.\autocite{Lilja2015,Chamberland2018}
+
+To achieve the best possible representation of this important pathway, the LGN was segmentated with precision in all training subjects using the incoming optic tracts and relative positioning with the cerebral penduncles for orientation.
+Using the \gls{lgn} for seeding, an inclusion waypoint was drawn around the saggital stratum \gls{roi} on the coronal plane.
+Finally, to improve the coverage of Meyer's loop, an anterior waypoint was positioned just posterior to the anterior pole of the temporal horn.
+Since not all of the \gls{or} takes the full scenic route, tractography was run with and without this additional anterior waypoint and the two sets of streamlines combined.
+
+\subsubsection*{Corticospinal tract}
+
+Standardised white matter atlases and tractography protocols varyingly describe the corticospinal and pyramidal tracts.
+These two terms are often used interchangeably in tractography-oriented publications, while in anatomical terms they are distinct:
+The corticospinal (CST) and pyramidal tracts (PyT) are both descending motor pathways, with the PyT encompassing both the CST and the corticobulbar tract, which controls movement of the head, neck and face via the cranial nerves.
+Tractography studies and related white matter segmentation research sometimes conflate the major descending (motor) and ascending (sensory pathways), whether intentionally or not. \note{reference this section}
+This is evident in two main regions.
+
+Firstly, the inclusion of the medial lemniscus is frequently seen in PyT or CST segmentations (usually as it is not explicitly excluded, rather than being actively included).
+This includes TractSeg (and associated reference streamline bundles), XTRACT to some extent, and TractoInferno.
+By contrast, the tractography protocol employed in this research includes an exclusion mask on the medial lemniscus.
+Secondly, while it has been suggested that the primary motor cortex can reside in the post-central gyrus,\autocite{Kumar2009} it is generally accepted that the somatosensory cortex is located in the latter, while the motor areas are in the precentral gyri.
+However, particularly with probabilistic tractography, it is near impossible to constrain streamlines exiting the internal capsule into the fanning corona radiata to one side of the central sulcus, without additional exclusion planes or the use of cortical target regions, which are especially time-consuming to produce, whether manually or through automatic parcellation.
+Thus streamline-based CST segmentations often contain parts of the somatosensory cortex\autocite{Poulin2021} while others, such as those utilising cortical parcellation-derived target regions, will be restricted to the motor cortex.
+
+The tractfinder CST atlas streamlines were obtained using Freesurfer parcellations \autocite{Desikan2006,FischlSalat2002} of the primary motor cortex.
+To boost the coverage of the lateral precentral gyrus, which is typically neglected by tractography due to the difficulty in crossing the centrum semiovale and its preference for taking the straightest path, two sets of streamlines were generated.
+First, streamlines were seeded from the entire precentral gyrus, with include regions on the cerebral peduncles and mid-pons level, retaining the coordinates of the successful (included) seeds.
+Then, a dilated mask of those coordinates was subtracted from the motor cortex mask, and the tracking was repeated from this modified low-count seed mask.
+An exclusion \gls{roi} on the medial lemniscus in the mid-pons excludes afferent fibres at the brainstem level.
+
+\subsubsection*{Arcuate fasciculus}
+
+\begin{quote}
+  In dieser Windung liegt der starke hakenförmige Markbündel, welcher beide Hirnlappen verbindet und gleichsam als der eigentliche Schlüssel zur Organisation der Sylvischen Grube angesehen werden muss.
+
+  [In this curve lies the strongly hook-shaped matter bundle, which connects both brain lobes and must be regarded as the essential key to the organisation of the Sylvian fissure.] (\citeauthor{Reil1809}, \citeyear{Reil1809}\autocite{Reil1809})
+\end{quote}
+% In 1809,  wrote:
+
+The \gls{af} has long held the fascination of neuroscientists, anatomists and psychologists since its earliest descriptions in the 19th century.
+Ever since, the nomenclature and anatomical description of the \gls{af} has been the subject of much disagreement and confusion, with researchers variably dividing it into a series of subcomponents, disputing its cortical terminals and declaring it synonymous with either part or all of the \gls{slf}.
+A comprehensive review of this jumble at its history can be read in \textcite{PortodeOliveira2021}.
+Intertwined with this discussion on the white matter connections between (and within) frontal and temporal lobes are the ever-evolving models of language reception, processing and production in the human brain.\autocite{Becker2022a}
+In particular, conflicts over the distinction between the \gls{slf} and \gls{af} and their respective terminations in the superior, middle or inferior temporal gyri are directly motivated by a desire to disentangle the distribution of different language associated functions in the temporal cortex and their processing by means of the dorsal and ventral language streams.\autocite{Hickok2004,Friederici2013a,Kljajevic2014a,Giampiccolo2022a,Becker2022a}
+
+Even the core precondition for the classical definition of the \gls{af}, namely the existence of a direct connection between the inferior frontal gyrus (loosely, Broca's area) and the posterior superior temporal gyrus (Wernicke's area), has been called into question.\autocite{Dick2012,Giampiccolo2022a}
+While we cannot dispute the existence of a core bundle of fibres arching around the Sylvian fissure, noone can seem to agree on where exactly those fibres are headed, in either direction.
+Within the temporal lobe, attempts to definitively disentangle the \gls{af} from other temporal lobe tracts have fallen short,\autocite{Becker2022} and with regards to the frontal terminations, there is disagreement over the relationships between the various dorsal stream components and the premotor cortex and inferior frontal gyrus.\autocite{Kljajevic2014a,Giampiccolo2022a}
+
+Numerous lengthy articles and thesis chapters have been devoted to this discussion, and it is beyond the scope of this short review to attempt a definitive summary.
+Instead, for the purposes of this report, we will consider only the narrowest and perhaps most canonical definition of the the \gls{af}: that of a bundle connecting the posterior-superior aspect of the temporal lobe with the inferior frontal gyrus.
+By this defintion, we will exclude longer extensions into the anterior temporal cortex\autocite{Giampiccolo2022a} and any frontal gyri other than the inferior frontal gyrus, and reject the tripartite paradigm which includes additional subdivisions connecting to Geschwind's territory of the parietal lobe.\autocite{Catani2005,Martino2013a}
+
+\subsubsection*{Inferior fronto-occipital fasciculus}
+
+\paragraph*{Anatomy and function}
+
+So it is with the inferior fronto-occipital fasciculus.
+The most commonly stated function of the IFOF is an involvement in language processing, in particular semantic processing.
+It is also said to be a major pathway of the ventral stream in the dual processing model\autocite{Duffau2013a,Rollans2018,Voets2017,DavidPoeppel2012}, however, there is a lot of confusion and ambiguity in the categorisation of the \gls{ifof} into a ``ventral stream" pathway, where the language system is referred to, even though some cited descriptions of the ventral language system barely make mention of the occipital lobe\autocite{DavidPoeppel2012,Hickok2004}.
+Similarly and confusingly, some sources describe the \gls{ifof} as originating, at least partly, in the language areas of the temporal lobe.\autocite{Bajada2015a,Weiller2021}
+Intraoperative sub-cortical stimulation of the IFOF has been shown to elicit semantic paraphasia, [...] and disruptions in visual semantic tasks such as picture naming \autocite{Rollans2018}\note{find original!} *list more findings indicative of functional classification*
+collectively leading to the widely accepted function of semantic processing being ascribed to the IFOF, additionally supported by functional MRI.
+
+On the anatomical side, Klingler dissections have found terminations in the inferior frontal gyrus where XX processing takes place, lending support to the idea of a role in the semantic network.
+As arising almolst definitionally in the occipital lobe, the hypothesised role in semantic comprehension involves the transmission of visual input, initally processed within the occipital cortex, to the frontal regions for higher order conceptual processing.
+Additional findings and speculation, however, point to a wider involvement in more complex cogintive processes including working memory and goal-oriented behaviour, awareness any elaboration of visual information for motor planning (\autocite{Sarubbo2013}; the original \autocite{Rizzolatti2003} only discusses the visual dorsal stream and role of inferior parietal lobe) as well as the very broadly described role of "multimodal integration" among distant brain regions \autocite{Sarubbo2013}.
+
+\paragraph*{Posterior terminations}
+
+Despite the name, both \textcite{Sarubbo2013} and \textcite{Martino2010}, finding terminations in the parietal lobe in addition to occipital regions, proposed a possible subdivision of the IFOF into language and non-language related functions.
+
+In their detailed dissection studies, \textcite{Martino2010}, and \textcite{Sarubbo2013} all confirmed the extrastriate occipital cortex, in particular the middle occipital gyrus, as the primary poterior terminations of the IFOF. Lateral occipital lobe terminations were also studied in \textcite{Palejwala2020}.
+\textcite{Hau2016} agree aswell, however that study was based on tractography alone and therefore difficult to trust when it comes to detailed distinction of cortical terminations.
+For example, the lingual gyrus is cited in \textcite{Sarubbo2013} as one of three "main apparent origins" of the IFOF, albeit to a limited extent, while \textcite{Martino2010} (who studied the posterior terminations to a more thorough extent) asserted that any fibres connected to the lingual gyrus belonged to the optic radiations. \textcite{Hau2016} Reported tractography projections to the lingual gyrus "in almost all subejcts".
+Similarly, while \textcite{Sarubbo2013} performed detailed dissection of the frontal IFOF terminations, \textcite{Martino2010} maintained that "at the level of the frontal operculum, the fibers of the IFOF strongly intersect with the terminal branches of other long association fasciculus", making dissection extremely difficult, and indeed not possible for that particular study.
+
+The lingual gyrus (in \textcite{Sarubbo2013} and \textcite{Hau2016}) and in \textcite{Martino2010} the posterior fusiform gyrus, were also frequently found.
+In these dissection studies, however, the distinction between the fibres of the IFOF and those of the occipital radiations are very difficult to distinguish, adding further confusion to the specific anatomical defintion of the former.
+The lingual gyrus and cuneus are cited as IFOF origination regions in \textcite{Palejwala2021}
+
+In addition to the largely agreed upon occipital regions, additional terminations have been found in the parietal and temporal cortices, in particular the superior parietal lobe, fusiform and inferior temporal gyri (\autocite{Martino2010}), and the lingual gyrus in \textcite{Sarubbo2013}.
+Indeed, one of the original descriptions of the IFOF, by Edward Curran in 1909, described the IFOF as also containing fibres "which join the frontal lobe with the posterior part of the temporal and parietal lobes". \autocite{Forkel2014a}
+
+Connections to the temporal lobe are also claimed in the literature where the IFOF (or "extreme capsule fibre system") is considered part of the ventral language system and thus connecting auditory and temporal language regions with frontal regions inculding Broca's area. \autocite{Friederici2013a} \autocite{Kummerer2013}
+
+*All the info is there, needs massively reorganising*
+
+\paragraph*{Frontal terminations}
+
+The cognitive functions residing in the frontal cortex are often nebulously defined and difficult to study and pin down, making the the anatomical definition of pathways associated with those functions correspondingly difficult.
+
+\textcite{Sarubbo2013} have conducted the only dissection study to my knowledge of detailed analysis of the frontal connections specifically of the IFOF. Other studies, e.g. \textcite{Burks2017} focus on a particular cortical region and study all connections to the region. The disadvantage with such studies is in the difficulty of simultaneously keeping the fibres of multiple bundles intact and traceable at once ==citation needed==.
+
+Connections to the inferior frontal gyrus, the seat of Broca's area, were confirmed in \textcite{Sarubbo2013} as well as \textcite{Hau2016}, and is in agreement with the common connection of the IFOF and language function.
+\textcite{Sarubbo2013} also found terminations in the middle frontal gyrus (and more specfically the dorsolateral prefrontal cortex) "in all specimens".
+Finally, the orbitofrontal cortex and frontal pole terminations were found in \textcite{Sarubbo2013} as well as in \textcite{Burks2017}.
+The orbitofrontal cortex is considered to play an important role in decision making. \autocite{Burks2017}
 
 \section{TOD mapping}
 
