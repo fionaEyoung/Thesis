@@ -110,21 +110,35 @@ Since not all of the \gls{or} takes the full scenic route, tractography was run 
 
 \subsection{Corticospinal tract}
 
+
+Voluntary movement is the cornerstone of life and our means of interacting with the outside world, without which motion, speech, and vision would be impossible.
+It stands to reason that an outsized portion of the central nervous system is dedicated to the precise innervation of muscles througout the body, from the fine control of vocal chords to automated touch-typing, and that such a vast repertoire of motor function is mediated by an intricate interplay of different systems including the basal ganglia circuits, cerebellum and the sensori-motor cortices of the cerebral hemispheres.\autocite{Kandel2021}
+Within the primary motor cortex, situated in the precentral gyri, are the bodies of neurons whos axons project all the way into the spinal chord, where they synapse with the motor neurons of the peripheral nervous system to control muscles.
+These axons, together, form a critical pathway called the corticospinal tract (Fig. \ref{fig:cst}).
 Standardised white matter atlases and tractography protocols varyingly describe the corticospinal and pyramidal tracts.
 These two terms are often used interchangeably in tractography-oriented publications, while in anatomical terms they are distinct:
-The corticospinal (CST) and pyramidal tracts (PyT) are both descending motor pathways, with the PyT encompassing both the CST and the corticobulbar tract, which controls movement of the head, neck and face via the cranial nerves.
-Tractography studies and related white matter segmentation research sometimes conflate the major descending (motor) and ascending (sensory pathways), whether intentionally or not. \note{reference this section}
-This is evident in two main regions.
+Somewhat bafflingly, the pyramidal tracts are commonly defined as encompassing both the \gls{cst} and the corticobulbar (or corticonuclear) tract, the latter of which synapses with cranial nerve nuclei of the medulla to control motion of the head, neck and face.\autocite{Chenot2019}
+This despite the fact that only the \gls{cst} fibres continue to form the pyramids of the medulla, after which pyramidal tract is named.
+Since the two are not practically distinguishable on \gls{dmri} from the brainstem upwards, we will hereon refer only to the corticospinal tract.% \note{reference this section}
+%
+% Tractography studies and related white matter segmentation research sometimes conflate the major descending (motor) and ascending (sensory pathways), whether intentionally or not.
+% This is evident in two main regions.
+% Firstly, the inclusion of the medial lemniscus is frequently seen in \gls{cst} segmentations (usually as it is not explicitly excluded, rather than being actively included).
+% This includes TractSeg (and associated reference streamline bundles), XTRACT to some extent, and TractoInferno.
+% By contrast, the tractography protocol employed in this research includes an exclusion mask on the medial lemniscus.
+% Secondly, while it has been suggested that the primary motor cortex can reside in the post-central gyrus,\autocite{Kumar2009} it is generally accepted that the somatosensory cortex is located in the latter, while the motor areas are in the precentral gyri.
+% However, particularly with probabilistic tractography, it is near impossible to constrain streamlines exiting the internal capsule into the fanning corona radiata to one side of the central sulcus, without additional exclusion planes or the use of cortical target regions, which are especially time-consuming to produce, whether manually or through automatic parcellation.
+% Thus streamline-based CST segmentations often contain parts of the somatosensory cortex\autocite{Poulin2021} while others, such as those utilising cortical parcellation-derived target regions, will be restricted to the motor cortex.
 
-Firstly, the inclusion of the medial lemniscus is frequently seen in PyT or CST segmentations (usually as it is not explicitly excluded, rather than being actively included).
-This includes TractSeg (and associated reference streamline bundles), XTRACT to some extent, and TractoInferno.
-By contrast, the tractography protocol employed in this research includes an exclusion mask on the medial lemniscus.
-Secondly, while it has been suggested that the primary motor cortex can reside in the post-central gyrus,\autocite{Kumar2009} it is generally accepted that the somatosensory cortex is located in the latter, while the motor areas are in the precentral gyri.
-However, particularly with probabilistic tractography, it is near impossible to constrain streamlines exiting the internal capsule into the fanning corona radiata to one side of the central sulcus, without additional exclusion planes or the use of cortical target regions, which are especially time-consuming to produce, whether manually or through automatic parcellation.
-Thus streamline-based CST segmentations often contain parts of the somatosensory cortex\autocite{Poulin2021} while others, such as those utilising cortical parcellation-derived target regions, will be restricted to the motor cortex.
+Classically, the \gls{cst} was thought to arise solely from the primary motor cortex (M1), with supportive areas including supplementary motor and somatosensory areas mediating voluntary movement via interaction with M1.
+More recent analysis has revealed that these secondary cortices also send projections directly via the \gls{cst},\autocite{Kandel2021} with up to 35\% of neurons originating in non-motor (primary and supplementary) areas, although these figures are based on animal studies.\autocite{Welniarz2017}
+Evidence in humans for non-primary motor cortex origins of \gls{cst} fibres is limited to tractography and lesion studies.\autocite{Kumar2009,Jane1967}
+However, particularly with probabilistic tractography, it is near impossible to constrain streamlines exiting the internal capsule into the fanning corona radiata to only a narrow region of cortex, and of course tractography is unable to distinguish efferent and afferent pathways.
+Thus streamline-based \gls{cst} segmentations often contain parts of the somatosensory cortex whether intentionally or not.\autocite{Poulin2021}
+In another conflation of descending and ascending pathways, the inclusion of the medial lemniscus is frequently seen in \gls{cst} segmentations (usually as it is not explicitly excluded, rather than being actively included).\autocite{Wasserthal2018,Warrington2020,Poulin2021}
 
 The tractfinder CST atlas streamlines were obtained using Freesurfer parcellations \autocite{Desikan2006,FischlSalat2002} of the primary motor cortex.
-To boost the coverage of the lateral precentral gyrus, which is typically neglected by tractography due to the difficulty in crossing the centrum semiovale and its preference for taking the straightest path, two sets of streamlines were generated.
+To boost the coverage of the lateral precentral gyrus,\autocite{Ebeling1992} which is typically neglected by tractography due to the difficulty in crossing the centrum semiovale and its preference for taking the straightest path, two sets of streamlines were generated.
 First, streamlines were seeded from the entire precentral gyrus, with include regions on the cerebral peduncles and mid-pons level, retaining the coordinates of the successful (included) seeds.
 Then, a dilated mask of those coordinates was subtracted from the motor cortex mask, and the tracking was repeated from this modified low-count seed mask.
 An exclusion \gls{roi} on the medial lemniscus in the mid-pons excludes afferent fibres at the brainstem level.
