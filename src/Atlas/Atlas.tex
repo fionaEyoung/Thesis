@@ -3,7 +3,7 @@
 
 \note{Somehow also include the ``mapping" part in the chapter title?}
 
-The chosen approach to fulfill the aims laid out in \ref{sec:problem} combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation.
+The chosen approach to fulfil the aims laid out in section \ref{sec:problem} combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation.
 It is clear that the task of \gls{wm} tract identification cannot be accomplished without incorporating anatomical priors, and that those priors cannot account for individual differences.
 The incorporation of anatomical priors can be automated for streamline tractography, as is done for several prior works including the FSL tool XTRACT\autocite{Warrington2020} and the white matter query language framework.\autocite{Wassermann2016}
 These approaches still rely on tractography as the means for parsing the local orientation information in the test subject, and consequently inherit many associated drawbacks such as the computational time and power required for whole brain tractography, or the difficulties tracking through oedema or around tumours.
@@ -15,8 +15,8 @@ The necessary intermediate step, of establishing spatial correspondence between 
 
 \section{Theoretical motivation}
 
-The tract orientation atlas aims to capture the typical spatial and orientational distribution of the bundle across a sample of healthy subjects.
-In order to motivate the atlas creation steps, it is worth first considering the information channels aimed to be contained within the atlas and their interpretation.
+The tract orientation atlas aims to capture the typical spatial and orientational distribution of a bundle across a sample of healthy subjects.
+In order to motivate its format and derivation, it is worth first considering the information channels aimed to be contained within the atlas and their interpretation.
 
 First is the spatial distribution, i.e. the likelihood of finding the tract in a given voxel.
 How should we quantify this likelihood?
@@ -24,9 +24,9 @@ At the individual level, this is sometimes conflated with or loosely equated to 
 Instead, let's imagine we pick a single \gls{voxel} in a brain scan and ask, ``are fibres of the \gls{cst} present in this voxel?".
 In attempting to answer this question, we encounter several sources of uncertainty.
 a) Definitional uncertainty.
-While we can more or less agree that the \gls{cst} forms the pyramids of the medulla at one end, and terminates in the primary motor cortex in the precentral gyrus at the other, its precise boundaries boundaries in the subcortical \gls{wm} are less obvious.
+While we can more or less agree that the \gls{cst} forms the pyramids of the medulla at one end, and terminates in the primary motor cortex in the precentral gyrus at the other, its precise boundaries in the subcortical \gls{wm} are less obvious.
 Within the corona radiata, for instance, where is the transition, if a clear one exists, between motor fibres and ascending sensory pathways?
-This lack of highly detailed neurophsyiological knowledge is our first source of uncertainty.
+This lack of highly detailed neurophysiological knowledge is our first source of uncertainty.
 b) Inter-subject variability.
 Even if we could nail down the exact shape of a pathway in a hypothetical ideal brain, we would be left to contend with natural differences in brain shape and organisation.
 How can we know if, in this particular individual, the transition from afferent to efferent fibres occurs slightly more posteriorly than on average?
@@ -39,18 +39,19 @@ Using \gls{msmt} \gls{csd}, we obtain a different \gls{fod}, one which doesn't a
 
 Faced with this tangle of unknowns, we have chosen a simplistic route.
 At the individual level, we will decide upon a theoretical bundle structure that is best supported by known neuroanatomy (effectively eliminating the definitional uncertainty), and attempt to faithfully reconstruct that structure using probabilistic streamline tractography and careful manual filtering of implausible streamlines.
-From this reconstruction we will derive a binary spatial segmentation, effectively assuming no measurement uncertainty for the purpose of training an atlas.% \note{disregarding all those uncertainties?}
+From this reconstruction we will derive a binary spatial segmentation, effectively assuming no measurement uncertainty for the purpose of training an atlas. % \note{disregarding all those uncertainties?}
 By repeating this process and considering the differences in segmentations across a population of reference subjects, we will in doing so capture an approximation of the inter-subject variability.
-% its true we cant trust the mri signal so theres some uncertainty associated with that but given that we don't have a definitive definition of where the tract is even in a perfect situation with zero measurement uncertainty, trying to disentangle the ``we don't know if this voxel contains the tract necessarily because the signal might be noisy" and ``we don't know if the tract is here because we don't actully have a specific definition of the tract's anatomy" is sort of pointless. So we might as well decide on a definition and, whereever that definition is supported by the data we have via the presence of anatomically plausible streamlines, we'll define that voxel as having the tract.
+% its true we cant trust the mri signal so theres some uncertainty associated with that but given that we don't have a definitive definition of where the tract is even in a perfect situation with zero measurement uncertainty, trying to disentangle the ``we don't know if this voxel contains the tract necessarily because the signal might be noisy" and ``we don't know if the tract is here because we don't actually have a specific definition of the tract's anatomy" is sort of pointless. So we might as well decide on a definition and, wherever that definition is supported by the data we have via the presence of anatomically plausible streamlines, we'll define that voxel as having the tract.
 
 The second channel of information to be conveyed in the atlas is the orientation distribution, meaning the spread of likely directions along which the fibres of a bundle might be travelling at a given location.
 This property, too, is subject to uncertainties as described above.
 However, once a tract's location is known, or at least assumed, we can in most cases be fairly certain of its local orientations based on our knowledge of its global shape and trajectory.
 In a multi-fibre voxel, the distinct population in the apparent \gls{fod} which corresponds to our tract of interest is assumed to be known.
-In this case, tractography which pobabilistically draws samples from that distribution will reconstruct some streamlines travelling through that voxel in a distribution of directions consistent with our expectations for that tract, alongside potential spurious streamlines traversing the voxel in the ``wrong" direction.
+In this case, tractography which probabilistically draws samples from that distribution will reconstruct some streamlines travelling through that voxel in a distribution of directions consistent with our expectations for that tract, alongside potential spurious streamlines traversing the voxel in the ``wrong" direction.
 After carefully ensuring, as much as is feasible, that only those consistent streamlines remain, we can retrieve the orientation distribution of the tract of interest in isolation from the other crossing populations using \gls{tod} mapping.
-The objective is to create a map in a template space capturing, at each location, the range of possible orientations the tract can take on as a single spherical distribution.
-A narrow distribution may be found where the tract's orientation is highly consistent across all subjects, whereas a more spread-out distribution would reflect a wider inter-subect variability, which may be seen in regions of fanning or sharp turning (Fig. \note{fig:mean}).
+% The objective is to create a map in a template space capturing, at each location, the range of possible orientations the tract can take on as a single spherical distribution.
+After aggregating this information in template space we should be left with a single spherical distribution per voxel expressing the range of possible orientations typical of the tract.
+A narrow distribution may be found where the tract's orientation is highly consistent across all subjects, whereas a more spread-out distribution would reflect a wider inter-subject variability, which may be seen in regions of fanning or sharp turning (Fig. \note{fig:mean}).
 
 To obtain such a mapping, a combination of streamline tractography and \gls{tod} mapping \autocite{Dhollander2014} is used.
 While tractography has significant limitations as discussed previously, it remains the standard way of segmenting white matter bundles from \textit{in vivo} dMRI data, and biases and errors can, with appropriate post-processing steps, be at least partially corrected for.
@@ -68,14 +69,14 @@ A technique called tract-tracing, which involves the invasive injection of trace
 Blunt dissection in post-mortem specimens, greatly advanced through the fixation methods developed by Joseph Klingler (1888-1963) in the early 20th century,\autocite{Agrawal2011} is therefore the most direct technique available for studying global white matter anatomy in humans.
 Though greatly advancing the study of white matter anatomy and widely used to evaluate the findings of tractography studies, post-mortem dissections, in which layers of white matter fibres are painstakingly separated and isolated, cannot flawlessly uncover the complete and intact extent of an entire bundle,\autocite{Martino2010, Dick2012} and it's findings have also been subject of rigourous debate (see, for example, \textcite{Giampiccolo2022a,Becker2022,Giampiccolo2022b}).
 Nevertheless, post-mortem dissection and \textit{in vivo} functional evidence from intraoperative \gls{des} are preferred over conclusions drawn from purely non-invasive tractography for informing our tract definitions.
-By relying whereever possible on such ``primary source" evidence, we hope to avoid the circularity of basing our understanding of a tract's anatomy on tractography studies alone.%\note{explain this better}
-For example, there are several studies describing the cortical terminations of streamlines in tract reconstructions and presenting them as evidence for connectivity,\autocite{Conner2018,Hau2016} when in reality inferring the existence of a physical connection based on tractography alone is highly unadvisable.\autocite{Rheault2020}
+By relying wherever possible on such ``primary source" evidence, we hope to avoid the circularity of basing our understanding of a tract's anatomy on tractography studies alone.%\note{explain this better}
+For example, there are several studies describing the cortical terminations of streamlines in tract reconstructions and presenting them as evidence for connectivity,\autocite{Conner2018,Hau2016} when in reality inferring the existence of a physical connection based on tractography alone is highly inadvisable.\autocite{Rheault2020}
 
-For projection tracts, such as the optic radiation, the function and anatomy almost define eachother: the optic radiation transmits optical signals from the thalamus to the first point of contact in the cortex, the primary visual cortex.
-With association tracts, one can observe a backwards and forwards between deducing possible corical terminations based on observed function, e.g. particular functional deficits induced through stimulation of the core of the tract, and theorising on possible functions based on observed cortical terminations, e.g. through blunt postmortem dissections.
+For projection tracts, such as the optic radiation, the function and anatomy almost define each-other: the optic radiation transmits optical signals from the thalamus to the first point of contact in the cortex, the primary visual cortex.
+With association tracts, one can observe a backwards and forwards between deducing possible cortical terminations based on observed function, e.g. particular functional deficits induced through stimulation of the core of the tract, and theorising on possible functions based on observed cortical terminations, e.g. through blunt postmortem dissections.
 
 Once an anatomical definition was decided upon based on the balance of available evidence, tractography studies detailing recommended \gls{roi} strategies were compared.
-Prior studies acted as guidance for the choice of \glspl{roi} used for each tract if a clear consus consistent with the chosen definition emerged.
+Prior studies acted as guidance for the choice of \glspl{roi} used for each tract if a clear consensus consistent with the chosen definition emerged.
 Due to the difficulties in constraining tractography streamlines as they approach the cortex, grey matter \glspl{roi} derived from cortical parcellations were used wherever practical.
 
 As is invariably necessary for probabilistic tractography, additional exclusion ROIs are needed to filter false positive streamlines that are clearly not part of the tract, and would not feasibly be included in the tract in an alternative definition.
@@ -109,7 +110,7 @@ The \gls{or} is unsurprisingly an integral structure for visual function and thu
 With the extension of \gls{ml} deep into the temporal pole, this structure is at high risk of injury in common surgeries for treatment of epilepsy, often resulting in postoperative visual field deficits.\autocite{Lacerda2020}
 Intraoperative mapping with subcortical \gls{des} can be used to assess for visual field deficits during surgery,\autocite{Duffau2004a,Mazerand2017} although \textcite{Shahar2018} have suggested that this may be of limited value if visual responses can only be elicited once the resection has already reached a critical proximity to the tract.
 
-To achieve the best possible representation of this important pathway, the LGN was segmentated with precision in all training subjects using the incoming optic tracts and relative positioning with the cerebral penduncles for orientation.
+To achieve the best possible representation of this important pathway, the LGN was segmented with precision in all training subjects using the incoming optic tracts and relative positioning with the cerebral peduncles for orientation.
 Using the \gls{lgn} for seeding, an inclusion waypoint was drawn around the \gls{ss} \gls{roi} on the coronal plane.
 Finally, to improve the coverage of Meyer's loop, an anterior waypoint was positioned just posterior to the anterior pole of the temporal horn.
 Since not all of the \gls{or} takes the full scenic route, tractography was run with and without this additional anterior waypoint and the two sets of streamlines combined.
@@ -176,7 +177,7 @@ Intertwined with this discussion on the white matter connections between (and wi
 In particular, conflicts over the distinction between the \gls{slf} and \gls{af} and their respective terminations in the superior, middle or inferior temporal gyri are directly motivated by a desire to disentangle the distribution of different language associated functions in the temporal cortex and their processing by means of the dorsal and ventral language streams.\autocite{Hickok2004,Friederici2013a,Kljajevic2014a,Giampiccolo2022a,Becker2022a}
 
 Even the core precondition for the classical definition of the \gls{af}, namely the existence of a direct connection between the inferior frontal gyrus (loosely, Broca's area) and the posterior superior temporal gyrus (Wernicke's area), has been called into question.\autocite{Dick2012,Giampiccolo2022a}
-While we cannot dispute the existence of a core bundle of fibres arching around the Sylvian fissure, noone can seem to agree on where exactly those fibres are headed, in either direction.
+While we cannot dispute the existence of a core bundle of fibres arching around the Sylvian fissure, no-one can seem to agree on where exactly those fibres are headed, in either direction.
 Within the temporal lobe, attempts to definitively disentangle the \gls{af} from other temporal lobe tracts have fallen short,\autocite{Becker2022} and with regards to the frontal terminations, there is disagreement over the relationships between the various dorsal stream components and the premotor cortex and inferior frontal gyrus.\autocite{Kljajevic2014a,Giampiccolo2022a}
 
 Numerous lengthy articles and thesis chapters have been devoted to this discussion, and it is beyond the scope of this short review to attempt a definitive summary.
@@ -187,12 +188,13 @@ By this definition, we will exclude longer extensions into the anterior temporal
 
 % \paragraph*{Anatomy and function}
 
-Even compared to the arcuate fasciculus, whose canonical discription, however since disputed, was at least anchored in a strongly motivated connection between two well described cortical regions and an attached clear linguistic function, study of a direct white matter fiber connection between the occipital and frontal lobes has an unsettled history.\autocite{Forkel2014a}
 \begin{SCfigure}[][htb!]
   \includegraphics[width=0.5\textwidth]{chapter_2/ifof_schema.jpg}
   \caption{\note{draft} Scematic of arcuate fasciculus, from \textcite{Geschwind1970}}
   \label{fig:ifof}
 \end{SCfigure}
+
+Even compared to the arcuate fasciculus, whose canonical description, however since disputed, was at least anchored in a strongly motivated connection between two well described cortical regions and an attached clear linguistic function, study of a direct white matter fibre connection between the occipital and frontal lobes has an unsettled history.\autocite{Forkel2014a}
 Thanks to a confusing mix of attempting to directly compare simian and human anatomy,\autocite{Schmahmann2007,ThiebautdeSchotten2012,Mandonnet2018,Sarubbo2019} the historical study of and extrapolation from atypically developed or lesioned brains,\autocite{Schmahmann2007,Forkel2014a} and the difficulty by any means of following long-range connections in the brain,
 \autocite{Martino2010} the \gls{ifof} is an exceedingly difficult tract to pin down from available literature.\autocite{Sarubbo2019,Weiller2021}
 
@@ -200,12 +202,12 @@ The most widely cited functional role of the \gls{ifof} is one of semantic proce
 \autocite{Martino2010,Rollans2017,Rollans2018}
 From a surgical perspective, damage to and infiltration of the \gls{ifof} has been associated with transient or permanent semantic deficits and is commonly dislocated or infiltrated by tumours. \autocite{Almairac2015,Voets2017,Altieri2019,Binding2023}
 Situated within the temporal lobe alongside the \gls{or} and the dense language association network, the \gls{ifof} is at risk of injury in temporal lobectomy surgeries common in the treatment of epilepsy. \autocite{Baran2020,Shah2022,Binding2023}
-Furthermore, \textcite{Bello2010d} found preoperative reconstruction of the \gls{ifof} from \gls{dmri} to be in strong ageement with inatraoperative funcional mapping with \gls{des}.
+Furthermore, \textcite{Bello2010d} found preoperative reconstruction of the \gls{ifof} from \gls{dmri} to be in strong agreement with intraoperative functional mapping with \gls{des}.
 
-The \gls{ifof} is frequently described as the key pathway underpinning a proposed ventral stream of language prosessing\autocite{Duffau2013a,Rollans2018,Voets2017,DavidPoeppel2012} (inspired by the dual-stream ``what" and ``where" model of visual processing), even though early works on this dual-stream framework for language make practically no mention of the occipital cortex.\autocite{Hickok2004,DavidPoeppel2012,Kummerer2013}
-Others conflate it with the ``extreme capsule fibre system"\autocite{Friederici2013a,Zhang2018} (analgous to the structure described in non-human primates\autocite{Mandonnet2018,ThiebautdeSchotten2012}), said to connect the temporal and frontal cortices,\autocite{Kummerer2013}
+The \gls{ifof} is frequently described as the key pathway underpinning a proposed ventral stream of language processing\autocite{Duffau2013a,Rollans2018,Voets2017,DavidPoeppel2012} (inspired by the dual-stream ``what" and ``where" model of visual processing), even though early works on this dual-stream framework for language make practically no mention of the occipital cortex.\autocite{Hickok2004,DavidPoeppel2012,Kummerer2013}
+Others conflate it with the ``extreme capsule fibre system"\autocite{Friederici2013a,Zhang2018} (analogous to the structure described in non-human primates\autocite{Mandonnet2018,ThiebautdeSchotten2012}), said to connect the temporal and frontal cortices,\autocite{Kummerer2013}
 or otherwise declare the \gls{ifof}'s origins as being, at least partly, in the temporal lobe.\autocite{Bajada2015a}
-This casual blurring of functional and anatomical postulation and evidence has lead to a fair degree of uncertainty surrounding the cortical, in particular the posterior,\autocite{Martino2010,Forkel2014a,Weiller2021} terminations of the \gls{ifof} and how it ties in with the wider models of cerbral language networks.
+This casual blurring of functional and anatomical postulation and evidence has lead to a fair degree of uncertainty surrounding the cortical, in particular the posterior,\autocite{Martino2010,Forkel2014a,Weiller2021} terminations of the \gls{ifof} and how it ties in with the wider models of cerebral language networks.
 \autocite{Duffau2013a, Mandonnet2018, Rollans2018, Friederici2013a}
 The cognitive functions residing in the frontal cortex are often nebulously defined and difficult to study and pin down, making the anatomical definition of pathways associated with those functions correspondingly difficult.
 Beyond the commonly cited semantic functional role, researchers have also speculated, often based on at best tenuous evidence, on roles for the \gls{ifof} that include reading and writing functions associated with parts of the parietal cortex,\autocite{Motomura2014} sensorimotor processing\autocite{Martino2010} and planning,\autocite{Sarubbo2013} and involvement in goal-oriented behaviour.\autocite{Conner2018}
@@ -215,12 +217,12 @@ Beyond the commonly cited semantic functional role, researchers have also specul
 
 We will look for an anatomical consensus among post-mortem dissection studies aimed at uncovering the anatomical path of the \gls{ifof}, considering first the posterior and subsequently the frontal terminations.
 In their detailed dissection studies, \textcite{Martino2010}, and \textcite{Sarubbo2013} all confirmed the extrastriate occipital cortex, in particular the middle occipital gyrus, as primary posterior targets, while lateral occipital lobe terminations were also studied in \textcite{Palejwala2020}.
-% \textcite{Hau2016} agree aswell, however that study was based on tractography alone and therefore difficult to trust when it comes to detailed distinction of cortical terminations.
+% \textcite{Hau2016} agree as-well, however that study was based on tractography alone and therefore difficult to trust when it comes to detailed distinction of cortical terminations.
 In addition to the largely agreed upon occipital regions, additional terminations have been found in the parietal and temporal cortices, in particular the superior parietal lobe, fusiform and inferior temporal gyri in \textcite{Martino2010}, and the lingual gyrus in \textcite{Sarubbo2013}.
 The lingual gyrus and cuneus are cited as IFOF origination regions in \textcite{Palejwala2021}
 However, it must be pointed out that the \gls{ifof} fibres have not been unambiguously distinguished from other parietal-occipital bundles, including the \gls{or} and temporal association tracts.
 For example, the lingual gyrus is cited in \textcite{Sarubbo2013} as one of three ``main apparent origins" of the IFOF, albeit to a limited extent, while \textcite{Martino2010} asserted that any fibres connected to the lingual gyrus belonged to the optic radiations.
-% (\textcite{Hau2016} reported tractography projections to the lingual gyrus ``in almost all subejcts".)
+% (\textcite{Hau2016} reported tractography projections to the lingual gyrus ``in almost all subjects".)
 
 After coursing through the temporal lobe above the roof of the temporal horn,\autocite{Martino2010,Kljajevic2014a} the \gls{ifof} converges into a narrow bundle to squeeze, alongside the \gls{uf}, through the temporal stem and into the frontal lobe (Fig. \ref{fig:ifof}).\autocite{Martino2010,Sarubbo2013}
 \textcite{Martino2010} maintained that ``at the level of the frontal operculum, the fibers of the IFOF strongly intersect with the terminal branches of other long association fasciculus", making dissection extremely difficult, and indeed not possible for that particular study.
@@ -228,10 +230,10 @@ Nevertheless, \textcite{Sarubbo2013} have conducted the only dissection study to
 Other studies, e.g. \textcite{Burks2017}, focus on a particular cortical region and study all connections to the region.
 The disadvantage with such studies is in the aforementioned difficulty of simultaneously keeping the fibres of multiple bundles intact and traceable at once.
 Connections to the inferior frontal gyrus, the seat of Broca's area, were confirmed in \textcite{Sarubbo2013} as well as \textcite{Hau2016}, and are consistent with a linguistic function.
-\textcite{Sarubbo2013} also found terminations in the middle frontal gyrus (and more specfically the dorsolateral prefrontal cortex) ``in all specimens".
+\textcite{Sarubbo2013} also found terminations in the middle frontal gyrus (and more specifically the dorsolateral prefrontal cortex) ``in all specimens".
 Finally, the orbitofrontal cortex, which is considered to play an important role in decision making, and frontal pole terminations were found in \textcite{Sarubbo2013} as well as in \textcite{Burks2017}.
 
-Taken together, the dissection studies confirm (i.e. reported in all or most speciemens) primarily posterior terminations in the superior, middle, and inferior occipital gyri and anterior terminations in the middle and inferior frontal gyri, frontal pole, and orbito-frontal cortex.
+Taken together, the dissection studies confirm (i.e. reported in all or most specimens) primarily posterior terminations in the superior, middle, and inferior occipital gyri and anterior terminations in the middle and inferior frontal gyri, frontal pole, and orbito-frontal cortex.
 The evidence is less clear for wider connections to the parietal, posterior temporal and superior frontal cortices, so these will be excluded from the tractfinder atlas.
 Streamlines were seeded in the temporal stem (extreme capsule) and selected according to cortical targets derived from Freesurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation.\footnote{frontal labels: 1\{1,2\}1\{20,19,02,58,59\}; occipital labels: 1\{1,2\}1\{20,19,02,58,59\}}
 
@@ -321,6 +323,6 @@ Outlier voxels visited by streamlines in only a single subject's reconstruction 
 This atlas can then be registered to a target subject for further processing.
 Atlases have so far been created for the most commonly indicated pathways in neurosurgical planning and guidance, namely the \gls{cst}, \gls{or} and \gls{af} (Fig. \note{fig:atlases}), with the creation of further atlases to be the subject of future work.
 
-\section{Discussion}
-
-\note{Consider different elements of the atlas construction, e.g. what is the effect (smoothing) of using only non-linear registration and possibly put the discussion on number of training subjects here too?}
+% \section{Discussion}
+%
+% \note{Consider different elements of the atlas construction, e.g. what is the effect (smoothing) of using only non-linear registration and possibly put the discussion on number of training subjects here too?}
