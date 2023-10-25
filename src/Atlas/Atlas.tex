@@ -291,10 +291,10 @@ The distribution is described by those coefficients and the modified \gls{sh} ba
   T(\theta, \phi) = \sum_{l=0}^{l_{max}} \sum_{m=-l}^l t_{l,m} Y_{l,m}(\theta, \phi) = \sum_j t_jY_j(\theta, \phi)
 \end{align}
 
-The individual \gls{tod} images at this stage still contain significant density bias, with exaggerated differences in magnitude between the core bundle portions and fanning extremities owing to tractography's tendency towards early termination outside of the densest collinear tract regions.\autocite{Rheault2020,Smith2013}
+The individual \gls{tod} images at this stage still contain significant density bias, with exaggerated differences in magnitude between the core bundle portions and fanning extremities owing to tractography's tendency towards early termination outside of the densest collinear tract regions.\autocite{Smith2013,Calamante2015,Rheault2020}
 The purpose of the atlas is to capture only the likelihood of a tract's presence in any given voxel (spatial prior) and, in the case that it is present, its expected orientation (orientational prior).
 If the spatial prior is to be determined by considering the spatial variation of the tract between subjects, then the only information needed for each individual subject is a binary visitation map for the bundle and orientational data.
-Thus to remove the streamline density component, the \gls{tod} maps for each subject are normalised as follows.
+Thus to remove the streamline density component, the \gls{tod} maps for each subject are normalised.
 The spherical integral of each \gls{sh} basis function $Y_{l,m}$ is
 
 \begin{align}
