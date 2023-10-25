@@ -1,53 +1,49 @@
 \section{Atlas data requirements}\label{sec:ntrain}
 
-In segmentation methods relying on seen data from which to ``learn" patterns to apply to unseen data, the volume and range of training data influences the prediction accuracy and generalisability. \note{says who?}
+In segmentation methods which ``learn" patterns from seen data to apply to unseen data, the volume and range of training data influences the prediction accuracy and generalisability.
 For complex deep learning models, which have many thousands of network parameters to learn, the amount of training data required to achieve accurate and stable performance can be immense, posing a particular barrier to the use of such models in applications where suitably annotated data is scarce.
-In the case of the deep learning tool TractSeg\autocite{Wasserthal2018}, for example, 105 subjects in total were used for cross-validation training, which each fully trained model having seen 63 unique subjects \note{also mention augmentation?}.
-
+In the case of the deep learning tool TractSeg\autocite{Wasserthal2018}, for example, 105 subjects in total were used for cross-validation training, which each fully trained model having seen 63 unique subjects, and with the amount of training data effectively increased using extensive data augmentation strategies.
 In tractfinder, the influence of the number of subjects used to construct each atlas is on the amount of inter-subject anatomical variation reflected in the spatial and orientational components.
 It is to be expected that, save for extreme outliers, the additional information gained from adding more training subjects would reach a point of saturation.
 
 To investigate this, an experiment was conducted whereby the number of subjects included in atlas construction was varied, and the effect on segmentation accuracy compared.
-For this purpose the TractSeg \gls{hcp} reference bundles were used.
-Using the same train - test data split as described in \note{??}, subsets of 1, 3, 5, 10, 15 and 30, as well as the full 63 training subjects were randomly selected, from which separate \gls{tod} atlases where constructed.
-Tractfinder tract maps were then generated in the 42 test subjects using each of the different subset atlases and compared with the reference segmentations using the \gls{dice} and density correlation metrics.
+For this purpose the TractSeg \gls{hcp} bundles were used in order to enable objective evaluation against reference segmentations defined in the same manner as the training data, and direct comparison with TractSeg itself.
+Using the same train - test data split as described in \textcite{Wasserthal2018b}, subsets of 1, 3, 5, 10, 15 and 30, as well as the full 63 training subjects were randomly selected, from which separate \gls{tod} atlases where constructed.
+Tractfinder maps were then generated in the 42 test subjects using each of the different subset atlases and compared with the reference segmentations using the \gls{dice} and density correlation metrics.
 
-\begin{figure}
-    \includegraphics{compare_ntrain_.png}
+\begin{figure}[hb!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{compare_ntrain_.png}
     \caption{Comparison of segmentation performance using different numbers of atlas training subjects. Results are grouped by tract, colour represents number of training subjects. The IFO and \gls{or} are in places indistinguishable. \acrolist{af,cst,or}}
     \label{fig:ntrain}
 \end{figure}
 
-When using only a single subject's normalised \gls{tod} map as an ``atlas", mean \gls{dice}s ranged from 0.65 to 0.71 for the IFOF and \gls{cst} respectively.
+When using only a single subject's normalised \gls{tod} map as an ``atlas", mean \gls{dice}s ranged from 0.65 to 0.71 for the IFOF and \gls{cst} respectively (Fig. \ref{fig:ntrain}).
 % These figures are from using the script compare_atlas_size.py committed at sha 33777217
-The maximum increase in mean \gls{dice} between the 15 and 63 subjects atlases was only 0.00835, for the \gls{cst}, representing only a 1\% increase from the lower score of 0.759.
+The maximum increase in mean \gls{dice} between the 15 and 63 subjects atlases was 0.00835, for the \gls{cst}, representing only a 1\% increase from the lower score of 0.759.
 Across all tracts and both comparison metrics, differences in performance between the different atlases was consistently negligible.
+These results indicate that additional atlas subjects beyond a minimum number of around 10 to 15 do little or nothing to improve tractfinder results.
+This can be interpreted as the extra training subjects offering minimal additional information on inter-subject variability, as a lot of this variability is already smoothed out due to affine (instead of diffeomorphic) co-registration of training subjects into template space.
 
-The results indicate that additional atlas subjects beyond a minimum number of around 10 to 15 do little to nothing to improve tractfinder results.
-This can be interpreted as the additional training subjects offering minimal additional information on inter-subject variability, as a lot of this variability is already smoothed out due to affine (instead of diffeomorphic) co-registration of training subjects into template space.
-The effects of additional training data may present differently if the atlases are constructed with non-linear co-registration of training subjects.
-
-\note{this might belong somewhere else.}
-There are two sources of inter-subject variability wrapped up in the atlas: the first is the global anatomical variability including skull shape and differences in cortical shape and arrangement \note{better word for this}.
-The second is the variability in position and shape of the tract itself.
-Under ideal circumstances, diffeomorphic registration of training subjects would eliminate the first of these effects (global variability), leaving only the tract specific variation.
-However, such an atlas would necessitate subsequent applications in new target subjects to also involve diffeomorphic registration between subject and template space, as the atlas would contain no global variability ``allowance", and would therefore expect to be perfectly aligned with a target image, globally speaking \note{good lord}.
+The effects of additional training data may present differently if the atlases are constructed with non-linear co-registration of training subjects. %\note{this might belong somewhere else.}
+There are two sources of inter-subject variability wrapped up in the atlas: the first is the global anatomical variability including skull shape and differences in cortical surface geometry, the second is variability in position and shape of the tract itself.
+Theoretically, diffeomorphic registration of training subjects would eliminate the first of these effects (global variability), leaving only the tract specific variation.
+However, such an atlas would necessitate subsequent applications in new target subjects to also utilise diffeomorphic registration between subject and template space, as the atlas would contain no ``allowance" for global variability, expecting perfect alignment with a target image.
 Requiring diffeomorphic registration at the point of application would greatly inhibit the robustness and speed of tractfinder, and is therefore not the preferred approach.
 
 % Query link: https://www.webofscience.com/wos/woscc/summary/28ab4b31-92c1-4d9e-b117-d5cd310c9927-a4fe70c6/relevance/1
 The issue of deep learning's data requirements has been attracting increased attention.
-A search on the online publication database Web of Science for \lstinline|(few OR single OR one) AND shot AND learning|, (excluding results about singl-shot echo planar imaging) revealed a sharply increasing trend in the broad field of medical imaging alone \note{as in, broadly defined} (Fig. \ref{fig:pubs}).
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\textwidth]{pubs.png}
-  \caption{Publication records by year including the term "single/one/few shot learning" (or similar) on the database Web of Science.}
-  \label{fig:pubs}
-\end{figure}
-
+A search on the online publication database Web of Science for \spverb|(few OR single OR one) AND shot AND learning|  (excluding results about single-shot echo planar imaging) revealed a sharply increasing trend in publication volume within the field of medical imaging (Fig. \ref{fig:pubs}).
 A recent example, by \textcite{Liu2023a} and building on previous work in \textcite{Lu2021}, looked at using single-shot learning to train a deep neural detwork, an extension of the TractSeg architecture, for white matter tract segmentation.
-They trained a network on 60 of the 72 total TractSeg white matter tracts, and applied data-augmentation and transfer learning techniques to adapt the model to segment the remaining 12 tracts using only a single exemplar training dataset for these novel tracts.
-In their results, they include both the CST and OR as novel tracts, as well as others which aren't covered by tractfinder.
-Considering only the best results (which different depending on how many novel tracts the network was extended to) for these two tracts, they achieved a mean Dice score of 0.719 for the CST and 0.624 for the OR, equally good or worse than for tractfinder ``trained" even on only a single dataset (Fig. \ref{fig:ntrain}).
+They trained a network on 60 of the 72 total TractSeg white matter tracts, and applied data-augmentation and transfer learning techniques to adapt the model to segment the remaining 12 tracts using only a single exemplar training dataset for those novel tracts, which included both the \gls{cst} and \gls{or}.
+
+Considering only their best results (which differed depending on how many novel tracts the network was extended to) for these two tracts, they achieved a mean Dice score of 0.719 for the \gls{cst} and 0.624 for the \gls{or}, equally good or worse than for tractfinder ``trained" even on only a single dataset (Fig. \ref{fig:ntrain}).
 While the computational time spent on performing the prerequisite data augmentation training the network for these novel tracts is not disclosed in either \textcite{Liu2023a} or \textcite{Wasserthal2018}, with \note{3-500} epochs of batch size \note{162}, on a dataset of at least 6GB (before augmentation), one can assume \note{several hours} of training.
 Even so, one-shot training of a deep neural network appears to be no better than simply registering a segmentation from one subject to another and calling it a day.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{pubs.png}
+  \caption{Publication records by year including the term ``single/one/few shot learning" (or similar) on the database Web of Science.}
+  \label{fig:pubs}
+\end{figure}
