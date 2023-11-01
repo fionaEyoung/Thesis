@@ -1,14 +1,41 @@
 \section{Tumour deformation modelling}
 \label{chapterlabel3}
 
-The tract orientation atlas represents the expected orientation and location of the tract for a typical healthy subject.
-In order to correct for displacement of white matter tracts due to space occupying lesions, the atlas can be deformed before comparing with the native FOD map.
+Tract orientation atlases represent the expected orientation and location of a tract in typical healthy subjects.
+In the previous chapter we asserted that, for subjects with little structural divergence from the norm, linear registration is sufficient for aligning the atlas and target data.
+However, in cases with large mass-effect, affine registration becomes clearly inadequate, as the distances between expected and actual location of brain structures is simply too great.
+In order to correct for displacement of white matter tracts due to space-occupying lesions, the atlas will need to be deformed more dramatically before comparing with the native \gls{fod} map.
 
-The idea is to obtain a deformation model which is simple enough to compute that little temporal and computational resources are required.
-This unfortunately rules out any advanced tumour growth modelling using finite element methods which explicitly model the biomechanical and cytoarchitectural \note{? word for cell proliferation etc} properties of the tumoural and peritumoural environment.
-While such models are valuable for understanding tumour growth, progression at effects on surrounding tissue from an oncological perspective, we are interested solely in the gross spatial effects of tumour growth: what effect does the presence of a tumour have on the physical location a given volume unit of tissue?
-Of course, thinking this question can be fully answered without considering the complicated factors described above, such as whether a tumour is encapsulated or infiltrating, is folly.
-But focussing only on the spatial deformation and beginning with the simplest possible model to capture its effects can keep the complexity as low as feasible while allowing for more components to be introduced if necessary \note{??}.
+Anatomical non-correspondence between subject and template images caused by space-occupying lesions poses a substantial challenge to the use of atlas-based white matter segmentation methods in clinical subjects.
+While nonlinear deformation tools can produce accurate registration in clinical images, they require usually manual adjustment of many input and regularisation parameters on a case by case basis, and a robust automation of this process is not available to best knowledge.
+More significantly, in the case of registration between a normative template and a scan with a brain tumour, a fundamental assumption of many registration algorithms, that of topological equivalence between the two images, does not hold.\autocite{Zacharaki2009}
+The core of the problem is that one image -- the template -- depicts the anatomy of an average, healthy brain, and the other that of a diseased brain harbouring a tumour, presenting two potential scenarios.
+Either the lesion exists \textit{in addition} to all the structures and tissue expected of a healthy brain, which have been displaced or compressed to accommodate it, or it has \textit{replaced} brain landmarks or rendered them otherwise unrecognisable through the effects of odoema or differing MR properties between tumour and healthy brain tissue.
+In either case, a non-linear registration algorithm is tasked with finding a mapping between two images with different sets of anatomical landmarks, with finding anatomical correspondence between tissue in one image which is nonexistant in the other.
+The result of this violation of the topological equivalence assumption is often ridiculously contorted images, and particularly in the peritumoural zone, which is rather problematic for neurosurgical applications.
+
+Deformable registration alone is thus largely insufficient for handling the anatomical mismatch problem. \autocite{Elazab2018, Visser2020}
+It has long been proposed that an acceptable registration between atlas and tumour data can only be obtained with an additional step of artificially implanting or modelling a representation of the tumour in the atlas.\autocite{Cabezas2011,Mang2020}
+This can be in the form of a seeded atlas deformation,\autocite{Dawant2002} in which a small seed is placed in the atlas before deformable registration, acting as a region of tissue which can be warped to match the full tumour in patient space.
+Alternatively, the seed can be artificially ``grown" using a biophysical or mathematical model of tumour proliferation to simulate deformation, with optional further nonlinear registration of the deformed atlas to the patient image.\autocite{Cuadra2004, Zacharaki2009}
+Many proposed tumour deformation models aim to achieve highly accurate modelling of tumour growth dynamics and the effects on surrounding tissues, by taking into account elastic tissue properties and microscopic tumour growth modelling (see \textcite{Elazab2018} for a comprehensive review).
+Generally models will consider one or a coupling\autocite{Clatz2005,Hogea2007,Prastawa2009} of tumour cellular proliferation and infiltration into surrounding tissues using a reaction diffusion or similar framework,\autocite{Tunc2021,Scheufele2019b,Elaff2018}
+or the biomechanical forces acting between tissues.\autocite{Mohamed2006,Hogea2007a,Zacharaki2009}
+The resulting algorithms are often mathematically complex and implementated using finite element methods,\autocite{Elazab2018} require optimisation of tumour parameters through problem inversion or by other means \autocite{Mohamed2006, Zacharaki2009, Mang2020} and take anywhere between 1 and 36 hours to run, even on high performance computing setups.\autocite{Zacharaki2009,Bauer2012,Bauer2013,Mang2012}
+This is entirely reasonable for studies in which accuracy is a far greater priority than speed.
+Typical applications of tumour deformation modelling include intra-patient longitudinal studies of tumour growth, and inter-patient registration and spatial normalisation for atlas-based segmentation or statistical analysis across patient populations (see \textcite{Bauer2013} and \textcite{Cabezas2011} for overviews).
+Given the time constraints of intraoperative imaging and the practical constraints of the computing capacity which can reasonably be assumed to be available in a clinical setup, the aim for this project was to achieve an estimate of tract displacement with low computational complexity.
+
+The tract orientation atlas described in the previous chapter provides a degree of spatial tolerance that alleviates the need for voxel-perfect registration and deformation, allowing the implementation of a minimal deformation algorithm.
+The idea is to obtain a deformation model which is simple enough to compute using few temporal and computational resources, and use it in combination with affine registration, as before, to achieve spatial alignment between atlas and patient space.
+To this end we will interest ourselves solely in the macroscopic spatial effects of tumour growth: what effect does the presence of a tumour have on the physical location a given volume unit of tissue?
+Of course, this question cannot be fully answered without considering the complicated factors described above, such as whether a tumour is encapsulated or infiltrating.
+Nevertheless, as all models are wrong, and some are useful, the utility of our model will be measured by it's ease of computation and accurate capturing of tract displacement.
+Whether performance in the latter criteria is satisfactory will be measured through the resulting improvement in tract mapping as compared with patient-native methods such as streamline tractography (see Section \ref{sec:btcd}).
+We will consider a radial model of tumour deformation, assuming the tumour has expanded outwards from a central seed, and that surrounding tissue is displaced along the same radial directions.
+\textcite{Cuadra2004} similarly used a radial expansion assumption, but for modelling the interior tumour region (rather than outside the tumour), while an optical flow algorithm was implemented for image matching outside the tumour.
+
+\subsection{Development of a radial deformation model}
 
 We begin with a radial deformation model described by Nowinski and Belov \citep{Nowinski2005}.
 Their motivation was remarkably similar: the rapid deformation of a morphological brain atlas to aid the interpretation of brain anatomies affected by tumour mass effect.
@@ -104,7 +131,7 @@ This value can be determined iteratively, or analytically with the expression
   \lambda_{max} = \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t})+\frac{D_b}{D_t}
 \end{equation}
 
-Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified (referred to as ``adaptive $\lambda$"). 
+Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified (referred to as ``adaptive $\lambda$").
 Note that $\lambda_{max}$ varies throughout the brain, as it depends on the relative distances to brain and tumour surfaces for each specific $P$.
 
 The tumour deformation model is implemented in Python, and full execution takes on average 1 min for a 208 x 256 x 256 voxel image.
