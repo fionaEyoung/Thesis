@@ -40,7 +40,7 @@ We will consider a radial model of tumour deformation, assuming the tumour has e
 We begin with a radial deformation model described by Nowinski and Belov \citep{Nowinski2005}.
 Their motivation was remarkably similar: the rapid deformation of a morphological brain atlas to aid the interpretation of brain anatomies affected by tumour mass effect.
 The required model inputs are the segmentations of the tumour and brain volumes.
-We define the direction $\mathbf{\hat{e}}$, which is the unit vector along the line connecting a point anywhere within the brain $P(x,y,z)$ to the tumour centre of mass, $S$.
+We define the direction $\mathbf{\hat{e}}$, which is the unit vector along the line connecting a point $P(x,y,z)$ anywhere within the brain to the tumour centre of mass, $S$.
 This is the direction along which we assume the tissue at that point to be shifted by the tumour: radially outward from the tumour centre.
 Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarrow{SP}\|$, $D_b$ as the distance from $S$ to the brain surface and $D_t$ as the distance from $S$ to the tumour surface (Fig. \ref{fig:virtue}).
 
@@ -57,26 +57,26 @@ Then for a point in the original image $P = (x,y,z)$ the transformed location in
   P' = f(P) = P + \mathbf{\hat{e}}kD_ts.
 \end{align}
 
-The amount of displacement $\Delta P = kD_ts$ is thus determined by $D_t$, a scale factor $0<s \leq 1$ and a displacement factor $k$.
+The amount of displacement $\Delta P = kD_ts$ is thus determined by $D_t$, a scale factor $0<s \leq 1$ and a spatially varying displacement factor $k(P)$.
 In \textcite{Nowinski2005}, $k$ is a linear function of $D_p$: $k = 1-\frac{D_p}{D_b}$. \footnote[2]{In the original \textcite{Nowinski2005} article, the deformation is described in reverse, as a shrinking model, and the variables there look a little different. They are consistent with the formulation used here, which has been chosen for ease of conceptualisation. Note that both forward and reverse models are required for different types of image transformation, and will be derived later.}
 This can be conceptualised as a displacement force radiating from the centre of the tumour and decaying linearly with distance, reaching 0 only at the brain boundary.
 However, initial experimentations with this model revealed that such a linearly decaying force doesn't do well at capturing the displacement fields observed in real tumour cases.
-The elasticity and compressibility of brain tissue means that the radial force is absorbed by surrounding tissue more rapidly than the linear function suggests.
+The elasticity and compressibility of brain tissue means that the radial force is absorbed by surrounding tissue more rapidly than a linear function accounts for.
 Even with very large tumours, it is common for parts of the brain some distance from the tumour surface to experience no displacement at all, suggesting a  more rapidly decaying function would be a more appropriate choice for $k$.
 
 An exponentially decaying function captures this well, while remaining easily computable, close-form and invertible.
-We begin with a function in the form $k \propto e^{-\lambda \frac{D_p}{D_t}}$.
+We begin with a function in the form $k(P) \propto e^{-\lambda \frac{D_p}{D_t}}$.
 There are two boundary conditions: points on the brain surface should not be displaced ($k(D_p = D_b) = 0$) and points at the centre of the tumour should be displaced by exactly $D_t$ ($k(D_p = 0) = 1$).
-Note that the latter boundary condition is an assumption reflecting a fully encapsulated tumour, where no normal tumour remains inside the final tumour boundary after displacement.
+Note that the latter boundary condition is an assumption reflecting a fully encapsulated tumour, where no normal tissue remains inside the final tumour boundary after displacement.
 Solving for these boundary conditions gives us a normalisation constant:
 
-\begin{align*}
-  k &= a e^{-\lambda x} + c &\text{ where } x = D_p / D_b \\
-  k(x=0)=1 \longrightarrow 1 &= a e^{-0} + c = a + c \\
-  k(x=1)=0 \longrightarrow 0 &= a e{^-\lambda} + c \\
-  -c &= (1-c) e^{-\lambda} \\
-  c &= \frac{e^{-\lambda}}{e^{-\lambda} - 1}
-\end{align*}
+\begin{align}
+  k &= a e^{-\lambda x} + c &\text{ where } x = D_p / D_b \nonumber \\
+  k(x=0)=1 \longrightarrow 1 &= a e^{-0} + c = a + c \nonumber \\
+  k(x=1)=0 \longrightarrow 0 &= a e^{-\lambda} + c \nonumber \\
+  -c &= (1-c) e^{-\lambda} \nonumber \\
+  c &= \frac{e^{-\lambda}}{e^{-\lambda} - 1} \label{eq:c}
+\end{align}
 
 giving
 
@@ -84,38 +84,49 @@ giving
   k(P) = (1-c)e^{-\lambda \frac{D_p}{D_b}} +c.
 \end{align}
 
-Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the deformation field in forward warp convention, where a point in the original image is mapped to a position in the transformed image.
-Forward warping works well for continuous valued data, for example streamlines.
-However, for discreet data such as pixels (or voxels), forward warping brings the problem of ``holes", when a mapped location in the destination image falls between coordinates on the discreet voxel grid, and the original sample value has to be distributed among the neighbouring grid points.
-Thus it is usually preferable, if the warping function is invertible, to determine for each grid point in the transformed image, the corresponding continuous-valued point in the source image from which the appropriate value can be interpolated from the surrounding grid points. \note{does this make sense??}
-Reverse warp convention is used by most \note{??} medical image manipulation packages to deform (and resample) a gridded image.
-Thus we need to obtain the inverse mapping $P = f^{-1}(P')$ by solving equation (\ref{eq:forwardP}) for $P$:
+Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the forward deformation transform $P'=f(P)$, which maps a point in the original image $P$ to a new position $P'$ in the deformed image.
+Forward warping works well for continuous valued data such as streamlines: as the transformed image is also defined in continuous coordinates, each vertex can be ``pushed" to its exact location in the warped output.
+When transforming discreet image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes"), or voxels being assigned values from multiple overlapping mapped points.
+To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting", where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
+As each voxel value will be determined by a weighted sum of all transformed values, this method requires an intermediate buffer to store all transformed points and distributed weights before the final voxel values can be determined, and filling techniques may be required to fill in any holes.
 
-\begin{align}
-  P = P' - \mathbf{\hat{e}}(D_t c - \frac{D_b}{\lambda}\mathcal{W}_0(\frac{-\lambda D_t (1-c) e^{-\lambda(D_{p'}-D_tc)/D_b}}{D_b}))
-\end{align}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.7\textwidth]{warping.pdf}
+  \caption{Forward image warping maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting" (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
+  \label{fig:warp}
+\end{figure}
 
-where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$. \note{derive this ?in appendix??}
-
+It is therefore usually preferable, if the inverse transform $P = f^{-1}(P')$ is known, to use reverse warping, in which each grid point value in the transformed image is ``pulled" from the corresponding continuous-valued point in the source image.
+As with forward warping, the reverse mapped point $f^{-1}(P')$ will not generally fall exactly on a grid point in the source image, so the appropriate value is interpolated from the neighbourhood (Fig. \ref{fig:warp}).
+Reverse warp convention is preferred in medical image manipulation packages to smoothly deform (and resample) a gridded image, and so we need to obtain the inverse mapping $P = f^{-1}(P')$.
 The inverse function for the linear model is (as formulated in \textcite{Nowinski2005}):
 
 \begin{align}
   P = P' - \mathbf{\hat{e}}(1-\frac{D_{P'}-D_t}{D_b-D_t})D_ts
 \end{align}
 
-The appropriate value for the decay parameter $\lambda$ will depend on the specific lesion being modelled. For example, smaller lesions (20-30mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved. In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger decay of deformation, would be appropriate (Figure \ref{fig:virtue}).
-In any case, in order to keep the transforms well behaved, we need to maintain the condition that every point $P$ in the source image that is within the tumour boundary ends up strictly outside the tumour in the eventual deformed image.
+To obtain the inverse mapping for the exponential model, we solve equation (\ref{eq:forwardP}) for $P$, using the exponential $k(P)$ given by (\ref{eq:forwardk}):
+
+\begin{align}
+  P = P' - \mathbf{\hat{e}}(D_t s c - \frac{D_b}{\lambda}\mathcal{W}_0(\frac{-\lambda D_t s (1-c) e^{-\lambda(D_{p'}-D_tsc)/D_b}}{D_b}))
+\end{align}
+
+where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$. \note{derive this??}
+
+The most appropriate value for the exponential decay parameter $\lambda$ will depend on characteristics of the specific lesion being modelled. For example, smaller lesions (20-30mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved. In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger fall-off in displacement force, would be appropriate (Fig. \note{fig:examples}).
+In any case, in order to keep the transforms well-behaved, we need to enforce the boundary condition that every point $P$ in the source image that is within the tumour perimeter ends up strictly outside the tumour in the eventual deformed image.
 In other words,
 
 \begin{equation}\label{eq:lambdabound}
-  k(P) \geq 1 - \frac{D_P}{D_t}
+  k(P) \geq 1 - \frac{D_P}{D_t} = g(P)
 \end{equation}
 
-must hold for all $P$.
+must hold for all $P$ (Fig. \ref{fig:k}).
 
-Given that the gradient of $k$ is strictly decreasing and $g(D_P) = 1 - \frac{D_P}{D_t}$ is linear, it is sufficient to set
+Given that the gradient of $k$ is strictly decreasing and $g(P) = 1 - \frac{D_P}{D_t}$ is linear, it is sufficient to set
 \begin{align*}
-  \frac{d}{dP}\bigg\rvert_{D_P=0}k(D_P) &= \frac{d}{dP}\bigg\rvert_{D_P=0}g(D_P) &\text{ where } \frac{dk}{dP} &= -\frac{\lambda}{D_b}(1-c)e^{-D_p/D_b} &\text{ and } \frac{dg}{dP} &= -\frac{1}{D_t}
+  \frac{d}{dP}\bigg\rvert_{D_P=0}k(P) &= \frac{d}{dP}\bigg\rvert_{D_P=0}g(P) &\text{ where } \frac{dk}{dP} &= -\frac{\lambda}{D_b}(1-c)e^{-D_p/D_b} &\text{ and } \frac{dg}{dP} &= -\frac{1}{D_t}
 \end{align*}
 
 We solve for $\lambda$:
@@ -125,14 +136,20 @@ We solve for $\lambda$:
   \lambda_{max} &= \frac{D_b}{D_t (1-c)}
 \end{align*}
 
-This value can be determined iteratively, or analytically with the expression
+where $c$ is itself a function of $\lambda$ as defined in (\ref{eq:c}). This value can be determined iteratively, or with the expression
 
 \begin{equation}
-  \lambda_{max} = \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t})+\frac{D_b}{D_t}
+  \lambda_{max} = \mathfrak{Re} \left[ \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t}) \right] +\frac{D_b}{D_t}
 \end{equation}
 
 Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified (referred to as ``adaptive $\lambda$").
-Note that $\lambda_{max}$ varies throughout the brain, as it depends on the relative distances to brain and tumour surfaces for each specific $P$.
+Note that $\lambda_{max}$ varies throughout the brain, being a function of the relative distances to brain and tumour surfaces for each specific $P$.
+
+\begin{SCfigure}[][h!]
+  \includegraphics[width=0.6\textwidth]{chapter_3/k.png}
+  \caption{\note{draft.} Deformation factor $k$ as a function of $D_P$. $\lambda$ must be such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_P}{D_t})$ (red line)}
+  \label{fig:k}
+\end{SCfigure}
 
 The tumour deformation model is implemented in Python, and full execution takes on average 1 min for a 208 x 256 x 256 voxel image.
 If lookup tables for $ D_t$ and $D_b$ are precomputed and saved, then subsequent executions of the model (e.g. with different values for $\lambda$ and $s$, as appropriate for a given tumour) take less than 10 seconds, as long as the tumour and brain segmentations remain unchanged.
