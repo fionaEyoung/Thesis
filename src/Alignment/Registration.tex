@@ -1,18 +1,26 @@
 \chapter{Aligning atlas and data}
 \label{chap:reg}
 
-Each tract atlas exists only in a standard template space, and before being used to estimate the location of a tract in a new patient it must first be aligned with that patient's anatomy.
-In order to achieve this, some sort of registration strategy is needed.
-Depending on the specifics of the target data, simple linear registration may be sufficient to bring the two images into alignment.
-In more \note{abnormal} cases, for example patients with space-occupying tumours, intraoperative brain shift or hydrocephalus, further more advanced processing is needed to match the atlas to the subject.
+Each tract atlas is constructed in a standard template space, and before being used to estimate the location of a tract in a new patient it must first be aligned with that patient's anatomy.
+In order to achieve this, some sort of registration strategy is needed, with the most appropriate registration approach depending on the type of application.
+In healthy subjects, it is sufficient to use affine registration to transform the atlas from template into subject space, before the inner product (or whichever comparison is used) is calculated.
+However, in some patient data, more advanced processing may be necessary to ensure satisfactory alignment with target anatomy.
+The following sections will describe the registration methods used in tractfinder for different scenarios, and including the use of tumour deformation modelling to account for space-occupying lesions.
 
-\section{Registration}
+\section{Registration from standard space}
 
-\note{Cover all the registration options (there aren't many). Maybe discuss T1+FA registration}
+There are two categories of image registration.
+In global registration, a single transform applies to the entire image.
+Different degrees of freedom define some commonly used terms: rigid body registration comprises just translation and rotation, while affine registration further includes scaling and shearing (up to 12 degrees of freedom on $\R^3$).
+Following purely algebraic definition, a linear transform does not include translation, however in practice (at least in the medical imaging sphere) ``linear" and ``affine" are used interchangeably.
+Non-linear, deformable, or diffeomorphic registrations are defined on a voxel-by-voxel basis, and therefore have orders of magnitude more degrees of freedom.
+They are useful for fine-grained alignment of local structures, but many algorithms are unstable and prone to converging on local minima, making them difficult to successfully integrate into automated pipelines.
 
-At a minimum, atlas and subject data must be co-registered before tract mapping can be performed.
+As we saw in Chapter \ref{chap:atlas}, a certain degree of inter-subject variability, including both tract-specific and global anatomical differences, is a feature of the atlas due to the use of affine registration to combine the training data in template space.
+
+
 Given that atlases are created from linearly registered training subject data, it makes sense to mirror this relationship and linearly register the atlas to new subject space.
-The inter-subject variability in the atlas stems, due to the use of linear as opposed to diffeomorphic registration, not just from the differences in tract location relative to the rest of the white matter, but also from the global anatomical differences in position and shape of the brain landmarks. \note{how to explain this??}
+
 In using diffeomorphic registration to transform the atlas into subject space would effectively maintain an excessive degree of spatial variability in the atlas which should have been effectively ``registered out" with diffeomorphic transformation.
 The choice of affine registration also dovetails with the stated aim of keeping the overall segmentation methodology as computationally streamlined as possible for the intraoperative environment.
 There can be no ignoring the disadvantages of linear registration.
@@ -25,7 +33,7 @@ The similar orientations of the the \gls{af} and tapetum in this region, togethe
 \note{anything else to say about affine registration??}
 
 Certainly in healthy applications, affine registration is sufficient for accounting for most inter-subject variability.
-In come clinical applications, however, where patient anatomy is far from the norm, linear registration becomes inadequate.
+In some clinical applications, however, where patient anatomy is far from the norm, linear registration becomes inadequate.
 Where diffeomorphic registration may become necessary is in cases with significant amounts of brain shift.
 These include deformations which are not exclusively described by tumour debulking, and cannot be modelled using tumour deformation modelling as described in the \note{next} chapter.
 In this scenario, heavily regularised non-linear registration could be employed to co-register pre- and intraoperative scans of the same patient.
@@ -33,3 +41,6 @@ This is an easier registration than between standard space and intraoperative sp
 \note{show examples of T1+FA reg??}
 Unfortunately, even with regularisation, diffeomorphic registration algorithms are too complex to robustly generalise to the range of anatomies encountered in intraoperative imaging, and would require excessive amounts of manual parameter adjustments to be useful for an automated pipeline.
 \note{this will just devolve into a lit review about tumour registration??}
+\textcite{Visser2020} showed that registration accuracy of the tumoural region in low and high grade gliomas is not significantly improved using non-linear registration across a range of different packages, with little to justify the additional time cost and lack of robust automation.
+
+\section{Intra-patient registration}
