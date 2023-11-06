@@ -42,29 +42,3 @@ The similar orientations of the the \gls{af} and tapetum in this region, togethe
 
 In conclusion, affine registration between template and subject space is preferred in most applications, including for healthy subjects and clinical subjects without large space-occupying lesions.
 The next sections will address the scenarios where patient anatomical topology differs significantly from atlas space: in the presence of deforming tumours, or intraoperative brain shift.
-
-\section{Intra-patient registration and brain shift}
-
-Given the target application of intraoperative \gls{wm} imaging, it would be entirely remiss to not discuss the additional registration issues \note{hailed brought on} by brain shift.
-Predictably, the sheer variability and unpredictability in direction, magnitude and extent of brain shift means that a universally elegant and robust solution cannot be found.
-Instead, we will discuss some common intraoperative scenarios and how tractfinder would be applied to them.
-
-One major source of brain shift is tumour debulking.
-As tumour is removed through the craniotomy, the surrounding tissue collapses and the associated mass effect is reduced.
-For this situation, tumour deformation can be utilised using a preoperative segmentation of the tumour and adjustment of the tumour scale parameter $s$, which if set to a value below one will virtually decrease the tumour radius, mimicking the debulking effect.
-A case study demonstrating this is presented in Section \ref{sec:case}.
-The necessary steps in such a scenario would be affine registration between pre- and intraoperative subject space, re-computation of tumour deformation field using preoperative tumour segmentation and $s<1$, affine atlas transformation to intraoperative space, atlas deformation, and finally tract mapping with intraoperative \gls{fod} image.
-The additional steps of pre- to intraoperative registration and tumour deformation would add less than five minutes to the total processing time.
-
-Of course, tumour debulking does not always result in intraoperative brain shift that looks like a simple reduction in mass effect.
-Often, a certain degree of tissue inertia means that surrounding structures don't instantly relax back into a more ``normal" position, and the effects of gravity, \gls{csf} drainage, herniation, or intracranial pressure changes will have a far more drastic influence on overall brain shift than the removal of tumour tissue.
-In these cases, tumour deformation modelling cannot be leveraged to account for brain shift, and different registration strategies will be required.
-Affine registration is able to model anisotropic scaling, which may be sufficient for brain shift principally characterised by sagging or compression due to gravity.
-
-Finally, there are those cases in which topological differences between pre- and intraoperative scans are so great that neither affine registration nor adjust tumour deformation can sufficiently align the data.
-In these subjects, advanced deformable registration is necessary.
-The task of intraoperative registration to account for brain shift is a well studied one, although in most cases the approach is to deform preoperative data (such as streamlines) to continually provide accurate neuronavigation after brain shift.\autocite{Clatz2005,Archip2007,Wittek2007,Archip2008}
-This requires highly accurate registration, as there is no intraoperative \gls{dmri} acquisition to inform tract identification.
-For tractfinder, it would be preferable to impose stricter regularisation to increase registration stability and minimise the creation of unphysical distortions (e.g. surrounding the site of resection), since any consequent minor misalignments can be handled by the atlas smoothness and comparison with local diffusion data.
-In individual case studies, non-linear registration has successfully been leveraged in this way (Fig. \note{example figure}).
-However, this is still only possible in an experimental setting and involves significant trial-and-error in determining the appropriate registration input parameters, and it remains the subject of future work to achieve robust generalisation and automation.
