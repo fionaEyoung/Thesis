@@ -114,7 +114,9 @@ To obtain the inverse mapping for the exponential model, we solve equation (\ref
 
 where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$. \note{derive this??}
 
-The most appropriate value for the exponential decay parameter $\lambda$ will depend on characteristics of the specific lesion being modelled. For example, smaller lesions (20-30mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved. In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger fall-off in displacement force, would be appropriate (Fig. \note{fig:examples}).
+The most appropriate value for the exponential decay parameter $\lambda$ will depend on characteristics of the specific lesion being modelled.
+For example, smaller lesions (20-30mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved.
+In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger fall-off in displacement force, would be appropriate.% (Fig. \note{fig:examples}).
 In any case, in order to keep the transforms well-behaved, we need to enforce the boundary condition that every point $P$ in the source image that is within the tumour perimeter ends up strictly outside the tumour in the eventual deformed image.
 In other words,
 
@@ -146,7 +148,8 @@ Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ 
 Note that $\lambda_{max}$ varies throughout the brain, being a function of the relative distances to brain and tumour surfaces for each specific $P$.
 
 \begin{SCfigure}[][h!]
-  \includegraphics[width=0.6\textwidth]{chapter_3/k.png}
+  \captionsetup{format=plain}
+  \includegraphics[width=0.65\textwidth]{chapter_3/k.png}
   \caption{\note{draft.} Deformation factor $k$ as a function of $D_P$. $\lambda$ must be such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_P}{D_t})$ (red line)}
   \label{fig:k}
 \end{SCfigure}
@@ -178,7 +181,7 @@ Nevertheless, accurate white matter imaging could still be informative in assess
 
 \begin{figure}[htb!]
   \includegraphics[width=\textwidth]{chapter_3/fa_hist.pdf}
-  \caption{A series of paediatric brain tumour cases. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived directionally encoded colour maps overlaid. For patients 5 and 6, the \note{white dotted line} indicates the approximate location of the tumour. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 5 and 6, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
+  \caption{A series of paediatric brain tumour cases. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived directionally encoded colour maps overlaid. For patients 5 and 6, the white dotted line indicates the approximate location of the tumour. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 5 and 6, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
   \label{fig:fa_hist}
 \end{figure}
 
