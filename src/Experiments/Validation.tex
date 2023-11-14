@@ -13,7 +13,7 @@ The purpose of this validation is therefore not to determine which method is bes
 We'll consider three alternative segmentation approaches and compare each with the proposed method: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
 There are numerous alternative techniques, many based on streamline clustering or automatic \gls{roi} registration, including White Matter Analysis (WMA)\autocite{ODonnell2017} RecoBundles \autocite{Garyfallidis2018}, and Tracula.\autocite{Yendiki2011}
 We will not be comparing tractfinder with all of these alternatives because such a comparison would hardly provide any additional useful information:
-In those methods which rely on a predefined atlas of streamlines or \glspl{roi}, the anatomical assumptions embedded in those predefinitions would influence the similarity metrics more than any methodoligical differences, as indeed they do for the comparisons with TractSeg that follow.
+In those methods which rely on a predefined atlas of streamlines or \glspl{roi}, the anatomical assumptions embedded in those predefinitions would influence the similarity metrics more than any methodological differences, as indeed they do for the comparisons with TractSeg that follow.
 What is more, many of those alternatives have already been systematically compared with TractSeg\autocite{Wasserthal2018}, and so in comparing tractfinder with the latter we can infer relative performance against them.
 
 \paragraph*{Streamline tractography}
@@ -23,9 +23,9 @@ In the clinical dataset, ROIs were placed manually for each subject.
 For the 184 HCP and TractoInferno subjects, manual ROI placement was infeasible.
 Instead the same ROIs were drawn in MNI152 template space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration
 (HCP data includes MNI transformation warps, while warps were created for the TractoInferno data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/) \autocite{Tustison2013,Avants2011}).
-In theory, the defintions behind the in-house tractography paradigm was the same as for creating the respective atlases.
+In theory, the definitions behind the in-house tractography paradigm was the same as for creating the respective atlases.
 However, to avoid dependence on resource-intensive tools for cortical parcellation, only white matter \glspl{roi} were used.
-The result generally more extensive cortical terminations into gyri and sulci, for example the \gls{af}, not otherwise included in the atlases due to either the use of cortical \glspl{roi} or extensive manual filtering, while the core subcortical portions match the defintions reflected in the atlases. 
+The result generally more extensive cortical terminations into gyri and sulci, for example the \gls{af}, not otherwise included in the atlases due to either the use of cortical \glspl{roi} or extensive manual filtering, while the core subcortical portions match the definitions reflected in the atlases.
 This in-house tractography is subsequently abbreviated to ``TG", while the reference TractoInferno bundles are referred to as ``TGR".
 
 \paragraph*{TractSeg}
@@ -53,7 +53,7 @@ The Dice-Soerensen similarity coefficient (\gls{dice}) \autocite{Dice1945} is a 
 for two binary voxel sets $A$ and $B$.
 Since \gls{dice} is a measure for binary segmentations, it requires the thresholding of continuous-valued maps such as track density maps and the pseudo-probability maps produced by tractfinder, which poses some problems.
 Firstly, the conversion from continuous-valued to binary representation introduces a high degree of ambiguity over the appropriate choice of threshold value.
-While the simplest and least ambigiuous approach may be to include all voxels with value $>0$ in the segmentation, this makes little sense in practice.
+While the simplest and least ambiguous approach may be to include all voxels with value $>0$ in the segmentation, this makes little sense in practice.
 In the case of tractography, a small number of rogue false positive streamlines can massively increase the extent of the binary segmentation, and in the case of TractSeg, very few voxels actually are assigned a probability of 0.
 The following thresholds were used throughout, wherever binary segmentations are concerned, are given in Table \ref{tab:thresh}.
 
@@ -114,7 +114,7 @@ where $| \cdot |$ denotes set cardinality and $d_i(X)$ is the Euclidean distance
 
 \subsection{Processing times}
 
-Atlas transformation and inner product computation time per subject for all three tracts and both hemispheres was $18\pm5 s$, plus 1-2 minutes for MSMT-\gls{csd} and 20 seconds for MNI registration.
+Atlas transformation and inner product computation time per subject for all four tracts and both hemispheres was $24\pm5 s$, plus 1-2 minutes for MSMT-\gls{csd} and 20 seconds for MNI registration.
 For TractSeg (DKFZ or XTRACT), mean processing time (for all tracts, 72 for DKFZ and 23 for XTRACT, both hemispheres) was 4:00$\pm$1:00 $min$, plus $15-20 s$ for SSST-\gls{csd}.
 For a full processing time breakdown see Table \ref{tab:time}.
 
@@ -130,19 +130,19 @@ However, since the time taken depends greatly on several factors, including numb
   \begin{tabularx}{\textwidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
     \toprule
     \rowstyle{\rmfamily}
-    Step & Processing time (per subject) & tractfinder & TractSeg & Atlas & tractography \\
+    Step & Processing time \newline (seconds, per subject) & tractfinder & TractSeg & Atlas & tractography \\
     \midrule
-    \dag Brain masking & 3 $\pm$ 2 s & x & x & x & x\\
-    \dag Affine MNI registration & 20 $\pm$ 4s & x &  & x &  \\
-    \dag Response function & 5 $\pm$ 3 s & x & x & x & x\\
-    \dag MSMT CSD & 01:50 min $\pm$ 55 s & x &  & x & x\\
-    \dag SSST CSD + peaks estimation & 18 $\pm$ 8 s &  & x &  &  \\
-    \dag Atlas transformation + inner product (3 tracts) & 18 $\pm$ 5 s & x &  & (x) &  \\
-    \dag TractSeg (72 / 23 tracts) & 04:00 $\pm$ 01:00 min &  & x & & \\
-    \dag Manual ROI delineation (once for whole dataset) & 20:00 min & & & & x \\
-    \ddag Non-linear ROI registration + tractography (3 tracts, 2 hemispheres) & 4:05 $\pm$ 2:08 min & & & & x \\ \addlinespace
+    \dag Brain masking & 3 $\pm$ 2 & x & x & x & x\\
+    \dag Affine MNI registration & 20 $\pm$ 4 & x &  & x &  \\
+    \dag Response function & 5 $\pm$ 3 & x & x & x & x\\
+    \dag MSMT CSD & 110 $\pm$ 55 & x &  & x & x\\
+    \dag SSST CSD + peaks estimation & 18 $\pm$ 8 &  & x &  &  \\
+    \dag Atlas transformation + inner product (4 tracts, 2 hemispheres) & 24 $\pm$ 5 & x &  & (x) &  \\
+    \dag TractSeg DKFZ / XTRACT (72 / 23 tracts) & 240 $\pm$ 60 &  & x & & \\
+    \dag Manual ROI delineation (once for whole dataset) & 1200 & & & & x \\
+    \ddag Non-linear ROI registration + tractography (4 tracts, 2 hemispheres) & 334 $\pm$ 163 & & & & x \\ \addlinespace
     \rowstyle{\bfseries\rmfamily}
-    Total &  & 2:36 min & 4:25 min & \textless2:36min & $\gtrsim$26:03 min \\ \bottomrule
+    Total &  & 2:42min & 4:25min & \textless2:42min & $\gtrsim$27:32min \\ \bottomrule
   \end{tabularx}
 \end{table*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -259,7 +259,7 @@ For example, in several cases, optic radiation streamlines only reach the superi
 In others, the right arcuate fasciculus is significantly smaller than the left (Fig. \note{fig:DUDSAF}).
 
 Given these inconsistencies it was decided to leave the tractoinferno reference streamlines out of any critical analysis on the relative performances of different segmentation approaches.
-The tractoinferno dataset features 284 subjects in total (135 were used for the present analysis), and was published with the intention of providing a large and high quality dataset of reference streamlines explicitly for the purpose of training deep learning models for improved tractography and other data-intensitve applications.
+The tractoinferno dataset features 284 subjects in total (71 were used for the present analysis), and was published with the intention of providing a large and high quality dataset of reference streamlines explicitly for the purpose of training deep learning models for improved tractography and other data-intensitve applications.
 The dissapointingly low quality of these bundles is evidence of the difficulty in producing and conducting consistent quality control on streamline tractography bundles with a high degree of anatomical fidelity and inter-subject consistency.
 The reliance on such large datasets thus presents a significant challenge to methods such as deep learning and demonstrates the advantage of an approach like tractfinder, as was seen in (\ref{sec:ntrain}).
 

@@ -42,8 +42,8 @@ The curated TractSeg reference streamline bundles for these subjects are publicl
 \subsection{TractoInferno}
 
 The recently released TractoInferno database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1}),\autocite{Poulin2022} created for the training of machine learning tractography approaches, contains diffusion and T1-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography reconstructions.
-Of the 284 subjects included in the full TractoInferno database, the 144 subjects with tractography of the \gls{cst}, \gls{or} and \gls{af} were selected.
-Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed in-house tractography, leaving a final 135 subjects.
+Of the 284 subjects included in the full TractoInferno database, the 80 subjects with tractography of the \gls{cst}, \gls{or}, \gls{ifof} and \gls{af} were selected.
+Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed in-house tractography, leaving a final 71 subjects.
 Diffusion acquisition parameters and preprocessing steps are described in \textcite{Poulin2022}, and all data was additionally resampled to 2.3 mm isotropic voxels, the lowest resolution present in the dataset and one in line with clinical acquisitions.
 
 \subsection{Clinical (GOSH \& NHNN)}
@@ -72,13 +72,13 @@ No EPI distortion correction was performed, as it is frequently omitted from cli
              & pre-op   & intra-op      & pre-op & intra-op        & pre-op & post-op       & & \\
   \midrule%
   %           GOSH pre    GOSH intra          NHNN pre      NHNN intra                  BTC pre  BTC post                   HCP           TractoInferno
-  n subjects & 3          & 4                & 4      & 4                               & 10    & 9                         & 49         & 135     \\[1em]
+  n subjects & 3          & 4                & 4      & 4                               & 10    & 9                         & 49         & 71     \\[1em]
   age        & paediatric & paediatric (n=3) & \multicolumn{2}{c}{adult}                & adult & adult                     & adult      & adult   \\
              &            & adult (n=1)      &        &                                 &       &                           &            &         \\[1em]
   indication  & tumour    & tumour (n=3)   & \multicolumn{2}{c}{oligodendroglioma (n=2)}& \multicolumn{2}{c}{meningioma (n=4)} & healthy & healthy \\
               &           & healthy (n=1)  & \multicolumn{2}{c}{other tumour (n=2)}     & \multicolumn{2}{c}{glioma (n=5)}  &            & \\[1em]
-  b values  & 800 (n=1)   & 1000           & 1000     & 1000                       & \multicolumn{2}{c}{0, 700, 1200, 2800} & 1000       & 1000 (n=128) \\
-  (s/mm$^2$) & 1000, 2200 (n=2) &          &          &                            &            &                           &            & 700 (n=7) \\[1em]
+  b values  & 800 (n=1)   & 1000           & 1000     & 1000                       & \multicolumn{2}{c}{0, 700, 1200, 2800} & 1000       & 1000 (n=68) \\
+  (s/mm$^2$) & 1000, 2200 (n=2) &          &          &                            &            &                           &            & 700 (n=3) \\[1em]
   n dirs   & 15 (n=1)     & 30             & 64 (n=3) & 30 (n=3)                   & \multicolumn{2}{c}{8, 16, 30, 50}      & 60\dag     & 21-128 \\
            & 60, 60 (n=2) &                & 61 (n=1) & 3 x 12 (n=1)               &            &                           &            & \\[2em]
   voxel size & 1.75\textsf{x}1.75\textsf{x}2.5 (n=1) & 2.5 (n=1) & 2.5 & 2.5\textsf{x}2.5\textsf{x}2.7 & \multicolumn{2}{c}{2.5} & 2.5\dag    & 2.3\dag \\
