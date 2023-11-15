@@ -4,98 +4,129 @@
 \chapter{Theory fundamentals}
 \label{theory}
 
-\note{This will cover the more theoretical background prerequisites, covering the fundamental concepts on the biological side (neuroanatomy and cellular physiology, maybe some oncology?) and physical side (MR physics)}
-
 \section{Neuroanatomy: Micro to macro}
 
 \subsection{Cells of the brain}
 
-\note{neurons, glial cells, axons and basics of neural signalling.}
-
 The building blocks of living complex organisms begin at the level of molecules and atoms, through macromolecules such as proteins and lipids, organelles, cells, tissues, organs and finally whole organisms.
-For the purposes of this report, though, we can start at the cellular level, and focus on a single organ: the brain.
-Brain tissues consist of numerous cell types.
-The principle functional cells of the human nervous system are neurons, which perform the integration and transmission of signals underpinning all aspects of neural function.
-They are supported, and outnumbered ( by a \note{factor of?}), by a network of glial cells, each with specialised functions.
-There are countless types of neurons covering the spectrum of specialised function, however they all have the following basic components \note{true?}:
-The cell body, or soma, houses the cell nucleus, metabolic activity and organelles responsible for the day-to-day upkeep and maintenance of the entire cell.
-Neurons recieve signal inputs from other neurons via a web of protrusions called dendrites. \note{anything else to say about dendrites?}
-Signals are sent via a single, specialised protrusion called an axon.
-Axon terminals interface with the dentrites of other neurons or, in the peripheral nervous system, with muscles and other innervated tissues.
-The \note{nanoscopic?} gap between the axon terminal and the receving cell is called a synapse.
+For the purposes of this thesis, though, we can start at the cellular level, and focus on a single organ: The brain, which, together with the spinal chord, forms the \gls{cns}.
+Brain tissues comprise numerous cell types.
+The principle functional cell of the human nervous system is the neuron, which performs the integration and transmission of electrical signals underpinning all aspects of neural function.
+It wasn't until the work of Santiago Ramón y Cajal (1852-1934), utilising the silver staining technique developed by Camillo Golgi (1843-1926) to meticulously draw and label neural cells, that the nervous system was recognised as comprising discrete signalling units which interface with one another only at specific points, a principle called the \textit{neuron doctrine}.\autocite{Kandel2021a}
+The brain's approximately 80 billion neurons are supported by a network of glial cells of equal number and importance,\autocite{Herculano-Houzel2014,vonBartheld2016} and of which there are several specialised subtypes.
 
-Glial cells are the other major class of nervous system residents, previously thought to outnumber neurons \note{10:1, although this figure is now disputed.}
-Astrocytes are supportive glial cells provide a range of services including phagocytosis, scar tissue formation and blood-brain barrier formation.
+Neurons fulfil a wide spectrum of specialised functions across the nervous system, but all have the following basic components.
+The cell body, or soma, houses the cell nucleus, metabolic activity and organelles responsible for the day-to-day upkeep and maintenance of the entire cell.
+Neurons receive signal inputs from other neurons via one (uni- and bipolar neurons) or multiple (multipolar neurons) protrusions called dendrites.
+Most neurons of the \gls{cns} possess a large number of dendritic processes, forming a beautiful dendritic tree collecting countless inputs.
+Output signals are sent via a single, specialised protrusion called an axon, which can extend across great distances to deliver impulses to their targets.
+Axon terminals interface with the dendrites of other neurons or, in the \gls{pns}, with muscles and other innervated tissues, at points of contact called synapses.
+The speed of signal conduction in some axons, including those that travel great distances, is enhanced through sheaths of a fatty substance called myelin which provide electrical insulation.
+
+Glial cells (from Greek \textit{glia}, ``glue") are the other major class of nervous system residents, and though long thought to outnumber neurons up to ten fold, newer evidence indicates that they are more or less equally numerous as neurons throughout the brain as a whole, although local ratios vary greatly.\autocite{Herculano-Houzel2014}
+Astrocytes are supportive glial cells providing a range of services including phagocytosis, scar tissue formation and blood-brain barrier formation.
 Oligodendrocytes are the \gls{cns}'s myelinating glia.
-They form processes which wrap around axons as myelin sheaths, with each oligdendrocyte able to mylenate multiple axons simultaneously.
+They form processes which wrap around axons as myelin sheaths, with each oligdendrocyte able to myelinate multiple axons simultaneously.
 In the \gls{pns}, myelination is performed by Schwann cells, which each form a single myelin sheath.
-\note{add microglia}
+Alongside these three classes of macroglia are the microglia, the resident immunological cells of the \gls{cns}, which patrol the brain for pathogens and clean up waste.
 
 \subsection{Neural signalling}
 
+Transmission of information in the brain is both electrical and chemical.
 Neural impulses begin their life at the axon hillock, the transition between the soma and the axon.
-At resting state, an electrical potential exists across the axonal membrane, between the extra- and intraaxonal spaces.
-This membrane potential is maintained by active ion pumps \note{wiki says NaK pumps have low impact on membrane potential?} which continuously exchange two potassium for three sodium ions across the membrane.
-The consequences of this unequal exchange are three-fold: two opposing chemical potential gradients are established, where the extracellular sodium and intracellular potassium concentrations, respecitively, are high, while the three-for-two exchange ratio establishes a net extracellular positive charge.
-When the membrane potential at the axon hillock is depolarised to reach a threshold \note{?}, a wave of depolarisation is triggered which propagates down the axon as an action potential. \note{add more deets on axon potential: phases, repolarisation, channel mechanisms etc}
-In myelinated axons, propagation of the axon potential is greatly accelerated by the insulating effects of the myelin sheaths, separate only by the narrow myelin-free nodes of Ranvier.
-Instead of the axon membrane depolarising in a continuous wave, depolarisation cannot occur at the electrically insulated sections, and instead the signal appears to ``jump" from node to node, where depolarisation replenishes the signal preventing degradatio. \note{big ol simplification}
-In myelinated axons, action potentials travel at speeds of \note{??} mm/s, compared to \note{??} in unmyelinated axons.
+At resting state, an electrical potential exists across the axonal membrane, resulting from separation of charges between the extra- and intra-axonal spaces.
+This membrane potential arises from non-equal concentrations of different ionic species on opposite sides of the membrane, and is maintained by a combination active ion pumps and passive ion channels embedded within the membrane, through which potassium (K$^+$), sodium (Na$^+$), and chloride (Cl$^-$) ions continuously diffuse or are actively transported across the membrane.
+The interacting chemical and electrical potentials of primarily these ions, together with the concentration of ion channels selective for each species, give rise to a cell's resting potential, a steady net separation in charge maintained by a balanced flux of ions.
+All neural signalling is both initiated and propagated by disturbances to this resting potential, when large changes to the membrane's selective permeability cause significant fluxes of ions to change the net charge separation.
+When the membrane potential at the axon hillock is depolarised enough to reach a threshold, voltage-gated ion channels open to allow ions to flood across the membrane.
+
+Each ion species experiences an interplay of the overall charge potential and its own chemical gradient:
+At rest, Na$^+$ concentration is much higher outside the cell, while K$^+$ concentration is higher inside the cell, with those chemical gradients maintained by the relative membrane permeability to each species.
+At the beginning of an axonal impulse the opening of voltage-sensitve sodium ion channels suddenly increases the mebrane permeability to Na$^+$, allowing it to flow into the cell down its concentration gradient and further depolarise the membrane.
+As nearby voltage-gated channels are triggered in turn, a wave of depolarisation propagating down the axon as an action potential.
+After a brief delay, voltage-gated K$^+$ also activate, allowing potassium to repolarise the membrane by flowing down its own chemical gradient, out of the cell.
+This rapid sequence of de- and repolarisation lasts only milliseconds, after which the membrane is again susceptible to excitation.
+In myelinated axons, propagation of the action potential is greatly accelerated by the insulating effects of myelin sheaths, separated only by the narrow myelin-free nodes of Ranvier.
+Myelin acts to decrease the membrane capacitance and thus increase conduction velocity down the axon, while the signal is periodically replenished by strong depolarising Na$^+$ currents at the nodes of Ranvier where voltage-gated Na$^+$ channel density is high.
+Instead of the axon membrane depolarising in a continuous wave, the signal appears to ``jump" from node to node.
+In myelinated axons, action potentials travel at speeds of up to 120 m/s depending on axon diameter, compared with up to 2 m/s in unmyelinated axons.
 
 Upon reaching the axon terminal and synapse, the signal is converted from electrical to chemical.
-The arrival of the action potential triggers the release of signalling molecules called neurotransmitters, which diffuse across the synaptic cleft to ligase with receptors in the receiving cell to influence the mebrane potential on the other side of the cleft.
+The arrival of the action potential triggers the release of signalling molecules called neurotransmitters, which diffuse across the synaptic cleft and ligase with receptors in the postsynaptic cell to influence its membrane potential.
 The effect on the target neuron depends on the neurotransmitter: it may induce hyperpolarisation, in effect an inhibitory signal which decreases the likelihood of the target cell firing itself, or depolarisation, which brings the target cell closer to firing threshold.
-A neuron may recieve synaptic inputs from \note{millions?} of neurons across its dedrites.
+Axons may branch to synapse with many targets, and each neuron may itself receive thousands of synaptic inputs across its dendritic tree.
 Each impulse cases a slight de- or hyperpolarisation of the membrane, which diffuses towards the soma and axon hillock.
 It's the cumulative effects of all those impulses that determine whether a neuron fires, transmitting a new action potential down its axon.
 
-\note{details to potentially add: different neurotransmitters and effects; more biochem details about ion channels and resting membrane/action potentials; nuances of signalling like firing patterns (lots of potentials usually fired in rapid succession)}
+\subsection{Macroscopic neuroanatomy}
 
-\subsection{Neuroanatomy}
-
-\note{Structure of the brain, including different sections (hind, mid, forbrain etc.) and tissue types.
-Discuss the lobes, cortical regions and functional divisions, then white matter tracts.}
-
-On the macro scale, the human brain can be divided into \note{several} different divisions, starting with the at the most macro scale the hind-, mid- and forebrain.
-The hind brain comprises the caudal brainstem (pons and medulla) and cerebellum.
-The former forms a continuum between the forebrain to the spinal cord and houses the bodies vital and involuntary functions and control of the cranial nerves.
-
-The brainstem is further divided into, moving inferior to superior, the medulla, pons and midbrain.
-Posterior to the brainstem, and seated within the posterior fossa, sits the cerebellum, or "little brain",
-a highly specialised and complex structure whose full significance in cerebral function is yet to be fully described, but which is conventionally known to play an integral role in automated motor and speech functions.
-The cerebellum connects with the brain via three white matter bundles, the inferior, middle and superior cerebellar peduncles, of which the middle is the largest and forms the bulk of the pons. \note{?}
+The human brain is divided macroscopically into the hind-, mid- and forebrain.
+The hind brain comprises the caudal brainstem (medulla and pons) and cerebellum.
+The former forms a continuum between the forebrain to the spinal cord and houses control centres for vital, involuntary physiological functions and the cranial nerves.
+Posterior to the brainstem, and seated within the posterior fossa, sits the cerebellum (``little brain"),
+a highly specialised and complex structure whose full significance to cerebral function is yet to be fully described, but which is known to play an integral role in automated motor and speech functions.
+The cerebellum connects with the pons and brainstem via three \gls{wm} bundles, the inferior, middle and superior cerebellar peduncles, of which the middle is the largest.
+The pons also houses a dense arrangement of nuclei and tracts, connecting and integrating functions of the forebrain and cerebellum.
 
 The forebrain consists of the diencephalon (thalamus and hypothalamus) and the telecephalon (cerebral hemispheres).
-Evolutionarily speaking, the cerebral hemispheres are the youngest developments, responsible for much of the complex neural functionality we associated with the general intelligence of modern humans, as well as personality and consciousness \note{??}.
+Central both in importance and in location, the thalamus forms the gateway through which almost all afferent inputs to the forebrain are channeled.
+Its cluster of nuclei relay sensory inputs to their relevant cortical regions, and project diffusely to all regions of the cortex to regulate, it is thought, widespread arousal and attention, and form a feedback loop for sensory and motor integration.
+Ventral to the thalamus sits the hypothalamus, a centre for endocrine and metabolic regulation.
 
-The surface of the cerebral hemispheres, or cortex, is the site of integration of neural signals and complex neural computation.
-The cortical tissue is a form of grey matter, meaning it consists of dense layers of neural somae, dendrites, interneurons \note{and short range / local axonal connections (like inhibitory stuff?)}.
-Since antiquity \note{??} scientists suspected that various cognitive functions, rather than being all equally distributed throughout the brain, arise from distinct locations.
-While early incarnations of this idea may have featured wildly unfounded and \note{wrong} conclusions regarding both the functions that can be ascribed to specific localities, the underlying principle of functional localisation has been subsequently borne out and continuously refined.
-\note{mention Brodmann?}
-Historically, much of the understanding of the functions seated in a given cortical region was predicated on case studies involving injury (e.g. through trauma or stroke) to that region.
-This resulted in inevitably imperfect understanding of the affected areas and functions, given that such random injuries invariably span multiple functional regions. \note{hmm}
-Modern non-invasive imaging techniques \note{does this include stimulation like ntms?} have vastly accelerated our study of the brain, however, clinical case studies remain significant contributors to the field. \note{weak!}
-Some cortical regions have been studied and mapped extensively, particularly those linked with easy to measure quantities like external stimuli and motor outputs.
-Consequenty, the organisation of the visual, motor, and to lesser extent \note{based on what?} auditory, somatosensory and \note{primitive, like basic syntax?} language cortices are well described.
-Conversely, the precise localisation of high-level functions such as advanced language, planning, personality, not least because such complex multifaceted phenomena are unlikely to be associated with just a single structual-functional unit.
-Indeed, modern neuroscience understands that even seemingly primitive functions, such as visual object identification, involve the integration of information and processing across multiple, often distant cortical loci, and thus there can be no understanding of any cognitive function by considering only \note{artificially} demarcated cortical areas in isolation: the brain is a network, and the unit of connection between nodes is the neural axon.
+Evolutionarily speaking, the cerebral hemispheres are the youngest developments, responsible for much of the complex neural functionality we associated with the general intelligence of modern humans, as well as memory, sensorimotor control, and personality.
+The surface of the cerebral hemispheres, called the cortex, is the site of integration of neural signals and complex neural computation, and is divided into the frontal, parietal, occipital and temporal lobes (\note{figure}).
+Cortical tissue consists of dense layers of neural somae, dendrites, interneurons, all locally connected by unmyelinated axons.
+So extensive is the cortical surface in the human brain that, in order to fit inside the skull, it develops a folded topography of ridges (gyri) and valleys (sulci) which form distinctive landmarks on its surface which are recognisable between individuals.
+
+\subsection{Functional organisation: from topology to hodology}
+
+Since antiquity \note{??} scientists have suspected that different cognitive functions, rather than being equally distributed throughout the brain, arise from distinct locations.
+While early incarnations of this idea may have featured wildly unfounded and mistaken conclusions regarding the functions that can be ascribed to specific localities, the underlying principle of functional localisation has been subsequently borne out and continuously refined.
+
+Physicians of the 18th and 19th centuries popularised the study of bumps and dips on the skull as a means for assessing myriad character traits and capabilities, a pseudoscience known as phrenology.
+Significant advances in the theory of functional localisation came with the seminal studies of aphasia, or disorders of language function, undertaken by Pierre Paul Broca and Carl Wernicke \note{life years}.
+Each gave their names to regions of the frontal and temporal cortex respectively, after consistently linking specific patterns of aphasia with lesions caused by stroke or injury to those regions.
+Historically, much of the understanding of the functions seated in a given cortical region was in this way predicated on case studies involving injury (e.g. through trauma or stroke) to that region.
+This resulted in inevitably imperfect understanding of the affected areas and functions, given that such random injuries are unlikely to precisely take out one isolated functional centre.
+Modern non-invasive imaging and measuring techniques have accelerated our study of the brain, however clinical case studies remain significant contributors to the field.
+
+Some cortical regions have been studied and mapped extensively, particularly those associated with easily measured quantities such as external stimuli and motor outputs.
+Consequently, the organisation of the visual, motor, auditory and somatosensory cortices have been comprehensively described.
+The precise localisation of high-level functions, on the other hand, such as advanced language, memory, planning, and personality remains elusive, not least because such complex multifaceted phenomena are unlikely to be associated with just a single structural-functional unit.\autocite{Catani2007}
+Indeed, modern neuroscience understands that even seemingly primitive functions, such as visual object identification, involve the integration of information and processing across multiple, often distant cortical loci,\autocite{ffytche2005} and thus there can be no complete understanding of any cognitive function by considering only demarcated cortical areas in isolation: the brain is a network, and the unit of connection between nodes is the neural axon.
 
 Medium (between neighbouring gyri) and long range connecting axons project from the cortex to enter the dense network of axons that lies beneath.
-Myelin, the fatty substance providing electrical insulation to axons, gives this tissue consisting of densely packed axons a pale appearence, hence its name "\glsdesc{wm}".
-White matter axons, rather than existing as an incoherent \note{spaghetti salad}, form \note{coherent} bundles, or tracts, comprising fibres connecting similar brain regions.
-There are three categories of white matter tracts.
+The abundance of axon insulating myelin gives this tissue consisting of densely packed axons a pale appearance, hence its name ``white matter".
+White matter axons, rather than existing in an unordered tangle, form coherent bundles, or tracts, of fibres connecting similar brain regions.
+There are three categories of white matter tracts:
 Projection tracts connect the cortex with other, non-cortical brain structures and the spinal cord.
 They include both efferent (motor) and afferent (sensory) connections.
-Association tracts connect different cortical regions within the same cerebral hemisphere, while commisural tracts form interhemispheric connections.
-While an understanding of white matter tracts introduces a certain level of \note{coherence/clarity/?} to the intricate brain network, their anatomical and functional definitions are far from clear-cut.
-Mirroring what we saw in the problem of cortical functional localisation, the projection tracts, which have clear physiological correlates \note{?} are relatively easy to study and have been correspondingly well defined, arguably none more so than the corticospinal tract \note{getting too detailed?}.
-Meanwhile, the precise spatial delineation of and \note{ascribing of functional correlates} to the many association tracts is a monumental and woefully incomplete task.
-Fibres from different tracts cross and mingle throughout the white matter, and while bundles may be tight and strongly coherent for a portion of their length, they diverge and fan out to terminate in broad swathes of cortex.
+Association tracts connect different cortical regions within the same cerebral hemisphere, while commissural tracts form interhemispheric connections.
+
+While the division of white matter into individually described tracts introduces a certain level of clarity to the intricate brain network and a common ground from which to study it, many of their anatomical and functional definitions are far from clear-cut.
+As we saw in the context of cortical functional localisation, the projection tracts, which have clear physiological correlates of sensory input and motor outputs, are relatively easy to study and have been correspondingly well defined.
+Examples include the corticospinal tract, responsible for much of voluntary motor control, and the optic radiations, which bring visual inputs to the primary visual cortex in the occipital lobes, although as we will see in Chapter \ref{chap:atlas} even these structures' exact courses can be called into question.
+
+Meanwhile, the task of precisely delineating and ascribing functional correlates to the many association tracts is monumental and woefully incomplete.
+Fibres from different tracts cross, mingle, and converge throughout the brain, and while fibres of the same tract may form a coherent bundle in deep white matter, they proceed to diverge and fan out, terminating in broad swathes of cortex.
 There is no perfect method for observing the full extent of a tract from one end to another.
-Blunt dissection remains the gold standard for anatomical identification, but it's delicate work and disentangling the full course of one bundel of fibres from all other surrounding ones is impossible.
-So it is that anatomical dissections \note{have given} rise to the identification and description of tracts which turned out to be entirely artefactual. \note{round off this soapbox about tract anatomy. Copied from notes on IFOF:}
-\textit{With association tracts, one can observe a backwards and forwards between deducing possible corical terminations based on observed function, e.g. particular functional deficits induced through stimulation of the core of the tract, and theorising on possible functions based on observed cortical terminations, e.g. through blunt postmortem dissections.}
+Postmortem dissection remains the gold standard for anatomical identification, but it is delicate work and disentangling the full course of one bundle of fibres from all other surrounding ones is impossible.
+So it is that anatomical dissections have at times identified and defined tracts which turned out to be entirely artifactual.
+In Chapter \ref{chap:atlas} we will further explore difficulties of defining white matter tracts.
+
+Neuroscientists, anatomists, and neurologist have increasingly come to recognise the importance of looking beyond the purely localisationist models that focus on cortico-functional organisation, towards the integration of white matter connectivity into our understanding of cognitive function.\autocite{ffytche2005,Catani2007}
+After all, the axons in white matter are extensions of the cells that make up grey matter, so there can be no activity of the latter that does not involve the former.
+Indeed, far from being a mere philosophical question about under what framework we study and write about the brain, the so-called hodological view (from Greek \textit{hodos} ``path") has profound translational implications.
+Traditional localisationist approaches to neurosurgery hold, crudely put, that tumours seated within or in close association to ``eloquent" areas of cortex subserving well studied functions of language, low-level sensory processing and movement, are fundamentally inoperable.
+Meanwhile tumours in areas of ``non-eloquent" cortex with no known overt functional correlates can be radically resected with few substantial neurological consequences.
+Much of the study into and tools for functional preservation of so-called eloquent areas that will be discussed in Chapter \ref{sec:neurosurgery} adopts this thinking.
+But the postoperative deterioration in neurocognitive function and quality of life often experienced by patients undergoing surgery for epilepsy or tumours in ``non-eloquent" areas flies in the face of such thinking.
+\autocite{Satoer2017,Mandonnet2017a,Rijnen2019,Herbet2019,Vigren2020a,Dadario2021}
+Furthermore, emerging evidence suggests adopting a hodological approach to neurosurgery can inform successful resection of tumours from areas typically considered inoperable.\autocite{Dadario2021,DeBenedictis2011b,Suzuki2023}
+
+As frameworks of neural function continue to evolve alongside our technological means to study it, we find ourselves reaching across the disciplinary divides for tools and ideas with which to advance our understanding of the brain.
+Modern neuroscience is blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
+As such, while the methodologies and experiments presented in the thesis are rooted in \textit{in vivo} structural imaging of individual white matter tracts, questions around functional tract definitions and surgical relevance will recur throughout.
 
 \section{MRI Physics}
 
