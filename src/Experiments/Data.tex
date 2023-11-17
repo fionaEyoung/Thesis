@@ -41,8 +41,8 @@ The curated TractSeg reference streamline bundles for these subjects are publicl
 
 \subsection{TractoInferno}
 
-The recently released TractoInferno database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1}),\autocite{Poulin2022} created for the training of machine learning tractography approaches, contains diffusion and T1-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography reconstructions.
-Of the 284 subjects included in the full TractoInferno database, the 80 subjects with tractography of the \gls{cst}, \gls{or}, \gls{ifof} and \gls{af} were selected.
+The recently released \textit{TractoInferno} database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1}),\autocite{Poulin2022} created for the training of machine learning tractography approaches, contains diffusion and T1-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography reconstructions.
+Of the 284 subjects included in the full \textit{TractoInferno} database, the 80 subjects with tractography of the \gls{cst}, \gls{or}, \gls{ifof} and \gls{af} were selected.
 Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed in-house tractography, leaving a final 71 subjects.
 Diffusion acquisition parameters and preprocessing steps are described in \textcite{Poulin2022}, and all data was additionally resampled to 2.3 mm isotropic voxels, the lowest resolution present in the dataset and one in line with clinical acquisitions.
 
@@ -68,7 +68,7 @@ No EPI distortion correction was performed, as it is frequently omitted from cli
   \label{tab:datasets}
   \small
   \begin{tabularx}{0.9\linewidth}{l l l l l l l l l} \toprule
-             & \multicolumn{2}{c}{GOSH} & \multicolumn{2}{c}{NHNN} & \multicolumn{2}{c}{BTC\autocite{Aerts2018, Aerts2020a}} & HCP\autocite{Sotiropoulos2013, Glasser2013} & TractoInferno\autocite{Poulin2022} \\
+             & \multicolumn{2}{c}{GOSH} & \multicolumn{2}{c}{NHNN} & \multicolumn{2}{c}{BTC\autocite{Aerts2018, Aerts2020a}} & HCP\autocite{Sotiropoulos2013, Glasser2013} & \textit{TractoInferno}\autocite{Poulin2022} \\
              & pre-op   & intra-op      & pre-op & intra-op        & pre-op & post-op       & & \\
   \midrule%
   %           GOSH pre    GOSH intra          NHNN pre      NHNN intra                  BTC pre  BTC post                   HCP           TractoInferno

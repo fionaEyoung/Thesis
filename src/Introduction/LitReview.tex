@@ -198,6 +198,7 @@ In particular, tumour resections involve a unique combination of complexities an
 Indeed, it is sort of misleading to sweepingly refer to all neurosurgical procedures involving \note{cranial?supracellar?} \gls{cns} neoplasms as ``brain tumour resections", so diverse are those conditions in presentation, neurophysiology, microbiology, treatment plans, and prognosis.
 Such diversity presents a significant barrier to the development of image processing methods intended for generalisation to use in tumour patients.
 For example, tumours occur throughout the brain, and the location has an impact on the effects on surrounding brain structures.
+\textcite{Gooya2012} constructed a statistical atlas of 122 glioma cases and found the most frequently affected site to be the left temporal lobe.
 Midline tumours can affect both hemispheres, while tumours far from the midline may enact no effects whatsoever on the contralateral hemisphere, in which case for image processing purposes, the contralateral hemisphere could be considered ``normal".
 A tumour's \note{origin} and microbiology also play a large role in determining its effects on its environment.
 Gliomas are often of complex structure, with infiltrating portions and peri-tumoural edoema blurring the distinction between tumour and non-tumour tissue.
@@ -278,6 +279,9 @@ The European Association of Neuro-Onocology's recommendation, as of 2021, is tha
 
 \subsection{Surgical neuronavigation}
 
+\note{use cognitive mapping, not just stimulation, to monitor higher order functions and networks, says Mandonnet2017a, Rijnen2019}
+\note{failed intraop mapping worse outcomes: Nossek2013a}
+
 \note{All the various tools and gizmos for guided surgery. Split into preoperative planning and intraoperative use.
 Include functional imaging (EEG, fMRI, EEG), structural, tractography, DES, awake surgery/monitoring and intraoperative imaging.}
 
@@ -311,6 +315,8 @@ Functional MRI can guide the use of DES-based functional mapping after craniotom
 
 \paragraph*{White matter mapping}
 
+DTI and tractography could predict EOR by evaluating infiltration or displacement of tracts \autocite{CastellanoA.2010a, Castellano2012}
+
 \note{Copied from HBM manuscript; this might be better placed as a summary in the "problem statement" part?}
 
 In neurosurgical settings, tractography is frequently based on \gls{dt} fibre orientation models \autocite{Toescu2020, Yang2021} and deterministic tracking algorithms, for example as implemented in Brainlab's iPlan\textregistered (single tensor)\autocite{Brainlab2012} and Elements (dual tensor)\autocite{Sollmann2020a} Fibre Tracking applications (Brainlab AG, Munich, Germany) which use a version of fibre assignment by continuous tracking, or FACT. \autocite{Mori1999}
@@ -337,6 +343,7 @@ The dynamic conditions of brain surgery results in the unpredictable and often s
 A range of factors contribute to this phenomenon, including the draining of \gls{csf}, sagging due to gravity, decompression of tissue surrounding resected tumour, swelling, craniotomy herniation \note{is that a thing?} and the effects of surgical instruments.
 These effects are often \note{competing}, for example swelling and tumour debulking can cause brain tissue to shift towards a craniotomy, while the effects of gravity and \gls{csf} drainage can have the opposite effect.
 The amount and direction of shifting is unpredictable, ranging from \note{1-10mm}, making accounting for it with predictive modelling very difficult.
+Different tumour types can affect the pattern of brain shift in different ways \autocite{Gerard2017}
 
 Brain shift can affect the neurosurgeons perception of the shape and location of the target lesion \note{pure speculation} and invalidate preoperative imaging used for navigation.
 \note{cue various studies backing this up.}
