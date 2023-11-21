@@ -4,10 +4,10 @@ The following sections set out to provide an evaluation of the tractfinder metho
 A common complaint in the realm of white matter imaging is the lack of reliable ground truth for fibre tract identification.
 The truth is, there is no such ground truth.
 This goes deeper than the limitations of our scientific instruments: micrometer-resolution \gls{mri} or infallible tractography algorithms are not the answer.
-As was explored in (\ref{chap:atlas}), our \note{knowledge} of white matter anatomy, connection and function is neither fixed nor universal, such that a single definition that can be agreed upon by all does not even exist for a single moment, let alone one to last over time.
+As was explored in chapter \ref{chap:atlas}, our \note{knowledge} of white matter anatomy, connection and function is neither fixed nor universal, such that a single definition that can be agreed upon by all does not even exist for a single moment, let alone one to last over time.
 
-We can nontheless arrive at a reasonable assessment of tractfinder's accuracy, reliability and applicability by making justifiable assumptions and comparing it, quantitatively and visually, with benchmark methods in a variety of datasets and case studies.
-The missing ground truth problem comes to the fore when comparing different methods, as we will see in (\ref{sec:validation}), but the results are still instructive in assessing their respective characteristics.
+We can nonetheless arrive at a reasonable assessment of tractfinder's accuracy, reliability and applicability by making justifiable assumptions and comparing it, quantitatively and visually, with benchmark methods in a variety of datasets and case studies.
+The missing ground truth problem comes to the fore when comparing different methods, as we will see in section \ref{sec:validation}, but the results are still instructive in assessing their respective characteristics.
 To balance this issue, we provide a further analysis directly comparing tractfinder against the deep learning method TractSeg by constructing new \gls{tod} atlases from the TractSeg model training data.
 We'll further attempt to quantitatively evaluate the effect of tumour deformation modelling on improving segmentation performance in affected patients.
 
@@ -18,32 +18,35 @@ Finally, we'll move on from Dice scores and box plots to explore the practical a
 
 A range of datasets are considered in which to compare the tractfinder approach against alternative tract segmentation methods.
 Each dataset and any dataset-specific preprocessing is described in the following subsections.
-In addition, the following default preprocessing steps where applied to all scans, unless otherwise specified:
+In addition, the following default preprocessing steps were applied to all scans, unless otherwise specified:\footnote[2]{software versions: MRtrix3 v3.0.2-3.0.3 (\url{https://www.mrtrix.org/}), \gls{fsl} v.6.0}
 
-\begin{enumerate}
-  \item brain masking\autocite{Tournier2019}
-  \item linear registration using FSL v.6.0 Linear Image Registration Tool\autocite{Jenkinson2001,Jenkinson2002} between subject space and MNI152\autocite{Fonov2011} space
-  \item \gls{csd}. Depending on the dataset and / or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd} (``original flavour")\autocite{Tournier2007,Tournier2019} and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to white matter and grey matter tissue compartments for single-shelled acquisitions (those with a single nonzero $b$-value),
-  and \gls{msmt} \gls{csd} with three tissue compartments (WM, GM, CSF) for multi-shelled acquisitions.
-  In all cases, response functions were obtained using the Dhollander unsupervised 3-tissue response function estimation algorithm.\autocite{Dhollander2016,Dhollander2019}
-  All \gls{csd} processing was conducted using the MRtrix3 image processing software package v3.0.2-3.0.3 (\url{https://www.mrtrix.org/}).\autocite{Tournier2019}
-\end{enumerate}
+\textit{Brain masking}\autocite{Tournier2019}
+using a heuristic algorithm based on thresholding the mean of each diffusion weighted shell described in \textcite{Dhollander2016}, implemented in MRtrix3\autocite{Tournier2019} as \verb|dwi2mask|.
 
+\textit{Affine registration} between subject space and MNI152\autocite{Fonov2011} space using \gls{fsl} Linear Image Registration Tool\autocite{Jenkinson2001,Jenkinson2002}
+
+\textit{\Gls{csd}}. Depending on the dataset and / or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd} (``original flavour")\autocite{Tournier2007,Tournier2019} and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to \gls{wm} and \gls{gm} tissue compartments for single-shelled acquisitions (those with a single nonzero $b$-value),
+and \gls{msmt} \gls{csd} with three tissue compartments (\gls{wm}, \gls{gm}, \gls{csf}) for multi-shelled acquisitions.
+In all cases, response functions were obtained using the Dhollander unsupervised 3-tissue response function estimation algorithm.\autocite{Dhollander2016,Dhollander2019}
+All \gls{csd} processing was conducted using the MRtrix3 image processing software package\autocite{Tournier2019}.
 
 \subsection{HCP}
 
 The first large healthy adult dataset comprised 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
-These images have been preprocessed as documented in \textcite{Glasser2013},
-While for this analysis they were downsampled to 2.5 mm isotropic voxels and a subset of 60 directions at $b=1000 s/mm^2$ extracted, emulating a typical clinical acquisition in spatial and angular resolution.
+The original data comprises high resolution T1 weighted and diffusion weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
+Raw diffusion data contains three diffusion weighted shells at $b=$ 1000, 2000 and 3000 $s/mm^2$ with 90 directions each and 18 $b=0$ volumes.\autocite{Sotiropoulos2013}
+These images have been preprocessed as documented in \textcite{Glasser2013,Sotiropoulos2013},
+and additionally for this analysis they were downsampled to 2.5 mm isotropic voxels (from the original resolution of 1.25 mm isotropic) and a subset of 60 optimally distributed directions at $b=1000 s/mm^2$ extracted, emulating a typical clinical acquisition in spatial and angular resolution.
 
 A different set of 105 HCP subjects were used in the training and testing of the deep learning segmentation method TractSeg.\autocite{Wasserthal2018}
-The curated TractSeg reference streamline bundles for these subjects are publicly available\autocite{Wasserthal2018b} and were used in a separate set of analysis to directly compare tractfinder and TractSeg.
+The curated TractSeg reference streamline bundles for these subjects are publicly available\autocite{Wasserthal2018b} and were used in a separate set of analyses to directly compare tractfinder and TractSeg.
+For these subjects, the same preprocessing steps were applied as in the set of 49 subjects, with the exception of selecting a subset of 30 instead of 60 $b=1000s/mm^2$ directions, for comparability with the \textit{clinical quality} data using in \textcite{Wasserthal2018}.
 
 \subsection{TractoInferno}
 
 The recently released \textit{TractoInferno} database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1}),\autocite{Poulin2022} created for the training of machine learning tractography approaches, contains diffusion and T1-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography reconstructions.
 Of the 284 subjects included in the full \textit{TractoInferno} database, the 80 subjects with tractography of the \gls{cst}, \gls{or}, \gls{ifof} and \gls{af} were selected.
-Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed in-house tractography, leaving a final 71 subjects.
+Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed targeted ROI tractography (see section \ref{sec:methods}), leaving a final 71 subjects.
 Diffusion acquisition parameters and preprocessing steps are described in \textcite{Poulin2022}, and all data was additionally resampled to 2.3 mm isotropic voxels, the lowest resolution present in the dataset and one in line with clinical acquisitions.
 
 \subsection{Clinical (GOSH \& NHNN)}
@@ -72,8 +75,8 @@ No EPI distortion correction was performed, as it is frequently omitted from cli
              & pre-op   & intra-op      & pre-op & intra-op        & pre-op & post-op       & & \\
   \midrule%
   %           GOSH pre    GOSH intra          NHNN pre      NHNN intra                  BTC pre  BTC post                   HCP           TractoInferno
-  n subjects & 3          & 4                & 4      & 4                               & 10    & 9                         & 49         & 71     \\[1em]
-  age        & paediatric & paediatric (n=3) & \multicolumn{2}{c}{adult}                & adult & adult                     & adult      & adult   \\
+  n          & 3          & 4                & 4      & 4                               & 10    & 9                         & 49         & 71     \\[1em]
+  age range (y)  & \multicolumn{2}{c}{paediatric (3-12, n=3)} & \multicolumn{2}{c}{adult (30-39)} & \multicolumn{2}{c}{adult (39-74)} & adult (22-35) & adult (18-75) \\
              &            & adult (n=1)      &        &                                 &       &                           &            &         \\[1em]
   indication  & tumour    & tumour (n=3)   & \multicolumn{2}{c}{oligodendroglioma (n=2)}& \multicolumn{2}{c}{meningioma (n=4)} & healthy & healthy \\
               &           & healthy (n=1)  & \multicolumn{2}{c}{other tumour (n=2)}     & \multicolumn{2}{c}{glioma (n=5)}  &            & \\[1em]
@@ -84,7 +87,8 @@ No EPI distortion correction was performed, as it is frequently omitted from cli
   voxel size & 1.75\textsf{x}1.75\textsf{x}2.5 (n=1) & 2.5 (n=1) & 2.5 & 2.5\textsf{x}2.5\textsf{x}2.7 & \multicolumn{2}{c}{2.5} & 2.5\dag    & 2.3\dag \\
   (mm)       & 2\textsf{x}2\textsf{x}2.2 (n=2)       & 2.3 (n=3) & & & & & & \\[1em]
   scanner & Philips Ingenia 1.5T (n=1)  & Siemens Vida 3T & Siemens & Siemens & \multicolumn{2}{c}{Siemens} & Siemens 3T & variable\\
-          &  Siemens Prima 3T (n=2)  &                & Trio 3T  & Espree 1.5T                & \multicolumn{2}{c}{Trio 3T}           & ``Connectome Skyra”  & \\ \bottomrule
+          &  Siemens Prima 3T (n=2)  &                & Trio 3T  & Espree 1.5T                & \multicolumn{2}{c}{Trio 3T}           & ``Connectome  & \\
+          &                          &                &          &                            &                   &                   & Skyra”  & \\ \bottomrule
   \end{tabularx}
 \end{table}
 \end{landscape}

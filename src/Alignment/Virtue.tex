@@ -28,16 +28,18 @@ Given the time constraints of intraoperative imaging and the practical constrain
 
 The tract orientation atlas described in the previous chapter provides a degree of spatial tolerance that alleviates the need for voxel-perfect registration and deformation, allowing the implementation of a minimal deformation algorithm.
 The idea is to obtain a deformation model which is simple enough to compute using few temporal and computational resources, and use it in combination with affine registration, as before, to achieve spatial alignment between atlas and patient space.
-To this end we will interest ourselves solely in the macroscopic spatial effects of tumour growth: what effect does the presence of a tumour have on the physical location a given volume unit of tissue?
+To this end we will interest ourselves solely in the macroscopic spatial effects of tumour growth: what effect does the presence of a tumour have on the physical position of a given volume unit of tissue? \note{and orientation?}
 Of course, this question cannot be fully answered without considering the complicated factors described above, such as whether a tumour is encapsulated or infiltrating.
 Nevertheless, as all models are wrong, and some are useful, the utility of our model will be measured by its ease of computation and accurate capturing of tract displacement.
-Whether performance in the latter criteria is satisfactory will be measured through the resulting improvement in tract mapping as compared with patient-native methods such as streamline tractography (see Section \ref{sec:btcd}).
+Whether performance in the latter criteria is satisfactory will be measured through the resulting improvement in tract mapping as compared with patient-native methods such as streamline tractography (see section \ref{sec:btcd}).
 We will consider a radial model of tumour deformation, assuming the tumour has expanded outwards from a central seed, and that surrounding tissue is displaced along the same radial directions.
 \textcite{Cuadra2004} similarly used a radial expansion assumption, but for modelling the interior tumour region (rather than outside the tumour), while an optical flow algorithm was implemented for image matching outside the tumour.
 
+\note{add picture of tumour and affine atlas with big misalignment}
+
 \subsection{Development of a radial deformation model}
 
-We begin with a radial deformation model described by Nowinski and Belov \citep{Nowinski2005}.
+We begin with a radial deformation model described by \textcite{Nowinski2005}.
 Their motivation was remarkably similar: the rapid deformation of a morphological brain atlas to aid the interpretation of brain anatomies affected by tumour mass effect.
 The required model inputs are the segmentations of the tumour and brain volumes.
 We define the direction $\mathbf{\hat{e}}$, which is the unit vector along the line connecting a point $P(x,y,z)$ anywhere within the brain to the tumour centre of mass, $S$.
@@ -87,7 +89,7 @@ giving
 Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the forward deformation transform $P'=f(P)$, which maps a point in the original image $P$ to a new position $P'$ in the deformed image.
 Forward warping works well for continuous valued data such as streamlines: as the transformed image is also defined in continuous coordinates, each vertex can be ``pushed" to its exact location in the warped output.
 When transforming discreet image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes"), or voxels being assigned values from multiple overlapping mapped points.
-To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting", where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
+To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting",\autocite{Niklaus2020} where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
 As each voxel value will be determined by a weighted sum of all transformed values, this method requires an intermediate buffer to store all transformed points and distributed weights before the final voxel values can be determined, and filling techniques may be required to fill in any holes.
 
 \begin{figure}[h!]
@@ -150,7 +152,7 @@ Note that $\lambda_{max}$ varies throughout the brain, being a function of the r
 \begin{SCfigure}[][h!]
   \captionsetup{format=plain}
   \includegraphics[width=0.65\textwidth]{chapter_3/k.png}
-  \caption{\note{draft.} Deformation factor $k$ as a function of $D_P$. $\lambda$ must be such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_P}{D_t})$ (red line)}
+  \caption{Deformation factor $k$ as a function of $D_P$. $\lambda$ must be small enough such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_P}{D_t})$ (dashed line). An exponential $k$ with $\lambda_{max}$ is plotted in solid black, compared with a linear $k$ as proposed in \textcite{Nowinski2005} (dotted line).}
   \label{fig:k}
 \end{SCfigure}
 
@@ -181,7 +183,7 @@ Nevertheless, accurate white matter imaging could still be informative in assess
 
 \begin{figure}[htb!]
   \includegraphics[width=\textwidth]{chapter_3/fa_hist.pdf}
-  \caption{A series of paediatric brain tumour cases. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived directionally encoded colour maps overlaid. For patients 5 and 6, the white dotted line indicates the approximate location of the tumour. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 5 and 6, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
+  \caption{A series of paediatric brain tumour cases. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived directionally encoded colour maps overlaid. For patients 4 and 5, the white dotted line indicates the approximate location of the tumour. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 4 and 5, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
   \label{fig:fa_hist}
 \end{figure}
 

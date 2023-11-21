@@ -1,8 +1,6 @@
 
 \section{Validation: methods}
-
-While a ground truth for white matter tract segmentation is not obtainable \textit{in vivo}, it is nevertheless instructive to compare the tractfinder technique with two other widely adopted methods for a quantitative estimation of reliability and accuracy.
-We'll quantitatively evaluate tractfinder in three different datasets: Two large healthy datasets (HCP and \textit{TractoInferno}, see \ref{sec:data}) and one smaller dataset of clinical neurosurgical acquisitions (NHNN and GOSH combined), together covering a range of acquisition protocols and scanner specifications.
+\label{sec:methods}
 
 In segmentation tasks, it is common to present a single numeric score of similarity with a ground truth by way of establishing accuracy.
 However, in the absence of a ground truth for this particular task, we'll instead aim to present as rounded a picture as possible of the differences and characteristic features of each method through a range of different volumetric distance-based similarity metrics.
@@ -55,7 +53,7 @@ Since \gls{dice} is a measure for binary segmentations, it requires the threshol
 Firstly, the conversion from continuous-valued to binary representation introduces a high degree of ambiguity over the appropriate choice of threshold value.
 While the simplest and least ambiguous approach may be to include all voxels with value $>0$ in the segmentation, this makes little sense in practice.
 In the case of tractography, a small number of rogue false positive streamlines can massively increase the extent of the binary segmentation, and in the case of TractSeg, very few voxels actually are assigned a probability of 0.
-The following thresholds were used throughout, wherever binary segmentations are concerned, are given in Table \ref{tab:thresh}.
+The thresholds used wherever binary segmentations are concerned are given in Table \ref{tab:thresh}.
 
 \begin{table}[h!]
   \caption{}
@@ -74,7 +72,7 @@ The following thresholds were used throughout, wherever binary segmentations are
 \end{table}
 
 Secondly, the binary nature of a \gls{dice} discounts the additional confidence information present in density and probability maps.
-In addition to the binary \gls{dice} measure, therefore, we consider two candidates for a measure of agreement between two continuous valued segmentations.
+In addition to the binary \gls{dice} measure, therefore, we consider two candidates for a measure of agreement between two continuous valued segmentations. \note{Delete weighted dice? or unify naming generalised/weighted}
 The first is a generalisation of the \gls{dice} (\gls{gdice}):
 
 \begin{align}
@@ -111,6 +109,8 @@ where $| \cdot |$ denotes set cardinality and $d_i(X)$ is the Euclidean distance
 
 \section{Validation: results}
 \label{sec:validation}
+
+\note{add a couple of sentences of overview}
 
 \subsection{Processing times}
 
@@ -242,7 +242,7 @@ These differences highlight the difficulty in assessing the ``accuracy" of white
 
 \paragraph*{Reproducibility}
 
-As a final word on repoducibility, we note that the results in Figure \note{fig:METRICSBOXPLOTS} are consistent with the comparisons between TractSeg and RecoBundles published in \textcite{Wasserthal2018}.
+As a final word on reproducibility, we note that the results in Figure \note{fig:METRICSBOXPLOTS} are consistent with the comparisons between TractSeg and RecoBundles published in \textcite{Wasserthal2018}.
 There, a mean \gls{dice} of between 0.58 and 0.67 across all tracts was reported.
 Our measured \gls{dice}s between TractSeg (DKFZ) and reference tractography (which is based on RecoBundlesX\autocite{Garyfallidis2018}) range between 0.45 and 0.59 across the three tracts studied (Tab. \note{tab:DATATI}).
 
@@ -288,14 +288,14 @@ TractSeg was trained on 63 subjects and tested on the remaining 42, and the same
 \end{figure}
 
 In the four main tracts (\gls{af}, \gls{cst}, \gls{ifof}, \gls{or}) Tractfinder scores equally well or better on all metrics with the exception of the Dice coefficient, where in particular the scores for the \gls{ifof} and \gls{or} are lower (Fig. \ref{fig:ts_atlas}).
-Since the original TractSeg paper includes 72 tracts (including both left and right instances of non-commisural tracts and multiple subdivisions of tracts such as the corpus callosum or anterior thalamic radiation) and the performance varied substantially across tracts, we'll apply tractfinder to the full dataset for completeness.
-This is shown in Figure \ref{fig:ts_all_tracts}, analagous to Figure 6 in \textcite{Wasserthal2018}.
+Since the original TractSeg paper includes 72 tracts (including both left and right instances of non-commissural tracts and multiple subdivisions of tracts such as the corpus callosum or anterior thalamic radiation) and the performance varied substantially across tracts, we'll apply tractfinder to the full dataset for completeness.
+This is shown in Figure \ref{fig:ts_all_tracts}, analogous to Figure 6 in \textcite{Wasserthal2018}.
 Neither method convincingly outperforms the other, although TractSeg does score higher when measured by \gls{dice} on more tracts.
 An important difference between the two lies in how the fibre orientations, which serve as input to the two methods (as full \glspl{fodf} for tractfinder and as peaks for TractSeg) are computed.
 For single shell data, we have chosen to use \gls{msmt} \gls{csd} for tractfinder, using \gls{wm} and \gls{gm} compartments, to reduce the amount of noise and spurious white matter signal in non-white matter areas (most notably the cortex).
 This is motivated by the need for spatial information with a high specificity for white matter with which to compare the tract-specific spatial prior in the atlas.
-Unfortunately, using only two tisse compartments for \gls{msmt} \gls{csd} in this manner can produce inaccurate reconstructions at tissue boundaries, in particular a "cannibilisiation" of weak white matter signal in \gls{csf} partial volume voxels, leading to missing white matter \glspl{odf} in these areas.
-This is the case for tracts like the anterior commisure (CA) and fornices (FX\_left, FX\_right) which are small structures in places directly adjacent to \gls{csf}.
+Unfortunately, using only two tissue compartments for \gls{msmt} \gls{csd} in this manner can produce inaccurate reconstructions at tissue boundaries, in particular a ``cannibalisation" of weak white matter signal in \gls{csf} partial volume voxels, leading to missing white matter \glspl{odf} in these areas.
+This is the case for tracts like the anterior commissure (CA) and fornices (FX\_left, FX\_right) which are small structures in places directly adjacent to \gls{csf}.
 Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small structures, at the expense of producing more extensive (less specific) overall tract maps.
 
 \begin{figure}[h!]
