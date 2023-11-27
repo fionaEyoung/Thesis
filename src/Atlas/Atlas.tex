@@ -285,7 +285,7 @@ The absolute number of retained streamlines is of little consequence to subseque
 After aggregate filtering, the retained streamlines were re-separated into individual subject bundles and the \gls{tod} was computed from the individual bundles as described in \textcite{Dhollander2014} and implemented in MRtrix3. \autocite{Tournier2019}
 \gls{tod} mapping is the generalisation of track density imaging into the angular domain, creating a 5D spatio-angular representation of streamline tracks on a voxel-wise basis.
 The \gls{tod} image is represented in modified \gls{sh} basis \autocite{Descoteaux2006} using only even orders up to a maximum order $l_{max}=8$, meaning each image consists of 45 coefficients, denoted $t_j$, per voxel.
-The distribution is described by those coefficients and the modified \gls{sh} basis functions $Y_{l,m}$ \autocite{Descoteaux2006} as
+The distribution is described by those coefficients and the modified \gls{sh} basis functions $Y_{l,m}$ defined in (\ref{eq:sh}) \autocite{Descoteaux2006} as
 
 \begin{align}
   T(\theta, \phi) = \sum_{l=0}^{l_{max}} \sum_{m=-l}^l t_{l,m} Y_{l,m}(\theta, \phi) = \sum_j t_jY_j(\theta, \phi)

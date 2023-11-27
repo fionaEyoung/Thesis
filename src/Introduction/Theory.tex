@@ -392,13 +392,37 @@ These are particularly strong at interfaces between substances with large suscep
 
 \section{Representing spherical functions}
 \label{sec:sh}
-\note{move this to fibre orientation modelling section? but also relevant for tod etc. Appendix?}
 
-The study of macroscopic \gls{wm} structure involves descriptions of orientations in 3D space.
-This often requires the description of in terms of spherical functions, that is to say, mathematical representations of some quantity and its distribution on the sphere.
+Studying macroscopic \gls{wm} structure requires describing quantities distributed in the three dimensional angular domain.
+If the shape of the function is not generally known, then an arbitrary function may be represented in a suitable function space, defined by a set of orthogonal basis functions.
+Analogous to the use of the basis vectors $\mathbf{e}_1=(1\,0\,0)^T, \mathbf{e}_2=(0\,1\,0)^T, \mathbf{e}_3=(0\,0\,1)^T$ to represent any other vector
+$\mathbf{v}$ in $R^3$ as $\mathbf{v} =  (v_x\,v_z\,v_z)^T = v_x\mathbf{e}_1 + v_y\mathbf{e}_2 + v_z\mathbf{e}_3$,
+so can basis functions be combined to represent any other function in that space.
 
-One common such representation, and the one employed throught this thesis are the \gls{sh} basis functions.
-The origin of this set of basis function lies in quantum mechanics \note{does it?} but their use extends to the general representation of any spherical function.
-The \gls{sh} functions form a complete orthonormal basis such that any \note{well behaved} function can be expressed as a linear combination of them.
+Throughout this thesis, we will represent spherical functions using the spherical harmonic basis defined on the 2-sphere $S^2$.
+The solutions to Laplace's equation in spherical coordinates, the \glspl{sh} are widely used across physics, engineering and mathematics, and are given in complex form in for non-negative integer orders $l = 0, 1, 2,...$ and integer phase factor $-l \leqslant m \leqslant l$ as
 
-\note{to complete: functions expression, (modified) real functions (used in dmri),..??}
+\begin{align}
+  Y_l^m(\theta,\phi) = \sqrt{ \frac{2l+1}{4\pi} \frac{(l-m)!}{(l+m)!} } P_l^m(cos\phi)e^{im\phi}
+\end{align}
+
+where $P_l^m(x)$ are the associated Legendre polynomials.
+In \gls{dmri} analysis, including the representation of axon fibre orientations, a simplified set of \gls{sh} functions can be used.
+We will consider only real valued functions, and under the assumption that diffusion processes are antipodally symmetric, only the even orders $l = 2 \mathbb{N} = 0,2,4,...$ are included.\autocite{Descoteaux2006}
+This modified basis set is then given by
+\begin{equation}
+  Y_{lm} = \begin{cases}
+              \sqrt{2} \; \Im (Y_l^{-m}) & \text{if } -l \leq m < 0 \\
+              Y_l^0                      & \text{if } m=0 \\
+              \sqrt{2} \; \Re (Y_l^m)    & \text{if } 0 < m \leq l
+           \end{cases}, \label{eq:sh}
+\end{equation}
+where $l = 2\mathbb{N}$ and $\Re$ and $\Im$ denote the real and imaginary parts respectively.
+
+An arbitrary function $f(\theta,\phi)$ defined on the sphere can then be defined as a linear combination of $Y_{lm}$:
+\begin{equation}
+  f(\theta,\phi) = \sum_{l=0}^{\infty}\sum_{m=-l}^{l} c_{lm}Y_{lm}(\theta,\phi) = \sum_j^{\infty} t_jY_j(\theta, \phi)
+\end{equation}
+with $j = \frac{1}{2}l(l+1) + m$.
+In practical applications, only a finite number $N = \frac{1}{2}(l_{\text{max}}+1)(l_{\text{max}}+2)$ of coefficients $c_{lm}$ can be determined, up to a maximum order $l_{\text{max}}$.
+A higher maximum order can represent more angular detail, however due to this truncation our representations as a finite series can only ever be close approximations of the full function $f$.
