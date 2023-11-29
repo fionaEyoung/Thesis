@@ -83,7 +83,7 @@ At the heart of the brain flows a network of ventricles filled with \gls{csf}, a
 Two lateral ventricles curve through each hemisphere, connecting with the third ventricle separating the thalami at the midline, which in turn adjoins the fourth ventricle, a triangular cavity between the midbrain and cerebellum.
 From there, \gls{csf} flows into the spaces surrounding the brain and spinal cord.
 
-\subsection{Functional organisation: from topology to hodology}
+\subsection{Functional organisation: from topology to hodology}\label{sec:hodology}
 
 Since antiquity scientists have suspected that different cognitive functions, rather than being equally distributed throughout the brain, arise from distinct locations.
 While early incarnations of this idea may have featured wildly unfounded and mistaken conclusions regarding the functions that can be ascribed to specific localities, the underlying principle of functional localisation has been subsequently borne out and continuously refined.
@@ -115,6 +115,7 @@ Examples include the corticospinal tract, responsible for much of voluntary moto
 
 Meanwhile, the task of precisely delineating and ascribing functional correlates to the many association tracts is monumental and woefully incomplete.
 Fibres from different tracts cross, mingle, and converge throughout the brain, and while fibres of the same tract may form a coherent bundle in deep white matter, they proceed to diverge and fan out, terminating in broad swathes of cortex.
+In this way, fibre tracts form fractal echos the of their individual neural members, drawing on many inputs to disseminate the output signals across countless targets.
 There is no perfect method for observing the full extent of a tract from one end to another.
 Postmortem dissection remains the gold standard for anatomical identification, but it is delicate work and disentangling the full course of one bundle of fibres from all other surrounding ones is impossible.
 So it is that anatomical dissections have at times identified and defined tracts which turned out to be entirely artifactual.
@@ -133,6 +134,13 @@ Furthermore, emerging evidence suggests adopting a hodological approach to neuro
 As frameworks of neural function continue to evolve alongside our technological means to study it, we find ourselves reaching across the disciplinary divides for tools and ideas with which to advance our understanding of the brain.
 Modern neuroscience is blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
 As such, while the methodologies and experiments presented in the thesis are rooted in \textit{in vivo} structural imaging of individual white matter tracts, questions around functional tract definitions and surgical relevance will recur throughout.
+
+\begin{figure}[bh!]
+  \centering
+  \includegraphics[width=0.6\textwidth]{xkcd_1163_debugger.png}
+  \caption{xkcd \#1163: ``Debugger"}
+  \label{fig:xkcd}
+\end{figure}
 
 \section{MRI Physics}
 
@@ -298,7 +306,7 @@ Establishing that two brain regions' neural activity is temporally correlated is
 And while \gls{fmri} is a key tool for identifying eloquent cortex for neurosurgical planning, the paucity of blood vessels within \gls{wm} and \gls{fmri}'s low spatial resolution make it unsuitable for mapping \gls{wm} fibres.
 The only tool available for non-invasively imaging the microscopic structure of \gls{wm} \textit{in vivo} is \glsentrylong{dmri}.
 
-\subsection{Diffusion weighted MRI}
+\subsection{Diffusion weighted MRI}\label{sec:dmri}
 
 % \note{First describe diffusion in general but stick to tissue, i.e. restricted diffusion. Cover the different types of diffusion in different tissues in the brain, timescales etc.
 % Then look at the mechanism of diffusion MRI acquisition, pulse sequence and parameters e.g. b values.
@@ -358,7 +366,7 @@ The full picture of orientation-dependent diffusivity can be modelled by a \text
                 D_{xx} & D_{xy} & D_{xz}\\
                 D_{yx} & D_{yy} & D_{yz} \\
                 D_{zx} & D_{zy} & D_{zz}
-                \end{pmatrix}
+                \end{pmatrix} \label{eq:dt}
 \end{equation}
 It is therefore necessary to obtain multiple source images with diffusion weighting applied along different (at least three) unique directions to determine all components of $\mathbf{D}$.
 The series of measurements from these source images is then combined into the desired parametric map or further processed in advanced techniques.
@@ -421,7 +429,7 @@ where $l = 2\mathbb{N}$ and $\Re$ and $\Im$ denote the real and imaginary parts 
 
 An arbitrary function $f(\theta,\phi)$ defined on the sphere can then be defined as a linear combination of $Y_{lm}$:
 \begin{equation}
-  f(\theta,\phi) = \sum_{l=0}^{\infty}\sum_{m=-l}^{l} c_{lm}Y_{lm}(\theta,\phi) = \sum_j^{\infty} t_jY_j(\theta, \phi)
+  f(\theta,\phi) = \sum_{l=0}^{\infty}\sum_{m=-l}^{l} c_{lm}Y_{lm}(\theta,\phi) = \sum_j^{\infty} t_jY_j(\theta, \phi) \label{eq:shfun}
 \end{equation}
 with $j = \frac{1}{2}l(l+1) + m$.
 In practical applications, only a finite number $N = \frac{1}{2}(l_{\text{max}}+1)(l_{\text{max}}+2)$ of coefficients $c_{lm}$ can be determined, up to a maximum order $l_{\text{max}}$.
