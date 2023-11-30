@@ -101,60 +101,74 @@ The earliest tractography algorithms were developed almost concurrently with \gl
 In the \gls{fact} algorithm proposed by \textcite{Mori1999}, the local direction for each vertex is assigned from $\bm{\lambda}_1$ of the current voxel, and the stop criterion is a measure of neighbourhood fibre collinearity falling below a predefined threshold.
 With only a single possible propagation direction at each location, which, as discussed above, may throughout much of the brain have little to do with any true axon orientations at that point, diffusion tensor-based tractography can only track fibre pathways with rather limited accuracy.
 Streamlines may continue happily along a physiologically plausible path until encountering a region of intersecting tracts, at which point it may be prematurely terminated or diverted onto the trajectory of this intersecting tract if a continuation of the current path is entirely unsupported by the principle eigenvector field.
-It becomes clear when considering what we learned about neural connections in section \ref{sec:hodology}, about compact fibre bundles diverging to distributed cortical targets, that a single dominant fibre direction at every point is incompatible with the dynamic organisation of \gls{wm} tracts, and the result is a tendency to reconstruct narrow and incomplete fibre bundles.
-A well cited example of this limitation can be seen in reconstructions of the \gls{cst}, known to emanate from the entire motor cortex from the apex down to the Sylvian fissure, but which \gls{dt}-based algorithms would have you believe is little more than a \note{stick}.
-Against this background, tractography based on crossing fibre models represents a vast improvement in the ability to contend with tracking in the complex configurations of \gls{wm}.
-However, this flexibility comes with additional headaches, as when there are multiple distinct possible directions in which to propagate the streamline at any position, the decision of which direction to take becomes far more complex.
 
-Secondly comes the distinction between deterministic and probabilistic tracking approaches.
-In deterministic tractography, there is exactly one precise direction in which a streamline can be propagated from any given point.
-Two streamlines seeded in exactly the same location will be identical in this paradigm.
-But as previously described, tractography operates in a domain far removed from the reality of individual axons, and the certainty implied by such an \note{immutable} approach is wholly unwarranted.
+It becomes clear when considering what we learned about neural connections in section \ref{sec:hodology}, about compact fibre bundles diverging to distributed cortical targets, that a single dominant fibre direction at every point is incompatible with the dynamic organisation of \gls{wm} tracts, and the result is a tendency to reconstruct narrow and incomplete fibre bundles\autocite{Farquharson2013}.
+A well cited example of this limitation can be seen in reconstructions of the \gls{cst}, known to emanate from the entire motor cortex from the apex down to the Sylvian fissure, but which in renderings by \gls{dt}-based algorithm appears as little more than a \note{?????}.
+Against this background, tractography based on higher-order fibre orientation models represents a vast improvement in the ability to contend with tracking in the complex configurations of \gls{wm}.
+Now when two perpendicular tracts occupy the same voxel, the possible tracking direction is not limited to either that of the dominant bundle such that tracking the smaller one is impossible, or of an average of the two such that neither is properly represented.
+With multi-peak distributions, each distinct fibre orientation is \note{??}
+However, with this flexibility comes ambiguity, as when there are multiple distinct possible directions in which to propagate the streamline at any position, the decision of which direction to take becomes far more complex.
+While tensor-based tractography may be particularly prone to false negatives, or neglecting certain pathways, multi-peak tractography can easily produce false-positives by hopping onto the paths of intersecting tracts.
+
+The second significant distinction is between deterministic and probabilistic tracking approaches.
+In deterministic tractography, there is only one single direction in which a streamline can be propagated from any given point, and two streamlines seeded in exactly the same location will be identical.
+But the certainty implied by this deterministic approach is at significant odds with the reality that tractography operates in a domain and resolution far removed from that of individual axons.
 Probabilistic tractography algorithms are here to acknowledge the uncertainty inherent in the tracking process.
-Numerous probabilistic tracking algorithms have been developed, and while the end effect is essentially the same, whereby seeding in the exact same location will not give rise to identical streamlines, there are two subtly different schools in what sort of uncertainty is being considered.
+Numerous probabilistic tracking algorithms have been developed, and while the end effect is essentially the same, whereby the next step direction is sampled from a probability distribution instead of deterministically selected, and seeding in the exact same location will not give rise to identical streamlines, there are two subtly different schools in what sort of uncertainty is being considered\autocite{Jeurissen2019}.
 One considers the \textit{measurement} uncertainty of the calculated orientations.
 Under this approach, the general direction to take is not under question, but the accuracy of that direction is.
-The second school regards the uncertainty as lying in the figuring out which of the possible general directions, representing distinct fibre populations, is the correct one according the the current journey the streamline finds itself on. \note{lol}
+It holds that due to noise and inherent limitations in our measurement equipment and signal modelling, the fibre orientations can only be calculated with limited accuracy, and the tracking directions are sampled from a distribution reflecting this measurement uncertainty.
+The probabilistic algorithm probtrackx\autocite{Behrens2007}, based on the ball-and-sticks fibre orientation model\autocite{Behrens2003}, is a notable example of this approach.
+
+A second school takes the view that uncertainty surrounding selecting a streamline step direction \note{??} stems from the obscurity of the underlying physiological reality, and sampling that direction from the fibre \gls{odf} reflects that microstructural complexity.
+Crucially though, tracking is not proceeding under any guidance relating to real biophysical connections, and though a streamline's direction in a given voxel may well be in accordance with real axons, whether that direction is appropriate in the context of the preceding steps of the same streamline is unresolvable.
+In other words, \gls{fod}-based probabilistic tractography, of which first or second-order integration over FODs (iFOD1/iFOD2)\autocite{Tournier2012,Tournier2010} are notable examples, can capture the local dispersion of fibres in high detail, but that doesn't necessarily translate to long-range accuracy.
+It is possible to constrain tractography according to broad heuristics about fibre tract geometries, but inevitably such simplifications will not be globally applicable.
+For example, strategies to prevent streamlines from ``hopping" onto intersecting, but not physically connected, pathways can include placing upper limits on the angle between successive steps under the expectation that most tracts will carry more or less straight on, but there are plenty of tracts in the brain with regions of high curvature, which become much harder to accurately reconstruct if the ``straight ahead" constraint is too strict.
+
+Due to streamline tractography's locally oriented and step-by-step nature, errors and missteps accumulate rapidly with little to no opportunity to correct them, resulting in some wildly implausible streamlines.
+Attempts to address this blindness to biophysical reality are at the focus of much of modern tractography research\autocite{Bastiani2017,Rheault2019,Aydogan2021}, as the consequences of these ongoing challenges to connectivity research and neurology are substantial\autocite{Schilling2019, Yang2021, Grisot2021}.
 
 \subsection{White matter segmentation}
 
-As discussed above, \gls{dmri} provides a unique basis for examining the structure of human white matter, \textit{in vivo}, at the macroscopic scale.
-The functional division of white matter into distinct tracts is of great consequence to the efforts of neuroscience and psychology to analyse brain structure and function, and thus the spatial delineation of tracts is a key step in many such analysis pipelines.
-As we will see later, this task of identifying tracts is also of vital importance in neurosurgery.
-Streamline tractography was the first, and has long been the dominant answer to this task.
+The functional division of white matter into distinct tracts is of great consequence to neuroscience, psychology and neurology in their efforts to analyse brain structure and function, and aligns we will see later, identifying tracts is also of vital importance in neurosurgery.
+It follows that the spatial delineation of individual tracts is a key step in many \gls{dmri} analysis pipelines.
 
-There are two \note{ways} in which individual tract segmentations can be achieved using tractography.
-The first, sometimes \note{referred} to as ``virtual fibre dissection", is to initially generate a large (on the order of 10s of millions) number of streamlines seeded at random throughout the entire white matter.
-Streamline tracking proceeds virtually uninhibited, terminating only according to broad streamline selection parameters (e.g. maximum length) and when leaving the white matter (\note{based on mask and / or anisotropy / amplitude threshold}).
-After tracking, streamlines to be assigned to a target tract are selected using a combination of inclusion and exclusion regions of interest (ROIs), which impose known anatomical priors on the tract.
-The resulting bundle, comprising only the streamlines fulfilling selection criteria, represents the segmented tract.
-This approach is computationally extremely wasteful, since the a vast number of streamlines generated will not even represent \textit{any} anatomically valid pathway through the brain, let alone one that belongs to the tract of interest.
-Furthermore, it is well understood that tracking algorithms will tend to selecting streamlines that follow the densest routes with a high degree of fibre coherence, and will tend to continue straight on when encountering a region of crossing fibres.
-The result is a whole brain tractogram strongly biased towards such easily tracked routes, with some tracts (or sections of tracts) massively overrepresented.
-\note{more clarity about fibre density bias}
-All this means that, after perhaps ours of tracking and millions of streamlines created, only a handful may be included in the final bundle reconstruction.
+Streamline tractography was the first, and remains the dominant answer to this task.
+Though the field is wide and the specific approaches numerous, we will outline the two main frameworks through which individual tract segmentations are derived using streamline tractography.
+The first, sometimes dubbed ``virtual fibre dissection", involves generating a large number (on the order of 10s of millions) of streamlines, usually covering the entire brain, followed by a selection process whereby streamlines are assigned to a tract of interest or discarded.
+Streamline tracking proceeds virtually uninhibited, terminating only if a maximum length is reached or when leaving the white matter (as indicated by tissue segmentations\autocite{Smith2012} or a \gls{fod} amplitude threshold).
+After tracking, one approach for selecting streamlines belonging to the target bundle is to use logical \glspl{roi}, specifying inclusion volumes which must be visited and exclusion volumes which filter unwanted tracks.
+These selection and exclusion \glspl{roi} encapsulating our \textit{a priori} neuroanatomical knowledge, and the resulting bundle, comprising only those streamlines fulfilling the criteria, represents the segmented tract.
+The streamlines may be viewed as three-dimensional objects, or further processed into volumetric streamline density maps\autocite{Calamante2010} and thresholded binary segmentations.
 
-The second approach may be called ``targeted tractography", an involves only generating streamlines that fulfil the inclusion and exclusion criteria in the first place.
-In this version, rather than seeding throughout the brain, seeding is restricted to a known part of the target bundle, effectively acting as an include region.
-A seed region can be but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract, with additional include regions placed at the ends to ensure complete coverage.
-This approach does not mean that no streamlines are discarded (seeded fibres may be terminated before fulfilling all inclusion criteria, or stray into exclusion regions) but targeted seeding and selection certainly leads to a higher number of admissible streamlines being generated in less time.
-Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery.
-The streamlines may be displayed as-is, or further processed to produce volumetric segmentations via streamline density maps.\autocite{Calamante2010}
-A good understanding of the anatomy of a tract is not sufficient to manage the whims of tracking algorithms, and a user will be required to understand a the quirks and biases in tracking algorithms as well as the appropriate anatomical priors in order to generate acceptable results.
-This obfuscation seriously limits the accessibility of tractography to users of different backgrounds, and can lead to potentially dangerous misinterpretations. \note{I hate it do something}
-Even to an experienced user, producing quality bundles is time-consuming and tedious.
+Alternatives to \gls{roi}-based selection are clustering methods, which classify streamlines according to their proximity or similarity to each other.
+RecoBundles\autocite{Garyfallidis2018}, White Matter Analysis \autocite{ODonnell2017, ODonnell2007}, atlas based adaptive clustering \autocite{Tunc2014}, and example-based automatic tract labelling \autocite{Yoo2015} are all examples of data driven, group-wise streamline clustering and matching approaches.
+They typically rely on example data or streamline atlases based on which similar streamlines are recognised in the target data and labelled accordingly.
+Another approach, named Classifyber, uses a learned linear classification of streamline features to label streamlines belonging to the target bundle in a new subject \autocite{Berto2021}.
+In all clustering approaches, the necessary generation of whole brain tractograms and the additional construction of example or reference tractography data present barriers to application, as well as, in some cases, long processing times and high memory requirements\autocite{Wasserthal2018}.
 
-In view of these limitations, efforts in recent years have focussed on either a) improving the behaviour of tracking algorithms to produce fewer false positives (while maintaining sensitivity) b) automating the bundle dissection process, e.g. through automatic placement of ROIs and post-filtering and c) foregoing tractography entirely in favour of alternative, direct volumetric tract segmentation methods.
+The whole brain approach is computationally extremely wasteful, as the vast number of streamlines generated will not even represent \textit{any} anatomically valid pathway through the brain, let alone one belonging to the tract of interest.
+Furthermore, if streamlines are randomly seeded throughout the brain, then longer tracts covering a larger volume are more likely to be sampled, the tendency to continue straight along a ``path of least resistance" at diverging or crossing fibres results in inordinate overrepresentation of certain pathways\autocite{Smith2013}.
+All this means that, after perhaps hours of tracking and billions of streamlines created, only a handful may be included in a final bundle reconstruction.
 
-\paragraph*{Streamline-based automatic tract segmentation}
+The second approach may be called ``targeted tractography", an involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions, until a target number of streamlines have been selected.
+A seed region can but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract and propagate bidirectionally, placing additional include regions at the ends to ensure complete coverage.
+This approach does not mean that no streamlines are discarded (seeded fibres may be terminated before fulfilling all inclusion criteria, or stray into exclusion regions) but targeted seeding and selection certainly leads to a higher number of admissible streamlines being generated in far less computational time than in the whole brain approach, while discarding unwanted streamlines on the fly reduces storage requirements.
+Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery\autocite{Yang2021}.
 
-Several automated tractography approaches to bundle segmentation have been proposed, which broadly comprise atlas-based automatic ROI placement and streamline clustering approaches.
-TRACULA and TractQuerier are examples of the former which rely on FreeSurfer parcellations to apply anatomical priors to tractography, while XTRACT \autocite{Warrington2020} utilises a set of predefined ROIs to be registered to the subject.
-The additional step of either comprehensive and robust tissue parcellation, typically using computationally intensive tools such as FreeSurfer, or accurate registration, unfortunately limits the accessibility of these approaches to clinical and even (to a lesser extent) research applications.
-RecoBundles,\autocite{Garyfallidis2018} White Matter Analysis \autocite{ODonnell2017, ODonnell2007}, atlas based adaptive clustering \autocite{Tunc2014}, example-based automatic tract labelling \autocite{Yoo2015} are all examples of data driven, group-wise streamline clustering and matching approaches.
-In such approaches, the necessary generation of whole brain tractograms and in some cases the additional construction of example or reference tractography data, as well as long processing times and high memory requirements\autocite{Wasserthal2018} present barriers to application.
-Also, the above techniques ultimately still derive from streamline tractography, and are thus not free of its biases and inaccuracies already referenced.
-There have also been recent developments in the application of machine learning to tractography,\autocite{Poulin2019} a promising field that is still in its infancy and a while off from widespread adoption and clinical translation.
+Manual placement of \glspl{roi} in both whole-brain and targeted pipelines represents a significant intellectual burden, relies on expert anatomical knowledge and can be extremely time consuming, so it is often automated by registering atlases, as in TractQuerier\autocite{Wassermann2016} or Tracula \autocite{Yendiki2011}, or pre-defined \glspl{roi}, as in XTRACT \autocite{Warrington2020}.
+The former two are examples of methods that rely on comprehensive cortical parcellations, typically obtained with a software tool such as FreeSurfer which can take many hours to run.
+In many scenarios, manual \gls{roi} placement remains the default method, particularly in clinical contexts where automatic \gls{roi} registration or segmentation may fail due to pathology.
+Here, not only is a good understanding of the anatomy of a tract is vital to produce high quality reconstructions, but the user will also need to understand the biases and pitfalls of their chosen \gls{fod} model and tractography algorithm to ensure proper interpretation and qualification of the results\autocite{Rheault2020,Rheault2022}.
+Even to an experienced user, producing quality bundles is often time-consuming and tedious.
+While modern research applications and increasingly more clinical applications almost exclusively favour probabilistic and multi-fibre \gls{odf} algorithms thanks to higher sensitivity to complex fibre configurations\autocite{Yang2021}, an inevitable trade-off is a high prevalence of false positive streamlines, representing either irrelevant or unphysical connections.
+Filtering out these unwanted streamlines remains a considerable challenge\autocite{Jorgens2021}.
+Attempts to reduce their creation in the first instance include injecting more anatomical priors into the tracking process, such as by modifying \glspl{fod} to favour the directions associated with the target tract\autocite{Rheault2019}, using directional \glspl{roi} for particularly tricky geometries \autocite{Chamberland2017}, or designing alternatives to the piece-wise linear tracking paradigm that aim to generate streamlines with more anatomical plausibility \autocite{Schomburg2017,Aydogan2021}.
+Finally, due to a combination of the different computational methods available, and a general lack of consensus on the precise anatomical extents of many commonly reconstructed pathways, tractography suffers from notoriously low reproducibility\autocite{Schilling2021a}.
+
+In view of these limitations, some in the field are continuing efforts to improve streamline tractography with novel tracking algorithms, finding new ways to incorporate anatomical priors and developing more powerful streamline filtering, clustering and selection strategies.
+Others are looking towards white matter segmentation solutions that do not rely on tractography at the point of application, but instead produce voxel-wise tract segmentations directly from \gls{dmri} or \gls{fod} data.
 
 \paragraph*{Streamline free white matter segmentation}
 
@@ -344,6 +358,8 @@ DT acquisitions can have as few as 6 diffusion weighted directions, resulting in
 Deterministic tracking itself is rapid, and the placement of ROI need not be as strict as with probabilistic tractography owing to a lower sensitivity to false positives.\autocite{ODonnell2017}
 A lack of availability of the necessary expertise and time limits neurosurgical centres' access to state-of-the-art tractography.\autocite{Toescu2020}
 There is thus an unmet need for reliable, automated tract segmentation techniques that can rapidly provide consistent and complete tract reconstructions for clinical use.
+
+tracking (dt especially) bad in areas of ``disturbed diffusion" Kuhnt2013
 
 \paragraph*{Brain shift}
 
