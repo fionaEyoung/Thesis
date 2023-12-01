@@ -1,5 +1,14 @@
-\section{Research topic}
+\section{Objectives}
 \label{sec:problem}
 
 \note{This section needs a better title.
 Basically drawing on the conclusions of preceding literature review to lay out the problem statement and project aims.}
+
+
+Our aim is to develop a streamline free tract segmentation technique incorporating spatial and orientational priors, with a focus on computational simplicity, specificity, and intuitive output.
+Briefly, the proposed method consists of a tract-specific orientation distribution atlas, which encodes spatial and orientational prior information about each tract, which is then directly compared with the diffusion data derived fibre orientation distribution information in the target image via an inner product operation on the two spherical distributions.
+Here we report on extensive validation of our approach applied to the \gls{cst}, \gls{or} and \gls{af}.
+Those three tracts were chosen due to their high clinical relevance and frequent involvement with surgical targets: In \textcite{Toescu2020} they were cited by neurosurgeons as the most frequently reconstructed tracts, followed by the \gls{ifof} and corpus callosum.
+Generalisation to additional tracts is straightforward and requires relatively few training subjects, which is ideal in clinical translation, where appropriate data is often hard to obtain.
+Preliminary results for this approach have been published in \textcite{Young2022}, where we focused on qualitative results in the context of neurosurgical subjects with significantly deforming tumours.
+Here we provide a more detailed description of the technique as well as extensive quantitative validation of general applicability to both healthy and clinical datasets.
