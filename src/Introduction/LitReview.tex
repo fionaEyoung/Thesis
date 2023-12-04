@@ -203,47 +203,44 @@ The authors cite a lack of reliable and sufficient labelled training data as a r
 
 \subsection{Indications for neurosurgery}
 
-\note{This is for all the reasons for surgery, including tumour, epilepsy DBS.
-Also more detail into the types of tumours, and locations in the brain}
+% \note{This is for all the reasons for surgery, including tumour, epilepsy DBS.
+% Also more detail into the types of tumours, and locations in the brain}
 
-Many types of interventions fall under the remit of neurosurgery.
-\note{research most common procedures}
-Common ones include inserting electrodes for \gls{dbs}, extraction of tissue biopsies, vascular surgeries, and placement of shunts.
-All of these examples involve invasive procedures for which accurate neuronavigation is a vital component, and as such the following discussions on surgical planning and navigation pertain to them too.
+Many types of interventions fall under the remit of cranial and spinal neurosurgery, including inserting electrodes for \gls{dbs}, diagnostic (e.g. taking tissue biopsies), vascular surgeries, and insertion of \gls{csf} shunts.
+In all cases, precision is paramount and tools for accurate navigation form vital components of the surgical workflow.
+This review will focus on some of the most complex and invasive procedures, involving the removal of tumours and epileptogenic brain tissue.
+In England between 2013--2018, neuro-oncological procedures were the third most common of all subspecialties comprising approximately 9\% of total, while functional neurosurgeries (including epilepsy related and deep brain stimulation) made up 8\%\autocite{Wahba2022}.
+At Great Ormond Street Hospital for Children in London, a leading paediatric centre of care, 10\% of neurosurgeries taking place between 2018--2022 were tumour related, while 12\% were for epilepsy, both highly invasive categories of neurosurgery\autocite{gosh2023}.
 
-This review will focus on the most complex and invasive types of neurosurgery: tissue resections, most commonly the removal of tumours and epileptogenic brain tissue. \note{includes biopsy?}
-In particular, tumour resections involve a unique combination of complexities and a high degree of variability.
-Indeed, it is sort of misleading to sweepingly refer to all neurosurgical procedures involving \note{cranial?supracellar?} \gls{cns} neoplasms as ``brain tumour resections", so diverse are those conditions in presentation, neurophysiology, microbiology, treatment plans, and prognosis.
-Such diversity presents a significant barrier to the development of image processing methods intended for generalisation to use in tumour patients.
-For example, tumours occur throughout the brain, and the location has an impact on the effects on surrounding brain structures.
-Midline tumours can affect both hemispheres, while tumours far from the midline may enact no effects whatsoever on the contralateral hemisphere, in which case for image processing purposes, the contralateral hemisphere could be considered ``normal".
-A tumour's \note{origin} and microbiology also play a large role in determining its effects on its environment.
-Gliomas are often of complex structure, with infiltrating portions and peri-tumoural edoema blurring the distinction between tumour and non-tumour tissue.
-Meningiomas, on the other hand, and some types of astrocytoma, are entirely \note{??} separate from brain tissues and can strongly displace neighbouring structures instead of infiltrating.
+Brain tumour surgeries are both highly complex and variable in presentation, neurophysiology, microbiology, treatment plans, and prognosis.
+Such diversity presents a significant barrier to the development of image processing methods intended for generalised use in tumour patients.
+For example, neoplasms occur throughout the brain, with the location having unique impacts on surrounding structures and associated functions.
+A tumour's natural history and histopathology also plays a large role in determining its effects on its environment.
+Malignant gliomas, a category of tumours arising from glial cells, are often of complex structure, with infiltrating components and peri-tumoural oedema blurring the distinction between tumour and non-tumour tissue.
+On the other hand, many non-malignant tumours including most meningiomas and astrocytomas, are entirely encapsulated, with clear demarcation from surrounding from brain tissues, and can strongly displace neighbouring structures instead of infiltrating.
 
 This project is concerned with the visualisation of cerebral white matter tracts, and therefore this review with focus on those indications and interventions in which damage to and navigation of such structures is of concern.
-This is generally not the case for posterior fossa and suprasellar lesions.
-Brainstem tumours are often not candidates for surgical removal, due to their precarious locations limiting access and posing too high risks to vital brainstem function.
-The following discussions apply to lesions in the cerebral hemispheres and thalamus, candidates for biopsy or resection via craniotomy.
+This is typically not the case for posterior fossa and suprasellar lesions, although growing interest in the role of the cerebellum in wider cognition and the brain functional network and increased attention on the effects of posterior fossa surgery on cerebellar tracts \autocite{Toescu2021,Skye2023}.
+Brainstem tumours are often not candidates for surgical removal, with their precarious locations limiting access and posing too-high risks to vital brainstem function.
+The following discussions apply primarily to lesions in the cerebral hemispheres and thalamus, candidates for biopsy or resection via craniotomy.
 
 \subsection{Lesion resection}
 
-\note{Focus on tumours, but could also be epilepsy resections.
-Cover extent of resection (measurement, definitions etc.), biopsy, relationship between EOR and outcomes}
+% \note{Focus on tumours, but could also be epilepsy resections.
+% Cover extent of resection (measurement, definitions etc.), biopsy, relationship between EOR and outcomes}
 
-One might think that the goal of a resection surgery would be the removal of the target lesions.
+One might understandably assume that the goal of a resection surgery would be the total removal of target lesions.
 However, things are not so simple.
-While the ideal outcome may, in many cases, be the complete removal of all diseased tissue, in many cases this scenario would conflict with other factors to be balanced, such as the health of surrounding brain structures and other postoperative outcomes.
-A central concept to these trade-offs is that of \gls{eor}, or the amount of diseased tissue \note{just say tumour? does eor apply to epilepsy too?} successfully removed by surgery.
-While on the surface, \gls{eor} appears a straightforward concept, it nonetheless warrants its own discussion as its definition is often ill-defined while at the same time \gls{eor} plays a central role in studies of surgery efficacy and outcomes.
+While the ideal outcome may, in many cases, be the complete removal of all diseased tissue, this scenario would frequently be in conflict other equally important outcome indicators, such as the health of surrounding brain structures.
+Successfully balancing these trade-offs is a central dilemma in neurosurgical practice, and a key measure is \gls{eor}, or the amount of tumour or epileptogenic brain tissue removed.
+In theory, \gls{eor} is a straightforward concept, but in practice it is ill-defined and inconsistently measured while at the same time \gls{eor} central to studies of surgery efficacy and outcomes.
 
-On paper, \gls{eor} is easily defined: the percentage of tumour tissue resected.
-In practice, accurately measuring \gls{eor} is essentially impossible.
-The most natural approach is to measure the volume of the lesion before and after surgery as it appears on imaging.
-In nearly all cases \note{?}, this measurement is simply done by taking the diameter of the lesion on a single or maybe multiple slices, which will give an accurate result only for perfectly spherical tumours.
-This also can't account for resected portions of the tumour being filled with fluid, or differing amounts of tissue compression caused by mass effect and postoperative brain shift.
+Easily defined as either the absolute volume or relative percentage of tumour tissue resected, accurately determining \gls{eor} is essentially impossible.
+Many studies simply report very rough values as estimated visually by the operating surgeon with limited accuracy\autocite{Martino2013}. 
 Volumetric analysis, in which the entire lesion is segmented on pre- and postoperative imaging, is becoming more common and provides a far closer \gls{eor} estimate.
-This still relies on accurate segmentation, whether manual or automatic, which poses a problem when tumour tissue, healthy brain tissue or odoema become radiologically indistinguishable.
+This measurement may be done by simply taking the diameter of the lesion on a single or multiple slices, approximate ellipsoid segmentation or manual segmentation\autocite{Albuquerque2021}.
+This also can't account for resected portions of the tumour being filled with fluid, or differing amounts of tissue compression caused by mass effect and postoperative brain shift.
+This still relies on accurate segmentation, whether manual or automatic, which poses a problem when tumour tissue, healthy brain tissue or oedema become radiologically indistinguishable.
 In any case, unless a tumour is entirely encapsulated \note{by a membrane? is this possible?} or supratotal resection is performed \note{define}, microscopic tumour cell residues, invisible to the eye and on scans, are bound to remain.
 
 Studies reporting \gls{eor} often don't report to specific numerical values, but instead group resections into broad categories, the most common being subtotal resection (STR), near total resection \note{?}, gross total resection (GTR) and supratotal resection.
