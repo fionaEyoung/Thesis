@@ -213,83 +213,96 @@ In England between 2013--2018, neuro-oncological procedures were the third most 
 At Great Ormond Street Hospital for Children in London, a leading paediatric centre of care, 10\% of neurosurgeries taking place between 2018--2022 were tumour related, while 12\% were for epilepsy, both highly invasive categories of neurosurgery\autocite{gosh2023}.
 
 Brain tumour surgeries are both highly complex and variable in presentation, neurophysiology, microbiology, treatment plans, and prognosis.
-Such diversity presents a significant barrier to the development of image processing methods intended for generalised use in tumour patients.
+Such diversity presents a significant barrier to the development of image processing methods intended for generalised use in tumour patients\autocite{Bauer2013}.
 For example, neoplasms occur throughout the brain, with the location having unique impacts on surrounding structures and associated functions.
 A tumour's natural history and histopathology also plays a large role in determining its effects on its environment.
-Malignant gliomas, a category of tumours arising from glial cells, are often of complex structure, with infiltrating components and peri-tumoural oedema blurring the distinction between tumour and non-tumour tissue.
-On the other hand, many non-malignant tumours including most meningiomas and astrocytomas, are entirely encapsulated, with clear demarcation from surrounding from brain tissues, and can strongly displace neighbouring structures instead of infiltrating.
+Malignant gliomas, a category of tumours arising from glial cells, are often of complex structure, with infiltrating components and peri-tumoural oedema blurring the distinction between tumour and non-tumour tissue\autocite{Weller2021}.
+On the other hand, many non-malignant tumours including most meningiomas and low grade astrocytomas, are entirely encapsulated, with clear demarcation from surrounding from brain tissues, and can strongly displace neighbouring structures instead of infiltrating\autocite{Lu2004,Gerard2017}.
 
 This project is concerned with the visualisation of cerebral white matter tracts, and therefore this review with focus on those indications and interventions in which damage to and navigation of such structures is of concern.
 This is typically not the case for posterior fossa and suprasellar lesions, although growing interest in the role of the cerebellum in wider cognition and the brain functional network and increased attention on the effects of posterior fossa surgery on cerebellar tracts \autocite{Toescu2021,Skye2023}.
 Brainstem tumours are often not candidates for surgical removal, with their precarious locations limiting access and posing too-high risks to vital brainstem function.
 The following discussions apply primarily to lesions in the cerebral hemispheres and thalamus, candidates for biopsy or resection via craniotomy.
+Furthermore, much of the following review will focus on gliomas, those tumours originating in glial cells including astrocytes and oligodendrocytes which are among the most common \gls{cns} primary neoplasms in both adults\autocite{Ostrom2015,Wanis2021} and children\autocite{Ostrom2015}.
+The most common intracranial tumours are meningiomas, arising from the protective membranes surrounding the \gls{cns}, of which the majority are benign with good overall survival rates\autocite{Rogers2015,Spena2022}.
+While specific considerations of functional preservation and surgical strategy reviewed below apply to varying degrees to all intracranial surgeries, they will be illustrated through the view of literature pertaining to gliomas, which sharply illustrate the problems because they embed themselves in the brain.\note{fix this sentence}
+Gliomas are classified by the \gls{who} into four malignancy grades, commonly split into \gls{lgg} (\gls{who} grades 1-2) and \gls{hgg} (\gls{who} grades 3-4) to reflect differences is aggressiveness and prognosis.
+There are many subtypes based on histological and genetic characteristics which are periodically updated\autocite{Louis2021}, but this overview will stick with the broad categories of \gls{hgg} and \gls{lgg}.
 
-\subsection{Lesion resection}
+\subsection{Extent of resection}
 
 % \note{Focus on tumours, but could also be epilepsy resections.
 % Cover extent of resection (measurement, definitions etc.), biopsy, relationship between EOR and outcomes}
 
-One might understandably assume that the goal of a resection surgery would be the total removal of target lesions.
+One might understandably assume that the goal of surgical treatment would be the total removal of target lesions.
 However, things are not so simple.
 While the ideal outcome may, in many cases, be the complete removal of all diseased tissue, this scenario would frequently be in conflict other equally important outcome indicators, such as the health of surrounding brain structures.
 Successfully balancing these trade-offs is a central dilemma in neurosurgical practice, and a key measure is \gls{eor}, or the amount of tumour or epileptogenic brain tissue removed.
 In theory, \gls{eor} is a straightforward concept, but in practice it is ill-defined and inconsistently measured while at the same time \gls{eor} central to studies of surgery efficacy and outcomes.
 
-Easily defined as either the absolute volume or relative percentage of tumour tissue resected, accurately determining \gls{eor} is essentially impossible.
-Many studies simply report very rough values as estimated visually by the operating surgeon with limited accuracy\autocite{Martino2013}. 
-Volumetric analysis, in which the entire lesion is segmented on pre- and postoperative imaging, is becoming more common and provides a far closer \gls{eor} estimate.
-This measurement may be done by simply taking the diameter of the lesion on a single or multiple slices, approximate ellipsoid segmentation or manual segmentation\autocite{Albuquerque2021}.
-This also can't account for resected portions of the tumour being filled with fluid, or differing amounts of tissue compression caused by mass effect and postoperative brain shift.
-This still relies on accurate segmentation, whether manual or automatic, which poses a problem when tumour tissue, healthy brain tissue or oedema become radiologically indistinguishable.
-In any case, unless a tumour is entirely encapsulated \note{by a membrane? is this possible?} or supratotal resection is performed \note{define}, microscopic tumour cell residues, invisible to the eye and on scans, are bound to remain.
+Easily defined as either the absolute volume or relative percentage of tumour tissue removed, accurately determining \gls{eor} is essentially impossible.
+Many studies simply report very rough values as estimated visually by the operating surgeon with limited accuracy\autocite{Sanai2008,Martino2013,Lau2018,Sezer2020}.
+A more quantitative assessment requires comparing pre- and postoperative imaging, but here too practices are inconsistent\autocite{Wykes2021}.
+Full volumetric analysis, in which the entire lesion is segmented, is the accepted standard and becoming more common and provides a far closer \gls{eor} estimate.
+Sometimes \gls{eor} is calculated by simply taking the diameter of the lesion on a single or multiple slices, approximate ellipsoid segmentation, or full manual segmentation\autocite{Sanai2008,Albuquerque2021}.
+% This also can't account for resected portions of the tumour being filled with fluid, or differing amounts of tissue compression caused by mass effect and postoperative brain shift.
+Accurate segmentation is necessary for volumetric \gls{eor} analysis, but manual segmentation can be unreliable and inconsistent, especially for tumours with poorly defined borders and on postoperative imaging \autocite{Ertl-Wagner2009,Bo2017,Visser2019}
+Semi- or fully automatic segmentation improves reproducibility\autocite{Ertl-Wagner2009,Sezer2020} and modern algorithms are proving ever more accurate, although there are still challenges regarding computational performance and robust clinical translation\autocite{Angulakshmi2017,Wadhwa2019,Fawzi2021}.
+Estimates of \gls{eor} can also be thrown off by post-operative brain tissue shifting, obscuring the actual volume of resected tumour \autocite{Schucht2014a}, while microscopic tumour invasion cell invasion means that complete resection, as viewed either on imaging or by intraoperative visual assessment, does not mean no tumour residue remains\autocite{Yordanova2017}.
 
-Studies reporting \gls{eor} often don't report to specific numerical values, but instead group resections into broad categories, the most common being subtotal resection (STR), near total resection \note{?}, gross total resection (GTR) and supratotal resection.
-It's common for these categories are judged by the neurosurgeon or radiologist using subjective assessments such as whether or not tumour residue is visible in the resection cavity or on postoperative scan, which is known to be highly variable, subjective and inaccurate.\autocite{Sezer2020,Lau2018}
-There is no general consensus on how these categories are defined, which makes comparison between studies difficult.
-Over time, the definitions for \gls{eor} have evolved with the availability of measurement equipment, and the current gold standard for quantifying \gls{eor} is with volumetric measurement on pre- and postoperative imaging.\autocite{Rincon-Torroella2019}
-Even so, some studies only provide volumetric \gls{eor} in absolute terms, without taking into account the original tumour size, whereas a percentage reduction in volume is the preferred measurement.\autocite{Ius2012,Rincon-Torroella2019,Smith2008} \note{cite}
+Studies reporting \gls{eor} often don't give quantitative values, but instead group resections into broad categories, the most common being biopsy, subtotal resection (STR) or partial resection (PR), near total resection, gross total resection (GTR) and supratotal resection\autocite{Wykes2021,Karschnia2021}.
+It's common for these categories to be judged subjectively by a neurosurgeon or radiologist based on whether or not tumour residue is visible in the resection cavity or on postoperative scan.
+There is also no general consensus on how these categories are defined, which makes comparison between studies difficult\autocite{Karschnia2021}.
+Over time, the definitions for \gls{eor} have evolved with the availability of measurement equipment, and the current gold standard for quantifying \gls{eor} is with volumetric measurement on pre- and postoperative imaging\autocite{Rincon-Torroella2019}.
+Initially the focus was on reporting the relative reduction of tumour tissue as a percentage of original volume, but more recent studies have argued that absolute residual tumour volume is as if not more relevant for determining postoperative outcomes\autocite{Ius2012,Rincon-Torroella2019,Smith2008,Karschnia2021}.
 
-This inconsistency in the reporting of \gls{eor} is one factor complicating the study of the effect of \gls{eor} on clinical outcomes.
-\note{defs: lgg = grades 1-2, hgg = grades 3-4, glioblastoma = grade 4 glioma}
-For many tumour types, particularly aggressive tumours such as \glspl{hgg}, subtotal resection is \note{never} curative even with adjuvant therapy.
-Sometimes the risk to quality of life and postoperative neurological function associated with \gls{gtr} negates the potential oncological benefits, especially where even \gls{gtr} cannot eliminate the chances of recurrence.
-\Gls{gtr} has been shown to increase survival outcomes over \gls{str} across age groups in both high\autocite{Hatoum2022, Han2020, Adams2016, McCrea2015, Bloch2012, McGirt2009, Kramm2006} and low grade \autocite{Keles2001, Pollack1995, Sanai2008} gliomas.
-In \gls{lgg}, particularly in paediatric patients, \gls{gtr} is becoming the most recommended treatment, as it complete resection leads to very low chance of recurrence.\autocite{Berger1994}
-In particular, \glspl{lgg} residues risk evolving into malignant \glspl{hgg} which are far harder to treat.
-More recent studies have even argued for supratotal resection, beyond the margins of any abnormal enhancing areas on T1w and FLAIR T2w scans, as reviewed in \textcite{deLeeuw2019}.
-There is some evidence \autocite{Yordanova2011} that supratotal resection in \glspl{lgg} is followed by fewer cases of malignant transformation and improved progression-free survival.
+This inconsistency in the reporting of \gls{eor} is one factor complicating the study of the effect of \gls{eor} on clinical outcomes, even as there is widespread agreement on the importance of studying it\autocite{Rincon-Torroella2019,Wykes2021,Weller2021}.
+% \note{defs: lgg = grades 1-2, hgg = grades 3-4, glioblastoma = grade 4 glioma}
+% For many tumour types, particularly aggressive tumours such as \glspl{hgg}, subtotal resection is \note{never} curative even with adjuvant therapy.
+For the most aggressive tumour types, even maximal resection combined with adjuvant therapy is practically never curative, and may only lead to increases in survival of a few months\autocite{Rincon-Torroella2019,Karschnia2023}.
+Given the overall poor survival outcomes associated with aggressive gliomas, oftentimes the risk to quality of life and postoperative neurological function associated with pursuing \gls{gtr} outweighs any potential oncological benefits\autocite{Rahman2016,Tabor2021}.
+\Gls{gtr} has been shown to increase overall and progression free survival over \gls{str} across age groups in both high\autocite{Hatoum2022, Han2020, Adams2016, McCrea2015, Bloch2012, McGirt2009, Kramm2006} and low grade \autocite{Keles2001, Pollack1995, Sanai2008} gliomas.
+In \gls{lgg}, particularly in paediatric patients, \gls{gtr} has become the recommended standard of care, as complete resection leads to very low chance of recurrence\autocite{Berger1994}.
+In particular, maximal resection of \glspl{lgg} drastically reduces the risk of residual tumour evolving into \glspl{hgg} (known as malignant transformation)\autocite{Hervey-Jumper2016,Rincon-Torroella2019}.
+
+More recent studies have even argued for supratotal resection, beyond the margins of any abnormally enhancing areas on T1w and FLAIR T2w scans, as reviewed in \textcite{deLeeuw2019}.
+There is some evidence that supratotal resection in \glspl{lgg} is followed by fewer cases of malignant transformation and improved progression-free survival \autocite{Yordanova2011}.
 However, there remains a distinct lack of robust comparison with appropriately matched controls in this area, along with numerous confounding factors that make interpretation of such results difficult.
-With most studies investigating the effects of \gls{eor} on postsurgical outcomes being limited to retrospective analyses \note{or prospective without randomisation}, selection biases are bound to confound any conclusions that can be drawn from the comparative results.\autocite{deLeeuw2019,Keles2001}
-One might expect supratotal resection of \gls{lgg} to be associated with more postoperative neurological deficits, and indeed one study published in 2019 found higher probabilities of immediate postoperative deficits in supratotal versus total resection, but found that at three month and one year follow-up the deficits were significantly reversed and comparable between total and supratotal groups.\autocite{Rossi2019a}
-In \textcite{Gil-Robles2010}, authors argue for a more conservative resection margin in WHO grade II gliomas to protect functional structures.
-A further consideration on the feasibility of \gls{gtr} or supratotal resection is neuroplasticity.
-Slowly growing, low grade tumours may lead to functional reorganisation of surrounding brain tissue, enabling the safe removal of a greater margin of tissue \note{??}. \autocite{Rossi2019a}
-For example, different tumour subtypes may lend themselves more or less easily to greater \gls{eor}, or arise more frequently in eloquent areas of the brain, where an aggressive resection strategy is likely to be discounted.\autocite{deLeeuw2019}
-\Glspl{lgg} tend to occur more frequently in highly eloquent cortical regions than \glspl{hgg} \autocite{Duffau2004}
-In \glspl{hgg}, one of the most aggressive forms of cancer, the justification for aggressive \gls{gtr} or even supratotal resection is far weaker, given the worse outcomes associated with \gls{hgg} and the low chance of cure.
+With most studies investigating the effects of \gls{eor} on post-surgical outcomes being limited to retrospective analyses, or prospective studies without randomisation, selection biases are bound to confound any conclusions that can be drawn from the comparative results\autocite{deLeeuw2019,Keles2001}.
+For example, different tumour subtypes may lend themselves more or less easily to greater \gls{eor}, or arise more frequently in eloquent areas of the brain, where an aggressive surgical strategy is likely to be discounted.\autocite{deLeeuw2019}
+\Glspl{lgg} tend to occur more frequently in highly eloquent cortical regions than \glspl{hgg} \autocite{Duffau2004}.
+In \glspl{hgg}, one of the most aggressive forms of cancer, the justification for aggressive \gls{gtr} or even supratotal resection is far weaker, given the worse outcomes associated with \gls{hgg}.
 In that light, patient quality of life becomes a stronger consideration when balancing the aims of surgery, an minimising any potential neurological sequelae, even if that means leaving visible tumour residue, can become the greater priority.
-In adults, maximal safe resection, combined with adjuvant radio- and chemotherapy, has been the established standard of care for some time.
-It has been less clear, however, whether the same should apply in paediatric \gls{hgg} patients.
-For one thing, the most prevalent anatomical locations in which \gls{hgg} arise differ between adults and children.\note{is this true? what are most prev adult sites? Duffau2004}
-Paediatric gliomas frequently arise in highly eloquent and high risk \note{??} areas such as thalamus and brain stem.\note{\autocite{Ostrom2015}??}, with the risk of long-term disability particularly \note{undesirable} in children.
-A recent systematic review published in 2022 analysed 37 articles to assess the association between \gls{eor} and survival in paediatric patients with \gls{hgg}.\autocite{Hatoum2022}
-Notwithstanding the difficulties in consistently defining and reporting \gls{eor} as discussed above, the study found strong evidence for \note{significantly} improved overall survival in \gls{gtr} over \gls{str} of gliomas located in the cerebral hemispheres, but no association between \gls{eor} and survival was observed in midline cases.
-The authors emphasise that midline (thalamic and brain stem) gliomas are not often indicated for aggressive resection due to the elevated risk to critical neurological structures, and the lack of observed association may yet stem from measurement biases, including lower sample size and the pooling of histologically distinct tumour types which may respond differently to treatment \note{check this understanding}.
+In \textcite{Gil-Robles2010}, authors argue for a more conservative resection margin in WHO grade 2 gliomas to protect functional structures.
+One might expect supratotal resection of \gls{lgg} to be associated with more postoperative neurological deficits, and indeed \textcite{Rossi2019a} found higher probabilities of immediate postoperative deficits in supratotal versus total resection, these were significantly reversed as three month and one year follow-ups, and initial overall evidence suggests that neuropsychological outcomes are comparable between total and supratotal groups\autocite{Tabor2021}.
+A further consideration on the feasibility of \gls{gtr} or supratotal resection is neuroplasticity.
+Slowly growing, low grade tumours may lead to functional reorganisation of surrounding brain tissue, enabling the safe removal of a greater margin of tissue \note{??}. \autocite{Rossi2019a}Mitolo2022  Takahashi2012
+
+In adults with glioma, maximal safe resection, combined with adjuvant radio- and chemotherapy, has been the established standard of care for some time.
+It has been less clear, however, whether the same should apply in paediatric patients.
+For one thing, the most prevalent anatomical locations in which gliomas arise may differ between adults and children\autocite{Duffau2004}.
+Thalamic gliomas, for example, are more frequent in children than in adults\autocite{Cinalli2018,Palmisciano2021,GomezVecchio2021}.
+Adult gliomas are located most frequently in the hemispheres, mostly the frontal lobe, with only approximately 4-7\%\autocite{GomezVecchio2021,Larjavaara2007} situated in the thalamus, while as many as 19\% of paediatric \glspl{hgg} are thalamic\autocite{McCrea2015}.
+There is also concern that oncological differences between adult and paediatric type gliomas preclude safe extrapolation of treatment plans from one to the other\autocite{Jones2012,Greuter2021}.
+% Adult LGG 31\% eloquent Jakola2012
+% Adult mixed grade 2-3 65\% "presumed eloquence" GomezVecchio2021 ; 80\% eloquent adult LGG Greuter2021
+Paediatric tumours frequently arise in high-risk areas such as thalamus and brain stem \autocite{Ostrom2015}, while neurocognitive and functional preservation is an especially critical concern in children.
+A recent systematic review published in 2022 analysed 37 articles to assess the association between \gls{eor} and survival in paediatric patients with \gls{hgg}\autocite{Hatoum2022}.
+Notwithstanding the difficulties in consistently defining and reporting \gls{eor} as discussed above, the study found strong evidence for improved overall survival in \gls{gtr} over \gls{str} of gliomas located in the cerebral hemispheres, but no association between \gls{eor} and survival was observed in midline cases.
+The authors emphasise that midline (thalamic and brain stem) gliomas are not often indicated for aggressive resection due to the elevated risk to critical neurological structures, and the lack of observed association may yet stem from measurement biases, including lower sample size and the pooling of histologically distinct tumour types which may respond differently to treatment.
 However, no comparison was made for post-operative functional neurological outcomes, and thus only captures part of the picture considering the factors contributing to a decision to pursue aggressive surgery.
 
 New postoperative neurological deficits occur in over a third of glioma surgeries \autocite{Zetterling2020a}, although most patients improve significantly over longer-term followup.
-Unsurprisingly, higher chances of postoperative deficits were associated with higher \gls{eor} and with tumours situated in eloquent areas.\autocite{Zetterling2020a}
-In some surgeries, there is no hope whatsoever of completely removing the tumour, as treatment will be delivered via adjuvant therapy.
-In these cases, the goal of surgery may be debulking of the lesion to relieve pressure on the brain and reduce neurological deficits.
-In debulking surgeries, there is no need to attempt to fully resect the tumour, instead a conservative strategy is chosen and no risks involving surrounding functional tissue is taken.
-In certain types of tumour, particularly when a combined treatment approach of surgery and radiotherapy is taken, little evidence has been found that \gls{gtr} offers greater tumour-related (that is to say, neurological condition affected by the presence of the tumour) outcomes than subtotal resection, while increasing risk to surrounding brain tissue.
-On the other hand, certain types of tumour, in particular lower grade and less aggressive types, show a lower risk of recurrence and malignant transformation when radically resected, offering a particularly good long-term outlook.
-Increasingly, physicians have advocating for \gls{gtr} as the standard treatment for \gls{lgg} and maximal safe resection for \gls{hgg}. \autocite{Rincon-Torroella2019}
-This comes with the caveat that tumours of lower malignancy are also those found to be more operable, muddying the causal link between overall survival and extent of resection.\autocite{Weller2021}
-What's more, post-operative neurological deficits themselves have a negative impact on overall survival.\note{cite}
-The European Association of Neuro-Onocology's recommendation, as of 2021, is that prevention of new neurological deficits should be prioritised over maximal extent of resection in the surgical treatment of gliomas.\autocite{Weller2021}
+Unsurprisingly, higher chances of postoperative deficits were associated with higher \gls{eor} and with tumours situated in eloquent areas\autocite{Zetterling2020a}.
+Where radical resection carries no likely oncological benefit and is contraindicated by a high functional risk to eloquent areas, the goal of surgery may be conservative debulking of the lesion to relieve pressure on the brain and reduce neurological symptoms.
+% In certain types of tumour, particularly when a combined treatment approach of surgery and radiotherapy is taken, little evidence has been found that \gls{gtr} offers greater tumour-related (that is to say, neurological condition affected by the presence of the tumour) outcomes than subtotal resection, while increasing risk to surrounding brain tissue.
+% On the other hand, certain types of tumour, in particular lower grade and less aggressive types, show a lower risk of recurrence and malignant transformation when radically resected, offering a particularly good long-term outlook.
+With the evidence of oncological advantage, physicians have been increasingly advocating for \gls{gtr} as the standard treatment for \gls{lgg} and maximal safe resection for \gls{hgg} \autocite{Rincon-Torroella2019}.
+This comes with the caveat that tumours of lower malignancy are also those found to be more operable, muddying the causal link between overall survival and extent of resection\autocite{Weller2021}.
+What's more, post-operative neurological deficits themselves have a negative impact on overall survival, independently of differences in pre-operative symptoms \autocite{Rahman2016}.
+The European Association of Neuro-Onocology's recommendation, as of 2021, is that prevention of new neurological deficits should be prioritised over maximal extent of resection in the surgical treatment of gliomas\autocite{Weller2021}.
 
-\note{more about preserving eloquent tissue}
+% Overall view: moving goal posts, as changes in classifications of glioma and new understanding of mutations and associated risk, changing priorities from topological to hodological mapping and considering neuroplasticity, selection bias, ...
 
 \subsection{Surgical neuronavigation}
 
