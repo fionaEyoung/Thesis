@@ -64,7 +64,7 @@ To address these limitations, an extension proposed in \textcite{Jeurissen2014} 
 The resulting \gls{fod} estimates have higher angular precision than \gls{ssst} \gls{csd}, with fewer noisy spurious lobes to confound downstream processing and interpretation.
 Furthermore, separation of the isotropic signal contributions greatly improves the interpretation of \gls{fod} amplitude as a measure of \gls{afd}, as the amplitudes of each tissue's deconvolved \gls{odf} closely correspond to their respective tissue volume fractions\autocite{Jeurissen2014}.
 
-\subsection{Streamline tractography}
+\subsection{Streamline tractography}\label{sec:tractography}
 
 % \note{Discuss as the mainstay of white matter bundle segmentation.
 % Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
@@ -319,72 +319,90 @@ The next section will explore some of those advanced technologies instrumental i
 \note{All the various tools and gizmos for guided surgery. Split into preoperative planning and intraoperative use.
 Include functional imaging (EEG, fMRI, EEG), structural, tractography, DES, awake surgery/monitoring and intraoperative imaging.}
 
-The successful balancing of maximum safe resection and preservation of neurological function is the overall goal of neurosurgical resection.
-Tumours can interact with their surroundings in a number of ways, depending on the nature and location of the neoplasm.
-\note{anything about de novo vs secondary tumours?}
-Some tumours are encapsulated and displace tissue as they grow.
-On the one hand, such separation can make operating easier as the distinction between tumour and healthy tissue is clear, but on the other hand, such tumours can exert dangerous amounts of pressure on displaced tissues, leading to neurological impairments and urgent need for surgical debulking.
-Other tumours cause almost no spatial displacement of brain tissue, with cancer cells instead infiltrating the brain and blurring the boundaries between disease and healthy brain.
-Infiltrating tumours are difficult to operate on due to the risk if injury to eloquent tissue, and are instead often conservatively debulked and treated with radiation or chemotherapy.
-Many tumours are of \note{combination type}, with both a tumour core and infiltrating boundary.
-
-In order to minimise risk to adjacent structures, a neurosurgical team has a wealth of tools at their disposal, including structural imaging and functional mapping.
+Tumours can interact with their surroundings in a number of ways, depending on their nature and location.
+Some tumours, including some \glspl{lgg} and meningiomas, are fully encapsulated and displace surrounding brain as they grow.
+This strong distinction between tumour and healthy tissue can simplify surgical treatment as it is not necessary to risk functioning neural tissue while resecting infiltrating tumour, but such tumours can exert dangerous amounts of pressure on displaced tissues, leading to neurological impairments and urgent need for surgical debulking.
+Others cause almost no spatial displacement of brain tissue, with cancer cells instead invading the parenchyma and blurring the boundaries between disease and healthy brain.
+Infiltrating tumours pose a particular surgical challenge due to the risk of injury to eloquent tissue, and are often only conservatively debulked and treated with adjuvant radiation or chemotherapy.
+In order to meet the goal of safely balancing maximal resection and functional preservation, the full tumour-brain interaction must be comprehensively mapped to determine the optimal resection margin.
 
 \paragraph*{Preoperative imaging}
 
 \note{change to perioperative imaging? mention postop scans, usually checking for residuals/confirming EOR}
 
-Preoperatively, structural and functional non-invasive imaging are used for surgical planning.
-At this stage the goal is to assess the interaction between diseased and healthy tissues, map out a safe operative corridor to access the lesion, and determine the appropriate \gls{eor} to aim for based on risk to surrounding structures and degree of infiltration.
-Functional \gls{mri} is used at this stage to map out cortical areas of functional importance that lie in proximity to the lesion, principally the motor and language cortices \note{but also others?}.
-Navigated transcranial magnetic stimulation is another non-invasive functional mapping technique.
-In epilepsy cases, \gls{eeg} may be employed to monitor epileptogenic regions.
-Structural imaging also play an important role in planning.
-\Gls{ct} can indicate calcified regions \note{is ct actually used for planning??}.
-Multi-contrast \gls{mri}, including FLAIR, T1w and T2w imaging sequences, each provide unique contrasts for visualising different aspects of a tumour, such as necrotic and infiltrating regions, which can aid in determining what \gls{eor} to aim for or which region of the tumour to target for biopsy.
-Angiography \note{mri, ct?} can also be employed for determining the tumour's and surrounding vasculature.
-Preoperative imaging has greatly improved the scope of cases for which surgical resection is now a possibility, by enabling the planning of safe routes to regions of the brain previously considered inoperable, for example thalamic tumours \note{and some brain stem?}.
-These preoperative images can also be used intraoperatively for guidance throughout the procedure.
-Functional MRI can guide the use of DES-based functional mapping after craniotomy, and in some cases, for example surgery near the language centres in patients where awake surgery is not possible, action as a substitute for DES.\note{??}
+Preoperatively, structural and functional non-invasive imaging are used for diagnosis and, if surgery is indicated, surgical planning.
+At this stage the goal is to assess the spatial and functional relationships between diseased and healthy tissues, map out a safe operative corridor to access the lesion, and determine the appropriate \gls{eor} under all considerations explored in the previous section.
+Structural imaging with \gls{ct} and \gls{mri} provide critical anatomical information in high spatial detail.
+Multi-contrast \gls{mri}, including FLAIR, T1w and T2w imaging sequences, each provide unique contrasts for visualising different aspects of a tumour, such as necrotic and infiltrating regions, which can aid in determining tumour type, what \gls{eor} to aim for or which region of the tumour to target for biopsy.
+Angiography, detailed mapping of blood vessels with \gls{ct} and specialised \gls{mri} sequences, can also be employed for determining a tumour's vasculature and identifying major vessels involved\autocite{Kashimura2008,Kim2019}.
+\Gls{fmri} and navigated transcranial magnetic stimulation \autocite{WeissLucas2020} can be used to map out cortical areas of functional importance that lie in proximity to the lesion, including the motor, language, and sensory cortices.
+In epilepsy cases, \gls{eeg} may be employed to monitor epileptogenic regions\autocite{Sarco2006}.
 
-\paragraph*{White matter mapping}
+Alongside functional cortical mapping, \gls{dmri} is playing an ever-increasingly important role for surgical planning and navigation.
+Tumour and \gls{wm} interactions are varied and can be difficult to distinguish on conventional contrast \gls{mri} alone.
+Depending on the infiltrative nature of a lesion, \gls{wm} tracts may be displaced due to mass effect, invaded but remain functionally intact, disrupted or destroyed, or experience a combination of effects\autocite{Essayed2017,DSouza2019,Manan2023}.
+\gls{dmri} can be instrumental in distinguishing these circumstances and assessing tract integrity\autocite{Field2004,Manan2023}, but care must be taken to recognise how tumour effects may disturb diffusion patterns and impact the results.
+Peri-tumoural oedema and invading cells can lead to drastically altered measured diffusion signals and reduction of anisotropy, complicating their interpretation\autocite{Kuhnt2013}.
+That said, \gls{dti} and streamline tractography have brought dramatic improvements to neurosurgical planning, unlocking detailed visualisations of \gls{wm} tracts and their spatial relationship to the surgical target.
+This potential was recognised almost immediately, with \gls{dti} and early tractography quickly making their way into clinical practice \autocite{Lee2001,Mori2002a,Nimsky2005}.
+% \paragraph*{White matter mapping}
+%%%% --! The below may be picked up as plagiarism; heavily copied from HBM manuscript; check academic regulations !--
+In the intervening years, research imaging has largely transitioned to multi-fibre models and probabilistic algorithms as described in section \ref{sec:tractography}, but in clinical practice tractography is frequently still based on \gls{dt} fibre orientation models \autocite{Toescu2020, Yang2021} and deterministic tracking algorithms,
+for example as implemented in popular neuronavigation platform provider Brainlab's iPlan\textregistered{} (single tensor)\autocite{Brainlab2012} and Elements (dual tensor)\autocite{Sollmann2020a} Fibre Tracking applications (Brainlab AG, Munich, Germany) which use a version of \gls{fact} \autocite{Mori1999}.
 
-\note{Copied from HBM manuscript; this might be better placed as a summary in the "problem statement" part?}
-
-In neurosurgical settings, tractography is frequently based on \gls{dt} fibre orientation models \autocite{Toescu2020, Yang2021} and deterministic tracking algorithms, for example as implemented in Brainlab's iPlan\textregistered (single tensor)\autocite{Brainlab2012} and Elements (dual tensor)\autocite{Sollmann2020a} Fibre Tracking applications (Brainlab AG, Munich, Germany) which use a version of fibre assignment by continuous tracking, or FACT. \autocite{Mori1999}
-In research settings, \gls{dt} models and deterministic algorithms have long since given way to multi-fibre models and probabilistic algorithms.
-These include multi-tensor models,\autocite{Peled2006} Q-ball imaging\autocite{Tuch2004}, ball-and-sticks\autocite{Behrens2003} and \gls{csd}-derived fibre orientation distribution functions on the modelling side, and probtrackx \autocite{Behrens2007}, first or second-order integration over FODs (iFOD1/iFOD2)\autocite{Tournier2010} and particle filter tractography \autocite{Girard2014} on the algorithms side.
-
-Regardless of the particular combination of fibre model, algorithm and tracking criteria, streamline tractography is compromised by weaknesses that can lead to flawed results or interpretations if not accounted for.\autocite{Rheault2020, Schilling2022, Schilling2019}
-Although probabilistic tractography is generally considered to be superior to deterministic tractography in its ability to reconstruct bundles more completely, especially ones with complex shapes, sharp bends and fanning, this improved sensitivity is accompanied by a high propensity for false positive streamlines.\autocite{Maier-Hein2017}
-As a result, targeted reconstruction of specific bundles using probabilistic tractography requires constraining with inclusion and exclusion regions of interest (ROIs), whose manual placement is labour intensive and demands expert neuroanatomical knowledge.
-
-Nonetheless, there is growing consensus that (pending appropriate regulatory approval) the clinical community ought to adopt probabilistic, non-DT tractography,\autocite{Yang2021, Beare2022, Petersen2017} given, among other issues, the low sensitivity of DT deterministic tractography particularly around lesions.\autocite{Ashmore2020}
-There is evidence that a shift is underway, at least in the context of presurgical planning,\autocite{Toescu2020} although there is the question of whether the adoption of advanced tractography is being driven from the supply or demand side.
+Regardless of the particular combination of fibre model, algorithm and tracking criteria, streamline tractography is compromised by weaknesses that can lead to flawed results or interpretations if not accounted for\autocite{Rheault2020, Schilling2022, Schilling2019}.
+The same techniques and associated limitations for reconstructing individual \gls{wm} bundles already described apply here too, and can even be exasperated by additional tumour-related effects.
+\gls{dt}-based tractography, already afflicted by low sensitivity in healthy applications, often encounters particular difficulties tracking through oedema and areas of infiltration even where intact and functioning fibres may persist, leading to missed connections and dangerous blind spots in the very regions at risk during surgery, where accurate navigation is most critical \autocite{Kuhnt2013,Ashmore2020}.
+Meanwhile, the high propensity for false positive streamlines typical of probabilistic algorithms can be even more difficult to manage when tumour deformations disturb normal fibre orientations and inhibit accurate placement of \glspl{roi}\autocite{Yang2021}.
+Perhaps clinical translation of probabilistic tractography has also been muted on account of its lower ease of use and practicality.
+DT acquisitions can have as few as 6 diffusion weighted directions, resulting in much shorter scan times compared to full HARDI scans.
+Deterministic tracking itself is rapid, and the placement of \glspl{roi} need not be as strict as with probabilistic tractography owing to a lower sensitivity to false positives \autocite{ODonnell2017}.
+A general lack of availability of the necessary expertise and time limits neurosurgical centres' access to state-of-the-art tractography \autocite{Toescu2020}.
 Until recently, commercially available neurosurgical navigation platforms have exclusively supported \gls{dt} modelling and deterministic tractography (a recent exception is the Medtronic Stealth\texttrademark{}  Tractography application (Medtronic, USA), which implements \gls{csd}-based tractography\autocite{Pozzilli2023} as well as DT).
 This lack of readily available alternatives in the neurosurgeon's workflow and certified for safe clinical use is undoubtedly a major factor in the persisting preference for deterministic methods in clinical practice.
-But perhaps demand for probabilistic tractography in neuronavigational software has also been understandably muted on account of its lower ease of use and practicality.
-DT acquisitions can have as few as 6 diffusion weighted directions, resulting in much shorter scan times compared to full HARDI acquisitions.
-Deterministic tracking itself is rapid, and the placement of ROI need not be as strict as with probabilistic tractography owing to a lower sensitivity to false positives.\autocite{ODonnell2017}
-A lack of availability of the necessary expertise and time limits neurosurgical centres' access to state-of-the-art tractography.\autocite{Toescu2020}
-There is thus an unmet need for reliable, automated tract segmentation techniques that can rapidly provide consistent and complete tract reconstructions for clinical use.
+Nonetheless, there is growing consensus that (pending appropriate regulatory approval) the clinical community ought to adopt probabilistic, non-DT tractography\autocite{Yang2021, Beare2022, Petersen2017}.
+There is evidence that this shift is gradually underway, at least in the context of presurgical planning\autocite{Toescu2020},  driven probably by a combination and feedback loop of growing demand, and better availability and integration of advanced techniques into the clinical workflow.
 
-tracking (dt especially) bad in areas of ``disturbed diffusion" Kuhnt2013
+\paragraph*{Image-guided surgery and brain shift}
 
-\paragraph*{Brain shift}
+Imaging and functional data acquired in preparation for surgery is not only instrumental to surgical planning, it also serves to guide the surgeon throughout the procedure, providing real-time multidimensional navigational information to supplement their live view through the surgical microscope.
+Simple image guidance can involve simply displaying preoperative imaging and mapping in the theatre, while more advanced systems also integrate the positions of surgical tools or overlay imaging information on the microscope view \note{rephrase}.
+This is achieved through stereotactic image guided surgery, where the patient's head is fixed within a frame with fiducial markers, which are tracked along with the surgical tools by an optical system.
+Fiducials in the image are registered to the \gls{or} coordinate system, allowing the tools' positions to be mapped transformed into the image coordinate system.
 
-The dynamic conditions of brain surgery results in the unpredictable and often significantly strong movement, compression and deformation of tissue referred to as brain shift.
-A range of factors contribute to this phenomenon, including the draining of \gls{csf}, sagging due to gravity, decompression of tissue surrounding resected tumour, swelling, craniotomy herniation \note{is that a thing?} and the effects of surgical instruments.
-These effects are often \note{competing}, for example swelling and tumour debulking can cause brain tissue to shift towards a craniotomy, while the effects of gravity and \gls{csf} drainage can have the opposite effect.
-The amount and direction of shifting is unpredictable, ranging from \note{1-10mm}, making accounting for it with predictive modelling very difficult.
+Alongside imaging, functional monitoring with \gls{des} is a crucial \note{tool} and widely considered the gold standard for localisation of neural function.
+\gls{des} can be utilised in awake or asleep paradigms.
+In the former, patients are awakened after craniotomy and dural opening, and perform structured cognitive tasks involving those cortical hubs that may be at risk.
+Language function is perhaps the most common target for awake stimulation as well as complex motor tasks (such as playing an instrument) and vision\autocite{Mazerand2017}.
+Electrical current is applied to the cortical surface at different \note{decreasing?increasing?} strengths, and where stimulation results in functional disruption, the corresponding surface region is labelled as eloquent. \note{maybe phrase this better}
+Additionaly, stimulation of subcortical white matter during resection can be used to indicate when resection should be halted as underlying eloquent structures are apporoached.
+Awake surgery is complex and psychocognitively and emotionally demanding of the patient, and is not universally tolerated.
+In very young children, awake surgery is rarely possible except in the most cooperative and resilient patients, and with appropriate preparation\autocite{Zolotova2022}.
+\gls{des} may also be perfomed in asleep patients, albeit limited to motor function, where stimulation can elicit potentials in the patient's muscles (although the effects of anaesthesia can limit the sensitivity and accuracy of this approach\autocite{WeissLucas2020}). \note{round off; more citations about awake surgery / des}
+Where awake surgery is contraindicated, preoperative functional mapping remains the only guidance available for higher cognitive functions \note{???}.
 
-Brain shift can affect the neurosurgeons perception of the shape and location of the target lesion \note{pure speculation} and invalidate preoperative imaging used for navigation.
+As well as functional preservation, maximising \gls{eor} has been significantly improved with the introduction of 5-aminolevulinic acid (5-ALA) \note{full name} guidance.
+This enzyme \note{?} is administered orally prior to surgery and is converted in cells to protoporphyrin IX (PPIX), which fluoresces when excited by short wavelength light.
+Uptake of 5-ALA is highest in tumour cells due to \gls{bbb} disruption, and the metabolic pathways producing PPIX are greatly increased in tumour cells, allowing the surgeon to distinguish them from healthy tissue under the surgical microscope.
+5-ALA guided surgery results in improved \gls{eor} while maintaining preservation of functional tissue\autocite{Coburger2019}.\note{cite}
+
+The dynamic conditions of brain surgery results in the unpredictable and often substantial movement, compression and deformation of tissue referred to as brain shift.
+A range of factors contribute to this phenomenon, including the \gls{csf} drainage, sagging due to gravity, decompression of tissue surrounding the resection cavity, swelling, craniotomy herniation and the effects of surgical instruments\autocite{Gerard2017}.
+These factors may act in competing directions and combine in complex ways, for example swelling and tumour debulking can cause brain shift towards the craniotomy, while gravity and \gls{csf} drainage may have the opposite effect.
+With the magnitude and direction of brain shift being so unpredictable, ranging from 1mm to as much as 50mm\autocite{Gerard2017}, accounting for it with predictive modelling is very difficult.
+
+Brain shift can affect the neurosurgeon's perception of the shape and location of the target lesion \note{pure speculation} and invalidate preoperative imaging used for navigation.
 \note{cue various studies backing this up.}
 There have been attempts to address the problem of brain shift by dynamically adjusting preoperative imaging according to (sparse) intraoperative data, for example optical imaging of the cortical surface, or using ultrasound. \note{does this belong in next section?}
 Many neurosurgeons rely on their intuition to update their mental map of the surgical site throughout the procedure.
 On more advanced neuronavigational platforms which integrate preoperative imaging and intraoperative data such as \gls{des} stimulation sites, brain shift can lead to misleading and inaccurate depictions of the spatial relationships between tumour and surrounding structures.
 
-\paragraph*{Intraoperative imaging}
+\paragraph*{Intraoperative neuronavigation and imaging}
+
+
+Preoperative images can also be used intraoperatively for guidance throughout the procedure.
+\gls{fmri} can guide the use of \gls{des}-based functional mapping after craniotomy, and in some cases, for example surgery near the language centres in patients where awake surgery is not possible, action as a substitute for DES.\note{??}
+
 
 To mitigate the effects of brain shift on neuronavigational accuracy, new structural and functional guidance information can be acquired intraoperatively.
 Once more, different modalities offer different strengths and weaknesses depending on the circumsances.
@@ -407,3 +425,5 @@ Higher angular resolution diffusion sequences are far less common in intraoperat
 Modern scanners can compute basic diffusion tensor directionally encoded colour maps which can help radiologists coarsely identify white matter pathways in the tumour neighbourhood.
 In \note{nimsky??} intraoperative diffusion \gls{mri} successfully imaged the shifting of white matter tracts, and \note{??} measured the directions and magnitude of shifting, determining that it was all quite variable and unpredictable.
 \note{expand on studies using iop dti}
+
+\note{Can use anything from systematic review??}
