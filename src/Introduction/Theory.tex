@@ -25,7 +25,7 @@ Axon terminals interface with the dendrites of other neurons or, in the \gls{pns
 The speed of signal conduction in some axons, including those that travel great distances, is enhanced through sheaths of a fatty substance called myelin which provide electrical insulation.
 
 Glial cells (from Greek \textit{glia}, ``glue") are the other major class of nervous system residents, and though long thought to outnumber neurons up to ten fold, newer evidence indicates that they are more or less equally numerous as neurons throughout the brain as a whole, although local ratios vary greatly.\autocite{Herculano-Houzel2014}
-Astrocytes are supportive glial cells providing a range of services including phagocytosis, scar tissue formation and blood-brain barrier formation.
+Astrocytes are supportive glial cells providing a range of services including phagocytosis, scar tissue formation and \gls{bbb} formation, the latter being a protective layer around neural vasculature selectively regulating molecular exchange between the bloodstream and brain parenchyma.
 Oligodendrocytes are the \gls{cns}'s myelinating glia.
 They form processes which wrap around axons as myelin sheaths, with each oligodendrocyte able to myelinate multiple axons simultaneously.
 In the \gls{pns}, myelination is performed by Schwann cells, which each form a single myelin sheath.
@@ -126,10 +126,10 @@ After all, the axons in white matter are extensions of the cells that make up gr
 Indeed, far from being a mere philosophical question about under what framework we study and write about the brain, the so-called hodological view (from Greek \textit{hodos} ``path") has profound translational implications.
 Traditional localisationist approaches to neurosurgery hold, crudely put, that tumours seated within or in close association to ``eloquent" areas of cortex subserving well studied functions of language, low-level sensory processing and movement, are fundamentally inoperable.
 Meanwhile tumours in areas of ``non-eloquent" cortex with no known overt functional correlates can be radically resected with few substantial neurological consequences.
-Much of the study into and tools for functional preservation of so-called eloquent areas that will be discussed in Chapter \ref{sec:neurosurgery} adopts this thinking.
+Much of the study into and tools for functional preservation of so-called eloquent areas that will be discussed in Chapter \ref{sec:neurosurgery} adopts this framing.
 But the postoperative deterioration in neurocognitive function and quality of life often experienced by patients undergoing surgery for epilepsy or tumours in ``non-eloquent" areas flies in the face of such thinking.
 \autocite{Satoer2017,Mandonnet2017a,Rijnen2019,Herbet2019,Vigren2020a,Dadario2021}
-Furthermore, emerging evidence suggests adopting a hodological approach to neurosurgery can inform successful resection of tumours from areas typically considered inoperable.\autocite{Dadario2021,DeBenedictis2011b,Suzuki2023}
+Furthermore, emerging evidence suggests adopting a hodological approach to neurosurgery can inform successful resection of tumours from areas typically considered inoperable\autocite{Dadario2021,DeBenedictis2011b,Suzuki2023}.
 
 As frameworks of neural function continue to evolve alongside our technological means to study it, we find ourselves reaching across the disciplinary divides for tools and ideas with which to advance our understanding of the brain.
 Modern neuroscience is blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
@@ -268,7 +268,7 @@ After a time $\Delta t_p$, $G_p$ is switched off, and in its absence spins retur
 In other words, the clocks have been brought back together such that they keep the same time, but without correcting the 5 minute lag one clock accumulated while it was experiencing gravitational time dilation.
 Since the phase encoding gradient is switched off before signal readout, phase differences become locked in and serve to identify spins along the \gls{pe} direction.
 A single echo provides insufficient information to fully separate out the mixed phase contributions and uniquely determine the $y$ coordinates of received signal components.
-Instead, the excitation--phase-encoding--echo-readout sequence is repeated with varying \gls{pe} strengths resulting in a series of echo train signals, with the number of \gls{pe} steps corresponding to the image matrix size along the $y$ axis.
+Instead, the excitation--phase-encoding--echo-readout sequence is repeated with varying \gls{pe} strengths resulting in a series of echo train signals, with the number of \gls{pe} steps $N_{p}$ corresponding to the image matrix size along the $y$ axis.
 
 After all \gls{pe} steps have been acquired, the full data from a single slice has been recorded as a series of time-varying electrical signals.
 Thanks to our spatial encoding gradients, we know that those signals are complex mixtures of frequencies originating from different positions in the sample.
