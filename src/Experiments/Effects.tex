@@ -93,7 +93,7 @@ This is particularly relevant for longitudinal studies, or when comparing differ
 Because high angular resolution \gls{dmri} acquisitions involve acquiring many volumes of data, they would have prohibitively long scan times without the use of \gls{epi}.
 A common complaint about \gls{epi} concerns the geometric image distortions that commonly arise at the boundaries between areas of different magnetic susceptibility, typically at tissue/air interfaces.
 For intraoperative scanning, this poses a particular problem in which the very region of interest, the operative field and surgical cavity, can suffer from the strongest distortions, affecting nearby structures (such as white matter tracts) that are of neuronavigational importance.\autocite{Yang2022}
-In most applications, these artifacts are tolerated as they can be fairly robustly corrected for offline at the image proprocessing stage.
+In most applications, these artefacts are tolerated as they can be fairly robustly corrected for offline at the image preprocessing stage.
 However, not only can the distortions around resection cavities be especially severe due to the large exposed area of brain (Fig. \ref{fig:epi}), neither can they be easily corrected for intraoperatively, as the current tools take on the order of tens of minutes to hours to run.
 
 \begin{figure}[h!]
@@ -106,7 +106,7 @@ As an alternative to \gls{ssepi}, multi-shot (MS) sequences have been proposed.
 These include interleaved and readout-segmented (RS) sequences which, in general, only traverse a portion of k-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) but increasing scan time.\autocite{Wang2018}
 RESOLVE (readout segmentation of long variable echo-trains), a Siemens product, is one example of a commonly used \gls{rsepi} sequence.
 
-While RESOLVE can be combined with generalised autocalibrating partially parallel acquision (GRAPPA) and simultaneous multislice (SMS) acceleration tecniques, they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
+While RESOLVE can be combined with generalised autocalibrating partially parallel acquision (GRAPPA) and simultaneous multislice (SMS) acceleration techniques, they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
 For example, in \textcite{Wang2018} the authors compared readout-segemented and interleaved EPI sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4mm thickness!
 In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE DTI sequence with 15 segments, 6 DW directions, and a scan time of 10:34.
 For comparison, the clinical DTI sequence currently used intraoperatively at GOSH is a 30xb1000 acquisition lasting just 4:57 with 2.3mm isotropic voxels.
