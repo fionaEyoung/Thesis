@@ -21,27 +21,30 @@ kspace = np.fft.fftshift(np.fft.ifft2(imslice))
 kx = np.fft.fftshift(np.fft.fftfreq(imslice.shape[0]))
 ky = np.fft.fftshift(np.fft.fftfreq(imslice.shape[1]))
 
-# kslice = kspace.real[x]
-kmax_inset = 0.05
 kmax = max(kx)
-kspace[np.unravel_index(kspace.argmax(), kspace.shape)] *= 0.3
+
+# kslice = kspace.real[x]
+kx_max_inset = 0.07
+ky_max_inset = 0.03
+n_ky_lines = np.count_nonzero(abs(ky)<ky_max_inset)
+kspace[np.unravel_index(abs(kspace).argmax(), kspace.shape)] *= 0.3
 # X = np.arange(kspace.shape[0])
 # X = kx
-X = kx[np.nonzero(abs(kx)<kmax_inset)]
-fig, ax = plt.subplots(1, 4, gridspec_kw={'width_ratios': [3, 2, 1, 1]})
+X = kx[np.nonzero(abs(kx)<kx_max_inset)]
+fig, ax = plt.subplots(1, 4, gridspec_kw={'width_ratios': [2.5, 2, 1, 1]}, constrained_layout=True)
 # ax = plt.figure().add_subplot(projection='3d')
-
 # ax[0].plot(kspace[x], 'k.')
-for j, Y in reversed(list(enumerate(ky[np.nonzero(abs(ky)<kmax_inset)]))): #np.arange(kspace.shape[1])[::-1]:
-  yind=np.flatnonzero(abs(ky)<kmax_inset)[0]+j
+for j, Y in reversed(list(enumerate(ky[np.nonzero(abs(ky)<ky_max_inset)]))): #np.arange(kspace.shape[1])[::-1]:
+  yind=np.flatnonzero(abs(ky)<ky_max_inset)[0]+j
   # sys.exit(0
-  trail = kspace.real[np.nonzero(abs(kx)<kmax_inset),yind].flat
+  # trail = kspace.real[np.nonzero(abs(kx)<kmax_inset),yind].flat
+  trail = kspace.real[np.nonzero(abs(kx)<kx_max_inset),yind].flat
   Spline = make_interp_spline(X, trail)
 
   X_ = np.linspace(X.min(), X.max(), 600)
   Y_ = Spline(X_)
 
-  if j == (len(trail)//2 - 1):
+  if j == (n_ky_lines//2 - 1):
     i = 3
     td = np.linspace(X[i], X[i+1], 10)
     ymax = 2*max(Y_)
@@ -58,7 +61,7 @@ for j, Y in reversed(list(enumerate(ky[np.nonzero(abs(ky)<kmax_inset)]))): #np.a
     t.set_bbox(dict(facecolor='w', edgecolor='None', pad=0))
     # ax[0].annotate('', xy=(X[i], ymax), xytext=(X[i+1]-X[i], ymax), arrowprops=dict(arrowstyle='<->'))
 
-    ax[0].set_aspect(0.0005)
+    ax[0].set_aspect(0.0009)
     # ax[0].set_frame_on(False)
     ax[0].spines[['top','right','left']].set_visible(False)
     ax[0].axes.get_yaxis().set_visible(False)
@@ -73,10 +76,11 @@ for j, Y in reversed(list(enumerate(ky[np.nonzero(abs(ky)<kmax_inset)]))): #np.a
     # ax[0].axis('off')
 
   m = 3
-  ax[1].plot(X_+Y/2 , m*yind+Y_, 'k-', linewidth=0.5, zorder=2*abs(j-kspace.shape[1])+1)
-  ax[1].plot(X+Y/2 , m*yind+trail, 'ro', markersize=0.5, zorder=2*abs(j-kspace.shape[1])+1.5)
+  ax[1].plot(X_+Y/2 , m*yind+Y_, 'k-', linewidth=0.4, zorder=2*abs(j-kspace.shape[1])+1)
+  ax[1].plot(X+Y/2 , m*yind+trail, 'ro', markersize=0.3, zorder=2*abs(j-kspace.shape[1])+1.5)
   ax[1].fill_between(X_+Y/2, m*yind+Y_, min(m*yind+Y_), color='w', alpha=0.9, zorder=2*abs(j-kspace.shape[1]))
   ax[1].axis('off')
+  ax[1].set_aspect(0.0015)
 
   ## 3D attempt
   # ax.plot(X_ , Y_, 'k-', zs=Y, linewidth=0.3, zorder=2*abs(j-kspace.shape[1])+1, zdir='y')
@@ -88,7 +92,7 @@ crop = int((s*(1-zoom))//2)
 ax[2].imshow(ndi.rotate(np.absolute(kspace),90)[crop:(s-crop),crop:(s-crop)],
                         extent=[-zoom*kmax, zoom*kmax, -zoom*kmax, zoom*kmax],
                         vmin=0, vmax=4, cmap='gray')
-ax[2].add_patch(plt.Rectangle((-kmax_inset, -kmax_inset), 2*kmax_inset, 2*kmax_inset, ls="--", ec="w", fc="none"))
+ax[2].add_patch(plt.Rectangle((-kx_max_inset, -ky_max_inset), 2*kx_max_inset, 2*ky_max_inset, ls="--", ec="w", fc="none"))
 ax[2].tick_params(which='both', bottom=False, left=False, labelbottom=False, labelleft=False)
 ax[2].set_xlabel('$k_x$')
 ax[2].set_ylabel('$k_y$')
