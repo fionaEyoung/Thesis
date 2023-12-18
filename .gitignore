@@ -48,6 +48,7 @@ src/bibliographies
 
 ## Build tool directories for auxiliary files
 .build
+.drafts
 
 ## Auxiliary and intermediate files from other packages:
 # algorithms
