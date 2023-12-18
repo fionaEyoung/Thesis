@@ -1,5 +1,27 @@
-\section{Research topic}
+\section{Summary and objectives}
 \label{sec:problem}
 
-\note{This section needs a better title.
-Basically drawing on the conclusions of preceding literature review to lay out the problem statement and project aims.}
+We have seen how, along the long journey towards understanding and mapping the brain to advance neuroscience and neurology, \gls{mri} has played a pivotal role.
+In particular, advanced \gls{dmri} \gls{wm} imaging with fibre orientation modelling and streamline tractography has brought us closer to comprehensively exploring the brain's structural connectivity pathways, at the same time as those pathways have achieved higher recognition as structures of interest to neurosurgical planning and navigation.
+The unique challenges of the neurosurgical imaging environment, including limited resources and pathology-affected data, have so far held back effective clinical translation of the most advanced capabilities of \gls{dmri}.
+These challenges are especially acute in intraoperative imaging, which has the potential to improve surgical outcomes through overcoming the destabilising effects of brain shift on image-guided surgery accuracy.
+Considering the existing evidence for improved \gls{eor} with conventional contrast \gls{imri}, in combination with the proven beneficial contribution of preoperative diffusion MRI, it is reasonable to hypothesise that the addition of intraoperative \gls{dmri} \gls{wm} imaging to the surgical workflow could significantly improve outcomes still further.
+
+Streamline tractography, as the dominant \gls{wm} imaging tool, has found widespread adoption for surgical planning while remaining error prone and easily affected by disease-specific image effects, including disturbed diffusion around tumour oedema and infiltration.
+Direct voxel-based segmentation does not have the same sensitivity to error propagation and magnification inherent in the point-wise tracking process, but like tractography it still requires careful consideration of the anatomical criteria defining a tract, only these are required during a preparatory training phase, rather than at the point of application.
+Data-hungry solutions including deep-learning models demonstrate impressive accuracy and speed, but often have limited generalisability without extensive retraining.
+Notably, inference can fail in the presence of large tumour distortions, limiting applicability in neurosurgical practice.
+Finally, a methodology dependent on large volumes of training data is arguably less than ideal for an application where the accuracy of that data may be subjective and change over time, as is the case with white matter tract anatomical definitions, which are evolving and lacking consensus.
+
+This thesis describes the conceptualisation and implementation of a \gls{wm} tract imaging method tailored to neurosurgical application in light of all considerations laid out above.
+The preceding sections reviewing the current state of the art motivate the following guiding principles and objectives for the proposed method:
+Of course, applicability and robustness to clinical data and specifically brain tumour patient data featuring large spatial distortions is paramount.
+Secondly, streamline tracking at the point of application is to be avoided, owing to its demands on resources and expertise and vulnerability to pathology.
+Instead the rich orientation information available in \gls{dmri} acquisitions should be directly compared with \textit{a priori} tract feature knowledge to infer the tract's likely location in the target subject.
+More generally we require a pipeline compatible with the specific constraints of the intraoperative environment, including an acquisition--to--result timescale of under ten minutes, and minimal to no reliance on user input.
+Finally, the training data requirements should be kept to a minimum, to allow flexibility and adaptability to new tracts or modified tract definitions in an environment where obtaining and curating high quality reference data is restricted.
+
+The remainder of this thesis is divided into two parts.
+A proposed methodology is presented next, consisting of a tract specific statistical atlas expressing priors on the spatial and orientational distribution to guide inference in the target image, and a tumour deformation model for adaptability to patient-specific tumour distortions.
+Subsequently, feasibility, applicability and technical considerations are explored through a series of quantitative benchmark evaluations and case studies.
+Along the way the above objectives will be continually invoked to frame and evaluate the proposed approaches.

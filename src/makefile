@@ -1,0 +1,29 @@
+# Latex Makefile using latexmk
+# Modified by Dogukan Cagatay <dcagatay@gmail.com>
+# Originally from : http://tex.stackexchange.com/a/40759
+#
+# Change only the variable below to the name of the main tex file.
+PROJNAME=Main
+bibfile=setup/BibSettings.tex
+
+# You want latexmk to *always* run, because make does not have all the info.
+# Also, include non-file targets in .PHONY so they are run regardless of any
+# file of the given name existing.
+.PHONY: $(PROJNAME).pdf all clean
+
+# The first rule in a Makefile is the one executed by default ("make"). It
+# should always be the "all" rule, so that "make" and "make all" are identical.
+all: $(PROJNAME).pdf
+
+# MAIN LATEXMK RULE
+
+$(PROJNAME).pdf: $(PROJNAME).tex
+	texfot --no-stderr latexmk -pdflatex  -outdir=.build --interaction=nonstopmode $< && mv .build/Main.pdf .
+
+clean:
+	latexmk -c
+
+# CONVERT TO .docx
+citestring := $(shell printf -- '--bibliography %s ' $(shell ggrep -oPe '\\addbibresource{\K.*.bib' $(bibfile)))
+$(PROJNAME).docx: $(PROJNAME).tex
+	pandoc $< -s -o $@ $(citestring) --citeproc --resource-path draft_figs --resource-path figs
