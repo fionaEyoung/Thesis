@@ -17,7 +17,7 @@ It wasn't until the work of Santiago Ramón y Cajal (1852--1934), utilising the 
 The brain's approximately 80 billion neurons are supported by a network of glial cells of equal number and importance,\autocite{Herculano-Houzel2014,vonBartheld2016} and of which there are several specialised subtypes.
 
 Neurons fulfil a wide spectrum of specialised functions across the nervous system, but all have the following basic components.
-The cell body, or soma, houses the cell nucleus, metabolic activity and organelles responsible for the day-to-day upkeep and maintenance of the entire cell.
+The cell body, or soma, houses the cell nucleus, metabolic activity and organelles responsible for the day-to-day upkeep and maintenance of the entire cell (Fig. \ref{fig:neuron}).
 Neurons receive signal inputs from other neurons via one (uni- and bipolar neurons) or multiple (multipolar neurons) protrusions called dendrites.
 Most neurons of the \gls{cns} possess a large number of dendritic processes, forming a beautiful dendritic tree collecting countless inputs.
 Output signals are sent via a single, specialised protrusion called an axon, which can extend across great distances to deliver impulses to their targets.
@@ -30,6 +30,13 @@ Oligodendrocytes are the \gls{cns}'s myelinating glia.
 They form processes which wrap around axons as myelin sheaths, with each oligodendrocyte able to myelinate multiple axons simultaneously.
 In the \gls{pns}, myelination is performed by Schwann cells, which each form a single myelin sheath.
 Alongside these three classes of macroglia are the microglia, the resident immunological cells of the \gls{cns}, which patrol the brain for pathogens and clean up waste.
+
+\begin{figure}[hbt!]
+  \centering
+  \includesvg[width=0.7\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/neuron.svg}
+  \caption{A neuron receives inputs across its dendritic tree (d) which converge on the cell body (c). Action potentials propagate down the axon (a) to the axon terminals (t) where they trigger chemical transmission of the signal at the synapses (s). Electrical conduction is accelerated by insulating myelin sheaths (m) separated by the nodes of Ranvier (n).}
+  \label{fig:neuron}
+\end{figure}
 
 \subsection{Neural signalling}
 
@@ -69,6 +76,12 @@ Posterior to the brainstem, and seated within the posterior fossa, sits the cere
 a highly specialised and complex structure whose full significance to cerebral function is yet to be fully described, but which is known to play an integral role in automated motor and speech functions.
 The cerebellum connects with the pons and brainstem via three \gls{wm} bundles, the inferior, middle and superior cerebellar peduncles, of which the middle is the largest.
 The pons also houses a dense arrangement of nuclei and tracts, connecting and integrating functions of the forebrain and cerebellum.
+%
+% \begin{SCfigure}[][h!]
+%   \includesvg[width=0.5\textwidth]{chapter_1/anat_gross.svg}
+%   \caption{Macroscale divisions of the human brain \note{source}}
+%   \label{fig:anat1}
+% \end{SCfigure}
 
 The forebrain consists of the diencephalon (thalamus and hypothalamus) and the telencephalon (cerebral hemispheres).
 Central both in importance and in location, the thalamus forms the gateway through which almost all afferent inputs to the forebrain are channeled.
@@ -83,6 +96,25 @@ So extensive is the cortical surface in the human brain that, in order to fit in
 At the heart of the brain flows a network of ventricles filled with \gls{csf}, a protective and supportive fluid which surrounds the \gls{cns}, providing cushioning and maintaining homeostasis.\autocite{Wichmann2022}
 Two lateral ventricles curve through each hemisphere, connecting with the third ventricle separating the thalami at the midline, which in turn adjoins the fourth ventricle, a triangular cavity between the midbrain and cerebellum.
 From there, \gls{csf} flows into the spaces surrounding the brain and spinal cord.
+
+% \begin{figure}[h!]
+%   \includesvg[width=\textwidth]{chapter_1/anat_ortho.svg}
+%   \caption{Key anatomical landmarks of the human brain. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter}
+%   \label{fig:anat2}
+% \end{figure}
+\begin{figure}[h!]
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0040_TABVII.svg}
+    \caption{}\label{fig:ardnoldVII1}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0046_TABX.svg}
+    \caption{}\label{fig:ardnoldX4}
+  \end{subfigure}
+  \caption{Key anatomical landmarks of the human brain, labelled on illustrations by Friedrich Arnold\autocite{Arnold1838}. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, F. frontal lobe, P. parietal lobe, O. occipital lobe, S. central sulcus}
+  \label{fig:anat2}
+\end{figure}
+
 
 \subsection{Functional organisation: from topology to hodology}\label{sec:hodology}
 
@@ -135,7 +167,7 @@ As frameworks of neural function continue to evolve alongside our technological 
 Modern neuroscience is blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
 As such, while the methodologies and experiments presented in the thesis are rooted in \textit{in vivo} structural imaging of individual white matter tracts, questions around functional tract definitions and surgical relevance will recur throughout.
 
-\begin{figure}[bh!]
+\begin{figure}[hb!]
   \centering
   \includegraphics[width=0.6\textwidth]{xkcd_1163_debugger.png}
   \caption{xkcd \#1163: ``Debugger"}
@@ -179,6 +211,17 @@ The spin magnetic moments also precess about the external field in a phenomenon 
 \begin{equation}
   \omega = \gamma B
 \end{equation}
+
+\begin{SCfigure}
+  \begin{subfigure}[b]{0.33\textwidth}
+    \includesvg[height=1.1\textwidth,pretex=\small,inkscapelatex=true]{chapter_1/nmr.svg}
+    % \caption{Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$}\label{fig:larmor}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.33\textwidth}
+    \includesvg[height=1.1\textwidth,pretex=\small,inkscapelatex=true]{chapter_1/relaxation.svg}
+  \end{subfigure}%
+  \caption{Larmor precession and M relaxation \note{draft}}
+\end{SCfigure}
 
 \subsection{Resonance and relaxation}
 
