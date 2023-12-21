@@ -17,14 +17,15 @@ What is more, many of those alternatives have already been systematically compar
 \paragraph*{Streamline tractography}
 
 Targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3)  was run in each scan using a multi-ROI approach (see \ref{app:rois} for ROI details), with tractography input \glspl{fod} derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} using \gls{wm} and \gls{gm} tissue compartments.
-In the clinical dataset, ROIs were placed manually for each subject.
+In the clinical dataset, ROIs were placed manually for each subject. \note{put ROIs in this section}
 For the 184 HCP and \textit{TractoInferno} subjects, manual ROI placement was infeasible.
 Instead the same ROIs were drawn in MNI152 template space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration
 (HCP data includes MNI transformation warps, while warps were created for the \textit{TractoInferno} data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/) \autocite{Tustison2013,Avants2011}).
 In theory, the definitions behind the in-house tractography paradigm was the same as for creating the respective atlases.
 However, to avoid dependence on resource-intensive tools for cortical parcellation, only white matter \glspl{roi} were used.
-The result generally more extensive cortical terminations into gyri and sulci, for example the \gls{af}, not otherwise included in the atlases due to either the use of cortical \glspl{roi} or extensive manual filtering, while the core subcortical portions match the definitions reflected in the atlases.
+The result is generally more extensive cortical terminations into gyri and sulci, for example in the \gls{af} and \gls{ifof}, not otherwise included in the atlases due to either the use of cortical \glspl{roi} or extensive manual filtering, while the core subcortical portions match the definitions reflected in the atlases. \note{check this section?}
 This in-house tractography is subsequently abbreviated to ``TG", while the reference \textit{TractoInferno} bundles are referred to as ``TGR".
+\note{Voxelwise from TDI}
 
 \paragraph*{TractSeg}
 
@@ -80,6 +81,7 @@ The first is a generalisation of the \gls{dice} (\gls{gdice}):
   =  \frac{2 \sum_i \sqrt{a_ib_i} }{||\mathbf{a}||_1 + ||\mathbf{b}||_1}
 \end{align}
 
+\note{get rid of gDSC}
 The density correlation metric provides an alternative option:
 it is simply the Pearson correlation coefficient between the two sets of voxel values.
 After considering computing and considering both the \gls{gdice} and density correlation for this analysis, it was determined that one did not provide any further information over the other.
@@ -218,7 +220,7 @@ There are a couple possible factors which may account for the worse performance 
 One is the difficulty in consistently reconstructing this tract, as well as the \gls{ifof}, using only white matter based ROIs (as opposed to cortical ROIs which necessitate more extensive image preprocessing), which are unable to adequately constrain the streamlines as they fan out into numerous cortical regions.
 Supporting this theory, tractfinder returned the highest standard deviation values for the arcuate fasciculus out of all four tracts across all metrics except the signed bundle distance.
 It should be noted that, compared to tractography, TractSeg also returns higher standard deviations for the \gls{af}, pointing to an inter-subject variability in tractography segmentations, rather than an high degree of inconsistency in tractfinder performance.
-We can also see that the signed bundle distance is significantly higher on average for the \gls{af} and \gls{ifof}, meaning tractfinder typically under-segments these tracts relative to tractography, which is to be expected with large volumes streamlines fanning to adjacent cortical termini not included in the curated tract atlas.
+We can also see that the signed bundle distance is significantly higher on average for the \gls{af} and \gls{ifof}, \note{what dataset / figure is this referring to??? boxplots for HCP using TG as reference?} meaning tractfinder typically under-segments these tracts relative to tractography, which is to be expected with large volumes streamlines fanning to adjacent cortical termini not included in the curated tract atlas.
 Another presumed contributing factor is the unique shape of the \gls{af}, which includes a tight bend around the top of the sylvian fissure.
 Alignment of an atlas with this shape is particularly sensitive individual anatomical variations which may also partly explain the lower average accuracy for this tract.
 
@@ -231,10 +233,16 @@ There is little variation in the comparison metrics across subjects, and the ove
 Visual assessment reveals that \note{persistent} differences in the shapes of the segmented tracts accounts for a large part of the discrepancy between methods.
 Again, this is most apparent in the arcuate fasciculus, where anatomical definitions differ widely (Fig. \note{fig:lb.afr}, \note{fig:lb.afl}).
 For example, TractSeg (DKFZ) includes extensive coverage of the frontal and temporal lobe in its \gls{af} segmentations, including parts of the primary motor cortex.
-Dice scores between different methods are low across the board for the \gls{af} owing to these anatomical disagreements.
+Dice scores between different methods are lower across the board for the \gls{af} owing to these anatomical disagreements.
+Similarly, the \gls{ifof} reconstructions also display strong variability, owing in part to disagreements in its precise definition as reviewed in Section \ref{chap:atlas}.
 Conversely in the corticospinal tract, which has a relatively well agreed-upon domain, segmentation results have much higher volumetric agreement between methods. \note{need graphic to show this}
 Agreement in the optic radiations is somewhere in between, with slightly lower \glspl{dice} compared to the two TractSeg methods, which tend to include more thalamus and a lesser extent of Meyer's loop.
 These differences highlight the difficulty in assessing the ``accuracy" of white matter segmentation methods given limited consensus on the precise anatomical definitions of different pathways.
+A further consideration is the effect of segmentation volume on \gls{dice} values.
+This metric is more sensitive to segmentation errors in smaller volumes, and conversely segmentations of large structures tend to score higher.
+We can see this particularly well in TractSeg's results when compared with reference tractography in the TractoInferno data, which was produced using the streamline clustering tool RecoBundlesX\autocite{Garyfallidis2018,Rheault2020a}.
+In Figure \note{ref:boxplots hcp}, TractSeg scores notably high, compared to other methods, for the \gls{ifof} and \gls{af}, both association bundles whose terminations are poorly defined and/or difficult to constrain using tractography without obtaining cortical parcellations, and which consequently can be reconstructed with very extensive segmentations and large volumes (Fig. \note{ref:lightbox ifof and af}).
+\note{something about how this makes dice scores dodgy, compare with e.g. other metrics, same advantage not there (hcp) compared with targeted tractography}
 
 % Figure \ref{fig:combobox} compares each studied method against the reference streamline bundles in the \textit{TractoInferno} dataset.
 % Noticeably, the differences in scores within a single method, between different tracts, are in places greater than the differences between methods within a tract.
@@ -244,11 +252,11 @@ These differences highlight the difficulty in assessing the ``accuracy" of white
 
 As a final word on reproducibility, we note that the results in Figure \note{fig:METRICSBOXPLOTS} are consistent with the comparisons between TractSeg and RecoBundles published in \textcite{Wasserthal2018}.
 There, a mean \gls{dice} of between 0.58 and 0.67 across all tracts was reported.
-Our measured \gls{dice}s between TractSeg (DKFZ) and reference tractography (which is based on RecoBundlesX\autocite{Garyfallidis2018}) range between 0.45 and 0.59 across the three tracts studied (Tab. \note{tab:DATATI}).
+Our measured \gls{dice}s between TractSeg (DKFZ) and TractoInferno reference tractography (which is based on RecoBundlesX\autocite{Garyfallidis2018}) range between 0.45 and 0.59 across the four tracts studied (Tab. \note{tab:DATATI}).
 
 \paragraph*{TractoInferno}
 
-% \textit{\gls{dice}, \gls{gdice} and density correlation values for tractfinder were on par with TractSeg (XTRACT) in all three tracts, with the exception of density correlation in \gls{af}, while \gls{gdice} and density correlation were higher than TractSeg (DKFZ) in all tracts.
+% \textit{\gls{dice}, \gls{gdice} and density correlation values for tractfinder were on par with TractSeg (XTRACT) in all four tracts, with the exception of density correlation in \gls{af}, while \gls{gdice} and density correlation were higher than TractSeg (DKFZ) in all tracts.
 % Binary \gls{dice} scores were highest for TractSeg (DKFZ) in the \gls{cst} and \gls{af}, and equal between tractography, tractfinder and TractSeg (DKFZ)  for the optic radiation.}
 
 While initially we intended to make use of the published \textit{TractoInferno} streamlines as an unbiased reference for comparison, it became apparent that they were unsuited for this application.
