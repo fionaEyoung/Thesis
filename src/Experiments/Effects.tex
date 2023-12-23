@@ -4,13 +4,15 @@
 \note{\normalsize Chapter overview: More qualitative validation in as many sample datasets as possible, including intraoperative data, tumour deformation and debulking cases. Show specific cases where differs from e.g. tractography or TractSeg in specific areas like peritumoural oedema. Also analyse failure cases.}
 % \note{Would be nice to also have e.g. epilepsy cases in here?}
 
+\note{you can also mention publications here}
+
 \section{Technical considerations}\label{sec:technical}
 
 The technical feasibility of tractfinder for intraoperative application depends not only on the capabilities of the method itself in terms of speed and reliability, but also on the achievable image quality.
 Intraoperative scanning must occur under significant time pressure, and the concessions made to achieve this will have profound consequences for the image quality and subsequent image processing.
 In general, two strategies exist for reducing diffusion MRI scan time:
 The first is to reduce the \note{data richness} of the acquisition.
-This could mean lower spatial resolution (larger voxels), lower angular resolution (fewer diffusion-weighted directions), sorter diffusion weightings (lower $b$-values) or fewer unique $b$-values ("shells").
+This could mean lower spatial resolution (larger voxels), lower angular resolution (fewer diffusion-weighted directions), shorter diffusion weightings (lower $b$-values) or fewer unique $b$-values ("shells").
 The second is to use accelerated imaging techniques.
 
 \subsection{Data requirements}\label{sec:ismrmdiff}
@@ -68,7 +70,7 @@ This comparison was made for each combination of data quality and CSD approach.
 \begin{figure}
   \centering
   \includegraphics{chapter_4/self_dice.png}
-  \caption{Self dice scores \note{caption}}
+  \caption{Self dice scores \note{caption, legend}}
   \label{fig:self_dice}
 \end{figure}
 
@@ -90,6 +92,7 @@ This is particularly relevant for longitudinal studies, or when comparing differ
 
 \subsection{Fast imaging and artefacts}
 
+\note{need to explain EPI before hand, reference intro section}
 Because high angular resolution \gls{dmri} acquisitions involve acquiring many volumes of data, they would have prohibitively long scan times without the use of \gls{epi}.
 A common complaint about \gls{epi} concerns the geometric image distortions that commonly arise at the boundaries between areas of different magnetic susceptibility, typically at tissue/air interfaces.
 For intraoperative scanning, this poses a particular problem in which the very region of interest, the operative field and surgical cavity, can suffer from the strongest distortions, affecting nearby structures (such as white matter tracts) that are of neuronavigational importance.\autocite{Yang2022}
@@ -132,7 +135,7 @@ The acquisition parameters of the three test sequences, along with the standard 
   \midrule
    $n$ directions & 3 & 30 & 6 & 12 & 20 \\
    b values & 0, 800 & 0, 1000 & 0, 800 & 0, 1000 & 0, 1000 \\
-   scan time (min) & 4:53 & 4:57 & 4:57 & 7:30 & ? \\
+   scan time (min) & 4:53 & 4:57 & 4:57 & 7:30 & not recorded \\
    voxel size (mm) & 1.198 x 1.198 x 4 & 2.3 x 2.3 x 2.3 & 2.3 x 2.3 x 2.1 & 2.5 x 2.5 x 2.5 & 2.3 x 2.3 x 2.3 \\
    size (voxels) & 192 x 192 x 35  & 96 x 96 x 62 & 96 x 96 x 47 & 88 x 88 x 58 & 96 x 96 x 58 \\
    FOV (mm)  & 230 x 230  & 220 x 220 & 220 x 220 & 220 x 220 & 220 x 220 \\
@@ -191,7 +194,7 @@ Finally, a simple \gls{cst} probabilistic tractography protocol was applied, usi
 
 Based on visual assessment alone, the degree of distortion reduction is difficult to evaluate for all compared sequences (Fig. \ref{fig:rsepi}).
 It’s unclear whether, in the case of intraoperative scans with high levels of distortion at the resection site, the amount of distortion improvement would be comparatively greater than is apparent in a healthy scan with minimal distortion to begin with.
-The third teset scan used simultaneous multislice (SMS) acceleration which appears to have significantly degraded and even corrupted the scan, \note{even though iemens advertises RESOLVE with SMS}
+The third test scan used simultaneous multislice (SMS) acceleration which appears to have significantly degraded and even corrupted the scan, \note{even though Siemens advertises RESOLVE with SMS}
 \footnote[2]{\url{https://www.siemens-healthineers.com/en-uk/magnetic-resonance-imaging/options-and-upgrades/clinical-applications/syngo-resolve} retrieved 06-Oct-2023}
 
 

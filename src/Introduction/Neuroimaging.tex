@@ -23,19 +23,21 @@ Collectively, these scalar parameters are fit from a family of microstructural m
 These parameters could capture virtual cytohistological information and even serve as biomarkers for disease\autocite{Alexander2008}.
 For the purposes of studying macroscopic brain connectivity and the course and organisation of individual \gls{wm} fibre tracts, the key information of interest to be determined from raw \gls{dmri} is the distribution of axonal orientations within each voxel described by a \gls{fod}.
 
-\subsection{Tissus microstructure  and fibre orientation modelling}
+\subsection{Tissue microstructure  and fibre orientation modelling}
+
+\note{move DTI stuff from 1.2 down to here}
 
 The first approach for modelling fibre orientations came in the form of \gls{dti}, which remains one of the dominant diffusion models in many applications today, particularly in clinical contexts.
-The diffusion process within a \gls{wm} voxel is modelled as a three dimensional gaussian distribution, whose covariance matrix is proportional to the diffusion tensor\autocite{Basser1994,ODonnell2011} in equation (\ref{eq:dt}).
+The diffusion process within a \gls{wm} voxel is modelled as a three dimensional Gaussian distribution, whose covariance matrix is proportional to the diffusion tensor\autocite{Basser1994,ODonnell2011} in equation (\ref{eq:dt}).
 By diagonalising this matrix, which is symmetric and positive-definite, three orthogonal eigenvectors and corresponding eigenvalues $\lambda_1 \geqslant \lambda_2 \geqslant \lambda_3$ can be computed.
-Rotationally invariant indices including mean diffusivity \gls{fa} provide scalar quantities which can be interpreted in terms of underlying tissue properties, the latter being given by
+Rotationally invariant indices including mean diffusivity and \gls{fa} provide scalar quantities which can be interpreted in terms of underlying tissue properties, the latter being given by
 \begin{equation}
   FA = \sqrt{\frac{3}{2}}\frac{\sqrt{(\lambda_1 - \langle \lambda \rangle)^2 + (\lambda_2 - \langle \lambda \rangle)^2 + (\lambda_3 - \langle \lambda \rangle)^2}}{\sqrt{\lambda_1^2 + \lambda_2^2+ \lambda_3^2}}
 \end{equation}
-The principle eigenvector $\bm{\lambda}_1$ is usually interpreted as the direction of fastest, or least restricted, diffusivity, although this holds only in voxels with a single population of straight, parallel axons.
+The principal eigenvector $\bm{\lambda}_1$ is usually interpreted as the direction of fastest, or least restricted, diffusivity, although this holds only in voxels with a single population of straight, parallel axons.
 If the diffusion tensor, whose eigenvectors and eigenvalues can be represented in the form of a zeppelin shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
 In fact, it is rare for a voxel of \gls{wm} to contain only a single uniformly oriented bundle of axons.
-In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture: a smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors.
+In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture: a smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors. \note{mention colour FA maps}
 
 The crossing fibres problem led to \gls{dti}, at least in research imaging, gradually giving way to higher-order fibre orientation modelling techniques which aim to account for more than one, or even an arbitrary number of distinctly oriented fibre populations\autocite{Alexander2005}.
 These include to an extent the multi-compartment models which can include multiple directional intra-axonal compartments, such as the popular ``ball and sticks" model\autocite{Behrens2003,Behrens2007}.
@@ -63,6 +65,13 @@ In addition, the original \gls{csd} method was designed only for data acquired w
 To address these limitations, an extension proposed in \textcite{Jeurissen2014} and referred to as \gls{msmt} \gls{csd} includes support for multiple $b$-value shells and separation of the signal into contributions from different tissue compartments, typically \gls{wm}, \gls{gm}, and \gls{csf}, each with their own characteristic response functions.
 The resulting \gls{fod} estimates have higher angular precision than \gls{ssst} \gls{csd}, with fewer noisy spurious lobes to confound downstream processing and interpretation.
 Furthermore, separation of the isotropic signal contributions greatly improves the interpretation of \gls{fod} amplitude as a measure of \gls{afd}, as the amplitudes of each tissue's deconvolved \gls{odf} closely correspond to their respective tissue volume fractions\autocite{Jeurissen2014}.
+
+\begin{SCfigure}[10]
+  \includegraphics[width=0.5\textwidth]{chapter_1/coronalwm.png}
+  \hspace*{-0.1\textwidth}
+  \parbox{0.6\textwidth}{\caption{Coronal section of this author's white matter, imaged with \gls{csd} \gls{dec} mapping and streamline tractography. The \glspl{cst} are visible radiating from the cortex to converge in the internal capsules before descending through the anterior pons, perpendicular to the middle cerebellar peduncle fibres. Either side of the pons, the trigeminal nerves (cranial nerve V) are visible.}}
+  \label{fig:corwm}
+\end{SCfigure}
 
 \subsection{Streamline tractography}\label{sec:tractography}
 
@@ -97,10 +106,10 @@ The seed location, step length, conditions for terminating or entirely rejecting
 There are two choices that most fundamentally affect the tractography process and which feature most heavily in discussions on its use.
 
 First is the choice of method for representing orientation information from the underlying data.
-The earliest tractography algorithms were developed almost concurrently with \gls{dti}\autocite{Mori1998,Mori1999}, with the orientation vector field constructed from the principle eigenvectors of fitted diffusion tensors.
+The earliest tractography algorithms were developed almost concurrently with \gls{dti}\autocite{Mori1998,Mori1999}, with the orientation vector field constructed from the principal eigenvectors of fitted diffusion tensors.
 In the \gls{fact} algorithm proposed by \textcite{Mori1999}, the local direction for each vertex is assigned from $\bm{\lambda}_1$ of the current voxel, and the stop criterion is a measure of neighbourhood fibre collinearity falling below a predefined threshold.
 With only a single possible propagation direction at each location, which, as discussed above, may throughout much of the brain have little to do with any true axon orientations at that point, diffusion tensor-based tractography can only track fibre pathways with rather limited accuracy.
-Streamlines may continue happily along a physiologically plausible path until encountering a region of intersecting tracts, at which point it may be prematurely terminated or diverted onto the trajectory of this intersecting tract if a continuation of the current path is entirely unsupported by the principle eigenvector field.
+Streamlines may continue happily along a physiologically plausible path until encountering a region of intersecting tracts, at which point it may be prematurely terminated or diverted onto the trajectory of this intersecting tract if a continuation of the current path is entirely unsupported by the principal eigenvector field.
 
 It becomes clear when considering what we learned about neural connections in section \ref{sec:hodology}, about compact fibre bundles diverging to distributed cortical targets, that a single dominant fibre direction at every point is incompatible with the dynamic organisation of \gls{wm} tracts, and the result is a tendency to reconstruct narrow and incomplete fibre bundles\autocite{Farquharson2013}.
 A well cited example of this limitation can be seen in reconstructions of the \gls{cst}, which arises from the entire motor cortex from the apex down to the Sylvian fissure, but which is rendered by \gls{dt}-based algorithms only as a vertical pathway without any lateral projections.
@@ -156,7 +165,7 @@ All this means that, after perhaps hours of tracking and billions of streamlines
 The second approach may be called ``targeted tractography", an involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions, until a target number of streamlines have been selected.
 A seed region can but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract and propagate bidirectionally, placing additional include regions at the ends to ensure complete coverage.
 This approach does not mean that no streamlines are discarded (seeded fibres may be terminated before fulfilling all inclusion criteria, or stray into exclusion regions) but targeted seeding and selection certainly leads to a higher number of admissible streamlines being generated in far less computational time than in the whole brain approach, while discarding unwanted streamlines on the fly reduces storage requirements.
-Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery\autocite{Yang2021}.
+Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery\autocite{Yang2021}. \note{the pnt approach is closer to this than clustering}
 
 Manual placement of \glspl{roi} in both whole-brain and targeted pipelines represents a significant intellectual burden, relies on expert anatomical knowledge and can be extremely time consuming, so it is often automated by registering structural atlases and defining tracts in terms of logical relations to atlas structures, as in TractQuerier\autocite{Wassermann2016} or a similar proposed method using fuzzy logic\autocite{Delmonte2019}, and Tracula \autocite{Yendiki2011}, or pre-defined \glspl{roi}, as in XTRACT \autocite{Warrington2020}.
 The former two are examples of methods that rely on comprehensive cortical parcellations, typically obtained with a software tool such as FreeSurfer which can take many hours to run.
@@ -182,7 +191,7 @@ The spatial probability was given by the averaged, normalised track density valu
 \textcite{Bazin2011} also proposed a direct approach based on diffusion tensor-derived priors (``Diffusion-Oriented Tract Segmentation", or DOTS) also based on \gls{dt} modelling.
 Here the atlas orientation prior consisted of a single principal direction per voxel, and comparisons with the test subject data are made using Markov random field models and neighbouring tensor connectivity.
 
-More recent developments have made use of advances in data science techniques including deep learning segmentation models, of which TractSeg\autocite{Wasserthal2018} and Neuro4Neuro\textcite{Li2020} are notable examples, using \gls{fod} peaks and diffusion tensors as inputs, respectively.
+More recent developments have made use of advances in data science techniques including deep learning segmentation models, of which TractSeg\autocite{Wasserthal2018} and Neuro4Neuro\autocite{Li2020} are notable examples, using \gls{fod} peaks and diffusion tensors as inputs, respectively.
 Deep learning-based approaches have the advantage of producing highly reproducible results in short processing time, without the need for template or atlas registration.
 However, drawbacks of direct, deep learning-based methods which produce binary segmentations include a lack of explainability, and a dependence on large volumes of annotated training data which are labour-intensive to produce.
 This limits their flexibility: if a user requires a tract segmentation which is either anatomically different or not covered by an existing pre-trained model, then the necessary production of new training data and subsequent model training represents a high logistical and computational barrier.

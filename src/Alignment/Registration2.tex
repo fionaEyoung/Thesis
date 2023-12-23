@@ -30,3 +30,19 @@ However, this is still only possible in an experimental setting and involves sig
   \caption{Example of non-linear registration applied to a GOSH iMRI patient. Left: Intraoperative scan with colour FA map overlaid to enhance \gls{wm} contrast, registered to preoperative scan (rigid registration). Outline of white matter segmentation of preoperative scan is overlaid, demonstrating substantial brain shift away from the craniotomy (*). Arrow highlights shifting of the ipsilateral external capsule. Dotted line indicates position of coronal plane in right image. Right: tractfinder map of bilateral \gls{cst} after non-linear registration between pre- and intraoperative scans, using the Fast Free-Form Deformation algorithm from the NiftyReg package.}
   \label{fig:nrrex}
 \end{figure}
+
+\section{Summary}
+
+All atlas-based image segmentation or analysis techniques have to contend with the problem of aligning said atlas with the target image, and \note{tractfinder} is no exception.
+In this chapter we have considered the available solutions to this problem, their respective advantages and drawbacks, and applicability to various practical scenarios.
+
+By designing a fuzzy atlas which allows for inter-subject variability to provide an initial estimate for a tract's expected features in the target image, and relying on additional subject-specific information to refine that estimate, we can avoid the need for voxel-perfect atlas alignment, as long as the registered atlas fully covers the domain of the target tract.
+In healthy and structurally normal data, affine registration with 12 degrees of freedom is fully sufficient to achieve this coverage.
+We saw in section \ref{sec:reg1} that non-linear registration is unlikely to provide any significant improvement in performance, and only decrease speed and practicality.
+
+Where space occupying lesions are concerned, however, simple affine registration can leave the registered tract atlas entirely misaligned with the corresponding subject anatomy.
+In such cases, more advanced atlas deformation is necessary to account for the effects of tumours, while still keeping the compute complexity to an acceptable minimum for clinical implementation.
+A simple radial deformation algorithm is proposed to specifically account for mass effect after initial affine registration, which successfully models gross tract displacements.
+
+Finally, we saw how the stringent assumptions of the tumour expansion model do not adequately support the modelling of infiltrating tumours, and how the complexities of brain shift may call for more involved registration tactics, including non-linear algorithms and others developed specifically for intraoperative registration.
+In the next chapters we will put the methodological components together and assess the proposed techniques' performance in a series of quantitative evaluations and practical applications.

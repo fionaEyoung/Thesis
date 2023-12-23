@@ -12,12 +12,12 @@ The building blocks of living complex organisms begin at the level of molecules 
 For the purposes of this thesis, we can start at the cellular level and focus on a single organ:
 The brain, which, together with the spinal chord, forms the \gls{cns}.
 Brain tissues comprise numerous cell types.
-The principle functional cell of the human nervous system is the neuron, which performs the integration and transmission of electrical signals underpinning all aspects of neural function.
+The principal functional cell of the human nervous system is the neuron, which performs the integration and transmission of electrical signals underpinning all aspects of neural function.
 It wasn't until the work of Santiago Ramón y Cajal (1852--1934), utilising the silver staining technique developed by Camillo Golgi (1843--1926) to meticulously draw and label neural cells, that the nervous system was recognised as comprising discrete signalling units which interface with one another only at specific points, a principle called the \textit{neuron doctrine}.\autocite{Kandel2021a}
 The brain's approximately 80 billion neurons are supported by a network of glial cells of equal number and importance,\autocite{Herculano-Houzel2014,vonBartheld2016} and of which there are several specialised subtypes.
 
 Neurons fulfil a wide spectrum of specialised functions across the nervous system, but all have the following basic components.
-The cell body, or soma, houses the cell nucleus, metabolic activity and organelles responsible for the day-to-day upkeep and maintenance of the entire cell.
+The cell body, or soma, houses the cell nucleus, metabolic activity and organelles responsible for the day-to-day upkeep and maintenance of the entire cell (Fig. \ref{fig:neuron}).
 Neurons receive signal inputs from other neurons via one (uni- and bipolar neurons) or multiple (multipolar neurons) protrusions called dendrites.
 Most neurons of the \gls{cns} possess a large number of dendritic processes, forming a beautiful dendritic tree collecting countless inputs.
 Output signals are sent via a single, specialised protrusion called an axon, which can extend across great distances to deliver impulses to their targets.
@@ -31,19 +31,26 @@ They form processes which wrap around axons as myelin sheaths, with each oligode
 In the \gls{pns}, myelination is performed by Schwann cells, which each form a single myelin sheath.
 Alongside these three classes of macroglia are the microglia, the resident immunological cells of the \gls{cns}, which patrol the brain for pathogens and clean up waste.
 
+\begin{figure}[hbt!]
+  \centering
+  \includesvg[width=0.7\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/neuron.svg}
+  \caption{A neuron receives inputs across its dendritic tree (d) which converge on the cell body (c). Action potentials propagate down the axon (a) to the axon terminals (t) where they trigger chemical transmission of the signal at the synapses (s). Electrical conduction is accelerated by insulating myelin sheaths (m) separated by the nodes of Ranvier (n).}
+  \label{fig:neuron}
+\end{figure}
+
 \subsection{Neural signalling}
 
 Transmission of information in the brain is both electrical and chemical.
 Neural impulses begin their life at the axon hillock, the transition between the soma and the axon.
 At resting state, an electrical potential exists across the axonal membrane, resulting from separation of charges between the extra- and intra-axonal spaces.
-This membrane potential arises from non-equal concentrations of different ionic species on opposite sides of the membrane, and is maintained by a combination active ion pumps and passive ion channels embedded within the membrane, through which potassium (K$^+$), sodium (Na$^+$), and chloride (Cl$^-$) ions continuously diffuse or are actively transported across the membrane.
+This membrane potential arises from non-equal concentrations of different ionic species on opposite sides of the membrane, and is maintained by a combination of active ion pumps and passive ion channels embedded within the membrane, through which potassium (K$^+$), sodium (Na$^+$), and chloride (Cl$^-$) ions continuously diffuse or are actively transported across the membrane.
 The interacting chemical and electrical potentials of primarily these ions, together with the concentration of ion channels selective for each species, give rise to a cell's resting potential, a steady net separation in charge maintained by a balanced flux of ions.
 All neural signalling is both initiated and propagated by disturbances to this resting potential, when large changes to the membrane's selective permeability cause significant fluxes of ions to change the net charge separation.
 When the membrane potential at the axon hillock is depolarised enough to reach a threshold, voltage-gated ion channels open to allow ions to flood across the membrane.
 
 Each ion species experiences an interplay of the overall charge potential and its own chemical gradient:
 At rest, Na$^+$ concentration is much higher outside the cell, while K$^+$ concentration is higher inside the cell, with those chemical gradients maintained by the relative membrane permeability to each species.
-At the beginning of an axonal impulse the opening of voltage-sensitive sodium ion channels suddenly increases the mebrane permeability to Na$^+$, allowing it to flow into the cell down its concentration gradient and further depolarise the membrane.
+At the beginning of an axonal impulse the opening of voltage-sensitive sodium ion channels suddenly increases the membrane permeability to Na$^+$, allowing it to flow into the cell down its concentration gradient and further depolarise the membrane.
 As nearby voltage-gated channels are triggered in turn, a wave of depolarisation propagating down the axon as an action potential.
 After a brief delay, voltage-gated K$^+$ also activate, allowing potassium to repolarise the membrane by flowing down its own chemical gradient, out of the cell.
 This rapid sequence of de- and repolarisation lasts only milliseconds, after which the membrane is again susceptible to excitation.
@@ -61,13 +68,20 @@ It's the cumulative effects of all those impulses that determine whether a neuro
 
 \subsection{Macroscopic neuroanatomy}
 
-The human brain is divided macroscopically into the hind-, mid- and forebrain.
+The human brain is divided macroscopically into the hind-, mid- and forebrain, which are densely interconnected via a system of axon fibre bundles (``tracts").
+With reference to a particular brain structure or functional hub, incoming connections from other parts of the brain or spinal chord are called \textit{afferent}, compared to outgoing \textit{efferent} fibres.
 The hind brain comprises the caudal brainstem (medulla and pons) and cerebellum.
 The former forms a continuum between the forebrain to the spinal cord and houses control centres for vital, involuntary physiological functions and the cranial nerves.
 Posterior to the brainstem, and seated within the posterior fossa, sits the cerebellum (``little brain"),
 a highly specialised and complex structure whose full significance to cerebral function is yet to be fully described, but which is known to play an integral role in automated motor and speech functions.
 The cerebellum connects with the pons and brainstem via three \gls{wm} bundles, the inferior, middle and superior cerebellar peduncles, of which the middle is the largest.
 The pons also houses a dense arrangement of nuclei and tracts, connecting and integrating functions of the forebrain and cerebellum.
+%
+% \begin{SCfigure}[][h!]
+%   \includesvg[width=0.5\textwidth]{chapter_1/anat_gross.svg}
+%   \caption{Macroscale divisions of the human brain \note{source}}
+%   \label{fig:anat1}
+% \end{SCfigure}
 
 The forebrain consists of the diencephalon (thalamus and hypothalamus) and the telencephalon (cerebral hemispheres).
 Central both in importance and in location, the thalamus forms the gateway through which almost all afferent inputs to the forebrain are channeled.
@@ -82,6 +96,25 @@ So extensive is the cortical surface in the human brain that, in order to fit in
 At the heart of the brain flows a network of ventricles filled with \gls{csf}, a protective and supportive fluid which surrounds the \gls{cns}, providing cushioning and maintaining homeostasis.\autocite{Wichmann2022}
 Two lateral ventricles curve through each hemisphere, connecting with the third ventricle separating the thalami at the midline, which in turn adjoins the fourth ventricle, a triangular cavity between the midbrain and cerebellum.
 From there, \gls{csf} flows into the spaces surrounding the brain and spinal cord.
+
+% \begin{figure}[h!]
+%   \includesvg[width=\textwidth]{chapter_1/anat_ortho.svg}
+%   \caption{Key anatomical landmarks of the human brain. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter}
+%   \label{fig:anat2}
+% \end{figure}
+\begin{figure}[h!]
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0040_TABVII.svg}
+    \caption{}\label{fig:ardnoldVII1}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.5\textwidth}
+    \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0046_TABX.svg}
+    \caption{}\label{fig:ardnoldX4}
+  \end{subfigure}
+  \caption{Key anatomical landmarks of the human brain, labelled on illustrations by Friedrich Arnold\autocite{Arnold1838}. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, F. frontal lobe, P. parietal lobe, O. occipital lobe, S. central sulcus}
+  \label{fig:anat2}
+\end{figure}
+
 
 \subsection{Functional organisation: from topology to hodology}\label{sec:hodology}
 
@@ -101,8 +134,7 @@ Consequently, the organisation of the visual, motor, auditory and somatosensory 
 The precise localisation of high-level functions, on the other hand, such as advanced language, memory, planning, and personality remains elusive, not least because such complex multifaceted phenomena are unlikely to be associated with just a single structural-functional unit.\autocite{Catani2007}
 Indeed, modern neuroscience understands that even seemingly primitive functions, such as visual object identification, involve the integration of information and processing across multiple, often distant cortical loci,\autocite{ffytche2005} and thus there can be no complete understanding of any cognitive function by considering only demarcated cortical areas in isolation: the brain is a network, and the unit of connection between nodes is the neural axon.
 
-Medium (between neighbouring gyri) and long range connecting axons project from the cortex to enter the dense network of axons that lies beneath.
-The abundance of axon insulating myelin gives this tissue consisting of densely packed axons a pale appearance, hence its name ``white matter".
+Medium and long range connecting axons project from the cortex into a dense subcortical network, named ``white matter" after the pale appearance given by the abundance of insulating myelin.
 White matter axons, rather than existing in an unordered tangle, form coherent bundles, or tracts, of fibres connecting similar brain regions.
 There are three categories of white matter tracts:
 Projection tracts connect the cortex with other, non-cortical brain structures and the spinal cord.
@@ -115,13 +147,13 @@ Examples include the corticospinal tract, responsible for much of voluntary moto
 
 Meanwhile, the task of precisely delineating and ascribing functional correlates to the many association tracts is monumental and woefully incomplete.
 Fibres from different tracts cross, mingle, and converge throughout the brain, and while fibres of the same tract may form a coherent bundle in deep white matter, they proceed to diverge and fan out, terminating in broad swathes of cortex.
-In this way, fibre tracts form fractal echos the of their individual neural members, drawing on many inputs to disseminate the output signals across countless targets.
+In this way, fibre tracts form fractal echos of their individual neural constituents, drawing on many inputs to disseminate the output signals across countless targets.
 There is no perfect method for observing the full extent of a tract from one end to another.
 Postmortem dissection remains the gold standard for anatomical identification, but it is delicate work and disentangling the full course of one bundle of fibres from all other surrounding ones is impossible.
 So it is that anatomical dissections have at times identified and defined tracts which turned out to be entirely artifactual.
 In Chapter \ref{chap:atlas} we will further explore difficulties of defining white matter tracts.
 
-Neuroscientists, anatomists, and neurologist have increasingly come to recognise the importance of looking beyond the purely localisationist models that focus on cortico-functional organisation, towards the integration of white matter connectivity into our understanding of cognitive function.\autocite{ffytche2005,Catani2007}
+Neuroscientists, anatomists, and neurologists have increasingly come to recognise the importance of looking beyond the purely localisationist models that focus on cortico-functional organisation, towards the integration of white matter connectivity into our understanding of cognitive function.\autocite{ffytche2005,Catani2007}
 After all, the axons in white matter are extensions of the cells that make up grey matter, so there can be no activity of the latter that does not involve the former.
 Indeed, far from being a mere philosophical question about under what framework we study and write about the brain, the so-called hodological view (from Greek \textit{hodos} ``path") has profound translational implications.
 Traditional localisationist approaches to neurosurgery hold, crudely put, that tumours seated within or in close association to ``eloquent" areas of cortex subserving well studied functions of language, low-level sensory processing and movement, are fundamentally inoperable.
@@ -135,7 +167,7 @@ As frameworks of neural function continue to evolve alongside our technological 
 Modern neuroscience is blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
 As such, while the methodologies and experiments presented in the thesis are rooted in \textit{in vivo} structural imaging of individual white matter tracts, questions around functional tract definitions and surgical relevance will recur throughout.
 
-\begin{figure}[bh!]
+\begin{figure}[hb!]
   \centering
   \includegraphics[width=0.6\textwidth]{xkcd_1163_debugger.png}
   \caption{xkcd \#1163: ``Debugger"}
@@ -144,9 +176,9 @@ As such, while the methodologies and experiments presented in the thesis are roo
 
 \section{MRI Physics}
 
-The study of living human neuroanatomy at the millimetre and macro scale in unprecedented detail was unlocked in the latter 20th century by the advent of magnetic resonance imaging techniques.
-To understand the workings of the ``Wonder Machine", we have to leave behind our microscopic neurons and enter the realm of atomic and subatomic particles to cover the mechanisms of \gls{nmr}.
-Throughout this section, format vector quantities and their associated scalar magnitudes as $\mathbf{a}$ and $a$ respectively.
+The study of living human neuroanatomy at the millimetre and macro scale in unprecedented detail was unlocked in the latter 20th century by the advent of \gls{mri} techniques.
+To understand the workings of the ``Wonder Machine" \note{keep?}, we have to leave behind our microscopic neurons and enter the realm of atomic and subatomic particles to cover the mechanisms of \gls{nmr}.
+Throughout this section, vector quantities and their associated scalar magnitudes will be formatted as $\mathbf{a}$ and $a$ respectively.
 
 \subsection{Nuclei and spin}
 
@@ -159,7 +191,7 @@ The nucleus of a hydrogen atom which, in its most abundant isotope (protium, $^1
 
 The particular combination of nucleons determines that nucleus' spin and quantum magnetic moment, properties which in turn determine the effects wrought by an external magnetic field on that nucleus.
 Spin (or spin angular momentum) $\mathbf{S}$ is an intrinsic property of elemental particles, and of their composites, including nuclei.\autocite{Eisberg1961}\footnote[2]{The unique spin quantity of nuclei $I$ arises non-trivially from the interactions of its constituent nucleons' individual spins, however we are concerning ourselves here only with individual protons.}
-Each particle has a fixed, dimensionless spin quantum number $s$ ($\frac{1}{2}$ for single electrons, protons and neutrons) which determines the spin vector's magnitude given by $S = \hslash \sqrt{s(s+1)}$.
+Each particle has a fixed, dimensionless spin quantum number $s$ ($\frac{1}{2}$ for single electrons, protons and neutrons) which determines the spin vector's magnitude given by $S = \hslash \sqrt{s(s+1)}$, where $\hslash$ is the reduced Planck constant.
 However, according to the uncertainty principle of quantum mechanics, which posits that the location and momentum of quantum system cannot be known simultaneously, the total spin angular momentum vector (magnitude \textit{and} direction) cannot be measured.
 Instead, the associated observable quantity is the component of $S$ along the observed direction, typically arbitrarily designated the $z$-axis, which is determined by another quantum number $S_z = \hslash m_s$.
 The spin magnetic quantum number $m_s$, like $s$, is a quantised property, meaning it can inhabit a discrete number $2s+1$ of values ranging from $-s$ to $+s$.
@@ -180,6 +212,17 @@ The spin magnetic moments also precess about the external field in a phenomenon 
   \omega = \gamma B
 \end{equation}
 
+\begin{SCfigure}
+  \begin{subfigure}[b]{0.33\textwidth}
+    \includesvg[height=1.1\textwidth,pretex=\small,inkscapelatex=true]{chapter_1/nmr.svg}
+    % \caption{Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$}\label{fig:larmor}
+  \end{subfigure}%
+  \begin{subfigure}[b]{0.33\textwidth}
+    \includesvg[height=1.1\textwidth,pretex=\small,inkscapelatex=true]{chapter_1/relaxation.svg}
+  \end{subfigure}%
+  \caption{Larmor precession and M relaxation \note{draft}}
+\end{SCfigure}
+
 \subsection{Resonance and relaxation}
 
 % \note{Basics of resonance, magnetisation, spin-spin / spin-lattice relaxation}
@@ -193,15 +236,15 @@ At equilibrium, more spins magnetic moments will occupy the lower energy state a
 As the difference in energy between the two states is determined by $\Delta E = \gamma h B_0$, the stronger the external field, the larger the ratio of up to down spins and thus the a larger $M_z$.
 This in turn underpins the strength of any subsequently sampled signals, so that stronger $\mathbf{B}_0$ fields, as a general rule, produce images with better \gls{snr}.
 Just as the distribution of spin states among two possible opposing states produces a net \textit{longitudinal} magnetisation along $z$, the lack of any directional coherence perpendicular to $z$ precludes any net \textit{transverse} magnetisation $\mathbf{M}_{xy}$.
-In other words, at thermal equilibrium the magnetic moments within the sample are precessing at the Larmor frequency entirely out of phase with one another.
+In other words, at thermal equilibrium the magnetic moments within the sample are precessing at the Larmor frequency with random phases.
 
 Manipulation of the net magnetisation away from, and subsequent relaxation back to this equilibrium state, is the basis of all signal production in \gls{mri}.
 Spins in the lower energy state can be excited to occupy the higher energy state by absorbing electromagnetic radiation tuned precisely to the Larmor frequency.
 This energy is transmitted in the form of an oscillating magnetic field $\mathbf{B}_1$, called a \gls{rf} pulse as the frequency falls within the \gls{rf} range of the electromagnetic spectrum, and has two effects on the bulk magnetisation.
-The first is a reduction in $M_z$, as the absorbed energy reduces the ratio of spins in the relaxed state, with the total change in $M_z$ dependent on the total energy absorbed, or the duration $t_p$ of the \gls{rf} pulse.
+The first is a reduction in $M_z$, as the absorbed energy reduces the ratio of spins in the relaxed state, with the total change in $M_z$ dependent on the duration $\tau$ of the \gls{rf} pulse.
 Secondly, spins will align themselves with an effective field combining $\mathbf{B}_0$ and the rotating $\mathbf{B}_1$, resulting in a phase synchronisation of spins' precessions and a net, rotating transverse magnetisation $\mathbf{M}_{xy}$.
 It is the sweep of this rotating bulk magnetisation vector which induces an oscillating current in the receiver equipment of the \gls{mri} scanner, which is registered as the signal called \gls{fid}.
-The angle between the total magnetisation $\mathbf{M} = \mathbf{M}_{xy} + \mathbf{M}_{z}$ after the \gls{rf} pulse and $\mathbf{B}_0$ is the flip angle $\alpha$ determined by $\alpha = \gamma B_1 t_p$.
+The angle between the total magnetisation $\mathbf{M} = \mathbf{M}_{xy} + \mathbf{M}_{z}$ after the \gls{rf} pulse and $\mathbf{B}_0$ is the flip angle $\alpha$ determined by $\alpha = \gamma B_1 \tau$.
 
 As soon as the excitation field is switched off, the bulk magnetisation gradually relaxes to equilibrium as the induced effects on the individual moments revert.
 Interactions between spins and their molecular environment cause de-phasing of their precession and consequent reduction in $M_{xy}$ (spin-spin or transverse relaxation), while the energy gained from the \gls{rf} pulse is gradually thermally dissipated among the lattice of neighbouring molecules as the spins revert to the statistically favourable lower energy state in alignment with $B_0$ causing gradual recovery of $M_z$ (spin-lattice or longitudinal relaxation):
@@ -217,16 +260,16 @@ It is the varying values of $T_1$ and $T_2$, as well as the overall differences 
 \subsection{Signal echos}\label{sec:echos}
 
 Immediately after application of the \gls{rf} excitation pulse, magnetisation will return to equilibrium in a spiral pattern (\note{fig}) inducing the rapidly decaying \gls{fid} signal.
-Due to in part its short lifetime and, the simple \gls{fid} is not particularly useful on its own for biological imaging.
+Due in part to its short lifetime, the simple \gls{fid} is not particularly useful on its own for biological imaging.
 In fact, the phase coherence of the system is not entirely lost even as the \gls{fid} signal reaches zero, but only masked by competing effects.
 This hidden signal can be partially resurrected though the spin echo technique, but to appreciate how we must first look more closely at the transverse relaxation process.
-Spins loose their phase coherence through a range of different effects which in combination manifest in the overall transverse relaxation.
+Spins lose their phase coherence through a range of different effects which in combination manifest in the overall transverse relaxation.
 One is an intrinsic tissue property, in which through interactions with the molecular environment spins experience minute perturbations in $\omega$ and accumulating phase differences as a result.
 This dephasing is associated with the ``true" $T_2$.
 In addition, in homogeneities in the applied $B_0$ field also produce slightly varying $\omega$ values across the sample, with the same dephasing effect.
 The combination of intrinsic $T_2$ and the effects of field inhomogeneities produce an overall dephasing effect characterised by $T_2$*, where  $T_2$* $\leqslant$ $T_2$.
 
-If, a time TE/2 after a 90\textdegree\ \gls{rf} pulse is applied to the sample, an additional ``refocussing" 180\textdegree pulse follows, $\textbf{M}$ will be flipped in the $xy$ plane.
+If, a time TE/2 after a 90\textdegree\ \gls{rf} pulse is applied to the sample, an additional ``refocussing" 180\textdegree\ pulse follows, $\textbf{M}$ will be flipped in the $xy$ plane.
 Recall that variations in precession speeds will mean that some spins will have accumulated a certain amount of phase ``ahead" of the ensemble average, while others will lag behind.
 After being flipped, while the speeds stay the same, the relative phase differences will be reversed, allowing the slower spins to catch up.
 Thus after an additional symmetrical time span of TE/2, the uneven effects of field inhomogeneities will have been entirely cancelled out and the spins find themselves briefly rephased, producing a spin echo signal peak at TE (echo time).
@@ -251,13 +294,13 @@ A \gls{rf} pulse with (central) frequency $\nu_c = \frac{1}{2\pi} (\omega_0 + \g
 All other spins in the sample will be unaffected by subsequent manipulation of the magnetisation vector throughout the pulse sequence and will not generate signal.
 The slice width $\Delta z$ is determined by the \gls{rf} pulse bandwidth $\Delta\nu$ as $\Delta z = \frac{2 \pi \Delta \nu}{\gamma G_z}$.
 
-Within the selected plain, manipulation of two spin quantities determines localisation in the remaining two dimensions.
+Within the selected plane, manipulation of two spin quantities determines localisation in the remaining two dimensions.
 The first is spin precession frequency, which can be modulated along an axis in the same manner as is used in slice selection -- a \gls{fe} magnetic field gradient $G_{f}$ applied along $x$ imparts spatially varying frequencies according to $\omega_0 + \gamma G_{f}x$.
 Thus each spin precesses at a frequency that uniquely identifies its position along the \gls{fe} direction.
 In practice, frequencies are grouped into pixels of finite width, with the range of frequencies per pixel termed \textit{pixel bandwidth}, while the full range of frequencies (total receiver bandwidth) across the sample determines the image field of view (FOV) in the \gls{fe} direction.
 The width of each pixel is determined by the analog-to-digital sampling rate of the received signal, such that if the signal is samples at dwell time intervals of $t_d$ for a total amount of time $t_s$, the total \gls{fe} bandwidth is $t_d^{-1}$ and the pixel bandwidth $t_s^{-1}$.
 The frequency encoding gradient is applied throughout the signal readout period to maintain the spatially dependent frequencies and is correspondingly also called the readout gradient.
-The receiver coil digitally samples the echo signal a discreet points, with the number of samples corresponding to the image matrix size along the $x$ axis.
+The receiver coil digitally samples the echo signal at discreet points, with the number of samples corresponding to the image matrix size along the $x$ axis.
 
 The second encoded property is spin phase.
 If differences in spin frequency can be likened to clocks running at different speeds, then two spins with different phases (but the same frequency) are like two clocks which both keep perfect time, except that one has not been set correctly and is perpetually five minutes behind the other (these two clocks would have a phase difference of five minutes).
@@ -282,7 +325,7 @@ Pulse sequences, meaning specific arrangements, durations and magnitudes of the 
 MR imaging is a stunningly diverse modality.
 Beyond the basics of spatial encoding and echo signal generation, there lies a whole host of techniques for generating specific contrasts, neutralising unwanted signals and artefacts, and accelerating acquisition times which are outside of the scope of this introduction.
 
-The modification of pulse sequence parameters enables the production of images in which different physiological properties dominate the image contrast, the principle ones being the tissue-specific relaxation time constants $T_1$ and $T_2$, as well as the density of protons.
+The modification of pulse sequence parameters enables the production of images in which different physiological properties dominate the image contrast, the principal ones being the tissue-specific relaxation time constants $T_1$ and $T_2$, as well as the density of protons.
 The development of novel pulse sequences and contrasts is a perennial and active field of research which will continue to expand and improve the capabilities of \gls{mri} for years to come.
 Here we will focus on the few fundamental contrasts directly relevant to this thesis.
 From (\ref{eq:recovery}), the signal at $t=TE$ in a spin-echo sequence is described approximately by
@@ -329,7 +372,7 @@ In such an environment, diffusion is \textit{anisotropic}, biased towards certai
 
 That molecular displacement, both passive diffusion effects and active perfusion (such as the flow of \gls{csf} and blood\autocite{LeBihan1988}), has an effect on measured MR signals was known some time before those effects were harnessed as a form of contrast weighting.
 \textcite{Hahn1950} described in 1950 how diffusion attenuates the measured spin-echo signal, as spins diffusing through field inhomogeneities aren't refocussed by the 180\textdegree\ pulse.
-While the effect is typically small with standard sequences, any MR pulse sequence can be modified to introduce stronger sensitisation to brownian motion, or diffusion weighting, in addition to the existing $T_1$ and $T_2$ based contrasts.
+While the effect is typically small with standard sequences, any MR pulse sequence can be modified to introduce stronger sensitisation to Brownian motion, or diffusion weighting, in addition to the existing $T_1$ and $T_2$ based contrasts.
 Most commonly this is achieved with a spin echo sequence and the addition of a pair of strong diffusion sensitisation gradient pulses of equal length and polarity separated by the 180\textdegree\ \gls{rf} refocussing pulse prior to echo generation and signal readout.
 
 To illustrate the concept, we will consider the application of diffusion weighting along a single orthogonal direction, e.g. $x$.
@@ -343,7 +386,7 @@ It will experience a net dephasing of
   \Delta\phi = \gamma G_d (\int_0^{\delta} x(t) dt - \int_{\Delta}^{\Delta+\delta} x(t) dt)
 \end{equation}
 where $\Delta$ is the time separating onset of the two gradient pulses.
-When $\Delta\phi < 0$ refocussing will be incomplete, attenuating the spine echo amplitude accordingly.
+When $\Delta\phi < 0$ refocussing will be incomplete, attenuating the spin echo amplitude accordingly.
 
 Following diffusion sensitisation, spatial encoding and image formation proceed as in standard sequences, and those voxels in which diffusion is high will have have a high degree of diffusion weighting-induced dephasing and exhibit a corresponding signal dropout.
 In those voxels with low diffusion, phase coherence will remain relatively intact after diffusion sensitisation and signal loss will be correspondingly minimal.
@@ -352,15 +395,16 @@ The signal magnitude at echo time is determined in simplified terms by
     S = S_0e^{-bD}
 \end{align}\label{eq:S}
 where $S_0$ is the baseline signal value without diffusion weighting, $D$ is now the effective, or apparent diffusion coefficient\autocite{Basser1994,Beaulieu2002} (a quantity that depends on the molecular environment and includes both diffusion and other incoherent motion effects) and $b$ is the gradient factor summarising the effects of all gradient pulses, first described in \textcite{LeBihan1986} and since commonly termed the $b$-value.
-The above description follows the spin-echo pulse sequence proposed by Stejskal and Tanner in 1965\autocite{Stejskal1965}, forming the basis for most modern \gls{dmri} sequence designs.
+The above description follows the spin-echo pulse sequence proposed by Stejskal and Tanner in 1965\autocite{Stejskal1965}, one of the earliest \gls{dmri} sequence designs.
+Modern \gls{dmri} sequences vary in the precise pattern of diffusion weighting gradients and refocussing pulses, so the $b$-value provides a sequence-independent summary of the effective diffusion weighting factor.
 In the Stejskal-Tanner sequence we have $b = \gamma^2 G_d^2 \delta^2 (\Delta-\delta/3)$.
 The choice of $b$-value is highly influential on the final image, and typically values in the range $600-3000 s/mm^2$ are used.
 Higher $b$-values reflect stronger diffusion sensitisation, but also produce far noisier images and require more advanced scanner hardware and gradient instrumentation.
-Values up to 1000 $s/mm^2$ are more common in routine and clinical settings, balancing optimal diffusion dependent contrast with acceptable \gls{snr}, while higher values are employed in more advanced research methods.\autocite{Roberts2007}
+Values up to 1000 $s/mm^2$ are more common in routine and clinical settings, balancing optimal diffusion dependent contrast with acceptable \gls{snr}, while higher values are employed \note{why?} in more advanced research methods.\autocite{Roberts2007}  \note{jc Worth mentioning multiple b-value acqs and the reasons for them}
 
 A single \gls{dmri} volume only applies a diffusion weighted gradient of fixed strength along a single orientation, with all signal samples reflecting the diffusivity along that specific direction.
 As diffusion in much of the brain is anisotropic, it cannot be assumed in general that the diffusivity would be the same if observed along a different direction.
-The full picture of orientation-dependent diffusivity can be modelled by a \textit{diffusion tensor} $\mathbf{D}$:
+The full picture \note{jc not really!} of orientation-dependent diffusivity can be modelled by a \textit{diffusion tensor} $\mathbf{D}$:
 \begin{equation}
   \mathbf{D} = \begin{pmatrix}
                 D_{xx} & D_{xy} & D_{xz}\\
@@ -400,6 +444,8 @@ These are particularly strong at interfaces between substances with large suscep
 
 \section{Representing spherical functions}
 \label{sec:sh}
+
+\note{make the step from the tensor more explicit}
 
 Studying macroscopic \gls{wm} structure requires describing quantities distributed in the three dimensional angular domain.
 If the shape of the function is not generally known, then an arbitrary function may be represented in a suitable function space, defined by a set of orthogonal basis functions.

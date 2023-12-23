@@ -12,7 +12,7 @@ Rather than expecting perfect and robust registration, which is a particularly t
 
 The tract atlas intentionally conveys a degree of spatial tolerance to account for individual variations in tract location, with the final mapping step acting to refine the estimate according to observed local information in the target image.
 The latter, derived from raw \gls{dmri} data, could conceivably take any form.
-For example, one could take the log transform of the normalised signal, and compare the resulting angular diffusivity function with the atlas expectations.% \note{this was attempted in MRes}
+For example, one could take the log transform of the normalised signal, and compare the resulting angular diffusivity function with the atlas expectations. % \note{this was attempted in MRes}
 However, given that conceptually the \gls{tod} represents a tract specific \gls{fodf}, the most intuitive comparison can be made against the full \glspl{fod}, as modelled using \gls{csd}, observed in the target image.
 
 \subsection{Inner Product}\label{sec:ip}
@@ -24,8 +24,8 @@ This is the functional analogue to taking the dot product (or inner product) of 
 We define the inner product of two functions $f$ and $g$ over the closed interval $[a \geq x \geq b]$ as
 
 \begin{align}
-  \langle f,g \rangle = \int_a^b f g dx
-\end{align}.
+  \langle f,g \rangle = \int_a^b f g dx.
+\end{align}
 
 In our scenario, we are comparing two spherical functions defined over the angular domain parameterised by the azimuthal ($\phi$) and polar ($\theta$) angles, $F(\theta, \phi)$ and $T(\theta, \phi)$.
 Both are represented in the modified \gls{sh} basis introduced in section \ref{sec:sh}:

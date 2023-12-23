@@ -33,14 +33,20 @@
 %   ...
 %  \end{figure}
 
+\usepackage[inkscapearea=page,
+            inkscapeexe=/Applications/Inkscape.app/Contents/MacOS/inkscape,
+            draft=false,
+            inkscapelatex=false]{svg}
 
 \ifdraft{%
   % Figure path
   \graphicspath{{draft_figs/}{figs/}}
+  \svgpath{{draft_figs/}{figs/}}
   % Endfloats with chapter counters
   \usepackage[nolists, figuresonly]{endfloat}
 }{%
   \graphicspath{{figs/}{draft_figs/}}
+  \svgpath{{figs/}{draft_figs/}}
   \usepackage[disable]{endfloat}
 }
 
