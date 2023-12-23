@@ -21,9 +21,10 @@ $(PROJNAME).pdf: $(PROJNAME).tex
 	texfot --no-stderr latexmk -pdflatex  -outdir=.build --interaction=nonstopmode $< && mv .build/Main.pdf .
 
 clean:
-	latexmk -c
+	latexmk -c -auxdir=.build/ -quiet
+	rm .build/**/*.aux
 
 # CONVERT TO .docx
 citestring := $(shell printf -- '--bibliography %s ' $(shell ggrep -oPe '\\addbibresource{\K.*.bib' $(bibfile)))
 $(PROJNAME).docx: $(PROJNAME).tex
-	pandoc $< -s -o $@ $(citestring) --citeproc --resource-path draft_figs --resource-path figs
+	pandoc $< -s -o $@ $(citestring) --citeproc --resource-path draft_figs --resource-path figs -F pandoc-acronym-filter.py 
