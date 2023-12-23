@@ -2,7 +2,14 @@
 
 % Bibliography and referencing settings
 
-\usepackage[doi=true,isbn=true,url=false,natbib=true,style=nature,backend=bibtex]{biblatex} % Add citation styles as needed (see docs for biblatex)
+\usepackage[doi=true,
+            isbn=true,
+            url=false,
+            natbib=true,
+            maxcitenames=50,
+            maxbibnames=50,
+            style=nature,
+            backend=bibtex]{biblatex} % Add citation styles as needed (see docs for biblatex)
 \IfFileExists{bibliographies/Neuroimaging.bib}
           {\addbibresource{bibliographies/Neuroimaging.bib}}
           {\addbibresource{bibs/Neuroimaging.bib}}
