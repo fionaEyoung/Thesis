@@ -2,6 +2,9 @@
 src/*figs
 src/bibliographies
 
+## Datafiles
+raw_results/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
