@@ -4,7 +4,7 @@ In segmentation methods which ``learn" patterns from seen data to apply to unsee
 For complex deep learning models, which have many thousands of network parameters to learn, the amount of training data required to achieve accurate and stable performance can be immense, posing a particular barrier to the use of such models in applications where suitably annotated data is scarce.
 In the case of the deep learning tool TractSeg\autocite{Wasserthal2018}, for example, 105 subjects in total were used for cross-validation training, with each fully trained model having seen randomly sampled data slices from 63 unique subjects.
 %https://github.com/MIC-DKFZ/TractSeg/issues/240
-In tractfinder, the influence of the number of subjects used to construct each atlas is on the amount of inter-subject anatomical variation reflected in the spatial and orientational components.
+In tractfinder, the number of subjects used to construct each atlas influences the amount of inter-subject anatomical variation reflected in the spatial and orientational components.
 It is to be expected that, save for extreme outliers, the additional information gained from adding more training subjects would reach a point of saturation.
 
 To investigate this, an experiment was conducted whereby the number of subjects included in atlas construction was varied, and the effect on segmentation accuracy compared.
