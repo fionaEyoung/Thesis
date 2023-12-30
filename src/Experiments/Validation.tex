@@ -117,7 +117,7 @@ In a subsequent section (\ref{sec:tractseg}) we will see how the two method trac
 
 \note{this section needs a different name/focus}
 
-Segmentation results results for a representative subject from the \textit{TractoInferno} dataset are shown in Figures \ref{fig:lb.afcst}-\ref{fig:lb.ifofor}.
+Segmentation results results for a representative subject from the \textit{TractoInferno} dataset are shown in Figures \ref{fig:lb.cstor}-\ref{fig:lb.afifof}.
 Tractfinder maps typically have values ranging from 0 to 0.5 (in arbitrary units, derived from the magnitudes of \gls{fod} and atlas distribution functions).
 Due to the combined effects of \gls{odf} amplitude and orientation information, a low tract map value can have several causes: a) the \gls{fod} amplitude is low, indicating low evidence for white matter tissue in the voxel in question; b) the atlas amplitude is low, indicating low prior likelihood of the tract being present in that location; c) the peak orientations between the \gls{fod} and atlas are poorly aligned.
 
@@ -125,27 +125,30 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
 
 % Fullpage figures
 \begin{figure}[htb!]
-  \centering
   \begin{subfigure}{\textwidth}
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_AF.svg}
+    \makebox[\linewidth][r]{%
+    \includesvg[width=1.04\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_AF.svg}}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_CST.svg}
+    \makebox[\linewidth][r]{%
+    \includesvg[width=1.048\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_IFOF.svg}}
   \end{subfigure}
-  \caption{Segmentations for the left \gls{af} (top) and \gls{cst} (bottom) in a representative subject from the \textit{TractoInferno} dataset, shown on slices at 5mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colourbars are drawn once for each method category (tractfinder, tractography and TractSeg).}
-  \label{fig:lb.afcst}
+  \caption{Segmentations for the left \gls{af} (top) and \gls{ifof} (bottom) in a representative subject from the \textit{TractoInferno} dataset, shown on slices at 5mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colourbars are drawn once for each method category (tractfinder, tractography and TractSeg).}
+  \label{fig:lb.afifof}
 \end{figure}
 \begin{figure}[htb!]
   \centering
   \begin{subfigure}{\textwidth}
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_IFOF.svg}
+    \makebox[\linewidth][r]{%
+    \includesvg[width=1.04\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_CST.svg}}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_OR.svg}
+    \makebox[\linewidth][r]{%
+    \includesvg[width=1.055\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_OR.svg}}
   \end{subfigure}
 \end{figure}
 \clearpage %flush
-{\captionof{figure}{Segmentations for the \gls{ifof} (top) and \gls{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset.\label{fig:lb.ifofor}}
+{\captionof{figure}{Segmentations for the the projection tracts \gls{cst} (top) and \gls{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset shown on slices at 5mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colourbars are drawn once for each method category (tractfinder, tractography and TractSeg). \label{fig:lb.cstor}}
 }
 \subsection{Quantitative results}\label{sec:quant}
 
@@ -160,10 +163,9 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
 \paragraph*{Performance and reproducibility}
 
 \begin{SCfigure}
-  \includegraphics{chapter_5/score_mats_group.pdf}
-  \hspace*{-0.1\textwidth}
-  \parbox{0.6\textwidth}{
-  \caption{Pairwise \gls{dice} and density correlations for the \textit{Tractoinferno} (top) HCP49 (middle) and clinical (bottom) datasets. For each pair of methods, the metric distributions across all subjects are shown for each tract (from left to right: \gls{af}, \gls{cst}, \gls{ifof}, \gls{or}), with background colours corresponding to mean score value. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}}
+  \makebox[0.52\linewidth][r]{%
+  \includegraphics{chapter_5/score_mats_group.pdf}}
+  \caption{Pairwise \gls{dice} and density correlations for the \textit{Tractoinferno} (top) HCP49 (middle) and clinical (bottom) datasets. For each pair of methods, the metric distributions across all subjects are shown for each tract (from left to right: \gls{af}, \gls{cst}, \gls{ifof}, \gls{or}), with background colours corresponding to mean score value. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}
   \label{fig:dscmats}}
 \end{SCfigure}
 
@@ -210,11 +212,11 @@ Our measured \gls{dice}s between TractSeg DKFZ and TractoInferno reference bundl
 \paragraph*{Tract variability}
 
 Visual assessment reveals that systematic differences in the shapes of the segmented tracts account for a large part of the discrepancy between methods.
-Again, this is most apparent in the association tracts, where anatomical definitions differ widely (Fig. \ref{fig:lb.afcst}--\ref{fig:lb.ifofor}).
+Again, this is most apparent in the association tracts, where anatomical definitions differ widely (Fig. \ref{fig:lb.cstor}--\ref{fig:lb.afifof}).
 For example, TractSeg DKFZ includes extensive coverage of the frontal and temporal lobe in its \gls{af} segmentations, including parts of the primary motor cortex.
 Dice scores between different methods are lower across the board for the \gls{af} owing to these anatomical disagreements.
 Similarly, the \gls{ifof} reconstructions also display strong variability, owing in part to disagreements in its precise definition as reviewed in Chapter \ref{chap:atlas}.
-Conversely in the \gls{cst}, which has a relatively well agreed-upon domain, segmentations have much higher volumetric agreement between methods, with the exception of TractSeg XTRACT, which does not include the lateral projections (Fig. \ref{fig:lb.afcst}).
+Conversely in the \gls{cst}, which has a relatively well agreed-upon domain, segmentations have much higher volumetric agreement between methods, with the exception of TractSeg XTRACT, which does not include the lateral projections (Fig. \ref{fig:lb.cstor}).
 Agreement in the optic radiations is somewhere in between, with slightly lower \glspl{dice} in tractfinder compared against the two TractSeg methods, which tend to include more thalamus and a lesser extent of Meyer's loop.
 These differences highlight the difficulty in assessing the ``accuracy" of white matter segmentation methods given limited consensus on the precise anatomical definitions of different pathways.
 
@@ -264,10 +266,26 @@ Overall, results in the clinical (GOSH \& NHNN) dataset were highly consistent w
 Although this dataset contained a mixture of adult and paediatric patients, scanned at two different hospitals, when the results were split on hospital / age group (paediatric or adult), no appreciable difference in results was observed.
 Equally, no systematic difference in segmentation scores was observed between intraoperative and preoperative datasets.
 
-Two example clinical subjects, one adult and one paediatric, are displayed in Figure \note{fig:lb.clin} and demonstrate key observations in the clinical applicability of the compared methods.
-In Figure \note{fig:lb.nh}, a sagittal view displays the interaction between the surgical resection cavity of a frontal tumour and the \gls{cst}.
-Tractfinder maps portions of the \gls{cst} in close proximity to the resection site, as does manual tractography, where the TractSeg segmentations are far more conservative, potentially missing \gls{cst} locations influenced by oedema, brain shift, or other tumour effects.
-In Figure \note{fig:lb.gosh}, the anterior extent of Meyer's loop depicted by tractography is similarly included in the tractfinder segmentation, but absent from the TractSeg results.
+Two example clinical subjects, one adult and one paediatric, are displayed in Figures \ref{fig:lb.nh}--\ref{fig:lb.gosh} and demonstrate key observations in the clinical applicability of the compared methods.
+In Figure \ref{fig:lb.nh}, a sagittal view displays the interaction between the surgical resection cavity of a frontal tumour and the \gls{cst}.
+Tractfinder maps portions of the \gls{cst} in close proximity to the resection site, as does manual tractography, where the TractSeg segmentations are far more conservative and even incomplete, potentially missing \gls{cst} locations influenced by oedema, brain shift, or other tumour effects.
+Even though parts of the precentral sulcus remain some distance from the resection site, the slight brain shift seems to have made fully recognising the \gls{cst} challenging for TractSeg. \note{less patronising?}
+Intraoperative imaging of a paediatric tumour patient in Figure \ref{fig:lb.gosh} reveals the ipsilateral \gls{or} immediately deep to the resection cavity.
+Minimal brain shift and diffusion disturbance from this small craniotomy have enabled good reconstruction of the affected tract by all techniques.
+The anterior extent of Meyer's loop has additionally been captured by tractography and tractfinder, but is absent from both TractSeg results.
+
+\begin{figure}[htb!]
+  \makebox[\linewidth][r]{%
+  \includesvg[width=1.04\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_NHNN_5.svg}}
+  \caption{Intraoperative imaging for an adult right frontal \gls{who} grade 2 oligodendroglioma patient from the clinical dataset, with right \gls{cst} segmentations (thresholded according to Table \ref{tab:thresh}) shown in coronal slices at 5mm intervals and as full volumes in the right-most column. White arrowheads indicate the precentral sulcus.}
+  \label{fig:lb.nh}
+\end{figure}
+\begin{figure}[htb!]
+  \makebox[\linewidth][r]{%
+  \includesvg[width=1.05\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_GOSH_3.svg}}
+  \caption{Intraoperative imaging for a paediatric temporal \note{tumour type} patient, with bilateral \gls{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5mm intervals and as full volumes in the right-most column.}
+  \label{fig:lb.gosh}
+\end{figure}
 
 % The mean score results for all tracts and comparisons are given in Supplementary Table \note{tab:DATACL}.
 
@@ -316,8 +334,8 @@ TractSeg was trained on 63 subjects and tested on the remaining 42, and here the
 Since the original TractSeg paper includes 72 tracts (including both left and right instances of non-commissural tracts and multiple subdivisions of tracts such as the corpus callosum or anterior thalamic radiation) and the performance varied substantially across tracts, tractfinder was run for all tracts for completeness rather than just the four (\gls{af}, \gls{cst}, \gls{ifof}, \gls{or}) studied thus far.
 
 \begin{figure}[htb!]
-  \includegraphics[width=\textwidth]{chapter_4/tractfinder_trained_on_tractseg.png}
-  \caption{Scores for tractfinder (using atlases constructed from the TractSeg training data) and TractSeg validated on the TractSeg reference bundles. \note{convert this figure to square}}
+  \includegraphics[width=\textwidth]{chapter_5/ts_test_box.pdf}
+  \caption{Scores for tractfinder (using atlases constructed from the TractSeg training data) and TractSeg validated on the TractSeg reference bundles. }
   \label{fig:ts_atlas}
 \end{figure}
 

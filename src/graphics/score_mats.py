@@ -41,7 +41,7 @@ def main():
   N = len(METHODS_)
   figcolours = iter(['b','r','g'])
 
-  supfig = plt.figure(figsize=set_size(ratio=3, fraction=0.5))
+  supfig = plt.figure(figsize=set_size(ratio=3, fraction=0.55))
   subfigs = supfig.subfigures(nrows=3, ncols=1, height_ratios=[N,N-1,N])#, figsize=set_size(ratio=1, fraction=1))
 
   for d, fig in zip(datas, subfigs):
