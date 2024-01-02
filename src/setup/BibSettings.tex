@@ -6,7 +6,7 @@
             isbn=true,
             url=false,
             natbib=true,
-            maxcitenames=50,
+            maxcitenames=1,
             maxbibnames=50,
             style=nature,
             backend=bibtex]{biblatex} % Add citation styles as needed (see docs for biblatex)
@@ -39,3 +39,11 @@
 \ifthenelse { \equal {#1} {} }  %
     {\citeauthor{#2}\autocite{#2}}   % if #1 == blank
     {\citeauthor{#1}\autocite{#2}}}
+
+\DeclareCiteCommand{\fullcite}
+  {\usebibmacro{prenote}}
+  {\usedriver
+     {\defcounter{maxnames}{50}}
+     {\thefield{entrytype}}.}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}

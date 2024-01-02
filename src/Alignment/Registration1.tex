@@ -42,9 +42,10 @@ The similar orientations of the the \gls{af} and tapetum in this region, togethe
 \end{SCfigure}
 
 Fortunately, such misalignment effects are small and unlikely to impact the overall segmentation quality, in part because only the margins of the atlas are likely to ``spill" into neighbouring tracts, and the low spatial probability will result in very low or sub-threshold mapped values.
-To confirm this assessment, Figure \ref{fig:nrr} shows segmentation similarity scores compared with probabilistic targeted tractography when using either affine (FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002}) or non-linear (ANTs registration package Symmetric Normalisation algorithm\autocite{Tustison2013,Avants2011}) atlas registration in 71 healthy subjects (\textit{TractoInferno} dataset, see section \ref{sec:data} for more details).
+To confirm this assessment, Figure \ref{fig:nrr} shows segmentation similarity scores compared with probabilistic targeted tractography when using either affine (FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002}) or non-linear (ANTs registration package Symmetric Normalisation algorithm\autocite{Tustison2013,Avants2011}) atlas registration in 71 healthy subjects (\textit{TractoInferno} dataset, see Section \ref{sec:data} for more details).
 Note that the atlases themselves are unchanged from those previously described and used in subsequent analyses, meaning the generation of the atlases still involves only affine registration between training subjects.
 There is no discernible difference in the scores, indicating that non-linear registration does not improve the final output.
+This comparison was included as supplementary material in a manuscript accepted for publication in \textit{Human Brain Mapping}\autocite{Young2024}.
 
 \begin{figure}
   \centering
