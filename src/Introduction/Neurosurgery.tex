@@ -38,7 +38,7 @@ Though it may in many cases be the ideal outcome from an onocological perspectiv
 Successfully balancing these consequences is a central dilemma in neurosurgical practice, with the key measure being \gls{eor}, the amount of tumour removed.
 In theory, \gls{eor} is a straightforward concept, but in practice it is ill-defined and inconsistently reported, while remaining central to studies of surgical efficacy and outcomes.
 
-Easily defined in oncology
+Easily defined in oncology%
 \footnote[2]{\gls{eor} is relevant to epilepsy surgery, although the terminology and calculations here are different. Epileptogenic centres cannot always be distinguished and measured on imaging, and functionally eloquent tissue may be the clear source of epileptic \note{activity}, and thus subject to removal.}
 as either the absolute volume or relative percentage of tumour tissue removed, accurately and consistently determining \gls{eor} is very difficult.
 It is often reported in terms of broad categories, the most common being biopsy, \gls{str} or partial resection (PR), near total resection, \gls{gtr} and supratotal resection\autocite{Wykes2021,Karschnia2021}.
@@ -157,6 +157,12 @@ This lack of readily available alternatives in the neurosurgeon's workflow and c
 Nonetheless, there is growing consensus that (pending appropriate regulatory approval) the clinical community ought to adopt probabilistic, non-DT tractography\autocite{Yang2021, Beare2022, Petersen2017}.
 There is evidence that this shift is gradually underway, at least in the context of presurgical planning\autocite{Toescu2020}, driven probably by a combination and feedback loop of growing demand and better availability and integration of advanced techniques into the clinical workflow.
 
+\begin{SCfigure}[][htb!]
+  \includegraphics[width=0.5\textwidth]{chapter_2/neuronav.png}
+  \caption{Idealised demonstration of tractography for neurosurgical planning and navigation in a paediatric patient with a left ependymoma (orange, outlined) involved with the \gls{or} (green) and \gls{cst} (blue). (Illustrative only, not real clinical tractography.)}
+  \label{fig:nav}
+\end{SCfigure}
+
 \subsection{Neuronavigation and brain shift}
 
 During the surgical procedure itself, multimodal information streams continue to guide the safest possible resection.
@@ -185,6 +191,12 @@ Maximising \gls{eor} has further been significantly improved with the introducti
 This compound is administered orally prior to surgery and is converted within cells to protoporphyrin IX (PPIX), which fluoresces when excited by short wavelength light.
 Uptake of 5-ALA is highest in tumour cells due to \gls{bbb} disruption, and the metabolic pathways producing PPIX are more active in tumour cells, allowing the surgeon to distinguish them from healthy tissue under the surgical microscope.
 5-ALA guided surgery results in improved \gls{eor} and higher progression free survival, while maintaining preservation of functional tissue\autocite{Coburger2019,Golub2020}, and has seen widespread uptake in the surgical treatment of gliomas\autocite{Stummer2006}.
+
+\begin{SCfigure}[][h!]
+  \includesvg[height=\textheight]{chapter_2/brain_shift.svg}
+  \caption{Illustration of intraoperative brain shift and its effect on neuronavigation. Top: Preoperative imaging of a right \gls{who} grade 1 epidermoid lesion patient. Image is a $T_1$ weighted structural scan overlaid with \gls{csd}-derived \gls{dec} map. White arrowhead indicates medial displacement of the \gls{cst} (coloured blue/purple). Middle: Intraoperative imaging with partially resected lesion. Brain shift has caused the \gls{cst} to relax laterally towards the craniotomy (white arrowhead). Bottom: Streamline tractography reconstructions of the \gls{cst} from preoperative (red) and intraoperative (green) \gls{dmri}, with areas of overlap in yellow. Note how the red streamlines give the impression of a tract further from the resection margin.}
+  \label{fig:shift}
+\end{SCfigure}
 
 The dynamic conditions of brain surgery result in the unpredictable and often substantial movement, compression and deformation of tissue referred to as brain shift.
 A range of factors contribute to this phenomenon, including \gls{csf} drainage, sagging due to gravity, decompression of tissue surrounding the resection cavity, swelling, craniotomy herniation and the effects of surgical instruments\autocite{Gerard2017}.

@@ -101,7 +101,7 @@ This metric is asymmetric, with $BD_s (A,B) = -BD_s(B,A)$, and is defined as
 
 \begin{SCfigure}[50][htbp!]
   \centering
-  \includegraphics[width=0.3\textwidth]{segmentations_distance_euc.pdf}
+  \includegraphics[width=0.3\textwidth]{chapter_5/segmentations_distance_euc.pdf}
   \caption{Illustration of regions involved in calculating bundle distance metric. The light grey area is $A\setminus B$, dark grey is $B\setminus A$, and in each grey voxel is written its minimum Euclidean distance to the black intersection. Distance sign is negative outside of the reference segmentation ($B$ in this example) and positive inside. To compute the bundle distance $BD(A,B)$ (Eq. \ref{eq:bd}), the mean minimum absolute distance is taken across all 17 voxels in the two grey areas $BD(A,B) = (14+4\sqrt{2}+3\sqrt{5})/17 = 1.55$. To compute the signed bundle distance $BD_s(A,B)$ (Eq. \ref{eq:bds}), the signed distances relative to the reference set $B$ are used: $BD_s(A,B) = (2-2\sqrt{2}-\sqrt{5})/17 = -0.18$. The Dice score for these two segmentations would be $DSC = 2*4/(13+12) = 0.32$}
   \label{fig:BD}
 \end{SCfigure}
@@ -335,7 +335,7 @@ Since the original TractSeg paper includes 72 tracts (including both left and ri
 
 \begin{figure}[htb!]
   \includegraphics[width=\textwidth]{chapter_5/ts_test_box.pdf}
-  \caption{Scores for tractfinder (using atlases constructed from the TractSeg training data) and TractSeg validated on the TractSeg reference bundles. }
+  \caption{Scores for tractfinder (using atlases constructed from the TractSeg training data) and TractSeg validated on the TractSeg reference bundles.}
   \label{fig:ts_atlas}
 \end{figure}
 
