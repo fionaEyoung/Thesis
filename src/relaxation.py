@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import mpl_toolkits.mplot3d.art3d as art3d
 # plt.rcParams['text.usetex'] = True
-plt.rcParams.update ({'text.usetex': False, "svg.fonttype": 'none'})
+plt.rcParams.update ({'text.usetex': True, "svg.fonttype": 'none'})
 
 n = 1000
 s = 5
@@ -69,3 +69,4 @@ plt.gcf().subplots_adjust(left=0, right=1, bottom=0, top=1)
 plt.tight_layout()
 # plt.show()
 plt.savefig('figs/chapter_1/relaxation.svg', format='svg')
+plt.savefig('figs/chapter_1/relaxation.pdf', format='pdf')

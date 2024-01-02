@@ -78,7 +78,7 @@ METHOD_PROPS = {'TSX': dict(color='#FF8100', hatch=''),
                   'AT' : dict(color='#F046A8', hatch=''),
                   'TFF': dict(color='#F38B03', hatch=''),
                   'TFD': dict(color='#F38B03', hatch=''),
-                  'TFA': dict(color='#BECB34', hatch='///', name='Nonlinear')}
+                  'TFA': dict(color='#BECB34', hatch='///////', name='Nonlinear')}
 METHOD_SHAPES = {'TSX': 'v',
                   'TSD': '^',
                   'TG' : 's',
@@ -111,11 +111,12 @@ cmap_generalised = colormaps['inferno']
 cmap_binary = colormaps['viridis']
 # Boxplot parameters
 c = 'w'
-boxprops = dict(linestyle='-', color=c, facecolor=c, linewidth=0.5, alpha=0.7)
-boxlineprops = dict(linestyle='-', color=c, linewidth=0.5, alpha=0.7)
+boxlw = 0.5
+boxprops = dict(linestyle='-', color=c, facecolor=c, linewidth=boxlw, alpha=0.7)
+boxlineprops = dict(linestyle='-', color=c, linewidth=boxlw, alpha=0.7)
 # flierprops = dict(marker='.', markerfacecolor=c, markeredgecolor=c, markersize=1)
-medianprops = dict(linestyle='-', linewidth=0.5, color='k')
+medianprops = dict(linestyle='-', linewidth=boxlw, color='k')
 whiskerprops = dict(color=c)
-flierprops = dict(marker='o', markerfacecolor='k', markeredgecolor='none', markersize=1.5, alpha=0.5)
+flierprops = dict(marker='o', markerfacecolor='k', markeredgecolor='none', markersize=1, alpha=0.5)
 meanpointprops = dict(marker='o', markeredgecolor='k', markersize=5, markerfacecolor='k')
-meanlineprops = dict(linestyle='--', linewidth=2, color='purple')
+meanlineprops = dict(linestyle='--', linewidth=boxlw, color='purple')
