@@ -48,7 +48,7 @@ Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarro
 
 \begin{figure}[htp]
   \centering
-  \includegraphics{virtue_vars.pdf}
+  \includesvg[inkscapelatex=true]{chapter_4/virtue_vars.svg}
   \caption{Graphical schema of the variables defined in the radial deformation model}
   \label{fig:virtue}
 \end{figure}
@@ -94,7 +94,7 @@ As each voxel value will be determined by a weighted sum of all transformed valu
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.7\textwidth]{warping.pdf}
+  \includesvg[width=0.7\textwidth,inkscapelatex=true]{chapter_4/warping.svg}
   \caption{Forward image warping maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting" (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
   \label{fig:warp}
 \end{figure}
@@ -151,7 +151,7 @@ Note that $\lambda_{max}$ varies throughout the brain, being a function of the r
 
 \begin{SCfigure}[][h!]
   \captionsetup{format=plain}
-  \includegraphics[width=0.65\textwidth]{chapter_3/k.png}
+  \includegraphics{chapter_4/k.pdf}
   \caption{Deformation factor $k$ as a function of $D_P$. $\lambda$ must be small enough such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_P}{D_t})$ (dashed line). An exponential $k$ with $\lambda_{max}$ is plotted in solid black, compared with a linear $k$ as proposed in \textcite{Nowinski2005} (dotted line).}
   \label{fig:k}
 \end{SCfigure}

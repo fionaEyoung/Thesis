@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import lambertw
 from os import path, pardir
+from figutils import *
 
 S = 0
 T = 4
@@ -12,8 +13,9 @@ def k(x, l):
   c = np.exp(-l) / (np.exp(-l)-1)
   return (1-c) * np.exp(-l*abs((x)/(B-S))) + c
 
-plt.rcParams['text.usetex'] = True
-# plt.rcParams['font.size'] = 13
+plt.rcParams.update(tex_fonts)
+current_dir = path.dirname(__file__)
+out_dir = path.join(current_dir, pardir, 'figs', 'chapter_4')
 
 l = 8
 lmax = lambertw(-((B-S)/(T-S))*np.exp(-((B-S)/(T-S))), k=0).real + (B-S)/(T-S)
@@ -26,7 +28,7 @@ lin_maxl = 1 - abs((P-S)/(T-S))
 
 y = [0,100]
 
-fig, ax = plt.subplots(figsize=(4.5,3), layout='tight')
+fig, ax = plt.subplots(figsize=set_size(fraction=0.65), layout='constrained')
 
 # Indicate tumour and brain boundaries
 # ax.plot([S+B,S+B], y, 'k--', [S-B,S-B], y, 'k--', [S+T,S+T], y, 'k:', [S-T,S-T], y, 'k:' )
@@ -48,7 +50,7 @@ ax.set_ylabel('$k$', fontsize=15)
 ax.set_xlabel(r'$D_p$', fontsize=15)
 
 leg = plt.legend(loc='upper center',  bbox_to_anchor=(T+(B-T)/2, 1),bbox_transform=ax.transData,
-                  frameon=False, fontsize='medium')
+                  frameon=False)
 # leg.legendPatch.set(linestyle='--')
-
-plt.savefig(path.join(path.dirname(__file__), 'draft_figs', 'chapter_3', 'k.png'), dpi=300)
+plt.margins(0,0)
+plt.savefig(path.join(out_dir, 'k.pdf'), dpi=300)

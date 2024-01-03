@@ -170,11 +170,11 @@ The whole brain approach is computationally extremely wasteful, as the vast numb
 Furthermore, if streamlines are randomly seeded throughout the brain, then longer tracts covering a larger volume are more likely to be sampled, the tendency to continue straight along a ``path of least resistance" at diverging or crossing fibres results in inordinate overrepresentation of certain pathways\autocite{Smith2013}.
 All this means that, after perhaps hours of tracking and billions of streamlines created, only a handful may be included in a final bundle reconstruction.
 
-\begin{figure}
-  \includegraphics[width=\textwidth]{chapter_2/tg_rois_glass.png}
+\begin{SCfigure}
+  \includegraphics[width=0.5\textwidth]{chapter_2/tg_rois_glass.png}
   \caption{\gls{wm} tracts are virtually dissected with streamline tractography and anatomically informed \glspl{roi}. In this toy example, streamlines for the \gls{cst} are seeded in the cerebral peduncles (blue ring), selected with an inclusion \gls{roi} in the posterior limb of the internal capsule (green ring). Streamlines following the paths of the \gls{cc} or cerebellar peduncles are excluded (red rings).}
   \label{fig:tg_rois}
-\end{figure}
+\end{SCfigure}
 
 The second approach may be called ``targeted tractography", an involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions (Fig. \ref{fig:tg_rois}), until a target number of streamlines have been selected.
 A seed region can but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract and propagate bidirectionally, placing additional include regions at the ends to ensure complete coverage.
