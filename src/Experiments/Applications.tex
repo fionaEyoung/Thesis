@@ -1,15 +1,17 @@
 \section{Intraoperative brain shift}
 \label{sec:imri}
 
-When considering the application of tractfinder for intraoperative imaging, we need to take brain shift into account, which is unpredictable: differing effects stem from drainage of fluid, pressure changes, tumour debulking and gravitational sag.
-Nevertheless, we aim to achieve intraoperative tract segmentation while avoiding the need to perform additional tumour and / or resection cavity segmentation intraoperatively.
+When considering the application of tractfinder to intraoperative imaging, we need to take brain shift into account, which is unpredictable:
+Differing effects stem from drainage of fluid, pressure changes, tumour debulking and gravity.
+Nevertheless, the aim is to achieve accurate intraoperative tract segmentation while avoiding the need to perform additional tumour or resection segmentation intraoperatively.
 
-As the atlas is designed to be spatially inclusive, with the inner product acting to correct small spatial inaccuracies, it is possible in some cases where brain shift is minimal to reuse the properative tumour deformation field.
-In cases of significant tumour debulking, the deformation field can be recomputed from the preoperative tumour segmentation by adjusting the value of $s$ in (\ref{eq:forwardP}) to simulate a reduction in tumour volume.
-
-This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection of a large temporal epidermoid cyst.
-There is significant reduction in cyst volume and the adjacent corticospinal tract has shifted accordingly, however by reusing the preoperative lesion segmentation and setting $s=0.8$, the resulting deformation field is able to capture the rough location of the shifted tract.
-By only adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ and $D_b$, we can avoid time and resource-intensive intraoperative lesion segmentation, brain shift modelling, or non-linear registration.
+As the atlas is designed to be fairly inclusive, with the inner product acting to correct small spatial inaccuracies, it is possible in some cases where brain shift is minimal to reuse the preoperative tumour deformation field.
+In cases of significant tumour debulking, the deformation field can be recomputed from the preoperative tumour segmentation by adjusting the value of $s$ in the deformation expression (\ref{eq:forwardP}) to simulate a reduction in tumour volume.
+This scenario is demonstrated in Figure \ref{fig:shrink}, showing the resection of a large temporal epidermoid cyst in an adult patient, the same case depicted in an earlier demonstration of brain shift and tractography in Figure \ref{fig:shift}.
+Intraoperative imaging shows a significant reduction in cyst volume and the adjacent \gls{cst} has shifted accordingly, resulting in significant discrepancy between preoperative tract reconstruction and intraoperative tract position.
+Even so, the pathway is still shifted medially compared to its normal position (which can be clearly seen in comparison with the contralateral tract), such that tumour deformation modelling is still required for accurate segmentation.
+By reusing the preoperative lesion segmentation and setting $s=0.8$ (effectively modelling a 20\% smaller tumour), the resulting deformation field is able to capture the approximate location of the shifted tract, without the need for additional tumour segmentation on the intraoperative structural imaging.
+Adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ and $D_b$ avoids time and resource-intensive intraoperative lesion segmentation, brain shift modelling, or non-linear registration.
 
 \begin{figure*}[h!]
   \centering
@@ -28,29 +30,29 @@ By only adjusting the value of $s$ and reusing preoperatively computed values of
 \note{add section about oedema: nhnn subject 5 tractography vs tractseg vs tractfinder}
 
 \clearpage
-\section{iMRI case studies}\label{sec:case}
+\section{GOSH iMRI case studies}\label{sec:case}
 
-From \note{early 2022 to late 2023}, 9 \note{verify!} tumour resections where carried out at Great Ormond Street Hospital for Children with intraoperative MRI guidance including multi-directional diffusion weighted imaging.
+From mid 2021 to late 2023, nine tumour resections were carried out at \gls{gosh} with \gls{imri} guidance that also included multi-directional diffusion weighted imaging (that is, not trace-weighted or \gls{adc} imaging).
 Throughout this period, neurosurgical and radiological staff were continually learning how best to integrate the iMRI facility into their practice.
 
-The subjects included two posterior fossa tumour, two midline (thalamic) glioma and \note{five} hemispheric tumour patients.
-Of these, thalamic tumours are the indications with potentially the most to gain from advanced intraoperative guidance, given their complex functional environment and difficult access.
-Indeed, such tumours have widely been considered inoperable and have only recently seen surgical treatment thanks in part to changing attitudes\autocite{Souweidane1996,Puget2007} advances in neuronavigation.\autocite{Sunderland2021}
-Paediatric patients in particular\autocite{Ferroli2023} experience better overall survival rates when thalamic tumours are more radically resected compared to subtotal resection or biopsy.\autocite{Cinalli2018a}
-The Alder Hey Children's Hospital in Liverpool, UK experienced an increase in substantial resection \note{define} rates from 37\% to 94\% with the introduction of intraoperative MRI navigation, without any associated increase in postoperative morbidity.\autocite{Sunderland2021}
+The cases included two posterior fossa tumours, two midline (thalamic) gliomas and five supratentorial hemispheric tumours.
+Of these, \gls{imri} guidance with diffusion tractography is potentially the most useful for thalamic tumours, given their complex functional environment and difficult surgical access.
+Both low-grade \autocite{Wong2016} and high-grade\autocite{Dorfer2021} thalamic tumours may be candidates for maximal safe resection, although infiltrating lesions cannot be safely resected completely without serious risk of neurological detriment to the patient.
+With advances in surgical navigation, maximal safe resection has become an important consideration in thalamic tumours once considered inoperable\autocite{Souweidane1996,Puget2007,Steinbok2016,Grewal2019,Sunderland2021}.
+Children in particular\autocite{Ferroli2023} experience better overall survival rates when thalamic tumours are more radically resected compared to subtotal resection or biopsy\autocite{Cinalli2018}.
+The Alder Hey Children's Hospital in Liverpool, UK experienced an increase in substantial resection ($<1.5$cm$^3$ residual) rates from 37\% to 94\% with the introduction of intraoperative MRI navigation, without any associated increase in postoperative morbidity\autocite{Sunderland2021}.
 Similarly, a review of 38 thalamic tumour patients (paediatric and adult) treated at the Chinese PLA General Hospital in Beijing, China found that the use of iMRI increased GTR rates from 42\% to 68\%.\autocite{Zheng2016}
-Motor deficits are the most common functional symptoms of thalamic tumours,\autocite{Puget2007, Zheng2016, Palmisciano2021} and preservation of the posterior limb of the internal capsule, containing the corticospinal tract, is a major concern when resecting them.
-\note{to cite: Grewal2019, Wong2016, Kis2014, Dorfer2021, Steinbok2016, Celtikci2017}
+Preservation of the posterior limb of the internal capsule, containing the corticospinal tract, during resection is critical, with motor deficits being the most common functional symptoms of thalamic tumours\autocite{Puget2007, Zheng2016, Palmisciano2021}.
+As the specific interactions between thalamic tumours and surrounding \gls{wm} are complex and unpredictable, as we will see in the following case studies, \gls{dmri} \gls{wm} imaging is especially valuable for safely planning and conducting resections\autocite{Celtikci2017}.
 
-The following will look at two of the GOSH diffusion iMRI cases in detail, considering the imaging features, tumours and peri-operative clinical presentation and neurology.
-Hopefully this will provide a unique an balance perspective into the challenges and potential of intraoperative \gls{dmri} for such cases.
+The following will look at two of the \gls{gosh} diffusion iMRI cases in detail, considering the imaging and tumour features, peri-operative clinical presentation, and neurology.
+Hopefully this will provide a balanced perspective into the challenges and potential of intraoperative \gls{dmri} for such cases.
 
 \subsection{Patient 5: Low grade pilocytic astrocytoma}
 
-\note{add some sort of disclaimer about how this is all hearsay based on MDT / scanner room notes?}
-
-The first of the two patients harboured a low-grade pilocytic astrocytoma in the left thalamus and presented at 23 months old with progressive right side weakness.
-The unusual radiological presentation showed a sliver of tissue within the tumour, presumed to be a part of the CST, while the rest of the tract was displaced (Fig. \ref{fig:5p}).
+The first of the two patients presented with a low-grade pilocytic astrocytoma in the left thalamus at 23 months of age with progressive right-sided weakness.
+On preoperative \gls{mri} examination, a sliver of tissue within the tumour, presumed to be a part of the \gls{cst}, was evident, while the rest of the tract was displaced (Fig. \ref{fig:5p}).
+This being a low-grade and well-encapsulated tumour,
 
 \begin{figure}
   \centering
@@ -59,14 +61,14 @@ The unusual radiological presentation showed a sliver of tissue within the tumou
   \label{fig:5p}
 \end{figure}
 
-Confirming the location of the CST, divided as it appeared to be into an intratumoural and a displaced portion, was particularly difficult in this case.
-A \gls{dmri} sequence with colour FA visualisation was able to confirm that the strip of tissue inside the tumour indeed constituted part of the CST.
-Streamline tractography also reconstructed the CST as both within and displaced posteriorly around the tumour.
-The part of the pathway involved is at the cerebral peduncle level, which in healthy cases is a relatively narrow bundle.
-Consequently, the tractfinder atlas was unable to account for both the tumour-engulfed section, which remained spatially relatively unmoved, and the posteriorly displaced portion simultaneously.
-Basic tract mapping reconstructed only the first part, while additional tumour deformation modelling enabled detection of the second part (Fig. \ref{fig:5p_cst}).
-Of course, such a hacked-together reconstruction would be entirely impractical and difficult to interpret, compared to tractography which is better at exploring the available pathways regardless of anatomical prior expectations.
-As such, this is a case for which tractfinder is entirely unsuited.
+Confirming the location of the \gls{cst}, divided into an intratumoural and a displaced portion, was particularly difficult in this case.
+A \gls{dmri} sequence with \gls{dec} visualisation was able to confirm that the strip of tissue inside the tumour indeed constituted part of the \gls{cst}.
+Streamline tractography also depicted the \gls{cst} as both within and displaced posteriorly around the tumour.
+The part of the pathway involved was at the cerebral peduncle level, which even in controls appears as a relatively narrow bundle.
+Consequently, the tractfinder atlas was unable to account for both the tumour-engulfed section, which remained spatially relatively unmoved from a normal position, and the posteriorly displaced portion simultaneously.
+Basic tract mapping reconstructed the first part, while additional tumour deformation modelling enabled detection of the second part (Fig. \ref{fig:5p_cst}).
+Of course, such an \textit{ad hoc} solution would be entirely impractical and difficult to interpret, compared to tractography which is better at exploring the available pathways regardless of prior anatomical expectations.
+As such, this is a case in which tractfinder was unsuited to the complex anatomy and tumour deformation effects at hand.
 
 \begin{figure}
   \centering
@@ -75,9 +77,10 @@ As such, this is a case for which tractfinder is entirely unsuited.
   \label{fig:5p_cst}
 \end{figure}
 
-Due to this complicated involvement of the internal capsule a debulking resection under iMRI guidance was indicated to relieve pressure on the \gls{cst}.
-After a large part of the tumour was resected, the patient was brought through to \gls{imri} (Fig \ref{fig:5i}).
-Here, again, reconstruction of the \gls{cst} proved difficult.
+Due to this complicated involvement of the internal capsule a debulking resection under \gls{imri} guidance was indicated to relieve pressure on the \gls{cst}.
+After a large part of the tumour was removed, the patient was brought through to \gls{imri} (Fig \ref{fig:5i}) to confirm maximal safe resection with some residual tumour remaining.
+There was concern of an area of infarction involving the \gls{cst}, however the patient's hemiparesis, after experiencing worsened motor deficit immediately postoperatively, improved over the following days after decompression of the motor fibres.
+The patient went on to receive adjuvant chemotherapy and showed further improvement over longer term follow-up, their hemiparesis returning to preoperative levels.
 
 \begin{figure}
   \centering
@@ -93,17 +96,14 @@ Here, again, reconstruction of the \gls{cst} proved difficult.
   \label{fig:5i_cst}
 \end{figure}
 
-This time, significant brain shift away from the craniotomy prevented accurate atlas registration, again resulting in a mismatch in anatomical alignment between atlas and target image (Fig \ref{fig:5i_cst}).
-Non-linear registration, with harsh penalties on strong local deformation to reduce overfitting around the resection surface, could mitigate this, but would be impractical for routine use.
-
-A partial resection was completed, and as the intraoperative frozen section \note{??} was reported as appearing high grade, the decision was made not to pursue extensive resection, given the risk of functional injury and the unlikelihood of achieving curative resection for a high grade lesion. \note{????}
-There was concern of an area of infarction involving the CST, however the patient, after experiencing worsened motor deficit immediately postoperatively, approved to preoperative levels of the following days.
-The patient went on to receive adjuvant chemotherapy and showed further improvement to their hemiparesis compared to their preoperative condition.
+Reconstruction of the \gls{cst} on intraoperative imaging again proved difficult.
+Here, significant brain shift away from the craniotomy site prevented accurate atlas registration, resulting in a mismatch in anatomical alignment between atlas and target image (Fig \ref{fig:5i_cst}).
+Non-linear registration, with harsh penalties on strong local deformation to reduce overfitting around the resection surface, could mitigate this, but would be impractical for routine intraoperative use.
 
 \subsection{Patient 8: High grade glioma}
 
-The second thalamic tumour case study involves a seven year old with a diffuse midline astrocytoma (WHO grade IV) also in the left thalamus.
-A high degree of mass effect called for tumour deformation modelling, so the lesion was segmented on the preoperative structural scan (Fig. \ref{fig:8p}).
+A second patient presented at seven years of age with a diffuse midline astrocytoma (\gls{who} grade 4) also in the left thalamus.
+A strong degree of mass effect called for tumour deformation modelling, so the lesion was segmented on the preoperative structural scan (Fig. \ref{fig:8p}).
 
 \begin{figure}
   \centering
@@ -113,7 +113,11 @@ A high degree of mass effect called for tumour deformation modelling, so the les
 \end{figure}
 
 The diffuse and infiltrative nature of this tumour made identifying the posterior capsule, thalamus and tumour margins exceedingly difficult.
-Intraoperative DTI was requested by the radiologist after extensive discussion of the already acquired conventional contrast scans, from which the extent of PLIC infiltration was indiscernible (Fig. \ref{fig:8i}).
+Intraoperative \gls{dti} was requested by the radiologist after extensive discussion of the already acquired conventional contrast scans, from which the extent of internal capsule infiltration was indiscernible (Fig. \ref{fig:8i}).
+\Gls{dti} \gls{dec} maps showed a largely intact and slightly displaced internal capsule with extensive tumour infiltration, so the decision was made not to attempt further resection of that part of the tumour.
+Roughly half of the lesion was resected, predominantly in the ventral and medial parts.
+Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy after confirmation of high-grade histology with H3K27M mutation.
+Over the following weeks the patient's hemiparesis improved slowly, consistent with the decompression of the \gls{csd} and the tumour's infiltrative nature.
 
 \begin{figure}
   \centering
@@ -122,11 +126,10 @@ Intraoperative DTI was requested by the radiologist after extensive discussion o
   \label{fig:8i}
 \end{figure}
 
-Colour FA showed a largely intact and slightly displaced internal capsule with extensive tumour infiltration, so the decision was made not to attempt further resection of that part of the tumour.
-In this situation, identification of the internal capsule and assessment of its condition could have been significantly assisted with more advanced \gls{dmri} analysis.
-The smearing of colours on the directional FA map make it difficult to discern what affect is leading to the change from the expected indigo colour of a healthy internal capsule.
-What is unclear is the state of the neuronal fibres in the infiltrated portion: are they intact but surrounded with oedema/tumour tissue, or simply in a rotated orientation, or destroyed?
-Visualising the fibre \glspl{odf} using \gls{csd} gets us closer to the answer (Fig. \ref{fig:8i_fod}).
+Identification of the internal capsule and assessment of its condition on intraoperative imaging may have been significantly simplified with advanced tract-specific \gls{dmri} analysis.
+Interpreting colours on the directional \gls{fa} map is complicated by crossing fibres and disturbed diffusion caused by infiltration and oedema.
+What is unclear is the state of the neuronal fibres in the infiltrated portion: Are they intact, distorted, or destroyed?
+Visualising the fibre \glspl{odf} using \gls{csd} gives us further insight (Fig. \ref{fig:8i_fod}).
 
 \begin{figure}
   \centering
@@ -146,12 +149,10 @@ Visualising the fibre \glspl{odf} using \gls{csd} gets us closer to the answer (
   \label{fig:8i_fod}
 \end{figure}
 
-Using the tumour deformation field modelled from the preoperative scan, tractfinder reconstructs the corticospinal tract in very close accordance with probabilistic streamline tractography.
+Using a tumour deformation field modelled from the preoperative scan, tractfinder reconstructed the corticospinal tract in very close agreement with probabilistic streamline tractography.
 Both indicate a largely intact bundle slightly laterally displaced, although neither can necessarily rule out the presence of infiltrated fibres closer to the tumour, as the expected resulting decrease in anisotropy would produce fewer streamlines through that region and reduced tractfinder probability.
-In the end, roughly 50\% of the lesion was resected, predominantly in the ventral and medial parts.
-Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy \note{did they? only have this down as planned} after confirmation of high-grade histology.
-Over the following weeks the patient's hemiparesis persisted, consistent with the infiltrative nature of the tumour.
-\note{show tractseg here!}
+Surprisingly, TractSeg was unable to successfully detect the \gls{cst} in the affected hemisphere, despite the relatively manageable amount of distortion.
+It is unclear what led to failure in this particular subject, as TractSeg has shown some success in cases with similar tumour deformations\autocite{Moshe2022}.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{case_studies/8_iop_tf.png}
