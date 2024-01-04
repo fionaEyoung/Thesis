@@ -26,7 +26,7 @@ using a heuristic algorithm based on thresholding the mean of each diffusion wei
 \textit{Affine registration} between subject space and MNI152\autocite{Fonov2011} template space using the \gls{fsl} Linear Image Registration Tool (FLIRT)\autocite{Jenkinson2001,Jenkinson2002}.
 
 \textit{\Gls{csd}}. Depending on the dataset and / or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd}\autocite{Tournier2007,Tournier2019} (``original flavour") and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to \gls{wm} and \gls{gm} tissue compartments for single-shelled acquisitions (those with a single nonzero $b$-value),
-and \gls{msmt} \gls{csd} with three tissue compartments (\gls{wm}, \gls{gm}, \gls{csf}) for multi-shelled acquisitions.
+and \gls{msmt} \gls{csd} with three tissue compartments (\gls{wm}, \gls{gm}, \gls{csf}) for multi-shelled acquisitions (see Section \ref{sec:ismrmdiff} for further context on these choices).
 In all cases, response functions were obtained using the Dhollander unsupervised 3-tissue response function estimation algorithm\autocite{Dhollander2016,Dhollander2019}.
 All \gls{csd} was performed using the MRtrix3 image processing software package\autocite{Tournier2019}.
 
