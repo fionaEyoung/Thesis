@@ -1,17 +1,17 @@
 
 \section{Validation: methods}
-\label{sec:methods}
 
 Segmentation tasks are commonly validated against reference data using a single numeric score of similarity or accuracy.
 In the absence of a ground truth for \textit{in vivo} white matter tracts, what should instead by the measure by which a tract imaging method is considered ``accurate"?
 Perhaps the only reasonable performance target can be to reproduce as closely as possible the results which would be obtained by the current standard, which in most cases would be streamline tractography.
-However, given the very large degree of variabiltiy between tractography algorithms and tract reconstruction approaches, even this is a poorly defined reference point.
+However, given the very large degree of variability between tractography algorithms and tract reconstruction approaches, even this is a poorly defined reference point.
 False positive streamlines can unfairly skew accuracy scores, while manually editing reference bundles to remove them is likely to introduce bias.
 
 Given these challenges, we'll aim to present as rounded a picture as possible of the differences and characteristic features of each method through different volumetric and distance-based similarity metrics.
 The purpose of this validation is not to determine which method is best, as indeed cannot be determined without a reliable reference point, but to highlight the ways in which they are similar, and their strengths and weaknesses.
 
 \subsection{Benchmark methods}
+\label{sec:methods}
 
 We'll consider three alternative tract segmentation approaches and compare each with tractfinder: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
 There are numerous alternative techniques, as detailed in Section \ref{sec:wms}, many based on streamline clustering or classification, or automatic \gls{roi} registration, including White Matter Analysis (WMA)\autocite{ODonnell2017}, RecoBundles \autocite{Garyfallidis2018}, Classifyber\autocite{Berto2021}, and Tracula\autocite{Yendiki2011}.
@@ -51,7 +51,7 @@ Comparing results with simple atlas registration between structural image data i
 
 Each technique is compared against all others, rather than designating any single technique as ``ground truth", with the exception of the \textit{TractoInferno} dataset, where the published streamlines are treated as an independent reference.
 Several comparison metrics are computed, to capture different aspects of agreement between segmentations.
-The Dice-Soerensen similarity coefficient (\gls{dice}) \autocite{Dice1945} is a popular, symmetric measure of segmentation similarity given by
+The \gls{dice} \autocite{Dice1945} is a popular, symmetric measure of segmentation similarity given by
 
 \begin{align}
   DSC &= \frac{2 |A \cap B|}{|A| + |B|}
@@ -163,8 +163,7 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
 \paragraph*{Performance and reproducibility}
 
 \begin{SCfigure}
-  \makebox[0.52\linewidth][r]{%
-  \includegraphics{chapter_5/score_mats_group.pdf}}
+  \includegraphics{chapter_5/score_mats_group.pdf}
   \caption{Pairwise \gls{dice} and density correlations for the \textit{Tractoinferno} (top) HCP49 (middle) and clinical (bottom) datasets. For each pair of methods, the metric distributions across all subjects are shown for each tract (from left to right: \gls{af}, \gls{cst}, \gls{ifof}, \gls{or}), with background colours corresponding to mean score value. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}
   \label{fig:dscmats}}
 \end{SCfigure}

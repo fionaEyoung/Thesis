@@ -61,7 +61,7 @@ For fully acquisition details see Table \ref{tab:datasets}.
 All clinical scans used in the systematic comparison with benchmark methods involved non-deforming tumours, in the sense that any lesions did not appreciably displace white matter structures from their typical positions.
 Further GOSH and NHNN scans with substantial tumours were analysed on a case-by case basis, as the low sample size and high tumour heterogenity precluded a systematic quantitative evaluation.
 
-Each \gls{dmri} scan was minimally preprocessed with Marchenko-Pastur principal component analysis denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction,\autocite{Zhang2001, Smith2004} as implemented in MRtrix3 \autocite{Tournier2019}.
+Each \gls{dmri} scan was minimally preprocessed with \gls{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction,\autocite{Zhang2001, Smith2004} as implemented in MRtrix3 \autocite{Tournier2019}.
 Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} (MRtrix3 v3.0.3 and FMRIB Software Library (FSL, \url{https://fsl.fmrib.ox.ac.uk}) v6.0) applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
 No EPI distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times.\autocite{Yang2022}
 
@@ -107,7 +107,7 @@ The 10 selected subjects include 4 with tumours large enough (3 meningioma and 1
 Of these 4 subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral" tracts.
 In all other subjects, the tracts were labelled ipsilateral or contralateral if they were in the same or opposite hemisphere as the tumour respectively.
 
-\gls{dmri} data was preprocessed with denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of FSL v.6.0.4).
+\gls{dmri} data was preprocessed with \gls{mppca} denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of FSL v.6.0.4).
 \gls{msmt}-\gls{csd}, tractfinder, TractSeg and manual tractography of the \gls{af}, \gls{cst}, \gls{ifof} and \gls{or} were performed as previously described.
 Given the disruption caused by the space-occupying and in cases infiltrating lesions, manual tractography using multi-ROI targeting alone did not produce acceptable results.
 Instead, the bundles were manually filtered to remove spurious and implausible streamlines using the same process as was used when curating the atlas training data.
@@ -115,6 +115,7 @@ These filtered bundles are used as reference segmentations for the 10 BTCD subje
 
 \subsection{Fibercup phantom}
 
+\note{move this to chapter 3}
 While testing and validating on \textit{in vivo} human data is irreplaceable, the complexities of such data, as well as the lack of definitive ground truth for fibre bundle reconstructions in unknown anatomies, can make results difficult to interpret.
 This is where synthetic phantom data, with known physical parameters, are valuable for prototyping and validating methods.
 Within the white matter imaging space there is a synthetic phantom known as the Fibre Cup phantom after a tractography challenge held for the 12th international conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) in 2009.\autocite{Fillard2011}
