@@ -1,4 +1,6 @@
-\section{Intraoperative brain shift}
+\section{Challenging tumours}
+
+\subsection{Intraoperative brain shift}
 \label{sec:imri}
 
 When considering the application of tractfinder to intraoperative imaging, we need to take brain shift into account, which is unpredictable:
@@ -15,19 +17,34 @@ Adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ a
 
 \begin{figure*}[h!]
   \centering
-  \includegraphics[width=0.8\textwidth]{chapter_4/figure_4.png}
-  \caption{Example results in intraoperative image using scaled preoperative tumour segmentation. Blue outline: Tumour segmentation. Green outline: effective tumour boundary with $s=0.8$ used for intraoperative segmentation}
+  \includesvg[width=\textwidth,pretex=\sffamily,inkscapelatex=true]{chapter_6/shrink.svg}
+  \caption{Demonstration of successful pre- and intraoperative tract imaging using only preoperative tumour segmentation (blue outline). Setting $s=0.8$ (green outline) simulates intraoperative decompression and models accurate atlas deformation to align with intraoperative anatomy after brain shift. The resulting \gls{cst} tractfinder segmentations are in strong agreement with streamline tractography.}
   \label{fig:shrink}
 \end{figure*}
+%
+% \begin{figure*}[h!]
+%   \centering
+%   \includegraphics[width=\textwidth]{chapter_4/figure_5_revised.png}
+%   \caption{Sample results in 4 different clinical subjects. First column: linearly registered tract atlas (spatial component only). Second column: atlas after tumour deformation. Third column: Final tract map. Fourth column: Track density image from streamline tractography, where intensity corresponds to streamline count per $(2.5mm)^3$ voxel (thresholded at 10 streamlines).}
+%   \label{fig:res}
+% \end{figure*}
 
-\begin{figure*}[h!]
-  \centering
-  \includegraphics[width=\textwidth]{chapter_4/figure_5_revised.png}
-  \caption{Sample results in 4 different clinical subjects. First column: linearly registered tract atlas (spatial component only). Second column: atlas after tumour deformation. Third column: Final tract map. Fourth column: Track density image from streamline tractography, where intensity corresponds to streamline count per $(2.5mm)^3$ voxel (thresholded at 10 streamlines).}
-  \label{fig:res}
-\end{figure*}
+\subsection{Tumour deformation and oedema}
 
-\note{add section about oedema: nhnn subject 5 tractography vs tractseg vs tractfinder}
+In this example case of a NHNN patient with a tumour embedded within the right precentral gyrus (tumour histology information is unavailable for this subject).
+Not only is there substantial distortion to the \gls{cst} and cortical topology, the tumour is surrounded with oedema, which is affecting diffusion measurements.
+Due to the large free water compartment within the \gls{wm}, the usual \gls{msmt} \gls{csd} approach with \gls{wm} and \gls{gm} compartments is unsuitable in this situation.
+Instead, \gls{wm} and \gls{csf} compartments were modelled, allowing modelling of \gls{wm} \glspl{fod} within oedema while reducing noise slightly compared to \gls{ssst} \gls{csd}.
+After \gls{fod} modelling, the \gls{cst} was reconstructed using probabilistic tractography, tractfinder with tumour deformation modelling and TractSeg (DKFZ).
+
+In Figure \ref{fig:oedema}, panel \textbf{a}, fibre orientations clearly indicate the presence of \gls{csd} fibres circumventing the tumour, yet the presence of oedema has inhibited their detection in both the tractography (panel \textbf{d}) and TractSeg (panel \textbf{e}) reconstructions.
+The deformed tract atlas, by contrast, aligns well with the \gls{fod} orientations (panel \textbf{b}) resulting in a successful tractfinder segmentation  (panel \textbf{c}).
+
+\begin{figure}
+  \includesvg[width=\textwidth,pretex=\ttfamily,inkscapelatex=true]{chapter_6/oedema.svg}
+  \caption{Adult patient with tumour in the right precentral gyrus. \textbf{a.} \glspl{fod}, \textbf{b.} Deformed \gls{cst} \gls{tod} atlas, \textbf{c.} Tractfinder map of the \gls{cst}, thresholded at 0.05, \textbf{d.} Probabilistic tractography streamlines, \textbf{e.} TractSeg segmentation probability, thresholded at 0.5, \textbf{f.} Coronal and sagittal slices indicating the location of panels \textbf{a.-e.}}
+  \label{fig:oedema}
+\end{figure}
 
 \clearpage
 \section{GOSH iMRI case studies}\label{sec:case}
@@ -54,10 +71,11 @@ The first of the two patients presented with a low-grade pilocytic astrocytoma i
 On preoperative \gls{mri} examination, a sliver of tissue within the tumour, presumed to be a part of the \gls{cst}, was evident, while the rest of the tract was displaced (Fig. \ref{fig:5p}).
 This being a low-grade and well-encapsulated tumour,
 
-\begin{figure}
+\begin{figure}[htb!]
   \centering
-  \includegraphics[width=0.8\textwidth]{case_studies/5_preop.png}
-  \caption{Preoperative radiological presentation of patient 5, with a low-grade astrocytoma of the left thalamus. Top: T1, bottom: DTI FA. Arrow heads indicate the CST, partially travelling through the tumour.}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_t1.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_fa.png}
+  \caption{Preoperative radiological presentation of \gls{gosh} patient 5, with a low-grade astrocytoma of the left thalamus. Top: $T_1$-weighted scan. Bottom: \gls{dti} \gls{dec} \gls{fa} map. \note{Arrow heads} indicate the \gls{cst}, partially located within the tumour.}
   \label{fig:5p}
 \end{figure}
 
@@ -70,10 +88,11 @@ Basic tract mapping reconstructed the first part, while additional tumour deform
 Of course, such an \textit{ad hoc} solution would be entirely impractical and difficult to interpret, compared to tractography which is better at exploring the available pathways regardless of prior anatomical expectations.
 As such, this is a case in which tractfinder was unsuited to the complex anatomy and tumour deformation effects at hand.
 
-\begin{figure}
+\begin{figure}[htb!]
   \centering
-  \includegraphics[width=0.8\textwidth]{case_studies/5_preop_tf.png}
-  \caption{Reconstruction of the corticospinal tract on preop imaging. Top: track density imaging, bottom: tractfinder (combined with and without deformation modelling), with tractography outlined in white for comparison.\note{redo with only unilateral?}}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_tg_5mm.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_tf_5mm.png}
+  \caption{Reconstruction of the left \gls{cst} on preoperative imaging. Top: Streamline tractography \gls{tdi} map, thresholded at 10 streamlines. Bottom: Tractfinder with and without deformation modelling merged into a single segmentation.}
   \label{fig:5p_cst}
 \end{figure}
 
@@ -82,17 +101,19 @@ After a large part of the tumour was removed, the patient was brought through to
 There was concern of an area of infarction involving the \gls{cst}, however the patient's hemiparesis, after experiencing worsened motor deficit immediately postoperatively, improved over the following days after decompression of the motor fibres.
 The patient went on to receive adjuvant chemotherapy and showed further improvement over longer term follow-up, their hemiparesis returning to preoperative levels.
 
-\begin{figure}
+\begin{figure}[htb!]
   \centering
-  \includegraphics[width=0.6\textwidth]{case_studies/5_iop.png}
-  \caption{Intraoperative T1w (top) and diffusion colour FA (bottom) for patient 5, showing left craniotomy and surgical corridor through the temporal lobe}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_t1.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_fa.png}
+  \caption{Intraoperative $T_1$-weighted (top) and \gls{dec} \gls{fa} (bottom) for patient 5, showing left craniotomy and surgical corridor through the temporal lobe}
   \label{fig:5i}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[htb!]
   \centering
-  \includegraphics[width=0.8\textwidth]{case_studies/5_iop_tf.png}
-  \caption{Reconstruction of the CST on intraoperative imaging using tractography (top) and tractfinder (bottom) with standard affine registration.}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_tg_5mm.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_tf_5mm.png}
+  \caption{Reconstruction of the \gls{cst} on intraoperative imaging using tractography (top) and tractfinder (bottom) with standard affine registration.}
   \label{fig:5i_cst}
 \end{figure}
 
@@ -105,10 +126,11 @@ Non-linear registration, with harsh penalties on strong local deformation to red
 A second patient presented at seven years of age with a diffuse midline astrocytoma (\gls{who} grade 4) also in the left thalamus.
 A strong degree of mass effect called for tumour deformation modelling, so the lesion was segmented on the preoperative structural scan (Fig. \ref{fig:8p}).
 
-\begin{figure}
+\begin{figure}[htb!]
   \centering
-  \includegraphics[width=0.7\textwidth]{case_studies/8_preop.png}
-  \caption{Preoperative T1 weighted scan (top) of patient 8 with high grade left thalamic glioma. Bottom row shows tumour deformation modelling applied to a coregistered MNI template image.}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_t1.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_def.png}
+  \caption{Preoperative $T_1$-weighted imaging (top) of patient 8 with high grade left thalamic glioma. Bottom: Tumour deformation modelling in a co-registered MNI template image. No \gls{dmri} acquired preoperatively was available.}
   \label{fig:8p}
 \end{figure}
 
@@ -121,8 +143,9 @@ Over the following weeks the patient's hemiparesis improved slowly, consistent w
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{case_studies/8_iop.png}
-  \caption{Intraoperative imaging showing transcollosal approach to thalamic glioma. Top: T1w, bottom: DTI colour FA. White arrowhead on DTI indicates partially infiltrated and displaced internal capsule.}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_t1.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_fa.png}
+  \caption{Intraoperative imaging showing transcollosal approach to patient 8's thalamic glioma. Top: $T_1$-weighted imaging. Bottom: \gls{dti} \gls{dec} \gls{fa} map. \note{White arrowhead} indicates partially infiltrated and displaced internal capsule.}
   \label{fig:8i}
 \end{figure}
 
@@ -133,19 +156,10 @@ Visualising the fibre \glspl{odf} using \gls{csd} gives us further insight (Fig.
 
 \begin{figure}
   \centering
-  \begin{subfigure}{0.3\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{case_studies/8_iop_dt.png}
-    \caption{Diffusion Tensor}
-    \label{fig:8i_dt}
-  \end{subfigure}%
-  \begin{subfigure}{0.3\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{case_studies/8_iop_csd.png}
-    \caption{CSD FOD}
-    \label{fig:8i_csd}
-  \end{subfigure}%
-  \caption{Partial view of partially resected tumour and internal capsule on coronal slice and two different fibre orientation models: diffusion tensor and constrained spherical deconvolution. The multi-fibre FODs make it easier to identify where the descending fibres a likely to remain intact. \note{specify CSD type}}
+  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_tensor.png}\,%
+  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_csd.png}\,%
+  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_atlas.png}
+  \caption{Magnified coronal view of partially resected tumour and internal capsule and modelled fibre orientations. \textbf{a.} \gls{dt}. \textbf{b.} \gls{csd} \glspl{fod} (\gls{msmt} \gls{csd} with \gls{wm} and \gls{csf} compartments). \textbf{c.} Deformed \gls{tod} \gls{cst} atlas. While the main body of the tract is well defined in all three images, the boundaries between intact fibres, infiltrated \gls{wm}, and tumour are indiscernible.}
   \label{fig:8i_fod}
 \end{figure}
 
@@ -155,7 +169,9 @@ Surprisingly, TractSeg was unable to successfully detect the \gls{cst} in the af
 It is unclear what led to failure in this particular subject, as TractSeg has shown some success in cases with similar tumour deformations\autocite{Moshe2022}.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{case_studies/8_iop_tf.png}
-  \caption{Coronal slices in 5mm increments from intraoperative imaging for patient 8. Tractfinder CST map is overlaid along with tractography track density image outline in white for comparison (\note{100 streamline isosurface})}
+  % 5mm slice increments
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tg.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tf.png}
+  \caption{Coronal slices in 5mm increments with \gls{cst} reconstructions on intraoperative imaging for patient 8. Top: Probabilistic streamline tractography, Bottom: Tractfinder \gls{cst} with tumour deformation modelling based on preoperative tumour segmentation.}
   \label{fig:8i_tf}
 \end{figure}
