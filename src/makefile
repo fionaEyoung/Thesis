@@ -27,4 +27,13 @@ clean:
 # CONVERT TO .docx
 citestring := $(shell printf -- '--bibliography %s ' $(shell ggrep -oPe '\\addbibresource{\K.*.bib' $(bibfile)))
 $(PROJNAME).docx: $(PROJNAME).tex
-	pandoc $< -s -o $@ $(citestring) --citeproc --resource-path draft_figs --resource-path figs -F pandoc-acronym-filter.py 
+	pandoc $< -s -o $@ $(citestring) --citeproc --resource-path draft_figs --resource-path figs -F pandoc-acronym-filter.py
+
+# Figures
+figures:
+	python3 graphics/ts_boxplots.py
+	python3 graphics/TI_boxplots.py
+	python3 graphics/score_mats.py
+	python3 graphics/registration_boxplots.py
+	python3 graphics/hcp_sbd_box.py
+	python3 graphics/btcd_boxplots.py

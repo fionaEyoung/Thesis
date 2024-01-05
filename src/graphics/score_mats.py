@@ -24,8 +24,6 @@ def main():
   results_dir = path.join(current_dir, pardir, 'figs', 'chapter_5')
   figname = 'score_mats'
 
-  # plt.rcParams.update({'font.size': 18})
-  plt.rcParams.update(tex_fonts)
   rc('axes', edgecolor='k', linewidth=0.2)
   plt.rcParams.update({'ytick.major.width':0.2, 'xtick.major.width':0.2,
                        'ytick.major.size':2, 'xtick.major.size':2})

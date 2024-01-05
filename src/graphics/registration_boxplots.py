@@ -23,10 +23,6 @@ def main():
   results_dir = path.join(current_dir, pardir, 'figs', 'chapter_4')
   figname = 'registration_2'
 
-  # plt.rcParams.update({'font.size': 18})
-  plt.rcParams.update(tex_fonts)
-  plt.rcParams.update({'hatch.linewidth':boxlw})
-
   include_metrics = ['binary_dice','density_correlation']#,'ba_schilling_volume', 'ba_schilling_signed_m1']
   datasets = ['tractoinferno_compare_nrr', 'tractoinferno_ifo_redo_compare_nrr']
   compare_against = 'TG'
@@ -53,6 +49,9 @@ def main():
 
       x = np.arange(1, (n_c+1)*n_t, (n_c+1))
       one_of_each = []
+
+      if metric == 'ba_schilling_signed_m1':
+          ax.axhline(y=0, color='#D2D2D2', linestyle=':', linewidth=0.5)
 
       for i, method in enumerate(order):
           # Left and right all combined
@@ -84,9 +83,6 @@ def main():
               set_box_colours(box['signed'], hatch=METHOD_PROPS[method]['hatch'], color='k', facecolor='w')
               one_of_each.append(box['signed']['boxes'][0])
 
-      if metric == 'ba_schilling_signed_m1':
-          ax.axhline(y=0, c='#8a8a8a', ls='--')
-
       ax.set_xticks(x+1)
       ax.set_xticklabels(['IFOF' if t.get_text()=='ifo' else t.get_text().upper() for t in ax.get_xticklabels()])
       units = METRIC_PARAMS[metric].get('units')
@@ -96,8 +92,7 @@ def main():
       ax.set_ylim(METRIC_PARAMS[metric]['lims'])
       ax.set_title("")
 
-  all_metrics_axs[0].legend(one_of_each, [METHOD_PROPS[o].get('name', o) for o in order], ncol=len(order),
-          columnspacing=1, markerscale=0.5, handlelength=1)
+  all_metrics_axs[0].legend(one_of_each, [METHOD_PROPS[o].get('name', o) for o in order], ncol=len(order))
   all_metrics_fig.suptitle("")
   plt.margins(0,0)
   all_metrics_fig.savefig(path.join(results_dir, f'{figname}.pdf'),
