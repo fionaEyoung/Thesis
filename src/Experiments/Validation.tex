@@ -366,10 +366,16 @@ Four out of the ten selected BTCD subjects had tumours substantial enough to war
 Results were compared with manual targeted tractography with additional streamline filtering as described in Section \ref{sec:data_btcd}.
 
 \begin{SCfigure}[][htb!]
-  \includegraphics{chapter_4/btcd_deformation_corr.png}
-  \caption{Effect of deformation modelling on segmentation accuracy, compared to tractfinder without deformation modelling. Each heavy datapoint represents the average across tracts for a single subject, the light datapoints represent individual tracts. There are only three heavy contralateral datapoints because one of the four subjects had a midline tumour (all tracts considered ipsilateral).}
+  \includegraphics{chapter_5/btcd_defchange.pdf}
+  \caption{Effect of deformation modelling on segmentation accuracy, compared with manually filtered targeted tractography. Each large datapoint represents the average across tracts for a single subject, and is coloured according to the tumour side. Small datapoints represent individual tracts. In the one subject with a midline tumour, all tracts are considered ipsilateral.}
   \label{fig:btcd_def}
 \end{SCfigure}
+
+\begin{figure}[htb!]
+  \includegraphics{chapter_5/btcd_box.pdf}
+  \caption{\note{caption}}
+  \label{fig:btcd_box}
+\end{figure}
 
 Figure \ref{fig:btcd_def} shows how deformation modelling changes segmentation results, measured with density correlation.
 Although the sample size is small, deformation modelling improves segmentation accuracy in most cases, although there is considerable variation.

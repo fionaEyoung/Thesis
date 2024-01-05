@@ -65,6 +65,21 @@ tex_fonts = {
     "ytick.labelsize": 'x-small'
 }
 
+lw = 0.5
+ms = 1
+
+plot_styles = {
+    "legend.framealpha": 1,
+    "legend.columnspacing":0.5,
+    "legend.handletextpad":0.3,
+    "legend.markerscale":0.5,
+    "legend.handlelength":0.7,
+    "hatch.linewidth":lw
+}
+
+plt.rcParams.update(tex_fonts)
+plt.rcParams.update(plot_styles)
+
 #https://davidmathlogic.com/colorblind/#%23000000-%233D840B-%23F38B03-%235D32B1
 TRACT_COLOURS = {'af' :'#F38B03',
                  'or' :'#3D840B',
@@ -111,12 +126,11 @@ cmap_generalised = colormaps['inferno']
 cmap_binary = colormaps['viridis']
 # Boxplot parameters
 c = 'w'
-boxlw = 0.5
-boxprops = dict(linestyle='-', color=c, facecolor=c, linewidth=boxlw, alpha=0.7)
-boxlineprops = dict(linestyle='-', color=c, linewidth=boxlw, alpha=0.7)
+boxprops = dict(linestyle='-', color=c, facecolor=c, linewidth=lw, alpha=0.7)
+boxlineprops = dict(linestyle='-', color=c, linewidth=lw, alpha=0.7)
 # flierprops = dict(marker='.', markerfacecolor=c, markeredgecolor=c, markersize=1)
-medianprops = dict(linestyle='-', linewidth=boxlw, color='k')
+medianprops = dict(linestyle='-', linewidth=lw, color='k')
 whiskerprops = dict(color=c)
-flierprops = dict(marker='o', markerfacecolor='k', markeredgecolor='none', markersize=1, alpha=0.5)
+flierprops = dict(marker='o', markerfacecolor='k', markeredgecolor='none', markersize=ms, alpha=0.5)
 meanpointprops = dict(marker='o', markeredgecolor='k', markersize=5, markerfacecolor='k')
-meanlineprops = dict(linestyle='--', linewidth=boxlw, color='purple')
+meanlineprops = dict(linestyle='--', linewidth=lw, color='purple')
