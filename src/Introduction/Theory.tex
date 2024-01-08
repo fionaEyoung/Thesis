@@ -76,12 +76,12 @@ Posterior to the brainstem, and seated within the posterior fossa, sits the cere
 a highly specialised and complex structure whose full significance to cerebral function is yet to be fully described, but which is known to play an integral role in automated motor and speech functions.
 The cerebellum connects with the pons and brainstem via three \gls{wm} bundles, the inferior, middle and superior cerebellar peduncles, of which the middle is the largest.
 The pons also houses a dense arrangement of nuclei and tracts, connecting and integrating functions of the forebrain and cerebellum.
-%
-% \begin{SCfigure}[][h!]
-%   \includesvg[width=0.5\textwidth]{chapter_1/anat_gross.svg}
-%   \caption{Macroscale divisions of the human brain \note{source}}
-%   \label{fig:anat1}
-% \end{SCfigure}
+
+\begin{SCfigure}[][h!]
+  \includesvg[width=0.6\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_1/anat_gross.svg}
+  \caption{Macroscale subdivisions of the human brain. Adapted from \textcite{Carter1918}, Public domain, via Wikimedia Commons.}
+  \label{fig:anat1}
+\end{SCfigure}
 
 The forebrain consists of the diencephalon (thalamus and hypothalamus) and the telencephalon (cerebral hemispheres).
 Central both in importance and in location, the thalamus forms the gateway through which almost all afferent inputs to the forebrain are channeled.
@@ -97,21 +97,16 @@ At the heart of the brain flows a network of ventricles filled with \gls{csf}, a
 Two lateral ventricles curve through each hemisphere, connecting with the third ventricle separating the thalami at the midline, which in turn adjoins the fourth ventricle, a triangular cavity between the midbrain and cerebellum.
 From there, \gls{csf} flows into the spaces surrounding the brain and spinal cord.
 
-% \begin{figure}[h!]
-%   \includesvg[width=\textwidth]{chapter_1/anat_ortho.svg}
-%   \caption{Key anatomical landmarks of the human brain. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter}
-%   \label{fig:anat2}
-% \end{figure}
 \begin{figure}[h!]
   \begin{subfigure}[b]{0.5\textwidth}
     \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0040_TABVII.svg}
-    \caption{}\label{fig:ardnoldVII1}
+    \caption{Tabula VII, Fig. 1}\label{fig:ardnoldVII1}
   \end{subfigure}%
   \begin{subfigure}[b]{0.5\textwidth}
     \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0046_TABX.svg}
-    \caption{}\label{fig:ardnoldX4}
+    \caption{Tabula X, Fig. 4}\label{fig:ardnoldX4}
   \end{subfigure}
-  \caption{Key anatomical landmarks of the human brain, labelled on illustrations by Friedrich Arnold\autocite{Arnold1838}. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, F. frontal lobe, P. parietal lobe, O. occipital lobe, S. central sulcus}
+  \caption{Anatomical landmarks of the human brain, labelled on illustrations by Friedrich Arnold\autocite{Arnold1838}. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, m. corpus callosum, F. frontal lobe, P. parietal lobe, O. occipital lobe, T. temporal lobe, S. central sulcus}
   \label{fig:anat2}
 \end{figure}
 
@@ -140,6 +135,7 @@ There are three categories of white matter tracts:
 Projection tracts connect the cortex with other, non-cortical brain structures and the spinal cord.
 They include both efferent (motor) and afferent (sensory) connections.
 Association tracts connect different cortical regions within the same cerebral hemisphere, while commissural tracts form interhemispheric connections.
+The major commissural bundle is the corpus callosum, forming a thick band bridging the lagely separated cerebral hemispheres (Fig. \ref{fig:anat2}).
 
 While the division of white matter into individually described tracts introduces a certain level of clarity to the intricate brain network and a common ground from which to study it, many of their anatomical and functional definitions are far from clear-cut.
 As we saw in the context of cortical functional localisation, the projection tracts, which have clear physiological correlates of sensory input and motor outputs, are relatively easy to study and have been correspondingly well defined.
@@ -212,16 +208,12 @@ The spin magnetic moments also precess about the external field in a phenomenon 
   \omega = \gamma B
 \end{equation}
 
-\begin{SCfigure}
-  \begin{subfigure}[b]{0.33\textwidth}
-    \includesvg[height=1.1\textwidth,pretex=\small,inkscapelatex=true]{chapter_1/nmr.svg}
-    % \caption{Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$}\label{fig:larmor}
-  \end{subfigure}%
-  \begin{subfigure}[b]{0.33\textwidth}
-    \includesvg[height=1.1\textwidth,pretex=\small,inkscapelatex=true]{chapter_1/relaxation.svg}
-  \end{subfigure}%
-  \caption{Larmor precession and M relaxation \note{draft}}
-\end{SCfigure}
+\begin{figure}
+    \centering
+    \includesvg[height=0.4\textwidth,pretex=\small\sffamily,inkscapelatex=true]{chapter_1/nmr.svg}\qquad%
+    \includesvg[height=0.4\textwidth,pretex=\small\sffamily,inkscapelatex=true]{chapter_1/relaxation.svg}
+  \caption{\textbf{a.} Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$ Larmor precession and \textbf{b.} M relaxation \note{draft}}\label{fig:larmor}
+\end{figure}
 
 \subsection{Resonance and relaxation}
 
@@ -236,7 +228,7 @@ At equilibrium, more spins magnetic moments will occupy the lower energy state a
 As the difference in energy between the two states is determined by $\Delta E = \gamma h B_0$, the stronger the external field, the larger the ratio of up to down spins and thus the a larger $M_z$.
 This in turn underpins the strength of any subsequently sampled signals, so that stronger $\mathbf{B}_0$ fields, as a general rule, produce images with better \gls{snr}.
 Just as the distribution of spin states among two possible opposing states produces a net \textit{longitudinal} magnetisation along $z$, the lack of any directional coherence perpendicular to $z$ precludes any net \textit{transverse} magnetisation $\mathbf{M}_{xy}$.
-In other words, at thermal equilibrium the magnetic moments within the sample are precessing at the Larmor frequency with random phases.
+In other words, at thermal equilibrium the magnetic moments within the sample are precessing at the Larmor frequency with random phases (Fig. \ref{fig:larmor}).
 
 Manipulation of the net magnetisation away from, and subsequent relaxation back to this equilibrium state, is the basis of all signal production in \gls{mri}.
 Spins in the lower energy state can be excited to occupy the higher energy state by absorbing electromagnetic radiation tuned precisely to the Larmor frequency.
@@ -259,7 +251,7 @@ It is the varying values of $T_1$ and $T_2$, as well as the overall differences 
 
 \subsection{Signal echos}\label{sec:echos}
 
-Immediately after application of the \gls{rf} excitation pulse, magnetisation will return to equilibrium in a spiral pattern (\note{fig}) inducing the rapidly decaying \gls{fid} signal.
+Immediately after application of the \gls{rf} excitation pulse, magnetisation will return to equilibrium in a spiral pattern (Fig. \ref{fig:larmor}) inducing the rapidly decaying \gls{fid} signal.
 Due in part to its short lifetime, the simple \gls{fid} is not particularly useful on its own for biological imaging.
 In fact, the phase coherence of the system is not entirely lost even as the \gls{fid} signal reaches zero, but only masked by competing effects.
 This hidden signal can be partially resurrected though the spin echo technique, but to appreciate how we must first look more closely at the transverse relaxation process.
@@ -318,12 +310,24 @@ Thanks to our spatial encoding gradients, we know that those signals are complex
 The spatial frequencies and phases in this raw signal can be represented in the 2-dimensional frame known as $k$-space, a reciprocal space defined as the inverse spatial \gls{2dft} of the measured image.
 To reconstruct an image in the spatial domain, two Fourier transforms are computed, first for each signal train, and secondly for each time sample across all phase encoding steps.
 
+\begin{figure}
+  \includesvg[pretex=\sffamily\small,inkscapelatex=true]{chapter_1/kspace.svg}
+  \caption{Sampled MR signals encode 2D images. \textbf{a.} A single echo train is sampled at dwell time intervals $t_d$, where each sample corresponds to a point in reciprocal $k$-space, and $t_d$ determines the resolution along $k_x$ and the image matrix size along $x$. \textbf{b.} Repeated echos with varying \gls{pe} gradient strengths sample along $k_y$. \textbf{c-d.} The image in spatial dimensions is reconstructed by taking the 2D Fourier transform of the $k$-space image. \note{better description?}}
+  \label{fig:kspace}
+\end{figure}
+
 \subsection{Pulse sequences and contrast}
 
 As we have seen, MR images are acquired by measuring signals within the spatial frequency dimension, $k$-space, from which we can retrieve the spatial image via a \gls{2dft} operation.
 Pulse sequences, meaning specific arrangements, durations and magnitudes of the \gls{rf} pulses, field gradients, and signal readout, encode the trajectory and resolution in which data-points in $k$-space are measured.
 MR imaging is a stunningly diverse modality.
 Beyond the basics of spatial encoding and echo signal generation, there lies a whole host of techniques for generating specific contrasts, neutralising unwanted signals and artefacts, and accelerating acquisition times which are outside of the scope of this introduction.
+
+\begin{figure}[htb!]
+  \includesvg[width=\textwidth,inkscapelatex=true]{chapter_1/mprage.svg}
+  \caption{MP-RAGE $T_1$-weighted pulse sequence diagram. \note{simplified, usually more acquisitions between inversion pulses.}}
+  \label{fig:mprage}
+\end{figure}
 
 The modification of pulse sequence parameters enables the production of images in which different physiological properties dominate the image contrast, the principal ones being the tissue-specific relaxation time constants $T_1$ and $T_2$, as well as the density of protons.
 The development of novel pulse sequences and contrasts is a perennial and active field of research which will continue to expand and improve the capabilities of \gls{mri} for years to come.
@@ -348,6 +352,12 @@ Additionally, by analysing temporal correlations between activation in different
 Establishing that two brain regions' neural activity is temporally correlated isn't enough to confirm the existence of a direct structural connection between them, as their correlation may be incidental, or mediated by a third intermediate node.
 And while \gls{fmri} is a key tool for identifying eloquent cortex for neurosurgical planning, the paucity of blood vessels within \gls{wm} and \gls{fmri}'s low spatial resolution make it unsuitable for mapping \gls{wm} fibres.
 The only tool available for non-invasively imaging the microscopic structure of \gls{wm} \textit{in vivo} is \glsentrylong{dmri}.
+
+\begin{figure}[hbt!]
+  \includesvg[width=\textwidth,inkscapelatex=true,pretex=\ttfamily\small]{chapter_1/anat_ortho.svg}
+  \caption{Orthogonal slices (from left to right: Sagittal, coronal, axial views) of a $T_1$-weighted \gls{mri} acquisition of the author's brain, with key anatomical features and landmarks labelled. \note{ref in text} a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, m. corpus callosum, F. frontal lobe, P. parietal lobe, O. occipital lobe, T. temporal lobe, S. central sulcus.}
+  \label{fig:ortho}
+\end{figure}
 
 \subsection{Diffusion weighted MRI}\label{sec:dmri}
 
@@ -438,6 +448,12 @@ In one example of an \gls{epi} pulse sequence, the phase and frequency encoding 
 The result is a stepped zig-zag traversal of all of $k$-space during the readout of a single signal echo.
 Measuring enough samples in the extremely short time available before the signal decays requires very strong and rapidly switching gradients, placing significant demands on scanner hardware.\autocite{Bowtell1998}
 
+\begin{figure}
+  \includesvg[width=\textwidth,inkscapelatex=true]{chapter_1/dwepi.svg}
+  \caption{Diffusion weighted \gls{epi} pulse sequence diagram}
+  \label{fig:dwepi}
+\end{figure}
+
 Fitting the entire image readout into a single magnetisation decay period results in relatively long total acquisition times per excitation.
 The pixel bandwidth in the \gls{pe} direction is the inverse of this total acquisition time, and the resulting low pixel bandwidth is associated with particular imaging artefacts.
 Local differences in magnetic susceptibility within the sample cause field inhomogeneities, leading off-resonance phase shifts geometric image distortions termed \textit{susceptibility artefacts} \autocite{Fischer1998}.
@@ -456,7 +472,7 @@ so can basis functions be combined to represent any other function in that space
 
 \begin{SCfigure}
   \includegraphics[width=0.6\textwidth]{chapter_1/SH.png}
-  \caption{Visualisation of the first four orders (in rows) of the \gls{sh} basis functions. Postive and negative lobes are coloured grey and yellow respectively.}
+  \caption{Visualisation of the first four orders (in rows) of the \gls{sh} basis functions. Postive and negative lobes are coloured grey and yellow respectively. Image adapted from \textcite{Inigo.quilez2014} \note{copyright?}}
   \label{fig:sh}
 \end{SCfigure}
 

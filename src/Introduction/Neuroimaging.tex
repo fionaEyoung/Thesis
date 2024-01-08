@@ -37,7 +37,15 @@ Rotationally invariant indices including mean diffusivity and \gls{fa} provide s
 The principal eigenvector $\bm{\lambda}_1$ is usually interpreted as the direction of fastest, or least restricted, diffusivity, although this holds only in voxels with a single population of straight, parallel axons.
 If the diffusion tensor, whose eigenvectors and eigenvalues can be represented in the form of a zeppelin shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
 In fact, it is rare for a voxel of \gls{wm} to contain only a single uniformly oriented bundle of axons.
-In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture: a smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors. \note{mention colour FA maps}
+In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture:
+A smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors (Fig. \ref{fig:cross}). \note{mention colour FA maps}
+
+\begin{figure}
+  \centering
+  \includesvg[width=0.6\textwidth,inkscapelatex=true,pretex=\small\sffamily]{chapter_2/fods.svg}
+  \caption{Popular \gls{dmri} modelling techniques produce different estimates of the underlying fibre orientations. In a voxel with a single population of fibres (top row), both the diffusion tensor and \gls{csd} derived \gls{fod} capture the dominant fibre orientation. If two fibre bundles cross within a voxel (bottom row), the diffusion tensor does not accurately estimate any of the dominant fibre orientations, whereas the \gls{fod} is able to resolve both populations.}
+  \label{fig:cross}
+\end{figure}
 
 The crossing fibres problem led to \gls{dti}, at least in research imaging, gradually giving way to higher-order fibre orientation modelling techniques which aim to account for more than one, or even an arbitrary number of distinctly oriented fibre populations\autocite{Alexander2005}.
 These include to an extent the multi-compartment models which can include multiple directional intra-axonal compartments, such as the popular ``ball and sticks" model\autocite{Behrens2003,Behrens2007}.
@@ -51,7 +59,7 @@ Then, the observed signal $S(\theta,\phi)$ in a given voxel amounts to a convolu
 Solving (\ref{eq:csd}) for $F(\theta,\phi)$, represented in spherical harmonics basis as given by (\ref{eq:shfun}), involves computing the inverse operation: A spherical \textit{de}convolution of the signal with the response function.
 Early versions of this concept included \textcite{Anderson2005}, in which the response kernel was modelled as a diffusion tensor.
 In another approach presented by \textcite{Tournier2004} $R(\theta)$ is estimated directly from the data, generally by averaging the signals from voxels with the highest diffusion anisotropy, and thus does not rely on a model of diffusion, although it does rely on the assumption that a single fibre population's response is uniform throughout the brain and for different fibre configurations.
-To improve angular resolution and reduce noise sensitivity in the estimated \gls{fod}, a regularised implementation in which biophysically impossible negative $F(\theta,\phi)$ values are strongly penalised gave rise to the widely used \gls{csd} method.
+To improve angular resolution and reduce noise sensitivity in the estimated \gls{fod}, a regularised implementation in which biophysically impossible negative $F(\theta,\phi)$ values are strongly penalised gave rise to the widely used \gls{csd} method (Fig. \ref{fig:cross}).
 \Gls{csd} can reconstruct \glspl{fod} resolving multiple crossing fibre populations with high angular resolution in a matter of seconds, from \gls{dmri} datasets with acquisition parameters achievable in routine imaging practice\autocite{Tournier2013}.
 In addition to providing a means for estimating the \gls{fod} to a high degree of angular resolution, \gls{csd} also spurred exploration of new quantities relating to tissue microstructure, notably the interpretation of the \gls{fod} amplitude as measure of intra-axonal volume fraction, or \gls{afd} \autocite{Raffelt2012a}.
 \Gls{afd} can be defined as a directional quantity or as a single scalar per voxel, obtained by integrating $F$ over the sphere.
@@ -104,7 +112,7 @@ Volumetric images can also be generated by computing the number of streamlines i
 
 \begin{figure}
   \includegraphics[width=\textwidth]{chapter_2/streamlines.png}
-  \caption{Streamline tracking involves tracing trajectories through a vector field of inferred dominant fibre orientations. Two example streamlines, from the \gls{cst} (blue) and \gls{cc} (blue) are depicted in a coronal slice of the human brain. Figure reproduced from \textcite{Jeurissen2019} used under \href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons Attribution-NonCommercial License}.}
+  \caption{Streamline tracking involves tracing trajectories through a vector field of inferred dominant fibre orientations. Two example streamlines, from the \gls{cst} (blue) and \gls{cc} (blue) are depicted in a coronal slice of the human brain. Figure reproduced from \textcite{Jeurissen2019} licenced under \href{https://creativecommons.org/licenses/by-nc/4.0/}{CC-BY-NC 4.0}.}
   \label{fig:tracking}
 \end{figure}
 
@@ -172,7 +180,7 @@ All this means that, after perhaps hours of tracking and billions of streamlines
 
 \begin{SCfigure}
   \includegraphics[width=0.5\textwidth]{chapter_2/tg_rois_glass.png}
-  \caption{\gls{wm} tracts are virtually dissected with streamline tractography and anatomically informed \glspl{roi}. In this toy example, streamlines for the \gls{cst} are seeded in the cerebral peduncles (blue ring), selected with an inclusion \gls{roi} in the posterior limb of the internal capsule (green ring). Streamlines following the paths of the \gls{cc} or cerebellar peduncles are excluded (red rings).}
+  \caption{\gls{wm} tracts are virtually dissected with streamline tractography and anatomically informed \glspl{roi}. In this toy example, streamlines for the \gls{cst} are seeded in the cerebral peduncles (blue ring) and selected with an inclusion \gls{roi} in the posterior limb of the internal capsule (green ring). Streamlines following the paths of the \gls{cc} or cerebellar peduncles are excluded (red rings).}
   \label{fig:tg_rois}
 \end{SCfigure}
 
