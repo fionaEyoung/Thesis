@@ -8,6 +8,9 @@
             nopostdot]
             {glossaries}
 \makeglossaries
+\preto\chapter{\glsresetall}
+\AtBeginEnvironment{figure}{\glslocalresetall}
+\AtBeginEnvironment{SCfigure}{\glslocalresetall}
 
 %% MRI
 \newacronym{mri}{MRI}{magnetic resonance imaging}
