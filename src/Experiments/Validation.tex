@@ -261,7 +261,7 @@ The reliance on such large datasets thus presents a significant challenge to dee
 
 The present analysis includes clinical scans with non-deforming lesions, meaning the orientation atlas could be registered to the target image using only affine registration without the need for tumour deformation modelling.
 For results in clinical scans featuring deforming lesions, see Sections \ref{sec:btcd} and \ref{sec:imri}. %\textcite{Young2022}
-Overall, results in the clinical (GOSH \& NHNN) dataset were highly consistent with those seen in the healthy datasets.
+Overall, quantitative results in the clinical (GOSH \& NHNN) dataset were highly consistent with those seen in the healthy datasets.
 Although this dataset contained a mixture of adult and paediatric patients, scanned at two different hospitals, when the results were split on hospital / age group (paediatric or adult), no appreciable difference in results was observed.
 Equally, no systematic difference in segmentation scores was observed between intraoperative and preoperative datasets.
 
@@ -272,6 +272,7 @@ Even though parts of the precentral sulcus remain some distance from the resecti
 Intraoperative imaging of a paediatric tumour patient in Figure \ref{fig:lb.gosh} reveals the ipsilateral \gls{or} immediately deep to the resection cavity.
 Minimal brain shift and diffusion disturbance from this small craniotomy have enabled good reconstruction of the affected tract by all techniques.
 The anterior extent of Meyer's loop has additionally been captured by tractography and tractfinder, but is absent from both TractSeg results.
+Further examples of tract reconstructions in intraoperative imaging are displayed in Figure \ref{fig:tumours}, panels c and e.
 
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
@@ -356,11 +357,22 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
   \label{fig:ts_all_tracts}
 \end{figure}
 
+\begin{figure}
+  \includesvg[width=\textwidth,inkscapelatex=true,pretex=\sffamily\small]{chapter_5/tumours.svg}
+  \caption{Tractfinder maps for selected \gls{btc} and clinical subjects. Tumours or resection cavities are marked with asterisks (*), where a double asterisk (**) indicates that tumour deformation modelling was applied.
+  \textbf{a.} Right \gls{or} mapped in \gls{btc} subject PAT16 with a right fronto-temporal anaplastic astrocytoma (\gls{who} grade 2-3).
+  \textbf{b.} Right \gls{cst} mapped in \gls{btc} subject PAT26 with a right temporal anaplastic astrocytoma (\gls{who} grade 3).
+  \textbf{c.} Right \gls{or} mapped in \gls{nhnn} subject 6, intraoperative scan, with a right temporal oligodendroglioma (\gls{who} grade 2).
+  \textbf{d.} Right \gls{af} mapped in \gls{btc} subject PAT03 with a right parietal meningioma (\gls{who} grade 1).
+  \textbf{e.} Left \gls{af} mapped in \gls{gosh} subject 4, intraoperative scan, with a left temporal pleomorphic xanthoastrocytoma (\gls{who} grade 2).
+  \textbf{f.} Left \gls{ifof} mapped in \gls{btc} subject PAT07 with left temporal ependymoma (\gls{who} grade 2)}
+  \label{fig:tumours}
+\end{figure}
 
 \section{The effect of deformation modelling}
 \label{sec:btcd}
 
-The BTC dataset, with its range of tumour types, high quality \gls{dmri} scans and tumour masks, provides an ideal arena to evaluate the effect of tumour deformation modelling on segmentation accuracy.
+The \gls{btc} dataset, with its range of tumour types, high quality \gls{dmri} scans and tumour masks, provides an ideal arena to evaluate the effect of tumour deformation modelling on segmentation accuracy.
 Four out of the ten selected BTCD subjects had tumours substantial enough to warrant deformation modelling, which was done using the exponential deformation factor model with adaptive $\lambda$ for all subjects.
 Results were compared with manual targeted tractography with additional streamline filtering as described in Section \ref{sec:data_btcd}.
 
@@ -376,17 +388,10 @@ Results were compared with manual targeted tractography with additional streamli
   \label{fig:btcd_box}
 \end{figure}
 
-Figure \ref{fig:btcd_def} shows how deformation modelling changes segmentation results, measured with density correlation.
-Although the sample size is small, deformation modelling improves segmentation accuracy in most cases, although there is considerable variation.
-There are two subjects worth considering in detail, where there is no clear improvement with the addition of deformation modelling.
+Selected tract segmentations in the \gls{btc} dataset are shown in Figure \ref{fig:tumours} (panels a, b, d, and f), alongside additional examples from the NHNN and \gls{gosh} clinical data.
+Figure \ref{fig:btcd_def} shows how deformation modelling improves segmentation accuracy in most cases, measured with density correlation, although the sample size is small, and there is considerable variation.
+In two subjects, there is no clear overall improvement (average across all tracts) with the addition of deformation modelling.
 For subject 11 (highest scores in Figure \ref{fig:btcd_def}), the superior frontal location of the tumour barely affected any of the studied tracts, hence the overall high score and imperceptible improvement with the addition of deformation modelling.
 In subject 26, which in Figure \ref{fig:btcd_def} is the only subject showing an average slight decrease in \gls{dice} for ipsilateral tracts with the addition of deformation modelling, the \gls{cst} and \gls{af} actually saw increased scores, while the \gls{ifof} and \gls{or} saw decreases.
 In this case, the deformation modelled in the direct vicinity of the temporal lobe tumour was too strong, leading to slightly worse detection of the \gls{ifof} and \gls{or}.
-At a greater distance from the tumour, however, the deformation modelled accurately matched the patient anatomy, leading to improved detection of more distant tracts, the \gls{af} and \gls{cst}.
-\note{Examples} in Figure \ref{fig:btcd_def_pat03} demonstrate how tractfinder including tumour deformation produces tract margins closer to those indicated by tractography than without deformation modelling, providing further evidence for the potential usefulness of tractfinder in neurosurgical applications.
-
-\begin{SCfigure}[50][hb!]
-  \includegraphics[width=0.4\textwidth]{chapter_4/sub-PAT03.png}
-  \caption{\note{draft} Effect of deformation modelling on tractfinder accuracy demonstrated in BTCD subject sub-PAT03 with large parietal meningioma. Black outline: tractfinder without deformation modelling, orange: tractfinder after deformation modelling, white: tractography (3 streamline isosurface)\note{more examples}}
-  \label{fig:btcd_def_pat03}
-\end{SCfigure}
+At a greater distance from the tumour, however, the deformation modelled accurately matched the patient anatomy, leading to improved detection of more distant tracts, the \gls{af} and \gls{cst} (Fig. \ref{fig:tumours}, panel b).

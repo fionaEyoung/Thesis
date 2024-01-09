@@ -47,6 +47,27 @@ def set_size(width=452.9679, ratio=None, fraction=1, subplots=(1, 1)):
     # print(fig_width_in)
     return (fig_width_in, fig_height_in)
 
+# https://stackoverflow.com/a/44971177
+def set_ax_size(width=452.9679, ratio=None, fraction=1, ax=None):
+    """ w, h: width, height in inches """
+    if not ax: ax=plt.gca()
+
+    # Convert from pt to inches
+    inches_per_pt = 1 / 72.27
+    golden_ratio = (5**.5 - 1) / 2
+
+    # Width of figure (in pts)
+    ax_width_in  = width * fraction * inches_per_pt
+    ax_height_in = ax_width_in * (ratio or golden_ratio)
+
+    l = ax.figure.subplotpars.left
+    r = ax.figure.subplotpars.right
+    t = ax.figure.subplotpars.top
+    b = ax.figure.subplotpars.bottom
+    figw = float(ax_width_in)/(r-l)
+    figh = float(ax_height_in)/(t-b)
+    ax.figure.set_size_inches(figw, figh)
+
 tex_fonts = {
     # Use LaTeX to write all text
     "text.usetex": True,

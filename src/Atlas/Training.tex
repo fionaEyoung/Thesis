@@ -12,11 +12,11 @@ For this purpose the TractSeg \gls{hcp} bundles were used in order to enable obj
 Using the same train - test data split as described in \textcite{Wasserthal2018b}, subsets of 1, 3, 5, 10, 15 and 30, as well as the full 63 training subjects were randomly selected, from which separate \gls{tod} atlases where constructed.
 Tractfinder maps were then generated in the 42 test subjects using each of the different subset atlases and compared with the reference segmentations using the \gls{dice} and density correlation metrics.
 
-\begin{figure}[hb!]
+\begin{figure}[htb!]
     \centering
     \makebox[\linewidth][r]{%
     \includegraphics{chapter_3/ntrain.pdf}}
-    \caption{Comparison of segmentation performance using different numbers of atlas training subjects. Results are grouped by tract, colour represents number of training subjects. The IFO and \gls{or} are in places indistinguishable. \acrolist{af,cst,or,ifof}}
+    \caption{Comparison of segmentation performance using different numbers of atlas training subjects. Results are grouped by tract, colour represents number of training subjects. The IFO and \gls{or} are in places indistinguishable. \acrolist{af,cst,or,ifof} \note{smaller}}
     \label{fig:ntrain}
 \end{figure}
 
@@ -43,9 +43,9 @@ Considering only their best results (which differed depending on how many novel 
 While the computational time spent on network training is not disclosed in either \textcite{Liu2023a} or \textcite{Wasserthal2018}, \textcite{Berto2021} re-trained their own TractSeg model as a benchmark comparison for the streamline clustering method Classifyber and reported GPU-accelerated training times of 3-7 hours.
 Even so, one-shot training of a deep neural network appears to offer no improvement over simply registering a segmentation from one subject to another.
 
-\begin{figure}[h!]
+\begin{SCfigure}[][h!]
   \centering
-  \includegraphics[width=0.8\textwidth]{chapter_3/pubs.png}
+  \includegraphics{chapter_3/pubs.pdf}
   \caption{Publication records by year including the term ``single/one/few shot learning" (or similar) on the database Web of Science.}
   \label{fig:pubs}
-\end{figure}
+\end{SCfigure}

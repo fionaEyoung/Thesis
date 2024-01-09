@@ -15,23 +15,17 @@ Even so, the pathway is still shifted medially compared to its normal position (
 By reusing the preoperative lesion segmentation and setting $s=0.8$ (effectively modelling a 20\% smaller tumour), the resulting deformation field is able to capture the approximate location of the shifted tract, without the need for additional tumour segmentation on the intraoperative structural imaging.
 Adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ and $D_b$ avoids time and resource-intensive intraoperative lesion segmentation, brain shift modelling, or non-linear registration.
 
-\begin{figure*}[h!]
+\begin{figure}[h!]
   \centering
   \includesvg[width=\textwidth,pretex=\sffamily,inkscapelatex=true]{chapter_6/shrink.svg}
   \caption{Demonstration of successful pre- and intraoperative tract imaging using only preoperative tumour segmentation (blue outline). Setting $s=0.8$ (green outline) simulates intraoperative decompression and models accurate atlas deformation to align with intraoperative anatomy after brain shift. The resulting \gls{cst} tractfinder segmentations are in strong agreement with streamline tractography.}
   \label{fig:shrink}
-\end{figure*}
-%
-% \begin{figure*}[h!]
-%   \centering
-%   \includegraphics[width=\textwidth]{chapter_4/figure_5_revised.png}
-%   \caption{Sample results in 4 different clinical subjects. First column: linearly registered tract atlas (spatial component only). Second column: atlas after tumour deformation. Third column: Final tract map. Fourth column: Track density image from streamline tractography, where intensity corresponds to streamline count per $(2.5mm)^3$ voxel (thresholded at 10 streamlines).}
-%   \label{fig:res}
-% \end{figure*}
+\end{figure}
 
 \subsection{Tumour deformation and oedema}
 
-In this example case of a NHNN patient with a tumour embedded within the right precentral gyrus (tumour histology information is unavailable for this subject).
+In this example case of a NHNN patient with a tumour embedded within the right precentral gyrus (tumour histology information is unavailable for this subject) we will consider the combined effects of tumour mass effect and peri-tumoural oedema on tract reconstruction.
+(This subject was not included in the non-deformation clinical dataset described in Section \ref{sec:data} and the quantitative evaluation in Chapter \ref{chap:eval}.)
 Not only is there substantial distortion to the \gls{cst} and cortical topology, the tumour is surrounded with oedema, which is affecting diffusion measurements.
 Due to the large free water compartment within the \gls{wm}, the usual \gls{msmt} \gls{csd} approach with \gls{wm} and \gls{gm} compartments is unsuitable in this situation.
 Instead, \gls{wm} and \gls{csf} compartments were modelled, allowing modelling of \gls{wm} \glspl{fod} within oedema while reducing noise slightly compared to \gls{ssst} \gls{csd}.
@@ -39,9 +33,13 @@ After \gls{fod} modelling, the \gls{cst} was reconstructed using probabilistic t
 
 In Figure \ref{fig:oedema}, panel \textbf{a}, fibre orientations clearly indicate the presence of \gls{csd} fibres circumventing the tumour, yet the presence of oedema has inhibited their detection in both the tractography (panel \textbf{d}) and TractSeg (panel \textbf{e}) reconstructions.
 The deformed tract atlas, by contrast, aligns well with the \gls{fod} orientations (panel \textbf{b}) resulting in a successful tractfinder segmentation  (panel \textbf{c}).
+This example highlights the particular advantages of tractfinder:
+All three methods utilised the same \glspl{fod} as the basis for identifying the tract, which clearly depict the presence of \gls{wm} fibres within the oedematous zone, yet the combination of crossing \gls{af} fibres, altered diffusion, and \gls{cst} displacement presented a significant barrier to streamlines, with few penetrating to tract the \gls{cst} beyond.
+Whether TractSeg neglected the same region because of deformation, oedema, or a combination of both is difficult to determine.
+Meanwhile, with the deformed atlas predicting the presence of fibres within the affected region and their expected orientation, both of which are confirmed by the \gls{fod} estimates, tractfinder \note{finish sentence}
 
 \begin{figure}
-  \includesvg[width=\textwidth,pretex=\ttfamily,inkscapelatex=true]{chapter_6/oedema.svg}
+  \includesvg[width=\textwidth,pretex=\sffamily,inkscapelatex=true]{chapter_6/oedema.svg}
   \caption{Adult patient with tumour in the right precentral gyrus. \textbf{a.} \glspl{fod}, \textbf{b.} Deformed \gls{cst} \gls{tod} atlas, \textbf{c.} Tractfinder map of the \gls{cst}, thresholded at 0.05, \textbf{d.} Probabilistic tractography streamlines, \textbf{e.} TractSeg segmentation probability, thresholded at 0.5, \textbf{f.} Coronal and sagittal slices indicating the location of panels \textbf{a.-e.}}
   \label{fig:oedema}
 \end{figure}

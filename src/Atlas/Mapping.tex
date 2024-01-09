@@ -119,7 +119,7 @@ By segmenting a full \gls{fod} into individual lobes and computing properties on
 
 The fixel framework has been adapted here to extend the inner product to consider individual \gls{fod} lobes in isolation.
 \gls{fod} segmentation is achieved as described in \textcite{Smith2013} by sampling the \gls{sh} distribution on a dense set of directions (\textgreater 1000).
-Each of these direction samples is binned into a fixel based on its neighbourhood using a fast-marching level set algorithm, resulting in each fixel being represented by a collection of directional samples and the associated amplitudes of the original \gls{fod}.
+Each of these direction samples is binned into a fixel based on its neighbourhood using a fast-marching level set algorithm, resulting in each fixel being represented by a collection of directional samples and the associated amplitudes of the original \gls{fod} (Fig. \ref{fig:fixip} \textbf{f-g}).
 Each fixel is then converted to a \gls{sh} representation via a linear least-squares fit to the sampled amplitudes, producing separate \gls{sh} distributions $I_p(\theta, \phi)$ per voxel for each fibre population $p$.
 
 The amplitude of the fixel \glspl{odf} will reflect that of the corresponding lobe in the original full multi-fibre distribution, and thus the amplitude of the fixel \gls{odf} will always be smaller or equal to that of the original \gls{fod}.
@@ -143,18 +143,6 @@ To address the concern that renormalising each $I_p$ could excessively amplify n
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{0.325\textwidth}
-    \centering
-    \includegraphics[width=\textwidth,draft=false]{chapter_2/FCF_ground_truth_fibres.png}
-    \caption{Ground truth fibres}
-  \end{subfigure}%
-  \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth,draft=false]{chapter_2/normal_ip_FCF.png}
-    \caption{Simple inner product}
-  \end{subfigure}%
-  \begin{subfigure}[b]{0.3\textwidth}
-    \includegraphics[width=\textwidth,draft=false]{chapter_2/fixel_ip_FCF.png}
-    \caption{Fixel inner product}
-  \end{subfigure}
-  \caption{Demonstration of fixel-wise inner product using the synthetic Fibre Cup Phantom. Crossing fibres results in low inner product signal for the brown tract in upper intersection region (b). In (c) this signal drop is eliminated resulting in smooth tract map.}\label{fig:fixip}
+  \includesvg[width=1.08\textwidth,pretex=\small\sffamily,inkscapelatex=true]{chapter_3/fixel.svg}
+  \caption{Demonstration of fixel-wise inner product using the synthetic Fibre Cup Phantom. \textbf{a.} Seven ground truth streamline bundles intesect throughout the phantom. \textbf{b.} The brown tract intersects with three other paralell bundles. The crossing fibres are denser and therefore dominate the \gls{fod} reconstruction (\textbf{d.}), resulting in a drop in tractfinder amplitude. \textbf{c.} By computing the inner product with each fixel separately, weigthed by the overall \gls{fod} amplidute, and taking the maximum value, a smooth tract reconstruction is achieved. \textbf{e.} \glspl{fod} in a second crossing area, showing the brown and purple tracts intersecting at an oblique angle. \textbf{f.} First segmented fixel. \textbf{g.} Second segmented fixel. \textbf{h.} \gls{tod} atlas for the brown tract.}\label{fig:fixip}
 \end{figure}

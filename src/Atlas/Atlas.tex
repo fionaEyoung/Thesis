@@ -91,7 +91,7 @@ Where relevant, such distinctions are described below.
 \subsection{Optic radiation}
 
 \begin{SCfigure}[][htb!]
-  \includegraphics[width=0.5\textwidth]{chapter_2/or_schema_Ebeling1988.png}
+  \includegraphics[width=0.5\textwidth]{chapter_3/45_or.png}
   \caption{\note{draft} Schematic of optic radiation, from \textcite{Ebeling1988}}
   \label{fig:or}
 \end{SCfigure}
@@ -121,7 +121,7 @@ Since not all of the \gls{or} takes the full scenic route, tractography was run 
 \subsection{Corticospinal tract}
 
 \begin{SCfigure}[][htb!]
-  \includegraphics[width=0.5\textwidth]{chapter_2/cst_schema_Ebeling1992.png}
+  \includegraphics[width=0.5\textwidth]{chapter_3/45_cst.png}
   \caption{\note{draft} Schematic of corticospinal tract, from \textcite{Ebeling1992}}
   \label{fig:cst}
 \end{SCfigure}
@@ -168,7 +168,7 @@ An exclusion \gls{roi} on the medial lemniscus in the mid-pons excludes afferent
 % % In 1809,  wrote:
 
 \begin{SCfigure}[][htb!]
-  \includegraphics[width=0.5\textwidth]{chapter_2/af_schema_Geschwind1970.png}
+  \includegraphics[width=0.5\textwidth]{chapter_3/45_af.png}
   \caption{\note{draft} Schematic of arcuate fasciculus, from \textcite{Geschwind1970}}
   \label{fig:af}
 \end{SCfigure}
@@ -194,7 +194,7 @@ Streamlines were seeded from an \gls{roi} covering the \gls{af} on a coronal sli
 % \paragraph*{Anatomy and function}
 
 \begin{SCfigure}[][htb!]
-  \includegraphics[width=0.5\textwidth]{chapter_2/ifof_schema.jpg}
+  \includegraphics[width=0.5\textwidth]{chapter_3/45_ifof.png}
   \caption{\note{draft} Scematic of arcuate fasciculus, from \textcite{Geschwind1970}}
   \label{fig:ifof}
 \end{SCfigure}
@@ -256,7 +256,7 @@ Then each bundle of interest was reconstructed in both hemispheres using probabi
 After streamline generation, each streamline bundle was transformed into MNI space using affine registration implemented in the \gls{fsl} Linear Image Registration Tool\autocite{Jenkinson2002} between the subject's $T_1$-weighted image and the MNI152 $T_1$ template.\autocite{Fonov2011}
 Affine registration rather than non-linear, was used for this step to capture individual anatomical variation and minimise unrealistic warping of streamlines from local registration errors or overfitting.
 With all subject streamlines aggregated in MNI space, manual filtering of streamlines was performed according to the definitions previously laid out for each tract (Fig. \note{fig:atlases}) to remove not only ``volumetric false positives", which depart from the accepted volume of the tract, but also ``orientational false positives" (OFPs), which remain entirely within the tract volume but are at least in part aligned with a different, intersecting bundle.
-An example of such OFPs are depicted in Figure \ref{fig:ofp}. Such streamlines have little effect on any volumetric applications of the reconstruction, e.g. via a track density depiction.
+An example of such OFPs are depicted in Figure \ref{fig:ofps}. Such streamlines have little effect on any volumetric applications of the reconstruction, e.g. via a track density depiction.
 However, their removal is vital for the construction of the orientation atlas, which summarises the orientational distribution of streamlines on a voxel-wise basis.
 Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsolver.org/})\autocite{Yeh2021a}, which enables the filtering of streamlines based on angle of intersection with a cutting plane.
 
@@ -264,10 +264,10 @@ Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsol
   \centering
   \begin{subfigure}{0.3\textwidth}
     \includegraphics[width=\textwidth]{chapter_2/OFPs1.png}
-  \end{subfigure}%
+  \end{subfigure}\hfill%
   \begin{subfigure}{0.3\textwidth}
     \includegraphics[width=\textwidth]{chapter_2/cst_tod_unfiltered.png}
-  \end{subfigure}%
+  \end{subfigure}\hfill%
   \begin{subfigure}{0.3\textwidth}
     \includegraphics[width=\textwidth]{chapter_2/cst_tod_filtered.png}
   \end{subfigure}%
@@ -306,6 +306,20 @@ The absolute number of retained streamlines is of little consequence to subseque
  \end{tabularx}
 \end{table*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+  \makebox[\linewidth][c]{%
+    \includegraphics[width=0.28\textwidth]{chapter_3/cst_removed.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/or_removed.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/af_removed.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/ifo_removed.png}}
+  \makebox[\linewidth][c]{%
+    \includegraphics[width=0.28\textwidth]{chapter_3/cst_filtered.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/or_filtered.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/af_filtered.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/ifo_filtered.png}}
+  \caption{Streamlines that I filtered \note{caption} \label{fig:filter}}
+\end{figure}
 
 
 \section{TOD mapping}
@@ -349,9 +363,21 @@ Finally, the mean of all individual normalised \gls{tod} maps is computed to pro
 Averaging all maps results in distributions that reflect all possible ranges of tract orientations in each voxel (Fig. \note{fig:mean}), while the first \gls{sh} coefficient of the atlas will reflect the proportion of training subjects in which the tract was present in a given voxel.
 Outlier voxels visited by streamlines in only a single subject's reconstruction will contribute little weight to the final atlas.
 This atlas can then be registered to a target subject for further processing.
-Atlases have so far been created for the most commonly indicated pathways in neurosurgical planning and guidance, namely the \gls{cst}, \gls{af}, \gls{or} and \gls{ifof} (Fig. \note{fig:atlases}), with the creation of further atlases to be the subject of future work.
+Atlases have so far been created for the most commonly indicated pathways in neurosurgical planning and guidance, namely the \gls{cst}, \gls{af}, \gls{or} and \gls{ifof} (Fig. \ref{fig:atlases}), with the creation of further atlases to be the subject of future work.
 Users can also generate custom atlases from any set of training streamlines using the code available at \url{https://github.com/fionaEyoung/tractfinder}. \note{how to mention code?}
 
 % \section{Discussion}
 %
 % \note{Consider different elements of the atlas construction, e.g. what is the effect (smoothing) of using only non-linear registration and possibly put the discussion on number of training subjects here too?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure*}[h!]
+  \centering
+  \makebox[\linewidth][c]{%
+    \includegraphics[width=0.28\textwidth]{chapter_3/cst_tod.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/or_tod.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/af_tod.png}%
+    \includegraphics[width=0.28\textwidth]{chapter_3/ifo_tod.png}}
+  \caption{Tract orientation atlases, composite images in coronal (CST), axial (OR, IFOF) and sagittal (AF) views. All figures depicted in MNI152 reference space. \note{valign and bigger} \note{different caption / reprod. from \textcite{Young2024}}}\label{fig:atlases}
+\end{figure*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
