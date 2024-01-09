@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import patheffects, patches
+from matplotlib.path import Path
 from os import path, getlogin, pardir
 import nibabel as nib
 import scipy.ndimage as ndi
@@ -20,13 +22,16 @@ img = nib.load(path.join(dirname,'fy','t1_crop.nii.gz'))
 #nib.viewers.OrthoSlicer3D(img.get_fdata()).show()
 
 x = 77
+z = 127
 
-imslice = img.get_fdata()[x,:,:]
+# imslice = img.get_fdata()[x,:,:]
+imslice = img.get_fdata()[:,:,z]
 kspace = np.fft.fftshift(np.fft.ifft2(imslice))
 kx = np.fft.fftshift(np.fft.fftfreq(imslice.shape[0]))
 ky = np.fft.fftshift(np.fft.fftfreq(imslice.shape[1]))
 
-kmax = max(kx)
+kmax_x = max(kx)
+kmax_y = max(ky)
 
 # kslice = kspace.real[x]
 kx_max_inset = 0.07
@@ -45,7 +50,7 @@ ax0 = fig.add_subplot(gs[0,:])
 ax_k = fig.add_subplot(gs[1,0])
 ax_kimg = fig.add_subplot(gs[1,1])
 ax_img = fig.add_subplot(gs[1,2])
-
+ymin = 1000
 # ax = plt.figure().add_subplot(projection='3d')
 # ax[0].plot(kspace[x], 'k.')
 for j, Y in reversed(list(enumerate(ky[np.nonzero(abs(ky)<ky_max_inset)]))): #np.arange(kspace.shape[1])[::-1]:
@@ -95,30 +100,39 @@ for j, Y in reversed(list(enumerate(ky[np.nonzero(abs(ky)<ky_max_inset)]))): #np
 
   m = 3
   ax = ax_k
+  ylim = [300,345]
+  ymin = min(ymin, min(m*yind+Y_))
   ax.plot(X_+Y/2 , m*yind+Y_, 'k-', linewidth=0.4, zorder=2*abs(j-kspace.shape[1])+1, clip_on=False)
   ax.plot(X+Y/2 , m*yind+trail, 'ro', markersize=0.5, fillstyle='full', zorder=2*abs(j-kspace.shape[1])+1.5, clip_on=False)
-  ax.fill_between(X_+Y/2, m*yind+Y_, min(m*yind+Y_), color='w', alpha=0.9, zorder=2*abs(j-kspace.shape[1]))
+  ax.fill_between(X_+Y/2, m*yind+Y_, ymin, color='w', alpha=0.8, zorder=2*abs(j-kspace.shape[1]), clip_on=False)
   ax.axis('off')
-  ax.set_aspect(0.002)
-  ax.set_ylim([285,335])
+  ax.set_aspect(0.0021)
+  ax.set_ylim(ylim)
   ax.set_xlim([-0.8*kx_max_inset,1.1*kx_max_inset])
 
   ## 3D attempt
   # ax.plot(X_ , Y_, 'k-', zs=Y, linewidth=0.3, zorder=2*abs(j-kspace.shape[1])+1, zdir='y')
   # ax.add_collection3d(plt.fill_between(X_ , Y_, min(Y_), color='w', alpha=0.9, zorder=2*abs(j-kspace.shape[1])), zs=Y, zdir='y')
 
-zoom=0.5
-s = len(kspace)
-crop = int((s*(1-zoom))//2)
+zoom=0.6
+# zoom=1
+s_x, s_y = kspace.shape
+crop_x, crop_y = ((np.array(kspace.shape)*(1-zoom))//2).astype(int)
 ax = ax_kimg
-ax.imshow(ndi.rotate(np.absolute(kspace),90)[crop:(s-crop),crop:(s-crop)],
-                        extent=[-zoom*kmax, zoom*kmax, -zoom*kmax, zoom*kmax],
+ax.imshow(ndi.rotate(np.absolute(kspace),90)[crop_y:(s_y-crop_y),crop_x:(s_x-crop_x)],
+                        extent=[-zoom*kmax_x, zoom*kmax_x, -zoom*kmax_y, zoom*kmax_y],
                         vmin=0, vmax=4, cmap='gray')
 # Inset box
-ax.add_patch(plt.Rectangle((-kx_max_inset, -ky_max_inset), 2*kx_max_inset, 2*ky_max_inset, ls="--", ec="w", fc="none"))
+ax.add_patch(patches.PathPatch(Path([[-kx_max_inset, -ky_max_inset],
+                                     [-kx_max_inset, ky_max_inset],
+                                     [kx_max_inset, ky_max_inset],
+                                     [kx_max_inset, -ky_max_inset],
+                                     [-kx_max_inset, -ky_max_inset]]),
+             ls="--", ec="w", fc="none",
+             path_effects=[patheffects.SimpleLineShadow(offset=(.5, -.5), alpha=.5), patheffects.Normal()]))
 # Zoom lines
-ax.plot([-zoom*kmax,-kx_max_inset], [0.7*zoom*kmax, ky_max_inset], 'w-', lw=lw)
-ax.plot([-zoom*kmax,-kx_max_inset], [-0.5*zoom*kmax, -ky_max_inset], 'w-', lw=lw)
+ax.plot([-zoom*kmax_x,-kx_max_inset], [0.6*zoom*kmax_y, ky_max_inset], 'w-', lw=lw)
+ax.plot([-zoom*kmax_x,-kx_max_inset], [-0.75*zoom*kmax_y, -ky_max_inset], 'w-', lw=lw)
 ax.tick_params(which='both', bottom=False, left=False, labelbottom=False, labelleft=False)
 # ax.set_xlabel('$k_x$')
 ax.set_ylabel('$k_y$')

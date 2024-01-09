@@ -25,20 +25,31 @@ For the purposes of studying macroscopic brain connectivity and the course and o
 
 \subsection{Tissue microstructure  and fibre orientation modelling}
 
-\note{move DTI stuff from 1.2 down to here}
 
 The first approach for modelling fibre orientations came in the form of \gls{dti}, which remains one of the dominant diffusion models in many applications today, particularly in clinical contexts.
-The diffusion process within a \gls{wm} voxel is modelled as a three dimensional Gaussian distribution, whose covariance matrix is proportional to the diffusion tensor\autocite{Basser1994,ODonnell2011} in equation (\ref{eq:dt}).
-By diagonalising this matrix, which is symmetric and positive-definite, three orthogonal eigenvectors and corresponding eigenvalues $\lambda_1 \geqslant \lambda_2 \geqslant \lambda_3$ can be computed.
+The diffusion process within a \gls{wm} voxel is modelled as a three dimensional Gaussian distribution, whose covariance matrix is proportional to the diffusion \textit{diffusion tensor}\autocite{Basser1994,ODonnell2011} $\mathbf{D}$:
+\begin{equation}
+  \mathbf{D} = \begin{pmatrix}
+                D_{xx} & D_{xy} & D_{xz}\\
+                D_{yx} & D_{yy} & D_{yz} \\
+                D_{zx} & D_{zy} & D_{zz}
+                \end{pmatrix} \label{eq:dt}
+\end{equation}
+At least six unique directions are required to fully determine $\mathbf{D}$ (which is diagonally symmetric, i.e. $D_{ij} = D_{ji}$), although the diagonal components, sufficient for measuring \gls{adc} as previously described in (\ref{eq:trace}--\ref{eq:adc}), may be determined from only three orthogonal measurements.
+
+By diagonalising $\mathbf{D}$, which is symmetric and positive-definite, three orthogonal eigenvectors and corresponding eigenvalues $\lambda_1 \geqslant \lambda_2 \geqslant \lambda_3$ can be computed.
 Rotationally invariant indices including mean diffusivity and \gls{fa} provide scalar quantities which can be interpreted in terms of underlying tissue properties, the latter being given by
 \begin{equation}
   FA = \sqrt{\frac{3}{2}}\frac{\sqrt{(\lambda_1 - \langle \lambda \rangle)^2 + (\lambda_2 - \langle \lambda \rangle)^2 + (\lambda_3 - \langle \lambda \rangle)^2}}{\sqrt{\lambda_1^2 + \lambda_2^2+ \lambda_3^2}}
 \end{equation}
 The principal eigenvector $\bm{\lambda}_1$ is usually interpreted as the direction of fastest, or least restricted, diffusivity, although this holds only in voxels with a single population of straight, parallel axons.
 If the diffusion tensor, whose eigenvectors and eigenvalues can be represented in the form of a zeppelin shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
+Depicting peak orientations is achieved through \gls{dec} mapping, in which directions are mapped to colours in RGB space, where the $x$-axis, or medio-lateral / left-right direction is assigned pure red, the $y$-axis, or posterior-anterior direction is assigned pure green, and the $z$-axis, or inferior-superior direction, is assigned pure blue.
+\gls{dti} images are often depicted as \gls{dec} \gls{fa} (or ``colour \gls{fa}) maps, where a voxel's colour is determined by $\lambda_1$ and its brightness by the \gls{fa} value.
+
 In fact, it is rare for a voxel of \gls{wm} to contain only a single uniformly oriented bundle of axons.
 In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture:
-A smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors (Fig. \ref{fig:cross}). \note{mention colour FA maps}
+A smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors (Fig. \ref{fig:cross}).
 
 \begin{figure}
   \centering
@@ -56,7 +67,8 @@ Then, the observed signal $S(\theta,\phi)$ in a given voxel amounts to a convolu
 \begin{align}
   S(\theta,\phi) = F(\theta,\phi) \otimes R(\theta)
 \end{align}\label{eq:csd}
-Solving (\ref{eq:csd}) for $F(\theta,\phi)$, represented in spherical harmonics basis as given by (\ref{eq:shfun}), involves computing the inverse operation: A spherical \textit{de}convolution of the signal with the response function.
+Solving (\ref{eq:csd}) for $F(\theta,\phi)$, represented in spherical harmonics basis as given by (\ref{eq:shfun}), involves computing the inverse operation:
+A spherical \textit{de}convolution of the signal with the response function.
 Early versions of this concept included \textcite{Anderson2005}, in which the response kernel was modelled as a diffusion tensor.
 In another approach presented by \textcite{Tournier2004} $R(\theta)$ is estimated directly from the data, generally by averaging the signals from voxels with the highest diffusion anisotropy, and thus does not rely on a model of diffusion, although it does rely on the assumption that a single fibre population's response is uniform throughout the brain and for different fibre configurations.
 To improve angular resolution and reduce noise sensitivity in the estimated \gls{fod}, a regularised implementation in which biophysically impossible negative $F(\theta,\phi)$ values are strongly penalised gave rise to the widely used \gls{csd} method (Fig. \ref{fig:cross}).
@@ -169,7 +181,6 @@ The streamlines may be viewed as three-dimensional objects, or further processed
 Alternatives to \gls{roi}-based selection are clustering methods, which classify streamlines according to their proximity or similarity to each other, or other geometrical properties.
 RecoBundles\autocite{Garyfallidis2018}, White Matter Analysis \autocite{ODonnell2017, ODonnell2007}, atlas based adaptive clustering \autocite{Tunc2014}, and example-based automatic tract labelling \autocite{Yoo2015} are all examples of data driven, group-wise streamline clustering and matching approaches.
 They typically rely on registration of example data or streamline atlases based on which similar streamlines are recognised in the target data and labelled accordingly.
-Reference tracts can also be used to optimise seed placement according to streamline similarity metrics \autocite{Clayden2006,Clayden2009}.
 Streamline clustering methods have been shown to generate more consistent and reproducible results across subjects compared to \gls{roi}-based segmentation\autocite{Sydnor2018}.
 Another approach, named Classifyber, uses a learned linear classification of streamline features to label streamlines belonging to the target bundle in a new subject \autocite{Berto2021}.
 In all clustering approaches, the necessary generation of whole brain tractograms in test subjects and the additional construction of example or reference tractography data present barriers to application, as well as, in some cases, long processing times and high memory requirements\autocite{Wasserthal2018}.
@@ -187,10 +198,11 @@ All this means that, after perhaps hours of tracking and billions of streamlines
 The second approach may be called ``targeted tractography", an involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions (Fig. \ref{fig:tg_rois}), until a target number of streamlines have been selected.
 A seed region can but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract and propagate bidirectionally, placing additional include regions at the ends to ensure complete coverage.
 This approach does not mean that no streamlines are discarded (seeded fibres may be terminated before fulfilling all inclusion criteria, or stray into exclusion regions) but targeted seeding and selection certainly leads to a higher number of admissible streamlines being generated in far less computational time than in the whole brain approach, while discarding unwanted streamlines on the fly reduces storage requirements.
-Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery\autocite{Yang2021}. \note{the pnt approach is closer to this than clustering}
+Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery\autocite{Yang2021}.
 
 Manual placement of \glspl{roi} in both whole-brain and targeted pipelines represents a significant intellectual burden, relies on expert anatomical knowledge and can be extremely time consuming, so it is often automated by registering structural atlases and defining tracts in terms of logical relations to atlas structures, as in TractQuerier\autocite{Wassermann2016} or a similar proposed method using fuzzy logic\autocite{Delmonte2019}, and Tracula \autocite{Yendiki2011}, or pre-defined \glspl{roi}, as in XTRACT \autocite{Warrington2020}.
 The former two are examples of methods that rely on comprehensive cortical parcellations, typically obtained with a software tool such as FreeSurfer\autocite{Desikan2006,FischlSalat2002} which can take many hours to run.
+Seed placement may also be optimised using reference tracts, as in probabilistic neighbourhood tractography \autocite{Clayden2006,Clayden2009}.
 In many scenarios, manual \gls{roi} placement remains the default method, particularly in clinical contexts where automatic \gls{roi} registration or segmentation may fail due to pathology.
 Here, not only is a good understanding of the anatomy of a tract is vital to produce high quality reconstructions, but the user will also need to understand the biases and pitfalls of their chosen \gls{fod} model and tractography algorithm to ensure proper interpretation and qualification of the results\autocite{Rheault2020,Rheault2022}.
 Even to an experienced user, producing quality bundles is often time-consuming and tedious.
