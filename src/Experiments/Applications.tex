@@ -34,9 +34,11 @@ After \gls{fod} modelling, the \gls{cst} was reconstructed using probabilistic t
 In Figure \ref{fig:oedema}, panel \textbf{a}, fibre orientations clearly indicate the presence of \gls{csd} fibres circumventing the tumour, yet the presence of oedema has inhibited their detection in both the tractography (panel \textbf{d}) and TractSeg (panel \textbf{e}) reconstructions.
 The deformed tract atlas, by contrast, aligns well with the \gls{fod} orientations (panel \textbf{b}) resulting in a successful tractfinder segmentation  (panel \textbf{c}).
 This example highlights the particular advantages of tractfinder:
-All three methods utilised the same \glspl{fod} as the basis for identifying the tract, which clearly depict the presence of \gls{wm} fibres within the oedematous zone, yet the combination of crossing \gls{af} fibres, altered diffusion, and \gls{cst} displacement presented a significant barrier to streamlines, with few penetrating to tract the \gls{cst} beyond.
+All three methods utilised the same \glspl{fod} as the basis for identifying the tract, which clearly depict the presence of \gls{wm} fibres within the oedematous zone, yet the combination of crossing \gls{af} fibres, altered diffusion, and tract displacement presented a significant barrier to streamlines, with few penetrating to the \gls{cst} beyond.
 Whether TractSeg neglected the same region because of deformation, oedema, or a combination of both is difficult to determine.
-Meanwhile, with the deformed atlas predicting the presence of fibres within the affected region and their expected orientation, both of which are confirmed by the \gls{fod} estimates, tractfinder \note{finish sentence}
+Meanwhile, the deformed atlas predicted the presence of fibres within the affected region and their expected orientation, both of which are confirmed by the \gls{fod} estimates, resulting in appropriate detection of the tract of interest.
+Note how the atlas probability is also high within the tumour itself:
+Its prediction alone is not sufficient for accurate segmentation, and a comparison with the local diffusion data is required to correct for imperfect atlas alignment.
 
 \begin{figure}
   \includesvg[width=\textwidth,pretex=\sffamily,inkscapelatex=true]{chapter_6/oedema.svg}

@@ -370,7 +370,9 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 
 The \gls{btc} dataset, with its range of tumour types, high quality \gls{dmri} scans and tumour masks, provides an ideal arena to evaluate the effect of tumour deformation modelling on segmentation accuracy.
 Four out of the ten selected BTCD subjects had tumours substantial enough to warrant deformation modelling, which was done using the exponential deformation factor model with adaptive $\lambda$ for all subjects.
-Results were compared with manual targeted tractography with additional streamline filtering as described in Section \ref{sec:data_btcd}.
+Results were compared with manual targeted tractography with additional streamline filtering as described in Section \ref{sec:data_btcd}, which was necessary to ensure a high quality baseline in challenging data with disruptive tumour effects.
+Selected tract segmentations in the \gls{btc} dataset are shown in Figure \ref{fig:tumours} (panels a, b, d, and f), alongside additional examples from the NHNN and \gls{gosh} clinical data.
+Across the whole dataset, including both deforming and non-deforming tumours, tractfinder produced consistently high volumetric similarity scores compared with manual tractography, while an average signed bundle distance close to 0 for all tracts but the \gls{or} indicate consistently high agreement in segmentation margins (Fig. \ref{fig:btcd_box}).
 
 \begin{SCfigure}[][htb!]
   \includegraphics{chapter_5/btcd_defchange.pdf}
