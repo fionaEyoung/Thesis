@@ -113,13 +113,3 @@ In all other subjects, the tracts were labelled ipsilateral or contralateral if 
 Given the disruption caused by the space-occupying and in cases infiltrating lesions, manual tractography using multi-ROI targeting alone did not produce acceptable results.
 Instead, the bundles were manually filtered to remove spurious and implausible streamlines using the same process as was used when curating the atlas training data.
 These filtered bundles are used as reference segmentations for the 10 BTCD subjects.
-
-\subsection{Fibercup phantom}
-
-\note{move this to chapter 3}
-While testing and validating on \textit{in vivo} human data is irreplaceable, the complexities of such data, as well as the lack of definitive ground truth for fibre bundle reconstructions in unknown anatomies, can make results difficult to interpret.
-This is where synthetic phantom data, with known physical parameters, are valuable for prototyping and validating methods.
-Within the white matter imaging space there is a synthetic phantom known as the Fibre Cup phantom after a tractography challenge held for the 12th international conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) in 2009.\autocite{Fillard2011}
-The phantom features seven bundles arranged in a way that aims to mimic the range of configurations found in the brain, including sharp curves, multi-way crossings, kissing and fanning fibres.
-A digital recreation of the original data and accompanying ground truth streamlines are openly available.\autocite{NITRC}
-The Fibre Cup phantom was used extensively in prototyping and proof-of-concepts for tractfinder, including testing alternative atlas-data comparison approaches such as the KL-divergence and fixel-decomposed inner product.

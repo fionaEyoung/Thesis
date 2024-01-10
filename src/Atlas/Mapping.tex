@@ -136,7 +136,11 @@ Then we compute the inner product of the atlas \gls{tod} and each fixel \gls{odf
   P = \operatorname*{argmax}_k \langle \widetilde{I}_k(\theta,\phi), T(\theta,\phi) \rangle
 \end{align}
 
-The result is improved tract sensitivity in areas of crossing fibres where there is otherwise sufficient evidence that the tract is present in the voxel, and less ambiguity in the interpretation of a low mapped value (Fig. \ref{fig:fixip}).
+The result is improved tract sensitivity in areas of crossing fibres where there is otherwise sufficient evidence that the tract is present in the voxel, and less ambiguity in the interpretation of a low mapped value.
+The fixel inner product framework was tested in a synthetic image known as the Fibre Cup phantom, after a tractography challenge held for the 12th international conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) in 2009\autocite{Fillard2011}.
+The phantom features seven bundles arranged in a way that aims to mimic the range of configurations found in the brain, including sharp curves, multi-way crossings, kissing and fanning fibres.
+A digital recreation of the original data and accompanying ground truth streamlines are openly available\autocite{NITRC}.
+Figure \ref{fig:fixip} demonstrates the effect of using the fixel framework to reconstruct a tract segmentation with consistent intensity values across crossing fibre regions.
 To address the concern that renormalising each $I_p$ could excessively amplify noise, lending equal voice to tiny \gls{fod} lobes that make practically no contribution to the total voxel signal, we can place a minimum threshold on the lobe amplitude for a single fixel during the \gls{fod} segmentation process.
 
 \begin{figure}
