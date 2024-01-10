@@ -145,8 +145,10 @@ def main():
   labels.insert(3,'')
   lgd = scatter_ax.legend(lines,labels,loc='lower left', ncol=3, columnspacing=0.9, handletextpad=0.5, markerscale=1)
 
-  scatter_ax.set_ylim([0.45,0.95])
+  ylim = [0.48,0.92]
   scatter_ax.minorticks_on()
+  scatter_ax.set_ylim(ylim)
+  scatter_ax.yaxis.set_ticks(np.arange(0.5, 1, 0.1))
   scatter_ax.xaxis.set_tick_params(which='minor', bottom=False)
   scatter_ax.grid(which="both", axis='y', color='#D2D2D2', linestyle=':')
 
@@ -156,7 +158,7 @@ def main():
 
   # scatter_fig[0].legend()
   plt.tight_layout()
-  set_ax_size(ax=scatter_ax)
+  set_ax_size(ax=scatter_ax, ratio=.55)
   plt.margins(0,0)
   scatter_fig.savefig(path.join(results_dir, f'{filename}.pdf'),
               transparent=False, dpi=300, bbox_inches="tight", pad_inches=0.01)
