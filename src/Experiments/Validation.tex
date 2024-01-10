@@ -36,7 +36,7 @@ Since tractfinder is a voxel-based method, streamlines were converted to voxel-b
 
 \paragraph*{TractSeg}
 
-TractSeg \autocite{Wasserthal2018} is a deep convolutional neuroal network model for tract segmentation which produces volumetric segmentation for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3-2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
+TractSeg \autocite{Wasserthal2018} is a deep convolutional neural network model for tract segmentation which produces volumetric segmentation for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3-2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
 There are two models available: One trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018} (``TractSeg DKFZ (TSD)"), and a second trained on streamline density maps output by FSL's XTRACT \autocite{Warrington2020} application using automatic predefined \gls{roi} registration and probtracx probabilistic tractography\autocite{Behrens2007} (``TractSeg XTRACT (TSX)").
 Here both versions are compared, as they feature significant differences in anatomical tract definitions.
 Input peaks for all TractSeg results were derived from the SSST \gls{csd} \glspl{fod} for all single-shelled data and from the \gls{msmt} peaks for all multi-shelled data.
@@ -102,7 +102,7 @@ This metric is asymmetric, with $BD_s (A,B) = -BD_s(B,A)$, and is defined as
 \begin{SCfigure}[50][htbp!]
   \centering
   \includegraphics[width=0.3\textwidth]{chapter_5/segmentations_distance_euc.pdf}
-  \caption{Illustration of regions involved in calculating bundle distance metric. The light grey area is $A\setminus B$, dark grey is $B\setminus A$, and in each grey voxel is written its minimum Euclidean distance to the black intersection. Distance sign is negative outside of the reference segmentation ($B$ in this example) and positive inside. To compute the bundle distance $BD(A,B)$ (Eq. \ref{eq:bd}), the mean minimum absolute distance is taken across all 17 voxels in the two grey areas $BD(A,B) = (14+4\sqrt{2}+3\sqrt{5})/17 = 1.55$. To compute the signed bundle distance $BD_s(A,B)$ (Eq. \ref{eq:bds}), the signed distances relative to the reference set $B$ are used: $BD_s(A,B) = (2-2\sqrt{2}-\sqrt{5})/17 = -0.18$. The Dice score for these two segmentations would be $DSC = 2*4/(13+12) = 0.32$}
+  \caption{Illustration of regions involved in calculating bundle distance metric. The light grey area is $A\setminus B$, dark grey is $B\setminus A$, and in each grey voxel is written its minimum Euclidean distance to the black intersection. Distance sign is negative outside of the reference segmentation ($B$ in this example) and positive inside. To compute the bundle distance $BD(A,B)$ (Eq. \ref{eq:bd}), the mean minimum absolute distance is taken across all 17 voxels in the two grey areas $BD(A,B) = (14+4\sqrt{2}+3\sqrt{5})/17 = 1.55$. To compute the signed bundle distance $BD_s(A,B)$ (Eq. \ref{eq:bds}), the signed distances relative to the reference set $B$ are used: $BD_s(A,B) = (2-2\sqrt{2}-\sqrt{5})/17 = -0.18$. The \gls{dice} for these two segmentations would be $DSC = 2*4/(13+12) = 0.32$}
   \label{fig:BD}
 \end{SCfigure}
 
@@ -110,7 +110,7 @@ This metric is asymmetric, with $BD_s (A,B) = -BD_s(B,A)$, and is defined as
 \label{sec:validation}
 
 In the following section, we will review the results of quantitatively comparing each of the methods described in Section \ref{sec:methods}, in the HCP49, clinical, and TractoInferno datasets, including material which has been accepted for publication in \textit{Human Brain Mapping}\autocite{Young2024}.
-Given the large disparities between methods in particular with regards to tract anatomical definitions, the results presented in this section can be regarded as a quantitative performance evaluation against benchmark methods.
+Given the large disparities in tract anatomical definitions between methods, the results presented in this section can be regarded as a quantitative performance evaluation against benchmark methods.
 In a subsequent section (\ref{sec:tractseg}) we will see how the two method tractfinder and TractSeg compare when both are trained on the same data.
 
 Segmentation results results for a representative subject from the \textit{TractoInferno} dataset are shown in Figures \ref{fig:lb.cstor}--\ref{fig:lb.afifof}.
@@ -144,7 +144,7 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
   \end{subfigure}
 \end{figure}
 \clearpage %flush
-{\captionof{figure}{Segmentations for the the projection tracts \gls{cst} (top) and \gls{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset shown on slices at 5mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colourbars are drawn once for each method category (tractfinder, tractography and TractSeg). \label{fig:lb.cstor}}
+{\captionof{figure}{Segmentations for the the projection tracts \gls{cst} (top) and \gls{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset shown on slices at 5mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colour scales are drawn once for each method category (tractfinder, tractography and TractSeg). \label{fig:lb.cstor}}
 }
 \subsection{Quantitative results}\label{sec:quant}
 
@@ -209,7 +209,7 @@ Our measured \gls{dice}s between TractSeg DKFZ and TractoInferno reference bundl
 Visual assessment reveals that systematic differences in the shapes of the segmented tracts account for a large part of the discrepancy between methods.
 Again, this is most apparent in the association tracts, where anatomical definitions differ widely (Fig. \ref{fig:lb.cstor}--\ref{fig:lb.afifof}).
 For example, TractSeg DKFZ includes extensive coverage of the frontal and temporal lobe in its \gls{af} segmentations, including parts of the primary motor cortex.
-Dice scores between different methods are lower across the board for the \gls{af} owing to these anatomical disagreements.
+\Glspl{dice} between different methods are lower across the board for the \gls{af} owing to these anatomical disagreements.
 Similarly, the \gls{ifof} reconstructions also display strong variability, owing in part to disagreements in its precise definition as reviewed in Chapter \ref{chap:atlas}.
 Conversely in the \gls{cst}, which has a relatively well agreed-upon domain, segmentations have much higher volumetric agreement between methods, with the exception of TractSeg XTRACT, which does not include the lateral projections (Fig. \ref{fig:lb.cstor}).
 Agreement in the optic radiations is somewhere in between, with slightly lower \glspl{dice} in tractfinder compared against the two TractSeg methods, which tend to include more thalamus and a lesser extent of Meyer's loop.
@@ -322,8 +322,8 @@ However, since the time taken depends greatly on several factors, including numb
 
 \section{Two methods, same training data}\label{sec:tractseg}
 
-A key component of tractfinder is the precise definition of each tract and careful filtering of the atlas training streamlines.
-Dispite the availability of public streamline datasets including the \textit{TractInferno} data and the TractSeg training and validation bundles, none were found to adequately fulfil the predefined anatomical criteria, and thus new training strealines were generated for tractfinder.
+A key component of tractfinder is the precise definition of each tract and careful filtering of atlas training streamlines.
+Despite the availability of public streamline datasets including the \textit{TractInferno} data and the TractSeg training and validation bundles, none were found to adequately fulfil the predefined anatomical criteria, and thus new training streamlines were generated for tractfinder.
 While the anatomical fidelity of the resulting atlases represents a particular strength, it does make objective comparison between benchmark methods, which may be based on different references, difficult.
 In order to produce a direct and objective comparison with TractSeg, a new set of tract atlases were created from the TractSeg DKFZ reference bundles\autocite{Wasserthal2018b} in the HCP105 dataset, using the same split into training and testing subjects as used in the deep learning model (published version).
 TractSeg was trained on 63 subjects and tested on the remaining 42, and here the same was done for tractfinder (where ``training" means constructing the atlas from individual bundles as described in Chapter \ref{chap:atlas}), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
@@ -336,7 +336,7 @@ Since the original TractSeg paper includes 72 tracts (including both left and ri
 \end{figure}
 
 In the four main tracts (\gls{af}, \gls{cst}, \gls{ifof}, \gls{or}) Tractfinder scores equally well or better on all volumetric overap and distance metrics with the exception of the \gls{dice}, where in particular the scores for the \gls{ifof} and \gls{or} are lower (Fig. \ref{fig:ts_atlas}).
-These results clearly demonstrate that for clinically relevant large \gls{wm} tracts, tractfinder is an accurate alternative to TractSeg while maintaining additional advantages in flexibility, robustness and explainabilty.
+These results clearly demonstrate that for clinically relevant large \gls{wm} tracts, tractfinder is an accurate alternative to TractSeg while maintaining additional advantages in flexibility, robustness and explainability.
 The \gls{dice} scores and density correlations for all 72 tracts are shown in Figure \ref{fig:ts_all_tracts}, analogous to Figure 6 in \textcite{Wasserthal2018}.
 Neither method convincingly outperforms the other, although TractSeg does score higher when measured by \gls{dice} on more tracts.
 
@@ -349,7 +349,7 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 
 \begin{figure}[h!]
   \includegraphics{chapter_5/ts_scatter.pdf}
-  \caption{Dice similarity and density correlation scores for tractfinder and TractSeg using the same training and testing strealines from the HCP105 dataset. Mean over all subjects is shown for each tract.}
+  \caption{\gls{dsc} and density correlation scores for tractfinder and TractSeg using the same training and testing streamlines from the HCP105 dataset. Mean over all subjects is shown for each tract.}
   \label{fig:ts_all_tracts}
 \end{figure}
 

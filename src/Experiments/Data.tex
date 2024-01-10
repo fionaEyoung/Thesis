@@ -12,7 +12,7 @@ The missing ground truth problem comes to the fore when comparing different meth
 To balance this issue, a further analysis directly comparing tractfinder against the deep learning method TractSeg by constructing new \gls{tod} atlases from the TractSeg model training data is presented in Section \ref{sec:tractseg}.
 We'll further attempt to quantitatively evaluate the effect of tumour deformation modelling on improving segmentation performance in affected patients.
 
-Subsequently, in Chapter \ref{chap:applications}, we'll move on from Dice scores and box plots to explore the practical applicability of tractfinder, considering the technical aspects of bringing it to the bedside, and illustrating the strengths and remaining roadblocks through a series of case studies.
+Subsequently, in Chapter \ref{chap:applications}, we'll move on from similarity scores and box plots to explore the practical applicability of tractfinder, considering the technical aspects of bringing it to the bedside, and illustrating the strengths and remaining roadblocks through a series of case studies.
 
 \section{Datasets and image processing}
 \label{sec:data}
@@ -55,16 +55,34 @@ Diffusion acquisition parameters and preprocessing steps are described in detail
 To validate tractfinder in real clinical patient scans, a dataset of 15 individual scans from eight different subjects and two different institutions was collated.
 They include four adult glioma subjects acquired in 2009 at the National Hospital for Neurology and Neurosurgery, London (NHNN) (cases 4 and 5 from \textcite{Mancini2022}, others unpublished data),
 three paediatric subjects from \gls{gosh} (each with one preoperative and one intraoperative scan),
-a mock “intraoperative” scan on a healthy adult volunteer acquired with the GOSH intraoperative \gls{dti} protocol and using a simulated intraoperative setup (flex-coils wrapped around the head instead of a head coil, head significantly displaced from scanner isocenter etc),
+a mock “intraoperative” scan on a healthy adult volunteer acquired with the GOSH intraoperative \gls{dti} protocol and using a simulated intraoperative setup (flex-coils wrapped around the head instead of a head coil, head significantly displaced from scanner isocenter etc.),
 and a partridge in a pear tree.
 The three \gls{gosh} paediatric patients all had low-grade astrocytoma (pilocytic astrocytoma, diffuse astrocytoma, and pleomorphic xanthoastrocytoma).
 For fully acquisition details see Table \ref{tab:datasets}.
 All clinical scans used in the systematic comparison with benchmark methods involved non-deforming tumours, in the sense that any lesions did not appreciably displace white matter structures from their typical positions.
-Further \gls{gosh} and \gls{nhnn} scans with substantial tumours were analysed on a case-by case basis, as the low sample size and high tumour heterogenity precluded a systematic quantitative evaluation.
+Further \gls{gosh} and \gls{nhnn} scans with substantial tumours were analysed on a case-by case basis, as the low sample size and high tumour heterogeneity precluded a systematic quantitative evaluation.
 
 Each \gls{dmri} scan was minimally preprocessed with \gls{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction,\autocite{Zhang2001, Smith2004} as implemented in MRtrix3 \autocite{Tournier2019}.
 Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} (MRtrix3 v3.0.3 and FMRIB Software Library (FSL, \url{https://fsl.fmrib.ox.ac.uk}) v6.0) applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
 No EPI distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times.\autocite{Yang2022}
+
+\subsection{BTCD}
+\label{sec:data_btcd}
+
+The \gls{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
+Of the total 25 patients in the original dataset, 10 with macroscopic, non-infiltrating lesions were selected for the validation of tractfinder in tumour patients.
+In one of the 10 subjects (sub-PAT22), only a preoperative session is available, giving a total of 19 unique scan sessions used for this dataset.
+The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural $T_1$-weighted images.
+In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which can be used for tumour deformation modelling in those patients with strong tumour deformation.
+The 10 selected subjects include 4 with tumours large enough (3 meningioma and 1 anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
+Of these 4 subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral" tracts.
+In all other subjects, the tracts were labelled ipsilateral or contralateral if they were in the same or opposite hemisphere as the tumour respectively.
+
+\gls{dmri} data was preprocessed with \gls{mppca} denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of FSL v.6.0.4).
+\gls{msmt}-\gls{csd}, tractfinder, TractSeg and manual tractography of the \gls{af}, \gls{cst}, \gls{ifof} and \gls{or} were performed as previously described.
+Given the disruption caused by the space-occupying and in cases infiltrating lesions, manual tractography using multi-ROI targeting alone did not produce acceptable results.
+Instead, the bundles were manually filtered to remove spurious and implausible streamlines using the same process as was used when curating the atlas training data.
+These filtered bundles are used as reference segmentations for the 10 BTCD subjects.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape}
@@ -95,21 +113,3 @@ No EPI distortion correction was performed, as it is frequently omitted from cli
 \end{table}
 \end{landscape}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{BTCD}
-\label{sec:data_btcd}
-
-The \gls{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
-Of the total 25 patients in the original dataset, 10 with macroscopic, non-infiltrating lesions were selected for the validation of tractfinder in tumour patients.
-In one of the 10 subjects (sub-PAT22), only a preoperative session is available, giving a total of 19 unique scan sessions used for this dataset.
-The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural $T_1$-weighted images.
-In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which can be used for tumour deformation modelling in those patients with strong tumour deformation.
-The 10 selected subjects include 4 with tumours large enough (3 meningioma and 1 anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
-Of these 4 subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral" tracts.
-In all other subjects, the tracts were labelled ipsilateral or contralateral if they were in the same or opposite hemisphere as the tumour respectively.
-
-\gls{dmri} data was preprocessed with \gls{mppca} denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of FSL v.6.0.4).
-\gls{msmt}-\gls{csd}, tractfinder, TractSeg and manual tractography of the \gls{af}, \gls{cst}, \gls{ifof} and \gls{or} were performed as previously described.
-Given the disruption caused by the space-occupying and in cases infiltrating lesions, manual tractography using multi-ROI targeting alone did not produce acceptable results.
-Instead, the bundles were manually filtered to remove spurious and implausible streamlines using the same process as was used when curating the atlas training data.
-These filtered bundles are used as reference segmentations for the 10 BTCD subjects.

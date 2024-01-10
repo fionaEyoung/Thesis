@@ -152,7 +152,7 @@ However, particularly with probabilistic tractography, it is near impossible to 
 Thus streamline-based \gls{cst} segmentations often contain parts of the somatosensory cortex whether intentionally or not.\autocite{Poulin2022a}
 In another conflation of descending and ascending pathways, the inclusion of the medial lemniscus is frequently seen in \gls{cst} segmentations (usually as it is not explicitly excluded, rather than being actively included).\autocite{Wasserthal2018,Warrington2020,Poulin2022a}
 
-The tractfinder CST atlas streamlines were obtained using Freesurfer parcellations \autocite{Desikan2006,FischlSalat2002} of the primary motor cortex.
+The tractfinder CST atlas streamlines were obtained using FreeSurfer parcellations \autocite{Desikan2006,FischlSalat2002} of the primary motor cortex.
 To boost the coverage of the lateral precentral gyrus,\autocite{Ebeling1992} which is typically neglected by tractography due to the difficulty in crossing the centrum semiovale and its preference for taking the straightest path, two sets of streamlines were generated.
 First, streamlines were seeded from the entire precentral gyrus, with include regions on the cerebral peduncles and mid-pons level, retaining the coordinates of the successful (included) seeds.
 Then, a dilated mask of those coordinates was subtracted from the motor cortex mask, and the tracking was repeated from this modified low-count seed mask.
@@ -231,17 +231,17 @@ For example, the lingual gyrus is cited in \textcite{Sarubbo2013} as one of thre
 % (\textcite{Hau2016} reported tractography projections to the lingual gyrus ``in almost all subjects".)
 
 After coursing through the temporal lobe above the roof of the temporal horn,\autocite{Martino2010,Kljajevic2014a} the \gls{ifof} converges into a narrow bundle to squeeze, alongside the \gls{uf}, through the temporal stem and into the frontal lobe (Fig. \ref{fig:ifof}).\autocite{Martino2010,Sarubbo2013}
-\textcite{Martino2010} maintained that ``at the level of the frontal operculum, the fibers of the IFOF strongly intersect with the terminal branches of other long association fasciculus", making dissection extremely difficult, and indeed not possible for that particular study.
+\textcite{Martino2010} maintained that ``at the level of the frontal operculum, the fibres of the IFOF strongly intersect with the terminal branches of other long association fasciculus", making dissection extremely difficult, and indeed not possible for that particular study.
 Nevertheless, \textcite{Sarubbo2013} have conducted the only dissection study to my knowledge analysing in detail of the frontal connections specifically of the IFOF.
 Other studies, e.g. \textcite{Burks2017}, focus on a particular cortical region and study all connections to the region.
-The disadvantage with such studies is in the aforementioned difficulty of simultaneously keeping the fibres of multiple bundles intact and traceable at once.
+The disadvantage with such studies is in the aforementioned difficulty in simultaneously keeping the fibres of multiple bundles intact and traceable at once.
 Connections to the inferior frontal gyrus, the seat of Broca's area, were confirmed in \textcite{Sarubbo2013} as well as \textcite{Hau2016}, and are consistent with a linguistic function.
 \textcite{Sarubbo2013} also found terminations in the middle frontal gyrus (and more specifically the dorsolateral prefrontal cortex) ``in all specimens".
 Finally, the orbitofrontal cortex, which is considered to play an important role in decision making, and frontal pole terminations were found in \textcite{Sarubbo2013} as well as in \textcite{Burks2017}.
 
-Taken together, the dissection studies confirm (i.e. reported in all or most specimens) primarily posterior terminations in the superior, middle, and inferior occipital gyri and anterior terminations in the middle and inferior frontal gyri, frontal pole, and orbito-frontal cortex.
+Taken together, the dissection studies confirm (i.e. reported in all or most specimens) primarily posterior terminations in the superior, middle, and inferior occipital gyri and anterior terminations in the middle and inferior frontal gyri, frontal pole, and orbitofrontal cortex.
 The evidence is less clear for wider connections to the parietal, posterior temporal and superior frontal cortices, so these will be excluded from the tractfinder atlas.
-Streamlines were seeded in the temporal stem (extreme capsule) and selected according to cortical targets derived from the Freesurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation.\footnote[2]{frontal labels: 1\{1,2\}1\{01,05,15,54,12,13,14,53,63,24,65\}; occipital labels: 1\{1,2\}1\{02,19,20,58,59\}}
+Streamlines were seeded in the temporal stem (extreme capsule) and selected according to cortical targets derived from the FreeSurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation.\footnote[2]{frontal labels: 1\{1,2\}1\{01,05,15,54,12,13,14,53,63,24,65\}; occipital labels: 1\{1,2\}1\{02,19,20,58,59\}}
 
 \section{Streamline tractography and filtering}
 
@@ -279,7 +279,7 @@ Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsol
 \end{figure}
 
 The percentage of streamlines filtered for each tract and summarised reasons for removal are presented in Table \ref{tab:filt}.
-What is immediately apparent is the large discrepancy between tracts in the number of streamlines filtered, an indication of how much easier it is to reconstruct some tracts over others.
+What is immediately apparent is the large discrepancy in the number of streamlines filtered between tracts, an indication of how much easier it is to reconstruct some tracts over others.
 For the \gls{cst}, thanks to the well targeted cortical seeding and structurally highly distinct pathway, it was only necessary to remove a small percentage of streamlines, mostly OFPs in the centrum semiovale.
 By contrast, approximately half of all \gls{ifof} streamlines were discarded, due thanks to the tight association of multiple tracts in the \gls{ss} resulting in overwhelming contamination from abutting structures, in particular the \gls{vof}.
 The absolute number of retained streamlines is of little consequence to subsequent steps in creating the atlas, after ensuring full coverage of the tract in every training subject.
@@ -319,7 +319,7 @@ The absolute number of retained streamlines is of little consequence to subseque
     \includegraphics[width=0.28\textwidth]{chapter_3/or_filtered.png}%
     \includegraphics[width=0.28\textwidth]{chapter_3/af_filtered.png}%
     \includegraphics[width=0.28\textwidth]{chapter_3/ifo_filtered.png}}
-  \caption{False positive streamlines filtered from each tract, aggregated from all subjects (top row) and final set of selected streamlines (bottom row). Reproduced from \textcite{Young2024}}\label{fig:filter}
+  \caption{False positive streamlines filtered from each tract (top row), aggregated from all subjects, and final set of selected streamlines (bottom row). Reproduced from \textcite{Young2024}}\label{fig:filter}
 \end{figure}
 
 

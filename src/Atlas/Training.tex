@@ -37,10 +37,10 @@ Requiring diffeomorphic registration at the point of application would greatly i
 % Query link: https://www.webofscience.com/wos/woscc/summary/28ab4b31-92c1-4d9e-b117-d5cd310c9927-a4fe70c6/relevance/1
 The issue of deep learning's data requirements has been attracting increased attention.
 A search on the online publication database Web of Science for \spverb|(few OR single OR one) AND shot AND learning|  (excluding results about single-shot echo planar imaging) revealed a sharply increasing trend in publication volume within the field of medical imaging (Fig. \ref{fig:pubs}).
-A recent example, by \textcite{Liu2023a} and building on previous work in \textcite{Lu2021}, looked at using single-shot learning to train a deep neural detwork, an extension of the TractSeg architecture, for white matter tract segmentation.
+A recent example, by \textcite{Liu2023a} and building on previous work in \textcite{Lu2021}, looked at using single-shot learning to train a deep neural network, an extension of the TractSeg architecture, for white matter tract segmentation.
 They trained a network on 60 of the 72 total TractSeg white matter tracts, and applied data-augmentation and transfer learning techniques to adapt the model to segment the remaining 12 tracts using only a single exemplar training dataset for those novel tracts, which included both the \gls{cst} and \gls{or}.
 
-Considering only their best results (which differed depending on how many novel tracts the network was extended to) for these two tracts, they achieved a mean Dice score of 0.719 for the \gls{cst} and 0.624 for the \gls{or}, equally good or worse than for tractfinder ``trained" even on only a single dataset (Fig. \ref{fig:ntrain}).
+Considering only their best results (which differed depending on how many novel tracts the network was extended to) for these two tracts, they achieved a mean \gls{dice} of 0.719 for the \gls{cst} and 0.624 for the \gls{or}, equally good or worse than for tractfinder ``trained" even on only a single dataset (Fig. \ref{fig:ntrain}).
 While the computational time spent on network training is not disclosed in either \textcite{Liu2023a} or \textcite{Wasserthal2018}, \textcite{Berto2021} re-trained their own TractSeg model as a benchmark comparison for the streamline clustering method Classifyber and reported GPU-accelerated training times of 3-7 hours.
 Even so, one-shot training of a deep neural network appears to offer no improvement over simply registering a segmentation from one subject to another.
 

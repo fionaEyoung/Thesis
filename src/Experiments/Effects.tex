@@ -21,8 +21,8 @@ These two possibilities are investigated in the following sections, beginning wi
 It is important to assess the applicability of image processing techniques developed with research quality data in acquisitions more typical of a clinical setting.
 Advanced \gls{dmri} processing techniques may sometimes set constraints on the input data, such as a recommended or required minimum number of diffusion weighted volumes (angular resolution), $b$-values or spatial resolution.
 If it can be demonstrated that an image processing pipeline produces excellent results in a high quality research dataset, which can be interpreted with confidence, then the question follows:
-Were one to acquire a lower quality dataset of the same subject, and perform the same data processing, how comparable would the resulting segmentation be to that of the high quality scan?
-This is the question explored in the following study, which makes use of the high quality \gls{hcp} \gls{dmri} data (Section \ref{sec:data}) to determine the minimum data requirements to obtain successful segmentation, comparing different numbers of direction samples, $b$-values and post-processing strategies, as well as the affects of decreasing data quality on segmentation stability for three different methods (tractfinder, tracotgraphy and TractSeg; see Section \ref{sec:methods} for further details).
+Were one to acquire a lower quality dataset of the same subject and perform the same data processing, how comparable would the resulting segmentation be to that of the high quality scan?
+This is the question explored in the following study, which makes use of the high quality \gls{hcp} \gls{dmri} data (Section \ref{sec:data}) to determine the minimum data requirements to obtain successful segmentation, comparing different numbers of direction samples, $b$-values and post-processing strategies, as well as the affects of decreasing data quality on segmentation stability for three different methods (tractfinder, tractography and TractSeg; see Section \ref{sec:methods} for further details).
 
 % \paragraph*{Data and methods}
 
@@ -64,7 +64,7 @@ This comparison was made for each combination of diffusion scheme and \gls{csd} 
 \begin{figure}
   \centering
   \includesvg[width=\textwidth,inkscapelatex=true,pretex=\sffamily\footnotesize]{chapter_6/self_dice.svg}
-  \caption{Self dice scores for all tracts and methods. Each datapoint represents a comparison with the corresponding segmentation in DWI-1, the highest quality acquisition scheme. Outlined markers represent the mean over all subjects.}
+  \caption{Self Dice scores for all tracts and methods. Each datapoint represents a comparison with the corresponding segmentation in DWI-1, the highest quality acquisition scheme. Outlined markers represent the mean over all subjects.}
   \label{fig:self_dice}
 \end{figure}
 
@@ -107,7 +107,7 @@ As an alternative to \gls{ssepi}, multi-shot sequences have been proposed.
 These include interleaved and \gls{rsepi} sequences which, in general, only traverse a portion of $k$-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) while increasing scan time\autocite{Wang2018}.
 RESOLVE (readout segmentation of long variable echo-trains), a Siemens product, is one example of a commonly used \gls{rsepi} sequence for high quality three-scan trace weighted images with high in-plane resolution.
 
-While RS sequences can be combined with acceleration techniques including generalised autocalibrating partially parallel acquision (GRAPPA) and simultaneous multislice (SMS), they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
+While RS sequences can be combined with acceleration techniques including generalised autocalibrating partially parallel acquisition (GRAPPA) and simultaneous multi-slice (SMS), they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
 For example, in \textcite{Wang2018} authors compared interleaved and \gls{rsepi} sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4mm thickness!
 In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE sequence with 15 segments, six diffusion weighted directions, and a scan time of 10:34min.
 For comparison, the clinical \gls{ssepi} \gls{dti} sequence currently used intraoperatively at \gls{gosh} is a 30 direction $b=1000s/mm^2$ acquisition lasting just 4:57min with 2.3mm isotropic voxels.
@@ -130,7 +130,7 @@ The acquisition parameters of the three test sequences, along with the standard 
   % \setlength{\tabcolsep}{0.3em}
   \footnotesize
   \begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X} \toprule
-    & \gls{gosh} VIDA “clinical” (RESOLVE) & \gls{gosh} VIDA Clinical \gls{dti} & Test scan 1: 7seg 6xb800 & Test scan 2: 3seg 12xb1000 & Test scan 3: 3seg 20xb1000 \\
+    & \gls{gosh} VIDA “clinical” (RESOLVE) & \gls{gosh} VIDA Clinical \gls{dti} & Test scan 1: 7seg 6\x b800 & Test scan 2: 3seg 12\x b1000 & Test scan 3: 3seg 20\x b1000 \\
   \midrule
    $n$ directions & 3 & 30 & 6 & 12 & 20 \\
    b values & 0, 800 & 0, 1000 & 0, 800 & 0, 1000 & 0, 1000 \\
@@ -156,7 +156,7 @@ Finally, the \gls{cst} was reconstructed with a simple probabilistic tractograph
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{chapter_6/rsepi.png}
-  \caption{Baseline \gls{ssepi} diffusion sequence and three \gls{rsepi} test sequences. From top: Baseline (30xb1000 SSEPI DTI), 7seg 6xb800, 3seg 12xb1000, 3seg 20xb1000}
+  \caption{Baseline \gls{ssepi} diffusion sequence and three \gls{rsepi} test sequences. From top: Baseline (30\x b1000 SSEPI DTI), 7seg 6\x b800, 3seg 12\x b1000, 3seg 20\x b1000}
   \label{fig:rsepi}
 \end{figure}
 
@@ -181,7 +181,7 @@ The third test scan additionally used SMS acceleration which appears to have sig
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{chapter_6/3_fod_tg.png}
   \end{subfigure}
-  \caption{\glspl{fod} at the centrum semiovale and full \gls{cst} tractography streamlines. From left to right, top to bottom: Baseline (30xb1000 SSEPI DTI), 7seg 6xb800, 3seg 12xb1000, 3seg 20xb1000}
+  \caption{\glspl{fod} at the centrum semiovale and full \gls{cst} tractography streamlines. From left to right, top to bottom: Baseline (30\x b1000 SSEPI DTI), 7seg 6\x b800, 3seg 12\x b1000, 3seg 20\x b1000}
   \label{fig:rsepi-fod}
 \end{figure}
 
