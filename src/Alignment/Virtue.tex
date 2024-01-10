@@ -191,6 +191,12 @@ Nevertheless, accurate white matter imaging could still be informative in assess
   \label{fig:fa_hist}
 \end{figure}
 
+\begin{figure}[htb!]
+  \includesvg[width=\textwidth,inkscapelatex=true,pretex=\small\sffamily]{chapter_4/ventricles.svg}
+  \caption{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. \textbf{a.} \gls{btc} sub-PAT03. \textbf{b.} \gls{btc} sub-PAT26}
+  \label{fig:ventricles}
+\end{figure}
+
 A second key limitation of the present deformation model relates to the characteristics of the surrounding tissues rather than the tumour itself.
 The displacement of a position in the brain $P$ depends only on the distances between it, the tumour, and the brain surface.
 Otherwise, the brain is treated as a homogenous mass, when in reality it comprises regions with very different mechanical properties.
@@ -200,9 +206,3 @@ These tissue-dependent effects are completely omitted from the presented model, 
 Controlling the magnitude of deformation adjacent to the tumour by adjusting the deformation decay constant $\lambda$ can mitigate this affect to an extent, however this increases the need for case-by-case manual parameter adjustment, which we wish to avoid.
 Ultimately, accurate registration throughout the brain cannot be achieved with such a simple model, as indeed was never the aim.
 Future work could investigate the feasibility of combining the radial deformation with adaptable tissue-dependent elasticity, modelled on previous similar works in the registration space.\autocite{Rohde2003,Duay2004}
-
-\begin{figure}[htb!]
-  \includegraphics[width=\textwidth]{chapter_3/ventricles.png}
-  \caption{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. Left: BTCD sub-PAT03, right: BTCD sub-PAT26}
-  \label{fig:ventricles}
-\end{figure}
