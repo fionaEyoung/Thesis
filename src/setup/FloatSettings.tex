@@ -42,23 +42,11 @@
   % Figure path
   \graphicspath{{draft_figs/}{figs/}}
   \svgpath{{draft_figs/}{figs/}}
-  % Endfloats with chapter counters
-  \usepackage[nolists, figuresonly]{endfloat}
+  \setkeys{Gin}{draft=false}
 }{%
   \graphicspath{{figs/}{draft_figs/}}
   \svgpath{{figs/}{draft_figs/}}
-  \usepackage[disable]{endfloat}
 }
-
-\makeatletter%
-  \@ifpackagewith{endfloat}{disable}{%
-    \setkeys{Gin}{draft=false}}{%
-    \renewcommand{\efloatseparator}{}
-    \renewcommand\thepostfigure{\arabic{chapter}.\arabic{postfig}}
-    \AddToHook{cmd/chapter/before}{%
-      \processdelayedfloats
-      \setcounter{postfig}{0}}}
-\makeatother%
 
 % "Times" symbol for resolutions etc.
 \newcommand{\x}{\nobreak\hspace{.1em minus .045em}$\times$\nobreak\hspace{.1em minus .045em}}
