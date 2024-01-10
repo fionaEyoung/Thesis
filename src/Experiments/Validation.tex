@@ -67,7 +67,7 @@ Secondly, the binary nature of a \gls{dice} discounts the additional confidence 
 Assigning equal weight to a segmentation voxel only marginally above threshold and that with the highest overall value doesn't provide a fair assessment of a method's performance and leads to tract maps which are visually harder to interpret.
 
 \begin{table}[h!]
-  \caption{}
+  \caption{Intensity thresholds for binary comparison measures.}
   \label{tab:thresh}
   \small
   \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}X c >{\raggedright\arraybackslash}X}
@@ -257,14 +257,14 @@ The reliance on such large datasets thus presents a significant challenge to dee
 
 The present analysis includes clinical scans with non-deforming lesions, meaning the orientation atlas could be registered to the target image using only affine registration without the need for tumour deformation modelling.
 For results in clinical scans featuring deforming lesions, see Sections \ref{sec:btcd} and \ref{sec:imri}. %\textcite{Young2022}
-Overall, quantitative results in the clinical (GOSH \& NHNN) dataset were highly consistent with those seen in the healthy datasets.
+Overall, quantitative results in the clinical (\gls{gosh} \& \gls{nhnn}) dataset were highly consistent with those seen in the healthy datasets.
 Although this dataset contained a mixture of adult and paediatric patients, scanned at two different hospitals, when the results were split on hospital / age group (paediatric or adult), no appreciable difference in results was observed.
 Equally, no systematic difference in segmentation scores was observed between intraoperative and preoperative datasets.
 
 Two example clinical subjects, one adult and one paediatric, are displayed in Figures \ref{fig:lb.nh}--\ref{fig:lb.gosh} and demonstrate key observations in the clinical applicability of the compared methods.
 In Figure \ref{fig:lb.nh}, a sagittal view displays the interaction between the surgical resection cavity of a frontal tumour and the \gls{cst}.
 Tractfinder maps portions of the \gls{cst} in close proximity to the resection site, as does manual tractography, where the TractSeg segmentations are far more conservative and even incomplete, potentially missing \gls{cst} locations influenced by oedema, brain shift, or other tumour effects.
-Even though parts of the precentral sulcus remain some distance from the resection site, the slight brain shift seems to have made fully recognising the \gls{cst} challenging for TractSeg. \note{less patronising?}
+Even though parts of the precentral sulcus remain some distance from the resection site, the slight brain shift may have affected TractSeg's ability to fully recognise the \gls{cst}.
 Intraoperative imaging of a paediatric tumour patient in Figure \ref{fig:lb.gosh} reveals the ipsilateral \gls{or} immediately deep to the resection cavity.
 Minimal brain shift and diffusion disturbance from this small craniotomy have enabled good reconstruction of the affected tract by all techniques.
 The anterior extent of Meyer's loop has additionally been captured by tractography and tractfinder, but is absent from both TractSeg results.
@@ -279,7 +279,7 @@ Further examples of tract reconstructions in intraoperative imaging are displaye
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
   \includesvg[width=1.05\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_GOSH_3.svg}}
-  \caption{Intraoperative imaging for a paediatric temporal \note{tumour type} patient, with bilateral \gls{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5mm intervals and as full volumes in the right-most column.}
+  \caption{Intraoperative imaging for a paediatric temporal diffuse low grade astrocytoma patient, with bilateral \gls{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5mm intervals and as full volumes in the right-most column.}
   \label{fig:lb.gosh}
 \end{figure}
 
@@ -382,11 +382,11 @@ Across the whole dataset, including both deforming and non-deforming tumours, tr
 
 \begin{figure}[htb!]
   \includegraphics{chapter_5/btcd_box.pdf}
-  \caption{\note{caption}}
+  \caption{Similarity scores for tractfinder and TractSeg DKFZ in the \gls{btc} dataset, compared with filtered manual tractography.}
   \label{fig:btcd_box}
 \end{figure}
 
-Selected tract segmentations in the \gls{btc} dataset are shown in Figure \ref{fig:tumours} (panels a, b, d, and f), alongside additional examples from the NHNN and \gls{gosh} clinical data.
+
 Figure \ref{fig:btcd_def} shows how deformation modelling improves segmentation accuracy in most cases, measured with density correlation, although the sample size is small, and there is considerable variation.
 In two subjects, there is no clear overall improvement (average across all tracts) with the addition of deformation modelling.
 For subject 11 (highest scores in Figure \ref{fig:btcd_def}), the superior frontal location of the tumour barely affected any of the studied tracts, hence the overall high score and imperceptible improvement with the addition of deformation modelling.

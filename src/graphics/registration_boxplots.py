@@ -43,7 +43,7 @@ def main():
   all_metrics_fig, all_metrics_axs = plt.subplots(ncols=2,
                                                   nrows=ceil(len(include_metrics)/2),
                                                   layout='constrained',
-                                                  figsize=set_size(subplots=(ceil(len(include_metrics)/2),2)))
+                                                  figsize=set_size(subplots=(ceil(len(include_metrics)/2),2), fraction=1.08))
 
   for metric, ax in zip(include_metrics, all_metrics_axs.flat):
 

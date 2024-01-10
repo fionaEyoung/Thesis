@@ -143,7 +143,7 @@ A digital recreation of the original data and accompanying ground truth streamli
 Figure \ref{fig:fixip} demonstrates the effect of using the fixel framework to reconstruct a tract segmentation with consistent intensity values across crossing fibre regions.
 To address the concern that renormalising each $I_p$ could excessively amplify noise, lending equal voice to tiny \gls{fod} lobes that make practically no contribution to the total voxel signal, we can place a minimum threshold on the lobe amplitude for a single fixel during the \gls{fod} segmentation process.
 
-\begin{figure}
+\begin{figure}[tbh!]
   \centering
   \includesvg[width=1.08\textwidth,pretex=\small\sffamily,inkscapelatex=true]{chapter_3/fixel.svg}
   \caption{Demonstration of fixel-wise inner product using the synthetic Fibre Cup Phantom. \textbf{a.} Seven ground truth streamline bundles intesect throughout the phantom. \textbf{b.} The brown tract intersects with three other paralell bundles. The crossing fibres are denser and therefore dominate the \gls{fod} reconstruction (\textbf{d.}), resulting in a drop in tractfinder amplitude. \textbf{c.} By computing the inner product with each fixel separately, weigthed by the overall \gls{fod} amplidute, and taking the maximum value, a smooth tract reconstruction is achieved. \textbf{e.} \glspl{fod} in a second crossing area, showing the brown and purple tracts intersecting at an oblique angle. \textbf{f.} First segmented fixel. \textbf{g.} Second segmented fixel. \textbf{h.} \gls{tod} atlas for the brown tract.}\label{fig:fixip}

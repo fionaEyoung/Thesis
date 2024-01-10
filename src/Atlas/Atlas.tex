@@ -1,7 +1,7 @@
 \chapter{Tract orientation atlases and mapping}
 \label{chap:atlas}
 
-The chosen approach to fulfil the aims laid out in section \ref{sec:problem} combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation.
+The chosen approach to fulfil the aims laid out in section \ref{sec:problem} combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation, and is named \textit{tractfinder}.
 It is clear that the task of \gls{wm} tract identification cannot be accomplished without incorporating anatomical priors, and that those priors cannot account for individual differences.
 The incorporation of anatomical priors can be automated for streamline tractography, as is done for several prior works including the FSL tool XTRACT\autocite{Warrington2020} and the white matter query language framework.\autocite{Wassermann2016}
 These approaches still rely on tractography as the means for parsing the local orientation information in the test subject, and consequently inherit many associated drawbacks such as the computational time and power required for whole brain tractography, or the difficulties tracking through oedema or around tumours.

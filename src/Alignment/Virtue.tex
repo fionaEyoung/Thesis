@@ -36,8 +36,6 @@ Whether performance in the latter criteria is satisfactory will be measured thro
 We will consider a radial model of tumour deformation, previously described in \textcite{Young2022}, assuming the tumour has expanded outwards from a central seed, and that surrounding tissue is displaced along the same radial directions.
 \textcite{Cuadra2004} similarly used a radial expansion assumption, but for modelling the interior tumour region (rather than outside the tumour), while an optical flow algorithm was implemented for image matching outside the tumour.
 
-\note{add picture of tumour and affine atlas with big misalignment}
-
 \subsection{Development of a radial deformation model}
 
 We begin with a radial deformation model described by \textcite{Nowinski2005}.
@@ -119,7 +117,7 @@ To obtain the inverse mapping for the exponential model, we solve equation (\ref
   P = P' - \mathbf{\hat{e}}(D_t s c - \frac{D_b}{\lambda}\mathcal{W}_0(\frac{-\lambda D_t s (1-c) e^{-\lambda(D_{p'}-D_tsc)/D_b}}{D_b}))
 \end{align}
 
-where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$. \note{derive this??}
+where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$.
 
 The most appropriate value for the exponential decay parameter $\lambda$ will depend on characteristics of the specific lesion being modelled.
 For example, smaller lesions (20-30mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved.
@@ -155,7 +153,6 @@ Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ 
 Note that $\lambda_{max}$ varies throughout the brain, being a function of the relative distances to brain and tumour surfaces for each specific $P$.
 
 \begin{SCfigure}[][h!]
-  \captionsetup{format=plain}
   \includegraphics{chapter_4/k.pdf}
   \caption{Deformation factor $k$ as a function of $D_P$. $\lambda$ must be small enough such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_P}{D_t})$ (dashed line). An exponential $k$ with $\lambda_{max}$ is plotted in solid black, compared with a linear $k$ as proposed in \textcite{Nowinski2005} (dotted line).}
   \label{fig:k}
@@ -188,7 +185,8 @@ In depth exploration of such additional distortion models was not pursued for th
 Nevertheless, accurate white matter imaging could still be informative in assessing the lesion and informing treatment plans such as radiotherapy targeting,\autocite{Jena2005,Berberat2014} so the extension of this framework to include robust handling of infiltration could be an interesting avenue for future work.
 
 \begin{figure}[htb!]
-  \includegraphics{chapter_4/tumour_fa.pdf}
+  \makebox[\linewidth][r]{%
+  \includegraphics{chapter_4/tumour_fa.pdf}}
   \caption{A series of paediatric brain tumour cases. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived directionally encoded colour maps overlaid. Patients 4 and 5 have infiltrating tumours centred on the left and right basal ganglia respectively. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 4 and 5, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
   \label{fig:fa_hist}
 \end{figure}
