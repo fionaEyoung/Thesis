@@ -310,8 +310,8 @@ The spatial frequencies and phases in this raw signal can be represented in the 
 To reconstruct an image in the spatial domain, two Fourier transforms are computed, first for each signal train, and secondly for each time sample across all phase encoding steps.
 
 \begin{figure}
-  \includesvg[pretex=\sffamily\small,inkscapelatex=true]{chapter_1/kspace_axial.svg}
-  \caption{Sampled MR signals encode 2D images. \textbf{a.} A single echo train is sampled at dwell time intervals $t_d$, where each sample corresponds to a point in reciprocal $k$-space, and $t_d$ determines the frequency resolution along $k_x$ and the image matrix size along $x$. \textbf{b.} Repeated echos with varying \gls{pe} gradient strengths sample the image along $k_y$. \textbf{c--d.} The image in spatial dimensions is reconstructed by taking the 2D Fourier transform of the $k$-space image.}
+  \includesvg[width=\textwidth,pretex=\sffamily\small,inkscapelatex=true]{chapter_1/kspace_axial.svg}
+  \caption{Sampled MR signals encode 2D images. \textbf{a.} A single echo train is sampled at dwell time intervals $t_d$, where each sample corresponds to a point in reciprocal $k$-space, and $t_d$ determines the frequency resolution along $k_x$ and the image matrix size along $x$. \textbf{b.} Repeated echos with varying \gls{pe} gradient strengths sample the image along $k_y$. \textbf{c--d.} The image in spatial dimensions is reconstructed by taking the 2D \gls{ft} of the $k$-space image.}
   \label{fig:kspace}
 \end{figure}
 
@@ -342,7 +342,8 @@ Similarly, very short echo times ($TE\ll T_2$) produce images with no $T_2$-base
 Finally if both $TR\gg T_1$ and $TE\ll T_2$ then contrast derived from different relaxation properties disappears altogether, producing a \gls{pd} weighted image.
 
 Sequences with $T_1$ or $T_2$ weighted contrast are some of the most common sequences employed in clinical and research \gls{mri} as they can produce images with high resolution and anatomical detail (Fig. \ref{fig:ortho}).
-Alongside these so-called ``conventional" contrasts exist a large collection of advanced imaging techniques that are sensitive to particular tissue properties or activity.
+Alongside these so-called ``conventional" contrasts exist a large collection of advanced imaging techniques that are sensitive to particular tissue properties or activity.%
+\footnote[2]{The term ``contrast" is also associated in clinical contexts with the use of external agents (typically injected) with paramagnetic properties that shorten local $T_1$ times and increase image brightness particularly in blood vessels and in areas of \gls{bbb} disruption, making it an important tool in oncological imaging. This will be referred to specifically as \gls{dce} \gls{mri}, or simply contrast enhancement, where applicable, while here we will use ``contrast" more generally to refer to manipulation of pulse sequence elements to highlight different tissue properties.}
 \Gls{fmri}, for example, involves the detection of subtle contrast changes produced by changes in the relative concentrations of oxygenated and deoxygenated blood, which have different magnetic properties and influence the local magnetic field accordingly.
 A spike in neural activity within a particular region causes increased flow of oxygen rich blood to that area, and the resulting local magnetic field disturbances have a measurable effect on proton relaxation, producing a \textit{blood oxygentation level dependent} (BOLD) signal.
 \gls{fmri} is an important clinical and research tool for measuring association between activity in particular brain areas and observable behaviour or stimuli, such as motor activity, speech, or visual inputs.
@@ -436,7 +437,7 @@ Measuring enough samples in the extremely short time available before the signal
 
 \begin{figure}
   \includesvg[width=\textwidth,inkscapelatex=true]{chapter_1/dwepi.svg}
-  \caption{Diffusion weighted \gls{epi} pulse sequence diagram}
+  \caption{Diffusion weighted \gls{epi} pulse sequence diagram, with diffusion gradients, drawn in dark grey to differentiate them from orthogonal slice, phase and frequency encoding, either side of a 180\textdegree \gls{rf} inversion pulse. All orthogonal gradients may be combined to produce diffusion weighting along an arbitrary direction. An entire slice of $k$-space is acquired from a single echo train, using a strong switching frequency encoding gradient $G_f$ to encode lines along $k_x$, combined with ``blipped" phase encoding gradients $G_p$ to advance the signal through $k_y$.}
   \label{fig:dwepi}
 \end{figure}
 

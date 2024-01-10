@@ -11,7 +11,7 @@ The following review will focus on some of the most complex and invasive procedu
 In England between 2013--2018, oncological procedures were the third most common of all neurosurgery subspecialties comprising approximately 9\% of total, while functional neurosurgeries (including for epilepsy and deep brain stimulation) made up 8\%\autocite{Wahba2022}.
 At \gls{gosh} in London, a leading paediatric centre, 10\% of neurosurgical procedures between 2018--2022 were tumour-related, while 12\% were for epilepsy\autocite{gosh2023}.
 
-Invasive brain tumour operations are both highly complex and variable in their, neurophysiology, microbiology, treatment plans, and prognosis.
+Invasive brain tumour operations are both highly complex and variable in their neurophysiology, microbiology, treatment plans, and prognosis.
 Such diversity presents a significant barrier to the development of image processing methods intended for generalised use in tumour patients\autocite{Bauer2013}.
 Neoplasms occur throughout the brain, with the location having unique impact on surrounding structures and associated function.
 A tumour's natural history and histopathology also play a large role in determining its effects on its environment.
@@ -20,16 +20,16 @@ On the other hand, many non-malignant tumours including most meningiomas and low
 
 This project is concerned with the visualisation of cerebral white matter tracts, and therefore this review will focus on those indications and interventions in which damage to and navigation around such structures is of particular concern.
 This is typically not the case for posterior fossa and suprasellar lesions, although there is growing interest in the role of the cerebellum in wider cognition and the brain functional network, and the surgical community is paying increasing attention on the effects of posterior fossa surgery on cerebellar tracts\autocite{Toescu2021,Skye2023}.
-Brainstem tumours are often not candidates for surgical removal due to their precarious \note{/eloquent} location, with limited access and excessive risk to vital brainstem function.
+Brainstem tumours are often not candidates for surgical removal due to their eloquent location, with limited access and excessive risk to vital brainstem function.
 The discussions in this section therefore apply primarily to supratentorial lesions in the cerebral hemispheres and thalamus, candidates for biopsy or resection via craniotomy.
 The most common intracranial tumours are meningiomas, arising from the protective membranes surrounding the \gls{cns}, of which the majority are benign with good overall survival rates and relatively low-risk surgical treatment \autocite{Rogers2015,Spena2022}.
 Far more complex and controversial are decisions surrounding the surgical treatment of gliomas, those tumours originating in glial cells including astrocytes and oligodendrocytes which are the most common malignant primary \gls{cns} neoplasms in both adults\autocite{Ostrom2015,Wanis2021} and children\autocite{Ostrom2015,Bauchet2009}.
 While challenges regarding functional preservation and optimal surgical strategy are relevant to all intracranial surgeries, they are acutely highlighted within the context of glioma literature.
-These tumours can embed themselves insidiously within the brain's functional architecture with devastating prognosis, facing \note{/challenging} oncologists and surgeons with stark dilemmas in their bid to maximise both patient survival and quality of life.
-Gliomas are classified into four \gls{who} \note{malignancy} grades, commonly split into \gls{lgg} (\gls{who} grades 1-2) and \gls{hgg} (\gls{who} grades 3-4) to reflect differences is aggressiveness and prognosis.
+These tumours can embed themselves insidiously within the brain's functional architecture with devastating prognosis, facing challenging oncologists and surgeons with stark dilemmas in their bid to maximise both patient survival and quality of life.
+Gliomas are classified into four \gls{who} grades, commonly split into \gls{lgg} (\gls{who} grades 1-2) and \gls{hgg} (\gls{who} grades 3-4) to reflect differences is malignancy and prognosis.
 There are many subtypes based on histological and genetic characteristics which are periodically updated\autocite{Louis2021}, but this overview will focus on the broad categories of \gls{hgg} and \gls{lgg}.
 
-\subsection{Extent of resection}
+\subsection{Extent of resection}\label{sec:eor}
 
 Complete removal of all pathological tissue, perhaps counterintuitvely, is not always the surgical objective.
 Though it may in many cases be the ideal outcome from an onocological perspective, this scenario would frequently be in conflict with other equally important outcome indicators, such as the preservation of surrounding brain structures and the patient's neurological wellbeing.
@@ -37,7 +37,7 @@ Successfully balancing these consequences is a central dilemma in neurosurgical 
 In theory, \gls{eor} is a straightforward concept, but in practice it is ill-defined and inconsistently reported, while remaining central to studies of surgical efficacy and outcomes.
 
 Easily defined in oncology%
-\footnote[2]{\gls{eor} is relevant to epilepsy surgery, although the terminology and calculations here are different. Epileptogenic centres cannot always be distinguished and measured on imaging, and functionally eloquent tissue may be the clear source of epileptic \note{activity}, and thus subject to removal.}
+\footnote[2]{\gls{eor} is relevant to epilepsy surgery, although the terminology and calculations here are different. Epileptogenic centres cannot always be distinguished and measured on imaging, and functionally eloquent tissue may be the clear source of epileptic activity, and thus subject to removal.}
 as either the absolute volume or relative percentage of tumour tissue removed, accurately and consistently determining \gls{eor} is very difficult.
 It is often reported in terms of broad categories, the most common being biopsy, \gls{str} or partial resection (PR), near total resection, \gls{gtr} and supratotal resection\autocite{Wykes2021,Karschnia2021}.
 There is also no general consensus on how these categories are defined, making comparison between studies even more difficult\autocite{Karschnia2021}.
@@ -48,7 +48,7 @@ Full volumetric analysis requires accurately segmenting the entire lesion, thoug
 
 Even manual delineation can be unreliable and inconsistent, especially for tumours with poorly defined borders and on postoperative imaging \autocite{Ertl-Wagner2009,Bo2017,Visser2019}.
 Semi- or fully automatic segmentation improves reproducibility\autocite{Ertl-Wagner2009,Sezer2020} and modern algorithms are proving ever more accurate, although there are still challenges regarding computational performance and robust clinical translation\autocite{Angulakshmi2017,Wadhwa2019,Fawzi2021}.
-Estimates of \gls{eor} can also be thrown off \note{/compromised} by post-operative brain tissue shifting and obscuring the actual volume of resected tumour \autocite{Schucht2014a}, while microscopic tumour cell invasion means that complete resection, as viewed either on imaging or by intraoperative visual assessment, does not necessarily mean no tumour residue remains\autocite{Yordanova2017}.
+Estimates of \gls{eor} can also be compromised by post-operative brain tissue shifting and obscuring the actual volume of resected tumour \autocite{Schucht2014a}, while microscopic tumour cell invasion means that complete resection, as viewed either on imaging or by intraoperative visual assessment, does not necessarily mean no tumour residue remains\autocite{Yordanova2017}.
 Finally, while there is the most focus on reporting relative reductions in tumour volume as a percentage of original size, more recent studies have argued that absolute residual tumour volume is as, if not more relevant for determining postoperative outcomes\autocite{Ius2012,Rincon-Torroella2019,Smith2008,Karschnia2021}.
 
 \subsection{Oncological and neurological outcomes: Necessarily in opposition?}
@@ -58,14 +58,13 @@ Inconsistent reporting of \gls{eor} is one factor complicating the study of its 
 % For many tumour types, particularly aggressive tumours such as \glspl{hgg}, subtotal resection is \note{never} curative even with adjuvant therapy.
 Broadly speaking, \gls{gtr} has been shown to increase overall and progression free survival over \gls{str} across age groups in both high \autocite{Hatoum2022, Han2020, Adams2016, McCrea2015, Bloch2012, McGirt2009, Kramm2006} and low grade \autocite{Keles2001, Pollack1995, Sanai2008} gliomas.
 For \gls{lgg}, and especially in paediatric patients, \gls{gtr} has become the recommended standard of care, as complete resection leads to a lower rate of recurrence\autocite{Berger1994,Claus2005}.
-In particular, maximal resection of \glspl{lgg} drastically reduces the risk of residual tumour evolving into \gls{hgg} (known as malignant transformation \note{This is only true in adult LGG - in children WHO grade I LGG, which constitute the majority of LGG  never undergo malignant transformation})\autocite{Duffau2013,Hervey-Jumper2016,Rincon-Torroella2019}.
-More recent voices have even argued for supratotal resection, beyond the margins of any abnormally enhancing areas on T1w and FLAIR T2w \gls{mri} scans, as reviewed in \textcite{deLeeuw2019}.
-There is some evidence, as published in \textcite{Yordanova2011}, to suggest that supratotal resection in \glspl{lgg} is followed by fewer cases of malignant transformation and improved progression-free survival. \note{again this only applies to adult WHO grade II astrocytomas - Hughes Duffau has been the main proponent of this and is quite controversial}
+In particular, maximal resection of \glspl{lgg} drastically reduces the risk of residual tumour evolving into \gls{hgg} (known as malignant transformation \autocite{Duffau2013,Hervey-Jumper2016,Rincon-Torroella2019}, though this is only a concern in adult patients, as malignant transformation in paediatric \glspl{lgg} is exceedingly rare\autocite{Collins2020}.
+More recent voices have even argued for supratotal resection, beyond the margins of any abnormally enhancing areas on $T_1$-weighted and FLAIR $T_2$-weighted \gls{mri} scans, as reviewed in \textcite{deLeeuw2019}.
+There is limited evidence, though controversial, to suggest that supratotal resection of \gls{who} grade 2 gliomas in adults is followed by fewer cases of malignant transformation and improved progression-free survival \autocite{Yordanova2011}.
 
 However, due to a general lack of prospective randomisation and robust comparison with appropriately matched controls, drawing definitive conclusions from studies investigating the effects of \gls{eor} (or other surgical variables) on post-operative outcomes is contentious\autocite{deLeeuw2019,Keles2001}.
 Results may be confounded by selection biases, for example, different tumour histological subtypes may lend themselves more or less easily to greater \gls{eor}, or arise more frequently in eloquent areas of the brain (which include cortex and subcortical \gls{wm} subserving language, motor, and sensory functions, as well as the thalamus, midline structures involved in memory processing, and the brain stem), where an aggressive surgical strategy is likely to be discounted\autocite{deLeeuw2019}.
-\Glspl{lgg} tend to occur more frequently than \glspl{hgg} in highly eloquent cortical regions\autocite{Duffau2004}, indeed the control group for the supratotal \gls{lgg} study\autocite{Yordanova2011} mentioned above consisted of patients whose gliomas were located in eloquent brain areas, and who therefore underwent only \gls{gtr}.
-\note{this refer to adult tumours - mostly insular and tumours near the motor cortex. To balance this discussion you may want to mention awake craniotomies, which in adults helps to obtain a maximal safe resection. Obviously difficult in children.}
+Adult \glspl{lgg} tend to occur more frequently than \glspl{hgg} in highly eloquent cortical regions\autocite{Duffau2004}, indeed the control group for the supratotal \gls{lgg} study\autocite{Yordanova2011} mentioned above consisted of patients whose gliomas were located in eloquent brain areas, and who therefore underwent only \gls{gtr}.
 One might therefore expect supratotal resection to be associated with worse postoperative neurological outcomes, and indeed \textcite{Rossi2019a} found higher probabilities of immediate postoperative deficits in supratotal versus total resection of \glspl{lgg}.
 These were however significantly reversed at three month and one year follow-ups, and initial overall evidence suggests that neuropsychological outcomes are comparable between total and supratotal groups\autocite{Tabor2021}.
 
@@ -86,9 +85,9 @@ Moreover, no comparison was made for postoperative functional neurological outco
 New postoperative neurological deficits occur in over one third of glioma surgeries \autocite{Zetterling2020a}, although most patients improve significantly over longer-term followup.
 Unsurprisingly, higher chances of postoperative deficits were associated with higher \gls{eor} and with tumours situated in eloquent areas\autocite{Zetterling2020a}.
 In \textcite{Gil-Robles2010}, authors argue for a more conservative resection margin in WHO grade 2 gliomas (low-grade) to protect functional structures, although current consensus recommends total resection in \gls{lgg} wherever possible\autocite{Rincon-Torroella2019,Albuquerque2021}. %but this is not the dominant opinion
-For the most malignant tumour types, even maximal resection combined with adjuvant therapy is only rarely curative, and may only lead to increases in survival of just a few months\autocite{Rincon-Torroella2019,Karschnia2023}.
+For the most malignant tumour types, even maximal resection combined with adjuvant therapy is rarely curative, and may only lead to a survival advantage of just a few months\autocite{Rincon-Torroella2019,Karschnia2023}.
 Given the overall poor survival outcomes associated with aggressive gliomas, oftentimes the risks to quality of life and postoperative neurological function associated with pursuing \gls{gtr} outweigh any potential oncological benefits\autocite{Rahman2016,Tabor2021}.
-In \glspl{hgg}, the justification for \gls{gtr} or even supratotal resection is weaker than in \gls{lgg}, given that it cannot secure long-term survival for affected patients. \note{there is however evidence in the adult literature that even with GBM >70\% resection carries a significant survival advantage. }
+In \glspl{hgg}, the justification for \gls{gtr} or even supratotal resection is weaker than in \gls{lgg}, given that it cannot secure long-term survival for affected patients.
 Where radical resection carries no likely oncological benefit and is contraindicated by a high functional risk to eloquent areas, the goal of surgery may be conservative debulking of the lesion to relieve pressure on the brain and reduce current neurological symptoms.
 % In certain types of tumour, particularly when a combined treatment approach of surgery and radiotherapy is taken, little evidence has been found that \gls{gtr} offers greater tumour-related (that is to say, neurological condition affected by the presence of the tumour) outcomes than subtotal resection, while increasing risk to surrounding brain tissue.
 % On the other hand, certain types of tumour, in particular lower grade and less aggressive types, show a lower risk of recurrence and malignant transformation when radically resected, offering a particularly good long-term outlook.
@@ -113,18 +112,15 @@ The next section will explore some of those advanced technologies instrumental i
 
 Tumours can interact with their surroundings in a number of ways, depending on their nature and location.
 Some tumours, including some \glspl{lgg} and meningiomas, are fully encapsulated and displace surrounding brain as they grow.
-This strong demarcation between tumour and healthy tissue can facilitate surgical treatment as it is not necessary to risk functioning neural tissue while resecting infiltrating tumour, but such tumours can exert pressure on displaced tissues, leading to neurological impairments and a \note{reccommendation} for surgical debulking.
+This strong demarcation between tumour and healthy tissue can facilitate surgical treatment and total removal of the tumour without undue risk to functioning neural tissue, but such lesions can cause neurological impairments as surrounding structures are stretched or compressed, leading to a recommendation for surgical removal of a tumour which poses an otherwise lower oncological threat.
 Others cause almost no spatial displacement of brain tissue, with cancer cells instead invading the parenchyma and blurring the boundaries between disease and healthy brain.
-Infiltrating tumours pose a particular surgical challenge due to the risk of injury to eloquent tissue, and may only be conservatively debulked and treated with adjuvant radiation or chemotherapy.
+Infiltrating tumours pose a particular surgical challenge due to the risk of surgical injury to eloquent tissue, and may only be conservatively debulked to relieve intracranial pressure and improve the effectiveness of adjuvant radiation or chemotherapy treatment.
 In order to meet the goal of safely balancing maximal resection and functional preservation, the full tumour-brain interaction must be comprehensively mapped to determine the optimal resection margin.
-\note{I think this needs to be re worded. All tumours may cause an elevation of ICP, whether they are encapsulated or infiltrative; the elevation of ICP is the main need for surgery.}
-
-% \paragraph*{Preoperative imaging}
 
 Preoperatively, structural and functional non-invasive imaging are used for diagnosis and, if surgery is indicated, surgical planning.
 At this stage the goal is to assess the spatial and functional relationships between involved and healthy tissues, map out a safe operative corridor to access the lesion, and determine the appropriate \gls{eor} under all considerations explored in the previous section.
 Structural imaging with \gls{ct} and \gls{mri} provide critical anatomical information in high spatial detail.
-Multi-contrast \gls{mri}, \note{for clinicians contrast is usually thought of as gadolinium} including FLAIR, T1w and T2w imaging sequences, each provide unique contrasts for visualising different aspects of a tumour, such as necrotic and infiltrating regions, which can aid in determining tumour type, what \gls{eor} to aim for, or which region of the tumour to target for biopsy.
+Multi-contrast \gls{mri} examinations, including FLAIR, $T_1$-weighted and $T_2$-weighted imaging sequences, each provide unique contrasts for visualising different aspects of a tumour, such as necrotic and infiltrating regions, which can aid in determining tumour type, what \gls{eor} to aim for, or which region of the tumour to target for biopsy.
 Angiography, detailed mapping of blood vessels with \gls{ct} and specialised \gls{mri} sequences, can also be employed for determining a tumour's vasculature and identifying major vessels involved\autocite{Kashimura2008,Kim2019}.
 \Gls{fmri} and navigated transcranial magnetic stimulation \autocite{WeissLucas2020} map out eloquent cortex lying in proximity to the lesion, including the motor, language, and sensory cortices, supplementing the purely structural data obtained from conventional \gls{mri} or \gls{ct}.
 In epilepsy patients, \gls{eeg} may be employed to monitor epileptogenic regions\autocite{Sarco2006}.
@@ -175,12 +171,14 @@ Awake surgery is technically complex, psycho-cognitively and emotionally demandi
 In very young children, awake surgery is rarely possible except in the most cooperative and resilient patients, and with appropriate preparation\autocite{Zolotova2022}.
 \gls{des} may also be performed in asleep patients, albeit limited to assessing motor and somatosensory function, where stimulation elicited somatosensory or motor evoked potentials (SSEPs, MEPs) can be measured in the patient's sensory cortex or muscles\autocite{Stone2019} (although the effects of anaesthesia can limit the sensitivity and accuracy of this approach\autocite{Stone2019,WeissLucas2020}).
 There is also a considerable risk of intraoperative seizures, particularly in younger patients, which can lead to failure of awake functional mapping and potential increased risk of postoperative deficits\autocite{Nossek2013,Wang2019,Rigolo2020a}.
+The neurological and oncological benefits associated with greater \gls{eor} discussed in Section \ref{sec:eor} have been achieved in large part with the help of awake functional mapping, primarily in adult patients.
+It is therefore vital to develop and improve alternatives to cortical mapping to achieve maximal safe resection in all populations and especially in those patients who cannot undergo awake surgery, including some children.
 
 Imaging and functional data acquired in preparation for surgery is not only instrumental to surgical planning, it also serves to guide the surgeon throughout the procedure, providing real-time multidimensional navigational information to supplement their live view through the surgical microscope.
 Image guidance can involve simply displaying preoperative imaging and mapping in the theatre, while more advanced systems can also indicate the positions of surgical tools, or overlay imaging information on the microscope view.
-This is achieved through stereotactic image guided surgery, where the patient's head is either fixed within a stereotactic frame, or affixed with fiducial markers on the skin surface, which are tracked, along with the surgical tools, by an infrared camera system\autocite{Sattur2019}.
-Fiducials in the image are registered to the operating room coordinate system, allowing the tools' positions to be mapped into the image coordinate system.
-\note{may be worth adding that these systems have been available since the mid 1990s and have developed and become more complex and accurate over time. One of the first references is Sandeman et al, 1995, which referred to the ‘wand’ - can look for the full reference if you need.}
+This is achieved through stereotactic image guided surgery, which arrived with the introduction of frame-based systems in the later half of the 20th century, later largely giving way to frameless setups for craniotomies\autocite{Sandeman1995}, which are considered more time and cost effective\autocite{Sattur2019}.
+In the former case, the patient's head is fixed within a stereotactic frame which guides the positioning of surgical tools, while in modern frameless systems the tools are tracked remotely, most commonly by an infrared camera system\autocite{Sattur2019}.
+Fiducials, affixed either to the frame or patient, are detected on imaging and registered to the operating room coordinate system, allowing the tools' and patient's positions to be mapped and displayed on imaging in real time.
 Intraoperative navigation with preoperative \gls{fmri} and \gls{dti} or tractography can improve \gls{eor} and preservation of critical cortical and subcortical function\autocite{Wu2007,Bello2008,Bello2010d}, particularly when combined with \gls{des} or awake surgery\autocite{Aibar-Duran2020}.
 Where awake surgery is contraindicated or abandoned, preoperative functional mapping remains the only guidance available for higher cognitive functions, playing a crucial role in improving surgical care for patients who would not qualify for awake surgery.
 \textcite{Rigolo2020a} found that preoperative \gls{fmri} guidance enabled safe resection of tumours or epileptic foci to continue after failed or incomplete \gls{des} function mapping, with no significant difference in postoperative morbidity.
@@ -188,7 +186,7 @@ Where awake surgery is contraindicated or abandoned, preoperative functional map
 Maximising \gls{eor} has further been significantly improved with the introduction of 5-aminolevulinic acid (5-ALA) guidance.
 This compound is administered orally prior to surgery and is converted within cells to protoporphyrin IX (PPIX), which fluoresces when excited by short wavelength light.
 Uptake of 5-ALA is highest in tumour cells due to \gls{bbb} disruption, and the metabolic pathways producing PPIX are more active in tumour cells, allowing the surgeon to distinguish them from healthy tissue under the surgical microscope.
-5-ALA guided surgery results in improved \gls{eor} and higher progression free survival, while maintaining preservation of functional tissue\autocite{Coburger2019,Golub2020}, and has seen widespread uptake in the surgical treatment of gliomas\autocite{Stummer2006}.
+5-ALA guided surgery results in improved \gls{eor} and higher progression free survival, while maintaining preservation of functional tissue\autocite{Coburger2019,Golub2020}, has seen widespread adoption in the surgical treatment of gliomas\autocite{Stummer2006}, and is included in UK national care guidelines\autocite{NICE2021}.
 
 \begin{SCfigure}[][h!]
   \includesvg[height=\textheight,pretex=\small\sffamily]{chapter_2/brain_shift.svg}
@@ -228,7 +226,7 @@ Numerous works demonstrate the benefits of \gls{imri} for improving postsurgical
 \autocite{Shah2012,Zhang2015a,Sacino2016,Rao2017c,Giordano2017,Lu2018a,Garzon-Muvdi2019,Leroy2019,Karsy2019,Golub2020,Hlavac2020,Englman2021}.
 %Giordano2017: safe in children; positioning
 Even with advanced image and surgical guidance, postoperative \gls{mri} may show tumour nodules unintentionally left in the brain, concealed in corners of the resection cavity.
-In some cases early repeat surgery is required to remove unresected disease, resulting in significant additional clinical burden to the patient, longer hospital stays, heightened risk of complications including wound infection\autocite{Tenney1985,Chang2003}, delays in the planning of adjuvant treatment, and greater financial expense\autocite{Shah2012}.
+In some cases early repeat surgery is required to remove residual disease, resulting in significant additional clinical burden to the patient, longer hospital stays, heightened risk of complications including wound infection\autocite{Tenney1985,Chang2003}, delays in the planning of adjuvant treatment, and greater financial expense\autocite{Shah2012}.
 Intraoperative imaging enables these remaining tumour margins to be detected and fully resected within the same surgery\autocite{Sattur2019,Hlavac2020}.
 For low grade lesions, the use of \gls{imri} could mean the difference between a potentially curative procedure and one leaving the patient at risk for recurrence and/or reoperation\autocite{Shah2012}.
 Where \gls{imri} indicates no need for further resection, it can replace the need to subject patients to an additional scan immediately following surgery with all the discomfort and possible sedation, or in children, general anaesthesia, that it would entail.
@@ -247,7 +245,8 @@ In line with this finding, the majority of literature reviewed surrounding \gls{
 What has been less extensively studied is the potential for \gls{imri} to provide updated advanced functional neuronavigation.
 Broadly speaking, this can be approached in two ways.
 The first is to use conventional \gls{imri} to dynamically adjust preoperative functional information (including \gls{fmri} and tractography) using deformable image registration and/or biomechanical brain shift modelling, the second is to directly acquire new advanced \gls{mri} sequences intraoperatively.
-While the former may seem like the preferred choice, as one avoids having to acquire and process additional lengthy scans and further prolonging surgery interruption, achieving robust deformable registration in a reasonable timeframe is by no means trivial, and especially complicated given the significantly disturbed anatomy following craniotomy and complex brain shift. \note{you may add the presence of air in the resection cavity}
+While the former may seem like the preferred choice, as one avoids having to acquire and process additional lengthy scans and further prolonging surgery interruption, achieving robust deformable registration in a reasonable timeframe is by no means trivial.
+It is especially complicated given the significantly disturbed anatomy following craniotomy and complex brain shift, as well as the effects of air in the resection cavity not present on preoperative imaging.
 Intraoperative \gls{fmri} has been reported in a very limited number of studies in \gls{dbs}\autocite{Hiss2015,Knight2015}, tumour resection\autocite{Roder2016a,Qiu2017a}, and neurovascular\autocite{Muscas2019} surgeries, but it's unlikely to find widespread use on account of practicality and an established preference for \gls{des} for cortical mapping.
 By contrast, intraoperative \gls{dmri} has several potential advantages.
 
@@ -266,7 +265,7 @@ Nearly all current implementations of intraoperative tractography are limited to
 Nevertheless, concrete evidence of benefits to postoperative outcomes with intraoperative advanced \gls{dmri} is mounting\autocite{DAndrea2012,Cui2015,Maesawa2010}, and in combination with what we already know about conventional \gls{imri} and preoperative imaging for \gls{wm} neuronavigation, it stands to reason that intraoperative \gls{dmri} could bring significant improvements to brain surgery if some of the technical and image processing limitations can be overcome.
 
 All neuronavigational tools are complementary, each providing distinct streams of information, and where possible, combination of techniques can increase the chances of achieving an optimal outcome.
-For example, maximal safe resection with combined 5-ALA and \gls{imri} guidance is recommended by UK national clinical guidelines for surgical treatment of gliomas\autocite{NICE2021}. \note{you should also mention inclusion in national guidelines in your earlier paragraph on 5-ALA}
+For example, maximal safe resection with combined 5-ALA and \gls{imri} guidance is recommended by UK national clinical guidelines for surgical treatment of gliomas, which further advise considering the use of \gls{dti} and awake craniotomy to optimise safety and effectiveness\autocite{NICE2021}.
 Reviews have found similar benefits to \gls{eor} from both \gls{imri} and 5-ALA guidance separately\autocite{Golub2020} and even better outcomes when combined\autocite{Nickel2018,Coburger2019}.
 5-ALA provides the surgeon with a direct visualisation of tumour cells in the surgical view, but residual nodules may remain out of sight behind cavity convexities and only show up on \gls{imri}\autocite{SueroMolina2019}.
 Combining awake surgery with \gls{imri} is also viable and beneficial in some patients \autocite{Motomura2017,Tuleasca2021}.
