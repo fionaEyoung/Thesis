@@ -8,50 +8,42 @@
 
 \title{ Fibre tract imaging with intraoperative diffusion MRI for neurosurgical navigation }
 \author{ Fiona Young }
-\department{ Department of Medical Physics and Biomedical Engineering \\ UCL GOS Institute of Child Health }
+\department{ Department of Medical Physics and Biomedical Engineering \\ UCL Great Ormond Street Institute of Child Health }
 
 \maketitle
 \makedeclaration
 
 \begin{abstract} % 300 word limit
-My research is about stuff.
-
-It begins with a study of some stuff, and then some other stuff and things.
-
-There is a 300-word limit on your abstract.
+Mapping and understanding the brain's structure and function is never more critical than when it suffers injury or illness.
+Lifesaving neurosurgical procedures may put cricital neural communication pathways called \gls{wm} tracts at risk, with grave consequences for the patient, so accurately depicting their location using \gls{dmri} is becoming a key component of modern neurosurgical practice.
+More recently, obtaining new \gls{imri} partway through surgery has demonstrated potential to further improve outcomes by providing updated anatomical information after the dynamic effects of intraoperative brain shift have deminished the accuracy of preoperative imaging.
+With the ability to sample directional water diffusivity in tissue, \gls{dmri} data is processed to produce milimeter-scale maps of \gls{wm} fibre orientations which are key to reconstructing individual tracts.
+However, established image computational methods suffer from limitations in accuracy and practicality which restrict the wider clinical uptake of \gls{dmri} \gls{wm} imaging generally, and particularly for \gls{imri}.
+After an in depth review of the state of the art in \gls{wm} imaging and image-guided neurosurgery, this thesis explores the development of a novel \gls{wm} tract mapping tool, named \textit{tractfinder}, which applies \textit{a priori} anatomical knowledge encoded within a statistical tract orientation and location atlas to achieve rapid tract segmentation in a patient \gls{dmri} scan.
+The proposed pipeline includes explicit patient-specific modelling of tumour deformation effects, an element missing from many research-oriented tract reconstruction approaches.
+Tractfinder's effectiveness in a range of applications is detailed through thorough quantitative evaluation, while clinical case studies demonstrate its key advantages over existing approaches.
+In additional, the technical and practical challenges of intraoperative imaging are explored together with their implications for effective clinical translation of advanced \gls{dmri}-based \gls{wm} imaging.
 \end{abstract}
 
 \begin{impactstatement}
 
-	UCL theses now have to include an impact statement. \textit{(I think for REF reasons?)} The following text is the description from the guide linked from the formatting and submission website of what that involves. (Link to the guide: {\scriptsize \url{http://www.grad.ucl.ac.uk/essinfo/docs/Impact-Statement-Guidance-Notes-for-Research-Students-and-Supervisors.pdf}})
+This thesis explores the use of \gls{dmri}'s ability to map brain fibre pathways (``tracts") in neurosurgical planning and guidance, in in particular the potential for more advanced \gls{dmri} analysis methods than those currently under routine clinical use to improve outcomes for neurological patients.
 
-\begin{quote}
-The statement should describe, in no more than 500 words, how the expertise, knowledge, analysis,
-discovery or insight presented in your thesis could be put to a beneficial use. Consider benefits both
-inside and outside academia and the ways in which these benefits could be brought about.
+Though intraoperative \gls{mri} has gradually been recognised as a beneficial technology for improving neurosurgery, the use of high angular resolution \gls{dmri} specifically has not been widely adopted, partly because the associated potential benefits have yet to be determined.
+The methods described in this thesis may make \gls{dmri} analysis more accessible to intraoperative \gls{mri} procedures, which would allow their advantages to be systematically studied.
+Over the longer term, intraoperative \gls{dmri} may, if found to be benficial, be incorporated into national healthcare guidelines, as preoperative \gls{dti} and general \gls{mri} currently are.
+In addition, the proposal of an alternative to streamline tractography, the current standard for \gls{wm} tract imaging, which relies less on the availability of domain experts, time, and computational resources, could widen the availability of tract imaging for preoperative planning to more health centers, who may have the requisite equipment (\gls{mri} capabilities) but lack expertise in applying modern research methods.
 
-The benefits inside academia could be to the discipline and future scholarship, research methods or
-methodology, the curriculum; they might be within your research area and potentially within other
-research areas.
+The tract orientation atlas framework put forth here could inform to the study of \gls{wm} architecture and connectivity in individuals and across populations, an area in which we are still lacking a lot of understanding, and which will be critical in the future study and combatting of pyschological and neurological disorders.
+It also contributes to current discussions on how to adopt modern data science methods and innovation in a field, medical imaging, where appropriate data is often scarce and difficult to annotate.
+Brain shift is an intraoperative phenomenon which presents a key challenge to image guided surgery techniques.
+The tumour deformation modelling described in this thesis represents a novel solution to achieving acceptable \gls{wm} tract segmentations on both pre- and intraoperative imaging, in patients with deforming tumours, which may be applicable to other imaging modalities as well as to tumours outside of the brain.
 
-The benefits outside academia could occur to commercial activity, social enterprise, professional
-practice, clinical use, public health, public policy design, public service delivery, laws, public
-discourse, culture, the quality of the environment or quality of life.
+Findings presented in this thesis have been shared with the wider research community at several international meetings, and have led to funding being granted for a two year follow-on prospective study to apply these methods in intraoperative cases at \gls{gosh}, London.
+All image processing tools developed for this thesis, including data and code for tumour deformation modelling and tract segmentation, have been made available for researchers to apply in their own data.
+In addition, a patent application covering much of the methodology has been submitted and is currently under examination.
+If granted, the intellectual propert could be licensed to national or international commercial producers of neuronavigational equipment.
 
-The impact could occur locally, regionally, nationally or internationally, to individuals, communities or
-organisations and could be immediate or occur incrementally, in the context of a broader field of
-research, over many years, decades or longer.
-
-Impact could be brought about through disseminating outputs (either in scholarly journals or
-elsewhere such as specialist or mainstream media), education, public engagement, translational
-research, commercial and social enterprise activity, engaging with public policy makers and public
-service delivery practitioners, influencing ministers, collaborating with academics and non-academics
-etc.
-
-Further information including a searchable list of hundreds of examples of UCL impact outside of
-academia please see \url{https://www.ucl.ac.uk/impact/}. For thousands more examples, please see
-\url{http://results.ref.ac.uk/Results/SelectUoa}.
-\end{quote}
 \end{impactstatement}
 
 \begin{acknowledgements}
