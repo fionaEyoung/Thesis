@@ -9,7 +9,7 @@ In order to correct for displacement of white matter tracts due to space-occupyi
 Anatomical non-correspondence between subject and template images caused by space-occupying lesions poses a substantial challenge to the use of atlas-based white matter segmentation methods in clinical subjects.
 While nonlinear deformation tools can produce accurate registration in clinical images, they require usually manual adjustment of many input and regularisation parameters on a case by case basis, and a robust automation of this process is not available to best knowledge.
 More significantly, in the case of registration between a normative template and a scan with a brain tumour, a fundamental assumption of many registration algorithms, that of topological equivalence between the two images, does not hold.\autocite{Zacharaki2009}
-The core of the problem is that one image -- the template -- depicts the anatomy of an average, healthy brain, and the other that of a diseased brain harbouring a tumour, presenting two potential scenarios.
+The core of the problem is that one image---the template---depicts the anatomy of an average, healthy brain, and the other that of a diseased brain harbouring a tumour, presenting two potential scenarios.
 Either the lesion exists \textit{in addition} to all the structures and tissue expected of a healthy brain, which have been displaced or compressed to accommodate it, or it has \textit{replaced} brain landmarks or rendered them otherwise unrecognisable through the effects of oedema or differing MR properties between tumour and healthy brain tissue.
 In either case, a non-linear registration algorithm is tasked with finding a mapping between two images with different sets of anatomical landmarks, with finding anatomical correspondence between tissue in one image which is nonexistent in the other.
 The result of this violation of the topological equivalence assumption is often ridiculously contorted images, and particularly in the peritumoural zone, which is rather problematic for neurosurgical applications.
@@ -28,7 +28,8 @@ Given the time constraints of intraoperative imaging and the practical constrain
 
 The tract orientation atlas described in the previous chapter provides a degree of spatial tolerance that alleviates the need for voxel-perfect registration and deformation, allowing the implementation of a minimal deformation algorithm.
 The idea is to obtain a deformation model which is simple enough to compute using few temporal and computational resources, and use it in combination with affine registration, as before, to achieve spatial alignment between atlas and patient space.
-To this end we will interest ourselves solely in the macroscopic spatial effects of tumour growth: what effect does the presence of a tumour have on the physical position of a given volume unit of tissue? \note{and orientation?}
+To this end we will interest ourselves solely in the macroscopic spatial effects of tumour growth:
+What effect does the presence of a tumour have on the physical position of and the fibre orientations within a given volume unit of tissue?
 Of course, this question cannot be fully answered without considering the complicated factors described above, such as whether a tumour is encapsulated or infiltrating.
 Nevertheless, as all models are wrong, and some are useful, the utility of our model will be measured by its ease of computation and accurate capturing of tract displacement.
 Whether performance in the latter criteria is satisfactory will be measured through the resulting improvement in tract mapping as compared with patient-native methods such as streamline tractography (see Section \ref{sec:btcd}).
@@ -40,10 +41,12 @@ We will consider a radial model of tumour deformation, previously described in \
 \subsection{Development of a radial deformation model}
 
 We begin with a radial deformation model described by \textcite{Nowinski2005}.
-Their motivation was remarkably similar: the rapid deformation of a morphological brain atlas to aid the interpretation of brain anatomies affected by tumour mass effect.
+Their motivation was remarkably similar:
+The rapid deformation of a morphological brain atlas to aid the interpretation of brain anatomies affected by tumour mass effect.
 The required model inputs are the segmentations of the tumour and brain volumes.
 We define the direction $\mathbf{\hat{e}}$, which is the unit vector along the line connecting a point $P(x,y,z)$ anywhere within the brain to the tumour centre of mass, $S$.
-This is the direction along which we assume the tissue at that point to be shifted by the tumour: radially outward from the tumour centre.
+This is the direction along which we assume the tissue at that point to be shifted by the tumour:
+Radially outward from the tumour centre.
 Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarrow{SP}\|$, $D_b$ as the distance from $S$ to the brain surface and $D_t$ as the distance from $S$ to the tumour surface (Fig. \ref{fig:virtue}).
 
 \begin{figure}[htp]
@@ -68,7 +71,8 @@ Even with very large tumours, it is common for parts of the brain some distance 
 
 An exponentially decaying function captures this well, while remaining easily computable, close-form and invertible.
 We begin with a function in the form $k(P) \propto e^{-\lambda \frac{D_p}{D_t}}$.
-There are two boundary conditions: points on the brain surface should not be displaced ($k(D_p = D_b) = 0$) and points at the centre of the tumour should be displaced by exactly $D_t$ ($k(D_p = 0) = 1$).
+There are two boundary conditions:
+Points on the brain surface should not be displaced ($k(D_p = D_b) = 0$) and points at the centre of the tumour should be displaced by exactly $D_t$ ($k(D_p = 0) = 1$).
 Note that the latter boundary condition is an assumption reflecting a fully encapsulated tumour, where no normal tissue remains inside the final tumour boundary after displacement.
 Solving for these boundary conditions gives us a normalisation constant:
 
@@ -87,7 +91,8 @@ giving
 \end{align}
 
 Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the forward deformation transform $P'=f(P)$, which maps a point in the original image $P$ to a new position $P'$ in the deformed image.
-Forward warping works well for continuous valued data such as streamlines: as the transformed image is also defined in continuous coordinates, each vertex can be ``pushed" to its exact location in the warped output.
+Forward warping works well for continuous valued data such as streamlines:
+As the transformed image is also defined in continuous coordinates, each vertex can be ``pushed" to its exact location in the warped output.
 When transforming discreet image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes"), or voxels being assigned values from multiple overlapping mapped points.
 To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting",\autocite{Niklaus2020} where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
 As each voxel value will be determined by a weighted sum of all transformed values, this method requires an intermediate buffer to store all transformed points and distributed weights before the final voxel values can be determined, and filling techniques may be required to fill in any holes.
@@ -166,7 +171,8 @@ One is the inbuilt assumption of full tumour encapsulation, as expressed in the 
 Through this assumption we have explicitly excluded the modelling of infiltrative tumours, which may expand existing structures but not necessarily wholesale shunt them outside the tumour boundary.
 
 The difficulty with modelling tumour infiltration under the current framework is in the appropriate demarcation of the lesion in the subject scan.
-We can broadly categorise tumour regions into three components based on their interaction with the non-tumour environment: a tumour core, non-infiltrating and possibly cystic or necrotic, an infiltrating component, and finally peritumoural oedema.
+We can broadly categorise tumour regions into three components based on their interaction with the non-tumour environment:
+A tumour core, non-infiltrating and possibly cystic or necrotic, an infiltrating component, and finally peritumoural oedema.
 These distinctions are not enough to predict the mass effect of a tumour.
 Some tumours that are entirely infiltrative exert no perceivable mass effect, while others do.
 % If a tumour comprises both an infiltrating and non-infiltrating component, should both be included in the segmentation?

@@ -12,7 +12,8 @@ The following sections will describe the registration methods used in tractfinde
 
 There are two categories of image registration.
 In global registration, a single transform applies to the entire image, preserving its topology.
-Different degrees of freedom define some commonly used terms: rigid body registration comprises just translation and rotation, while affine registration further includes scaling and shearing (up to 12 degrees of freedom on $\mathbb{R}^3$).
+Different degrees of freedom define some commonly used terms:
+Rigid body registration comprises just translation and rotation, while affine registration further includes scaling and shearing (up to 12 degrees of freedom on $\mathbb{R}^3$).
 Following purely algebraic definition, a linear transform does not include translation, however in practice (at least in the medical imaging sphere) ``linear" and ``affine" are often used interchangeably.
 Non-linear, deformable, or diffeomorphic registrations compute local deformations on a voxel-by-voxel basis, and therefore have orders of magnitude more degrees of freedom.
 They are useful for fine-grained alignment of local structures, but many algorithms are unstable and prone to converging on local minima, making them difficult to successfully integrate into automated pipelines.
@@ -22,7 +23,7 @@ We mirror this relationship by allowing the atlas to be registered to a new targ
 Computing a non-linear registration between atlas and subject at the point of application is undesirable principally due the lack of robust, stable and generalisable algorithms that are open source.
 Maintaining practicality is a key requisite of tractfinder, and various non-linear registration tools were found during prototyping to either be too unstable (requiring manual adjustment of parameters in difficult cases such as some clinical scans) or having too long a computation time.\autocite{Visser2020}
 
-As we shall see in the range of evaluations presented in Part \ref{part3}, the use of affine registration does not result in significant segmentation inaccuracies or errors, thus there is no credible incentive to favour the use of non-linear registration at the cost of increased processing time and potential instabilities.
+As we shall see in the range of evaluations presented in Chapters \ref{chap:eval}--\ref{chap:validation}, the use of affine registration does not result in significant segmentation inaccuracies or errors, thus there is no credible incentive to favour the use of non-linear registration at the cost of increased processing time and potential instabilities.
 Indeed, \textcite{Visser2020} showed that subject-to-standard registration accuracy of the tumoural region in low and high grade gliomas is not significantly improved using non-linear registration across a range of different packages, concluding there is little to justify the additional time cost and lack of robust automation.
 Nevertheless, the trade-offs associated with relying on affine registration must be acknowledged.
 Particularly in brains with modest deformations or other lesions, the accuracy of anatomical alignment can be impacted, and there follows the risk of suboptimal spatial and / or orientational alignment, resulting in missed areas (false negative) or erroneously included regions (false positives).
@@ -36,8 +37,8 @@ The similar orientations of the the \gls{af} and tapetum in this region, togethe
 
 \begin{SCfigure}[][h!]
   \captionsetup{format=plain}
-  \includegraphics[width=0.6\textwidth]{chapter_3/tpfia.png}
-  \caption{Example of potential for atlas misalignment. The \gls{af} (*) and tapetum (**) are proximal and parallel at the temporoparietal fibre intersection area. Linearly registered right \gls{af} atlas \glspl{tod} may overlap with tapetum (arrow).}
+  \includesvg[width=0.6\textwidth,inkscapelatex=true,pretex=\ttfamily\small]{chapter_4/tpfia.svg}
+  \caption{Example of potential for atlas misalignment. The \gls{af} (A) and tapetum (T) are proximal and parallel at the temporoparietal fibre intersection area. Linearly registered right \gls{af} atlas \glspl{tod} may overlap with tapetum (arrowhead).}
   \label{fig:tpfia}
 \end{SCfigure}
 
@@ -55,4 +56,5 @@ This comparison was included as supplementary material in a manuscript accepted 
 \end{figure}
 
 In conclusion, affine registration between template and subject space is preferred in most applications, including for healthy subjects and clinical subjects without large space-occupying lesions.
-The next sections will address the scenarios where patient anatomical topology differs significantly from atlas space: in the presence of deforming tumours, or intraoperative brain shift.
+The next sections will address the scenarios where patient anatomical topology differs significantly from atlas space:
+In the presence of deforming tumours, or intraoperative brain shift.

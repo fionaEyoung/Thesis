@@ -32,7 +32,8 @@ In the white matter imaging space, machine learning is gaining traction both for
 Against this backdrop of excitement for new algorithmic and big-data possibilities, proposals for a new atlas-based technique have been met with some skepticism.
 Nevertheless, just as streamline tractography has long delivered astonishing benefits while simultaneously remaining unable to expel its sensitivity-specificity trade-off gremlins, so too are the difficulties of bringing deep learning solutions to real clinical translation beginning to show.
 Fulfilling the need for large volumes of accurately annotated data may easy where the resources for producing said data are freely available, or at least justified if the application is a well-defined and static problem.
-Tract segmentation is neither of those things: producing the ground truth reference annotated data is burdensome, and the likelihood that efforts may need duplicating as our understanding of \gls{wm} anatomy evolves is high.
+Tract segmentation is neither of those things:
+Producing the ground truth reference annotated data is burdensome, and the likelihood that efforts may need duplicating as our understanding of \gls{wm} anatomy evolves is high.
 We have seen this in Section \ref{sec:quant} with the \textit{TractoInferno} dataset, which represents a substantial contribution to the machine learning tractography research community, but which nonetheless contains a number of poor-quality samples undetected by rigorous quality control.
 Work on single-shot and transfer learning as discussed in Section \ref{sec:ntrain} has underscored the need for methods which can easily be retrained or extended to support new tracts as and when they become relevant.
 In addition, a key concern in the translation of complex, ``black box" models is that clinical decision making must remain traceable and transparent, including when aided by computers.

@@ -2,7 +2,8 @@
 
 The following sections set out to provide an evaluation of the tractfinder method from a range of perspectives.
 A common complaint in the white matter imaging field is over the lack of reliable ground truth information for fibre tract identification.
-This goes deeper than the limitations of our scientific instruments: micrometer-resolution \gls{mri} or infallible tractography algorithms are not the answer.
+This goes deeper than the limitations of our scientific instruments:
+Micrometer-resolution \gls{mri} or infallible tractography algorithms are not the answer.
 As was explored in Chapter \ref{chap:atlas}, our understanding of white matter anatomy, connection, and function is neither fixed nor universal, meaning for many tracts a single definition that can be agreed upon by all does not even exist in a given moment, nor one to last over time.
 
 We can nonetheless arrive at a reasonable assessment of tractfinder's accuracy, reliability and applicability by making justifiable assumptions and comparing it, quantitatively and visually, with benchmark methods in a variety of datasets and case studies.
@@ -33,7 +34,7 @@ All \gls{csd} was performed using the MRtrix3 image processing software package\
 \subsection{HCP}
 
 The first large healthy adult dataset (``HCP49") comprised 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
-The original data comprises high resolution T1 weighted and diffusion weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
+The original data comprises high resolution $T_1$-weighted and diffusion weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
 Raw diffusion data contains three diffusion weighted shells at $b=$ 1000, 2000 and 3000 $s/mm^2$ with 90 directions each and 18 $b=0$ volumes\autocite{Sotiropoulos2013}.
 These images have been preprocessed as documented in \textcite{Glasser2013,Sotiropoulos2013},
 and additionally for this analysis they were downsampled to 2.5 mm isotropic voxels (from the original resolution of 1.25 mm isotropic) and a subset of 60 optimally distributed directions at $b=1000 s/mm^2$ were extracted, emulating a typical clinical acquisition in spatial and angular resolution.
@@ -44,7 +45,7 @@ For these subjects, the same preprocessing steps were applied as in the set of 4
 
 \subsection{TractoInferno}
 
-The recently released \textit{TractoInferno} database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1})\autocite{Poulin2022a,Poulin2022}, created as an open dataset to support the training and comparison of machine learning tractography algorithms, contains diffusion and T1-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography bundle reconstructions produced using four different tracking algorithms and the RecoBundlesX automatic streamline clustering method \autocite{Garyfallidis2018,Rheault2020a}, followed by semi-automatic quality control.
+The recently released \textit{TractoInferno} database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1})\autocite{Poulin2022a,Poulin2022}, created as an open dataset to support the training and comparison of machine learning tractography algorithms, contains diffusion and $T_1$-weighted MRI scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography bundle reconstructions produced using four different tracking algorithms and the RecoBundlesX automatic streamline clustering method \autocite{Garyfallidis2018,Rheault2020a}, followed by semi-automatic quality control.
 Of the 284 subjects included in the full \textit{TractoInferno} database, the 80 subjects with tractography of all of the \gls{cst}, \gls{or}, \gls{ifof} and \gls{af} were selected.
 Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed targeted \gls{roi} tractography (see Section \ref{sec:methods}), leaving a final 71 subjects.
 Diffusion acquisition parameters and preprocessing steps are described in detail in \textcite{Poulin2022} and summarised in Table \ref{tab:datasets}, and all data was additionally resampled to 2.3mm isotropic voxels, the lowest resolution present in the dataset and one in line with clinical acquisitions.
@@ -101,7 +102,7 @@ No EPI distortion correction was performed, as it is frequently omitted from cli
 The \gls{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
 Of the total 25 patients in the original dataset, 10 with macroscopic, non-infiltrating lesions were selected for the validation of tractfinder in tumour patients.
 In one of the 10 subjects (sub-PAT22), only a preoperative session is available, giving a total of 19 unique scan sessions used for this dataset.
-The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural T1w images.
+The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural $T_1$-weighted images.
 In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which can be used for tumour deformation modelling in those patients with strong tumour deformation.
 The 10 selected subjects include 4 with tumours large enough (3 meningioma and 1 anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
 Of these 4 subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral" tracts.

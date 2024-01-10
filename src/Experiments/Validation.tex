@@ -1,5 +1,5 @@
 
-\section{Validation: methods}
+\section{Validation: Methods}
 
 Segmentation tasks are commonly validated against reference data using a single numeric score of similarity or accuracy.
 In the absence of a ground truth for \textit{in vivo} white matter tracts, what should instead by the measure by which a tract imaging method is considered ``accurate"?
@@ -113,11 +113,7 @@ In the following section, we will review the results of quantitatively comparing
 Given the large disparities between methods in particular with regards to tract anatomical definitions, the results presented in this section can be regarded as a quantitative performance evaluation against benchmark methods.
 In a subsequent section (\ref{sec:tractseg}) we will see how the two method tractfinder and TractSeg compare when both are trained on the same data.
 
-\subsection{Qualitative evaluation}
-
-\note{this section needs a different name/focus}
-
-Segmentation results results for a representative subject from the \textit{TractoInferno} dataset are shown in Figures \ref{fig:lb.cstor}-\ref{fig:lb.afifof}.
+Segmentation results results for a representative subject from the \textit{TractoInferno} dataset are shown in Figures \ref{fig:lb.cstor}--\ref{fig:lb.afifof}.
 Tractfinder maps typically have values ranging from 0 to 0.5 (in arbitrary units, derived from the magnitudes of \gls{fod} and atlas distribution functions).
 Due to the combined effects of \gls{odf} amplitude and orientation information, a low tract map value can have several causes: a) the \gls{fod} amplitude is low, indicating low evidence for white matter tissue in the voxel in question; b) the atlas amplitude is low, indicating low prior likelihood of the tract being present in that location; c) the peak orientations between the \gls{fod} and atlas are poorly aligned.
 

@@ -228,7 +228,8 @@ Here the atlas orientation prior consisted of a single principal direction per v
 More recent developments have made use of advances in data science techniques including deep learning segmentation models, of which TractSeg\autocite{Wasserthal2018} and Neuro4Neuro\autocite{Li2020} are notable examples, using \gls{fod} peaks and diffusion tensors as inputs, respectively.
 Deep learning-based approaches have the advantage of producing highly reproducible results in short processing time, without the need for template or atlas registration.
 However, drawbacks of direct, deep learning-based methods which produce binary segmentations include a lack of explainability, and a dependence on large volumes of annotated training data which are labour-intensive to produce.
-This limits their flexibility: if a user requires a tract segmentation which is either anatomically different or not covered by an existing pre-trained model, then the necessary production of new training data and subsequent model training represents a high logistical and computational barrier.
+This limits their flexibility:
+If a user requires a tract segmentation which is either anatomically different or not covered by an existing pre-trained model, then the necessary production of new training data and subsequent model training represents a high logistical and computational barrier.
 
 Inference models trained on large volumes of healthy data may not be entirely robust to pathologies, particularly those causing significant topological changes.
 In addition to healthy data, Neuro4Neuro\autocite{Li2020} was validated only in a dementia dataset, and TractSeg\autocite{Wasserthal2018} was qualitatively validated in schizophrenia and autism datasets in the original work.

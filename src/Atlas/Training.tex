@@ -28,7 +28,8 @@ These results indicate that additional atlas subjects beyond a minimum number of
 This can be interpreted as the extra training subjects offering minimal additional information on inter-subject variability, as a lot of this variability is already smoothed out due to affine (instead of diffeomorphic) co-registration of training subjects into template space.
 
 The effects of additional training data may present differently if the atlases are constructed with non-linear co-registration of training subjects. %\note{this might belong somewhere else.}
-There are two sources of inter-subject variability wrapped up in the atlas: the first is the global anatomical variability including skull shape and differences in cortical surface geometry, the second is variability in position and shape of the tract itself.
+There are two sources of inter-subject variability wrapped up in the atlas:
+The first is the global anatomical variability including skull shape and differences in cortical surface geometry, the second is variability in position and shape of the tract itself.
 Theoretically, diffeomorphic registration of training subjects would eliminate the first of these effects (global variability), leaving only the tract specific variation.
 However, such an atlas would necessitate subsequent applications in new target subjects to also utilise diffeomorphic registration between subject and template space, as the atlas would contain no ``allowance" for global variability, expecting perfect alignment with a target image.
 Requiring diffeomorphic registration at the point of application would greatly inhibit the robustness and speed of tractfinder, and is therefore not the preferred approach.
