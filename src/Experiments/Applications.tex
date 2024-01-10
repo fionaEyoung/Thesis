@@ -62,12 +62,67 @@ Similarly, a review of 38 thalamic tumour patients (paediatric and adult) treate
 Preservation of the posterior limb of the internal capsule, containing the corticospinal tract, during resection is critical, with motor deficits being the most common functional symptoms of thalamic tumours\autocite{Puget2007, Zheng2016, Palmisciano2021}.
 As the specific interactions between thalamic tumours and surrounding \gls{wm} are complex and unpredictable, as we will see in the following case studies, \gls{dmri} \gls{wm} imaging is especially valuable for safely planning and conducting resections\autocite{Celtikci2017}.
 
-The following will look at two of the \gls{gosh} diffusion iMRI cases in detail, considering the imaging and tumour features, peri-operative clinical presentation, and neurology.
+The following will look at two of the \gls{gosh} diffusion iMRI cases in detail, beginning with the most recent, considering the imaging and tumour features, peri-operative clinical presentation, and neurology.
 Hopefully this will provide a balanced perspective into the challenges and potential of intraoperative \gls{dmri} for such cases.
+
+\subsection{Patient 8: High grade glioma}
+
+The first of the two patients presented at seven years of age with a diffuse midline astrocytoma (\gls{who} grade 4) also in the left thalamus.
+A strong degree of mass effect called for tumour deformation modelling, so the lesion was segmented on the preoperative structural scan (Fig. \ref{fig:8p}).
+
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_t1.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_def.png}
+  \caption{Preoperative $T_1$-weighted imaging (top) of patient 8 with high grade left thalamic glioma. Bottom: Tumour deformation modelling in a co-registered MNI template image. No \gls{dmri} acquired preoperatively was available.}
+  \label{fig:8p}
+\end{figure}
+
+The diffuse and infiltrative nature of this tumour made identifying the posterior capsule, thalamus and tumour margins exceedingly difficult.
+Intraoperative \gls{dti} was requested by the radiologist after extensive discussion of the already acquired conventional contrast scans, from which the extent of internal capsule infiltration was indiscernible (Fig. \ref{fig:8i}).
+\Gls{dti} \gls{dec} maps showed a largely intact and slightly displaced internal capsule with extensive tumour infiltration, so the decision was made not to attempt further resection of that part of the tumour.
+Roughly half of the lesion was resected, predominantly in the ventral and medial parts.
+Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy after confirmation of high-grade histology with H3K27M mutation.
+Over the following weeks the patient's hemiparesis improved slowly, consistent with the decompression of the \gls{csd} and the tumour's infiltrative nature.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_t1.png}
+  \includesvg[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_fa.svg}
+  \caption{Intraoperative imaging showing transcallosal approach to patient 8's thalamic glioma. Top: $T_1$-weighted imaging. Bottom: \gls{dti} \gls{dec} \gls{fa} map. Arrowheads indicate partially infiltrated and displaced internal capsule.}
+  \label{fig:8i}
+\end{figure}
+
+Identification of the internal capsule and assessment of its condition on intraoperative imaging may have been significantly simplified with advanced tract-specific \gls{dmri} analysis.
+Interpreting colours on the directional \gls{fa} map is complicated by crossing fibres and disturbed diffusion caused by infiltration and oedema.
+What is unclear is the state of the neuronal fibres in the infiltrated portion: Are they intact, distorted, or destroyed?
+Visualising the fibre \glspl{odf} using \gls{csd} gives us further insight (Fig. \ref{fig:8i_fod}).
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_tensor.png}\,%
+  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_csd.png}\,%
+  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_atlas.png}
+  \caption{Magnified coronal view of partially resected tumour and internal capsule and modelled fibre orientations. \textbf{a.} \gls{dt}. \textbf{b.} \gls{csd} \glspl{fod} (\gls{msmt} \gls{csd} with \gls{wm} and \gls{csf} compartments). \textbf{c.} Deformed \gls{tod} \gls{cst} atlas. While the main body of the tract is well defined in all three images, the boundaries between intact fibres, infiltrated \gls{wm}, and tumour are indiscernible.}
+  \label{fig:8i_fod}
+\end{figure}
+
+Using a tumour deformation field modelled from the preoperative scan, tractfinder reconstructed the corticospinal tract in very close agreement with probabilistic streamline tractography.
+Both indicate a largely intact bundle slightly laterally displaced, although neither can necessarily rule out the presence of infiltrated fibres closer to the tumour, as the expected resulting decrease in anisotropy would produce fewer streamlines through that region and reduced tractfinder probability.
+Surprisingly, TractSeg was unable to successfully detect the \gls{cst} in the affected hemisphere, despite the relatively manageable amount of distortion.
+It is unclear what led to failure in this particular subject, as TractSeg has shown some success in cases with similar tumour deformations\autocite{Moshe2022}.
+
+\begin{figure}
+  % 5mm slice increments
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tg.png}
+  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tf.png}
+  \caption{Coronal slices in 5mm increments with \gls{cst} reconstructions on intraoperative imaging for patient 8. Top: Probabilistic streamline tractography, Bottom: Tractfinder \gls{cst} with tumour deformation modelling based on preoperative tumour segmentation.}
+  \label{fig:8i_tf}
+\end{figure}
 
 \subsection{Patient 5: Low grade pilocytic astrocytoma}
 
-The first of the two patients presented with a low-grade pilocytic astrocytoma in the left thalamus at 23 months of age with progressive right-sided weakness.
+A second patient presented with a low-grade pilocytic astrocytoma in the left thalamus at 23 months of age with progressive right-sided weakness.
 On preoperative \gls{mri} examination, a sliver of tissue within the tumour, presumed to be a part of the \gls{cst}, was evident, while the rest of the tract was displaced (Fig. \ref{fig:5p}).
 This being a low-grade and well-encapsulated tumour,
 
@@ -120,58 +175,3 @@ The patient went on to receive adjuvant chemotherapy and showed further improvem
 Reconstruction of the \gls{cst} on intraoperative imaging again proved difficult.
 Here, significant brain shift away from the craniotomy site prevented accurate atlas registration, resulting in a mismatch in anatomical alignment between atlas and target image (Fig \ref{fig:5i_cst}).
 Non-linear registration, with harsh penalties on strong local deformation to reduce overfitting around the resection surface, could mitigate this, but would be impractical for routine intraoperative use.
-
-\subsection{Patient 8: High grade glioma}
-
-A second patient presented at seven years of age with a diffuse midline astrocytoma (\gls{who} grade 4) also in the left thalamus.
-A strong degree of mass effect called for tumour deformation modelling, so the lesion was segmented on the preoperative structural scan (Fig. \ref{fig:8p}).
-
-\begin{figure}[htb!]
-  \centering
-  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_t1.png}
-  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_def.png}
-  \caption{Preoperative $T_1$-weighted imaging (top) of patient 8 with high grade left thalamic glioma. Bottom: Tumour deformation modelling in a co-registered MNI template image. No \gls{dmri} acquired preoperatively was available.}
-  \label{fig:8p}
-\end{figure}
-
-The diffuse and infiltrative nature of this tumour made identifying the posterior capsule, thalamus and tumour margins exceedingly difficult.
-Intraoperative \gls{dti} was requested by the radiologist after extensive discussion of the already acquired conventional contrast scans, from which the extent of internal capsule infiltration was indiscernible (Fig. \ref{fig:8i}).
-\Gls{dti} \gls{dec} maps showed a largely intact and slightly displaced internal capsule with extensive tumour infiltration, so the decision was made not to attempt further resection of that part of the tumour.
-Roughly half of the lesion was resected, predominantly in the ventral and medial parts.
-Postoperatively the patient's right side weakness was slightly improved and the patient received adjuvant radiotherapy after confirmation of high-grade histology with H3K27M mutation.
-Over the following weeks the patient's hemiparesis improved slowly, consistent with the decompression of the \gls{csd} and the tumour's infiltrative nature.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_t1.png}
-  \includesvg[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_fa.svg}
-  \caption{Intraoperative imaging showing transcallosal approach to patient 8's thalamic glioma. Top: $T_1$-weighted imaging. Bottom: \gls{dti} \gls{dec} \gls{fa} map. Arrowheads indicate partially infiltrated and displaced internal capsule.}
-  \label{fig:8i}
-\end{figure}
-
-Identification of the internal capsule and assessment of its condition on intraoperative imaging may have been significantly simplified with advanced tract-specific \gls{dmri} analysis.
-Interpreting colours on the directional \gls{fa} map is complicated by crossing fibres and disturbed diffusion caused by infiltration and oedema.
-What is unclear is the state of the neuronal fibres in the infiltrated portion: Are they intact, distorted, or destroyed?
-Visualising the fibre \glspl{odf} using \gls{csd} gives us further insight (Fig. \ref{fig:8i_fod}).
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_tensor.png}\,%
-  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_csd.png}\,%
-  \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_atlas.png}
-  \caption{Magnified coronal view of partially resected tumour and internal capsule and modelled fibre orientations. \textbf{a.} \gls{dt}. \textbf{b.} \gls{csd} \glspl{fod} (\gls{msmt} \gls{csd} with \gls{wm} and \gls{csf} compartments). \textbf{c.} Deformed \gls{tod} \gls{cst} atlas. While the main body of the tract is well defined in all three images, the boundaries between intact fibres, infiltrated \gls{wm}, and tumour are indiscernible.}
-  \label{fig:8i_fod}
-\end{figure}
-
-Using a tumour deformation field modelled from the preoperative scan, tractfinder reconstructed the corticospinal tract in very close agreement with probabilistic streamline tractography.
-Both indicate a largely intact bundle slightly laterally displaced, although neither can necessarily rule out the presence of infiltrated fibres closer to the tumour, as the expected resulting decrease in anisotropy would produce fewer streamlines through that region and reduced tractfinder probability.
-Surprisingly, TractSeg was unable to successfully detect the \gls{cst} in the affected hemisphere, despite the relatively manageable amount of distortion.
-It is unclear what led to failure in this particular subject, as TractSeg has shown some success in cases with similar tumour deformations\autocite{Moshe2022}.
-
-\begin{figure}
-  % 5mm slice increments
-  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tg.png}
-  \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tf.png}
-  \caption{Coronal slices in 5mm increments with \gls{cst} reconstructions on intraoperative imaging for patient 8. Top: Probabilistic streamline tractography, Bottom: Tractfinder \gls{cst} with tumour deformation modelling based on preoperative tumour segmentation.}
-  \label{fig:8i_tf}
-\end{figure}
