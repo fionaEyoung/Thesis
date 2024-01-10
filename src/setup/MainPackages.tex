@@ -113,10 +113,12 @@
 % This set-up makes hanging labels, makes the caption text smaller
 %  than the body text, and makes the label bold.
 % Highly recommended.
-\usepackage[format=hang,font=small,labelfont=bf]{caption}
+\usepackage[format=hang,font=small,labelfont=bf,labelsep=quad]{caption}
 \usepackage{subcaption}
 \usepackage[innercaption,raggedright]{sidecap}
 \sidecaptionvpos{figure}{t}
+\AtBeginEnvironment{SCfigure}{\captionsetup{format=plain}}
+
 % If you're getting into defining your own commands, you might want
 %  to check out the etoolbox package -- it defines a few commands
 %  that can make it easier to make commands robust.
