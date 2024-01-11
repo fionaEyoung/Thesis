@@ -99,7 +99,7 @@ Furthermore, separation of the isotropic signal contributions greatly improves t
 
 Up to this point, we have only discussed the processing and analysis of \gls{dmri} data, and what it can or cannot reveal about \gls{wm} microstructure, at the level of individual image \glspl{voxel}.
 However, the individual axons that form fibre tracts can traverse 100s of millimetres, and with the unique ability to measure fibre orientations in each voxel it wasn't long before this information was being exploited to reconstruct axonal connections in their entirety.
-The basic principle is one of treating fibre orientations as a brain-wide vector field through which the paths of virtual neural fibres can be traced in a process called streamline tractography.
+The basic principle is one of treating fibre orientations as a brain-wide vector field through which the paths of virtual neural fibres can be traced in a process called streamline tractography (or simply tractography).
 It is vital to note here that the paths of individual \textit{in vivo} axons are entirely indiscernible from \gls{dmri}.
 The individual streamlines of tractography are entirely abstract mathematical objects, each a collection of vertices, which aim to capture the \textit{potential} pathways of axons consistent with the observed \glspl{fod} representing an ensemble of thousands of axons.
 Tractography is an immensely powerful and useful tool, and at the same time full of flaws due to this abstract and indirect nature.
@@ -165,7 +165,7 @@ For example, strategies to prevent streamlines from ``hopping" onto intersecting
 Due to streamline tractography's locally oriented and step-by-step nature, errors and missteps accumulate rapidly with little to no opportunity to correct them, resulting in some wildly implausible streamlines.
 Attempts to address this blindness to biophysical reality are at the focus of much of modern tractography research\autocite{Bastiani2017,Rheault2019,Aydogan2021}, as the consequences of these ongoing challenges to connectivity research and neurology are substantial\autocite{Schilling2019, Yang2021, Grisot2021}.
 
-\subsection{White matter imaging part 1: Tractography}
+\subsection{Segmenting white matter tracts with tractography}
 
 The functional division of white matter into distinct tracts is of great consequence to neuroscience, psychology and neurology in their efforts to analyse brain structure and function, and as we will see later, identifying tracts is also of vital importance in neurosurgery.
 It follows that the spatial delineation of individual tracts is a key step in many \gls{dmri} analysis pipelines.
@@ -214,7 +214,7 @@ Finally, due to a combination of the different computational methods available, 
 In view of these limitations, some in the field are continuing efforts to improve streamline tractography with novel tracking algorithms, finding new ways to incorporate anatomical priors and developing more powerful streamline filtering, clustering and selection strategies.
 Others are looking towards white matter segmentation solutions that do not rely on tractography at the point of application, but instead produce voxel-wise tract segmentations directly from \gls{dmri} or \gls{fod} data.
 
-\subsection{White matter imaging part 2: Direct methods}
+\subsection{Streamline-free white matter imaging}
 
 There have been numerous works addressing the \gls{wm} tract identification task as a classic voxel-wise segmentation problem, utilising techniques including multi-label supervised clustering \autocite{Ratnarajah2014}, level-set and front propagation\textcite{Nazem-Zadeh2011, Hao2014}, and deep learning for direct segmentation from fibre orientation representations \autocite{Wasserthal2018,Li2020}.
 Typically, direct methods require some number of samples with which to train a classifier, atlas, Bayesian model or neural network.
