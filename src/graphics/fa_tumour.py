@@ -14,7 +14,7 @@ def main():
 
   filename = 'tumour_fa'
   fig, axs = plt.subplots(nrows=2, ncols=3, sharey=True, sharex=True,
-                          figsize=set_size(subplots=(2,3), ratio=0.8, fraction=1.05), layout='constrained')
+                          figsize=set_size(subplots=(2,3)))
 
   c_tumour = METHOD_PROPS['TF']['color']
   c_brain = METHOD_PROPS['TG']['color']
@@ -32,6 +32,7 @@ def main():
             label=['Whole brain', 'Tumour only'])
 
     ax.set_ylim([0,0.3])
+    ax.set_yticks(np.arange(0,0.4,0.1))
     ax.set_title(f'Subject {s}')
     plt.setp(ax.spines.values(), linewidth=lw)
 
@@ -46,7 +47,9 @@ def main():
   for ax in axs.flat:
     ax.tick_params(width=lw)
 
+  fig.subplots_adjust(wspace=0.08, hspace=0.2)
   plt.margins(0,0)
+  set_ax_size(ax=axs, ratio=0.45)
   fig.savefig(path.join(results_dir, f'{filename}.pdf'),
               transparent=False, dpi=300, bbox_inches="tight", pad_inches=0.01)
 

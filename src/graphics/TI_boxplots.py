@@ -41,7 +41,6 @@ def main():
   ## All metrics box plots, grouped by tract
   all_metrics_fig, all_metrics_axs = plt.subplots(nrows=2,
                                                   ncols=ceil(len(include_metrics)/2),
-                                                  layout='constrained',
                                                   figsize=set_size(subplots=(2,2)))
 
   for metric, ax in zip(include_metrics, all_metrics_axs.flat):
@@ -91,10 +90,14 @@ def main():
       ax.set_title("")
 
   all_metrics_axs[0,0].legend(one_of_each, order, ncol=len(order), loc='upper center')
-  all_metrics_fig.suptitle("TractoInferno")
+  all_metrics_fig.suptitle("TractoInferno", y=0.92)
+
+  plt.tight_layout()
+  all_metrics_fig.subplots_adjust(hspace=0.2, wspace=0.2)
   plt.margins(0,0)
+  set_ax_size(ax=all_metrics_axs)
   all_metrics_fig.savefig(path.join(results_dir, f'TI_boxplots.pdf'),
-              transparent=False, dpi=80)#, bbox_inches='tight', pad_inches=0.05)
+              transparent=False, dpi=80, bbox_inches='tight', pad_inches=0.01)
 
 
 

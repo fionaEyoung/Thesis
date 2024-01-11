@@ -50,7 +50,6 @@ def main():
   ## All metrics box plots, grouped by tract
   all_metrics_fig, all_metrics_axs = plt.subplots(nrows=2,
                                                   ncols=ceil(len(include_metrics)/2),
-                                                  layout='constrained',
                                                   figsize=set_size(subplots=(2,2)))
 
   for metric, ax in zip(include_metrics, all_metrics_axs.flat):
@@ -101,10 +100,14 @@ def main():
       ax.set_title("")
 
   all_metrics_axs[0,0].legend(one_of_each, order, ncol=len(order), loc='lower center')
-  all_metrics_fig.suptitle("HCP105, TractSeg reference bundles")
+  all_metrics_fig.suptitle("HCP105, TractSeg reference bundles", y=0.92)
+
+  plt.tight_layout()
+  all_metrics_fig.subplots_adjust(hspace=0.2, wspace=0.2)
   plt.margins(0,0)
+  set_ax_size(ax=all_metrics_axs, subplots=(2,2))
   all_metrics_fig.savefig(path.join(results_dir, f'{filename}.pdf'),
-              transparent=False, dpi=80)#, bbox_inches='tight', pad_inches=0.05)
+              transparent=False, dpi=80, bbox_inches='tight', pad_inches=0.01)
 
   ## PART 2: giant scatter plot
 
@@ -151,11 +154,11 @@ def main():
       ax.set_xlim([0.1, 1])
       ax.set_xlabel(METRIC_PARAMS[metric]['title'])
 
-  bix_fig_ax[0].legend()
+  bix_fig_ax[0].legend(columnspacing=0.9, handletextpad=0.5, markerscale=1)
   # plt.tight_layout()
   plt.margins(0,0)
   big_fig.savefig(path.join(results_dir, f'{filename}.pdf'),
-              transparent=False, dpi=120)#, bbox_inches="tight", pad_inches=0)
+              transparent=False, dpi=120, bbox_inches="tight", pad_inches=0.01)
 
 
 if __name__ == '__main__':

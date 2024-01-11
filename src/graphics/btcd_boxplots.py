@@ -57,7 +57,6 @@ def main():
   ## All metrics box plots, grouped by tract
   all_metrics_fig, all_metrics_axs = plt.subplots(nrows=2,
                                                   ncols=ceil(len(include_metrics)/2),
-                                                  layout='constrained',
                                                   figsize=set_size(subplots=(2,2)))
 
   for metric, ax in zip(include_metrics, all_metrics_axs.flat):
@@ -109,10 +108,15 @@ def main():
 
   l = all_metrics_axs[0,0].legend(one_of_each, order, ncol=len(order), loc='lower center')
   l.get_frame().set_linewidth(lw)
-  all_metrics_fig.suptitle("BTCD")
+  all_metrics_fig.suptitle("BTC", y=0.92)
+
+
+  plt.tight_layout()
+  all_metrics_fig.subplots_adjust(hspace=0.2, wspace=0.2)
   plt.margins(0,0)
+  set_ax_size(ax=all_metrics_axs)
   all_metrics_fig.savefig(path.join(results_dir, f'{filename}.pdf'),
-              transparent=False, dpi=80)
+              transparent=False, dpi=80, bbox_inches='tight', pad_inches=0.01)
 
   ## PART 2: Change plot
 
@@ -181,6 +185,8 @@ def main():
   l = ax.legend([(l1, l2), (l3, l4)], ['ipsilateral', 'contralateral'], loc='lower center',
                handler_map={tuple: HandlerTuple(ndivide=None)}, markerscale=1)
   l.get_frame().set_linewidth(lw)
+
+  plt.margins(0,0)
   change_plot_fig.savefig(path.join(results_dir, f'{filename}.pdf'),
               transparent=False, dpi=120)
 

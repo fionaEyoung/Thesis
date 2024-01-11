@@ -123,11 +123,11 @@ Thus combining information from the atlas and data-derived \glspl{fod} improves 
 \begin{figure}[htb!]
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=1.04\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_AF.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_AF.svg}}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=1.048\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_IFOF.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_IFOF.svg}}
   \end{subfigure}
   \caption{Segmentations for the left \gls{af} (top) and \gls{ifof} (bottom) in a representative subject from the \textit{TractoInferno} dataset, shown on slices at 5~mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colourbars are drawn once for each method category (tractfinder, tractography and TractSeg).}
   \label{fig:lb.afifof}
@@ -136,11 +136,11 @@ Thus combining information from the atlas and data-derived \glspl{fod} improves 
   \centering
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=1.04\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_CST.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_CST.svg}}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=1.055\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_OR.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_OR.svg}}
   \end{subfigure}
 \end{figure}
 \clearpage %flush
@@ -150,8 +150,8 @@ Thus combining information from the atlas and data-derived \glspl{fod} improves 
 
 \begin{figure}[h!]
   \centering
-  % \includesvg[width=\textwidth,pretex=\sffamily\large]{chapter_5/TI_boxplots.svg}
-  \includegraphics{chapter_5/TI_boxplots.pdf}
+  \makebox[\linewidth][r]{%
+  \includegraphics{chapter_5/TI_boxplots.pdf}}
   \caption{All methods compared against the \textit{TractoInferno} reference streamlines. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}}
   \label{fig:combobox}
 \end{figure}
@@ -213,7 +213,7 @@ For example, TractSeg DKFZ includes extensive coverage of the frontal and tempor
 Similarly, the \gls{ifof} reconstructions also display strong variability, owing in part to disagreements in its precise definition as reviewed in Chapter \ref{chap:atlas}.
 Conversely in the \gls{cst}, which has a relatively well agreed-upon domain, segmentations have much higher volumetric agreement between methods, with the exception of TractSeg XTRACT, which does not include the lateral projections (Fig. \ref{fig:lb.cstor}).
 Agreement in the optic radiations is somewhere in between, with slightly lower \glspl{dice} in tractfinder compared against the two TractSeg methods, which tend to include more thalamus and a lesser extent of Meyer's loop.
-These differences highlight the difficulty in assessing the ``accuracy" of white matter segmentation methods given limited consensus on the precise anatomical definitions of different pathways.
+These differences highlight the difficulty in assessing the ``accuracy'' of white matter segmentation methods given limited consensus on the precise anatomical definitions of different pathways.
 
 A further consideration is the effect of segmentation volume on \gls{dice} values.
 This metric is more sensitive to segmentation errors in smaller volumes, and conversely segmentations of large structures tend to score higher.
@@ -272,13 +272,13 @@ Further examples of tract reconstructions in intraoperative imaging are displaye
 
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
-  \includesvg[width=1.04\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_NHNN_5.svg}}
+  \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_NHNN_5.svg}}
   \caption{Intraoperative imaging for an adult right frontal \gls{who} grade 2 oligodendroglioma patient from the clinical dataset, with right \gls{cst} segmentations (thresholded according to Table \ref{tab:thresh}) shown in coronal slices at 5~mm intervals and as full volumes in the right-most column. White arrowheads indicate the precentral sulcus.}
   \label{fig:lb.nh}
 \end{figure}
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
-  \includesvg[width=1.05\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_GOSH_3.svg}}
+  \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_GOSH_3.svg}}
   \caption{Intraoperative imaging for a paediatric temporal diffuse low-grade astrocytoma patient, with bilateral \gls{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5~mm intervals and as full volumes in the right-most column.}
   \label{fig:lb.gosh}
 \end{figure}
@@ -305,10 +305,10 @@ However, since the time taken depends greatly on several factors, including numb
     \rowstyle{\rmfamily}
     Step & Processing time \newline (s, per subject) & Tractfinder & TractSeg & Atlas & Tractography \\
     \midrule
-    \dag Brain masking & 3 $\pm$ 2 &\x{}&\x{}&\x{}& x\\
+    \dag Brain masking & 3 $\pm$ 2 &\x{}&\x{}&\x{}&\x{}\\
     \dag Affine MNI registration & 20 $\pm$ 4 &\x{}&  &\x{}&  \\
-    \dag Response function & 5 $\pm$ 3 &\x{}&\x{}&\x{}& x\\
-    \dag MSMT CSD & 110 $\pm$ 55 &\x{}&  &\x{}& x\\
+    \dag Response function & 5 $\pm$ 3 &\x{}&\x{}&\x{}&\x{}\\
+    \dag MSMT CSD & 110 $\pm$ 55 &\x{}&  &\x{}&\x{}\\
     \dag SSST CSD + peaks estimation & 18 $\pm$ 8 &  &\x{}&  &  \\
     \dag Atlas transformation + inner product (4 tracts, 2 hemispheres) & 24 $\pm$ 5 &\x{}&  & (\x{}) &  \\
     \dag TractSeg DKFZ / XTRACT (72 / 23 tracts) & 240 $\pm$ 60 &  &\x{}& & \\
@@ -326,11 +326,12 @@ A key component of tractfinder is the precise definition of each tract and caref
 Despite the availability of public streamline datasets including the \textit{TractInferno} data and the TractSeg training and validation bundles, none were found to adequately fulfil the predefined anatomical criteria, and thus new training streamlines were generated for tractfinder.
 While the anatomical fidelity of the resulting atlases represents a particular strength, it does make objective comparison between benchmark methods, which may be based on different references, difficult.
 In order to produce a direct and objective comparison with TractSeg, a new set of tract atlases were created from the TractSeg DKFZ reference bundles\autocite{Wasserthal2018b} in the HCP105 dataset, using the same split into training and testing subjects as used in the deep learning model (published version).
-TractSeg was trained on 63 subjects and tested on the remaining 42, and here the same was done for tractfinder (where ``training" means constructing the atlas from individual bundles as described in Chapter \ref{chap:atlas}), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
+TractSeg was trained on 63 subjects and tested on the remaining 42, and here the same was done for tractfinder (where ``training'' means constructing the atlas from individual bundles as described in Chapter \ref{chap:atlas}), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
 Since the original TractSeg paper includes 72 tracts (including both left and right instances of non-commissural tracts and multiple subdivisions of tracts such as the corpus callosum or anterior thalamic radiation) and the performance varied substantially across tracts, tractfinder was run for all tracts for completeness rather than just the four (\gls{af}, \gls{cst}, \gls{ifof}, \gls{or}) studied thus far.
 
 \begin{figure}[htb!]
-  \includegraphics[width=\textwidth]{chapter_5/ts_test_box.pdf}
+  \makebox[\linewidth][r]{%
+  \includegraphics{chapter_5/ts_test_box.pdf}}
   \caption{Scores for tractfinder (using atlases constructed from the TractSeg training data) and TractSeg validated on the TractSeg reference bundles.}
   \label{fig:ts_atlas}
 \end{figure}
@@ -381,7 +382,8 @@ Across the whole dataset, including both deforming and non-deforming tumours, tr
 \end{SCfigure}
 
 \begin{figure}[htb!]
-  \includegraphics{chapter_5/btcd_box.pdf}
+  \makebox[\linewidth][r]{%
+  \includegraphics{chapter_5/btcd_box.pdf}}
   \caption{Similarity scores for tractfinder and TractSeg DKFZ in the \gls{btc} dataset, compared with filtered manual tractography.}
   \label{fig:btcd_box}
 \end{figure}

@@ -43,7 +43,6 @@ def main():
   ## All metrics box plots, grouped by tract
   all_metrics_fig, all_metrics_axs = plt.subplots(nrows=1,
                                                   ncols=ceil(len(include_metrics)/2),
-                                                  layout='constrained',
                                                   figsize=set_size(subplots=(1,ceil(len(include_metrics)/2)), fraction=0.5))
 
   for metric, ax in zip(include_metrics, [all_metrics_axs]):
@@ -90,13 +89,13 @@ def main():
       ax.set_xlabel('')
       ax.tick_params(axis='x', length=0)
       ax.set_ylim(METRIC_PARAMS[metric]['lims'])
-      ax.set_title("HCP")
+      ax.set_title("HCP", y=0.92)
 
   all_metrics_axs.legend(one_of_each, order, ncol=len(order), loc='lower right')
   all_metrics_fig.suptitle("")
   plt.margins(0,0)
   all_metrics_fig.savefig(path.join(results_dir, 'hcp_box.pdf'),
-              transparent=False, dpi=80)#, bbox_inches='tight', pad_inches=0.05)
+              transparent=False, dpi=80, bbox_inches='tight', pad_inches=0.01)
 
 
 

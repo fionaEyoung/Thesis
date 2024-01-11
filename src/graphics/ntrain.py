@@ -37,6 +37,7 @@ def main():
 
   plt.rcParams.update(tex_fonts)
   # plt.rcParams.update({'text.usetex': True, 'svg.fonttype': 'none'})
+  plt.rcParams.update({"mathtext.fontset":"custom", "mathtext.it":"Source Sans Pro Italic"})
 
   filename = 'ntrain'
   include_metrics = ['binary_dice','density_correlation']
@@ -133,7 +134,7 @@ def main():
 
   plt.plot(100,100, 'o', mec='k', color='w', mew=0.5, label='tractfinder')
   plt.plot(100,100, '^', mec='k', color='w', mew=0.5, label='TractSeg')
-  plt.plot(100,100, 's', mec='k', color='w', mew=0.5, label='TractSeg+Oneshot (Liu \\textit{et al.}, 2023)')
+  plt.plot(100,100, 's', mec='k', color='w', mew=0.5, label='TractSeg+Oneshot (Liu $\it{et\, al.}$, 2023)')
 
   scatter_ax.set_ylabel("Dice similarity coefficient")
   scatter_ax.set_xlabel("Number of training subjects")

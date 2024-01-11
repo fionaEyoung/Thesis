@@ -14,6 +14,10 @@ def k(x, l):
   return (1-c) * np.exp(-l*abs((x)/(B-S))) + c
 
 plt.rcParams.update(tex_fonts)
+plt.rcParams.update({"mathtext.fontset":"custom",
+                     "mathtext.it":"Libertinus Serif Italic",
+                     "mathtext.rm":"Libertinus Math"})
+
 current_dir = path.dirname(__file__)
 out_dir = path.join(current_dir, pardir, 'figs', 'chapter_4')
 

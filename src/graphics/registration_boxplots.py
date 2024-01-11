@@ -42,8 +42,7 @@ def main():
   ## All metrics box plots, grouped by tract
   all_metrics_fig, all_metrics_axs = plt.subplots(ncols=2,
                                                   nrows=ceil(len(include_metrics)/2),
-                                                  layout='constrained',
-                                                  figsize=set_size(subplots=(ceil(len(include_metrics)/2),2), fraction=1.08))
+                                                  figsize=set_size(subplots=(ceil(len(include_metrics)/2),2)))
 
   for metric, ax in zip(include_metrics, all_metrics_axs.flat):
 
@@ -94,9 +93,12 @@ def main():
 
   all_metrics_axs[0].legend(one_of_each, [METHOD_PROPS[o].get('name', o) for o in order], ncol=len(order))
   all_metrics_fig.suptitle("")
+
+  all_metrics_fig.subplots_adjust(hspace=0.2, wspace=0.2)
   plt.margins(0,0)
+  set_ax_size(ax=all_metrics_axs, subplots=(1,2))
   all_metrics_fig.savefig(path.join(results_dir, f'{figname}.pdf'),
-              transparent=False, dpi=120)#, bbox_inches="tight")
+              transparent=False, dpi=120, bbox_inches="tight", pad_inches=0.01)
 
 
 

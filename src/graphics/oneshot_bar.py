@@ -5,7 +5,7 @@ from os import path, getlogin, pardir
 
 current_dir = path.dirname(__file__)
 data_dir = path.join(current_dir, 'raw_results')
-results_dir = path.join(current_dir, pardir, 'figs', 'chapter_2')
+results_dir = path.join(current_dir, pardir, 'figs', 'chapter_3')
 filename = 'pubs'
 
 data = pd.read_csv(path.join(data_dir, 'publications.txt'), skiprows=3)

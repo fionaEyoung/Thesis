@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from matplotlib import colormaps, cm
+import numpy as np
 
 def set_box_colours(bp, index=None, **kwargs):
     # print(bp.keys())
@@ -48,9 +50,10 @@ def set_size(width=452.9679, ratio=None, fraction=1, subplots=(1, 1)):
     return (fig_width_in, fig_height_in)
 
 # https://stackoverflow.com/a/44971177
-def set_ax_size(width=452.9679, ratio=None, fraction=1, ax=None):
+def set_ax_size(width=452.9679, ratio=None, fraction=1, ax=None, subplots=(1, 1)):
     """ w, h: width, height in inches """
-    if not ax: ax=plt.gca()
+    if ax is None: ax=plt.gca()
+    if not isinstance(ax, (np.ndarray)): ax = np.array([ax])
 
     # Convert from pt to inches
     inches_per_pt = 1 / 72.27
@@ -58,21 +61,21 @@ def set_ax_size(width=452.9679, ratio=None, fraction=1, ax=None):
 
     # Width of figure (in pts)
     ax_width_in  = width * fraction * inches_per_pt
-    ax_height_in = ax_width_in * (ratio or golden_ratio)
+    ax_height_in = ax_width_in * (ratio or golden_ratio) * (subplots[0] / subplots[1])
 
-    l = ax.figure.subplotpars.left
-    r = ax.figure.subplotpars.right
-    t = ax.figure.subplotpars.top
-    b = ax.figure.subplotpars.bottom
+    l = min([a.figure.subplotpars.left for a in ax.flat])
+    r = max([a.figure.subplotpars.right for a in ax.flat])
+    t = max([a.figure.subplotpars.top for a in ax.flat])
+    b = min([a.figure.subplotpars.bottom for a in ax.flat])
     figw = float(ax_width_in)/(r-l)
     figh = float(ax_height_in)/(t-b)
-    ax.figure.set_size_inches(figw, figh)
+    ax.flat[0].figure.set_size_inches(figw, figh)
 
 tex_fonts = {
     # Use LaTeX to write all text
-    "text.usetex": True,
+    # "text.usetex": True,
     "font.family": "sans-serif",
-    'font.serif'  : 'cmss',
+    "font.sans-serif": "Source Sans Pro",
     # Use 10pt font in plots, to match 10pt font in document
     "font.size": 12,
     "axes.labelsize": 'small',
