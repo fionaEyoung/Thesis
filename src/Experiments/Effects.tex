@@ -26,14 +26,14 @@ This is the question explored in the following study, which makes use of the hig
 
 % \paragraph*{Data and methods}
 
-49 preprocessed \gls{dmri} scans from the WU-Minn \gls{hcp} Young Adult S1200 data release were spatially resampled to 2.5mm isotropic voxel size (from the original of 1mm isotropic), a resolution far more typical in both clinical and research settings.
+49 preprocessed \gls{dmri} scans from the WU-Minn \gls{hcp} Young Adult S1200 data release were spatially resampled to 2.5~mm isotropic voxel size (from the original of 1~mm isotropic), a resolution far more typical in both clinical and research settings.
 Then, for each subject, the following five subsampled diffusion schemes were extracted from the full acquisition (Tab. \ref{tab:subschemes}):
-60 directions each at $b=1000s/mm^2$ and $b=2000s/mm^2$ (120 directions total, ``DWI-1”), 30 directions each at $b=1000s/mm^2$ and $b=2000s/mm^2$ (60 directions total, ``DWI-2”), 60 directions at $b=1000s/mm^2$ (``DWI-3”), 30 directions at $b=1000s/mm^2$ (``DWI-4”) and 12 directions at $b=1000s/mm^2$ (``DWI-5”).
+60 directions each at $b=1000$~s~mm$^{-2}$ and $b=2000$~s~mm$^{-2}$ (120 directions total, ``DWI-1”), 30 directions each at $b=1000$~s~mm$^{-2}$ and $b=2000$~s~mm$^{-2}$ (60 directions total, ``DWI-2”), 60 directions at $b=1000$~s~mm$^{-2}$ (``DWI-3”), 30 directions at $b=1000$~s~mm$^{-2}$ (``DWI-4”) and 12 directions at $b=1000$~s~mm$^{-2}$ (``DWI-5”).
 
 \begin{table}
   \centering
   \begin{tabular}{c c c} \toprule
-    Identifier & $b = 1000$ & $b=2000$ \\
+    Identifier & $b=1000$~s~mm$^{-2}$ & $b=2000$~s~mm$^{-2}$ \\
     \midrule
     DWI-1 & 60 & 60 \\
     DWI-2 & 30 & 30 \\
@@ -108,9 +108,9 @@ These include interleaved and \gls{rsepi} sequences which, in general, only trav
 RESOLVE (readout segmentation of long variable echo-trains), a Siemens product, is one example of a commonly used \gls{rsepi} sequence for high quality three-scan trace weighted images with high in-plane resolution.
 
 While RS sequences can be combined with acceleration techniques including generalised autocalibrating partially parallel acquisition (GRAPPA) and simultaneous multi-slice (SMS), they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
-For example, in \textcite{Wang2018} authors compared interleaved and \gls{rsepi} sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4mm thickness!
-In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE sequence with 15 segments, six diffusion weighted directions, and a scan time of 10:34min.
-For comparison, the clinical \gls{ssepi} \gls{dti} sequence currently used intraoperatively at \gls{gosh} is a 30 direction $b=1000s/mm^2$ acquisition lasting just 4:57min with 2.3mm isotropic voxels.
+For example, in \textcite{Wang2018} authors compared interleaved and \gls{rsepi} sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4~mm thickness!
+In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE sequence with 15 segments, six diffusion weighted directions, and a scan time of 10:34 minutes.
+For comparison, the clinical \gls{ssepi} \gls{dti} sequence currently used intraoperatively at \gls{gosh} is a 30 direction $b=1000$~s~mm$^{-2}$ acquisition lasting just 4:57~minutes with 2.3~mm isotropic voxels.
 
 We set out to explore the feasibility of setting up a \gls{rsepi} \gls{dti} sequence for intraoperative use at \gls{gosh}.
 An (approximately) isotropic voxel size is generally considered optimal for \gls{dti} modelling and tractography \autocite{Vos2011, Neher2013}, although tractography with high in plane resolution and thick slices is certainly possible.

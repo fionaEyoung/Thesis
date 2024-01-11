@@ -41,7 +41,7 @@ A recent example, by \textcite{Liu2023a} and building on previous work in \textc
 They trained a network on 60 of the 72 total TractSeg white matter tracts, and applied data-augmentation and transfer learning techniques to adapt the model to segment the remaining 12 tracts using only a single exemplar training dataset for those novel tracts, which included both the \gls{cst} and \gls{or}.
 
 Considering only their best results (which differed depending on how many novel tracts the network was extended to) for these two tracts, they achieved a mean \gls{dice} of 0.719 for the \gls{cst} and 0.624 for the \gls{or}, equally good or worse than for tractfinder ``trained" even on only a single dataset (Fig. \ref{fig:ntrain}).
-While the computational time spent on network training is not disclosed in either \textcite{Liu2023a} or \textcite{Wasserthal2018}, \textcite{Berto2021} re-trained their own TractSeg model as a benchmark comparison for the streamline clustering method Classifyber and reported GPU-accelerated training times of 3-7 hours.
+While the computational time spent on network training is not disclosed in either \textcite{Liu2023a} or \textcite{Wasserthal2018}, \textcite{Berto2021} re-trained their own TractSeg model as a benchmark comparison for the streamline clustering method Classifyber and reported GPU-accelerated training times of 3--7 hours.
 Even so, one-shot training of a deep neural network appears to offer no improvement over simply registering a segmentation from one subject to another.
 
 \begin{SCfigure}[][h!]

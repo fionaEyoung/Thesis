@@ -120,7 +120,7 @@ To obtain the inverse mapping for the exponential model, we solve equation (\ref
 where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$.
 
 The most appropriate value for the exponential decay parameter $\lambda$ will depend on characteristics of the specific lesion being modelled.
-For example, smaller lesions (20-30mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved.
+For example, smaller lesions (20--30~mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved.
 In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger fall-off in displacement force, would be appropriate.% (Fig. \note{fig:examples}).
 In any case, in order to keep the transforms well-behaved, we need to enforce the boundary condition that every point $P$ in the source image that is within the tumour perimeter ends up strictly outside the tumour in the eventual deformed image.
 In other words,
@@ -158,8 +158,8 @@ Note that $\lambda_{max}$ varies throughout the brain, being a function of the r
   \label{fig:k}
 \end{SCfigure}
 
-The tumour deformation model is implemented in Python, and full execution takes on average 1 min for a 208 x 256 x 256 voxel image.
-If lookup tables for $ D_t$ and $D_b$ are precomputed and saved, then subsequent executions of the model (e.g. with different values for $\lambda$ and $s$, as appropriate for a given tumour) take less than 10 seconds, as long as the tumour and brain segmentations remain unchanged.
+The tumour deformation model is implemented in Python, and full execution takes on average 1~minute for a 208\x{}256\x{}256 voxel image.
+If lookup tables for $ D_t$ and $D_b$ are precomputed and saved, then subsequent executions of the model (e.g. with different values for $\lambda$ and $s$, as appropriate for a given tumour) take less than 10~seconds, as long as the tumour and brain segmentations remain unchanged.
 
 \subsection{Limitations and future progress}
 
@@ -193,7 +193,7 @@ Nevertheless, accurate white matter imaging could still be informative in assess
 
 \begin{figure}[htb!]
   \includesvg[width=\textwidth,inkscapelatex=true,pretex=\small\sffamily]{chapter_4/ventricles.svg}
-  \caption{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. \textbf{a.} \gls{btc} sub-PAT03. \textbf{b.} \gls{btc} sub-PAT26}
+  \caption{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. Arrows indicate ventricle compression not fully captured in the deformation model. \textbf{a.} \gls{btc} sub-PAT03. \textbf{b.} \gls{btc} sub-PAT26}
   \label{fig:ventricles}
 \end{figure}
 

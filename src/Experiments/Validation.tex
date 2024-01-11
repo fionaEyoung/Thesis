@@ -36,7 +36,7 @@ Since tractfinder is a voxel-based method, streamlines were converted to voxel-b
 
 \paragraph*{TractSeg}
 
-TractSeg \autocite{Wasserthal2018} is a deep convolutional neural network model for tract segmentation which produces volumetric segmentation for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3-2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
+TractSeg \autocite{Wasserthal2018} is a deep convolutional neural network model for tract segmentation which produces volumetric segmentation for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3--2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
 There are two models available: One trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018} (``TractSeg DKFZ (TSD)"), and a second trained on streamline density maps output by FSL's XTRACT \autocite{Warrington2020} application using automatic predefined \gls{roi} registration and probtracx probabilistic tractography\autocite{Behrens2007} (``TractSeg XTRACT (TSX)").
 Here both versions are compared, as they feature significant differences in anatomical tract definitions.
 Input peaks for all TractSeg results were derived from the SSST \gls{csd} \glspl{fod} for all single-shelled data and from the \gls{msmt} peaks for all multi-shelled data.
@@ -129,7 +129,7 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
     \makebox[\linewidth][r]{%
     \includesvg[width=1.048\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_IFOF.svg}}
   \end{subfigure}
-  \caption{Segmentations for the left \gls{af} (top) and \gls{ifof} (bottom) in a representative subject from the \textit{TractoInferno} dataset, shown on slices at 5mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colourbars are drawn once for each method category (tractfinder, tractography and TractSeg).}
+  \caption{Segmentations for the left \gls{af} (top) and \gls{ifof} (bottom) in a representative subject from the \textit{TractoInferno} dataset, shown on slices at 5~mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colourbars are drawn once for each method category (tractfinder, tractography and TractSeg).}
   \label{fig:lb.afifof}
 \end{figure}
 \begin{figure}[htb!]
@@ -144,7 +144,7 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
   \end{subfigure}
 \end{figure}
 \clearpage %flush
-{\captionof{figure}{Segmentations for the the projection tracts \gls{cst} (top) and \gls{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset shown on slices at 5mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colour scales are drawn once for each method category (tractfinder, tractography and TractSeg). \label{fig:lb.cstor}}
+{\captionof{figure}{Segmentations for the the projection tracts \gls{cst} (top) and \gls{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset shown on slices at 5~mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colour scales are drawn once for each method category (tractfinder, tractography and TractSeg). \label{fig:lb.cstor}}
 }
 \subsection{Quantitative results}\label{sec:quant}
 
@@ -177,8 +177,8 @@ For the same two comparisons, the density correlations differed only by $0.04$ (
 
 
 The signed bundle distance gives an indication of the nature of disagreement between two techniques where other metrics show little difference.
-For example, in the \textit{TractoInferno} dataset and for the \gls{af}, mean bundle distance to targeted tractography was $5.06$mm for the naive registered atlas and a very similar $5.07$mm TractSeg DKFZ at (Fig. \ref{fig:combobox}). % (Tab. \note{missing table tab:DATAHCP}).
-However, the signed bundle distances for those same two comparisons were $+1.65$mm and $-2.60$mm respectively (similar values were also found for the \gls{hcp} dataset, data not shown here).
+For example, in the \textit{TractoInferno} dataset and for the \gls{af}, mean bundle distance to targeted tractography was 5.06~mm for the naive registered atlas and a very similar 5.07~mm TractSeg DKFZ at (Fig. \ref{fig:combobox}). % (Tab. \note{missing table tab:DATAHCP}).
+However, the signed bundle distances for those same two comparisons were +1.65~mm and -2.60~mm respectively (similar values were also found for the \gls{hcp} dataset, data not shown here).
 This indicates that, while if only considering the bundle distance metric, both TractSeg and the atlas appear to agree to a similar degree with tractography, TractSeg actually systematically over-segments the \gls{af} (relative to tractography), while the naive atlas segmentation tends towards under-segmentation.
 
 With all this in mind, we find that tractfinder does indeed reliably perform well against targeted streamline tractography across all metrics, with the exception of the \gls{af} when measured on \gls{dice} or distance metrics.
@@ -273,13 +273,13 @@ Further examples of tract reconstructions in intraoperative imaging are displaye
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
   \includesvg[width=1.04\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_NHNN_5.svg}}
-  \caption{Intraoperative imaging for an adult right frontal \gls{who} grade 2 oligodendroglioma patient from the clinical dataset, with right \gls{cst} segmentations (thresholded according to Table \ref{tab:thresh}) shown in coronal slices at 5mm intervals and as full volumes in the right-most column. White arrowheads indicate the precentral sulcus.}
+  \caption{Intraoperative imaging for an adult right frontal \gls{who} grade 2 oligodendroglioma patient from the clinical dataset, with right \gls{cst} segmentations (thresholded according to Table \ref{tab:thresh}) shown in coronal slices at 5~mm intervals and as full volumes in the right-most column. White arrowheads indicate the precentral sulcus.}
   \label{fig:lb.nh}
 \end{figure}
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
   \includesvg[width=1.05\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_5/LB_GOSH_3.svg}}
-  \caption{Intraoperative imaging for a paediatric temporal diffuse low grade astrocytoma patient, with bilateral \gls{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5mm intervals and as full volumes in the right-most column.}
+  \caption{Intraoperative imaging for a paediatric temporal diffuse low grade astrocytoma patient, with bilateral \gls{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5~mm intervals and as full volumes in the right-most column.}
   \label{fig:lb.gosh}
 \end{figure}
 
@@ -288,34 +288,34 @@ Further examples of tract reconstructions in intraoperative imaging are displaye
 \subsection{Processing times}
 
 A full processing time breakdown is presented in Table \ref{tab:time}.
-Atlas transformation and inner product computation time per subject for all four tracts and both hemispheres was $24\pm5$s, plus 1-2 minutes for MSMT-\gls{csd} and 20 seconds for MNI registration, with an average total time of just under 3min for the entire tractfinder pipeline (Tab. \ref{tab:time}).
-For TractSeg, mean processing time (for all tracts, 72 for DKFZ and 23 for XTRACT, both hemispheres) was 4:00$\pm$1:00min, plus $15-20$s for SSST-\gls{csd}.
+Atlas transformation and inner product computation time per subject for all four tracts and both hemispheres was 24~$\pm$~5~s, plus 1--2~minutes for MSMT-\gls{csd} and 20~seconds for MNI registration, with an average total time of just under 3~minutes for the entire tractfinder pipeline (Tab. \ref{tab:time}).
+For TractSeg, mean processing time (for all tracts, 72 for DKFZ and 23 for XTRACT, both hemispheres) was 4:00~$\pm$~1:00~minutes, plus 15--20~sseconds for SSST-\gls{csd}.
 
 For manual streamline tractography in the clinical datasets, processing time was not explicitly measured, due to the high variability that comes with manual ROI drawing (between 10--25 minutes for all tracts in a single subject, although anecdotally this varies significantly between operators).
-\Gls{hcp} and \textit{TractoInferno} tractography was run on a high performance computing cluster, taking approximately 10s per tract (single hemisphere), using 36 CPU cores, and additionally up to 2 minutes for non-linear ROI registration (Table \ref{tab:time}).
+\Gls{hcp} and \textit{TractoInferno} tractography was run on a high performance computing cluster, taking approximately 10 seconds per tract (single hemisphere), using 36 CPU cores, and additionally up to 2~minutes for non-linear ROI registration (Table \ref{tab:time}).
 However, since the time taken depends greatly on several factors, including number of streamlines to select and streamline acceptance rate (often low in brains with pathology due to oedema, deformation etc.), a precise time analysis for manual tractography cannot provided here.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table*}[h!]
-  \caption{Measured processing times mean and standard deviation for \textit{TractoInferno} dataset. Individual steps shown and total average for the four different pipelines. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography ROIs were drawn once for the whole dataset, whereas for clinical datasets manual ROI delineation will have to be repeated for each subject. \dag Desktop Mac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, 1 node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60GHz cores per node.}
+  \caption{Measured processing times mean and standard deviation for \textit{TractoInferno} dataset. Individual steps shown and total average for the four different pipelines. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography ROIs were drawn once for the whole dataset, whereas for clinical datasets manual ROI delineation will have to be repeated for each subject. \dag Desktop Mac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, 1 node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60 GHz cores per node.}
   \label{tab:time}
   \small
   \begin{tabularx}{\textwidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
     \toprule
     \rowstyle{\rmfamily}
-    Step & Processing time \newline (seconds, per subject) & tractfinder & TractSeg & Atlas & tractography \\
+    Step & Processing time \newline (s, per subject) & Tractfinder & TractSeg & Atlas & Tractography \\
     \midrule
-    \dag Brain masking & 3 $\pm$ 2 & x & x & x & x\\
-    \dag Affine MNI registration & 20 $\pm$ 4 & x &  & x &  \\
-    \dag Response function & 5 $\pm$ 3 & x & x & x & x\\
-    \dag MSMT CSD & 110 $\pm$ 55 & x &  & x & x\\
-    \dag SSST CSD + peaks estimation & 18 $\pm$ 8 &  & x &  &  \\
-    \dag Atlas transformation + inner product (4 tracts, 2 hemispheres) & 24 $\pm$ 5 & x &  & (x) &  \\
-    \dag TractSeg DKFZ / XTRACT (72 / 23 tracts) & 240 $\pm$ 60 &  & x & & \\
-    \dag Manual ROI delineation (once for whole dataset) & 1200 & & & & x \\
-    \ddag Non-linear ROI registration + tractography (4 tracts, 2 hemispheres) & 334 $\pm$ 163 & & & & x \\ \addlinespace
+    \dag Brain masking & 3 $\pm$ 2 &\x{}&\x{}&\x{}& x\\
+    \dag Affine MNI registration & 20 $\pm$ 4 &\x{}&  &\x{}&  \\
+    \dag Response function & 5 $\pm$ 3 &\x{}&\x{}&\x{}& x\\
+    \dag MSMT CSD & 110 $\pm$ 55 &\x{}&  &\x{}& x\\
+    \dag SSST CSD + peaks estimation & 18 $\pm$ 8 &  &\x{}&  &  \\
+    \dag Atlas transformation + inner product (4 tracts, 2 hemispheres) & 24 $\pm$ 5 &\x{}&  & (\x{}) &  \\
+    \dag TractSeg DKFZ / XTRACT (72 / 23 tracts) & 240 $\pm$ 60 &  &\x{}& & \\
+    \dag Manual ROI delineation (once for whole dataset) & 1200 & & & &\x{}\\
+    \ddag Non-linear ROI registration + tractography (4 tracts, 2 hemispheres) & 334 $\pm$ 163 & & & &\x{}\\ \addlinespace
     \rowstyle{\bfseries\rmfamily}
-    Total &  & 2:42min & 4:25min & \textless2:42min & $\gtrsim$27:32min \\ \bottomrule
+    Total &  & 2:42~min & 4:25~min & \textless2:42~min & \textgreater 27:32~min \\ \bottomrule
   \end{tabularx}
 \end{table*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -356,7 +356,7 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 \begin{figure}
   \includesvg[width=\textwidth,inkscapelatex=true,pretex=\sffamily\small]{chapter_5/tumours.svg}
   \caption{Tractfinder maps for selected \gls{btc} and clinical subjects. Tumours or resection cavities are marked with asterisks (*), where a double asterisk (**) indicates that tumour deformation modelling was applied.
-  \textbf{a.} Right \gls{or} mapped in \gls{btc} subject PAT16 with a right fronto-temporal anaplastic astrocytoma (\gls{who} grade 2-3).
+  \textbf{a.} Right \gls{or} mapped in \gls{btc} subject PAT16 with a right fronto-temporal anaplastic astrocytoma (\gls{who} grade 2--3).
   \textbf{b.} Right \gls{cst} mapped in \gls{btc} subject PAT26 with a right temporal anaplastic astrocytoma (\gls{who} grade 3).
   \textbf{c.} Right \gls{or} mapped in \gls{nhnn} subject 6, intraoperative scan, with a right temporal oligodendroglioma (\gls{who} grade 2).
   \textbf{d.} Right \gls{af} mapped in \gls{btc} subject PAT03 with a right parietal meningioma (\gls{who} grade 1).

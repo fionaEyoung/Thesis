@@ -62,7 +62,7 @@ Using this property, (\ref{eq:ip1}) simplifies to
 \end{align}\label{eq:ip2}
 
 Thus for two distributions represented by a vector of their spherical harmonic coefficients, the inner product of their functions is equal to the inner product of the two coefficient vectors.
-The resulting image can be regarded as a pseudo-probability map of tract location, in arbitrary and dimensionless units with values typically in the range [0 - 0.5].
+The resulting image can be regarded as a pseudo-probability map of tract location, in arbitrary and dimensionless units with values typically in the range 0--0.5.
 This measure of similarity, computed voxel-wise for the registered \gls{tod} atlas and subject \gls{fod} images, is the mapping used in tractfinder and all analyses presented in Chapters \ref{chap:eval}--\ref{chap:applications}.
 It is favoured for its computationally simplicity and relatively intuitive meaning, although alternative comparison approaches are also explored below.
 
@@ -73,7 +73,7 @@ In the atlas, this amplitude represents the spatial probability, or the likeliho
 Within the target \gls{fod} image, the amplitude is not tract specific, but rather reflects the \gls{afd} and by extension the likelihood that \textit{any} tract is present within a voxel, rather than grey matter or \gls{csf}.
 However, it is crucial to note that this assumption only holds under specific circumstances, depending on the strength of diffusion weighting of the input data ($b$-value(s)) and \gls{csd} algorithm used to model the \glspl{fod}.
 
-For $b$-values lower than around 2000-3000 $s/mm^2$, the total diffusion signal is higher in \gls{gm} than in \gls{wm}, and the \gls{fod} amplitude does not provide a good estimate of \gls{afd} when using \gls{ssst} \gls{csd}.
+For $b$-values lower than around 2000--3000~s~mm$^{-2}$, the total diffusion signal is higher in \gls{gm} than in \gls{wm}, and the \gls{fod} amplitude does not provide a good estimate of \gls{afd} when using \gls{ssst} \gls{csd}.
 This results in far more extensive segmentations based on the inner product in particular producing higher values within the cortex.
 Therefore when using lower $b$-value acquisitions (which remain the norm in clinical applications), \gls{msmt} \gls{csd} should be used to estimate the volume fraction of different tissues and thus achieve better \gls{wm} specificity.
 If only one diffusion weighted shell (in addition to $b_0$) is available, then at most two tissues can be modelled using \gls{msmt} \gls{csd}.
@@ -146,5 +146,5 @@ To address the concern that renormalising each $I_p$ could excessively amplify n
 \begin{figure}[tbh!]
   \centering
   \includesvg[width=1.08\textwidth,pretex=\small\sffamily,inkscapelatex=true]{chapter_3/fixel.svg}
-  \caption{Demonstration of fixel-wise inner product using the synthetic Fibre Cup Phantom. \textbf{a.} Seven ground truth streamline bundles intersect throughout the phantom. \textbf{b.} The brown tract intersects with three other parallel bundles. The crossing fibres are denser and therefore dominate the \gls{fod} reconstruction (\textbf{d.}), resulting in a drop in tractfinder amplitude. \textbf{c.} By computing the inner product with each fixel separately, weighted by the overall \gls{fod} amplitude, and taking the maximum value, a smooth tract reconstruction is achieved. \textbf{e.} \glspl{fod} in a second crossing area, showing the brown and purple tracts intersecting at an oblique angle. \textbf{f.} First segmented fixel. \textbf{g.} Second segmented fixel. \textbf{h.} \gls{tod} atlas for the brown tract.}\label{fig:fixip}
+  \caption{Demonstration of fixel-wise inner product using the synthetic Fibre Cup Phantom. \textbf{a.} Seven ground truth streamline bundles intersect throughout the phantom. \textbf{b.} The brown tract intersects with three other parallel bundles. The crossing fibres are denser and therefore dominate the \gls{fod} reconstruction (\textbf{d.}), resulting in a drop in tractfinder amplitude. \textbf{c.} By computing the inner product with each fixel separately, weighted by the overall \gls{fod} amplitude, and taking the maximum value, a smooth tract reconstruction is achieved. \textbf{e.} \glspl{fod} in a second crossing area, showing the brown and purple tracts intersecting at an oblique angle. \textbf{f.} First segmented fixel. \textbf{g.} Second segmented fixel. \textbf{h.} \Gls{tod} atlas for the brown tract.}\label{fig:fixip}
 \end{figure}
