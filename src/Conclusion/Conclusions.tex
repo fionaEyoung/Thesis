@@ -1,7 +1,7 @@
 \chapter{Conclusions}
 \label{chapterlabel6}
 
-The growing availability of advanced MRI capabilities in health centres is bringing attention to the shortcomings of current image processing techniques in fully exploiting potential benefits for patients.
+The growing availability of advanced \gls{mri} capabilities in health centres is bringing attention to the shortcomings of current image processing techniques in fully exploiting potential benefits for patients.
 In a small internal survey of neuroradiologists and neurosurgeons at \gls{gosh}, all respondents expressed that they would find a tool for intraoperative imaging of white matter bundles after brain shift to be either slightly (2/5) or very (3/5) useful, while confirming reservations about the reliability or accuracy of tractography.
 Against this background, this thesis has set out to explore the current capabilities of \gls{dmri} to map brain \gls{wm} for surgical planning and neuronavigation, and propose a novel technique to fulfil the requirements for rapid and robust \gls{wm} tract detection.
 Guided by the objectives set out in Section \ref{sec:problem}, the proposed pipeline, called tractfinder, involves constructing tract-specific orientation atlases which are compared with a subject's \gls{fod} image, to achieve direct voxel-wise segmentation with incorporated \textit{a priori} anatomical knowledge.
@@ -41,7 +41,7 @@ In this light, a flexible atlas, which can be re-trained if needed using only a 
 
 \section{Limitations and future directions}\label{sec:future}
 
-The reality of achieving reliable white matter neuronavigation with intraoperative diffusion MRI is not simply a matter of replacing tractography with a ``better" automated tract segmentation pipeline.
+The reality of achieving reliable white matter neuronavigation with intraoperative \gls{dmri} is not simply a matter of replacing tractography with a ``better" automated tract segmentation pipeline.
 As we have seen, the challenge of brain shift and tumour mass effect is substantial and will unlikely be solved with a single one-size-fits-all approach, given the degree of patient heterogeneity.
 
 Exponential radial tumour deformation modelling can go a long way towards extending the applicability of atlas-based tract mapping to cases involving mass effect, however, the results must be inspected carefully as the effects of many tumours are not well captured by such a simplistic model.
@@ -55,7 +55,7 @@ A further significant simplification is the strict non-infiltration assumption, 
 Indeed this assumption is necessary to ensure the formula for the displacement factor $k$ remains well-behaved and invertible.
 It may be argued that explicitly modelling tumour infiltration is of lower priority, as tumours infiltrating eloquent tracts are not generally candidates for total resection, as we saw in the case of patient 8 in Section \ref{sec:case}, where resection of the infiltrating tumour portion was abandoned to protect the corticospinal tract.
 We also saw that tumour deformation modelling can still be effective in such cases, if only the solid component is segmented, or a scale factor $s<1$ is employed to reduce the effective tumour radius.
-In this way, dMRI-based white matter mapping could play a role together with direct stimulation functional monitoring in subtotal resections and biopsies in high risk locations close to critical white matter.
+In this way, \gls{dmri}-based white matter mapping could play a role together with direct stimulation functional monitoring in subtotal resections and biopsies in high risk locations close to critical white matter.
 
 \Gls{imri} is a relatively new technique, and as additional time spent scanning under general anaesthetic and with an open craniotomy carries potential risks the patient, acquiring supplementary sequences with no clear or confirmed clinical benefit may be unethical.
 Particularly with regards to intraoperative \gls{dmri}, a standard of care or guidelines for its use based on large-cohort trials has yet to be established.
@@ -73,9 +73,11 @@ It is hoped that the methodologies and technical considerations presented in thi
 \begin{itemize}
   \item[] \fullcite{Young2022}
   \item[] \fullcite{Young2024}
-  \item[] \note{Aylmore, H. et al., in production}
 \end{itemize}
-
+\subparagraph*{Articles in production}
+\begin{itemize}
+  \item[] \fullcite{Aylmore}
+\end{itemize}
 \subparagraph*{International conferences, accepted abstracts}
 \begin{itemize}
   \item[] \fullcite{Young2022b}

@@ -66,7 +66,7 @@ The resulting image can be regarded as a pseudo-probability map of tract locatio
 This measure of similarity, computed voxel-wise for the registered \gls{tod} atlas and subject \gls{fod} images, is the mapping used in tractfinder and all analyses presented in Chapters \ref{chap:eval}--\ref{chap:applications}.
 It is favoured for its computationally simplicity and relatively intuitive meaning, although alternative comparison approaches are also explored below.
 
-The tract atlases and FOD data contain both scalar and directional information, all of which contribute to the final inner product value.
+The tract atlases and \gls{fod} data contain both scalar and directional information, all of which contribute to the final inner product value.
 The combined effects of these factors means that a lower mapped value could be driven by a low degree of overlap in the angular domain (``the fibre orientations here to not match what would be expected for the tract"), low amplitude in the atlas (``tract is unlikely to be found here"), or low amplitude in the \gls{fod} (``there is not much white matter signal here").
 In \gls{sh} terms, the scalar component is total amplitude, or spherical integral, of the \gls{odf} and is given by the first \gls{sh} coefficient ($Y_{0,0}$ term).
 In the atlas, this amplitude represents the spatial probability, or the likelihood across the training population of a tract being located within a specific voxel.
@@ -116,7 +116,7 @@ A voxel can contain any number of fixels, and each can be analysed in isolation 
 By segmenting a full \gls{fod} into individual lobes and computing properties on those sub-distributions, we can separate the effects of different fibre populations within a single voxel.
 
 The fixel framework has been adapted here to extend the inner product to consider individual \gls{fod} lobes in isolation.
-\gls{fod} segmentation is achieved as described in \textcite{Smith2013} by sampling the \gls{sh} distribution on a dense set of directions (\textgreater 1000).
+\Gls{fod} segmentation is achieved as described in \textcite{Smith2013} by sampling the \gls{sh} distribution on a dense set of directions (\textgreater 1000).
 Each of these direction samples is binned into a fixel based on its neighbourhood using a fast-marching level set algorithm, resulting in each fixel being represented by a collection of directional samples and the associated amplitudes of the original \gls{fod} (Fig. \ref{fig:fixip} \textbf{f-g}).
 Each fixel is then converted to a \gls{sh} representation via a linear least-squares fit to the sampled amplitudes, producing separate \gls{sh} distributions $I_p(\theta, \phi)$ per voxel for each fibre population $p$.
 

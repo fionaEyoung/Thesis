@@ -13,7 +13,7 @@ Though the tools for studying the structure and function of neural connectivity 
 Though the mechanism of diffusion weighted signal is well understood (see section \ref{sec:dmri}), its correct interpretation hinges on an understanding of how diffusion is affected by the microstructural environment\autocite{LeBihan1995}, or even by just those features of the microstructural environment we are interested in measuring.
 It is not obvious, for example, how much of diffusion within a voxel filled with myelinated axons can be best characterised as either hindered or restricted, and how properties such as axon density and diameter might contribute to the observed signal.\autocite{Panagiotaki2012}
 
-\gls{dmri} image \glspl{voxel} are on the order of cubic millimetres, and in such a volume are contained thousands of individual axons, with average diameters of around 1$\mu m$\autocite{Liewald2014,Lampinen2019}.
+\Gls{dmri} image \glspl{voxel} are on the order of cubic millimetres, and in such a volume are contained thousands of individual axons, with average diameters of around 1$\mu m$\autocite{Liewald2014,Lampinen2019}.
 What's more, rarely are all axons within a voxel uniformly aligned with a single direction.
 Throughout the brain, fibre tracts mingle and intersect, bend and fan out.\autocite{Jeurissen2013,Alexander2019}
 The physical diffusion processes in such complex configurations and multicellular environments cannot be known, only approximated and modelled through a choice of assumptions and simplifications.
@@ -45,7 +45,7 @@ Rotationally invariant indices including mean diffusivity and \gls{fa} provide s
 The principal eigenvector $\bm{\lambda}_1$ is usually interpreted as the direction of fastest, or least restricted, diffusivity, although this holds only in voxels with a single population of straight, parallel axons.
 If the diffusion tensor, whose eigenvectors and eigenvalues can be represented in the form of a zeppelin shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
 Depicting peak orientations is achieved through \gls{dec} mapping, in which directions are mapped to colours in RGB space, where the $x$-axis, or medial-lateral / left-right direction is assigned pure red, the $y$-axis, or posterior-anterior direction is assigned pure green, and the $z$-axis, or inferior-superior direction, is assigned pure blue.
-\gls{dti} images are often depicted as \gls{dec} \gls{fa} (or ``colour \gls{fa}) maps, where a voxel's colour is determined by $\lambda_1$ and its brightness by the \gls{fa} value.
+\Gls{dti} images are often depicted as \gls{dec} \gls{fa} (or ``colour \gls{fa}) maps, where a voxel's colour is determined by $\lambda_1$ and its brightness by the \gls{fa} value.
 
 In fact, it is rare for a voxel of \gls{wm} to contain only a single uniformly oriented bundle of axons.
 In so-called crossing fibre voxels, where at least two distinctly oriented fibre populations reside, the diffusion tensor provides a woefully inaccurate or misleading picture:
@@ -158,7 +158,7 @@ The probabilistic algorithm probtrackx\autocite{Behrens2007}, based on the ball-
 
 A second school takes the view that uncertainty in the choice of streamline step direction stems from the obscurity of the underlying physiological reality, and sampling that direction from the fibre \gls{odf} reflects that microstructural complexity.
 Crucially though, tracking is not proceeding under any guidance relating to real biophysical connections, and though a streamline's direction in a given voxel may well be in accordance with real axons, whether that direction is appropriate in the context of the preceding steps of the same streamline is unresolvable.
-In other words, \gls{fod}-based probabilistic tractography, of which first or second-order integration over FODs (iFOD1/iFOD2)\autocite{Tournier2012,Tournier2010} are notable examples, can capture the local dispersion of fibres in high detail, but that doesn't necessarily translate to long-range accuracy.
+In other words, \gls{fod}-based probabilistic tractography, of which first or second-order integration over \glspl{fod}  (iFOD1/iFOD2)\autocite{Tournier2012,Tournier2010} are notable examples, can capture the local dispersion of fibres in high detail, but that doesn't necessarily translate to long-range accuracy.
 It is possible to constrain tractography according to broad heuristics about fibre tract geometries, but inevitably such simplifications will not be globally applicable.
 For example, strategies to prevent streamlines from ``hopping" onto intersecting, but not physically connected, pathways can include placing upper limits on the angle between successive steps under the expectation that most tracts will carry more or less straight on, but there are plenty of tracts in the brain with regions of high curvature, which become much harder to accurately reconstruct if the ``straight ahead" constraint is too strict.
 

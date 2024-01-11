@@ -21,29 +21,29 @@ Furthermore, many of those alternatives have already been systematically compare
 
 \paragraph*{Streamline tractography}
 
-Targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3)  was run in each scan using a multi-ROI approach (see \ref{app:rois} for ROI details), with tractography input \glspl{fod} derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} using \gls{wm} and \gls{gm} tissue compartments.
-In the clinical dataset, ROIs were placed manually for each subject.
-For the 184 HCP and \textit{TractoInferno} subjects, manual ROI placement was infeasible.
-Instead the same ROIs were drawn in MNI152 template space aided by the FSL HCP-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration
-(HCP data includes MNI transformation warps, while warps were created for the \textit{TractoInferno} data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/) \autocite{Tustison2013,Avants2011}.
+Targeted probabilistic streamline tractography (iFOD2 algorithm\autocite{Tournier2010}, from MRtrix3\autocite{Tournier2019} v3.0.3)  was run in each scan using a multi-\gls{roi} approach (see \ref{app:rois} for \gls{roi} details), with tractography input \glspl{fod} derived from \gls{msmt} \gls{csd} \autocite{Jeurissen2014} using \gls{wm} and \gls{gm} tissue compartments.
+In the clinical dataset, \glspl{roi} were placed manually for each subject.
+For the 184 \gls{hcp} and \textit{TractoInferno} subjects, manual \gls{roi} placement was infeasible.
+Instead the same \glspl{roi} were drawn in MNI152 template space aided by the \gls{fsl} \gls{hcp}-1065 \gls{dti} template\autocite{FSLATLAS} and transformed to subject space using non-linear registration
+(\gls{hcp} data includes MNI transformation warps, while warps were created for the \textit{TractoInferno} data using the ANTs registration package v2.4.2 (http://stnava.github.io/ANTs/) \autocite{Tustison2013,Avants2011}.
 
 The anatomical definitions informing the manual tractography paradigm was the same as for creating the respective atlases, however, to avoid dependence on resource-intensive tools for cortical parcellation, only white matter \glspl{roi} could be used.
 The result is generally more extensive cortical terminations into gyri and sulci, for example in the \gls{af} and \gls{ifof}, not otherwise included in the atlases due to either the use of cortical \glspl{roi} or extensive manual filtering, while the core subcortical portions match the definitions reflected in the atlases.
 The same \gls{wm} seed and inclusion \glspl{roi} used for the atlases were adopted, along with additional exclusion \gls{roi} where necessary.
 For a full description of all tractography \glspl{roi} and any differences between atlas streamlines and validation manual tractography, see Appendix \ref{app:rois}
-This manual tractography (using the same anatomical definitions as the atlases) is subsequently abbreviated to ``TG", while the reference \textit{TractoInferno} bundles (produced using RecoBundlesX, see Section \ref{sec:data}) are referred to as ``TGR".
+This manual tractography (using the same anatomical definitions as the atlases) is subsequently abbreviated to ``\gls{tg}", while the reference \textit{TractoInferno} bundles (produced using RecoBundlesX, see Section \ref{sec:data}) are referred to as ``\gls{tgr}".
 Since tractfinder is a voxel-based method, streamlines were converted to voxel-based representation via \gls{tdi}\autocite{Calamante2010}, producing maps of streamline density per voxel.
 
 \paragraph*{TractSeg}
 
 TractSeg \autocite{Wasserthal2018} is a deep convolutional neural network model for tract segmentation which produces volumetric segmentation for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3--2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
-There are two models available: One trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018} (``TractSeg DKFZ (TSD)"), and a second trained on streamline density maps output by FSL's XTRACT \autocite{Warrington2020} application using automatic predefined \gls{roi} registration and probtracx probabilistic tractography\autocite{Behrens2007} (``TractSeg XTRACT (TSX)").
+There are two models available: One trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018} (``\gls{tsd}"), and a second trained on streamline density maps output by \gls{fsl}'s XTRACT \autocite{Warrington2020} application using automatic predefined \gls{roi} registration and probtracx probabilistic tractography\autocite{Behrens2007} (``\gls{tsx}").
 Here both versions are compared, as they feature significant differences in anatomical tract definitions.
-Input peaks for all TractSeg results were derived from the SSST \gls{csd} \glspl{fod} for all single-shelled data and from the \gls{msmt} peaks for all multi-shelled data.
+Input peaks for all TractSeg results were derived from the \gls{ssst} \gls{csd} \glspl{fod} for all single-shelled data and from the \gls{msmt} peaks for all multi-shelled data.
 
 \paragraph*{Atlas registration}
 
-As well as the full tractfinder method (atlas alignment and inner product), we'll also consider a ``naive" tract atlas approach, using only the density component (first SH coefficient) of the linearly registered tract atlases without any comparison with the native \glspl{fod}.
+As well as the full tractfinder method (atlas alignment and inner product), we'll also consider a ``naive" tract atlas approach, using only the density component (first \gls{sh} coefficient) of the linearly registered tract atlases without any comparison with the native \glspl{fod}.
 This amounts to a segmentation based on prior spatial expectation only, without taking into account the diffusion data or orientation expectations, and is comparable with segmentation approaches that rely entirely on registration, such as common cortical parcellation tools.
 Comparing results with simple atlas registration between structural image data is instructive for determining the added value of utilising \gls{dmri} data to inform segmentation, which may be relevant to future investigations into the benefits of acquiring intraoperative \gls{dmri} in addition to conventional tissue contrast \gls{mri} sequences.
 
@@ -117,7 +117,7 @@ Segmentation results results for a representative subject from the \textit{Tract
 Tractfinder maps typically have values ranging from 0 to 0.5 (in arbitrary units, derived from the magnitudes of \gls{fod} and atlas distribution functions).
 Due to the combined effects of \gls{odf} amplitude and orientation information, a low tract map value can have several causes: a) the \gls{fod} amplitude is low, indicating low evidence for white matter tissue in the voxel in question; b) the atlas amplitude is low, indicating low prior likelihood of the tract being present in that location; c) the peak orientations between the \gls{fod} and atlas are poorly aligned.
 
-Thus combining information from the atlas and data-derived \gls{fod}s improves the tract map estimation over the ``raw" registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
+Thus combining information from the atlas and data-derived \glspl{fod} improves the tract map estimation over the ``raw" registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
 
 % Fullpage figures
 \begin{figure}[htb!]
@@ -165,7 +165,7 @@ Thus combining information from the atlas and data-derived \gls{fod}s improves t
 \end{SCfigure}
 
 In a realistic clinical context, our target segmentation is represented not by an independently determined and verifiable ground truth, but by the results of whatever approach would normally be taken to produce tract reconstructions for surgical guidance in the absence of any suitable alternative.
-That benchmark is targeted multi-ROI streamline tractography, against which we need to evaluate tractfinder.
+That benchmark is targeted multi-\gls{roi} streamline tractography, against which we need to evaluate tractfinder.
 At the same time, quantitative evaluation using tractography as a reference is problematic as with typical use tractography will produce many false positives that are easily mentally discounted by an experienced viewer, but which will confound quantitative accuracy metrics.
 
 
@@ -202,7 +202,7 @@ There is little variation in results across subjects, and the overall patterns a
 
 As a final comment on reproducibility, we note that the results in Figure \ref{fig:combobox} agree with values published in \textcite{Wasserthal2018}.
 There, a mean \gls{dice} of between 0.58 and 0.67 across all tracts was reported for RecoBundles evaluated against the TractQuerier derived reference bundles.
-Our measured \gls{dice}s between TractSeg DKFZ and TractoInferno reference bundles (which is based on RecoBundlesX) range between 0.45 and 0.66 across the four tracts studied, demonstrating consistency between the two in different datasets.
+Our measured \glspl{dice} between TractSeg DKFZ and TractoInferno reference bundles (which is based on RecoBundlesX) range between 0.45 and 0.66 across the four tracts studied, demonstrating consistency between the two in different datasets.
 
 \paragraph*{Tract variability}
 
@@ -227,7 +227,7 @@ This contrasts with the bundle distance and density correlation metrics, where t
 % \note{something about how this makes dice scores dodgy, compare with e.g. other metrics, same advantage not there (hcp) compared with targeted tractography}
 % Figure \ref{fig:combobox} compares each studied method against the reference streamline bundles in the \textit{TractoInferno} dataset.
 % Noticeably, the differences in scores within a single method, between different tracts, are in places greater than the differences between methods within a tract.
-% For example, the binary \gls{dice} scores for the \gls{cst} are similar for tractfinder and TractSeg (DKFZ) ($0.48$ and $0.45$ on average respectively), however the binary \gls{dice}s of TractSeg (DKFZ) are markedly different between the \gls{cst} and \gls{or} ($0.45$ and $0.59$ on average respectively). % This is all based on the TGR comparison, which have decided isn't very helpful anyway. Against the TG comparison, in HCP and TI data, this observation goes away
+% For example, the binary \gls{dice} scores for the \gls{cst} are similar for tractfinder and TractSeg (DKFZ) ($0.48$ and $0.45$ on average respectively), however the binary \glspl{dice} of TractSeg (DKFZ) are markedly different between the \gls{cst} and \gls{or} ($0.45$ and $0.59$ on average respectively). % This is all based on the TGR comparison, which have decided isn't very helpful anyway. Against the TG comparison, in \gls{hcp} and TI data, this observation goes away
 
 \paragraph*{TractoInferno reference bundles}
 
@@ -288,16 +288,16 @@ Further examples of tract reconstructions in intraoperative imaging are displaye
 \subsection{Processing times}
 
 A full processing time breakdown is presented in Table \ref{tab:time}.
-Atlas transformation and inner product computation time per subject for all four tracts and both hemispheres was 24~$\pm$~5~s, plus 1--2~minutes for MSMT-\gls{csd} and 20~seconds for MNI registration, with an average total time of just under 3~minutes for the entire tractfinder pipeline (Tab. \ref{tab:time}).
-For TractSeg, mean processing time (for all tracts, 72 for DKFZ and 23 for XTRACT, both hemispheres) was 4:00~$\pm$~1:00~minutes, plus 15--20~sseconds for SSST-\gls{csd}.
+Atlas transformation and inner product computation time per subject for all four tracts and both hemispheres was 24~$\pm$~5~s, plus 1--2~minutes for \gls{msmt}-\gls{csd} and 20~seconds for MNI registration, with an average total time of just under 3~minutes for the entire tractfinder pipeline (Tab. \ref{tab:time}).
+For TractSeg, mean processing time (for all tracts, 72 for DKFZ and 23 for XTRACT, both hemispheres) was 4:00~$\pm$~1:00~minutes, plus 15--20~sseconds for \gls{ssst}-\gls{csd}.
 
-For manual streamline tractography in the clinical datasets, processing time was not explicitly measured, due to the high variability that comes with manual ROI drawing (between 10--25 minutes for all tracts in a single subject, although anecdotally this varies significantly between operators).
-\Gls{hcp} and \textit{TractoInferno} tractography was run on a high performance computing cluster, taking approximately 10 seconds per tract (single hemisphere), using 36 CPU cores, and additionally up to 2~minutes for non-linear ROI registration (Table \ref{tab:time}).
+For manual streamline tractography in the clinical datasets, processing time was not explicitly measured, due to the high variability that comes with manual \gls{roi} drawing (between 10--25 minutes for all tracts in a single subject, although anecdotally this varies significantly between operators).
+\Gls{hcp} and \textit{TractoInferno} tractography was run on a high performance computing cluster, taking approximately 10 seconds per tract (single hemisphere), using 36 CPU cores, and additionally up to 2~minutes for non-linear \gls{roi} registration (Table \ref{tab:time}).
 However, since the time taken depends greatly on several factors, including number of streamlines to select and streamline acceptance rate (often low in brains with pathology due to oedema, deformation etc.), a precise time analysis for manual tractography cannot provided here.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table*}[h!]
-  \caption{Measured processing times mean and standard deviation for \textit{TractoInferno} dataset. Individual steps shown and total average for the four different pipelines. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography ROIs were drawn once for the whole dataset, whereas for clinical datasets manual ROI delineation will have to be repeated for each subject. \dag Desktop Mac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, 1 node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60 GHz cores per node.}
+  \caption{Measured processing times mean and standard deviation for \textit{TractoInferno} dataset. Individual steps shown and total average for the four different pipelines. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography \glspl{roi} were drawn once for the whole dataset, whereas for clinical datasets manual \gls{roi} delineation will have to be repeated for each subject. \dag Desktop Mac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, 1 node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60 GHz cores per node.}
   \label{tab:time}
   \small
   \begin{tabularx}{\textwidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
@@ -312,8 +312,8 @@ However, since the time taken depends greatly on several factors, including numb
     \dag SSST CSD + peaks estimation & 18 $\pm$ 8 &  &\x{}&  &  \\
     \dag Atlas transformation + inner product (4 tracts, 2 hemispheres) & 24 $\pm$ 5 &\x{}&  & (\x{}) &  \\
     \dag TractSeg DKFZ / XTRACT (72 / 23 tracts) & 240 $\pm$ 60 &  &\x{}& & \\
-    \dag Manual ROI delineation (once for whole dataset) & 1200 & & & &\x{}\\
-    \ddag Non-linear ROI registration + tractography (4 tracts, 2 hemispheres) & 334 $\pm$ 163 & & & &\x{}\\ \addlinespace
+    \dag Manual \gls{roi} delineation (once for whole dataset) & 1200 & & & &\x{}\\
+    \ddag Non-linear \gls{roi} registration + tractography (4 tracts, 2 hemispheres) & 334 $\pm$ 163 & & & &\x{}\\ \addlinespace
     \rowstyle{\bfseries\rmfamily}
     Total &  & 2:42~min & 4:25~min & \textless2:42~min & \textgreater 27:32~min \\ \bottomrule
   \end{tabularx}
@@ -369,9 +369,9 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 \label{sec:btcd}
 
 The \gls{btc} dataset, with its range of tumour types, high quality \gls{dmri} scans and tumour masks, provides an ideal arena to evaluate the effect of tumour deformation modelling on segmentation accuracy.
-Four out of the ten selected BTCD subjects had tumours substantial enough to warrant deformation modelling, which was done using the exponential deformation factor model with adaptive $\lambda$ for all subjects.
+Four out of the ten selected \gls{btc} subjects had tumours substantial enough to warrant deformation modelling, which was done using the exponential deformation factor model with adaptive $\lambda$ for all subjects.
 Results were compared with manual targeted tractography with additional streamline filtering as described in Section \ref{sec:data_btcd}, which was necessary to ensure a high quality baseline in challenging data with disruptive tumour effects.
-Selected tract segmentations in the \gls{btc} dataset are shown in Figure \ref{fig:tumours} (panels a, b, d, and f), alongside additional examples from the NHNN and \gls{gosh} clinical data.
+Selected tract segmentations in the \gls{btc} dataset are shown in Figure \ref{fig:tumours} (panels a, b, d, and f), alongside additional examples from the \gls{nhnn} and \gls{gosh} clinical data.
 Across the whole dataset, including both deforming and non-deforming tumours, tractfinder produced consistently high volumetric similarity scores compared with manual tractography, while an average signed bundle distance close to 0 for all tracts but the \gls{or} indicate consistently high agreement in segmentation margins (Fig. \ref{fig:btcd_box}).
 
 \begin{SCfigure}[][htb!]

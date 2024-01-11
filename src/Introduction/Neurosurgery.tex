@@ -84,7 +84,7 @@ Moreover, no comparison was made for postoperative functional neurological outco
 
 New postoperative neurological deficits occur in over one third of glioma surgeries \autocite{Zetterling2020a}, although most patients improve significantly over longer-term followup.
 Unsurprisingly, higher chances of postoperative deficits were associated with higher \gls{eor} and with tumours situated in eloquent areas\autocite{Zetterling2020a}.
-In \textcite{Gil-Robles2010}, authors argue for a more conservative resection margin in WHO grade 2 gliomas (low-grade) to protect functional structures, although current consensus recommends total resection in \gls{lgg} wherever possible\autocite{Rincon-Torroella2019,Albuquerque2021}. %but this is not the dominant opinion
+In \textcite{Gil-Robles2010}, authors argue for a more conservative resection margin in \gls{who} grade 2 gliomas (low-grade) to protect functional structures, although current consensus recommends total resection in \gls{lgg} wherever possible\autocite{Rincon-Torroella2019,Albuquerque2021}. %but this is not the dominant opinion
 For the most malignant tumour types, even maximal resection combined with adjuvant therapy is rarely curative, and may only lead to a survival advantage of just a few months\autocite{Rincon-Torroella2019,Karschnia2023}.
 Given the overall poor survival outcomes associated with aggressive gliomas, oftentimes the risks to quality of life and postoperative neurological function associated with pursuing \gls{gtr} outweigh any potential oncological benefits\autocite{Rahman2016,Tabor2021}.
 In \glspl{hgg}, the justification for \gls{gtr} or even supratotal resection is weaker than in \gls{lgg}, given that it cannot secure long-term survival for affected patients.
@@ -125,10 +125,10 @@ Angiography, detailed mapping of blood vessels with \gls{ct} and specialised \gl
 \Gls{fmri} and navigated transcranial magnetic stimulation \autocite{WeissLucas2020} map out eloquent cortex lying in proximity to the lesion, including the motor, language, and sensory cortices, supplementing the purely structural data obtained from conventional \gls{mri} or \gls{ct}.
 In epilepsy patients, \gls{eeg} may be employed to monitor epileptogenic regions\autocite{Sarco2006}.
 
-\gls{dmri} is playing an ever-increasingly important role for neurosurgical planning and navigation\autocite{Manan2022}, especially as focus moves from functional localisation towards viewing the brain as an interconnected network.
+\Gls{dmri} is playing an ever-increasingly important role for neurosurgical planning and navigation\autocite{Manan2022}, especially as focus moves from functional localisation towards viewing the brain as an interconnected network.
 Tumour and \gls{wm} interactions are varied and can be difficult to distinguish on conventional contrast \gls{mri} alone.
 Depending on the infiltrative nature of a lesion, \gls{wm} tracts may be displaced due to mass effect, invaded but remain functionally intact, disrupted or destroyed, or experience a combination of effects\autocite{Essayed2017,DSouza2019,Manan2023}.
-\gls{dmri} can be instrumental in differentiating these circumstances and assessing tract integrity\autocite{Field2004,Manan2023}, but care must be taken to recognise how tumour effects may disturb diffusion patterns and impact the results.
+\Gls{dmri} can be instrumental in differentiating these circumstances and assessing tract integrity\autocite{Field2004,Manan2023}, but care must be taken to recognise how tumour effects may disturb diffusion patterns and impact the results.
 Peritumoural oedema and invading cells can lead to drastically altered diffusion signal measurements and reduction of anisotropy, complicating their interpretation and inhibiting accurate streamline tracking\autocite{Bulakbas2009,Nimsky2010,Kuhnt2013}.
 Nevertheless, \gls{dti} and streamline tractography have brought dramatic improvements to neurosurgical planning, unlocking detailed visualisations of \gls{wm} tracts and their spatial relationships to the surgical target and even acting as a predictor of postoperative deficits with implications for preoperative patient counselling\autocite{Manan2022}.
 This potential was recognised almost immediately, with \gls{dti} and early tractography quickly making their way into clinical practice \autocite{Lee2001,Mori2002a,Nimsky2005}.
@@ -139,16 +139,16 @@ As a notable example, popular neuronavigation platform provider Brainlab's iPlan
 
 Regardless of the particular combination of fibre model, algorithm and tracking criteria, streamline tractography is compromised by weaknesses that can lead to flawed results or interpretations if not accounted for\autocite{Rheault2020, Schilling2022, Schilling2019}.
 The same techniques and associated limitations for reconstructing individual \gls{wm} bundles already described apply here too, and can even be exasperated by additional tumour-related effects.
-\gls{dt}-based tractography, already afflicted by low sensitivity in healthy applications, often encounters particular difficulties tracking through oedema and areas of infiltration even where intact and functioning fibres may persist\autocite{Leclercq2010}, leading to missed connections and dangerous blind spots in the very regions at risk during surgery, where accurate navigation is most critical \autocite{Kuhnt2013,Ashmore2020}.
+\Gls{dt}-based tractography, already afflicted by low sensitivity in healthy applications, often encounters particular difficulties tracking through oedema and areas of infiltration even where intact and functioning fibres may persist\autocite{Leclercq2010}, leading to missed connections and dangerous blind spots in the very regions at risk during surgery, where accurate navigation is most critical \autocite{Kuhnt2013,Ashmore2020}.
 Meanwhile, the high propensity for false positive streamlines typical of probabilistic algorithms can be even more difficult to manage when tumour deformations disturb normal fibre orientations and inhibit accurate placement of \glspl{roi}\autocite{Yang2021}.
 
 Perhaps clinical translation of multi-fibre probabilistic tractography has also been muted on account of its lower ease of use and practicality.
-DT acquisitions can have as few as 6 diffusion weighted directions, resulting in much shorter scan times compared to full HARDI scans.
+\Gls{dt} acquisitions can have as few as 6 diffusion weighted directions, resulting in much shorter scan times compared to full \gls{hardi} scans.
 Deterministic tracking itself is rapid, and the placement of \glspl{roi} need not be as strict as with probabilistic tractography owing to a lower sensitivity to false positives \autocite{ODonnell2017}.
 A general lack of availability of the necessary expertise and time limits neurosurgical centres' access to state-of-the-art tractography \autocite{Toescu2020}.
-Until recently, commercially available neurosurgical navigation platforms have exclusively supported \gls{dt} modelling and deterministic tractography (a recent exception is the Medtronic Stealth\texttrademark{} S8 Tractography application (Medtronic, USA), which implements \gls{csd}-based tractography\autocite{Pozzilli2023} as well as DT).
+Until recently, commercially available neurosurgical navigation platforms have exclusively supported \gls{dt} modelling and deterministic tractography (a recent exception is the Medtronic Stealth\texttrademark{} S8 Tractography application (Medtronic, USA), which implements \gls{csd}-based tractography\autocite{Pozzilli2023} as well as \gls{dt}).
 This lack of readily available alternatives in the neurosurgeon's workflow and certification for safe clinical use is undoubtedly a major factor in the persisting preference for deterministic methods in clinical practice.
-Nonetheless, there is growing consensus that (pending appropriate regulatory approval) the clinical community ought to adopt probabilistic, non-DT tractography\autocite{Yang2021, Beare2022, Petersen2017}.
+Nonetheless, there is growing consensus that (pending appropriate regulatory approval) the clinical community ought to adopt probabilistic, non-\gls{dt} tractography\autocite{Yang2021, Beare2022, Petersen2017}.
 There is evidence that this shift is gradually underway, at least in the context of presurgical planning\autocite{Toescu2020}, driven probably by a combination and feedback loop of growing demand and better availability and integration of advanced techniques into the clinical workflow.
 
 \begin{SCfigure}[][htb!]
@@ -163,13 +163,13 @@ During the surgical procedure itself, multimodal information streams continue to
 Functional monitoring with \gls{des} is a crucial component of neurosurgical workflows and widely considered the gold standard for localising neural function after craniotomy.
 Electrical current is applied to the cortical surface at increasing strengths\autocite{Saito2015}, and where stimulation elicits a functional response or disruption, the corresponding region is deemed eloquent.
 Additionally, stimulation of subcortical white matter behind the resection cavity wall can be used to indicate when surgery should be halted as underlying eloquent structures are approached\autocite{Sala2019}.
-\gls{des} can be utilised in awake or asleep paradigms.
+\Gls{des} can be utilised in awake or asleep paradigms.
 In the former, patients are awakened after craniotomy, and perform structured cognitive tasks involving those cortical hubs that may be at risk while undergoing electrical stimulation.
 It is commonly considered for \gls{lgg} treatment within the UK, and to a lesser extent for \gls{hgg}\autocite{WykesV.2017}.
 Language function is perhaps the most common target for awake stimulation as well as high-level motor tasks (such as playing an instrument) and vision\autocite{Mazerand2017}.
 Awake surgery is technically complex, psycho-cognitively and emotionally demanding of the patient, and not universally tolerated\autocite{Nossek2013a,Wang2019}.
 In very young children, awake surgery is rarely possible except in the most cooperative and resilient patients, and with appropriate preparation\autocite{Zolotova2022}.
-\gls{des} may also be performed in asleep patients, albeit limited to assessing motor and somatosensory function, where stimulation elicited somatosensory or motor evoked potentials (SSEPs, MEPs) can be measured in the patient's sensory cortex or muscles\autocite{Stone2019} (although the effects of anaesthesia can limit the sensitivity and accuracy of this approach\autocite{Stone2019,WeissLucas2020}).
+\Gls{des} may also be performed in asleep patients, albeit limited to assessing motor and somatosensory function, where stimulation elicited somatosensory or motor evoked potentials (SSEPs, MEPs) can be measured in the patient's sensory cortex or muscles\autocite{Stone2019} (although the effects of anaesthesia can limit the sensitivity and accuracy of this approach\autocite{Stone2019,WeissLucas2020}).
 There is also a considerable risk of intraoperative seizures, particularly in younger patients, which can lead to failure of awake functional mapping and potential increased risk of postoperative deficits\autocite{Nossek2013,Wang2019,Rigolo2020a}.
 The neurological and oncological benefits associated with greater \gls{eor} discussed in Section \ref{sec:eor} have been achieved in large part with the help of awake functional mapping, primarily in adult patients.
 It is therefore vital to develop and improve alternatives to cortical mapping to achieve maximal safe resection in all populations and especially in those patients who cannot undergo awake surgery, including some children.
@@ -255,7 +255,7 @@ Some account for this by registering preoperative tractography or \gls{dti} \gls
 Alternatively, intraoperative acquisition of \gls{dti} and even \gls{hardi} scans has been garnering interest.
 Early work by \textcite{Nimsky2005}$^,$\autocite{Nimsky2005a} demonstrated the feasibility of intraoperative \gls{dmri} and tractography, illustrating \gls{wm} tract shifting after tumour resection.
 Safe resection of tumours and epilepsy foci aided by intraoperative reconstruction of motor\autocite{Maesawa2010,Javadi2017}, language\autocite{DAndrea2016,Li2021} and visual\autocite{Daga2012,Cui2015} pathways has been confirmed in subsequent studies.
-Overall, a systematic review found 26 articles reporting intraoperative \gls{dti} or tractography and associated outcome measures, with moderate suggestion of benefit to surgical success \note{cite: Aylmore20?? (submitted for publication)}.
+Overall, a systematic review by \citeauthor{Aylmore} (in production) found 26 articles reporting intraoperative \gls{dti} or tractography and associated outcome measures, with moderate suggestion of benefit to surgical success\autocite{Aylmore}.
 
 There are considerable technical considerations associated with intraoperative \gls{dmri}, even more so than with routine imaging.
 Duration is of course one, with minimum possible scan time a priority for interrupted surgeries.

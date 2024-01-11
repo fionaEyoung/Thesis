@@ -179,7 +179,7 @@ Throughout this section, vector quantities and their associated scalar magnitude
 
 \subsection{Nuclei and spin}
 
-\gls{nmr} is a phenomenon and a technique, in which the interactions between atomic nuclei and external magnetic fields produce characteristic electromagnetic signals.
+\Gls{nmr} is a phenomenon and a technique, in which the interactions between atomic nuclei and external magnetic fields produce characteristic electromagnetic signals.
 Atomic nuclei are made up of protons and neutrons (collectively termed nucleons) held together, despite the electrostatic forces repelling the positively charged protons, by the nuclear force, or residual strong force.
 The number of protons, or atomic number, in a nucleus determines the element: Every hydrogen atom has exactly one proton, every oxygen atom exactly eight, and so on.
 A given element can have a variable number of neutrons, with the total number of nucleons determining the \textit{isotope} of that atom.
@@ -222,7 +222,7 @@ The spin magnetic moments also precess about the external field in a phenomenon 
 %
 % \gls{mri} exploits the abundance of hydrogen atoms, bound to H$_2$O (water) molecules
 %
-% MRI images are obtained by detecting the spin relaxation resonance stuff of principally hydrogen atoms (which are abundant in the body in  molecules).
+% \gls{mri} images are obtained by detecting the spin relaxation resonance stuff of principally hydrogen atoms (which are abundant in the body in  molecules).
 
 The application of a strong linear magnetic field $\mathbf{B}_0$ along $z$ causes spins in a sample to, on average, align themselves with the direction of that field, with the ratio of spins in each of the possible energy states determined by (\ref{eq:boltzmann}).
 At equilibrium, more spins magnetic moments will occupy the lower energy state aligned with $\mathbf{B}_0$, resulting in a net bulk magnetisation $\mathbf{M}_z$ with magnitude $M_0$ at equilibrium.
@@ -248,7 +248,7 @@ Interactions between spins and their molecular environment cause de-phasing of t
 \end{align}
 
 where the recovery rate of $M_z$ and the rate of decay of $M_{xy}$ are described by the time constants $T_1$ and $T_2$ respectively, and each depend on the specific molecular environment and are thus tissue-dependent quantities.
-It is the varying values of $T_1$ and $T_2$, as well as the overall differences in proton densities (PD) between tissues which lend contrast to MR images.
+It is the varying values of $T_1$ and $T_2$, as well as the overall differences in \glspl{pd} between tissues which lend contrast to MR images.
 
 \subsection{Signal echos}\label{sec:echos}
 
@@ -325,7 +325,7 @@ Beyond the basics of spatial encoding and echo signal generation, there lies a w
 
 \begin{figure}[htb!]
   \includesvg[width=\textwidth]{chapter_1/mprage.svg}
-  \caption{A simplified pulse sequence diagram representing an MP-RAGE $T_1$-weighted acquisition. This popular acquisition uses a 180\textdegree \gls{ir} \gls{rf} pulse, followed after inversion time TI by an excitation--acquisition sequence, to enhance the contrast between tissues based on their different $T_1$ relaxation times. (In reality, multiple image echos are sampled using fast imaging techniques in-between repeated \gls{ir} pulses.) Multiple signal echos are sampled with decreasing \gls{pe} gradient strengths $G_p$ to build up an entire 2D image.}
+  \caption{A simplified pulse sequence diagram representing an \gls{mprage} $T_1$-weighted acquisition. This popular acquisition uses a 180\textdegree \gls{ir} \gls{rf} pulse, followed after inversion time TI by an excitation--acquisition sequence, to enhance the contrast between tissues based on their different $T_1$ relaxation times. (In reality, multiple image echos are sampled using fast imaging techniques in-between repeated \gls{ir} pulses.) Multiple signal echos are sampled with decreasing \gls{pe} gradient strengths $G_p$ to build up an entire 2D image.}
   \label{fig:mprage}
 \end{figure}
 
@@ -347,7 +347,7 @@ Alongside these so-called ``conventional" contrasts exist a large collection of 
 \footnote[2]{The term ``contrast" is also associated in clinical contexts with the use of external agents (typically injected) with paramagnetic properties that shorten local $T_1$ times and increase image brightness particularly in blood vessels and in areas of \gls{bbb} disruption, making it an important tool in oncological imaging. This will be referred to specifically as \gls{dce} \gls{mri}, or simply contrast enhancement, where applicable, while here we will use ``contrast" more generally to refer to manipulation of pulse sequence elements to highlight different tissue properties.}
 \Gls{fmri}, for example, involves the detection of subtle contrast changes produced by changes in the relative concentrations of oxygenated and deoxygenated blood, which have different magnetic properties and influence the local magnetic field accordingly.
 A spike in neural activity within a particular region causes increased flow of oxygen rich blood to that area, and the resulting local magnetic field disturbances have a measurable effect on proton relaxation, producing a \textit{blood oxygentation level dependent} (BOLD) signal.
-\gls{fmri} is an important clinical and research tool for measuring association between activity in particular brain areas and observable behaviour or stimuli, such as motor activity, speech, or visual inputs.
+\Gls{fmri} is an important clinical and research tool for measuring association between activity in particular brain areas and observable behaviour or stimuli, such as motor activity, speech, or visual inputs.
 Additionally, by analysing temporal correlations between activation in different brain regions, we can deduce functional connectivity between them and establish a model of brains functional network.
 
 Establishing that two brain regions' neural activity is temporally correlated isn't enough to confirm the existence of a direct structural connection between them, as their correlation may be incidental, or mediated by a third intermediate node.
@@ -360,10 +360,10 @@ The only tool available for non-invasively imaging the microscopic structure of 
   \label{fig:ortho}
 \end{figure}
 
-\subsection{Diffusion weighted MRI}\label{sec:dmri}
+\subsection{Diffusion weighted \gls{mri}}\label{sec:dmri}
 
 % \note{First describe diffusion in general but stick to tissue, i.e. restricted diffusion. Cover the different types of diffusion in different tissues in the brain, timescales etc.
-% Then look at the mechanism of diffusion MRI acquisition, pulse sequence and parameters e.g. b values.
+% Then look at the mechanism of \gls{dmri} acquisition, pulse sequence and parameters e.g. b values.
 % Also mention common artefacts.}
 
 Molecules in a fluid travel through their environment in a stochastic pattern of thermal motion, and this incoherent motion is the basis for the contrast formed in \gls{dmri}.
