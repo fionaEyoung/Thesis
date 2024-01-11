@@ -6,83 +6,119 @@
 \appendix
 
 
-\chapter{Tractography parameters and \gls{roi} protocols}
+\chapter{Tractography parameters and ROI protocols}
 \label{app:rois}
 
-The following tracking parameters were used for all probabilistic streamline tractography experiments unless otherwise indicated:
-
+Default parameters as documented for the \verb|tckgen| command of MRtrix3 (release version 3.0.3, available at \url{https://mrtrix.readthedocs.io/en/3.0.3/reference/commands/tckgen.html}) (including \verb|-select 5000 -algorithm iFOD2|) were used for all tractography:
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center}
-\begin{tabular}{ l l }
+\begin{tabular}{ l l }\toprule
   Parameter & Value \\
- \hline
+ \midrule
  Algorithm      &   iFOD2\autocite{Tournier2010} \\
  Number of streamlines selected &   5000 \\
  Maximum angle  &   45\degree  \\
  Step size & $0.5 \, \mathsf{x}$ voxel size \\
- \gls{fod} amplitude threshold & 0.1 \\
+ \glsentryshort{fod} amplitude threshold & 0.1 \\ \bottomrule
 \end{tabular}
 \end{center}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-For all pathways, streamlines were generated separately for each hemisphere, before concatenation for further processing.
+In addition, the parameter \verb|-seed_unidirectional| was included for \gls{or} reconstructions, to ensure streamlines are propagated from a single direction out of the \gls{lgn}.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=\textwidth]{Appendix/OR.png}
-%   \caption{Optic radiation \glspl{roi}. Top: Coronal slice of saggital stratum. Middle: Lateral geniculate nucleus. Bottom: Exclusion slices.}\label{fig:orrois}
-% \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ROI definitions}
+\label{sec:rois}
 
+The following ROI strategies were used for atlas constructions and subsequent validation tractography (differences between the two specified where applicable).
+Visualisations of each ROI are shown on MNI152 template in Figures \ref{fig:rois.af}, \ref{fig:rois.cst} and \ref{fig:rois.or}.
 
-\section{Optic radiation}
+\subsection{Arcuate fasciculus}
 
-Streamlines for the optic radiation were generated according to the following protocol (Fig. \ref{fig:orrois}):
-Streamlines were seeded randomly and unidirectionally within a region of interest (\gls{roi}) placed on the lateral geniculate nucleus.
-An inclusion \gls{roi} was placed on two consecutive coronal slices covering the saggital stratum.
-Exclusion \gls{roi} slices were placed at the level of the superior boundary of the lateral ventricles, two axial slices inferior to the lowest extent the anterior horn of the lateral ventricles, two coronal slices anterior to the anterior horn of the lateral ventricles, along the saggital midline, coronally through the fornix and sagitally through the thalamus.
-Additional exclusion slices were used in some cases to exclude streamlines from the corpus callosum and brainstem.
+\begin{description}
+  \item[Seed] White matter medial of angular gyrus, visible on coronal views of colour fractional anisotropy maps as a ``green triangle", drawn on the coronal plane.
+  Level of coronal plane selected from sagittal view by locating the central sulcus (Fig. \ref{fig:rois.af}, arrow).
+  \item[Include] Descending section of the arcuate fasciculus, drawn on the axial plane
+  \item[Exclude] Exclusion ROIs targeting: midline, superior fronto-occipital fasciculus, ipsilateral cerebral penduncles, sagittal stratum, corona radiata and external capsules.
+\end{description}
 
+The following publications were reviewed to inform the above ROI strategy: \textcite{Brown2014a},\textcite{Catani2002},\textcite{Catani2005},\textcite{Chen2015c},
+\textcite{Eluvathingal2007},\textcite{Kamali2014},\textcite{Martino2013a},\textcite{Nucifora2005},
+\textcite{Parker2005},\textcite{Bain2019},\textcite{Talozzi2018}
 
+\begin{figure*}[h]
+  \centering
+    \includegraphics[width=\textwidth]{appendix/AF_include.png}
+    \includegraphics[width=\textwidth]{appendix/AF_exclude.png}
+  \caption{Seed (yellow), inclusion (green) and exclusion (red) regions of interest for the arcuate fasciculus. Arrow indicates central sulcus, landmark for seed ROI.}
+  \label{fig:rois.af}
+\end{figure*}
 
-\section{Corticospinal Tract}
+\subsection{Corticospinal tract}
 
-Streamlines for the corticospinal tract were generated according to the following protocol (Fig. \ref{fig:cstrois}):
-Streamlines were seeded randomly and bidirectionally within an \gls{roi} placed on three consecutive axial slices of the posterior limb of the internal capsule.
-Inclusion \glspl{roi} were placed on the cerebral peduncles (two consecutive axial slices) and at the level of the pons.
-Exclusion \glspl{roi} were drawn for the cerebellar peduncles (single coronal slice), medial lemniscus (single axial slice), superior fronto-occipital fasciculus (consecutive axial slices), superior longitudinal fasciculus (consecutive axial slices) and saggital midline.
+Corticospinal tract tracography strategy differed between the atlas creation and general tractography applied to new subjects.
 
+\begin{description}
+  \item[Seed (atlas)] For the orientation atlas, Freesurfer cortical parcellations were used to obtain more complete coverage of the motor cortex via the following process:
+  \begin{enumerate}
+    \item Seed in precentral gyrus and output successful seed location
+    \item Generate binary mask from successful seed locations, subtract from precentral gyrus mask to create seed mask
+    \item Re-run tractography with second seed mask to cover rest of precentral gyrus
+  \end{enumerate}
+  \item[Seed (general)] Posterior limb of internal capsule, drawn on three consecutive axial slices
+  \item[Include] Posterior limb on internal capsule (if not used for seed), cerebral penduncles, CST in mid-pons
+  \item[Exclude] Cerebellar peduncles (drawn on coronal slice), medial lemniscus (drawn on axial slice), midline, superior fronto-occipital fasciculus,
+\end{description}
 
+The following publications were reviewed to inform the above ROI strategy: \textcite{Ciccarelli2006},\textcite{Han2010},\textcite{Hattingen2009a},
+\textcite{Niu2016},\textcite{Radmanesh2015},\textcite{Reich2006},
+\textcite{Rosenstock2017},\textcite{Szmuda2021},\textcite{Vargas2013}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{figure}[htbp]
-%   \centering
-%   \includegraphics[width=\textwidth]{Appendix/CST.png}
-%   \caption{\glspl{roi} used in corticospinal tract tractography. Clockwise from bottom right: Posterior limb of internal capsule, \gls{cst} at level of pons, cerebral peduncles, cerebellar peduncles, medial lemniscus, superior fronto-occipital fasciculus and anterior limb of internal capsule, superior longitudinal fasciculus}\label{fig:cstrois}
-% \end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure*}[h]
+  \centering
+    \includegraphics[width=\textwidth]{appendix/CST_include.png}
+    \includegraphics[width=\textwidth]{appendix/CST_exclude.png}
+  \caption{Seed (yellow), inclusion (green) and exclusion (red) regions of interest for the corticospinal tract}
+  \label{fig:rois.cst}
+\end{figure*}
 
+\subsection{Inferior fronto-occipital fasciculus}
 
+\begin{description}
+  \item[Seed] Temporal stem, between anterior tip if Meyer's loop and descending portion of the uncinate fasciculus
+  \item[Include (atlas)] Posterior: inferior, middle, and superior occipital gyri and middle and superior occipital sulci (Freesurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation labels 1\{1,2\}1\{02,19,20,58,59\}).
+  Anterior: frontal pole, middle and inferior frontal gyri and sulci, orbital gyrus and sulci (Freesurfer labels 1\{1,2\}1\{01,05,15,54,12,13,14,53,63,24,65\})
+  \item[Include (general)] Frontal lobe coronal slice, anterior to genu of the corpus callosum
+  \item[Exclude] Coronal slice on frontal lobe at the level of the central sulcus, coronal slice on tip of anterior temporal lobe
+\end{description}
 
+The following publications reviewed to inform the above ROI strategy: \textcite{Martino2010},\textcite{Sarubbo2013},\textcite{Hau2016},
+\textcite{Catani2008},\textcite{Wakana2007},\textcite{Wu2016}
 
-\chapter{Colophon}
-\label{appendixlabel3}
-\textit{This is a description of the tools you used to make your thesis. It helps people make future documents, reminds you, and looks good.}
+\begin{figure*}[h]
+  \centering
+    \includegraphics[width=\textwidth]{appendix/IFO_include.png}
+    \includegraphics[width=\textwidth]{appendix/IFO_exclude.png}
+  \caption{Seed (yellow), inclusion (green) and exclusion (red) regions of interest for the inferior fronto-occipital fasciculus}
+  \label{fig:rois.ifo}
+\end{figure*}
 
-\textit{(example)} This document was set in the Times Roman typeface using \LaTeX\ and Bib\TeX , composed with a text editor.
- % description of document, e.g. type faces, TeX used, TeXmaker, packages and things used for figures. Like a computational details section.
-% e.g. http://tex.stackexchange.com/questions/63468/what-is-best-way-to-mention-that-a-document-has-been-typeset-with-tex#63503
+\subsection{Optic radiation}
 
-% Side note:
-%http://tex.stackexchange.com/questions/1319/showcase-of-beautiful-typography-done-in-tex-friends
+\begin{description}
+  \item[Seed] Lateral geniculate nucleus (LGN; drawn on axial planes)
+  \item[Include] Sagittal stratum (drawn on coronal plane)
+  \item[Exclude] Coronal slice anterior of and axial slice inferior of most anterior point of lateral ventricles, axial slice at level of superior reach lateral ventricles, splenium of corpus callosum, fornix
+\end{description}
 
-\chapter{Ethics and data availabililty}
+The following publications reviewed to inform the above ROI strategy:
+\textcite{Yogarajah2009},\textcite{Hofer2010},\textcite{Dayan2015}
 
-The the novel research described in this thesis and the use of \gls{gosh} clinical data and with appropriate ethical approval from the UCL research ethics committee (ID2780/003) and the UCL Institute of Child Health/\gls{gosh} joint R\&D office (reference 19NI12).
-Use of \gls{nhnn} data was approved under retrospective research ethics by the \gls{nhnn} (University College London Hospitals NHS Foundation Trust) and UCL Institute of Neurology Joint Research Ethics Committee (REC 18/NW/0395, IRAS No: 213920).
-In addition, the acquisition and use of some \gls{nhnn} \gls{mri} data was also approved by the \gls{nhnn} (University College London Hospitals NHS Foundation Trust) and UCL Institute of Neurology Joint Research Ethics Committee (REC 12/LO/1977).
-All clinical data was acquired within the course of routine clinical care, and as no identifying information of any subject is present, there is no need for informed consent.
-To protect patient confidentiality, clinical data will not be made openly available.
+\begin{figure*}[h]
+  \centering
+    \includegraphics[width=\textwidth]{appendix/OR_include.png}
+    \includegraphics[width=\textwidth]{appendix/OR_exclude.png}
+  \caption{Seed (yellow), inclusion (green) and exclusion (red) regions of interest for the optic radiation}
+  \label{fig:rois.or}
+\end{figure*}
