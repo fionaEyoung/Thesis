@@ -70,12 +70,12 @@ No \gls{epi} distortion correction was performed, as it is frequently omitted fr
 \label{sec:data_btcd}
 
 The \gls{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
-Of the total 25 patients in the original dataset, 10 with macroscopic, non-infiltrating lesions were selected for the validation of tractfinder in tumour patients.
-In one of the 10 subjects (sub-PAT22), only a preoperative session is available, giving a total of 19 unique scan sessions used for this dataset.
+Of the total 25 patients in the original dataset, ten with macroscopic, non-infiltrating lesions were selected for the validation of tractfinder in tumour patients.
+In one of the ten subjects (sub-PAT22), only a preoperative session is available, giving a total of 19 unique scan sessions used for this dataset.
 The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural $T_1$-weighted images.
 In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which can be used for tumour deformation modelling in those patients with strong tumour deformation.
-The 10 selected subjects include 4 with tumours large enough (3 meningioma and 1 anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
-Of these 4 subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral" tracts.
+The ten selected subjects include four with tumours large enough (thee meningioma and one anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
+Of these four subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral" tracts.
 In all other subjects, the tracts were labelled ipsilateral or contralateral if they were in the same or opposite hemisphere as the tumour respectively.
 
 \Gls{dmri} data was preprocessed with \gls{mppca} denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of \gls{fsl} v.6.0.4).
