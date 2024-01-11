@@ -19,7 +19,7 @@ These two possibilities are investigated in the following sections, beginning wi
 \subsection{Data requirements}\label{sec:ismrmdiff}
 
 It is important to assess the applicability of image processing techniques developed with research quality data in acquisitions more typical of a clinical setting.
-Advanced \gls{dmri} processing techniques may sometimes set constraints on the input data, such as a recommended or required minimum number of diffusion weighted volumes (angular resolution), $b$-values or spatial resolution.
+Advanced \gls{dmri} processing techniques may sometimes set constraints on the input data, such as a recommended or required minimum number of diffusion-weighted volumes (angular resolution), $b$-values or spatial resolution.
 If it can be demonstrated that an image processing pipeline produces excellent results in a high quality research dataset, which can be interpreted with confidence, then the question follows:
 Were one to acquire a lower quality dataset of the same subject and perform the same data processing, how comparable would the resulting segmentation be to that of the high quality scan?
 This is the question explored in the following study, which makes use of the high quality \gls{hcp} \gls{dmri} data (Section \ref{sec:data}) to determine the minimum data requirements to obtain successful segmentation, comparing different numbers of direction samples, $b$-values and post-processing strategies, as well as the affects of decreasing data quality on segmentation stability for three different methods (tractfinder, tractography and TractSeg; see Section \ref{sec:methods} for further details).
@@ -109,17 +109,17 @@ RESOLVE (readout segmentation of long variable echo-trains), a Siemens product, 
 
 While RS sequences can be combined with acceleration techniques including generalised autocalibrating partially parallel acquisition (GRAPPA) and simultaneous multi-slice (SMS), they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
 For example, in \textcite{Wang2018} authors compared interleaved and \gls{rsepi} sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4~mm thickness!
-In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE sequence with 15 segments, six diffusion weighted directions, and a scan time of 10:34 minutes.
+In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE sequence with 15 segments, six diffusion-weighted directions, and a scan time of 10:34 minutes.
 For comparison, the clinical \gls{ssepi} \gls{dti} sequence currently used intraoperatively at \gls{gosh} is a 30 direction $b=1000$~s~mm$^{-2}$ acquisition lasting just 4:57~minutes with 2.3~mm isotropic voxels.
 
 We set out to explore the feasibility of setting up a \gls{rsepi} \gls{dti} sequence for intraoperative use at \gls{gosh}.
 An (approximately) isotropic voxel size is generally considered optimal for \gls{dti} modelling and tractography \autocite{Vos2011, Neher2013}, although tractography with high in plane resolution and thick slices is certainly possible.
-Additionally, a sufficient number of diffusion weighted directions for crossing fibre modelling (e.g \gls{csd}) would be ideal, potentially as few as 12 directions given the results from Section \ref{sec:ismrmdiff}.
+Additionally, a sufficient number of diffusion-weighted directions for crossing fibre modelling (e.g \gls{csd}) would be ideal, potentially as few as 12 directions given the results from Section \ref{sec:ismrmdiff}.
 In the end, we tested three different \gls{dti} sequences as well as several different three-scan trace RESOLVE sequences (not discussed here), all acquired from a healthy adult volunteer on the intraoperative Siemens MAGNETOM Vida (3T) system at \gls{gosh}.
 The acquisition parameters of the three test sequences, along with the standard \gls{gosh} \gls{dmri} sequences for comparison, are shown in Table \ref{tab:rsepi}.
 
 % [1] Yang, J. Y.-M. *et al.* Assessment of intraoperative diffusion \gls{epi} distortion and its impact on estimation of supratentorial white matter tract positions in pediatric epilepsy surgery. *NeuroImage: Clinical* **35**, 103097 (2022).  https://www.sciencedirect.com/science/article/pii/S2213158222001620
-% [2] Wang, Y. *et al.* A comparison of readout segmented \gls{epi} and interleaved \gls{epi} in high-resolution diffusion weighted imaging. *Magnetic Resonance Imaging* **47**, 39–47 (2018). DOI: 10.1016/j.mri.2017.11.011
+% [2] Wang, Y. *et al.* A comparison of readout segmented \gls{epi} and interleaved \gls{epi} in high-resolution diffusion-weighted imaging. *Magnetic Resonance Imaging* **47**, 39–47 (2018). DOI: 10.1016/j.mri.2017.11.011
 % [3] Elliott, C. A. *et al.* Intraoperative acquisition of \gls{dti} in cranial neurosurgery: readout-segmented \gls{dti} versus standard single-shot \gls{dti}. *Journal of Neurosurgery* **133**, 1210–1219 (2020). http://dx.doi.org/10.3171/2019.5.JNS19890
 % [4] https://archive.ismrm.org/2011/1945.html
 % [5] https://www.researchgate.net/publication/236022704_Analysis_of_tractography_biases_introduced_by_anisotropic_voxels

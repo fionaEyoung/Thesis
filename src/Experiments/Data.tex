@@ -22,7 +22,7 @@ Each dataset and any dataset-specific preprocessing is described in the followin
 In addition, the following default preprocessing steps were applied to all scans, unless otherwise specified:\footnote[2]{software versions: MRtrix3 v3.0.2--3.0.3 (\url{https://www.mrtrix.org/}), \gls{fsl} v.6.0}
 
 \textit{Brain masking}\autocite{Tournier2019}
-using a heuristic algorithm based on thresholding the mean of each diffusion weighted shell described in \textcite{Dhollander2016}, implemented in MRtrix3\autocite{Tournier2019} as \verb|dwi2mask|.
+using a heuristic algorithm based on thresholding the mean of each diffusion-weighted shell described in \textcite{Dhollander2016}, implemented in MRtrix3\autocite{Tournier2019} as \verb|dwi2mask|.
 
 \textit{Affine registration} between subject space and MNI152\autocite{Fonov2011} template space using the \gls{fsl} Linear Image Registration Tool (FLIRT)\autocite{Jenkinson2001,Jenkinson2002}.
 
@@ -34,8 +34,8 @@ All \gls{csd} was performed using the MRtrix3 image processing software package\
 \subsection{HCP}
 
 The first large healthy adult dataset (``HCP49") comprised 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
-The original data comprises high resolution $T_1$-weighted and diffusion weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
-Raw diffusion data contains three diffusion weighted shells at $b=$ 1000, 2000 and 3000~s~mm$^{-2}$ with 90 directions each and 18 $b=0$ volumes\autocite{Sotiropoulos2013}.
+The original data comprises high resolution $T_1$-weighted and diffusion-weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
+Raw diffusion data contains three diffusion-weighted shells at $b=$ 1000, 2000 and 3000~s~mm$^{-2}$ with 90 directions each and 18 $b=0$ volumes\autocite{Sotiropoulos2013}.
 These images have been preprocessed as documented in \textcite{Glasser2013,Sotiropoulos2013},
 and additionally for this analysis they were downsampled to 2.5~mm isotropic voxels (from the original resolution of 1.25~mm isotropic) and a subset of 60 optimally distributed directions at $b=1000$~s~mm$^{-2}$ were extracted, emulating a typical clinical acquisition in spatial and angular resolution.
 
