@@ -26,20 +26,20 @@ using a heuristic algorithm based on thresholding the mean of each diffusion-wei
 
 \textit{Affine registration} between subject space and MNI152\autocite{Fonov2011} template space using the \gls{fsl} Linear Image Registration Tool (FLIRT)\autocite{Jenkinson2001,Jenkinson2002}.
 
-\textit{\Gls{csd}}. Depending on the dataset and / or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd}\autocite{Tournier2007,Tournier2019} (``original flavour") and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to \gls{wm} and \gls{gm} tissue compartments for single-shelled acquisitions (those with a single nonzero $b$-value),
+\textit{\Gls{csd}}. Depending on the dataset and / or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd}\autocite{Tournier2007,Tournier2019} (``original flavour'') and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to \gls{wm} and \gls{gm} tissue compartments for single-shelled acquisitions (those with a single nonzero $b$-value),
 and \gls{msmt} \gls{csd} with three tissue compartments (\gls{wm}, \gls{gm}, \gls{csf}) for multi-shelled acquisitions (see Section \ref{sec:ismrmdiff} for further context on these choices).
 In all cases, response functions were obtained using the Dhollander unsupervised 3-tissue response function estimation algorithm\autocite{Dhollander2016,Dhollander2019}.
 All \gls{csd} was performed using the MRtrix3 image processing software package\autocite{Tournier2019}.
 
 \subsection{HCP}
 
-The first large healthy adult dataset (``HCP49") comprised 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
+The first large healthy adult dataset (``HCP49'') comprised 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
 The original data comprises high resolution $T_1$-weighted and diffusion-weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
 Raw diffusion data contains three diffusion-weighted shells at $b=$ 1000, 2000 and 3000~s~mm$^{-2}$ with 90 directions each and 18 $b=0$ volumes\autocite{Sotiropoulos2013}.
 These images have been preprocessed as documented in \textcite{Glasser2013,Sotiropoulos2013},
 and additionally for this analysis they were downsampled to 2.5~mm isotropic voxels (from the original resolution of 1.25~mm isotropic) and a subset of 60 optimally distributed directions at $b=1000$~s~mm$^{-2}$ were extracted, emulating a typical clinical acquisition in spatial and angular resolution.
 
-A different set of 105 \gls{hcp} subjects (``HCP105") were used to train and test the deep learning segmentation method TractSeg\autocite{Wasserthal2018}.
+A different set of 105 \gls{hcp} subjects (``HCP105'') were used to train and test the deep learning segmentation method TractSeg\autocite{Wasserthal2018}.
 The curated TractSeg reference streamline bundles for these subjects are publicly available\autocite{Wasserthal2018b} and were used in a separate analysis to directly compare tractfinder and TractSeg.
 For these subjects, the same preprocessing steps were applied as in the set of 49 subjects, with the exception of selecting a subset of 30 instead of 60 $b=1000$~s~mm$^{-2}$ directions, to match the \textit{clinical quality} data described in \textcite{Wasserthal2018}.
 
@@ -75,7 +75,7 @@ In one of the ten subjects (sub-PAT22), only a preoperative session is available
 The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural $T_1$-weighted images.
 In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which can be used for tumour deformation modelling in those patients with strong tumour deformation.
 The ten selected subjects include four with tumours large enough (thee meningioma and one anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
-Of these four subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral" tracts.
+Of these four subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral'' tracts.
 In all other subjects, the tracts were labelled ipsilateral or contralateral if they were in the same or opposite hemisphere as the tumour respectively.
 
 \Gls{dmri} data was preprocessed with \gls{mppca} denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of \gls{fsl} v.6.0.4).

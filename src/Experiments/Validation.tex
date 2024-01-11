@@ -2,7 +2,7 @@
 \section{Validation: Methods}
 
 Segmentation tasks are commonly validated against reference data using a single numeric score of similarity or accuracy.
-In the absence of a ground truth for \textit{in vivo} white matter tracts, what should instead by the measure by which a tract imaging method is considered ``accurate"?
+In the absence of a ground truth for \textit{in vivo} white matter tracts, what should instead by the measure by which a tract imaging method is considered ``accurate''?
 Perhaps the only reasonable performance target can be to reproduce as closely as possible the results which would be obtained by the current standard, which in most cases would be streamline tractography.
 However, given the very large degree of variability between tractography algorithms and tract reconstruction approaches, even this is a poorly defined reference point.
 False positive streamlines can unfairly skew accuracy scores, while manually editing reference bundles to remove them is likely to introduce bias.
@@ -13,7 +13,7 @@ The purpose of this validation is not to determine which method is best, as inde
 \subsection{Benchmark methods}
 \label{sec:methods}
 
-We'll consider three alternative tract segmentation approaches and compare each with tractfinder: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
+We'll consider three alternative tract segmentation approaches and compare each with tractfinder: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive'' atlas registration.
 There are numerous alternative techniques, as detailed in Chapter \ref{chap:neuroimaging}, many based on streamline clustering or classification, or automatic \gls{roi} registration, including White Matter Analysis (WMA)\autocite{ODonnell2017}, RecoBundles \autocite{Garyfallidis2018}, Classifyber\autocite{Berto2021}, and Tracula\autocite{Yendiki2011}.
 We will not be comparing tractfinder with all of these alternatives because such a comparison would hardly provide any additional useful information:
 In those methods which rely on a predefined atlas of streamlines or \glspl{roi}, the anatomical assumptions embedded in those predefinitions would influence the similarity metrics more than any methodological differences, as indeed they do for the comparisons with TractSeg that follow.
@@ -31,25 +31,25 @@ The anatomical definitions informing the manual tractography paradigm was the sa
 The result is generally more extensive cortical terminations into gyri and sulci, for example in the \gls{af} and \gls{ifof}, not otherwise included in the atlases due to either the use of cortical \glspl{roi} or extensive manual filtering, while the core subcortical portions match the definitions reflected in the atlases.
 The same \gls{wm} seed and inclusion \glspl{roi} used for the atlases were adopted, along with additional exclusion \gls{roi} where necessary.
 For a full description of all tractography \glspl{roi} and any differences between atlas streamlines and validation manual tractography, see Appendix \ref{app:rois}
-This manual tractography (using the same anatomical definitions as the atlases) is subsequently abbreviated to ``\gls{tg}", while the reference \textit{TractoInferno} bundles (produced using RecoBundlesX, see Section \ref{sec:data}) are referred to as ``\gls{tgr}".
+This manual tractography (using the same anatomical definitions as the atlases) is subsequently abbreviated to ``\gls{tg}'', while the reference \textit{TractoInferno} bundles (produced using RecoBundlesX, see Section \ref{sec:data}) are referred to as ``\gls{tgr}''.
 Since tractfinder is a voxel-based method, streamlines were converted to voxel-based representation via \gls{tdi}\autocite{Calamante2010}, producing maps of streamline density per voxel.
 
 \paragraph*{TractSeg}
 
 TractSeg \autocite{Wasserthal2018} is a deep convolutional neural network model for tract segmentation which produces volumetric segmentation for 72 tracts directly from fibre orientation distribution peak directions (TractSeg v2.3--2.6, available at \url{https://github.com/MIC-DKFZ/TractSeg}).
-There are two models available: One trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018} (``\gls{tsd}"), and a second trained on streamline density maps output by \gls{fsl}'s XTRACT \autocite{Warrington2020} application using automatic predefined \gls{roi} registration and probtracx probabilistic tractography\autocite{Behrens2007} (``\gls{tsx}").
+There are two models available: One trained on modified streamline reconstructions using TractQuerier \autocite{Wassermann2016} as described in \textcite{Wasserthal2018} (``\gls{tsd}''), and a second trained on streamline density maps output by \gls{fsl}'s XTRACT \autocite{Warrington2020} application using automatic predefined \gls{roi} registration and probtracx probabilistic tractography\autocite{Behrens2007} (``\gls{tsx}'').
 Here both versions are compared, as they feature significant differences in anatomical tract definitions.
 Input peaks for all TractSeg results were derived from the \gls{ssst} \gls{csd} \glspl{fod} for all single-shelled data and from the \gls{msmt} peaks for all multi-shelled data.
 
 \paragraph*{Atlas registration}
 
-As well as the full tractfinder method (atlas alignment and inner product), we'll also consider a ``naive" tract atlas approach, using only the density component (first \gls{sh} coefficient) of the linearly registered tract atlases without any comparison with the native \glspl{fod}.
+As well as the full tractfinder method (atlas alignment and inner product), we'll also consider a ``naive'' tract atlas approach, using only the density component (first \gls{sh} coefficient) of the linearly registered tract atlases without any comparison with the native \glspl{fod}.
 This amounts to a segmentation based on prior spatial expectation only, without taking into account the diffusion data or orientation expectations, and is comparable with segmentation approaches that rely entirely on registration, such as common cortical parcellation tools.
 Comparing results with simple atlas registration between structural image data is instructive for determining the added value of utilising \gls{dmri} data to inform segmentation, which may be relevant to future investigations into the benefits of acquiring intraoperative \gls{dmri} in addition to conventional tissue contrast \gls{mri} sequences.
 
 \subsection{Comparison metrics}
 
-Each technique is compared against all others, rather than designating any single technique as ``ground truth", with the exception of the \textit{TractoInferno} dataset, where the published streamlines are treated as an independent reference.
+Each technique is compared against all others, rather than designating any single technique as ``ground truth'', with the exception of the \textit{TractoInferno} dataset, where the published streamlines are treated as an independent reference.
 Several comparison metrics are computed, to capture different aspects of agreement between segmentations.
 The \gls{dice} \autocite{Dice1945} is a popular, symmetric measure of segmentation similarity given by
 
@@ -117,7 +117,7 @@ Segmentation results results for a representative subject from the \textit{Tract
 Tractfinder maps typically have values ranging from 0 to 0.5 (in arbitrary units, derived from the magnitudes of \gls{fod} and atlas distribution functions).
 Due to the combined effects of \gls{odf} amplitude and orientation information, a low tract map value can have several causes: a) the \gls{fod} amplitude is low, indicating low evidence for white matter tissue in the voxel in question; b) the atlas amplitude is low, indicating low prior likelihood of the tract being present in that location; c) the peak orientations between the \gls{fod} and atlas are poorly aligned.
 
-Thus combining information from the atlas and data-derived \glspl{fod} improves the tract map estimation over the ``raw" registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
+Thus combining information from the atlas and data-derived \glspl{fod} improves the tract map estimation over the ``raw'' registered atlas in both the spatial and orientational domain. For example, the \gls{tod} atlases have poor definition of gyri and sulci, due to the effect of averaging over many subjects and linear registration. The reduced overall \gls{fod} amplitude in grey matter corrects this non-specificity. And in regions where different white matter structures lie in close proximity, where the atlas can erroneously predict the likely presence of the tract, and \gls{fod} amplitude is high, the lack of orientational agreement discounts the presence of the tract of interest in that location.
 
 % Fullpage figures
 \begin{figure}[htb!]
@@ -350,7 +350,7 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 
 \begin{figure}[h!]
   \includegraphics{chapter_5/ts_scatter.pdf}
-  \caption{\gls{dice} and density correlation scores for tractfinder and TractSeg using the same training and testing streamlines from the HCP105 dataset. Mean over all subjects is shown for each tract.}
+  \caption{\Gls{dice} and density correlation scores for tractfinder and TractSeg using the same training and testing streamlines from the HCP105 dataset. Mean over all subjects is shown for each tract.}
   \label{fig:ts_all_tracts}
 \end{figure}
 

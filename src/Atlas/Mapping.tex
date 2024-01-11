@@ -3,12 +3,12 @@
 
 The methodological description of the preceding section was concerned with capturing prior information about tracts.
 Assuming this prior information can be brought into anatomical alignment with the target image (this problem is tackled in chapter \ref{chap:reg}), it remains to compare those priors with the information present in the target diffusion data itself.
-This process, of comparing a prior with the information in the acquired data and computing a similarity measure from them, will be generally referred to as ``tract mapping", and encompasses both spatial and angular components.
+This process, of comparing a prior with the information in the acquired data and computing a similarity measure from them, will be generally referred to as ``tract mapping'', and encompasses both spatial and angular components.
 
 Frequently, atlas-based segmentation techniques rely entirely on accurate registration of the atlas to the novel data, with the registered atlas forming the final segmentation without any further refinement.
 This strategy is strongly dependent on the accuracy of registration and assumes a one-to-one correspondence can be found between the template and subject anatomies.
 The approach taken here is a different one.
-Rather than expecting perfect and robust registration, which is a particularly tall order for clinical subjects, we instead make use of the rich information obtainable in \gls{dmri} to refine the initial estimate indicated by a ``close enough" registration.
+Rather than expecting perfect and robust registration, which is a particularly tall order for clinical subjects, we instead make use of the rich information obtainable in \gls{dmri} to refine the initial estimate indicated by a ``close enough'' registration.
 
 The tract atlas intentionally conveys a degree of spatial tolerance to account for individual variations in tract location, with the final mapping step acting to refine the estimate according to observed local information in the target image.
 The latter, derived from raw \gls{dmri} data, could conceivably take any form.
@@ -67,7 +67,7 @@ This measure of similarity, computed voxel-wise for the registered \gls{tod} atl
 It is favoured for its computationally simplicity and relatively intuitive meaning, although alternative comparison approaches are also explored below.
 
 The tract atlases and \gls{fod} data contain both scalar and directional information, all of which contribute to the final inner product value.
-The combined effects of these factors means that a lower mapped value could be driven by a low degree of overlap in the angular domain (``the fibre orientations here to not match what would be expected for the tract"), low amplitude in the atlas (``tract is unlikely to be found here"), or low amplitude in the \gls{fod} (``there is not much white matter signal here").
+The combined effects of these factors means that a lower mapped value could be driven by a low degree of overlap in the angular domain (``the fibre orientations here to not match what would be expected for the tract''), low amplitude in the atlas (``tract is unlikely to be found here''), or low amplitude in the \gls{fod} (``there is not much white matter signal here'').
 In \gls{sh} terms, the scalar component is total amplitude, or spherical integral, of the \gls{odf} and is given by the first \gls{sh} coefficient ($Y_{0,0}$ term).
 In the atlas, this amplitude represents the spatial probability, or the likelihood across the training population of a tract being located within a specific voxel.
 Within the target \gls{fod} image, the amplitude is not tract specific, but rather reflects the \gls{afd} and by extension the likelihood that \textit{any} tract is present within a voxel, rather than grey matter or \gls{csf}.
@@ -111,7 +111,7 @@ Finally, an analytical expression for the multiplication of two arbitrary \gls{s
 
 As described in Section \ref{sec:ip}, the inner product value between an estimated orientation distribution representing a mixture of fibre populations and the expected orientation distribution for a specific isolated population will depend on a range of interacting components, making interpretation of the final value a complicated task.
 To disentangle the competing effects in crossing fibre voxels, we consider an extension of the inner product analysis using the concept of fixels.
-A portmanteau of ``fibre" and ``voxel", a fixel describes a sub-voxel element representing a single fibre population\autocite{Raffelt2015,Raffelt2017}.
+A portmanteau of ``fibre'' and ``voxel'', a fixel describes a sub-voxel element representing a single fibre population\autocite{Raffelt2015,Raffelt2017}.
 A voxel can contain any number of fixels, and each can be analysed in isolation with fixel-level properties such as peak orientation, dispersion and fibre density.
 By segmenting a full \gls{fod} into individual lobes and computing properties on those sub-distributions, we can separate the effects of different fibre populations within a single voxel.
 

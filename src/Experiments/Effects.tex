@@ -12,7 +12,7 @@ We will next consider some of the realities of real-world clinical data and envi
 The technical feasibility of tractfinder for intraoperative application depends not only on the capabilities of the method itself in terms of speed and reliability, but also on the achievable image quality.
 Intraoperative scanning must occur under significant time pressure, and the concessions made to achieve this will have profound consequences for the image quality and subsequent image processing.
 In general, two strategies exist for reducing \gls{dmri} scan time:
-The first is to reduce the information content of the acquisition, which could mean lower spatial resolution (larger voxels), lower angular resolution (fewer diffusion-weighted directions), shorter diffusion weightings (lower $b$-values) or fewer unique $b$-values (``shells").
+The first is to reduce the information content of the acquisition, which could mean lower spatial resolution (larger voxels), lower angular resolution (fewer diffusion-weighted directions), shorter diffusion weightings (lower $b$-values) or fewer unique $b$-values (``shells'').
 The second is to use accelerated imaging techniques to achieve the (notionally) same image parameters in shorter time.
 These two possibilities are investigated in the following sections, beginning with an investigation into the effect of diffusion-weighting scan parameters on tract segmentations, in work first published in \textcite{Young2022a}.
 
@@ -55,8 +55,8 @@ Instead, the following approaches were compared: 1) Modelling two tissue types w
 \Gls{msmt} \gls{csd} is performed twice, once modelling \gls{wm} and \gls{gm} compartments, and once modelling \gls{wm} and \gls{csf} compartments; 2) Standard \gls{ssst} \gls{csd}.
 
 To investigate the effects of different data quality and modelling on a given method, the \gls{dice} \autocite{Dice1945} was computed between each segmentation in datasets DWI-2--5 and the corresponding segmentation of the same method in DWI-1 using three-tissue \gls{msmt} \gls{csd} (considered the benchmark segmentation).
-This ``self-similarity" approach is intended to answer the question put forward above:
-How close to the results produced from an ``ideal" acquisition can be achieved from a lower quality scan.
+This ``self-similarity'' approach is intended to answer the question put forward above:
+How close to the results produced from an ``ideal'' acquisition can be achieved from a lower quality scan.
 This comparison was made for each combination of diffusion scheme and \gls{csd} approach.
 
 % \paragraph*{Findings}
@@ -125,7 +125,7 @@ The acquisition parameters of the three test sequences, along with the standard 
 % [5] https://www.researchgate.net/publication/236022704_Analysis_of_tractography_biases_introduced_by_anisotropic_voxels
 
 \begin{table}
-  \caption{\gls{rsepi} test scan parameters}
+  \caption{\Gls{rsepi} test scan parameters}
   \label{tab:rsepi}
   % \setlength{\tabcolsep}{0.3em}
   \footnotesize
@@ -181,7 +181,7 @@ The third test scan additionally used SMS acceleration which appears to have sig
   \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=\textwidth]{chapter_6/3_fod_tg.png}
   \end{subfigure}
-  \caption{\glspl{fod} at the centrum semiovale and full \gls{cst} tractography streamlines. From left to right, top to bottom: Baseline (30\x{}b1000 \gls{ssepi} \gls{dti}), 7seg 6\x{}b800, 3seg 12\x{}b1000, 3seg 20\x{}b1000}
+  \caption{\Glspl{fod} at the centrum semiovale and full \gls{cst} tractography streamlines. From left to right, top to bottom: Baseline (30\x{}b1000 \gls{ssepi} \gls{dti}), 7seg 6\x{}b800, 3seg 12\x{}b1000, 3seg 20\x{}b1000}
   \label{fig:rsepi-fod}
 \end{figure}
 

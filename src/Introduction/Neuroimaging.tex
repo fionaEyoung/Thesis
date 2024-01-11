@@ -55,11 +55,11 @@ A smaller population with a low signal contribution may be entirely unrepresente
 \end{figure}
 
 The crossing fibres problem led to \gls{dti}, at least in research imaging, gradually giving way to higher-order fibre orientation modelling techniques which aim to account for more than one, or even an arbitrary number of distinctly oriented fibre populations\autocite{Alexander2005}.
-These include to an extent the multi-compartment models which can include multiple directional intra-axonal compartments, such as the popular ``ball and sticks" model\autocite{Behrens2003,Behrens2007}.
+These include to an extent the multi-compartment models which can include multiple directional intra-axonal compartments, such as the popular ``ball and sticks'' model\autocite{Behrens2003,Behrens2007}.
 Alternatively, several approaches aim to retrieve an underlying orientation distribution with arbitrary number of peaks through transforming the raw signal \gls{odf} into a spherical distribution of diffusivity or correlates thereof.
 Diffusion spectrum imaging (DSI)\autocite{Wedeen2008}, and the less data-demanding Q-ball imaging\autocite{Tuch2003,Tuch2004}, are examples of methods that reconstruct a distribution of water molecule displacement (\gls{dodf}), with peaks aligned with the (presumed) fibre orientation.
 Deconvolution methods begin with the premise that a single population of parallel fibres will produce a characteristic \gls{dmri} signal profile.
-Then, the observed signal $S(\theta,\phi)$ in a given voxel amounts to a convolution over the fibre orientation distribution function $F(\theta,\phi)$ with this single fibre ``response" kernel $R(\theta)$:
+Then, the observed signal $S(\theta,\phi)$ in a given voxel amounts to a convolution over the fibre orientation distribution function $F(\theta,\phi)$ with this single fibre ``response'' kernel $R(\theta)$:
 \begin{align}
   S(\theta,\phi) = F(\theta,\phi) \otimes R(\theta)
 \end{align}\label{eq:csd}
@@ -77,7 +77,7 @@ Within pure and highly organised \gls{wm}, this is a reasonable assumption, howe
 As we have seen in previous sections, brain tissue covers a spectrum of cytoarchitectures and a corresponding diversity in diffusion environments.
 At the typical resolutions of \gls{dmri} data, voxels may contain, in addition to axon fibres, signal contributions from \gls{csf} or \gls{gm}, which are typically characterised by isotropic and freer diffusion.
 The result of such partial volume effects are highly noisy \gls{fod} estimates with spurious peaks, overestimation of \gls{fod} peak amplitudes and overestimation of \gls{afd} in affected voxels.\autocite{Jeurissen2014}
-In addition, the original \gls{csd} method was designed only for data acquired with a single diffusion weighting $b$ factor (``shell"), unable to take advantage of the additional information contained in more advanced and increasingly popular multi-shell acquisitions.
+In addition, the original \gls{csd} method was designed only for data acquired with a single diffusion weighting $b$ factor (``shell''), unable to take advantage of the additional information contained in more advanced and increasingly popular multi-shell acquisitions.
 To address these limitations, an extension proposed in \textcite{Jeurissen2014} and referred to as \gls{msmt} \gls{csd} includes support for multiple $b$-value shells and separation of the signal into contributions from different tissue compartments, typically \gls{wm}, \gls{gm}, and \gls{csf}, each with their own characteristic response functions.
 The resulting \gls{fod} estimates have higher angular precision than \gls{ssst} \gls{csd}, with fewer noisy spurious lobes to confound downstream processing and interpretation.
 Furthermore, separation of the isotropic signal contributions greatly improves the interpretation of \gls{fod} amplitude as a measure of \gls{afd}, as the amplitudes of each tissue's deconvolved \gls{odf} closely correspond to their respective tissue volume fractions\autocite{Jeurissen2014}.
@@ -156,7 +156,7 @@ A second school takes the view that uncertainty in the choice of streamline step
 Crucially though, tracking is not proceeding under any guidance relating to real biophysical connections, and though a streamline's direction in a given voxel may well be in accordance with real axons, whether that direction is appropriate in the context of the preceding steps of the same streamline is unresolvable.
 In other words, \gls{fod}-based probabilistic tractography, of which first or second-order integration over \glspl{fod}  (iFOD1/iFOD2)\autocite{Tournier2012,Tournier2010} are notable examples, can capture the local dispersion of fibres in high detail, but that doesn't necessarily translate to long-range accuracy.
 It is possible to constrain tractography according to broad heuristics about fibre tract geometries, but inevitably such simplifications will not be globally applicable.
-For example, strategies to prevent streamlines from ``hopping" onto intersecting, but not physically connected, pathways can include placing upper limits on the angle between successive steps under the expectation that most tracts will carry more or less straight on, but there are plenty of tracts in the brain with regions of high curvature, which become much harder to accurately reconstruct if the ``straight ahead" constraint is too strict.
+For example, strategies to prevent streamlines from ``hopping'' onto intersecting, but not physically connected, pathways can include placing upper limits on the angle between successive steps under the expectation that most tracts will carry more or less straight on, but there are plenty of tracts in the brain with regions of high curvature, which become much harder to accurately reconstruct if the ``straight ahead'' constraint is too strict.
 
 Due to streamline tractography's locally oriented and step-by-step nature, errors and missteps accumulate rapidly with little to no opportunity to correct them, resulting in some wildly implausible streamlines.
 Attempts to address this blindness to biophysical reality are at the focus of much of modern tractography research\autocite{Bastiani2017,Rheault2019,Aydogan2021}, as the consequences of these ongoing challenges to connectivity research and neurology are substantial\autocite{Schilling2019, Yang2021, Grisot2021}.
@@ -168,7 +168,7 @@ It follows that the spatial delineation of individual tracts is a key step in ma
 
 Streamline tractography was the first, and remains the dominant answer to this task.
 Though the field is wide and the specific approaches numerous, we will outline the two main frameworks through which individual tract segmentations are derived using streamline tractography.
-The first, sometimes dubbed ``virtual fibre dissection", involves generating a large number (on the order of 10s of millions) of streamlines, usually covering the entire brain, followed by a selection process whereby streamlines are assigned to a tract of interest or discarded.
+The first, sometimes dubbed ``virtual fibre dissection'', involves generating a large number (on the order of 10s of millions) of streamlines, usually covering the entire brain, followed by a selection process whereby streamlines are assigned to a tract of interest or discarded.
 Streamline tracking proceeds virtually uninhibited, terminating only if a maximum length is reached or when leaving the white matter (as indicated by tissue segmentations\autocite{Smith2012} or a \gls{fod} amplitude threshold).
 After tracking, one approach for selecting streamlines belonging to the target bundle is to use logical \glspl{roi}, specifying inclusion volumes which must be visited and exclusion volumes to filter unwanted tracks.
 These selection and exclusion \glspl{roi} encapsulates our \textit{a priori} neuroanatomical knowledge, and the resulting bundle, comprising only those streamlines fulfilling the criteria, represents the segmented tract (Fig. \ref{fig:tg_rois}).
@@ -182,16 +182,16 @@ Another approach, named Classifyber, uses a learned linear classification of str
 In all clustering approaches, the necessary generation of whole brain tractograms in test subjects and the additional construction of example or reference tractography data present barriers to application, as well as, in some cases, long processing times and high memory requirements\autocite{Wasserthal2018}.
 
 The whole brain approach is computationally extremely wasteful, as the vast number of streamlines generated will not even represent \textit{any} anatomically valid pathway through the brain, let alone one belonging to the tract of interest.
-Furthermore, if streamlines are randomly seeded throughout the brain, then longer tracts covering a larger volume are more likely to be sampled, the tendency to continue straight along a ``path of least resistance" at diverging or crossing fibres results in inordinate overrepresentation of certain pathways\autocite{Smith2013}.
+Furthermore, if streamlines are randomly seeded throughout the brain, then longer tracts covering a larger volume are more likely to be sampled, the tendency to continue straight along a ``path of least resistance'' at diverging or crossing fibres results in inordinate overrepresentation of certain pathways\autocite{Smith2013}.
 All this means that, after perhaps hours of tracking and billions of streamlines created, only a handful may be included in a final bundle reconstruction.
 
 \begin{SCfigure}
   \includegraphics[width=0.5\textwidth]{chapter_2/tg_rois_glass.png}
-  \caption{\gls{wm} tracts are virtually dissected with streamline tractography and anatomically informed \glspl{roi}. In this toy example, streamlines for the \gls{cst} are seeded in the cerebral peduncles (blue ring) and selected with an inclusion \gls{roi} in the posterior limb of the internal capsule (green ring). Streamlines following the paths of the \gls{cc} or cerebellar peduncles are excluded (red rings).}
+  \caption{\Gls{wm} tracts are virtually dissected with streamline tractography and anatomically informed \glspl{roi}. In this toy example, streamlines for the \gls{cst} are seeded in the cerebral peduncles (blue ring) and selected with an inclusion \gls{roi} in the posterior limb of the internal capsule (green ring). Streamlines following the paths of the \gls{cc} or cerebellar peduncles are excluded (red rings).}
   \label{fig:tg_rois}
 \end{SCfigure}
 
-The second approach may be called ``targeted tractography", an involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions (Fig. \ref{fig:tg_rois}), until a target number of streamlines have been selected.
+The second approach may be called ``targeted tractography'', an involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions (Fig. \ref{fig:tg_rois}), until a target number of streamlines have been selected.
 A seed region can but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract and propagate bidirectionally, placing additional include regions at the ends to ensure complete coverage.
 This approach does not mean that no streamlines are discarded (seeded fibres may be terminated before fulfilling all inclusion criteria, or stray into exclusion regions) but targeted seeding and selection certainly leads to a higher number of admissible streamlines being generated in far less computational time than in the whole brain approach, while discarding unwanted streamlines on the fly reduces storage requirements.
 Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery\autocite{Yang2021}.
@@ -218,7 +218,7 @@ Typically, direct methods require some number of samples with which to train a c
 In \textcite{Hagler2009}, a fibre location and orientation atlas is created by averaging the \gls{dt} and tractography-derived information from multiple subjects and subsequently used to estimate the voxel-wise \textit{a posteriori} tract probability in a test subject.
 As orientation information was encoded by averaging \gls{dt} principal eigenvectors across subjects this approach is not optimised for crossing fibre configurations.
 The spatial probability was given by the averaged, normalised track density values from individual deterministic streamline tractography, although tracking biases discussed above mean that equating streamline density with likelihood of tract location is problematic\autocite{Rheault2019,Smith2013}.
-\textcite{Bazin2011} also proposed a direct approach based on diffusion tensor-derived priors (``Diffusion-Oriented Tract Segmentation", or DOTS) also based on \gls{dt} modelling.
+\textcite{Bazin2011} also proposed a direct approach based on diffusion tensor-derived priors (``Diffusion-Oriented Tract Segmentation'', or DOTS) also based on \gls{dt} modelling.
 Here the atlas orientation prior consisted of a single principal direction per voxel, and comparisons with the test subject data are made using Markov random field models and neighbouring tensor connectivity.
 
 More recent developments have made use of advances in data science techniques including deep learning segmentation models, of which TractSeg\autocite{Wasserthal2018} and Neuro4Neuro\autocite{Li2020} are notable examples, using \gls{fod} peaks and diffusion tensors as inputs, respectively.

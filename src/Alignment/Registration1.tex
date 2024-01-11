@@ -14,7 +14,7 @@ There are two categories of image registration.
 In global registration, a single transform applies to the entire image, preserving its topology.
 Different degrees of freedom define some commonly used terms:
 Rigid body registration comprises just translation and rotation, while affine registration further includes scaling and shearing (up to 12 degrees of freedom on $\mathbb{R}^3$).
-Following purely algebraic definition, a linear transform does not include translation, however in practice (at least in the medical imaging sphere) ``linear" and ``affine" are often used interchangeably.
+Following purely algebraic definition, a linear transform does not include translation, however in practice (at least in the medical imaging sphere) ``linear'' and ``affine'' are often used interchangeably.
 Non-linear, deformable, or diffeomorphic registrations compute local deformations on a voxel-by-voxel basis, and therefore have orders of magnitude more degrees of freedom.
 They are useful for fine-grained alignment of local structures, but many algorithms are unstable and prone to converging on local minima, making them difficult to successfully integrate into automated pipelines.
 
@@ -36,13 +36,12 @@ Here the vertical portion of the arcuate fasciculus lies lateral to the sagittal
 The similar orientations of the the \gls{af} and tapetum in this region, together with their close proximity, could lead to fibres of one being wrongly attributed to the other if the atlas is too broad (Fig. \ref{fig:tpfia}).
 
 \begin{SCfigure}[][h!]
-  \captionsetup{format=plain}
   \includesvg[width=0.6\textwidth,pretex=\ttfamily\small]{chapter_4/tpfia.svg}
   \caption{Example of potential for atlas misalignment. The \gls{af} (A) and tapetum (T) are proximal and parallel at the temporoparietal fibre intersection area. Linearly registered right \gls{af} atlas \glspl{tod} may overlap with tapetum (arrowhead).}
   \label{fig:tpfia}
 \end{SCfigure}
 
-Fortunately, such misalignment effects are small and unlikely to impact the overall segmentation quality, in part because only the margins of the atlas are likely to ``spill" into neighbouring tracts, and the low spatial probability will result in very low or sub-threshold mapped values.
+Fortunately, such misalignment effects are small and unlikely to impact the overall segmentation quality, in part because only the margins of the atlas are likely to ``spill'' into neighbouring tracts, and the low spatial probability will result in very low or sub-threshold mapped values.
 To confirm this assessment, Figure \ref{fig:nrr} shows segmentation similarity scores compared with probabilistic targeted tractography when using either affine (FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002}) or non-linear (ANTs registration package Symmetric Normalisation algorithm\autocite{Tustison2013,Avants2011}) atlas registration in 71 healthy subjects (\textit{TractoInferno} dataset, see Section \ref{sec:data} for more details).
 Note that the atlases themselves are unchanged from those previously described and used in subsequent analyses, meaning the generation of the atlases still involves only affine registration between training subjects.
 There is no discernible difference in the scores, indicating that non-linear registration does not improve the final output.

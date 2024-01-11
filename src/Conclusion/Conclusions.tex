@@ -36,12 +36,12 @@ Tract segmentation is neither of those things:
 Producing the ground truth reference annotated data is burdensome, and the likelihood that efforts may need duplicating as our understanding of \gls{wm} anatomy evolves is high.
 We have seen this in Section \ref{sec:quant} with the \textit{TractoInferno} dataset, which represents a substantial contribution to the machine learning tractography research community, but which nonetheless contains a number of poor-quality samples undetected by rigorous quality control.
 Work on single-shot and transfer learning as discussed in Section \ref{sec:ntrain} has underscored the need for methods which can easily be retrained or extended to support new tracts as and when they become relevant.
-In addition, a key concern in the translation of complex, ``black box" models is that clinical decision making must remain traceable and transparent, including when aided by computers.
+In addition, a key concern in the translation of complex, ``black box'' models is that clinical decision making must remain traceable and transparent, including when aided by computers.
 In this light, a flexible atlas, which can be re-trained if needed using only a handful of exemplar datasets and which leads to intuitive and interpretable results can play a unique role alongside machine learning.
 
 \section{Limitations and future directions}\label{sec:future}
 
-The reality of achieving reliable white matter neuronavigation with intraoperative \gls{dmri} is not simply a matter of replacing tractography with a ``better" automated tract segmentation pipeline.
+The reality of achieving reliable white matter neuronavigation with intraoperative \gls{dmri} is not simply a matter of replacing tractography with a ``better'' automated tract segmentation pipeline.
 As we have seen, the challenge of brain shift and tumour mass effect is substantial and will unlikely be solved with a single one-size-fits-all approach, given the degree of patient heterogeneity.
 
 Exponential radial tumour deformation modelling can go a long way towards extending the applicability of atlas-based tract mapping to cases involving mass effect, however, the results must be inspected carefully as the effects of many tumours are not well captured by such a simplistic model.

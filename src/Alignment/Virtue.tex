@@ -17,7 +17,7 @@ The result of this violation of the topological equivalence assumption is often 
 Deformable registration alone is thus largely insufficient for handling the anatomical mismatch problem. \autocite{Elazab2018, Visser2020}
 It has long been proposed that an acceptable registration between atlas and tumour data can only be obtained with an additional step of artificially implanting or modelling a representation of the tumour in the atlas\autocite{Cabezas2011,Mang2020}.
 This can be in the form of a seeded atlas deformation\autocite{Dawant2002}, in which a small seed is placed in the atlas before deformable registration, acting as a region of tissue which can be warped to match the full tumour in patient space.
-Alternatively, the seed can be artificially ``grown" using a biophysical or mathematical model of tumour proliferation to simulate deformation, with optional further nonlinear registration of the deformed atlas to the patient image\autocite{Cuadra2004, Zacharaki2009}.
+Alternatively, the seed can be artificially ``grown'' using a biophysical or mathematical model of tumour proliferation to simulate deformation, with optional further nonlinear registration of the deformed atlas to the patient image\autocite{Cuadra2004, Zacharaki2009}.
 Many proposed tumour deformation models aim to achieve highly accurate modelling of tumour growth dynamics and the effects on surrounding tissues, by taking into account elastic tissue properties and microscopic tumour growth modelling (see \textcite{Elazab2018} for a comprehensive review).
 Generally models will consider one or a coupling\autocite{Clatz2005,Hogea2007,Prastawa2009} of tumour cellular proliferation and infiltration into surrounding tissues using a reaction diffusion or similar framework,\autocite{Tunc2021,Scheufele2019b,Elaff2018}
 or the biomechanical forces acting between tissues.\autocite{Mohamed2006,Hogea2007a,Zacharaki2009}.
@@ -90,19 +90,19 @@ giving
 
 Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the forward deformation transform $P'=f(P)$, which maps a point in the original image $P$ to a new position $P'$ in the deformed image.
 Forward warping works well for continuous valued data such as streamlines:
-As the transformed image is also defined in continuous coordinates, each vertex can be ``pushed" to its exact location in the warped output.
-When transforming discreet image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes"), or voxels being assigned values from multiple overlapping mapped points.
-To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting"\autocite{Niklaus2020}, where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
+As the transformed image is also defined in continuous coordinates, each vertex can be ``pushed'' to its exact location in the warped output.
+When transforming discreet image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes''), or voxels being assigned values from multiple overlapping mapped points.
+To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting''\autocite{Niklaus2020}, where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
 As each voxel value will be determined by a weighted sum of all transformed values, this method requires an intermediate buffer to store all transformed points and distributed weights before the final voxel values can be determined, and filling techniques may be required to fill in any holes.
 
 \begin{figure}[h!]
   \centering
   \includesvg[width=0.7\textwidth]{chapter_4/warping.svg}
-  \caption{Forward image warping maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting" (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
+  \caption{Forward image warping maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting'' (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
   \label{fig:warp}
 \end{figure}
 
-It is therefore usually preferable, if the inverse transform $P = f^{-1}(P')$ is known, to use reverse warping, in which each grid point value in the transformed image is ``pulled" from the corresponding continuous-valued point in the source image.
+It is therefore usually preferable, if the inverse transform $P = f^{-1}(P')$ is known, to use reverse warping, in which each grid point value in the transformed image is ``pulled'' from the corresponding continuous-valued point in the source image.
 As with forward warping, the reverse mapped point $f^{-1}(P')$ will not generally fall exactly on a grid point in the source image, so the appropriate value is interpolated from the neighbourhood (Fig. \ref{fig:warp}).
 Reverse warp convention is preferred in medical image manipulation packages to smoothly deform (and resample) a gridded image, and so we need to obtain the inverse mapping $P = f^{-1}(P')$.
 The inverse function for the linear model is (as formulated in \textcite{Nowinski2005}):
@@ -149,7 +149,7 @@ where $c$ is itself a function of $\lambda$ as defined in (\ref{eq:c}). This val
   \lambda_{max} = \mathfrak{Re} \left[ \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t}) \right] +\frac{D_b}{D_t}
 \end{equation}
 
-Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified (referred to as ``adaptive $\lambda$").
+Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified (referred to as ``adaptive $\lambda$'').
 Note that $\lambda_{max}$ varies throughout the brain, being a function of the relative distances to brain and tumour surfaces for each specific $P$.
 
 \begin{SCfigure}[][h!]
