@@ -113,7 +113,7 @@
 % This set-up makes hanging labels, makes the caption text smaller
 %  than the body text, and makes the label bold.
 % Highly recommended.
-\usepackage[format=hang,font=small,labelfont=bf,labelsep=quad]{caption}
+\usepackage[format=hang,font=small,labelfont={bf,sf},labelsep=quad]{caption}
 \usepackage{subcaption}
 \usepackage[innercaption,raggedright]{sidecap}
 \sidecaptionvpos{figure}{t}
@@ -142,9 +142,10 @@
 \usepackage[parfill,indent,skip=0pt]{parskip}
 % \setlength{\parskip}{1\baselineskip plus 1pt minus 1pt}
 
+% Sans-serif, bold titles
+\usepackage[sf,bf,raggedright]{titlesec}
 % Create paragraph title format
-\usepackage{titlesec}
-\titleformat{\paragraph}[hang]{\normalfont\itshape\raggedright}{}{0pt}{\qquad}[]
+\titleformat{\paragraph}[hang]{\normalfont\itshape\raggedright\sffamily}{}{0pt}{\qquad}[]
 \titlespacing*{\paragraph}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 
 % Section header spacing
@@ -163,10 +164,6 @@
 \usepackage{sourcesanspro}
 \usepackage{libertinust1math}
 \usepackage[T1]{fontenc}
-
-% Sans-serif titles
-\usepackage{sectsty}
-\allsectionsfont{\sffamily}
 
 % For formatting matlab code specifically, **MUST COPY mcode.sty FILE INTO FOLDER**
 %\usepackage[framed,numbered,autolinebreaks,useliterate]{mcode}
