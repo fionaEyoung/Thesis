@@ -1,5 +1,5 @@
 
-\section{Neurosurgery}\label{sec:neurosurgery}
+\chapter{Neurosurgery}\label{chap:neurosurgery}
 %========================
 
 % \note{This is for all the reasons for surgery, including tumour, epilepsy DBS.
@@ -29,7 +29,7 @@ These tumours can embed themselves insidiously within the brain's functional arc
 Gliomas are classified into four \gls{who} grades, commonly split into \gls{lgg} (\gls{who} grades 1--2) and \gls{hgg} (\gls{who} grades 3--4) to reflect differences is malignancy and prognosis.
 There are many subtypes based on histological and genetic characteristics which are periodically updated\autocite{Louis2021}, but this overview will focus on the broad categories of \gls{hgg} and \gls{lgg}.
 
-\subsection{Extent of resection}\label{sec:eor}
+\section{Extent of resection}\label{sec:eor}
 
 Complete removal of all pathological tissue, perhaps counterintuitively, is not always the surgical objective.
 Though it may in many cases be the ideal outcome from an oncological perspective, this scenario would frequently be in conflict with other equally important outcome indicators, such as the preservation of surrounding brain structures and the patient's neurological wellbeing.
@@ -51,7 +51,7 @@ Semi- or fully automatic segmentation improves reproducibility\autocite{Ertl-Wag
 Estimates of \gls{eor} can also be compromised by post-operative brain tissue shifting and obscuring the actual volume of resected tumour \autocite{Schucht2014a}, while microscopic tumour cell invasion means that complete resection, as viewed either on imaging or by intraoperative visual assessment, does not necessarily mean no tumour residue remains\autocite{Yordanova2017}.
 Finally, while there is the most focus on reporting relative reductions in tumour volume as a percentage of original size, more recent studies have argued that absolute residual tumour volume is as, if not more relevant for determining postoperative outcomes\autocite{Ius2012,Rincon-Torroella2019,Smith2008,Karschnia2021}.
 
-\subsection{Oncological and neurological outcomes: Necessarily in opposition?}
+\section{Oncological and neurological outcomes: Necessarily in opposition?}
 
 Inconsistent reporting of \gls{eor} is one factor complicating the study of its effects on clinical outcomes, even as there is widespread agreement on the importance of studying those effects\autocite{Rincon-Torroella2019,Wykes2021,Weller2021}.
 % \note{defs: lgg = grades 1--2, hgg = grades 3--4, glioblastoma = grade 4 glioma}
@@ -108,7 +108,7 @@ The next section will explore some of those advanced technologies instrumental i
 
 % Overall view: moving goal posts, as changes in classifications of glioma and new understanding of mutations and associated risk, changing priorities from topological to hodological mapping and considering neuroplasticity, selection bias, ...
 
-\subsection{Surgical planning and preoperative imaging}
+\section{Surgical planning and preoperative imaging}
 
 Tumours can interact with their surroundings in a number of ways, depending on their nature and location.
 Some tumours, including some \glspl{lgg} and meningiomas, are fully encapsulated and displace surrounding brain as they grow.
@@ -134,7 +134,7 @@ Nevertheless, \gls{dti} and streamline tractography have brought dramatic improv
 This potential was recognised almost immediately, with \gls{dti} and early tractography quickly making their way into clinical practice \autocite{Lee2001,Mori2002a,Nimsky2005}.
 % \paragraph*{White matter mapping}
 %%%% --! The below may be picked up as plagiarism; heavily copied from HBM manuscript; check academic regulations !--
-In the intervening years, research imaging has largely transitioned to the multi-fibre models and probabilistic algorithms described in Section \ref{sec:wms}, but in clinical practice tractography is frequently still based on \gls{dt} fibre orientation models \autocite{Toescu2020, Yang2021} and deterministic tracking algorithms.
+In the intervening years, research imaging has largely transitioned to the multi-fibre models and probabilistic algorithms described in Chapter \ref{chap:neuroimaging}, but in clinical practice tractography is frequently still based on \gls{dt} fibre orientation models \autocite{Toescu2020, Yang2021} and deterministic tracking algorithms.
 As a notable example, popular neuronavigation platform provider Brainlab's iPlan\textregistered{} (single tensor)\autocite{Brainlab2012} and Elements (dual tensor)\autocite{Sollmann2020a} Fibre Tracking applications (Brainlab AG, Munich, Germany) use a version of the probabilistic \gls{fact} algorithm \autocite{Mori1999}.
 
 Regardless of the particular combination of fibre model, algorithm and tracking criteria, streamline tractography is compromised by weaknesses that can lead to flawed results or interpretations if not accounted for\autocite{Rheault2020, Schilling2022, Schilling2019}.
@@ -157,7 +157,7 @@ There is evidence that this shift is gradually underway, at least in the context
   \label{fig:nav}
 \end{SCfigure}
 
-\subsection{Neuronavigation and brain shift}
+\section{Neuronavigation and brain shift}
 
 During the surgical procedure itself, multimodal information streams continue to guide the safest possible resection.
 Functional monitoring with \gls{des} is a crucial component of neurosurgical workflows and widely considered the gold standard for localising neural function after craniotomy.
@@ -210,7 +210,7 @@ Ultimately, the most accurate 3D patient anatomy information can only be obtaine
 
 % Options without intraop imaging rely heavily on computationally modelling, with either limited accuracy or high computational time
 
-\subsection{Intraoperative imaging}
+\section{Intraoperative imaging}
 
 To mitigate the effects of brain shift on neuronavigation accuracy, new structural and functional guidance information can be acquired intraoperatively.
 Once more, different modalities offer different strengths and weaknesses.

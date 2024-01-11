@@ -1,12 +1,7 @@
-% \chapter{Theory and Background}
-% \label{chapterlabel1}
+\chapter{Neuroanatomy}
+\label{chap:neuroanatomy}
 
-\chapter{Theory fundamentals}
-\label{theory}
-
-\section{Neuroanatomy: Micro to macro}
-
-\subsection{Cells of the brain}
+\section{Cells of the brain}
 
 The building blocks of living complex organisms begin at the level of molecules and atoms, through macromolecules such as proteins and lipids, organelles, cells, tissues, organs and finally whole organisms.
 For the purposes of this thesis, we can start at the cellular level and focus on a single organ:
@@ -38,7 +33,7 @@ Alongside these three classes of macroglia are the microglia, the resident immun
   \label{fig:neuron}
 \end{figure}
 
-\subsection{Neural signalling}
+\section{Neural signalling}
 
 Transmission of information in the brain is both electrical and chemical.
 Neural impulses begin their life at the axon hillock, the transition between the soma and the axon.
@@ -67,7 +62,7 @@ Axons may branch to synapse with many targets, and each neuron may itself receiv
 Each impulse cases a slight de- or hyperpolarisation of the membrane, which diffuses towards the soma and axon hillock.
 It's the cumulative effects of all those impulses that determine whether a neuron fires, transmitting a new action potential down its axon.
 
-\subsection{Macroscopic neuroanatomy}
+\section{Macroscopic neuroanatomy}
 
 The human brain is divided macroscopically into the hind-, mid- and forebrain, which are densely interconnected via a system of axon fibre bundles (``tracts").
 With reference to a particular brain structure or functional hub, incoming connections from other parts of the brain or spinal cord are called \textit{afferent}, compared to outgoing \textit{efferent} fibres.
@@ -112,7 +107,7 @@ From there, \gls{csf} flows into the spaces surrounding the brain and spinal cor
 \end{figure}
 
 
-\subsection{Functional organisation: From topology to hodology}\label{sec:hodology}
+\section{Functional organisation: From topology to hodology}\label{sec:hodology}
 
 Since antiquity scientists have suspected that different cognitive functions, rather than being equally distributed throughout the brain, arise from distinct locations.
 While early incarnations of this idea may have featured wildly unfounded and mistaken conclusions regarding the functions that can be ascribed to specific localities, the underlying principle of functional localisation has been subsequently borne out and continuously refined.
@@ -155,7 +150,7 @@ After all, the axons in white matter are extensions of the cells that make up gr
 Indeed, far from being a mere philosophical question about under what framework we study and write about the brain, the so-called hodological view (from Greek \textit{hodos} ``path") has profound translational implications.
 Traditional localisationist approaches to neurosurgery hold, crudely put, that tumours seated within or in close association to ``eloquent" areas of cortex subserving well studied functions of language, low-level sensory processing and movement, are fundamentally inoperable.
 Meanwhile tumours in areas of ``non-eloquent" cortex with no known overt functional correlates can be radically resected with few substantial neurological consequences.
-Much of the study into and tools for functional preservation of so-called eloquent areas that will be discussed in Chapter \ref{sec:neurosurgery} adopts this framing.
+Much of the study into and tools for functional preservation of so-called eloquent areas that will be discussed in Chapter \ref{chap:neurosurgery} adopts this framing.
 But the postoperative deterioration in neurocognitive function and quality of life often experienced by patients undergoing surgery for epilepsy or tumours in ``non-eloquent" areas flies in the face of such thinking.
 \autocite{Satoer2017,Mandonnet2017a,Rijnen2019,Herbet2019,Vigren2020a,Dadario2021}
 Furthermore, emerging evidence suggests adopting a hodological approach to neurosurgery can inform successful resection of tumours from areas typically considered inoperable\autocite{Dadario2021,DeBenedictis2011b,Suzuki2023}.
@@ -171,13 +166,14 @@ As such, while the methodologies and experiments presented in the thesis are roo
   \label{fig:xkcd}
 \end{figure}
 
-\section{MRI Physics}
+\chapter{MRI Physics}
+\label{chap:NMR}
 
 The study of living human neuroanatomy at the millimetre and macro scale in unprecedented detail was unlocked in the latter 20th century by the advent of \gls{mri} techniques.
 To understand the workings of the ``Wonder Machine" (in the words of podcasters Josh Clark and Charles W. ``Chuck" Bryant), we have to leave behind our microscopic neurons and enter the realm of atomic and subatomic particles to cover the mechanisms of \gls{nmr}.
 Throughout this section, vector quantities and their associated scalar magnitudes will be formatted as $\mathbf{a}$ and $a$ respectively.
 
-\subsection{Nuclei and spin}
+\section{Nuclei and spin}
 
 \Gls{nmr} is a phenomenon and a technique, in which the interactions between atomic nuclei and external magnetic fields produce characteristic electromagnetic signals.
 Atomic nuclei are made up of protons and neutrons (collectively termed nucleons) held together, despite the electrostatic forces repelling the positively charged protons, by the nuclear force, or residual strong force.
@@ -216,7 +212,7 @@ The spin magnetic moments also precess about the external field in a phenomenon 
   \caption{\gls{mri} depends on quantum interactions between nuclei and magnetic fields. \textbf{a.} Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$ around external magnetic field $\mathbf{B}_0$. \textbf{b.} Immediately after 90\textdegree \gls{rf} excitation into the $xy$-plane, the bulk magnetisation $\mathbf{M}$ relaxes back to equilibrium where $\mathbf{M}_z=\mathbf{M}_0$ and $\mathbf{M}_{xy}=0$ in a spiral patter, inducing an oscillating electrical signal in the receiver equipment.}\label{fig:larmor}
 \end{figure}
 
-\subsection{Resonance and relaxation}
+\section{Resonance and relaxation}
 
 % \note{Basics of resonance, magnetisation, spin-spin / spin-lattice relaxation}
 %
@@ -250,7 +246,7 @@ Interactions between spins and their molecular environment cause de-phasing of t
 where the recovery rate of $M_z$ and the rate of decay of $M_{xy}$ are described by the time constants $T_1$ and $T_2$ respectively, and each depend on the specific molecular environment and are thus tissue-dependent quantities.
 It is the varying values of $T_1$ and $T_2$, as well as the overall differences in \glspl{pd} between tissues which lend contrast to MR images.
 
-\subsection{Signal echos}\label{sec:echos}
+\section{Signal echos}\label{sec:echos}
 
 Immediately after application of the \gls{rf} excitation pulse, magnetisation will return to equilibrium in a spiral pattern (Fig. \ref{fig:larmor}) inducing the rapidly decaying \gls{fid} signal.
 Due in part to its short lifetime, the simple \gls{fid} is not particularly useful on its own for biological imaging.
@@ -274,7 +270,7 @@ After a time TE/2 the gradient polarity is reversed, and with it the rates of de
 Spins previously precessing fastest are now the slowest and vice versa, such that after an equal amount of time TE/2 under the reversed gradients the gradient-induced dephasing effects are reversed, producing a signal echo at TE.
 Since the reversal of gradient polarity effects only the gradient coil generated fields, the dephasing caused by local inhomogeneities in the $B_0$ field cannot be reversed, and the resulting signal is $T_2$* weighted.
 
-\subsection{Spatial encoding}
+\section{Spatial encoding}
 
 The signal induced in an \gls{mri} receiver coil is a complex superposition of contributions from spins located throughout the excited sample.
 To generate a three dimensional image from this time-varying electrical current, the individual signal components need to be separated and attributed to positions in space.
@@ -316,7 +312,7 @@ To reconstruct an image in the spatial domain, two Fourier transforms are comput
   \label{fig:kspace}
 \end{figure}
 
-\subsection{Pulse sequences and contrast}
+\section{Pulse sequences and contrast}
 
 As we have seen, MR images are acquired by measuring signals within the spatial frequency dimension, $k$-space, from which we can retrieve the spatial image via a \gls{2dft} operation.
 Pulse sequences, meaning specific arrangements, durations and magnitudes of the \gls{rf} pulses, field gradients, and signal readout, encode the trajectory and resolution in which data-points in $k$-space are measured (Fig. \ref{fig:mprage}).
@@ -360,7 +356,7 @@ The only tool available for non-invasively imaging the microscopic structure of 
   \label{fig:ortho}
 \end{figure}
 
-\subsection{Diffusion weighted \gls{mri}}\label{sec:dmri}
+\section{Diffusion weighted \gls{mri}}\label{sec:dmri}
 
 % \note{First describe diffusion in general but stick to tissue, i.e. restricted diffusion. Cover the different types of diffusion in different tissues in the brain, timescales etc.
 % Then look at the mechanism of \gls{dmri} acquisition, pulse sequence and parameters e.g. b values.
@@ -411,7 +407,7 @@ Modern \gls{dmri} sequences vary in the precise pattern of diffusion weighting g
 In the Stejskal-Tanner sequence we have $b = \gamma^2 G_d^2 \delta^2 (\Delta-\delta/3)$.
 The choice of $b$-value is highly influential on the final image, and typically values in the range 600--3000~s~mm$^{-2}$ are used.
 Higher $b$-values reflect stronger diffusion sensitisation, but also produce far noisier images, require longer echo times, and require more advanced scanner hardware and gradient instrumentation\autocite{Tournier2011}.
-Values up to 1000~s~mm$^{-2}$ are more common in routine and clinical settings, balancing optimal diffusion dependent contrast with acceptable \gls{snr}, while higher values are included in more advanced research methods\autocite{Roberts2007}, where the longer diffusion times provide higher sensitivity to tissue-specific diffusion processes and better angular resolution for the advanced imaging techniques described in Section \ref{sec:wms}.
+Values up to 1000~s~mm$^{-2}$ are more common in routine and clinical settings, balancing optimal diffusion dependent contrast with acceptable \gls{snr}, while higher values are included in more advanced research methods\autocite{Roberts2007}, where the longer diffusion times provide higher sensitivity to tissue-specific diffusion processes and better angular resolution for the advanced imaging techniques described in Chapter \ref{chap:neuroimaging}.
 Acquisitions may also combine multiple $b$-values in a so-called ``multi-shelled" scheme, which can tease apart the effects of hindered and restricted diffusion compartments\autocite{Clark2002,Assaf2005}.
 
 A single \gls{dmri} volume only applies a diffusion weighted gradient of fixed strength along a single orientation, with all signal samples reflecting the diffusivity along that specific direction.
@@ -424,7 +420,7 @@ Alternatively, a map of \textit{average diffusion coefficient} (\glsentryshort{a
 \begin{equation}
   \text{ADC} = -b^{-1} ln (\frac{S_{tw}}{S_0}). \label{eq:adc}
 \end{equation}
-In modern acquisitions, including those required for the high angular resolution techniques we will encounter in Section \ref{sec:wms}, anywhere from 12 to 100s of directions are measured, and the number of scans may be additionally multiplied by repeating and averaging signals to boost \gls{snr}.
+In modern acquisitions, including those required for the high angular resolution techniques we will encounter in Chapter \ref{chap:neuroimaging}, anywhere from 12 to 100s of directions are measured, and the number of scans may be additionally multiplied by repeating and averaging signals to boost \gls{snr}.
 Consequently, \gls{dmri} scan times can be exceedingly long, from several minutes for clinical sequences into hours for advanced research studies, prompting efforts to reduce scan time by means of accelerated and parallel imaging techniques.
 
 \subsection{Representing spherical functions}

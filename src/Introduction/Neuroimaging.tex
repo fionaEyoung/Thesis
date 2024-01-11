@@ -1,11 +1,7 @@
-\chapter{Review of Literature}
-\label{chap:review}
+\chapter{Diffusion MRI analysis}\label{chap:neuroimaging}
 
 Having given a brief introduction to the principles neuroanatomy and \gls{dmri} physics and image formation, we will turn now to the modern developments in applying \gls{dmri} to qualitative and quantitative analysis of \gls{wm} organisation.
-This chapter will take us through early to state-of-the art uses of \gls{dmri} as a \gls{wm} imaging tool and outstanding challenges, followed by a review of key relevant concepts in neurosurgery.
-
-\section{Diffusion MRI analysis}\label{sec:wms}
-%==================================
+This chapter will take us through early to state-of-the art uses of \gls{dmri} as a \gls{wm} imaging tool and outstanding challenges.
 
 Though the tools for studying the structure and function of neural connectivity are numerous, \gls{dmri} remains the only available technique capable of investigating microscopic \gls{wm} structure of the entire human brain \textit{in vivo}.
 % This is thanks to the \note{fibrous} organisation of \gls{wm} fibres, which group together in bundles forming a restrictive diffusion environment in which axon membranes and myelin sheaths form barriers to diffusing water molecules.
@@ -23,7 +19,7 @@ Collectively, these scalar parameters are fit from a family of microstructural m
 These parameters could capture virtual cytohistological information and even serve as biomarkers for disease\autocite{Alexander2008}.
 For the purposes of studying macroscopic brain connectivity and the course and organisation of individual \gls{wm} fibre tracts, the key information of interest to be determined from raw \gls{dmri} is the distribution of axonal orientations within each voxel described by a \gls{fod}.
 
-\subsection{Tissue microstructure  and fibre orientation modelling}
+\section{Tissue microstructure  and fibre orientation modelling}
 
 
 The first approach for modelling fibre orientations came in the form of \gls{dti}, which remains one of the dominant diffusion models in many applications today, particularly in clinical contexts.
@@ -92,7 +88,7 @@ Furthermore, separation of the isotropic signal contributions greatly improves t
   \label{fig:corwm}
 \end{SCfigure}
 
-\subsection{Streamline tractography}\label{sec:tractography}
+\section{Streamline tractography}\label{sec:tractography}
 
 % \note{Discuss as the mainstay of white matter bundle segmentation.
 % Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
@@ -165,7 +161,7 @@ For example, strategies to prevent streamlines from ``hopping" onto intersecting
 Due to streamline tractography's locally oriented and step-by-step nature, errors and missteps accumulate rapidly with little to no opportunity to correct them, resulting in some wildly implausible streamlines.
 Attempts to address this blindness to biophysical reality are at the focus of much of modern tractography research\autocite{Bastiani2017,Rheault2019,Aydogan2021}, as the consequences of these ongoing challenges to connectivity research and neurology are substantial\autocite{Schilling2019, Yang2021, Grisot2021}.
 
-\subsection{Segmenting white matter tracts with tractography}
+\section{Segmenting white matter tracts with tractography}
 
 The functional division of white matter into distinct tracts is of great consequence to neuroscience, psychology and neurology in their efforts to analyse brain structure and function, and as we will see later, identifying tracts is also of vital importance in neurosurgery.
 It follows that the spatial delineation of individual tracts is a key step in many \gls{dmri} analysis pipelines.
@@ -214,7 +210,7 @@ Finally, due to a combination of the different computational methods available, 
 In view of these limitations, some in the field are continuing efforts to improve streamline tractography with novel tracking algorithms, finding new ways to incorporate anatomical priors and developing more powerful streamline filtering, clustering and selection strategies.
 Others are looking towards white matter segmentation solutions that do not rely on tractography at the point of application, but instead produce voxel-wise tract segmentations directly from \gls{dmri} or \gls{fod} data.
 
-\subsection{Streamline-free white matter imaging}
+\section{Streamline-free white matter imaging}
 
 There have been numerous works addressing the \gls{wm} tract identification task as a classic voxel-wise segmentation problem, utilising techniques including multi-label supervised clustering \autocite{Ratnarajah2014}, level-set and front propagation\textcite{Nazem-Zadeh2011, Hao2014}, and deep learning for direct segmentation from fibre orientation representations \autocite{Wasserthal2018,Li2020}.
 Typically, direct methods require some number of samples with which to train a classifier, atlas, Bayesian model or neural network.

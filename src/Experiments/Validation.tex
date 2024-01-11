@@ -14,7 +14,7 @@ The purpose of this validation is not to determine which method is best, as inde
 \label{sec:methods}
 
 We'll consider three alternative tract segmentation approaches and compare each with tractfinder: Probabilistic streamline tractography, representing the current standard, the deep learning direct segmentation technique TractSeg, and a ``naive" atlas registration.
-There are numerous alternative techniques, as detailed in Section \ref{sec:wms}, many based on streamline clustering or classification, or automatic \gls{roi} registration, including White Matter Analysis (WMA)\autocite{ODonnell2017}, RecoBundles \autocite{Garyfallidis2018}, Classifyber\autocite{Berto2021}, and Tracula\autocite{Yendiki2011}.
+There are numerous alternative techniques, as detailed in Chapter \ref{chap:neuroimaging}, many based on streamline clustering or classification, or automatic \gls{roi} registration, including White Matter Analysis (WMA)\autocite{ODonnell2017}, RecoBundles \autocite{Garyfallidis2018}, Classifyber\autocite{Berto2021}, and Tracula\autocite{Yendiki2011}.
 We will not be comparing tractfinder with all of these alternatives because such a comparison would hardly provide any additional useful information:
 In those methods which rely on a predefined atlas of streamlines or \glspl{roi}, the anatomical assumptions embedded in those predefinitions would influence the similarity metrics more than any methodological differences, as indeed they do for the comparisons with TractSeg that follow.
 Furthermore, many of those alternatives have already been systematically compared with TractSeg\autocite{Wasserthal2018,Berto2021}, and so in comparing tractfinder with the latter we can infer relative performance against them.
