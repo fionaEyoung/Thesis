@@ -427,32 +427,10 @@ Alternatively, a map of \textit{average diffusion coefficient} (\glsentryshort{a
 In modern acquisitions, including those required for the high angular resolution techniques we will encounter in Section \ref{sec:wms}, anywhere from 12 to 100s of directions are measured, and the number of scans may be additionally multiplied by repeating and averaging signals to boost \gls{snr}.
 Consequently, \gls{dmri} scan times can be exceedingly long, from several minutes for clinical sequences into hours for advanced research studies, prompting efforts to reduce scan time by means of accelerated and parallel imaging techniques.
 
-\subsection{Echo planar imaging}
-\label{sec:epi}
-
-Aside from the cost and practicalities of the longer scans needed for \gls{dmri}, there is also the increased risk of motion artefacts as subjects tire or become uncooperative in the scanner.
-To achieve orders of magnitude shorter scan times than with conventional sequences in which a single step of phase encoding (or single line in $k$-space) is sampled per excitation, \gls{dmri} scans usually use a fast imaging technique called \gls{epi}, in which all phase encoding steps are acquired after only a single \gls{rf} excitation.
-In one example of an \gls{epi} pulse sequence, the phase and frequency encoding gradients are switched on to move the signal to a corner of $k$-space immediately prior to readout, then the readout gradient alternates polarity while the \gls{pe} gradient is ``blipped" on each switch\autocite{Wielopolski1998}.
-The result is a stepped zig-zag traversal of all of $k$-space during the readout of a single signal echo.
-Measuring enough samples in the extremely short time available before the signal decays requires very strong and rapidly switching gradients, placing significant demands on scanner hardware\autocite{Bowtell1998}.
-
-\begin{figure}
-  \includesvg[width=\textwidth]{chapter_1/dwepi.svg}
-  \caption{Diffusion weighted \gls{epi} pulse sequence diagram, with diffusion gradients, drawn in dark grey to differentiate them from orthogonal slice, phase and frequency encoding, either side of a 180\textdegree \gls{rf} inversion pulse. All orthogonal gradients may be combined to produce diffusion weighting along an arbitrary direction. An entire slice of $k$-space is acquired from a single echo train, using a strong switching frequency encoding gradient $G_f$ to encode lines along $k_x$, combined with ``blipped" phase encoding gradients $G_p$ to advance the signal through $k_y$.}
-  \label{fig:dwepi}
-\end{figure}
-
-Fitting the entire image readout into a single magnetisation decay period results in relatively long total acquisition times per excitation.
-The pixel bandwidth in the \gls{pe} direction is the inverse of this total acquisition time, and the resulting low pixel bandwidth is associated with particular imaging artefacts.
-Local differences in magnetic susceptibility within the sample cause field inhomogeneities, leading off-resonance phase shifts geometric image distortions termed \textit{susceptibility artefacts} \autocite{Fischer1998}.
-These are particularly strong at interfaces between substances with large susceptibility differences, such as the air--tissue boundaries around the sinuses in the human head, and can compromise the results of a neuroimaging experiment if not appropriately corrected for.
-
-\section{Representing spherical functions}
+\subsection{Representing spherical functions}
 \label{sec:sh}
 
-\note{make the step from the tensor more explicit}
-
-Studying macroscopic \gls{wm} structure requires describing quantities distributed in the three dimensional angular domain.
+Diffusion signal analysis and studying macroscopic \gls{wm} structure require describing quantities distributed in the three dimensional angular domain.
 If the shape of the function is not generally known, then an arbitrary function may be represented in a suitable function space, defined by a set of orthogonal basis functions.
 Analogous to the use of the basis vectors $\mathbf{e}_1=(1\,0\,0)^T, \mathbf{e}_2=(0\,1\,0)^T, \mathbf{e}_3=(0\,0\,1)^T$ to represent any other vector
 $\mathbf{v}$ in $R^3$ as $\mathbf{v} =  (v_x\,v_z\,v_z)^T = v_x\mathbf{e}_1 + v_y\mathbf{e}_2 + v_z\mathbf{e}_3$,
@@ -491,3 +469,23 @@ An arbitrary function $f(\theta,\phi)$ defined on the sphere can then be defined
 with $j = \frac{1}{2}l(l+1) + m$.
 In practical applications, only a finite number $N = \frac{1}{2}(l_{\text{max}}+1)(l_{\text{max}}+2)$ of coefficients $c_{lm}$ can be determined, up to a maximum order $l_{\text{max}}$.
 A higher maximum order can represent more angular detail, however due to this truncation our representations as a finite series can only ever be close approximations of the full function $f$.
+
+\subsection{Echo planar imaging}
+\label{sec:epi}
+
+Aside from the cost and practicalities of the longer scans needed for \gls{dmri}, there is also the increased risk of motion artefacts as subjects tire or become uncooperative in the scanner.
+To achieve orders of magnitude shorter scan times than with conventional sequences in which a single step of phase encoding (or single line in $k$-space) is sampled per excitation, \gls{dmri} scans usually use a fast imaging technique called \gls{epi}, in which all phase encoding steps are acquired after only a single \gls{rf} excitation.
+In one example of an \gls{epi} pulse sequence, the phase and frequency encoding gradients are switched on to move the signal to a corner of $k$-space immediately prior to readout, then the readout gradient alternates polarity while the \gls{pe} gradient is ``blipped" on each switch\autocite{Wielopolski1998}.
+The result is a stepped zig-zag traversal of all of $k$-space during the readout of a single signal echo.
+Measuring enough samples in the extremely short time available before the signal decays requires very strong and rapidly switching gradients, placing significant demands on scanner hardware\autocite{Bowtell1998}.
+
+\begin{figure}
+  \includesvg[width=\textwidth]{chapter_1/dwepi.svg}
+  \caption{Diffusion weighted \gls{epi} pulse sequence diagram, with diffusion gradients, drawn in dark grey to differentiate them from orthogonal slice, phase and frequency encoding, either side of a 180\textdegree \gls{rf} inversion pulse. All orthogonal gradients may be combined to produce diffusion weighting along an arbitrary direction. An entire slice of $k$-space is acquired from a single echo train, using a strong switching frequency encoding gradient $G_f$ to encode lines along $k_x$, combined with ``blipped" phase encoding gradients $G_p$ to advance the signal through $k_y$.}
+  \label{fig:dwepi}
+\end{figure}
+
+Fitting the entire image readout into a single magnetisation decay period results in relatively long total acquisition times per excitation.
+The pixel bandwidth in the \gls{pe} direction is the inverse of this total acquisition time, and the resulting low pixel bandwidth is associated with particular imaging artefacts.
+Local differences in magnetic susceptibility within the sample cause field inhomogeneities, leading off-resonance phase shifts geometric image distortions termed \textit{susceptibility artefacts} \autocite{Fischer1998}.
+These are particularly strong at interfaces between substances with large susceptibility differences, such as the air--tissue boundaries around the sinuses in the human head, and can compromise the results of a neuroimaging experiment if not appropriately corrected for.
