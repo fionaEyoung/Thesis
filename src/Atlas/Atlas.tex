@@ -261,18 +261,11 @@ Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsol
 
 \begin{figure}[htb!]
   \centering
-  \begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=\textwidth]{chapter_2/OFPs1.png}
-  \end{subfigure}\hfill%
-  \begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=\textwidth]{chapter_2/cst_tod_unfiltered.png}
-  \end{subfigure}\hfill%
-  \begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=\textwidth]{chapter_2/cst_tod_filtered.png}
-  \end{subfigure}%
-  \caption{Example orientational false positive streamlines, isolated from a \gls{cst} bundle (left).
-  View is from a superior vantage. Ascending streamlines following the CST abruptly turn along an anterior-posterior direction to follow the course of the intersecting superior longitudinal fasciculus, before again turning back towards the motor cortex.
-  Atlas \glspl{tod} without (middle) and after (right) filtering out OFPs.}
+  \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_3/ofps.svg}
+  \caption{Orientational false positives (OFPs) are streamlines that remain within the target bundle volume, but partially follow the path of a different tract.
+  \textbf{a.} Example orientational false positive streamlines, isolated from a \gls{cst} bundle, viewed from a superior vantage. Ascending streamlines following the CST abruptly turn along an anterior-posterior direction to follow the course of the intersecting superior longitudinal fasciculus, before again turning back towards the motor cortex.
+  \textbf{b.} Atlas \glspl{tod} before filtering out OFPs, with green lobes that do not correspond the expected \gls{cst} orientations.
+  \textbf{c.} Atlas \glspl{tod} after filtering, showing only directions corresponding to the \gls{cst}. A = anterior, P = posterior.}
   \label{fig:ofps}
 \end{figure}
 
@@ -377,11 +370,10 @@ Atlases have been created for the most commonly indicated pathways in neurosurgi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure*}[htb!]
   \centering
-  \makebox[\linewidth][c]{%
-    \includegraphics[width=0.27\textwidth,align=c]{chapter_3/cst_tod.png}%
-    \includegraphics[width=0.3\textwidth,align=c]{chapter_3/or_tod.png}%
-    \includegraphics[width=0.35\textwidth,align=c]{chapter_3/af_tod.png}%
-    \includegraphics[width=0.25\textwidth,align=c]{chapter_3/ifo_tod.png}}
+    \includegraphics[width=0.45\textwidth,align=c]{chapter_3/cst_tod.png}%
+    \includegraphics[width=0.55\textwidth,align=c]{chapter_3/or_tod.png}
+    \includegraphics[width=0.55\textwidth,align=c]{chapter_3/af_tod.png}%
+    \includegraphics[width=0.45\textwidth,align=c]{chapter_3/ifo_tod.png}
   \caption{Tract orientation atlases, composite images projected onto coronal (CST), axial (OR, IFOF) and sagittal (AF) views in MNI152 reference space. Reproduced from \textcite{Young2024}}\label{fig:atlases}
 \end{figure*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
