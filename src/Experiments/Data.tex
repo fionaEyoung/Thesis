@@ -62,9 +62,9 @@ For fully acquisition details see Table \ref{tab:datasets}.
 All clinical scans used in the systematic comparison with benchmark methods involved non-deforming tumours, in the sense that any lesions did not appreciably displace white matter structures from their typical positions.
 Further \gls{gosh} and \gls{nhnn} scans with substantial tumours were analysed on a case-by case basis, as the low sample size and high tumour heterogeneity precluded a systematic quantitative evaluation.
 
-Each \gls{dmri} scan was minimally preprocessed with \gls{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction,\autocite{Zhang2001, Smith2004} as implemented in MRtrix3 \autocite{Tournier2019}.
+Each \gls{dmri} scan was minimally preprocessed with \gls{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction\autocite{Zhang2001, Smith2004}, as implemented in MRtrix3 \autocite{Tournier2019}.
 Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} (MRtrix3 v3.0.3 and FMRIB Software Library (FSL, \url{https://fsl.fmrib.ox.ac.uk}) v6.0) applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
-No EPI distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times.\autocite{Yang2022}
+No EPI distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times\autocite{Yang2022}.
 
 \subsection{BTCD}
 \label{sec:data_btcd}

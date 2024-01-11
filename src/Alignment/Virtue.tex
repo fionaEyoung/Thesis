@@ -8,20 +8,20 @@ In order to correct for displacement of white matter tracts due to space-occupyi
 
 Anatomical non-correspondence between subject and template images caused by space-occupying lesions poses a substantial challenge to the use of atlas-based white matter segmentation methods in clinical subjects.
 While nonlinear deformation tools can produce accurate registration in clinical images, they require usually manual adjustment of many input and regularisation parameters on a case by case basis, and a robust automation of this process is not available to best knowledge.
-More significantly, in the case of registration between a normative template and a scan with a brain tumour, a fundamental assumption of many registration algorithms, that of topological equivalence between the two images, does not hold.\autocite{Zacharaki2009}
+More significantly, in the case of registration between a normative template and a scan with a brain tumour, a fundamental assumption of many registration algorithms, that of topological equivalence between the two images, does not hold\autocite{Zacharaki2009}.
 The core of the problem is that one image---the template---depicts the anatomy of an average, healthy brain, and the other that of a diseased brain harbouring a tumour, presenting two potential scenarios.
 Either the lesion exists \textit{in addition} to all the structures and tissue expected of a healthy brain, which have been displaced or compressed to accommodate it, or it has \textit{replaced} brain landmarks or rendered them otherwise unrecognisable through the effects of oedema or differing MR properties between tumour and healthy brain tissue.
 In either case, a non-linear registration algorithm is tasked with finding a mapping between two images with different sets of anatomical landmarks, with finding anatomical correspondence between tissue in one image which is nonexistent in the other.
 The result of this violation of the topological equivalence assumption is often ridiculously contorted images, and particularly in the peritumoural zone, which is rather problematic for neurosurgical applications.
 
 Deformable registration alone is thus largely insufficient for handling the anatomical mismatch problem. \autocite{Elazab2018, Visser2020}
-It has long been proposed that an acceptable registration between atlas and tumour data can only be obtained with an additional step of artificially implanting or modelling a representation of the tumour in the atlas.\autocite{Cabezas2011,Mang2020}
-This can be in the form of a seeded atlas deformation,\autocite{Dawant2002} in which a small seed is placed in the atlas before deformable registration, acting as a region of tissue which can be warped to match the full tumour in patient space.
-Alternatively, the seed can be artificially ``grown" using a biophysical or mathematical model of tumour proliferation to simulate deformation, with optional further nonlinear registration of the deformed atlas to the patient image.\autocite{Cuadra2004, Zacharaki2009}
+It has long been proposed that an acceptable registration between atlas and tumour data can only be obtained with an additional step of artificially implanting or modelling a representation of the tumour in the atlas\autocite{Cabezas2011,Mang2020}.
+This can be in the form of a seeded atlas deformation\autocite{Dawant2002}, in which a small seed is placed in the atlas before deformable registration, acting as a region of tissue which can be warped to match the full tumour in patient space.
+Alternatively, the seed can be artificially ``grown" using a biophysical or mathematical model of tumour proliferation to simulate deformation, with optional further nonlinear registration of the deformed atlas to the patient image\autocite{Cuadra2004, Zacharaki2009}.
 Many proposed tumour deformation models aim to achieve highly accurate modelling of tumour growth dynamics and the effects on surrounding tissues, by taking into account elastic tissue properties and microscopic tumour growth modelling (see \textcite{Elazab2018} for a comprehensive review).
 Generally models will consider one or a coupling\autocite{Clatz2005,Hogea2007,Prastawa2009} of tumour cellular proliferation and infiltration into surrounding tissues using a reaction diffusion or similar framework,\autocite{Tunc2021,Scheufele2019b,Elaff2018}
-or the biomechanical forces acting between tissues.\autocite{Mohamed2006,Hogea2007a,Zacharaki2009}
-The resulting algorithms are often mathematically complex and implemented using finite element methods,\autocite{Elazab2018} require optimisation of tumour parameters through problem inversion or by other means \autocite{Mohamed2006, Zacharaki2009, Mang2020} and take anywhere between 1 and 36 hours to run, even on high performance computing setups.\autocite{Zacharaki2009,Bauer2012,Gooya2012,Bauer2013,Mang2012}
+or the biomechanical forces acting between tissues.\autocite{Mohamed2006,Hogea2007a,Zacharaki2009}.
+The resulting algorithms are often mathematically complex and implemented using finite element methods\autocite{Elazab2018}, require optimisation of tumour parameters through problem inversion or by other means \autocite{Mohamed2006, Zacharaki2009, Mang2020} and take anywhere between 1 and 36 hours to run, even on high performance computing setups.\autocite{Zacharaki2009,Bauer2012,Gooya2012,Bauer2013,Mang2012}
 This is entirely reasonable for studies in which accuracy is a far greater priority than speed.
 Typical applications of tumour deformation modelling include intra-patient longitudinal studies of tumour growth, and inter-patient registration and spatial normalisation for atlas-based segmentation or statistical analysis across patient populations (see \textcite{Bauer2013} and \textcite{Cabezas2011} for overviews).
 Given the time constraints of intraoperative imaging and the practical constraints of the computing capacity which can reasonably be assumed to be available in a clinical setup, the aim for this project was to achieve an estimate of tract displacement with low computational complexity.
@@ -92,7 +92,7 @@ Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the forward defor
 Forward warping works well for continuous valued data such as streamlines:
 As the transformed image is also defined in continuous coordinates, each vertex can be ``pushed" to its exact location in the warped output.
 When transforming discreet image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes"), or voxels being assigned values from multiple overlapping mapped points.
-To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting",\autocite{Niklaus2020} where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
+To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting"\autocite{Niklaus2020}, where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
 As each voxel value will be determined by a weighted sum of all transformed values, this method requires an intermediate buffer to store all transformed points and distributed weights before the final voxel values can be determined, and filling techniques may be required to fill in any holes.
 
 \begin{figure}[h!]
@@ -179,10 +179,10 @@ Hence even if it were practical to more finely segment a tumour, separately labe
 
 This is not to say that the tumour deformation model in its present form cannot handle any form of infiltrative tumour (indeed, we will see examples in Chapter \ref{chap:applications} of such cases), for example by adjusting the scale parameter $s$ if the segmentation partially includes infiltrative tumour.
 However, tumours which are more or less wholly infiltrative, for example cases 4 and 5 in Figure \ref{fig:fa_hist}, cannot be modelled.
-An alternative form of $k(P)$ could be considered, such as the radial polynomial models used in optics and digital imaging to describe and correct for lens distortions.\autocite{Zhang2000a}
+An alternative form of $k(P)$ could be considered, such as the radial polynomial models used in optics and digital imaging to describe and correct for lens distortions\autocite{Zhang2000a}.
 The magnification effect near the centre of a radial distortion field is comparable with the distending of tissue seen in some infiltrative tumours, see for example case 5 in Figure \ref{fig:fa_hist}.
 In depth exploration of such additional distortion models was not pursued for this project, principally because the relevant clinical cases are far less likely to be indicated for surgical resection owing to the grave risk to infiltrated structures.
-Nevertheless, accurate white matter imaging could still be informative in assessing the lesion and informing treatment plans such as radiotherapy targeting,\autocite{Jena2005,Berberat2014} so the extension of this framework to include robust handling of infiltration could be an interesting avenue for future work.
+Nevertheless, accurate white matter imaging could still be informative in assessing the lesion and informing treatment plans such as radiotherapy targeting\autocite{Jena2005,Berberat2014}, so the extension of this framework to include robust handling of infiltration could be an interesting avenue for future work.
 
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
@@ -205,4 +205,4 @@ The ventricles, forming a part of the wider \gls{csf} network, are far more comp
 These tissue-dependent effects are completely omitted from the presented model, leading to mis-estimations of the deformations surrounding ventricles in some cases (Fig. \ref{fig:ventricles}).
 Controlling the magnitude of deformation adjacent to the tumour by adjusting the deformation decay constant $\lambda$ can mitigate this affect to an extent, however this increases the need for case-by-case manual parameter adjustment, which we wish to avoid.
 Ultimately, accurate registration throughout the brain cannot be achieved with such a simple model, as indeed was never the aim.
-Future work could investigate the feasibility of combining the radial deformation with adaptable tissue-dependent elasticity, modelled on previous similar works in the registration space.\autocite{Rohde2003,Duay2004}
+Future work could investigate the feasibility of combining the radial deformation with adaptable tissue-dependent elasticity, modelled on previous similar works in the registration space\autocite{Rohde2003,Duay2004}.
