@@ -17,7 +17,7 @@ Adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ a
 
 \begin{figure}[h!]
   \centering
-  \includesvg[width=\textwidth,pretex=\sffamily,inkscapelatex=true]{chapter_6/shrink.svg}
+  \includesvg[width=\textwidth,pretex=\sffamily]{chapter_6/shrink.svg}
   \caption{Demonstration of successful pre- and intraoperative tract imaging using only preoperative tumour segmentation (blue outline). Setting $s=0.8$ (green outline) simulates intraoperative decompression and models accurate atlas deformation to align with intraoperative anatomy after brain shift. The resulting \gls{cst} tractfinder segmentations are in strong agreement with streamline tractography.}
   \label{fig:shrink}
 \end{figure}
@@ -41,7 +41,7 @@ Note how the atlas probability is also high within the tumour itself:
 Its prediction alone is not sufficient for accurate segmentation, and a comparison with the local diffusion data is required to correct for imperfect atlas alignment.
 
 \begin{figure}
-  \includesvg[width=\textwidth,pretex=\sffamily,inkscapelatex=true]{chapter_6/oedema.svg}
+  \includesvg[width=\textwidth,pretex=\sffamily]{chapter_6/oedema.svg}
   \caption{Adult patient with tumour in the right precentral gyrus. \textbf{a.} \glspl{fod}, \textbf{b.} Deformed \gls{cst} \gls{tod} atlas, \textbf{c.} Tractfinder map of the \gls{cst}, thresholded at 0.05, \textbf{d.} Probabilistic tractography streamlines, \textbf{e.} TractSeg segmentation probability, thresholded at 0.5, \textbf{f.} Coronal and sagittal slices indicating the location of panels \textbf{a.-e.}}
   \label{fig:oedema}
 \end{figure}

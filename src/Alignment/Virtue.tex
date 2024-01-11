@@ -97,7 +97,7 @@ As each voxel value will be determined by a weighted sum of all transformed valu
 
 \begin{figure}[h!]
   \centering
-  \includesvg[width=0.7\textwidth,inkscapelatex=true]{chapter_4/warping.svg}
+  \includesvg[width=0.7\textwidth]{chapter_4/warping.svg}
   \caption{Forward image warping maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting" (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
   \label{fig:warp}
 \end{figure}
@@ -192,7 +192,7 @@ Nevertheless, accurate white matter imaging could still be informative in assess
 \end{figure}
 
 \begin{figure}[htb!]
-  \includesvg[width=\textwidth,inkscapelatex=true,pretex=\small\sffamily]{chapter_4/ventricles.svg}
+  \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_4/ventricles.svg}
   \caption{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. Arrows indicate ventricle compression not fully captured in the deformation model. \textbf{a.} \gls{btc} sub-PAT03. \textbf{b.} \gls{btc} sub-PAT26}
   \label{fig:ventricles}
 \end{figure}

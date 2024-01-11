@@ -33,7 +33,7 @@ Alongside these three classes of macroglia are the microglia, the resident immun
 
 \begin{figure}[hbt!]
   \centering
-  \includesvg[width=0.7\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/neuron.svg}
+  \includesvg[width=0.7\textwidth,pretex=\ttfamily\small]{chapter_1/neuron.svg}
   \caption{A neuron receives inputs across its dendritic tree (d) which converge on the cell body (c). Action potentials propagate down the axon (a) to the axon terminals (t) where they trigger chemical transmission of the signal at the synapses (s). Electrical conduction is accelerated by insulating myelin sheaths (m) separated by the nodes of Ranvier (n).}
   \label{fig:neuron}
 \end{figure}
@@ -79,7 +79,7 @@ The cerebellum connects with the pons and brainstem via three \gls{wm} bundles, 
 The pons also houses a dense arrangement of nuclei and tracts, connecting and integrating functions of the forebrain and cerebellum.
 
 \begin{SCfigure}[][h!]
-  \includesvg[width=0.6\textwidth,pretex=\sffamily\footnotesize,inkscapelatex=true]{chapter_1/anat_gross.svg}
+  \includesvg[width=0.6\textwidth,pretex=\sffamily\footnotesize]{chapter_1/anat_gross.svg}
   \caption{Macroscale subdivisions of the human brain. Adapted from \textcite{Carter1918}, Public domain, via Wikimedia Commons.}
   \label{fig:anat1}
 \end{SCfigure}
@@ -100,11 +100,11 @@ From there, \gls{csf} flows into the spaces surrounding the brain and spinal cor
 
 \begin{figure}[h!]
   \begin{subfigure}[b]{0.5\textwidth}
-    \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0040_TABVII.svg}
+    \includesvg[width=\textwidth,pretex=\ttfamily\small]{chapter_1/arnold1838bd1_0040_TABVII.svg}
     \caption{Tabula VII, Fig. 1}\label{fig:ardnoldVII1}
   \end{subfigure}%
   \begin{subfigure}[b]{0.5\textwidth}
-    \includesvg[width=\textwidth,pretex=\ttfamily\small,inkscapelatex=true]{chapter_1/arnold1838bd1_0046_TABX.svg}
+    \includesvg[width=\textwidth,pretex=\ttfamily\small]{chapter_1/arnold1838bd1_0046_TABX.svg}
     \caption{Tabula X, Fig. 4}\label{fig:ardnoldX4}
   \end{subfigure}
   \caption{Anatomical landmarks of the human brain, labelled on illustrations by Friedrich Arnold\autocite{Arnold1838}. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, m. corpus callosum, F. frontal lobe, P. parietal lobe, O. occipital lobe, T. temporal lobe, S. central sulcus}
@@ -211,8 +211,8 @@ The spin magnetic moments also precess about the external field in a phenomenon 
 
 \begin{figure}
     \centering
-    \includesvg[height=0.4\textwidth,pretex=\small\sffamily,inkscapelatex=true]{chapter_1/nmr.svg}\qquad%
-    \includesvg[height=0.4\textwidth,pretex=\small\sffamily,inkscapelatex=true]{chapter_1/relaxation.svg}
+    \includesvg[height=0.4\textwidth,pretex=\small\sffamily]{chapter_1/nmr.svg}\qquad%
+    \includesvg[height=0.4\textwidth,pretex=\small\sffamily]{chapter_1/relaxation.svg}
   \caption{\gls{mri} depends on quantum interactions between nuclei and magnetic fields. \textbf{a.} Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$ around external magnetic field $\mathbf{B}_0$. \textbf{b.} Immediately after 90\textdegree \gls{rf} excitation into the $xy$-plane, the bulk magnetisation $\mathbf{M}$ relaxes back to equilibrium where $\mathbf{M}_z=\mathbf{M}_0$ and $\mathbf{M}_{xy}=0$ in a spiral patter, inducing an oscillating electrical signal in the receiver equipment.}\label{fig:larmor}
 \end{figure}
 
@@ -311,7 +311,7 @@ The spatial frequencies and phases in this raw signal can be represented in the 
 To reconstruct an image in the spatial domain, two Fourier transforms are computed, first for each signal train, and secondly for each time sample across all phase encoding steps.
 
 \begin{figure}
-  \includesvg[width=\textwidth,pretex=\sffamily\small,inkscapelatex=true]{chapter_1/kspace_axial.svg}
+  \includesvg[width=\textwidth,pretex=\sffamily\small]{chapter_1/kspace_axial.svg}
   \caption{Sampled MR signals encode 2D images. \textbf{a.} A single echo train is sampled at dwell time intervals $t_d$, where each sample corresponds to a point in reciprocal $k$-space, and $t_d$ determines the frequency resolution along $k_x$ and the image matrix size along $x$. \textbf{b.} Repeated echos with varying \gls{pe} gradient strengths sample the image along $k_y$. \textbf{c--d.} The image in spatial dimensions is reconstructed by taking the 2D \gls{ft} of the $k$-space image.}
   \label{fig:kspace}
 \end{figure}
@@ -324,7 +324,7 @@ MR imaging is a stunningly diverse modality.
 Beyond the basics of spatial encoding and echo signal generation, there lies a whole host of techniques for generating specific contrasts, neutralising unwanted signals and artefacts, and accelerating acquisition times which are outside of the scope of this introduction.
 
 \begin{figure}[htb!]
-  \includesvg[width=\textwidth,inkscapelatex=true]{chapter_1/mprage.svg}
+  \includesvg[width=\textwidth]{chapter_1/mprage.svg}
   \caption{A simplified pulse sequence diagram representing an MP-RAGE $T_1$-weighted acquisition. This popular acquisition uses a 180\textdegree \gls{ir} \gls{rf} pulse, followed after inversion time TI by an excitation--acquisition sequence, to enhance the contrast between tissues based on their different $T_1$ relaxation times. (In reality, multiple image echos are sampled using fast imaging techniques in-between repeated \gls{ir} pulses.) Multiple signal echos are sampled with decreasing \gls{pe} gradient strengths $G_p$ to build up an entire 2D image.}
   \label{fig:mprage}
 \end{figure}
@@ -355,7 +355,7 @@ And while \gls{fmri} is a key tool for identifying eloquent cortex for neurosurg
 The only tool available for non-invasively imaging the microscopic structure of \gls{wm} \textit{in vivo} is \glsentrylong{dmri}.
 
 \begin{figure}[hbt!]
-  \includesvg[width=\textwidth,inkscapelatex=true,pretex=\ttfamily\small]{chapter_1/anat_ortho.svg}
+  \includesvg[width=\textwidth,pretex=\ttfamily\small]{chapter_1/anat_ortho.svg}
   \caption{Orthogonal slices (from left to right: Sagittal, coronal, axial views) of a $T_1$-weighted \gls{mri} acquisition of the author's brain, with key anatomical features and landmarks labelled. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, m. corpus callosum, F. frontal lobe, P. parietal lobe, O. occipital lobe, T. temporal lobe, S. central sulcus.}
   \label{fig:ortho}
 \end{figure}
@@ -437,7 +437,7 @@ The result is a stepped zig-zag traversal of all of $k$-space during the readout
 Measuring enough samples in the extremely short time available before the signal decays requires very strong and rapidly switching gradients, placing significant demands on scanner hardware\autocite{Bowtell1998}.
 
 \begin{figure}
-  \includesvg[width=\textwidth,inkscapelatex=true]{chapter_1/dwepi.svg}
+  \includesvg[width=\textwidth]{chapter_1/dwepi.svg}
   \caption{Diffusion weighted \gls{epi} pulse sequence diagram, with diffusion gradients, drawn in dark grey to differentiate them from orthogonal slice, phase and frequency encoding, either side of a 180\textdegree \gls{rf} inversion pulse. All orthogonal gradients may be combined to produce diffusion weighting along an arbitrary direction. An entire slice of $k$-space is acquired from a single echo train, using a strong switching frequency encoding gradient $G_f$ to encode lines along $k_x$, combined with ``blipped" phase encoding gradients $G_p$ to advance the signal through $k_y$.}
   \label{fig:dwepi}
 \end{figure}
