@@ -160,7 +160,7 @@ Thus combining information from the atlas and data-derived \glspl{fod} improves 
 
 \begin{SCfigure}
   \includegraphics{chapter_5/score_mats_group.pdf}
-  \caption{Pairwise \gls{dice} and density correlations for the \textit{Tractoinferno} (top) HCP49 (middle) and clinical (bottom) datasets. For each pair of methods, the metric distributions across all subjects are shown for each tract (from left to right: \gls{af}, \gls{cst}, \gls{ifof}, \gls{or}), with background colours corresponding to mean score value. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}
+  \caption{Pairwise \gls{dice} and density correlations for the \textit{TractoInferno} (top) HCP49 (middle) and clinical (bottom) datasets. For each pair of methods, the metric distributions across all subjects are shown for each tract (from left to right: \gls{af}, \gls{cst}, \gls{ifof}, \gls{or}), with background colours corresponding to mean score value. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}
   \label{fig:dscmats}}
 \end{SCfigure}
 
@@ -303,7 +303,7 @@ However, since the time taken depends greatly on several factors, including numb
   \begin{tabularx}{\textwidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
     \toprule
     \rowstyle{\rmfamily}
-    Step & Processing time \newline (s, per subject) & Tractfinder & TractSeg & Atlas & Tractography \\
+    Step & Processing time\newline(s, per subject) & Tractfinder & TractSeg & Atlas & Tractography \\
     \midrule
     \dag Brain masking & 3 $\pm$ 2 &\x{}&\x{}&\x{}&\x{}\\
     \dag Affine MNI registration & 20 $\pm$ 4 &\x{}&  &\x{}&  \\
@@ -323,7 +323,7 @@ However, since the time taken depends greatly on several factors, including numb
 \section{Two methods, same training data}\label{sec:tractseg}
 
 A key component of tractfinder is the precise definition of each tract and careful filtering of atlas training streamlines.
-Despite the availability of public streamline datasets including the \textit{TractInferno} data and the TractSeg training and validation bundles, none were found to adequately fulfil the predefined anatomical criteria, and thus new training streamlines were generated for tractfinder.
+Despite the availability of public streamline datasets including the \textit{TractoInferno} data and the TractSeg training and validation bundles, none were found to adequately fulfil the predefined anatomical criteria, and thus new training streamlines were generated for tractfinder.
 While the anatomical fidelity of the resulting atlases represents a particular strength, it does make objective comparison between benchmark methods, which may be based on different references, difficult.
 In order to produce a direct and objective comparison with TractSeg, a new set of tract atlases were created from the TractSeg DKFZ reference bundles\autocite{Wasserthal2018b} in the HCP105 dataset, using the same split into training and testing subjects as used in the deep learning model (published version).
 TractSeg was trained on 63 subjects and tested on the remaining 42, and here the same was done for tractfinder (where ``training'' means constructing the atlas from individual bundles as described in Chapter \ref{chap:atlas}), even though tractfinder atlases can be constructed from just 10-15 subjects (see \ref{sec:ntrain}).
