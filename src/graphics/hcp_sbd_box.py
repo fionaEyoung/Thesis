@@ -89,7 +89,7 @@ def main():
       ax.set_xlabel('')
       ax.tick_params(axis='x', length=0)
       ax.set_ylim(METRIC_PARAMS[metric]['lims'])
-      ax.set_title("HCP", y=0.92)
+      ax.set_title("HCP")
 
   all_metrics_axs.legend(one_of_each, order, ncol=len(order), loc='lower right')
   all_metrics_fig.suptitle("")
