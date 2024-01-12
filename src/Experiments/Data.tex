@@ -5,11 +5,11 @@ A common complaint in the white matter imaging field is over the lack of reliabl
 This goes deeper than the limitations of our scientific instruments:
 Micrometer-resolution \gls{mri} or infallible tractography algorithms are not the answer.
 As was explored in Chapter \ref{chap:atlas}, our understanding of white matter anatomy, connection, and function is neither fixed nor universal, meaning for many tracts a single definition that can be agreed upon by all does not even exist in a given moment, nor one to last over time.
-
 We can nonetheless arrive at a reasonable assessment of tractfinder's accuracy, reliability and applicability by making justifiable assumptions and comparing it, quantitatively and visually, with benchmark methods in a variety of datasets and case studies.
 
 The missing ground truth problem comes to the fore when comparing different methods, as we will see in Section \ref{sec:validation}, but the results are still instructive in assessing their respective characteristics.
 To balance this issue, a further analysis directly comparing tractfinder against the deep learning method TractSeg by constructing new \gls{tod} atlases from the TractSeg model training data is presented in Section \ref{sec:tractseg}.
+These results originally appeared in \textcite{Young2024}.
 We'll further attempt to quantitatively evaluate the effect of tumour deformation modelling on improving segmentation performance in affected patients.
 
 Subsequently, in Chapter \ref{chap:applications}, we'll move on from similarity scores and box plots to explore the practical applicability of tractfinder, considering the technical aspects of bringing it to the bedside, and illustrating the strengths and remaining roadblocks through a series of case studies.

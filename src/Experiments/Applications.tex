@@ -1,4 +1,9 @@
-\section{Challenging tumours}
+\section{Clinical case studies}
+
+Having discussed some of the technological challenges of intraoperative image acquisition and processing, we will now turn our minds to the other side of the camera and explore the complex reality of tumour radiology and image guided neurosurgery.
+The use of tractfinder in the presence of both significant tumour deformation and brain shift is illustrated in an \gls{imri} case from the \gls{nhnn}, first described in \textcite{Young2022}.
+A further example, also from the \gls{nhnn}, demonstrates the effect of peritumoural oedema on tract imaging.
+Finally, Section \ref{sec:case} will look at two examples of some of the most challenging neurosurgical procedures, involving paediatric tumours of the thalamus, in \gls{imri} cases taking place at \gls{gosh}.
 
 \subsection{Intraoperative brain shift}
 \label{sec:imri}
@@ -18,7 +23,7 @@ Adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ a
 \begin{figure}[h!]
   \centering
   \includesvg[width=\textwidth,pretex=\sffamily]{chapter_6/shrink.svg}
-  \caption{Demonstration of successful pre- and intraoperative tract imaging using only preoperative tumour segmentation (blue outline). Setting $s=0.8$ (green outline) simulates intraoperative decompression and models accurate atlas deformation to align with intraoperative anatomy after brain shift. The resulting \gls{cst} tractfinder segmentations are in strong agreement with streamline tractography.}
+  \caption{Demonstration of successful pre- and intraoperative tract imaging using only preoperative tumour segmentation (blue outline). Setting $s=0.8$ (green outline) simulates intraoperative decompression and models accurate atlas deformation to align with intraoperative anatomy after brain shift. The resulting \gls{cst} tractfinder segmentations are in strong agreement with streamline tractography. An earlier version of this figure was first published in \textcite{Young2022}.}
   \label{fig:shrink}
 \end{figure}
 
@@ -47,7 +52,7 @@ Its prediction alone is not sufficient for accurate segmentation, and a comparis
 \end{figure}
 
 \clearpage
-\section{GOSH iMRI case studies}\label{sec:case}
+\subsection{A tale of two paediatric thalamic gliomas}\label{sec:case}
 
 From mid 2021 to late 2023, nine tumour resections were carried out at \gls{gosh} with \gls{imri} guidance that also included multi-directional diffusion-weighted imaging (that is, not trace-weighted or \gls{adc} imaging).
 Throughout this period, neurosurgical and radiological staff were continually learning how best to integrate the \gls{imri} facility into their practice.
@@ -65,7 +70,7 @@ As the specific interactions between thalamic tumours and surrounding \gls{wm} a
 The following will look at two of the \gls{gosh} diffusion \gls{imri} cases in detail, beginning with the most recent, considering the imaging and tumour features, peri-operative clinical presentation, and neurology.
 Hopefully this will provide a balanced perspective into the challenges and potential of intraoperative \gls{dmri} for such cases.
 
-\subsection{Patient 8: High grade glioma}
+\paragraph*{Patient 8: High grade glioma}
 
 The first of the two patients presented at seven years of age with a diffuse midline astrocytoma (\gls{who} grade 4) also in the left thalamus.
 A strong degree of mass effect called for tumour deformation modelling, so the lesion was segmented on the preoperative structural scan (Fig. \ref{fig:8p}).
@@ -120,7 +125,7 @@ It is unclear what led to failure in this particular subject, as TractSeg has sh
   \label{fig:8i_tf}
 \end{figure}
 
-\subsection{Patient 5: Low grade pilocytic astrocytoma}
+\paragraph*{Patient 5: Low grade pilocytic astrocytoma}
 
 A second patient presented with a low-grade pilocytic astrocytoma in the left thalamus at 23 months of age with progressive right-sided weakness.
 On preoperative \gls{mri} examination, a sliver of tissue within the tumour, presumed to be a part of the \gls{cst}, was evident, while the rest of the tract was displaced (Fig. \ref{fig:5p}).

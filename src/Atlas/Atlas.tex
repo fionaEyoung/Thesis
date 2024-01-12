@@ -8,7 +8,7 @@ These approaches still rely on tractography as the means for parsing the local o
 As an alternative to tractography, in which the attribution of a voxel to a tract of interest is contingent on it being visited by a streamline which, based on its entire length, has been attributed to the tract, we will instead develop a voxel-wise approach, in which a voxel can be associated with a tract based on its local diffusion properties and global coordinates.
 
 We'll thus consider a voxel's membership with a target tract to be determined by its location in the brain and local directional diffusion characteristics, and how well they align with prior expectations for the tract.
-This chapter is concerned with the encoding of those expectations in the form of a tract-specific location and orientation atlas, and the voxel-wise comparison of those expectations with observed directional diffusion information.
+This chapter, much of which was previously described in \textcite{Young2024}, is concerned with the encoding of those expectations in the form of a tract-specific location and orientation atlas, and the voxel-wise comparison of those expectations with observed directional diffusion information.
 The necessary intermediate step, of establishing spatial correspondence between the atlas and observed data, is the subject of Chapter \ref{chap:reg}.
 
 \section{Theoretical motivation}
@@ -243,7 +243,7 @@ Taken together, the dissection studies confirm (i.e. reported in all or most spe
 The evidence is less clear for wider connections to the parietal, posterior temporal and superior frontal cortices, so these will be excluded from the tractfinder atlas.
 Streamlines were seeded in the temporal stem (extreme capsule) and selected according to cortical targets derived from the FreeSurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation.\footnote[2]{frontal labels: 1\{1,2\}1\{01,05,15,54,12,13,14,53,63,24,65\}; occipital labels: 1\{1,2\}1\{02,19,20,58,59\}}
 
-\section{Streamline tractography and filtering}
+\section{Streamline tractography and filtering}\label{sec:atlasmethods}
 
 A dataset of \gls{hardi} acquisitions from 16 healthy adult volunteers (``EEG, fMRI and NODDI dataset''\autocite{Clayden2020}, available online at osf.io/94c5t) was used in the creation of reference bundles for developing the atlas.
 \Gls{dmri} scans were acquired at 2.5~mm isotropic voxel size with three shells at $b=2400$~s~mm$^{-2}$ (60 directions), $b=800$~s~mm$^{-2}$ (30 directions), $b=300$~s~mm$^{-2}$ (9 directions), and a single $b=0$ image with no diffusion weighting.
