@@ -18,7 +18,8 @@ all: $(PROJNAME).pdf
 # MAIN LATEXMK RULE
 
 $(PROJNAME).pdf: $(PROJNAME).tex
-	texfot --no-stderr latexmk -pdflatex  -outdir=.build --interaction=nonstopmode $< && mv .build/Main.pdf .
+	texfot --no-stderr latexmk -pdflatex --shell-escape -outdir=.build --interaction=nonstopmode $<
+	mv .build/Main.pdf $@
 
 clean:
 	latexmk -c -auxdir=.build/ -quiet
@@ -31,9 +32,18 @@ $(PROJNAME).docx: $(PROJNAME).tex
 
 # Figures
 figures:
+	## Intro figures: require additional annotation in inkscape after generating
+	# python3 graphics/kspace.py
+	# python3 graphics/relaxation.py
+	## Results figures
 	python3 graphics/ts_boxplots.py
 	python3 graphics/TI_boxplots.py
 	python3 graphics/score_mats.py
 	python3 graphics/registration_boxplots.py
 	python3 graphics/hcp_sbd_box.py
 	python3 graphics/btcd_boxplots.py
+	## Methods figures
+	python3 graphics/fa_tumour.py
+	python3 graphics/oneshot_bar.py
+	python3 graphics/plot_k.py
+	python3 graphics/ntrain.py
