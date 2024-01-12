@@ -85,30 +85,29 @@
 %  published in at the end of that chapter.
 % For more information, see: http://stefaanlippens.net/bibentry
 
-
 \ifdraft{%
   \setcounter{tocdepth}{5}
-  \tableofcontents
-  \renewcommand{\part}[1]{}}{%
+  \tableofcontents%
+  }{%
   \include{FrontBack/Preamble}
   \printglossary[type=\acronymtype]
   \glsaddallunused[main]
   \printglossary
 }
 
-\epigraph{I'll tell you where the real road lies\\
+\epipage{I'll tell you where the real road lies\\
 Between your ears, behind your eyes}{Anais Mitchell, Hermes in \textit{Wait For Me (Reprise)}}
 \include{Introduction/Introduction}
 
-\part{Background}
-\epigraph{Too much knowledge never makes for simple decisions.}{Frank Herbert, \textit{Children of Dune}}
+
+\epart[\epigraph{Too much knowledge never makes for simple decisions.}{Frank Herbert, \textit{Children of Dune}}]{Background}
+% \part*{Background}
 \include{Introduction/Theory}
 \include{Introduction/Neuroimaging}
 \include{Introduction/Neurosurgery}
 \include{Introduction/Project}
 
-\part{Tractfinder}
-\epigraph{I've spent my life trying to make things simpler. \\ Because I find ultimately that complicated doesn't reach the heart.}{Hans Zimmer}
+\epart[\epigraph{I've spent my life trying to make things simpler. \\ Because I find ultimately that complicated doesn't reach the heart.}{Hans Zimmer}]{Tractfinder}
 \include{Atlas/Atlas}
 \include{Atlas/Mapping}
 \include{Atlas/Training}
@@ -117,8 +116,7 @@ Between your ears, behind your eyes}{Anais Mitchell, Hermes in \textit{Wait For 
 \include{Alignment/Virtue}
 \include{Alignment/Registration2}
 
-\part{Results and applications}
-\epigraph{Unfortunately, nature seems unaware of our intellectual need for convenience and unity, and very often takes delight in complication and diversity.}{Santiago Ramón y Cajal, 1906 Nobel Lecture}
+\epart[\epigraph{Unfortunately, nature seems unaware of our intellectual need for convenience and unity, and very often takes delight in complication and diversity.}{Santiago Ramón y Cajal, 1906 Nobel Lecture}]{Results and applications}
 % \epigraph{What could be more natural than complexity?}{Hank Green}
 % \epigraph{The most natural thing in the world is complexity}{Hank Green}
 \include{Experiments/Data}
@@ -126,7 +124,7 @@ Between your ears, behind your eyes}{Anais Mitchell, Hermes in \textit{Wait For 
 \include{Experiments/Effects}
 \include{Experiments/Applications}
 
-\epigraph{It is good to have an end to journey toward, but it is the journey that matters in the end.}{Ursula K. Le Guin}
+\epipage{It is good to have an end to journey towards, but it is the journey that matters, in the end.}{Ursula K. Le Guin, \textit{The Left Hand of Darkness}}
 \include{Conclusion/Conclusions}
 
 \include{FrontBack/Appendices}

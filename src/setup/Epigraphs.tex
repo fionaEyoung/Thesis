@@ -1,13 +1,27 @@
 \newcommand\epigraph[2]{%
-\ifdraft{}{%
-  \clearpage\thispagestyle{empty}
   \begin{flushright}
-
-    \vspace*{\fill}
-    \textit{#1}
-
+    \parbox{0.75\textwidth}{\raggedleft #1}
+    \vskip 1.5\baselineskip
     --- #2
-    \vspace*{\fill}
   \end{flushright}%
 }
+
+\newcommand\epipage[2]{%
+  \clearpage\thispagestyle{empty}
+  \vspace*{\fill}
+  {\sffamily\epigraph{#1}{#2}}
+  \vspace*{\fill}\pagebreak
+}
+
+\newcommand\epart[2][]{%
+  \cleardoublepage          % Page break
+  \thispagestyle{empty}
+  \vspace*{.3\vsize}        % Vertical shift
+  \refstepcounter{part}
+  \addcontentsline{toc}{part}{#2}%
+  % Part title, center, 1/3 down
+  {\centering \textbf{\sffamily\Huge#2}\par}%
+  \vspace*{\fill}
+  {\sffamily#1}
+  \vspace*{\fill}\pagebreak
 }
