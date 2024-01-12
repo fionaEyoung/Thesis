@@ -145,10 +145,11 @@
 % Sans-serif, bold titles
 \usepackage[sf,bf,raggedright]{titlesec}
 % Create paragraph title format
-\titleformat{\paragraph}[hang]{\normalfont\itshape\raggedright\sffamily}{}{0pt}{\qquad}[]
-\titlespacing*{\paragraph}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+\titleformat{\paragraph}[hang]{\large\sffamily\raggedright}{}{0pt}{}[]
+\titleformat{\subparagraph}[hang]{\normalsize\sffamily\bfseries\raggedright}{}{0pt}{}[]
 
 % Section header spacing
+\titlespacing*{\paragraph}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 \titlespacing*{\section}{0pt}{3\baselineskip}{\baselineskip}
 \titlespacing*{\subsection}{0pt}{2\baselineskip}{\baselineskip}
 \titlespacing*{\subsubsection}{0pt}{\baselineskip}{\baselineskip}
