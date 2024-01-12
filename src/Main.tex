@@ -46,7 +46,7 @@
 %  you intend to print double-sided. Note that this is
 %  *specifically permitted* by the UCL thesis formatting
 %  guidelines.
-\documentclass[12pt,phd,a4paper,oneside,draft]{ucl_thesis}
+\documentclass[12pt,phd,a4paper,twoside]{ucl_thesis}
 
 % Package configuration:
 \input{setup/MainPackages}
@@ -85,15 +85,10 @@
 %  published in at the end of that chapter.
 % For more information, see: http://stefaanlippens.net/bibentry
 
-\ifdraft{%
-  \setcounter{tocdepth}{5}
-  \tableofcontents%
-  }{%
-  \include{FrontBack/Preamble}
-  \printglossary[type=\acronymtype]
-  \glsaddallunused[main]
-  \printglossary
-}
+\include{FrontBack/Preamble}
+\printglossary[type=\acronymtype]
+% \glsaddallunused[main]
+\printglossary
 
 \epipage{I'll tell you where the real road lies\\
 Between your ears, behind your eyes}{Anais Mitchell, Hermes in \textit{Wait For Me (Reprise)}}

@@ -17,7 +17,7 @@ def set_box_colours(bp, index=None, **kwargs):
       b.set(**kwargs)
 
 #https://jwalton.info/Embed-Publication-Matplotlib-Latex/
-def set_size(width=452.9679, ratio=None, fraction=1, subplots=(1, 1)):
+def set_size(width=398.33858, ratio=None, fraction=1, subplots=(1, 1)):
     """Set figure dimensions to avoid scaling in LaTeX.
 
     Parameters
@@ -50,7 +50,7 @@ def set_size(width=452.9679, ratio=None, fraction=1, subplots=(1, 1)):
     return (fig_width_in, fig_height_in)
 
 # https://stackoverflow.com/a/44971177
-def set_ax_size(width=452.9679, ratio=None, fraction=1, ax=None, subplots=(1, 1)):
+def set_ax_size(width=398.33858, ratio=None, fraction=1, ax=None, subplots=(1, 1)):
     """ w, h: width, height in inches """
     if ax is None: ax=plt.gca()
     if not isinstance(ax, (np.ndarray)): ax = np.array([ax])

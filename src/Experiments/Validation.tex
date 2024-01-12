@@ -296,14 +296,15 @@ For manual streamline tractography in the clinical datasets, processing time was
 However, since the time taken depends greatly on several factors, including number of streamlines to select and streamline acceptance rate (often low in brains with pathology due to oedema, deformation etc.), a precise time analysis for manual tractography cannot provided here.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{table*}[h!]
+\begin{landscape}
+\begin{table}[ht!]
   \caption{Measured processing times mean and standard deviation for \textit{TractoInferno} dataset. Individual steps shown and total average for the four different pipelines. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography \glspl{roi} were drawn once for the whole dataset, whereas for clinical datasets manual \gls{roi} delineation will have to be repeated for each subject. \dag Desktop Mac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, one node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60 GHz cores per node.}
   \label{tab:time}
   \small
-  \begin{tabularx}{\textwidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
+  \begin{tabularx}{\linewidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
     \toprule
     \rowstyle{\rmfamily}
-    Step & Processing time\newline(s, per subject) & Tractfinder & TractSeg & Atlas & Tractography \\
+    Step & Processing time (s, per subject) & Tractfinder & TractSeg & Atlas & Tractography \\
     \midrule
     \dag Brain masking & 3 $\pm$ 2 &\x{}&\x{}&\x{}&\x{}\\
     \dag Affine MNI registration & 20 $\pm$ 4 &\x{}&  &\x{}&  \\
@@ -317,7 +318,8 @@ However, since the time taken depends greatly on several factors, including numb
     \rowstyle{\bfseries\rmfamily}
     Total &  & 2:42~min & 4:25~min & \textless2:42~min & \textgreater 27:32~min \\ \bottomrule
   \end{tabularx}
-\end{table*}
+\end{table}
+\end{landscape}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Two methods, same training data}\label{sec:tractseg}
