@@ -42,8 +42,8 @@ ax.axvspan(S, B, facecolor='k', alpha=0.1)
 plotwidth=0.6
 # ax.plot(P-S,k_,linewidth=plotwidth, label=f'$k_{{l={l:d}}}$')
 ax.plot(P-S,k_lmax, 'k-', linewidth=plotwidth, label=f'$k_{{l=l_{{max}}}}$')
-ax.plot(P-S,lin_maxl, 'k--', linewidth=plotwidth, label=r'$k=1-\frac{{D_P}}{{D_t}}$')
-ax.plot(P-S,lin, 'k:', linewidth=plotwidth, label=r'$k=1-\frac{{D_P}}{{D_b}}$')
+ax.plot(P-S,lin_maxl, 'k--', linewidth=plotwidth, label=r'$k=1-\frac{{D_p}}{{D_t}}$')
+ax.plot(P-S,lin, 'k:', linewidth=plotwidth, label=r'$k=1-\frac{{D_p}}{{D_b}}$')
 
 ax.set_ylim([0,1.1])
 ax.set_yticks([])

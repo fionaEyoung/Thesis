@@ -35,7 +35,7 @@ Visualisations of each ROI are shown on MNI152 template in Figures \ref{fig:rois
 \subsection{Arcuate fasciculus}
 
 \begin{description}
-  \item[Seed] White matter medial of angular gyrus, visible on coronal views of colour fractional anisotropy maps as a ``green triangle'', drawn on the coronal plane.
+  \item[Seed] White matter medial of angular gyrus, visible on coronal views of colour \gls{fa} maps as a ``green triangle'', drawn on the coronal plane.
   Level of coronal plane selected from sagittal view by locating the central sulcus (Fig. \ref{fig:rois.af}, arrow).
   \item[Include] Descending section of the arcuate fasciculus, drawn on the axial plane
   \item[Exclude] Exclusion ROIs targeting: midline, superior fronto-occipital fasciculus, ipsilateral cerebral penduncles, sagittal stratum, corona radiata and external capsules.
@@ -49,7 +49,7 @@ The following publications were reviewed to inform the above ROI strategy: \text
   \centering
     \includegraphics[width=\textwidth]{appendix/AF_include.png}
     \includegraphics[width=\textwidth]{appendix/AF_exclude.png}
-  \caption{Seed (yellow), inclusion (green) and exclusion (red) regions of interest for the arcuate fasciculus. Arrow indicates central sulcus, landmark for seed ROI.}
+  \caption{Seed (yellow), inclusion (green) and exclusion (red) \glspl{roi} for the arcuate fasciculus. Arrow indicates central sulcus, landmark for seed ROI.}
   \label{fig:rois.af}
 \end{figure*}
 
@@ -61,11 +61,11 @@ Corticospinal tract tracography strategy differed between the atlas creation and
   \item[Seed (atlas)] For the orientation atlas, Freesurfer cortical parcellations were used to obtain more complete coverage of the motor cortex via the following process:
   \begin{enumerate}
     \item Seed in precentral gyrus and output successful seed location
-    \item Generate binary mask from successful seed locations, subtract from precentral gyrus mask to create seed mask
+    \item Generate binary mask from successful seed locations, subtract from precentral gyrus mask to create second seed mask
     \item Re-run tractography with second seed mask to cover rest of precentral gyrus
   \end{enumerate}
-  \item[Seed (general)] Posterior limb of internal capsule, drawn on three consecutive axial slices
-  \item[Include] Posterior limb on internal capsule (if not used for seed), cerebral penduncles, CST in mid-pons
+  \item[Seed (general)] Posterior limb of the internal capsule, drawn on three consecutive axial slices
+  \item[Include] Posterior limb of the internal capsule (if not used for seed), cerebral penduncles, CST in mid-pons
   \item[Exclude] Cerebellar peduncles (drawn on coronal slice), medial lemniscus (drawn on axial slice), midline, superior fronto-occipital fasciculus,
 \end{description}
 
@@ -77,14 +77,14 @@ The following publications were reviewed to inform the above ROI strategy: \text
   \centering
     \includegraphics[width=\textwidth]{appendix/CST_include.png}
     \includegraphics[width=\textwidth]{appendix/CST_exclude.png}
-  \caption{Seed (yellow), inclusion (green) and exclusion (red) regions of interest for the corticospinal tract}
+  \caption{Seed (yellow), inclusion (green) and exclusion (red) \glspl{roi} for the corticospinal tract}
   \label{fig:rois.cst}
 \end{figure*}
 
 \subsection{Inferior fronto-occipital fasciculus}
 
 \begin{description}
-  \item[Seed] Temporal stem, between anterior tip if Meyer's loop and descending portion of the uncinate fasciculus
+  \item[Seed] Temporal stem, between anterior tip of Meyer's loop and descending portion of the uncinate fasciculus
   \item[Include (atlas)] Posterior: inferior, middle, and superior occipital gyri and middle and superior occipital sulci (Freesurfer (v4.5) Destrieux atlas\autocite{Destrieux2010} (2009 version) parcellation labels 1\{1,2\}1\{02,19,20,58,59\}).
   Anterior: frontal pole, middle and inferior frontal gyri and sulci, orbital gyrus and sulci (Freesurfer labels 1\{1,2\}1\{01,05,15,54,12,13,14,53,63,24,65\})
   \item[Include (general)] Frontal lobe coronal slice, anterior to genu of the corpus callosum
@@ -98,7 +98,7 @@ The following publications reviewed to inform the above ROI strategy: \textcite{
   \centering
     \includegraphics[width=\textwidth]{appendix/IFO_include.png}
     \includegraphics[width=\textwidth]{appendix/IFO_exclude.png}
-  \caption{Seed (yellow), inclusion (green) and exclusion (red) regions of interest for the inferior fronto-occipital fasciculus}
+  \caption{Seed (yellow), inclusion (green) and exclusion (red) \glspl{roi} for the inferior fronto-occipital fasciculus}
   \label{fig:rois.ifo}
 \end{figure*}
 
