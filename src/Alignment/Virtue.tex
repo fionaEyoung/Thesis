@@ -51,7 +51,7 @@ Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarro
 \begin{figure}[htp]
   \centering
   \includesvg[inkscapelatex=true]{chapter_4/virtue_vars.svg}
-  \caption{Graphical schema of the variables defined in the radial deformation model}
+  \caption[Tumour deformation model variables]{Graphical schema of the variables defined in the radial deformation model}
   \label{fig:virtue}
 \end{figure}
 
@@ -94,7 +94,7 @@ As each voxel value will be determined by a weighted sum of all transformed valu
 \begin{figure}[h!]
   \centering
   \includesvg[width=0.7\textwidth]{chapter_4/warping.svg}
-  \caption{Forward image warping $f(P)$ maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting'' (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
+  \caption[Forward and reverse image warping]{Forward image warping $f(P)$ maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting'' (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
   \label{fig:warp}
 \end{figure}
 
@@ -145,7 +145,7 @@ Note that $\lambda_{max}$ varies throughout the brain, being a function of the r
 
 \begin{SCfigure}[][h!]
   \includegraphics{chapter_4/k.pdf}
-  \caption{Deformation factor $k$ as a function of $D_p$. $\lambda$ must be small enough such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_p}{D_t})$ (dashed line). An exponential $k$ with $\lambda_{max}$ is plotted in solid black, compared with a linear $k$ as proposed in \textcite{Nowinski2005} (dotted line).}
+  \caption[Deformation factor k]{Deformation factor $k$ as a function of $D_p$. $\lambda$ must be small enough such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_p}{D_t})$ (dashed line). An exponential $k$ with $\lambda_{max}$ is plotted in solid black, compared with a linear $k$ as proposed in \textcite{Nowinski2005} (dotted line).}
   \label{fig:k}
 \end{SCfigure}
 
@@ -180,13 +180,13 @@ Nevertheless, accurate \gls{wm} imaging could still be informative in assessing 
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
   \includegraphics{chapter_4/tumour_fa.pdf}}
-  \caption{A series of paediatric brain tumour cases from retrospective \gls{gosh} data. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived \gls{dec} \gls{fa} maps overlaid. Patients 4 and 5 have infiltrating tumours centred on the left and right basal ganglia respectively. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 4 and 5, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
+  \caption[Intra-tumoural FA indicates infiltration]{A series of paediatric brain tumour cases from retrospective \gls{gosh} data. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived \gls{dec} \gls{fa} maps overlaid. Patients 4 and 5 have infiltrating tumours centred on the left and right basal ganglia respectively. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 4 and 5, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
   \label{fig:fa_hist}
 \end{figure}
 
 \begin{figure}[htb!]
   \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_4/ventricles.svg}
-  \caption{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. Arrows indicate ventricle compression not fully captured in the deformation model. \textbf{\sffamily a.} \gls{btc} sub-PAT03. \textbf{\sffamily b.} \gls{btc} sub-PAT26}
+  \caption[Ventricle deformation examples]{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. Arrows indicate ventricle compression not fully captured in the deformation model. \textbf{\sffamily a.} \gls{btc} sub-PAT03. \textbf{\sffamily b.} \gls{btc} sub-PAT26}
   \label{fig:ventricles}
 \end{figure}
 

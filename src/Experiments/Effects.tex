@@ -41,7 +41,7 @@ In addition to the preprocessing previously described, for each subject, the fol
     DWI-4 & 30 &    \\
     DWI-5 & 12 &    \\ \bottomrule
   \end{tabular}
-  \caption{Subsampled diffusion schemes, number of directions}
+  \caption[Subsampled diffusion schemes for data stability analysis]{Subsampled diffusion schemes, number of directions}
   \label{tab:subschemes}
 \end{table}
 
@@ -64,7 +64,7 @@ This comparison was made for each combination of diffusion scheme and \gls{csd} 
 \begin{figure}
   \centering
   \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_6/self_dice.svg}
-  \caption{Self Dice scores for all tracts and methods. Each datapoint represents a comparison with the corresponding segmentation in DWI-1, the highest quality acquisition scheme. Outlined markers represent the mean over all subjects.}
+  \caption[Self-similarity scores for data stability analysis]{Self Dice scores for all tracts and methods. Each datapoint represents a comparison with the corresponding segmentation in DWI-1, the highest quality acquisition scheme. Outlined markers represent the mean over all subjects.}
   \label{fig:self_dice}
 \end{figure}
 
@@ -97,7 +97,7 @@ However, not only can the distortions around resection cavities be especially se
 
 \begin{figure}[h!]
   \includegraphics[width=\textwidth]{chapter_6/epidist.pdf}
-  \caption{Examples of strong susceptibility distortions (arrowheads) on intraoperative \gls{epi} acquisitions obtained on the Siemens MAGNETOM Vida system at \gls{gosh}. Effects this extreme are not present in all cases, but neither are they uncommon.}
+  \caption[EPI distortion artefacts]{Examples of strong susceptibility distortions (arrowheads) on intraoperative \gls{epi} acquisitions obtained on the Siemens MAGNETOM Vida system at \gls{gosh}. Effects this extreme are not present in all cases, but neither are they uncommon.}
   \label{fig:epi}
 \end{figure}
 
@@ -124,7 +124,7 @@ The acquisition parameters of the three test sequences, along with the routine \
 % [5] https://www.researchgate.net/publication/236022704_Analysis_of_tractography_biases_introduced_by_anisotropic_voxels
 
 \begin{table}
-  \caption{\Gls{rsepi} test scan parameters}
+  \caption[RS-EPI test scan acquisition parameters]{\Gls{rsepi} test scan parameters}
   \label{tab:rsepi}
   % \setlength{\tabcolsep}{0.3em}
   \footnotesize
@@ -155,7 +155,7 @@ Finally, the left \gls{cst} was reconstructed with a simple probabilistic tracto
 \begin{figure}[h!]
   \centering
   \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_6/rsepi.svg}
-  \caption{Baseline \gls{ssepi} diffusion sequence and three \gls{rsepi} test sequences
+  \caption[RS-EPI test scan results]{Baseline \gls{ssepi} diffusion sequence and three \gls{rsepi} test sequences
     \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \gls{ssepi} \gls{dti})
     \textbf{\sffamily b.} 7seg 6\x{}$b$800
     \textbf{\sffamily c.} 3seg 12\x{}$b$b1000
@@ -172,7 +172,7 @@ The third test scan additionally used SMS acceleration which appears to have sig
 \begin{figure}[h!]
   \centering
   \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_6/rsepi_fod_tg.svg}
-  \caption{\Glspl{fod} at the centrum semiovale and left \gls{cst} tractography streamlines.
+  \caption[RS-EPI test scan fibre orientation and CST reconstructions]{\Glspl{fod} at the centrum semiovale and left \gls{cst} tractography streamlines.
   \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \gls{ssepi} \gls{dti})
   \textbf{\sffamily b.} 7seg 6\x{}$b$800
   \textbf{\sffamily c.} 3seg 12\x{}$b$1000
@@ -197,6 +197,6 @@ While further exploration of distortion reduction was not a priority of this pro
   \begin{subfigure}{0.4\textwidth}
     \includegraphics[width=\textwidth]{chapter_6/2_glass_tf.png}
   \end{subfigure}
-  \caption{Tractfinder reconstruction (right) of the left \gls{cst} in the 12 direction, three segment \gls{rsepi} scan compared with streamline tractography (left).}
+  \caption[RS-EPI 12 direction test scan CST reconstructions with tractography and tractfinder]{Tractfinder reconstruction (right) of the left \gls{cst} in the 12 direction, three segment \gls{rsepi} scan compared with streamline tractography (left).}
   \label{fig:ssepi2}
 \end{figure}

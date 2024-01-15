@@ -92,7 +92,7 @@ Atlases have been created for the most commonly indicated pathways in neurosurgi
 
 \begin{SCfigure}[][htb!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_or.png}
-  \caption{Schematic reconstruction of the \glspl{or}, shown from an inferior axial viewpoint. Fibres originating in the \glsentrylong{lgn} of the thalamus arch anteriorly forming Meyer's loop, before returning towards the visual centres in the occipital cortex.}
+  \caption[Optic radiation]{Schematic reconstruction of the \glspl{or}, shown from an inferior axial viewpoint. Fibres originating in the \glsentrylong{lgn} of the thalamus arch anteriorly forming Meyer's loop, before returning towards the visual centres in the occipital cortex.}
   \label{fig:or}
 \end{SCfigure}
 
@@ -121,7 +121,7 @@ Since not all of the \gls{or} takes the full scenic route, tractography was run 
 
 \begin{SCfigure}[][htb!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_cst.png}
-  \caption{Schematic reconstruction of the \glspl{cst}, viewed coronally, showing efferent fibres originating in the primary motor cortices converging into a compact bundle in the internal capsule and descending into the spinal cord.}
+  \caption[Corticospinal tract]{Schematic reconstruction of the \glspl{cst}, viewed coronally, showing efferent fibres originating in the primary motor cortices converging into a compact bundle in the internal capsule and descending into the spinal cord.}
   \label{fig:cst}
 \end{SCfigure}
 
@@ -170,7 +170,7 @@ An exclusion \gls{roi} on the medial lemniscus in the mid-pons excluded afferent
 
 \begin{SCfigure}[][htb!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_af.png}
-  \caption{Schematic reconstruction of the \gls{af}, viewed sagittally, showing fibres arcing between the posterior temporal and inferior frontal lobes.}
+  \caption[Arcuate fasciculus]{Schematic reconstruction of the \gls{af}, viewed sagittally, showing fibres arcing between the posterior temporal and inferior frontal lobes.}
   \label{fig:af}
 \end{SCfigure}
 
@@ -197,7 +197,7 @@ Streamlines were seeded from an \gls{roi} covering the \gls{af} on a coronal sli
 
 \begin{SCfigure}[][hbt!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_ifof.png}
-  \caption{Schematic reconstruction of the \gls{ifof}, viewed sagittally, showing association fibres passing through the narrow external capsule and temporal stem to connect the occipital and frontal lobes}
+  \caption[Inferior fronto-occipital fasciculus]{Schematic reconstruction of the \gls{ifof}, viewed sagittally, showing association fibres passing through the narrow external capsule and temporal stem to connect the occipital and frontal lobes}
   \label{fig:ifof}
 \end{SCfigure}
 
@@ -262,7 +262,7 @@ Filtering was performed in DSI studio (v2021\_04, \url{https://dsi-studio.labsol
 \begin{figure}[htb!]
   \centering
   \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_3/ofps.svg}
-  \caption{Orientational false positives (OFPs) are streamlines that remain within the target bundle volume, but partially follow the path of a different tract.
+  \caption[Orientational false positive streamlines]{Orientational false positives (OFPs) are streamlines that remain within the target bundle volume, but partially follow the path of a different tract.
   \textbf{\sffamily a.} Example orientational false positive streamlines, isolated from a \gls{cst} bundle, viewed from a superior vantage. Ascending streamlines following the CST abruptly turn along an anterior-posterior direction to follow the course of the intersecting superior longitudinal fasciculus, before again turning back towards the motor cortex.
   \textbf{\sffamily b.} Atlas \glspl{tod} before filtering out OFPs, with green lobes that do not correspond the expected \gls{cst} orientations.
   \textbf{\sffamily c.} Atlas \glspl{tod} after filtering, showing only directions corresponding to the \gls{cst}. A = anterior, P = posterior.}
@@ -277,7 +277,7 @@ The absolute number of retained streamlines is of little consequence to subseque
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table*}[t]
-  \caption{Streamline filtering statistics. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof,vof}}
+  \caption[Streamline filtering statistics]{Streamline filtering statistics. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof,vof}}
   \label{tab:filt}
   \small
   \begin{tabularx}{\textwidth}{llllll X}\toprule
@@ -310,7 +310,7 @@ The absolute number of retained streamlines is of little consequence to subseque
     \includegraphics[width=0.28\textwidth]{chapter_3/or_filtered.png}%
     \includegraphics[width=0.28\textwidth]{chapter_3/af_filtered.png}%
     \includegraphics[width=0.28\textwidth]{chapter_3/ifo_filtered.png}}
-  \caption{False positive streamlines filtered from each tract (top row), aggregated from all subjects, and final set of selected streamlines (bottom row). Reproduced from \textcite{Young2024}}\label{fig:filter}
+  \caption[Atlas streamline filtering]{False positive streamlines filtered from each tract (top row), aggregated from all subjects, and final set of selected streamlines (bottom row). Reproduced from \textcite{Young2024}}\label{fig:filter}
 \end{figure}
 
 
@@ -353,7 +353,7 @@ After each individual \gls{tod} map has been normalised in MNI space, the result
 
 \begin{SCfigure}
   \includesvg[width=0.5\textwidth]{chapter_3/tod_mean.svg}
-  \caption{Averaging the \gls{tod} contributions from all subjects (smaller cutouts) produces a smooth map of voxel-wise orientation distributions (large cutout), illustrated here in the anterior point of Meyer's loop, a part of the \gls{or} with significant inter-subject variation. Adapted from \textcite{Young2024}}
+  \caption[TOD averaging to create and atlas]{Averaging the \gls{tod} contributions from all subjects (smaller cutouts) produces a smooth map of voxel-wise orientation distributions (large cutout), illustrated here in the anterior point of Meyer's loop, a part of the \gls{or} with significant inter-subject variation. Adapted from \textcite{Young2024}}
   \label{fig:todmean}
 \end{SCfigure}
 
@@ -373,6 +373,6 @@ This atlas can then be registered to a target subject for further processing (Fi
     \includegraphics[width=0.55\textwidth,align=c]{chapter_3/or_tod.png}
     \includegraphics[width=0.55\textwidth,align=c]{chapter_3/af_tod.png}%
     \includegraphics[width=0.45\textwidth,align=c]{chapter_3/ifo_tod.png}
-  \caption{Tract orientation atlases, composite images projected onto coronal (CST), axial (OR, IFOF) and sagittal (AF) views in MNI152 reference space. Reproduced from \textcite{Young2024}}\label{fig:atlases}
+  \caption[Tract orientation atlases for the CST, AF, OR and IFOF]{Tract orientation atlases, composite images projected onto coronal (CST), axial (OR, IFOF) and sagittal (AF) views in MNI152 reference space. Reproduced from \textcite{Young2024}}\label{fig:atlases}
 \end{figure*}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
