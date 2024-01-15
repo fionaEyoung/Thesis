@@ -39,7 +39,7 @@ Rotationally invariant indices including mean diffusivity and \gls{fa} provide s
   FA = \sqrt{\frac{3}{2}}\frac{\sqrt{(\lambda_1 - \langle \lambda \rangle)^2 + (\lambda_2 - \langle \lambda \rangle)^2 + (\lambda_3 - \langle \lambda \rangle)^2}}{\sqrt{\lambda_1^2 + \lambda_2^2+ \lambda_3^2}}
 \end{equation}
 The principal eigenvector $\bm{\lambda}_1$ is usually interpreted as the direction of fastest, or least restricted, diffusivity, although this holds only in voxels with a single population of straight, parallel axons.
-If the diffusion tensor, whose eigenvectors and eigenvalues can be represented in the form of a zeppelin shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
+If the diffusion tensor, whose eigenvectors and eigenvalues can be represented in the form of an ellipsoid shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
 Depicting peak orientations is achieved through \gls{dec} mapping, in which directions are mapped to colours in RGB space, where the $x$-axis, or medial-lateral / left-right direction is assigned pure red, the $y$-axis, or posterior-anterior direction is assigned pure green, and the $z$-axis, or inferior-superior direction, is assigned pure blue.
 \Gls{dti} images are often depicted as \gls{dec} \gls{fa} (or ``colour \gls{fa}) maps, where a voxel's colour is determined by $\lambda_1$ and its brightness by the \gls{fa} value.
 
@@ -191,7 +191,7 @@ All this means that, after perhaps hours of tracking and billions of streamlines
   \label{fig:tg_rois}
 \end{SCfigure}
 
-The second approach may be called ``targeted tractography'', an involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions (Fig. \ref{fig:tg_rois}), until a target number of streamlines have been selected.
+The second approach may be called ``targeted tractography'', and involves only seeding streamlines in a tract-specific \gls{roi} and retaining those that fulfil tract-specific selection criteria, provided as additional inclusion and exclusion regions (Fig. \ref{fig:tg_rois}), until a target number of streamlines have been selected.
 A seed region can but does not necessarily have to be placed at one of the actual anatomical ends of the tract, and in some cases it makes more sense to seed from the middle of the tract and propagate bidirectionally, placing additional include regions at the ends to ensure complete coverage.
 This approach does not mean that no streamlines are discarded (seeded fibres may be terminated before fulfilling all inclusion criteria, or stray into exclusion regions) but targeted seeding and selection certainly leads to a higher number of admissible streamlines being generated in far less computational time than in the whole brain approach, while discarding unwanted streamlines on the fly reduces storage requirements.
 Targeted tractography is the more common approach particularly in applications where only a few or even just a single tract are relevant, such as in neurosurgery\autocite{Yang2021}.

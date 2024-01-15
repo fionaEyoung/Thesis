@@ -31,7 +31,7 @@ The work described in this thesis came about during a time when increasingly siz
 In the white matter imaging space, machine learning is gaining traction both for direct segmentation methods and as a means for finally overcoming the fundamental roadblocks in streamline tractography which have entangled researchers for years.
 Against this backdrop of excitement for new algorithmic and big-data possibilities, proposals for a new atlas-based technique have been met with some skepticism.
 Nevertheless, just as streamline tractography has long delivered astonishing benefits while simultaneously remaining unable to expel its sensitivity-specificity trade-off gremlins, so too are the difficulties of bringing deep learning solutions to real clinical translation beginning to show.
-Fulfilling the need for large volumes of accurately annotated data may easy where the resources for producing said data are freely available, or at least justified if the application is a well-defined and static problem.
+Fulfilling the need for large volumes of accurately annotated data may be easy where the resources for producing said data are freely available, or at least justified if the application is a well-defined and static problem.
 Tract segmentation is neither of those things:
 Producing the ground truth reference annotated data is burdensome, and the likelihood that efforts may need duplicating as our understanding of \gls{wm} anatomy evolves is high.
 We have seen this in Section \ref{sec:quant} with the \textit{TractoInferno} dataset, which represents a substantial contribution to the machine learning tractography research community, but which nonetheless contains a number of poor-quality samples undetected by rigorous quality control.
@@ -57,7 +57,7 @@ It may be argued that explicitly modelling tumour infiltration is of lower prior
 We also saw that tumour deformation modelling can still be effective in such cases, if only the solid component is segmented, or a scale factor $s<1$ is employed to reduce the effective tumour radius.
 In this way, \gls{dmri}-based white matter mapping could play a role together with direct stimulation functional monitoring in subtotal resections and biopsies in high risk locations close to critical white matter.
 
-\Gls{imri} is a relatively new technique, and as additional time spent scanning under general anaesthetic and with an open craniotomy carries potential risks the patient, acquiring supplementary sequences with no clear or confirmed clinical benefit may be unethical.
+\Gls{imri} is a relatively new technique, and as additional time spent scanning under general anaesthetic and with an open craniotomy carries potential risks for the patient, acquiring supplementary sequences with no clear or confirmed clinical benefit may be unethical.
 Particularly with regards to intraoperative \gls{dmri}, a standard of care or guidelines for its use based on large-cohort trials has yet to be established.
 As a consequence, while the new \gls{imri} system at \gls{gosh} has been used extensively since installation, the acquisition of diffusion sequences has remained infrequent, leading to a lack of available modern data with which to rigorously validate tractfinder.
 Two of the available \gls{gosh} datasets were discussed in detail in Section \ref{sec:case}, providing illustrative insights into the use of tractfinder in real-world scenarios.
@@ -65,7 +65,7 @@ There are also outstanding challenges to obtaining consistently high quality dif
 A further aspect of clinical uptake which was not addressed in this thesis is acceptance of a volumetric, voxel-based intensity map where radiologists and neurosurgeons may prefer visualising tracts as the familiar three-dimensional streamline bundles.
 Addressing this potential barrier to translation, for example through a combination of the two techniques or improved volumetric visualisation strategies, should be considered as part of future investigations.
 These limitations are to be addressed in an upcoming follow-on prospective study, funded by a grant from Children with Cancer UK (Ref: CwC2022\textbackslash 100006), which will evaluate tractfinder against conventional tractography in a series of children undergoing brain tumour surgery with \gls{imri} at \gls{gosh} and assess its clinical applicability in a range of tumour histological types and locations.
-It is hoped that the methodologies and technical considerations presented in this work can contribute the wider exploitation and adoption of advanced \gls{dmri}-based \gls{wm} imaging in neurosurgical practice, bringing to bear the full potential of modern technological and neuroscientific developments to the benefit of patients.
+It is hoped that the methodologies and technical considerations presented in this work can contribute to the wider exploitation and adoption of advanced \gls{dmri}-based \gls{wm} imaging in neurosurgical practice, bringing to bear the full potential of modern technological and neuroscientific developments to the benefit of patients.
 
 \chapter*{List of publications and outputs}\addcontentsline{toc}{chapter}{List of publications and outputs}
 

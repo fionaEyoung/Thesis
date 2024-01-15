@@ -117,7 +117,7 @@ Physicians of the 18th and 19th centuries popularised the study of bumps and dip
 Significant advances in the theory of functional localisation came with the seminal studies of aphasia, or disorders of language function, undertaken by Pierre Paul Broca (1824--1880) and Carl Wernicke (1848--1905).
 Each gave their names to regions of the frontal and temporal cortex respectively, after consistently linking specific patterns of aphasia with lesions caused by stroke or injury to those regions.
 Historically, much of the understanding of the functions seated in a given cortical region was in this way predicated on case studies involving injury (e.g. through trauma or stroke) to that region.
-This resulted in inevitably imperfect understanding of the affected areas and functions, given that such random injuries are unlikely to precisely take out one isolated functional centre.
+This resulted in inevitably imperfect understanding of the affected areas and functions, given that such random injuries are unlikely to precisely hit one isolated functional centre.
 Modern non-invasive imaging and measuring techniques have accelerated our study of the brain, however clinical case studies remain significant contributors to the field.
 
 Some cortical regions have been studied and mapped extensively, particularly those associated with easily measured quantities such as external stimuli and motor outputs.
@@ -156,7 +156,7 @@ But the postoperative deterioration in neurocognitive function and quality of li
 Furthermore, emerging evidence suggests adopting a hodological approach to neurosurgery can inform successful resection of tumours from areas typically considered inoperable\autocite{Dadario2021,DeBenedictis2011b,Suzuki2023}.
 
 As frameworks of neural function continue to evolve alongside our technological means to study it, we find ourselves reaching across the disciplinary divides for tools and ideas with which to advance our understanding of the brain.
-Modern neuroscience is blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
+Modern neuroscience is a blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
 As such, while the methodologies and experiments presented in the thesis are rooted in \textit{in vivo} structural imaging of individual white matter tracts, questions around functional tract definitions and surgical relevance will recur throughout.
 
 \begin{figure}[hb!]
@@ -194,7 +194,7 @@ The existence of an intrinsic angular momentum of a particle with electrical cha
 Following directly the spin picture, the observable component $\mu_z$ is related to the spin angular momentum: $\mu_z = \gamma S_z = \gamma \hslash m_s $.
 where $\gamma$ is the \textit{gyromagnetic ratio}, a species-specific quantity derived from its charge, mass and intrinsic $g$-factor.
 Under quantum mechanics, a spin system can only inhabit a quantised set of possible states, called \textit{eigenstates} which have associated total energy \textit{eigenvalues}.
-In the absence of an external magnetic field, the spin eigenstates $m_s = \pm \frac{1}{2}$ are degenerate, meaning their energies are equal and neither is more likely than the other, but they split into different energy levels in phenomenon called the Zeemann effect under the influence of an external magnetic field.
+In the absence of an external magnetic field, the spin eigenstates $m_s = \pm \frac{1}{2}$ are degenerate, meaning their energies are equal and neither is more likely than the other, but they split into different energy levels in a phenomenon called the Zeemann effect under the influence of an external magnetic field.
 The ratio of spins in spin-up vs spin-down state is given by the Boltzmann distribution, which describes the expected value of the energy states over all possible quantum superpositions:
 \begin{align}
   \frac{N_{\uparrow}}{N_{\downarrow}} = e^{\Delta E / k T} = e^{\gamma \hslash B / k T}, \label{eq:boltzmann}
@@ -269,6 +269,7 @@ To produce a gradient echo, a static, spatially varying magnetic field gradient 
 After a time TE/2 the gradient polarity is reversed, and with it the rates of dephasing across the sample.
 Spins previously precessing fastest are now the slowest and vice versa, such that after an equal amount of time TE/2 under the reversed gradients the gradient-induced dephasing effects are reversed, producing a signal echo at TE.
 Since the reversal of gradient polarity effects only the gradient coil generated fields, the dephasing caused by local inhomogeneities in the $B_0$ field cannot be reversed, and the resulting signal is $T_2$* weighted.
+As a consequence, gradient echo sequences are more prone to $T_2$*-related imaging artefacts, including those caused by local variations in magenetic susceptibility.
 
 \section{Spatial encoding}
 
@@ -286,7 +287,7 @@ Within the selected plane, manipulation of two spin quantities determines locali
 The first is spin precession frequency, which can be modulated along an axis in the same manner as is used in slice selection -- a \gls{fe} magnetic field gradient $G_{f}$ applied along $x$ imparts spatially varying frequencies according to $\omega_0 + \gamma G_{f}x$.
 Thus each spin precesses at a frequency that uniquely identifies its position along the \gls{fe} direction.
 In practice, frequencies are grouped into pixels of finite width, with the range of frequencies per pixel termed \textit{pixel bandwidth}, while the full range of frequencies (total receiver bandwidth) across the sample determines the image field of view (FOV) in the \gls{fe} direction.
-The width of each pixel is determined by the analog-to-digital sampling rate of the received signal, such that if the signal is samples at dwell time intervals of $t_d$ for a total amount of time $t_s$, the total \gls{fe} bandwidth is $t_d^{-1}$ and the pixel bandwidth $t_s^{-1}$.
+The width of each pixel is determined by the analog-to-digital sampling rate of the received signal, such that if the signal is sampled at dwell time intervals of $t_d$ for a total amount of time $t_s$, the total \gls{fe} bandwidth is $t_d^{-1}$ and the pixel bandwidth $t_s^{-1}$.
 The frequency encoding gradient is applied throughout the signal readout period to maintain the spatially dependent frequencies and is correspondingly also called the readout gradient.
 The receiver coil digitally samples the echo signal at discreet points, with the number of samples corresponding to the image matrix size along the $x$ axis.
 
@@ -395,9 +396,9 @@ It will experience a net dephasing of
 where $\Delta$ is the time separating onset of the two gradient pulses.
 When $\Delta\phi < 0$ refocussing will be incomplete, attenuating the spin echo amplitude accordingly.
 
-Following diffusion sensitisation, spatial encoding and image formation proceed as in standard sequences, and those voxels in which diffusion is high will have have a high degree of diffusion weighting-induced dephasing and exhibit a corresponding signal dropout.
+Following diffusion sensitisation, spatial encoding and image formation proceed as in standard sequences, and those voxels in which diffusion is high will have have a high degree of diffusion weighting-induced dephasing and exhibit a corresponding signal attenuation.
 In those voxels with low diffusion, phase coherence will remain relatively intact after diffusion sensitisation and signal loss will be correspondingly minimal.
-The signal magnitude at echo time is determined in simplified terms by
+The signal magnitude at echo time is determined in simplified terms and assuming free diffusion at the measured timescales by
 \begin{align}
     S = S_0e^{-bD}
 \end{align}\label{eq:S}
@@ -412,7 +413,7 @@ Acquisitions may also combine multiple $b$-values in a so-called ``multi-shelled
 
 A single \gls{dmri} volume only applies a diffusion-weighted gradient of fixed strength along a single orientation, with all signal samples reflecting the diffusivity along that specific direction.
 As diffusion in much of the brain is anisotropic, it cannot be assumed in general that the diffusivity would be the same if observed along a different direction.
-The simplest \gls{dmri} acquisition, which is employed routinely in diagnostic radiology, obtains three source image different volumes with diffusion weighting along orthogonal directions along with the baseline $b_0$ image, which are combined to produce a \textit{trace weighted} image.
+The simplest \gls{dmri} acquisition, which is employed routinely in diagnostic radiology, obtains three diffusion-weigthed source image volumes with diffusion weighting along orthogonal directions along with the baseline $b_0$ image, which are combined to produce a \textit{trace weighted} image.
 \begin{equation}
   S_{tw} = S_0 e^{-b(D_{xx} + D_{yy} + D_{zz})/3}. \label{eq:trace}
 \end{equation}
@@ -420,7 +421,7 @@ Alternatively, a map of \textit{average diffusion coefficient} (\glsentryshort{a
 \begin{equation}
   \text{ADC} = -b^{-1} ln (\frac{S_{tw}}{S_0}). \label{eq:adc}
 \end{equation}
-In modern acquisitions, including those required for the high angular resolution techniques we will encounter in Chapter \ref{chap:neuroimaging}, anywhere from 12 to 100s of directions are measured, and the number of scans may be additionally multiplied by repeating and averaging signals to boost \gls{snr}.
+In modern acquisitions, including those required for the high angular resolution techniques we will encounter in Chapter \ref{chap:neuroimaging}, anywhere from six to 100s of directions are measured, and the number of scans may be additionally multiplied by repeating and averaging signals to boost \gls{snr}.
 Consequently, \gls{dmri} scan times can be exceedingly long, from several minutes for clinical sequences into hours for advanced research studies, prompting efforts to reduce scan time by means of accelerated and parallel imaging techniques.
 
 \subsection{Representing spherical functions}
@@ -439,7 +440,7 @@ so can basis functions be combined to represent any other function in that space
 \end{SCfigure}
 
 Throughout this thesis, we will represent spherical functions using the spherical harmonic basis defined on the 2-sphere $S^2$.
-The solutions to Laplace's equation in spherical coordinates, the \glspl{sh} are widely used across physics, engineering and mathematics, and are given in complex form in for non-negative integer orders $l = 0, 1, 2,...$ and integer phase factor $-l \leqslant m \leqslant l$ as
+The solutions to Laplace's equation in spherical coordinates, the \glspl{sh} are widely used across physics, engineering and mathematics, and are given in complex form for non-negative integer orders $l = 0, 1, 2,...$ and integer phase factor $-l \leqslant m \leqslant l$ as
 
 \begin{align}
   Y_l^m(\theta,\phi) = \sqrt{ \frac{2l+1}{4\pi} \frac{(l-m)!}{(l+m)!} } P_l^m(cos\phi)e^{im\phi}
@@ -483,5 +484,5 @@ Measuring enough samples in the extremely short time available before the signal
 
 Fitting the entire image readout into a single magnetisation decay period results in relatively long total acquisition times per excitation.
 The pixel bandwidth in the \gls{pe} direction is the inverse of this total acquisition time, and the resulting low pixel bandwidth is associated with particular imaging artefacts.
-Local differences in magnetic susceptibility within the sample cause field inhomogeneities, leading off-resonance phase shifts geometric image distortions termed \textit{susceptibility artefacts} \autocite{Fischer1998}.
+Local differences in magnetic susceptibility within the sample cause field inhomogeneities, leading to off-resonance phase shifts geometric image distortions termed \textit{susceptibility artefacts} \autocite{Fischer1998}.
 These are particularly strong at interfaces between substances with large susceptibility differences, such as the air--tissue boundaries around the sinuses in the human head, and can compromise the results of a neuroimaging experiment if not appropriately corrected for.
