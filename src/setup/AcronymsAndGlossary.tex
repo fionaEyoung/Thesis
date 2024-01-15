@@ -1,16 +1,22 @@
 %%
 %% Set up abbreviations and definitions
 \usepackage[acronym,
+            toc=false,
             style=super,
             nogroupskip=true,
-            nonumberlist,
             seeautonumberlist,
             nopostdot]
-            {glossaries}
+            {glossaries-extra}
+\usepackage{glossaries-prefix}
+\GlsXtrSetDefaultGlsOpts{noindex}
 \makeglossaries
 \preto\chapter{\glsresetall}
-\AtBeginEnvironment{figure}{\glslocalresetall}
-\AtBeginEnvironment{SCfigure}{\glslocalresetall}
+\makeglossaries
+\preto\chapter{\glsresetall}
+% \AtBeginEnvironment{figure}{\glslocalresetall}
+% \AtBeginEnvironment{SCfigure}{\glslocalresetall}
+% \NewCommandCopy{\oldcaption}{\caption}
+% \renewcommand{\caption}[1]{\oldcaption{{\protect\glslocalresetall#1}}}
 
 %% MRI
 \newacronym{mri}{MRI}{magnetic resonance imaging}
@@ -101,39 +107,6 @@
 \newacronym{fsl}{FSL}{FMRIB software library}
 \newacronym{gosh}{GOSH}{Great Ormond Street Hospital}
 \newacronym[prefixfirst={a~},prefix={an\space}]{nhnn}{NHNN}{National Hospital for Neurology and Neurosurgery}
-%% Definitions
-\newglossaryentry{tract}{
-name=tract,
-description={an anatomical structure of a group of neuron fibres with a common functional or anatomical organisation}
-}
-\newglossaryentry{fibrebundle}{
-name=fibre bundle,
-description={\emph{see} \gls{tract}}
-}
-\newglossaryentry{streamline}{
-name=streamline,
-description={a collection of points, in the context of tractography forming an abstraction of a single fibre}
-}
-\newglossaryentry{track}{
-name=track,
-description={\emph{see} \gls{streamline}}
-}
-\newglossaryentry{bundle}{
-name=bundle,
-description={\emph{see} \gls{streamlinebundle}}
-}
-\newglossaryentry{streamlinebundle}{
-name=streamline bundle,
-description={a collection of tractography streamlines, usually serving as a representation of, but not synonymous with, a corresponding anatomical tract}
-}
-\newglossaryentry{voxel}{
-name=voxel,
-description={``volume pixel"; the smallest spatial unit of a 3D digital image, akin to an image pixel in three dimensions }
-}
-\newglossaryentry{trigone}{
-name=trigone,
-description={also called ``atrium", the part of the lateral ventricle formed at the junction between the main body and the temporal and occipital horns}
-}
 
 %% Here we set up a new command to generate a list of abbreviations, e.g. for
 %% float captions, formatted in a consistent way

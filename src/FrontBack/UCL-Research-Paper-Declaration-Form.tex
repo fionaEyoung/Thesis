@@ -26,221 +26,224 @@
 % 	\setstretch{1.5}
 %
 % \begin{document}
-{\sffamily
-\section*{UCL Research Paper Declaration Form: referencing the doctoral candidate’s own published work(s)}
-% Uncomment the following line if you would like to add this declaration to your table of contents
-% \addcontentsline{toc}{section}{UCL Research Paper Declaration Form}
-%
-% Please use this form to declare if parts of your thesis are already available in another format,
-% e.g. if data, text, or figures:
-% •	have been uploaded to a preprint server
-% •	are in submission to a peer-reviewed publication
-% •	have been published in a peer-reviewed publication, e.g. journal, textbook.
-%
-% This form should be completed as many times as necessary. For instance, if a student had seven
-% thesis chapters, two of which having material which had been published, they would complete this form twice.
+{\sffamily\footnotesize\setstretch{1.0}
+\markboth{Research paper declaration}{Research paper declaration}
+\chapter*{UCL Research Paper Declaration Form: referencing the doctoral candidate’s own published work(s)}
+\section*{Young, F. \textit{et al.}, International Journal of Computer Assisted Radiology and Surgery (2022)}
+	% Uncomment the following line if you would like to add this declaration to your table of contents
+	% \addcontentsline{toc}{section}{UCL Research Paper Declaration Form}
+	%
+	% Please use this form to declare if parts of your thesis are already available in another format,
+	% e.g. if data, text, or figures:
+	% •	have been uploaded to a preprint server
+	% •	are in submission to a peer-reviewed publication
+	% •	have been published in a peer-reviewed publication, e.g. journal, textbook.
+	%
+	% This form should be completed as many times as necessary. For instance, if a student had seven
+	% thesis chapters, two of which having material which had been published, they would complete this form twice.
 
-\begin{enumerate}[leftmargin=*,label={\bfseries\arabic*.}]\itemsep0em
+	\begin{enumerate}[leftmargin=*,label={\bfseries\arabic*.}]\itemsep0em
+		\item \textbf{For a research manuscript that has already been published} (if not yet published, please skip to section 2)\textbf{:}
+		%
+		\begin{enumerate}[label={\alph*)}]\itemsep0em
+		%
+		\item \textbf{What is the title of the manuscript?}
+
+		\citetitle{Young2022}
+
+		\item \textbf{Please include a link to or doi for the work:}
+
+		\url{https://doi.org/10.1007/s11548-022-02617-z}
+
+		\item \textbf{Where was the work published?}
+
+		\citefield{Young2022}{journaltitle}% Answer here: e.g. journal name
+
+		\item \textbf{Who published the work?}
+
+		\citelist{Young2022}{publisher}% Answer here: e.g. Elsevier/Oxford University Press
+
+		\item \textbf{When was the work published?}
+
+		\citefield{Young2022}{year}% Answer here
+
+		\item \textbf{List the manuscript's authors in the order they appear on the publication:}
+		\citeauthor*{Young2022}% Answer here
+
+		\item \textbf{Was the work peer reviewd?}
+
+		Yes
+
+		\item \textbf{Have you retained the copyright?}
+
+		Yes, from the Licence to Publish agreement:
+		\begin{quote}
+			Ownership of copyright in the Article will be vested in the name of the Author.
+		\end{quote}% Answer here
+
+		\item \textbf{Was an earlier form of the manuscript uploaded to a preprint server (e.g. medRxiv)? If `Yes’, please give a link or doi}
+
+		No% Answer here:
+		\\
+		If ‘No’, please seek permission from the relevant publisher and check the box next to the below statement:
+		%
+			\begin{itemize}\itemsep0em
+			% To check this box, replace \Box with \boxtimes
+			\item[$\boxtimes$] {\itshape I acknowledge permission of the publisher named under 1d to include in this thesis portions of the publication named as included in 1c.}
+			\end{itemize}
+		%
+		\end{enumerate}
+	%
+	\item \textbf{For a research manuscript prepared for publication but that has not yet been published} (if already published, please skip to section 3)\textbf{:}
+	%
+	\begin{enumerate}[label={\alph*)}]\itemsep0em
+		%
+		\item \textbf{What is the current title of the manuscript?}
+		% Answer here:
+		\item \textbf{Has the manuscript been uploaded to a preprint server `e.g. medRxiv'?
+		\\
+		If `Yes', please please give a link or doi:}
+		% Answer here:
+		\item \textbf{Where is the work intended to be published?}
+		% Answer here: e.g. journal name
+		\item \textbf{List the manuscript's authors in the intended authorship order:}
+		% Answer here
+		\item \textbf{Stage of publication:}
+		% answer here: e.g. in submission
+		%
+	\end{enumerate}
+
+	\item \textbf{For multi-authored work, please give a statement of contribution covering all authors} (if single-author, please skip to section 4)\textbf{:}
+	\begin{description}[font=\sffamily]
+		\item[Fiona Young] Methodology (conceptualisation and implementation), analysis, manuscript original draft and graphics
+		\item[Kristian Aquilina] Supervision, manuscript review and editing
+		\item[Chris A. Clark] Supervision, manuscript review and editing
+		\item[Jonathan D. Clayden] Conceptualisation, supervision, manuscript review and editing
+	\end{description}
+	% Answer here
+	\item \textbf{In which chapter(s) of your thesis can this material be found?}
+	% Answer here
+
+	Chapters \ref{chap:reg}, \ref{chap:applications}
+
+	\end{enumerate}
+
+	\textbf{e-Signatures confirming that the information above is accurate}
+	(this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work)\textbf{:}\\
+	\textbf{}\\
+	\textbf{Candidate:}\\
+	\textbf{Date:}\\
+	% this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work):
+	\textbf{}\\
+	\textbf{Supervisor/Senior Author signature} (where appropriate)\textbf{:}\\
+	\textbf{Date:}
+	%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --- HBM --- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Young, F. \textit{et al.}, Human Brain Mapping (in press)}
+	\begin{enumerate}[leftmargin=*,label={\bfseries\arabic*.}]\itemsep0em
+	%
 	\item \textbf{For a research manuscript that has already been published} (if not yet published, please skip to section 2)\textbf{:}
 	%
 	\begin{enumerate}[label={\alph*)}]\itemsep0em
-	%
-	\item \textbf{What is the title of the manuscript?}
+		%
+		\item \textbf{What is the title of the manuscript?}
 
-	\citetitle{Young2022}
+		\citetitle{Young2024}
 
-	\item \textbf{Please include a link to or doi for the work:}
+		\item \textbf{Please include a link to or doi for the work:}
 
-	\url{https://doi.org/10.1007/s11548-022-02617-z}
+		\citefield{Young2024}{doi}
 
-	\item \textbf{Where was the work published?}
+		\item \textbf{Where was the work published?}
 
-	\citefield{Young2022}{journaltitle}% Answer here: e.g. journal name
+		\citefield{Young2024}{journaltitle}% Answer here: e.g. journal name
 
-	\item \textbf{Who published the work?}
+		\item \textbf{Who published the work?}
 
-	\citelist{Young2022}{publisher}% Answer here: e.g. Elsevier/Oxford University Press
+		\citelist{Young2024}{publisher}% Answer here: e.g. Elsevier/Oxford University Press
 
-	\item \textbf{When was the work published?}
+		\item \textbf{When was the work published?}
 
-	\citefield{Young2022}{year}% Answer here
+		\citefield{Young2024}{year}% Answer here
 
-	\item \textbf{List the manuscript's authors in the order they appear on the publication:}
-	\citeauthor*{Young2022}% Answer here
+		\item \textbf{List the manuscript's authors in the order they appear on the publication:}
 
-	\item \textbf{Was the work peer reviewd?}
+		\citeauthor*{Young2024}% Answer here
 
-	Yes
+		\item \textbf{Was the work peer reviewd?}
 
-	\item \textbf{Have you retained the copyright?}
+		Yes
 
-	Yes, from the Licence to Publish agreement:
-	\begin{quote}
-		Ownership of copyright in the Article will be vested in the name of the Author.
-	\end{quote}% Answer here
+		\item \textbf{Have you retained the copyright?}
 
-	\item \textbf{Was an earlier form of the manuscript uploaded to a preprint server (e.g. medRxiv)? If `Yes’, please give a link or doi}
+		Yes, from license agreement:
+		\begin{quote}
+			The Author and each Co-author or, if applicable, the Author’s or Co-author’s employer, retains all proprietary rights, such as copyright
+		\end{quote}
 
-	No% Answer here:
-	\\
-	If ‘No’, please seek permission from the relevant publisher and check the box next to the below statement:
-	%
+		\item \textbf{Was an earlier form of the manuscript uploaded to a preprint server (e.g. medRxiv)? If `Yes’, please give a link or doi}
+
+		No% Answer here:
+		\\
+		If ‘No’, please seek permission from the relevant publisher and check the box next to the below statement:
+		%
 		\begin{itemize}\itemsep0em
 		% To check this box, replace \Box with \boxtimes
 		\item[$\boxtimes$] {\itshape I acknowledge permission of the publisher named under 1d to include in this thesis portions of the publication named as included in 1c.}
 		\end{itemize}
-	%
+		%
 	\end{enumerate}
-%
-\item \textbf{For a research manuscript prepared for publication but that has not yet been published} (if already published, please skip to section 3)\textbf{:}
-%
-\begin{enumerate}[label={\alph*)}]\itemsep0em
 	%
-	\item \textbf{What is the current title of the manuscript?}
-	% Answer here:
-	\item \textbf{Has the manuscript been uploaded to a preprint server `e.g. medRxiv'?
-	\\
-	If `Yes', please please give a link or doi:}
-	% Answer here:
-	\item \textbf{Where is the work intended to be published?}
-	% Answer here: e.g. journal name
-	\item \textbf{List the manuscript's authors in the intended authorship order:}
+	\item \textbf{For a research manuscript prepared for publication but that has not yet been published} (if already published, please skip to section 3)\textbf{:}
+	%
+	\begin{enumerate}[label={\alph*)}]\itemsep0em
+		%
+		\item \textbf{What is the current title of the manuscript?}
+		% Answer here:
+		\item \textbf{Has the manuscript been uploaded to a preprint server `e.g. medRxiv'?
+		\\
+		If `Yes', please please give a link or doi:}
+		% Answer here:
+		\item \textbf{Where is the work intended to be published?}
+		% Answer here: e.g. journal name
+		\item \textbf{List the manuscript's authors in the intended authorship order:}
+		% Answer here
+		\item \textbf{Stage of publication:}
+		% answer here: e.g. in submission
+		%
+	\end{enumerate}
+
+	\item \textbf{For multi-authored work, please give a statement of contribution covering all authors} (if single-author, please skip to section 4)\textbf{:}
+	\begin{description}[font=\sffamily]
+		\item[Fiona Young] Methodology (conceptualisation and implementation), analysis, manuscript original draft and graphics
+		\item[Kristian Aquilina] Supervision, conceptualisation, manuscript review and editing
+		\item[Laura Mancini] Data contribution, manuscript review and editing
+		\item[Kiran K. Seunarine] Data contribution and curation
+		\item[Chris A. Clark] Supervision, manuscript review and editing
+		\item[Jonathan D. Clayden] Conceptualisation, supervision, manuscript review and editing
+	\end{description}
 	% Answer here
-	\item \textbf{Stage of publication:}
-	% answer here: e.g. in submission
-	%
-\end{enumerate}
-
-\item \textbf{For multi-authored work, please give a statement of contribution covering all authors} (if single-author, please skip to section 4)\textbf{:}
-\begin{description}[font=\sffamily]
-	\item[Fiona Young] Methodology (conceptualisation and implementation), analysis, manuscript original draft and graphics
-	\item[Kristian Aquilina] Supervision, manuscript review and editing
-	\item[Chris A. Clark] Supervision, manuscript review and editing
-	\item[Jonathan D. Clayden] Conceptualisation, supervision, manuscript review and editing
-\end{description}
-% Answer here
-\item \textbf{In which chapter(s) of your thesis can this material be found?}
-% Answer here
-
-Chapters \ref{chap:reg}, \ref{chap:applications}
-
-\end{enumerate}
-
-\textbf{e-Signatures confirming that the information above is accurate}
-(this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work)\textbf{:}\\
-\textbf{}\\
-\textbf{Candidate:}\\
-\textbf{Date:}\\
-% this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work):
-\textbf{}\\
-\textbf{Supervisor/Senior Author signature} (where appropriate)\textbf{:}\\
-\textbf{Date:}
-%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%% --- HBM --- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\begin{enumerate}[leftmargin=*,label={\bfseries\arabic*.}]\itemsep0em
-%
-\item \textbf{For a research manuscript that has already been published} (if not yet published, please skip to section 2)\textbf{:}
-%
-\begin{enumerate}[label={\alph*)}]\itemsep0em
-	%
-	\item \textbf{What is the title of the manuscript?}
-
-	\citetitle{Young2024}
-
-	\item \textbf{Please include a link to or doi for the work:}
-
-	\citefield{Young2024}{doi}
-
-	\item \textbf{Where was the work published?}
-
-	\citefield{Young2024}{journaltitle}% Answer here: e.g. journal name
-
-	\item \textbf{Who published the work?}
-
-	\citelist{Young2024}{publisher}% Answer here: e.g. Elsevier/Oxford University Press
-
-	\item \textbf{When was the work published?}
-
-	\citefield{Young2024}{year}% Answer here
-
-	\item \textbf{List the manuscript's authors in the order they appear on the publication:}
-
-	\citeauthor*{Young2024}% Answer here
-
-	\item \textbf{Was the work peer reviewd?}
-
-	Yes
-
-	\item \textbf{Have you retained the copyright?}
-
-	Yes, from license agreement:
-	\begin{quote}
-		The Author and each Co-author or, if applicable, the Author’s or Co-author’s employer, retains all proprietary rights, such as copyright
-	\end{quote}
-
-	\item \textbf{Was an earlier form of the manuscript uploaded to a preprint server (e.g. medRxiv)? If `Yes’, please give a link or doi}
-
-	No% Answer here:
-	\\
-	If ‘No’, please seek permission from the relevant publisher and check the box next to the below statement:
-	%
-	\begin{itemize}\itemsep0em
-	% To check this box, replace \Box with \boxtimes
-	\item[$\boxtimes$] {\itshape I acknowledge permission of the publisher named under 1d to include in this thesis portions of the publication named as included in 1c.}
-	\end{itemize}
-	%
-\end{enumerate}
-%
-\item \textbf{For a research manuscript prepared for publication but that has not yet been published} (if already published, please skip to section 3)\textbf{:}
-%
-\begin{enumerate}[label={\alph*)}]\itemsep0em
-	%
-	\item \textbf{What is the current title of the manuscript?}
-	% Answer here:
-	\item \textbf{Has the manuscript been uploaded to a preprint server `e.g. medRxiv'?
-	\\
-	If `Yes', please please give a link or doi:}
-	% Answer here:
-	\item \textbf{Where is the work intended to be published?}
-	% Answer here: e.g. journal name
-	\item \textbf{List the manuscript's authors in the intended authorship order:}
+	\item \textbf{In which chapter(s) of your thesis can this material be found?}
 	% Answer here
-	\item \textbf{Stage of publication:}
-	% answer here: e.g. in submission
+
+	Chapters \ref{chap:Neuroimaging}, \ref{chap:atlas}, \ref{chap:reg} (Section \ref{sec:reg1}), \ref{chap:eval}, Appendix
+	\end{enumerate}
+
+	\textbf{e-Signatures confirming that the information above is accurate}
+	(this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work)\textbf{:}\\
+	\textbf{}\\
+	\textbf{Candidate:}\\
+	\textbf{Date:}\\
+	% this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work):
+	\textbf{}\\
+	\textbf{Supervisor/Senior Author signature} (where appropriate)\textbf{:}\\
+	\textbf{Date:}
 	%
-\end{enumerate}
-
-\item \textbf{For multi-authored work, please give a statement of contribution covering all authors} (if single-author, please skip to section 4)\textbf{:}
-\begin{description}[font=\sffamily]
-	\item[Fiona Young] Methodology (conceptualisation and implementation), analysis, manuscript original draft and graphics
-	\item[Kristian Aquilina] Supervision, conceptualisation, manuscript review and editing
-	\item[Laura Mancini] Data contribution, manuscript review and editing
-	\item[Kiran K. Seunarine] Data contribution and curation
-	\item[Chris A. Clark] Supervision, manuscript review and editing
-	\item[Jonathan D. Clayden] Conceptualisation, supervision, manuscript review and editing
-\end{description}
-% Answer here
-\item \textbf{In which chapter(s) of your thesis can this material be found?}
-% Answer here
-
-Chapters \ref{chap:Neuroimaging}, \ref{chap:atlas}, \ref{chap:reg} (Section \ref{sec:reg1}), \ref{chap:eval}, Appendix
-\end{enumerate}
-
-\textbf{e-Signatures confirming that the information above is accurate}
-(this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work)\textbf{:}\\
-\textbf{}\\
-\textbf{Candidate:}\\
-\textbf{Date:}\\
-% this form should be co-signed by the supervisor/ senior author unless this is not appropriate, e.g. if the paper was a single-author work):
-\textbf{}\\
-\textbf{Supervisor/Senior Author signature} (where appropriate)\textbf{:}\\
-\textbf{Date:}
-%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%% --- IEEE --- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+\section*{Young, F. \textit{et al.}, IEEE EMBS Data Science (conference abstract, 2023)}
 \begin{enumerate}[leftmargin=*,label={\bfseries\arabic*.}]\itemsep0em
 	%
 	\item \textbf{For a research manuscript that has already been published} (if not yet published, please skip to section 2)\textbf{:}
@@ -327,7 +330,7 @@ Chapter \ref{chap:atlas}
 %
 
 %%%%%%%%%%%%%%%%%%%%%%%%% --- Diffusion ISMRM --- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
+\section*{Young, F. \textit{et al.}, ISMRM Wokshop on Diffusion MRI (conference abstract, 2022)}
 \begin{enumerate}[leftmargin=*,label={\bfseries\arabic*.}]\itemsep0em
 	%
 	\item \textbf{For a research manuscript that has already been published} (if not yet published, please skip to section 2)\textbf{:}

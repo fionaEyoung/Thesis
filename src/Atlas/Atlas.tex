@@ -19,7 +19,7 @@ In order to motivate its format and derivation, it is worth first considering th
 First is the spatial distribution, i.e. the likelihood of finding the tract in a given voxel.
 How should we quantify this likelihood?
 At the individual level, this is sometimes conflated with or loosely equated to streamline density derived from tractography, when in reality the relative densities between different portions of a streamline bundle have far more to do with the biases of tracking algorithms than the underlying anatomy.
-Instead, let's imagine we pick a single \gls{voxel} in a brain scan and ask, ``are fibres of the \gls{cst} present in this voxel?''.
+Instead, let's imagine we pick a single voxel in a brain scan and ask, ``are fibres of the \gls{cst} present in this voxel?''.
 In attempting to answer this question, we encounter several sources of uncertainty.
 
 \textit{a) Definitional uncertainty.}
@@ -49,7 +49,7 @@ This property, too, is subject to uncertainties as described above.
 However, once a tract's location is known, or at least assumed, we can in most cases be fairly certain of its local orientations based on our knowledge of its global shape and trajectory.
 In a multi-fibre voxel, the distinct population in the apparent \gls{fod} which corresponds to our tract of interest is assumed to be known.
 In this case, tractography which probabilistically draws samples from that distribution will reconstruct some streamlines travelling through that voxel in a distribution of directions consistent with our expectations for that tract, alongside potential spurious streamlines traversing the voxel in the ``wrong'' direction.
-After carefully ensuring, as much as is feasible, that only those consistent streamlines remain, we can retrieve the orientation distribution of the tract of interest in isolation from the other crossing populations using a technique called \gls{tod}\autocite{Dhollander2014} mapping.
+After carefully ensuring, as much as is feasible, that only those consistent streamlines remain, we can retrieve the orientation distribution of the tract of interest in isolation from the other crossing populations using a technique called \gls[noindex=false]{tod}\autocite{Dhollander2014} mapping.
 % The objective is to create a map in a template space capturing, at each location, the range of possible orientations the tract can take on as a single spherical distribution.
 After aggregating this information in a template space we should be left with a single spherical distribution per voxel expressing the range of possible orientations typical of the tract.
 A narrow distribution may be found where the tract's orientation is highly consistent across all subjects, whereas a more spread-out distribution would reflect a wider inter-subject variability, which may be seen in regions of fanning or sharp turning.
@@ -92,13 +92,13 @@ Atlases have been created for the most commonly indicated pathways in neurosurgi
 
 \begin{SCfigure}[][htb!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_or.png}
-  \caption[Optic radiation]{Schematic reconstruction of the \glspl{or}, shown from an inferior axial viewpoint. Fibres originating in the \glsentrylong{lgn} of the thalamus arch anteriorly forming Meyer's loop, before returning towards the visual centres in the occipital cortex.}
+  \caption[Optic radiation]{Schematic reconstruction of the \glsentrylongpl{or}, shown from an inferior axial viewpoint. Fibres originating in the \glsentrylong{lgn} of the thalamus arch anteriorly forming Meyer's loop, before returning towards the visual centres in the occipital cortex.}
   \label{fig:or}
 \end{SCfigure}
 
-As a projection tract, the \gls{or} is among the more easily definable in terms of its end points.
-Arising from the \gls{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named \gls{ml} (Fig. \ref{fig:or})\autocite{Sarubbo2015}, the extent and shape of which vary significantly between individuals\autocite{Ebeling1988,Yogarajah2009}.%first
-As it projects towards the most posterior reaches of the occipital lobe, the \gls{or} forms part of the \gls{ss}, a confluence of fibres superficial to the lateral ventricle, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes\autocite{Maldonado2021}.
+As a projection tract, the \glsentrylong{or} is among the more easily definable in terms of its end points.
+Arising from the \gls[noindex=false]{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named \gls[noindex=false]{ml} (Fig. \ref{fig:or})\autocite{Sarubbo2015}, the extent and shape of which vary significantly between individuals\autocite{Ebeling1988,Yogarajah2009}.%first
+As it projects towards the most posterior reaches of the occipital lobe, the \gls[noindex=false]{or} forms part of the \gls[noindex=false]{ss}, a confluence of fibres superficial to the lateral ventricle, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes\autocite{Maldonado2021}.
 The fibres of the \gls{or}, conferring low-level visual data on contrast, colour and shapes, then terminate in the primary visual areas of the occipital cortex surrounding the calcarine fissure, a sulcus on the medial surface of the occipital lobe.
 
 The \gls{or} is naturally an integral structure for visual function and thus quality of life.
@@ -121,19 +121,19 @@ Since not all of the \gls{or} takes the full scenic route, tractography was run 
 
 \begin{SCfigure}[][htb!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_cst.png}
-  \caption[Corticospinal tract]{Schematic reconstruction of the \glspl{cst}, viewed coronally, showing efferent fibres originating in the primary motor cortices converging into a compact bundle in the internal capsule and descending into the spinal cord.}
+  \caption[Corticospinal tract]{Schematic reconstruction of the \glsentrylongpl{cst}, viewed coronally, showing efferent fibres originating in the primary motor cortices converging into a compact bundle in the internal capsule and descending into the spinal cord.}
   \label{fig:cst}
 \end{SCfigure}
 
 Voluntary movement is the cornerstone of life and our means of interacting with the outside world, without which motion, speech, and full vision would be impossible.
 It stands to reason that an outsized portion of the central nervous system is dedicated to the precise innervation of muscles throughout the body, and that such a vast repertoire of motor function, which includes the fine control of vocal chords to automated touch-typing, is mediated by an intricate interplay of different systems including the basal ganglia circuits, cerebellum and the sensori-motor cortices of the cerebral hemispheres\autocite{Kandel2021}.
 Within the primary motor cortex, situated in the precentral gyri, are the bodies of neurons whose axons project all the way into the spinal cord, where they synapse with the motor neurons of the \gls{pns} to control muscles\autocite{Ebeling1992}.
-These axons form a critical pathway called the corticospinal tract (Fig. \ref{fig:cst}).
+These axons form a critical pathway called the \glsentrylong{cst} (Fig. \ref{fig:cst}).
 The motor cortex exhibits a somatotopic organisation, with correspondence between specific cortical areas and the muscles in different regions of the body, while recent evidence suggests that this somatotopy is lost in the spinal cord as descending fibres converge and overlap\autocite{Lemon2023}.
 As with many cerebral functions, somatotopic representation in the brain is contralateral, such that the left motor cortex controls movement in the right side of the body and vice versa.
 Standardised \gls{wm} atlases and tractography protocols varyingly describe the corticospinal and pyramidal tracts.
 These two terms are often used interchangeably in tractography-oriented publications, while in anatomical terms they are distinct:
-The pyramidal tracts are commonly defined as encompassing both the \glspl{cst} and the corticobulbar (or corticonuclear) tracts, the latter of which synapses with cranial nerve nuclei of the medulla to control motion of the head, neck and face\autocite{Chenot2019}.
+The pyramidal tracts are commonly defined as encompassing both the \glspl[noindex=false]{cst} and the corticobulbar (or corticonuclear) tracts, the latter of which synapses with cranial nerve nuclei of the medulla to control motion of the head, neck and face\autocite{Chenot2019}.
 This despite the fact that only the \gls{cst} fibres continue to form the pyramids of the medulla, after which the pyramidal tract is named.
 Since the two are not practically distinguishable on \gls{dmri} from the brainstem upwards, we will hereon refer only to the corticospinal tract.% \note{reference this section}
 %
@@ -170,12 +170,12 @@ An exclusion \gls{roi} on the medial lemniscus in the mid-pons excluded afferent
 
 \begin{SCfigure}[][htb!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_af.png}
-  \caption[Arcuate fasciculus]{Schematic reconstruction of the \gls{af}, viewed sagittally, showing fibres arcing between the posterior temporal and inferior frontal lobes.}
+  \caption[Arcuate fasciculus]{Schematic reconstruction of the \glsentrylong{af}, viewed sagittally, showing fibres arcing between the posterior temporal and inferior frontal lobes.}
   \label{fig:af}
 \end{SCfigure}
 
-The \gls{af} has long held the fascination of neuroscientists, anatomists and psychologists since its earliest descriptions in the 19th century\autocite{Burdach1822}.
-Ever since, the nomenclature and anatomical description of the \gls{af} has been the subject of much disagreement and confusion, with researchers variably dividing it into a series of subcomponents, disputing its cortical terminals and declaring it synonymous with either part or all of the \gls{slf}.
+The \glsentrylong{af} has long held the fascination of neuroscientists, anatomists and psychologists since its earliest descriptions in the 19th century\autocite{Burdach1822}.
+Ever since, the nomenclature and anatomical description of the \gls[noindex=false]{af} has been the subject of much disagreement and confusion, with researchers variably dividing it into a series of subcomponents, disputing its cortical terminals and declaring it synonymous with either part or all of the \gls{slf}.
 A comprehensive review of this jumble and its history can be read in \textcite{PortodeOliveira2021}.
 Intertwined with this discussion on the \gls{wm} connections between (and within) frontal and temporal lobes are the ever-evolving models of language reception, processing and production in the human brain\autocite{Becker2022a}.
 In particular, conflicts over the distinction between the \gls{slf} and \gls{af} and their respective terminations in the superior, middle or inferior temporal gyri are directly motivated by a desire to disentangle the distribution of different language associated functions in the temporal cortex and their processing by means of the dorsal and ventral language streams\autocite{Hickok2004,Friederici2013a,Kljajevic2014a,Giampiccolo2022a,Becker2022a}.
@@ -197,15 +197,15 @@ Streamlines were seeded from an \gls{roi} covering the \gls{af} on a coronal sli
 
 \begin{SCfigure}[][hbt!]
   \includegraphics[width=0.5\textwidth]{chapter_3/45_ifof.png}
-  \caption[Inferior fronto-occipital fasciculus]{Schematic reconstruction of the \gls{ifof}, viewed sagittally, showing association fibres passing through the narrow external capsule and temporal stem to connect the occipital and frontal lobes}
+  \caption[Inferior fronto-occipital fasciculus]{Schematic reconstruction of the \glsentrylong{ifof}, viewed sagittally, showing association fibres passing through the narrow external capsule and temporal stem to connect the occipital and frontal lobes}
   \label{fig:ifof}
 \end{SCfigure}
 
 Even compared to the \gls{af}, whose canonical description, however since disputed, was at least anchored in a strongly motivated connection between two well described cortical regions and an attached clear linguistic function, study of a direct \gls{wm} fibre connection between the occipital and frontal lobes has an unsettled history\autocite{Forkel2014a}.
 Thanks to a confusing mix of attempting to directly compare simian and human anatomy\autocite{Schmahmann2007,ThiebautdeSchotten2012,Mandonnet2018,Sarubbo2019}, the historical study of and extrapolation from atypically developed or lesioned brains\autocite{Schmahmann2007,Forkel2014a}, and the difficulty by any means of following long-range connections in the brain
-\autocite{Martino2010}, the \gls{ifof} is an exceedingly difficult tract to pin down from available literature\autocite{Sarubbo2019,Weiller2021}.
+\autocite{Martino2010}, the \glsentrylong{ifof} is an exceedingly difficult tract to pin down from available literature\autocite{Sarubbo2019,Weiller2021}.
 
-The most widely cited functional role of the \gls{ifof} is one of semantic processing and fluency as part of the wider language network, supported by lesion studies\autocite{Ille2018b,Almairac2015} and the eliciting of semantic paraphasia by \gls{des} along its entire course\autocite{Duffau2013a,Herbet2017,Voets2017,Vigren2020a}, while the connections to the occipital lobes point more specifically to lexical and visual-semantic involvement
+The most widely cited functional role of the \gls[noindex=false]{ifof} is one of semantic processing and fluency as part of the wider language network, supported by lesion studies\autocite{Ille2018b,Almairac2015} and the eliciting of semantic paraphasia by \gls{des} along its entire course\autocite{Duffau2013a,Herbet2017,Voets2017,Vigren2020a}, while the connections to the occipital lobes point more specifically to lexical and visual-semantic involvement
 \autocite{Martino2010,Rollans2017,Rollans2018}.
 From a surgical perspective, damage to and infiltration of the \gls{ifof} has been associated with transient or permanent semantic deficits and is commonly dislocated or infiltrated by tumours\autocite{Almairac2015,Voets2017,Altieri2019,Binding2023}.
 Situated within the temporal lobe alongside the \gls{or} and the dense language association network, the \gls{ifof} is at risk of injury in temporal lobectomy surgeries common in the treatment of epilepsy\autocite{Baran2020,Shah2022,Binding2023}.
@@ -230,7 +230,7 @@ However, it must be pointed out that the \gls{ifof} fibres have not been unambig
 For example, the lingual gyrus is cited in \textcite{Sarubbo2013} as one of three ``main apparent origins'' of the \gls{ifof}, albeit to a limited extent, while \textcite{Martino2010} asserted that any fibres connected to the lingual gyrus belonged to the optic radiations.
 % (\textcite{Hau2016} reported tractography projections to the lingual gyrus ``in almost all subjects''.)
 
-After coursing through the temporal lobe above the roof of the temporal horn of the lateral ventricle\autocite{Martino2010,Kljajevic2014a}, the \gls{ifof} converges into a narrow bundle to squeeze, alongside the \gls{uf}, through the temporal stem and into the frontal lobe (Fig. \ref{fig:ifof})\autocite{Martino2010,Sarubbo2013}.
+After coursing through the temporal lobe above the roof of the temporal horn of the lateral ventricle\autocite{Martino2010,Kljajevic2014a}, the \gls{ifof} converges into a narrow bundle to squeeze, alongside the \gls[noindex=false]{uf}, through the temporal stem and into the frontal lobe (Fig. \ref{fig:ifof})\autocite{Martino2010,Sarubbo2013}.
 \textcite{Martino2010} maintained that ``at the level of the frontal operculum, the fibres of the \gls{ifof} strongly intersect with the terminal branches of other long association fasciculus [\textit{sic}]'', making dissection extremely difficult, and indeed not possible for that particular study.
 Nevertheless, \textcite{Sarubbo2013} have conducted the only dissection study to my knowledge analysing in detail the frontal connections specifically of the \gls{ifof}.
 Other studies, e.g. \textcite{Burks2017}, focus on a particular cortical region and study all connections to it.

@@ -9,19 +9,19 @@ Though the tools for studying the structure and function of neural connectivity 
 Though the mechanism underlying a diffusion-weighted signal is well understood (see Section \ref{sec:dmri}), its correct interpretation hinges on an understanding of how diffusion is affected by the microstructural environment\autocite{LeBihan1995}, or even by just those features of the microstructural environment we are interested in measuring.
 It is not obvious, for example, how much of diffusion within a voxel filled with myelinated axons can be best characterised as either hindered or restricted, and how properties such as axon density and diameter might contribute to the observed signal\autocite{Panagiotaki2012}.
 
-Diffusion \gls{mri} image \glspl{voxel} are on the order of cubic millimetres, and in such a volume are contained thousands of individual axons, with average diameters of around 1$\mu m$\autocite{Liewald2014,Lampinen2019}.
+Diffusion \gls{mri} image voxels are on the order of cubic millimetres, and in such a volume are contained thousands of individual axons, with average diameters of around 1$\mu m$\autocite{Liewald2014,Lampinen2019}.
 What's more, rarely are all axons within a voxel uniformly aligned along a single direction.
 Throughout the brain, fibre tracts mingle and intersect, bend and fan out\autocite{Jeurissen2013,Alexander2019}.
 The physical diffusion processes in such complex configurations and multicellular environments cannot be known, only approximated and modelled through a choice of assumptions and simplifications.
 In this there are, of course, many contrasting approaches, developed for different applications and the directed study of specific quantities and microstructural features.
 Such properties of interest to \gls{dmri} analysis include cellular composition of \gls{gm}, axon density and myelination, intra- and extracellular water content, and diffusivity perpendicular to axonal orientation.
 These scalar parameters can be estimated using a family of microstructural models known collectively as multi-compartment models, so named for their separation of the measured signal into isolated compartments representing, for example, intra-axonal or extracellular space, each with different diffusion patterns\autocite{Panagiotaki2012,Alexander2019} which could capture virtual cytohistological information and even serve as biomarkers for disease\autocite{Alexander2008}.
-For the purposes of studying macroscopic brain connectivity and the course and organisation of individual \gls{wm} fibre tracts, the key information of interest to be determined from raw \gls{dmri} is the distribution of axonal orientations within each voxel described by a \gls{fod}.
+For the purposes of studying macroscopic brain connectivity and the course and organisation of individual \gls{wm} fibre tracts, the key information of interest to be determined from raw \gls{dmri} is the distribution of axonal orientations within each voxel described by a \gls[noindex=false]{fod}.
 
 \section{Tissue microstructure and fibre orientation modelling}
 
 
-The first approach for modelling fibre orientations came in the form of \gls{dti}, which remains one of the dominant diffusion models in many applications today, particularly in clinical contexts.
+The first approach for modelling fibre orientations came in the form of \gls[noindex=false]{dti}, which remains one of the dominant diffusion models in many applications today, particularly in clinical contexts.
 The diffusion process within a \gls{wm} voxel is modelled as a three dimensional Gaussian distribution, whose covariance matrix is proportional to the \textit{diffusion tensor}\autocite{Basser1994,ODonnell2011} $\mathbf{D}$:
 \begin{equation}
   \mathbf{D} = \begin{pmatrix}
@@ -33,18 +33,18 @@ The diffusion process within a \gls{wm} voxel is modelled as a three dimensional
 At least six unique directions are required to fully determine $\mathbf{D}$ (which is diagonally symmetric, i.e. $D_{ij} = D_{ji}$), although the diagonal components, sufficient for measuring \gls{adc} as previously described in (\ref{eq:trace}--\ref{eq:adc}), may be determined from only three orthogonal measurements.
 
 By diagonalising $\mathbf{D}$, which is symmetric and positive-definite, three orthogonal eigenvectors and corresponding eigenvalues $\lambda_1 \geqslant \lambda_2 \geqslant \lambda_3$ can be computed.
-Rotationally invariant indices derived from these tensor eigenvalues, including mean diffusivity (MD) and \gls{fa}, provide scalar quantities which can give insight into underlying tissue properties, the latter being a measure of the degree of diffusion anisotropy given by
+Rotationally invariant indices derived from these tensor eigenvalues, including mean diffusivity (MD) and \gls[noindex=false]{fa}, provide scalar quantities which can give insight into underlying tissue properties, the latter being a measure of the degree of diffusion anisotropy given by
 \begin{equation}
   FA = \sqrt{\frac{3}{2}}\frac{\sqrt{(\lambda_1 - \langle \lambda \rangle)^2 + (\lambda_2 - \langle \lambda \rangle)^2 + (\lambda_3 - \langle \lambda \rangle)^2}}{\sqrt{\lambda_1^2 + \lambda_2^2+ \lambda_3^2}}.
 \end{equation}
 The principal eigenvector $\bm{\lambda}_1$ is usually interpreted as the direction of fastest, or least restricted, diffusivity, although this holds only in voxels with a single population of straight, parallel axons.
-If the \gls{dt}, whose eigenvectors and eigenvalues can be represented in the form of an ellipsoid shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
-Depicting peak orientations is achieved through \gls{dec} mapping, in which directions are mapped to colours in RGB space, where the $x$-axis, or medial-lateral / left-right direction, is assigned pure red, the $y$-axis, or posterior-anterior direction, is assigned pure green, and the $z$-axis, or inferior-superior direction, is assigned pure blue.
+If the \gls[noindex=false]{dt}, whose eigenvectors and eigenvalues can be represented in the form of an ellipsoid shaped surface of equal mean displacement, is used as a rudimentary approximation of the \gls{fod}, then $\bm{\lambda}_1$ is taken as the single peak orientation of axon fibres.
+Depicting peak orientations is achieved through \gls[noindex=false]{dec} mapping, in which directions are mapped to colours in RGB space, where the $x$-axis, or medial-lateral / left-right direction, is assigned pure red, the $y$-axis, or posterior-anterior direction, is assigned pure green, and the $z$-axis, or inferior-superior direction, is assigned pure blue.
 \Gls{dti} images are often depicted as \gls{dec} \gls{fa} (or ``colour \gls{fa}'') maps, where a voxel's colour is determined by $\bm{\lambda}_1$ and its brightness by the \gls{fa} value.
 
 In fact, it is rare for a voxel of \gls{wm} to contain only a single uniformly oriented bundle of axons.
 In so-called crossing fibre voxels, which are traversed by at least two distinctly oriented fibre populations, the \gls{dt} provides a woefully inaccurate or misleading picture:
-A smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors (Fig. \ref{fig:cross}).
+A smaller population with a low signal contribution may be entirely unrepresented in the modelled \gls[noindex=false]{odf} peak, or else the effect is one of averaging all contributing populations such that none of the actual underlying fibre directions are indicated by the \gls{dt} eigenvectors (Fig. \ref{fig:cross}).
 
 \begin{figure}
   \centering
@@ -56,7 +56,7 @@ A smaller population with a low signal contribution may be entirely unrepresente
 The crossing fibres problem led to \gls{dti}, at least in research imaging, gradually giving way to higher-order fibre orientation modelling techniques which aim to account for more than one, or even an arbitrary number of distinctly oriented fibre populations\autocite{Alexander2005}.
 These include some multi-compartment models which can include multiple directional intra-axonal compartments, such as the popular ``ball and sticks'' model\autocite{Behrens2003,Behrens2007}.
 Alternatively, several approaches aim to retrieve an underlying orientation distribution with arbitrary number of peaks through transforming the raw signal \gls{odf} into a spherical distribution of diffusivity or correlates thereof.
-Diffusion spectrum imaging (DSI)\autocite{Wedeen2008}, and the less data-demanding Q-ball imaging\autocite{Tuch2003,Tuch2004}, are examples of methods that reconstruct a distribution of water molecule displacement (\gls{dodf}), with peaks aligned with the (presumed) fibre orientations.
+Diffusion spectrum imaging (DSI)\autocite{Wedeen2008}, and the less data-demanding Q-ball imaging\autocite{Tuch2003,Tuch2004}, are examples of methods that reconstruct a distribution of water molecule displacement (\gls[noindex=false]{dodf}), with peaks aligned with the (presumed) fibre orientations.
 Deconvolution methods, by contrast, aim to reconstruct the distribution of fibre orientations, beginning with the premise that a single population of parallel fibres will produce a characteristic \gls{dmri} signal profile.
 Then, the observed signal $S(\theta,\phi)$ in a given voxel amounts to a convolution over the fibre orientation distribution function $F(\theta,\phi)$ with this single fibre ``response'' kernel $R(\theta)$:
 \begin{align}
@@ -66,9 +66,9 @@ Solving (\ref{eq:csd}) for $F(\theta,\phi)$, represented in spherical harmonics 
 A spherical \textit{de}convolution of the signal with the response function.
 Early versions of this concept included one by \textcite{Anderson2005}, in which the response kernel was modelled as a \gls{dt}.
 In another approach presented by \textcite{Tournier2004} $R(\theta)$ is estimated directly from the data, generally by averaging the signals from voxels with the highest diffusion anisotropy, and thus does not rely on a model of diffusion, although it does rely on the assumption that a single fibre population's response is uniform throughout the brain and for different fibre configurations.
-To improve angular resolution and reduce noise sensitivity in the estimated \gls{fod}, a regularised implementation in which biophysically impossible negative $F(\theta,\phi)$ values are strongly penalised gave rise to the widely used \gls{csd} method (Fig. \ref{fig:cross}).
+To improve angular resolution and reduce noise sensitivity in the estimated \gls{fod}, a regularised implementation in which biophysically impossible negative $F(\theta,\phi)$ values are strongly penalised gave rise to the widely used \gls[noindex=false]{csd} method (Fig. \ref{fig:cross}).
 \Gls{csd} can reconstruct \glspl{fod} resolving multiple crossing fibre populations with high angular resolution in a matter of seconds, from \gls{dmri} datasets with acquisition parameters achievable in routine imaging practice\autocite{Tournier2013}.
-In addition to providing a means for estimating the \gls{fod} to a high degree of angular resolution, \gls{csd} also spurred exploration of new quantities relating to tissue microstructure, notably the interpretation of the \gls{fod} amplitude as a measure of intra-axonal volume fraction, or \gls{afd} \autocite{Raffelt2012a}.
+In addition to providing a means for estimating the \gls{fod} to a high degree of angular resolution, \gls{csd} also spurred exploration of new quantities relating to tissue microstructure, notably the interpretation of the \gls{fod} amplitude as a measure of intra-axonal volume fraction, or \gls[noindex=false]{afd} \autocite{Raffelt2012a}.
 \Gls{afd} can be defined as a directional quantity or as a single scalar per voxel, obtained by integrating $F$ over the sphere.
 
 By design, \gls{csd} presumes that the entire signal in a voxel can be explained by contributions from a number of fibre populations, each forming a highly restrictive environment in which diffusion is anisotropic.
@@ -77,8 +77,8 @@ As we have seen in previous sections, brain tissue covers a spectrum of cytoarch
 At the typical resolutions of \gls{dmri} data, voxels may contain, in addition to axon fibres, signal contributions from \gls{csf} or \gls{gm}, which are typically characterised by isotropic and freer diffusion.
 The result of such partial volume effects are highly noisy \gls{fod} estimates with spurious peaks, overestimation of \gls{fod} peak amplitudes and overestimation of \gls{afd} in affected voxels\autocite{Jeurissen2014}.
 In addition, the original \gls{csd} method was designed only for data acquired with a single diffusion weighting $b$ factor (``shell''), unable to take advantage of the additional information contained in more advanced and increasingly popular multi-shell acquisitions.
-To address these limitations, an extension proposed in \textcite{Jeurissen2014} and referred to as \gls{msmt} \gls{csd} includes support for multiple $b$-value shells and separation of the signal into contributions from different tissue compartments, typically \gls{wm}, \gls{gm}, and \gls{csf}, each with their own characteristic response functions.
-The resulting \gls{fod} estimates have higher angular precision than \gls{ssst} \gls{csd}, with fewer noisy spurious lobes to confound downstream processing and interpretation.
+To address these limitations, an extension proposed in \textcite{Jeurissen2014} and referred to as \gls[noindex=false]{msmt} \gls{csd} includes support for multiple $b$-value shells and separation of the signal into contributions from different tissue compartments, typically \gls{wm}, \gls{gm}, and \gls{csf}, each with their own characteristic response functions.
+The resulting \gls{fod} estimates have higher angular precision than \gls[noindex=false]{ssst} \gls{csd}, with fewer noisy spurious lobes to confound downstream processing and interpretation.
 Furthermore, separation of the isotropic signal contributions greatly improves the interpretation of \gls{fod} amplitude as a measure of \gls{afd}, as the amplitudes of each tissue's deconvolved \gls{odf} closely correspond to their respective tissue volume fractions\autocite{Jeurissen2014}.
 
 \section{Streamline tractography}\label{sec:tractography}
@@ -86,7 +86,7 @@ Furthermore, separation of the isotropic signal contributions greatly improves t
 % \note{Discuss as the mainstay of white matter bundle segmentation.
 % Cover fundamentals (including what it isn't), det/prop, different fibre models, virtual dissection, the usual suspects}
 
-Up to this point, we have only discussed the processing and analysis of \gls{dmri} data, and what it can or cannot reveal about \gls{wm} microstructure, at the level of individual image \glspl{voxel}.
+Up to this point, we have only discussed the processing and analysis of \gls{dmri} data, and what it can or cannot reveal about \gls{wm} microstructure, at the level of individual image voxels.
 However, the axons that form fibre tracts can traverse 100s of millimetres, and with the unique ability to measure fibre orientations in each voxel it wasn't long before this information was being exploited to reconstruct axonal connections in their entirety.
 The basic principle is one of treating fibre orientations as a brain-wide vector field through which the paths of virtual neural fibres can be traced in a process called streamline tractography (or simply tractography, Fig. \ref{fig:tracking}).
 It is vital to note here that the paths of individual \textit{in vivo} axons are entirely indiscernible from \gls{dmri}.
@@ -109,7 +109,7 @@ while length(streamlines) < N do
 \end{lstlisting}
 
 Once a predefined number N of streamlines which fulfil all selection criteria have been generated, tracking is terminated, and the resulting streamlines, each consisting of a set of vertices in 3D space, may be further analysed or visualised as required.
-Volumetric images can also be generated by computing the number of streamlines traversing each voxel on a predetermined grid, a technique referred to as \gls{tdi}\autocite{Calamante2010}.
+Volumetric images can also be generated by computing the number of streamlines traversing each voxel on a predetermined grid, a technique referred to as \gls[noindex=false]{tdi}\autocite{Calamante2010}.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{chapter_2/streamlines.png}
@@ -124,12 +124,12 @@ There are two choices, though, that most fundamentally affect the tractography p
 
 First is the choice of method for representing orientation information from the underlying data.
 The earliest tractography algorithms were developed almost concurrently with \gls{dti}\autocite{Mori1998,Mori1999}, with the orientation vector field constructed from the principal eigenvectors of fitted diffusion tensors.
-In the \gls{fact} algorithm proposed by \textcite{Mori1999}, the local direction for each vertex is assigned from $\bm{\lambda}_1$ of the current voxel, and the stop criterion is a measure of neighbourhood fibre collinearity falling below a predefined threshold.
+In the \gls[noindex=false]{fact} algorithm proposed by \textcite{Mori1999}, the local direction for each vertex is assigned from $\bm{\lambda}_1$ of the current voxel, and the stop criterion is a measure of neighbourhood fibre collinearity falling below a predefined threshold.
 With only a single possible propagation direction at each location, which, as discussed above, may throughout much of the brain have little to do with any true axon orientations at that point, \gls{dt}-based tractography can only track fibre pathways with rather limited accuracy.
 Streamlines may continue happily along a physiologically plausible path until encountering a region of intersecting tracts, at which point it may be prematurely terminated or diverted onto the trajectory of this intersecting tract, if a continuation of the current path is entirely unsupported by the principal eigenvector field.
 
 It becomes clear when considering what we learned about neural connections in Section \ref{sec:hodology}, about compact fibre bundles diverging to distributed cortical targets, that a single dominant fibre direction at every point is incompatible with the dynamic organisation of \gls{wm} tracts, and the result is a tendency to reconstruct narrow and incomplete fibre bundles\autocite{Farquharson2013}.
-A well-cited example of this limitation can be seen in reconstructions of the \gls{cst}, which arises from the entire motor cortex from the apex down to the Sylvian fissure, but which is rendered by \gls{dt}-based algorithms only as a vertical pathway without any lateral projections.
+A well-cited example of this limitation can be seen in reconstructions of the \gls[noindex=false]{cst}, which arises from the entire motor cortex from the apex down to the Sylvian fissure, but which is rendered by \gls{dt}-based algorithms only as a vertical pathway without any lateral projections.
 Against this background, tractography based on higher-order fibre orientation models represents a vast improvement in the ability to contend with tracking complex configurations of \gls{wm}.
 Now when two perpendicular tracts occupy the same voxel, the possible tracking direction is not limited to either that of the dominant bundle, such that tracking the smaller one is impossible, or of an average of the two, such that neither is properly represented.
 However, with the flexibility of multi-peak distributions comes ambiguity, as when there are multiple distinct possible directions in which to propagate the streamline at any position, the decision of which direction to take becomes far more complex.
@@ -170,7 +170,7 @@ Streamline tractography was the first, and remains the dominant answer to this t
 Though the field is wide and the specific approaches numerous, we will outline the two main frameworks through which individual tract segmentations are derived using streamline tractography.
 The first, sometimes dubbed ``virtual fibre dissection'', involves generating a large number (on the order of 10s of millions) of streamlines, usually covering the entire brain, followed by a selection process whereby streamlines are assigned to a tract of interest or discarded.
 Streamline tracking proceeds virtually uninhibited, terminating only if a maximum length is reached or when leaving the \gls{wm} (as indicated by tissue segmentations\autocite{Smith2012} or \pgls{fod} amplitude threshold).
-After tracking, one approach for selecting streamlines belonging to the target bundle is to use logical \glspl{roi}, specifying inclusion volumes which must be visited and exclusion volumes to filter unwanted tracks.
+After tracking, one approach for selecting streamlines belonging to the target bundle is to use logical \glspl[noindex=false]{roi}, specifying inclusion volumes which must be visited and exclusion volumes to filter unwanted tracks.
 These selection and exclusion \glspl{roi} encapsulates our \textit{a priori} neuroanatomical knowledge, and the resulting bundle, comprising only those streamlines fulfilling the criteria, represents the segmented tract (Fig. \ref{fig:tg_rois}).
 The streamlines may be viewed as three-dimensional objects, or further processed into volumetric streamline density maps\autocite{Calamante2010} and thresholded binary segmentations.
 

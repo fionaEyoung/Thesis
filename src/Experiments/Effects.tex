@@ -101,9 +101,9 @@ However, not only can the distortions around resection cavities be especially se
   \label{fig:epi}
 \end{figure}
 
-Typical \gls{dmri} acquisitions are based on \gls{ssepi}, in which an entire slice's worth of data is sampled in a single excitation-readout sequence.
+Typical \gls{dmri} acquisitions are based on \gls[noindex=false]{ssepi}, in which an entire slice's worth of data is sampled in a single excitation-readout sequence.
 As an alternative to \gls{ssepi}, multi-shot sequences have been proposed.
-These include interleaved and \gls{rsepi} sequences which, in general, only traverse a segment of $k$-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) while increasing scan time\autocite{Wang2018}.
+These include interleaved and \gls[noindex=false]{rsepi} sequences which, in general, only traverse a segment of $k$-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) while increasing scan time\autocite{Wang2018}.
 RESOLVE (readout segmentation of long variable echo-trains), a Siemens product, is one example of a commonly used \gls{rsepi} sequence for high quality three-scan trace weighted images with high in-plane resolution.
 
 While RS sequences can be combined with acceleration techniques including generalised autocalibrating partially parallel acquisition (GRAPPA) and simultaneous multi-slice (SMS), they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
@@ -159,8 +159,7 @@ Finally, the left \gls{cst} was reconstructed with a simple probabilistic tracto
     \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \gls{ssepi} \gls{dti})
     \textbf{\sffamily b.} 7seg 6\x{}$b$800
     \textbf{\sffamily c.} 3seg 12\x{}$b$b1000
-    \textbf{\sffamily d.} 3seg 20\x{}$b$1000}}
-  \label{fig:rsepi}
+    \textbf{\sffamily d.} 3seg 20\x{}$b$1000}\label{fig:rsepi}
 \end{figure}
 
 Based on visual assessment alone, the degree of distortion reduction is difficult to evaluate for all compared sequences (Fig. \ref{fig:rsepi}).

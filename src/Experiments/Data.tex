@@ -33,7 +33,7 @@ All \gls{csd} was performed using the MRtrix3 image processing software package\
 
 \subsection{HCP}
 
-The first large healthy adult dataset (``HCP49'') comprised 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
+The first large healthy adult dataset (``HCP49'') comprised 49 scans from the WU-Minn \gls[noindex=false]{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
 The original data comprises high resolution $T_1$-weighted and diffusion-weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
 Raw diffusion data contains three diffusion-weighted shells at $b=$ 1000, 2000 and 3000~s~mm$^{-2}$ with 90 directions each and 18 $b=0$ volumes\autocite{Sotiropoulos2013}.
 These images have been preprocessed as documented in \textcite{Glasser2013} and \textcite{Sotiropoulos2013},
@@ -53,8 +53,8 @@ Diffusion acquisition parameters and preprocessing steps are described in detail
 \subsection{Clinical (GOSH \& NHNN)}
 
 To validate tractfinder in real clinical patient imaging, a dataset of 15 individual scans from eight different subjects and two different institutions was collated.
-They include four adult glioma subjects acquired in 2009 at the \gls{nhnn}, London (cases 4 and 5 from \textcite{Mancini2022}, others unpublished data),
-three paediatric subjects from \gls{gosh} (each with one preoperative and one intraoperative scan),
+They include four adult glioma subjects acquired in 2009 at the \gls[noindex=false]{nhnn}, London (cases 4 and 5 from \textcite{Mancini2022}, others unpublished data),
+three paediatric subjects from \gls[noindex=false]{gosh} (each with one preoperative and one intraoperative scan),
 a mock “intraoperative” scan on a healthy adult volunteer acquired with the \gls{gosh} intraoperative \gls{dti} protocol and using a simulated intraoperative setup (flex-coils wrapped around the head instead of a head coil, head significantly displaced from scanner isocenter etc.),
 and a partridge in a pear tree.
 The three \gls{gosh} paediatric patients all had low-grade astrocytoma (pilocytic astrocytoma, diffuse astrocytoma, and pleomorphic xanthoastrocytoma).
@@ -63,14 +63,14 @@ For full acquisition details see Table \ref{tab:datasets}.
 All clinical scans used in the systematic comparison with benchmark methods involved non-deforming tumours, in the sense that any lesions did not appreciably displace \gls{wm} structures from their typical positions.
 Further \gls{gosh} and \gls{nhnn} scans with substantial tumours were analysed on a case-by case basis, as the low sample size and high tumour heterogeneity precluded a systematic quantitative evaluation.
 
-Each \gls{dmri} scan was minimally preprocessed with \gls{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction\autocite{Zhang2001, Smith2004}, as implemented in MRtrix3 \autocite{Tournier2019}.
+Each \gls{dmri} scan was minimally preprocessed with \gls[noindex=false]{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction\autocite{Zhang2001, Smith2004}, as implemented in MRtrix3 \autocite{Tournier2019}.
 Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
 No \gls{epi} distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times\autocite{Yang2022}.
 
 \subsection{BTCD}
 \label{sec:data_btcd}
 
-The \gls{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
+The \gls[noindex=false]{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
 Of the total 25 patients in the original dataset, ten with macroscopic, non-infiltrating lesions were selected for further validation of tractfinder in tumour patients.
 In one of the ten subjects (sub-PAT22), only a preoperative session is available, giving a total of 19 unique scan sessions used for this dataset.
 The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural $T_1$-weighted images.
