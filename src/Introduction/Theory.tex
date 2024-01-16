@@ -209,9 +209,9 @@ The external magnetic field also exerts a torque on the spin magnetic moments, c
     \centering
     \includesvg[height=0.4\textwidth,pretex=\small\sffamily]{chapter_1/nmr.svg}\qquad%
     \includesvg[height=0.4\textwidth,pretex=\small\sffamily]{chapter_1/relaxation.svg}
-  \caption[Larmor precession and magnetisation relaxation]{\Gls{mri} depends on quantum interactions between nuclei and magnetic fields.
+  \caption[Larmor precession and magnetisation relaxation]{\Glsentrylong{mri} depends on quantum interactions between nuclei and magnetic fields.
   \textbf{\sffamily a.} Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$ around external magnetic field $\mathbf{B}_0$.
-  \textbf{\sffamily b.} Immediately after a 90\textdegree\ \gls{rf} excitation into the $xy$-plane, the bulk magnetisation $\mathbf{M}$ relaxes back to equilibrium where $\mathbf{M}_z=\mathbf{M}_0$ and $\mathbf{M}_{xy}=0$ in a spiral pattern, inducing an oscillating electrical signal in the \gls{mri} receiver equipment.}\label{fig:larmor}
+  \textbf{\sffamily b.} Immediately after a 90\textdegree\ radio frequency excitation into the $xy$-plane, the bulk magnetisation $\mathbf{M}$ relaxes back to equilibrium where $\mathbf{M}_z=\mathbf{M}_0$ and $\mathbf{M}_{xy}=0$ in a spiral pattern, inducing an oscillating electrical signal in the \glsentryshort{mri} receiver equipment.}\label{fig:larmor}
 \end{figure}
 
 \section{Resonance and relaxation}
@@ -232,7 +232,7 @@ In other words, at thermal equilibrium the magnetic moments within the sample ar
 
 Manipulation of the net magnetisation away from, and subsequent relaxation back to this equilibrium state, is the basis of all signal production in \gls{mri}.
 Spins in the lower energy state can be excited (resonated) to occupy the higher energy state by absorbing electromagnetic radiation tuned precisely to the Larmor frequency.
-This energy is transmitted in the form of an oscillating magnetic field $\mathbf{B}_1$, called \pgls[noindex=false]{rf} pulse, as the frequency falls within the \gls{rf} range of the electromagnetic spectrum, and has two effects on the bulk magnetisation.
+This energy is transmitted in the form of an oscillating magnetic field $\mathbf{B}_1$, called a \glsreset{rf}\gls{rf} pulse, as the frequency falls within the \gls[noindex=false]{rf} range of the electromagnetic spectrum, and has two effects on the bulk magnetisation.
 The first is a reduction in $M_z$, as the absorbed energy reduces the ratio of spins in the relaxed state, with the total change in $M_z$ dependent on the duration $\tau$ of the \gls{rf} pulse.
 Secondly, spins will align themselves with an effective field combining $\mathbf{B}_0$ and the rotating $\mathbf{B}_1$, resulting in a phase synchronisation of spins' precessions and a net, rotating transverse magnetisation with magnitude $M_{xy}$.
 It is the sweep of this rotating bulk magnetisation vector which induces an oscillating current in the receiver equipment of the \gls{mri} scanner, which is registered as the signal called \gls[noindex=false]{fid}.
@@ -240,12 +240,12 @@ The angle between the total magnetisation $\mathbf{M} = \mathbf{M}_{xy} + \mathb
 
 As soon as the excitation field is switched off, the bulk magnetisation gradually relaxes to equilibrium as the induced effects on the individual moments revert.
 Interactions between spins and their molecular environment cause de-phasing of their precession and consequent reduction in $M_{xy}$ (spin-spin or transverse relaxation), while the energy gained from the \gls{rf} pulse is gradually thermally dissipated among the lattice of neighbouring molecules as the spins revert to the statistically favourable lower energy state in alignment with $\mathbf{B}_0$ causing gradual recovery of $M_z$ (spin-lattice or longitudinal relaxation):
-
+%
 \begin{align}
   M_z(t)  &= M_0 (1-e^{-t/T_1}) \\
   M_{xy}(t) &= M_0 e^{-t/T_2} \label{eq:recovery}
 \end{align}
-
+%
 where the recovery rate of $M_z$ and the rate of decay of $M_{xy}$ are described by the time constants $T_1$ and $T_2$ respectively, each dependent on the specific molecular environment and are tissue-specific quantities.
 It is the varying values of $T_1$ and $T_2$, as well as the overall differences in \glspl{pd} between tissues which lend contrast to MR images.
 
@@ -282,7 +282,7 @@ Most commonly in medical imaging spatial encoding is achieved with the \gls[noin
 In theory, these three encoding dimensions can apply to any permutation of the three spatial axes, but in practice, and for the purposes of this simplified description, it is easiest and conventional to select slices along the $z$-axis, parallel with the main magnetic field, and we will designate the $x$ and $y$ axes as the frequency and phase encoding dimensions respectively.
 
 Slice selection ensures that the \gls{rf} pulse only excites a specific slab within the sample, and is achieved by overlaying a magnetic field gradient $G_s$ along the slice selecting dimension $z$, altering the Larmor frequencies of the spins along $z$ according to $\omega_0 + \gamma G_sz$, where $\omega_0 = \gamma B_0$ is the Larmor precession frequency under $\mathbf{B}_0$.
-\Pgls{rf} pulse with (central) frequency $\nu_c = \frac{1}{2\pi} (\omega_0 + \gamma G_s z_c)$ will induce resonance in spins located only at position $z_c$, producing a slice of excitation. %\note{the 2 pi thing is about converting from angular frequency?}
+An \gls{rf} pulse with (central) frequency $\nu_c = \frac{1}{2\pi} (\omega_0 + \gamma G_s z_c)$ will induce resonance in spins located only at position $z_c$, producing a slice of excitation. %\note{the 2 pi thing is about converting from angular frequency?}
 All other spins in the sample will be unaffected by subsequent manipulation of the magnetisation vector throughout the imaging sequence and will not generate signal.
 The slice width $\Delta z$ is determined by the \gls{rf} pulse bandwidth $\Delta\nu$ as $\Delta z = \frac{2 \pi \Delta \nu}{\gamma G_s}$.
 
@@ -329,7 +329,7 @@ Beyond the basics of spatial encoding and echo signal generation, there lies a w
 
 \begin{figure}[htb!]
   \includesvg[width=\textwidth]{chapter_1/mprage.svg}
-  \caption[MPRAGE pulse sequence diagram]{A simplified pulse sequence diagram representing \pgls[noindex=false]{mprage} $T_1$-weighted acquisition. This popular acquisition uses a 180\textdegree\ \gls[noindex=false]{ir} \gls{rf} pulse, followed after inversion time TI by an excitation--acquisition sequence, to enhance the contrast between tissues based on their different $T_1$ relaxation times. (In reality, multiple image echos are sampled using fast imaging techniques in-between repeated \gls{ir} pulses.) $N_p$ signal echos are sampled with decreasing \gls{pe} gradient strengths $G_p$ to build up an entire 2D image.}
+  \caption[MPRAGE pulse sequence diagram]{A simplified pulse sequence diagram representing a \gls[noindex=false]{mprage} $T_1$-weighted acquisition. This popular acquisition uses a 180\textdegree\ \gls[noindex=false]{ir} \glsentryshort{rf} pulse, followed after inversion time TI by an excitation--acquisition sequence, to enhance the contrast between tissues based on their different $T_1$ relaxation times. (In reality, multiple image echos are sampled using fast imaging techniques in-between repeated \gls{ir} pulses.) $N_p$ signal echos are sampled with decreasing \glsentryshort{pe} gradient strengths $G_p$ to build up an entire 2D image.}
   \label{fig:mprage}
 \end{figure}
 
@@ -360,7 +360,7 @@ The only tool available for non-invasively imaging the microscopic structure of 
 
 \begin{figure}[hbt!]
   \includesvg[width=\textwidth,pretex=\ttfamily\small]{chapter_1/anat_ortho.svg}
-  \caption[Neuroanatomical landmarks on $T_1$-weighted MRI]{Orthogonal slices (from left to right: Sagittal, coronal, axial views) of \pgls{mprage} acquisition of the author's brain, with key anatomical features and landmarks labelled. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, m. corpus callosum, F. frontal lobe, P. parietal lobe, O. occipital lobe, T. temporal lobe, S. central sulcus.}
+  \caption[Neuroanatomical landmarks on $T_1$-weighted MRI]{Orthogonal slices (from left to right: Sagittal, coronal, axial views) of an \glsentryshort{mprage} acquisition of the author's brain, with key anatomical features and landmarks labelled. a. spinal cord, b. medulla, c. pons, d. midbrain, e. cerebellum, f. hypothalamus, g. thalamus, h. lateral ventricle, i. third ventricle, j. fourth ventricle, k. subcortical white matter, l. cortical grey matter, m. corpus callosum, F. frontal lobe, P. parietal lobe, O. occipital lobe, T. temporal lobe, S. central sulcus.}
   \label{fig:ortho}
 \end{figure}
 
@@ -431,9 +431,9 @@ Alternatively, a map of \gls{adc} or mean diffusivity may be computed according 
 In modern acquisitions, including those required for the high angular resolution techniques we will encounter in Chapter \ref{chap:neuroimaging}, anywhere from six to 100s of directions are measured, and the number of scans may be additionally multiplied by repeating and averaging signals to boost \gls{snr}.
 Consequently, \gls{dmri} scan times can be exceedingly long, from several minutes for clinical sequences into hours for advanced research studies, prompting efforts to reduce scan time by means of accelerated and parallel imaging techniques.
 
-\begin{figure}
+\begin{figure}[htb!]
   \includesvg[width=\textwidth]{chapter_1/dwepi.svg}
-  \caption[Diffusion-weighted EPI pulse sequence diagram]{Diffusion-weighted \gls{epi} pulse sequence diagram, with diffusion gradients, drawn in dark grey to differentiate them from orthogonal slice, phase and frequency encoding, either side of a 180	extdegree\ \gls{rf} inversion pulse. All orthogonal gradients may be combined to produce diffusion weighting along an arbitrary direction. An entire slice of $k$-space is acquired from a single echo train, using a strong switching frequency encoding gradient $G_f$ to encode lines along $k_x$, combined with ``blipped'' phase encoding gradients $G_p$ to advance the signal through $k_y$.}
+  \caption[Diffusion-weighted EPI pulse sequence diagram]{Diffusion-weighted \glsentrylong{epi} pulse sequence diagram, with diffusion gradients, drawn in dark grey to differentiate them from orthogonal slice, phase and frequency encoding, either side of a 180	extdegree\ \gls{rf} inversion pulse. All orthogonal gradients may be combined to produce diffusion weighting along an arbitrary direction. An entire slice of $k$-space is acquired from a single echo train, using a strong switching frequency encoding gradient $G_f$ to encode lines along $k_x$, combined with ``blipped'' phase encoding gradients $G_p$ to advance the signal through $k_y$.}
   \label{fig:dwepi}
 \end{figure}
 
@@ -446,7 +446,7 @@ Analogous to the use of the basis vectors $\mathbf{e}_1=(1\,0\,0)^T, \mathbf{e}_
 $\mathbf{v}$ in $R^3$ as $\mathbf{v} =  (v_x\,v_z\,v_z)^T = v_x\mathbf{e}_1 + v_y\mathbf{e}_2 + v_z\mathbf{e}_3$,
 so can basis functions be combined to represent any other function in that space.
 
-\begin{SCfigure}
+\begin{SCfigure}[][hbt!]
   \includegraphics[width=0.6\textwidth]{chapter_1/SH.png}
   \caption[Spherical harmonic basis functions]{Visualisation of the first four orders (in rows) of the \glsentrylong{sh} basis functions. Positive and negative lobes are coloured grey and yellow respectively. Image adapted from the original by \citeauthor{Inigo.quilez2014}, licensed under \href{https://creativecommons.org/licenses/by-sa/3.0}{CC-BY-SA 3.0}, via Wikimedia Commons}
   \label{fig:sh}
@@ -486,7 +486,7 @@ A higher maximum order can represent more angular detail, however due to this ne
 Aside from the cost and practicalities of the longer scans needed for \gls{dmri}, there is also the increased risk of motion artefacts as subjects tire or become uncooperative in the scanner.
 To achieve orders of magnitude shorter scan times than with conventional sequences in which a single step of phase encoding (or a single line in $k$-space) is sampled per excitation, \gls{dmri} scans usually use a fast imaging technique called \gls[noindex=false]{epi}, in which all phase encoding steps are acquired after only a single \gls{rf} excitation.
 In one example of an \gls{epi} pulse sequence, the phase and frequency encoding gradients are switched on to move the signal to a corner of $k$-space immediately prior to readout, then the readout gradient rapidly alternates polarity while the \gls{pe} gradient is ``blipped'' on each switch\autocite{Wielopolski1998}.
-The result is a stepped zig-zag traversal of all of $k$-space during the readout of a single signal echo (Fig. \ref{fig:dwiepi}).
+The result is a stepped zig-zag traversal of all of $k$-space during the readout of a single signal echo (Fig. \ref{fig:dwepi}).
 Measuring enough samples in the extremely short time available before the signal decays requires very strong and rapidly switching gradients, placing significant demands on scanner hardware\autocite{Bowtell1998}.
 
 Fitting the entire image readout into a single magnetisation decay period results in relatively long total acquisition times per excitation.

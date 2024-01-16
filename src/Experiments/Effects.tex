@@ -61,7 +61,7 @@ This comparison was made for each combination of diffusion scheme and \gls{csd} 
 
 % \paragraph*{Findings}
 
-\begin{figure}
+\begin{figure}[htb!]
   \centering
   \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_6/self_dice.svg}
   \caption[Self-similarity scores for data stability analysis]{Self Dice scores for all tracts and methods. Each datapoint represents a comparison with the corresponding segmentation in DWI-1, the highest quality acquisition scheme. Outlined markers represent the mean over all subjects.}
@@ -97,7 +97,7 @@ However, not only can the distortions around resection cavities be especially se
 
 \begin{figure}[h!]
   \includegraphics[width=\textwidth]{chapter_6/epidist.pdf}
-  \caption[EPI distortion artefacts]{Examples of strong susceptibility distortions (arrowheads) on intraoperative \gls{epi} acquisitions obtained on the Siemens MAGNETOM Vida system at \gls{gosh}. Effects this extreme are not present in all cases, but neither are they uncommon.}
+  \caption[EPI distortion artefacts]{Examples of strong susceptibility distortions (arrowheads) on intraoperative \glsentrylong{epi} acquisitions obtained on the Siemens MAGNETOM Vida system at \glsentrylong{gosh}. Effects this extreme are not present in all cases, but neither are they uncommon.}
   \label{fig:epi}
 \end{figure}
 
@@ -111,12 +111,6 @@ For example, in \textcite{Wang2018} authors compared interleaved and \gls{rsepi}
 In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE sequence with 15 segments, six diffusion-weighted directions, and a scan time of 10:34 minutes.
 For comparison, the clinical \gls{ssepi} \gls{dti} sequence currently used intraoperatively at \gls{gosh} is a 30 direction $b=1000$~s~mm$^{-2}$ acquisition lasting just 4:57~minutes with 2.3~mm isotropic voxels.
 
-We set out to explore the feasibility of setting up a \gls{rsepi} \gls{dti} sequence for intraoperative use at \gls{gosh}.
-An (approximately) isotropic voxel size is generally considered optimal for \gls{dti} modelling and tractography \autocite{Vos2011, Neher2013}, although tractography with high in plane resolution and thick slices is certainly possible.
-Additionally, a sufficient number of diffusion-weighted directions for crossing fibre modelling (e.g \gls{csd}) would be ideal, potentially as few as 12 directions given the results from Section \ref{sec:ismrmdiff}.
-In the end, we tested three different \gls{dti} sequences as well as several different three-scan trace RESOLVE sequences (not discussed here), all acquired from a healthy adult volunteer on the intraoperative Siemens MAGNETOM Vida (3T) system at \gls{gosh}.
-The acquisition parameters of the three test sequences, along with the routine \gls{gosh} \gls{dmri} sequences for comparison, are shown in Table \ref{tab:rsepi}.
-
 % [1] Yang, J. Y.-M. *et al.* Assessment of intraoperative diffusion \gls{epi} distortion and its impact on estimation of supratentorial white matter tract positions in pediatric epilepsy surgery. *NeuroImage: Clinical* **35**, 103097 (2022).  https://www.sciencedirect.com/science/article/pii/S2213158222001620
 % [2] Wang, Y. *et al.* A comparison of readout segmented \gls{epi} and interleaved \gls{epi} in high-resolution diffusion-weighted imaging. *Magnetic Resonance Imaging* **47**, 39–47 (2018). DOI: 10.1016/j.mri.2017.11.011
 % [3] Elliott, C. A. *et al.* Intraoperative acquisition of \gls{dti} in cranial neurosurgery: readout-segmented \gls{dti} versus standard single-shot \gls{dti}. *Journal of Neurosurgery* **133**, 1210–1219 (2020). http://dx.doi.org/10.3171/2019.5.JNS19890
@@ -124,7 +118,7 @@ The acquisition parameters of the three test sequences, along with the routine \
 % [5] https://www.researchgate.net/publication/236022704_Analysis_of_tractography_biases_introduced_by_anisotropic_voxels
 
 \begin{table}
-  \caption[RS-EPI test scan acquisition parameters]{\Gls{rsepi} test scan parameters}
+  \caption[RS-EPI test scan acquisition parameters]{\Glsentrylong{rsepi} test scan parameters}
   \label{tab:rsepi}
   % \setlength{\tabcolsep}{0.3em}
   \footnotesize
@@ -146,17 +140,23 @@ The acquisition parameters of the three test sequences, along with the routine \
   \end{tabularx}
 \end{table}
 
+We set out to explore the feasibility of setting up a \gls{rsepi} \gls{dti} sequence for intraoperative use at \gls{gosh}.
+An (approximately) isotropic voxel size is generally considered optimal for \gls{dti} modelling and tractography \autocite{Vos2011, Neher2013}, although tractography with high in plane resolution and thick slices is certainly possible.
+Additionally, a sufficient number of diffusion-weighted directions for crossing fibre modelling (e.g \gls{csd}) would be ideal, potentially as few as 12 directions given the results from Section \ref{sec:ismrmdiff}.
+In the end, we tested three different \gls{dti} sequences as well as several different three-scan trace RESOLVE sequences (not discussed here), all acquired from a healthy adult volunteer on the intraoperative Siemens MAGNETOM Vida (3T) system at \gls{gosh}.
+The acquisition parameters of the three test sequences, along with the routine \gls{gosh} \gls{dmri} sequences for comparison, are shown in Table \ref{tab:rsepi}.
+
 For each scan, minimal preprocessing was conducted using MRtrix3\autocite{Tournier2019} tools:
 \Gls{mppca} denoising and bias field correction, followed by \gls{dt} modelling and \gls{dec} mapping, and \gls{ssst} \gls{csd}.
 For \gls{csd}, $l_{max}$ was set to 8 except for the six direction scan where $l_{max}=6$ was used.
 No distortion correction was applied.
 Finally, the left \gls{cst} was reconstructed with a simple probabilistic tractography protocol, using the internal capsule as a seed region and an inclusion \gls{roi} at brain stem level, along with exclusion \glspl{roi} for common false positives.
 
-\begin{figure}[h!]
+\begin{figure}[htb!]
   \centering
   \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_6/rsepi.svg}
-  \caption[RS-EPI test scan results]{Baseline \gls{ssepi} diffusion sequence and three \gls{rsepi} test sequences
-    \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \gls{ssepi} \gls{dti})
+  \caption[RS-EPI test scan results]{Baseline \glsentrylong{ssepi} diffusion sequence and three \glsentrylong{rsepi} test sequences
+    \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \glsentrylong{ssepi} \glsentrylong{dti})
     \textbf{\sffamily b.} 7seg 6\x{}$b$800
     \textbf{\sffamily c.} 3seg 12\x{}$b$b1000
     \textbf{\sffamily d.} 3seg 20\x{}$b$1000}\label{fig:rsepi}
@@ -168,11 +168,11 @@ The third test scan additionally used SMS acceleration which appears to have sig
 \footnote[2]{minimum software version syngo MR XA11B. Source: \url{https://www.siemens-healthineers.com/en-uk/magnetic-resonance-imaging/options-and-upgrades/clinical-applications/syngo-resolve} retrieved 06-Oct-2023}.
 
 
-\begin{figure}[h!]
+\begin{figure}[htb!]
   \centering
   \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_6/rsepi_fod_tg.svg}
-  \caption[RS-EPI test scan fibre orientation and CST reconstructions]{\Glspl{fod} at the centrum semiovale and left \gls{cst} tractography streamlines.
-  \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \gls{ssepi} \gls{dti})
+  \caption[RS-EPI test scan fibre orientation and CST reconstructions]{\Glsentrylongpl{fod} at the centrum semiovale and left \glsentrylong{cst} tractography streamlines.
+  \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \glsentrylong{ssepi} \glsentrylong{dti})
   \textbf{\sffamily b.} 7seg 6\x{}$b$800
   \textbf{\sffamily c.} 3seg 12\x{}$b$1000
   \textbf{\sffamily d.} 3seg 20\x{}$b$1000}
@@ -188,7 +188,7 @@ Is the achievable reduction in susceptibility distortion worth the implications 
 This is a question that cannot be answered from such exploratory data, and indeed the answer is likely to be case-specific, given that the amount of distortion varies significantly from scan to scan depending on the specific patient and surgical setup.
 While further exploration of distortion reduction was not a priority of this project, it remains an interesting avenue for future research, and these preliminary findings provide an indication that \gls{rsepi} for intraoperative imaging remains an open possibility.
 
-\begin{figure}
+\begin{figure}[hbt!]
   \centering
   \begin{subfigure}{0.4\textwidth}
     \includegraphics[width=\textwidth]{chapter_6/2_glass_tg.png}
@@ -196,6 +196,6 @@ While further exploration of distortion reduction was not a priority of this pro
   \begin{subfigure}{0.4\textwidth}
     \includegraphics[width=\textwidth]{chapter_6/2_glass_tf.png}
   \end{subfigure}
-  \caption[RS-EPI 12 direction test scan CST reconstructions with tractography and tractfinder]{Tractfinder reconstruction (right) of the left \gls{cst} in the 12 direction, three segment \gls{rsepi} scan compared with streamline tractography (left).}
+  \caption[RS-EPI 12 direction test scan CST reconstructions with tractography and tractfinder]{Tractfinder reconstruction (right) of the left \glsentrylong{cst} in the 12 direction, three segment \glsentrylong{rsepi} scan compared with streamline tractography (left).}
   \label{fig:ssepi2}
 \end{figure}

@@ -49,7 +49,7 @@ This property, too, is subject to uncertainties as described above.
 However, once a tract's location is known, or at least assumed, we can in most cases be fairly certain of its local orientations based on our knowledge of its global shape and trajectory.
 In a multi-fibre voxel, the distinct population in the apparent \gls{fod} which corresponds to our tract of interest is assumed to be known.
 In this case, tractography which probabilistically draws samples from that distribution will reconstruct some streamlines travelling through that voxel in a distribution of directions consistent with our expectations for that tract, alongside potential spurious streamlines traversing the voxel in the ``wrong'' direction.
-After carefully ensuring, as much as is feasible, that only those consistent streamlines remain, we can retrieve the orientation distribution of the tract of interest in isolation from the other crossing populations using a technique called \gls[noindex=false]{tod}\autocite{Dhollander2014} mapping.
+After carefully ensuring, as much as is feasible, that only those consistent streamlines remain, we can retrieve the orientation distribution of the tract of interest in isolation from the other crossing populations using a technique called \glsreset{tod}\gls[noindex=false]{tod}\autocite{Dhollander2014} mapping.
 % The objective is to create a map in a template space capturing, at each location, the range of possible orientations the tract can take on as a single spherical distribution.
 After aggregating this information in a template space we should be left with a single spherical distribution per voxel expressing the range of possible orientations typical of the tract.
 A narrow distribution may be found where the tract's orientation is highly consistent across all subjects, whereas a more spread-out distribution would reflect a wider inter-subject variability, which may be seen in regions of fanning or sharp turning.
@@ -96,9 +96,9 @@ Atlases have been created for the most commonly indicated pathways in neurosurgi
   \label{fig:or}
 \end{SCfigure}
 
-As a projection tract, the \glsentrylong{or} is among the more easily definable in terms of its end points.
-Arising from the \gls[noindex=false]{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named \gls[noindex=false]{ml} (Fig. \ref{fig:or})\autocite{Sarubbo2015}, the extent and shape of which vary significantly between individuals\autocite{Ebeling1988,Yogarajah2009}.%first
-As it projects towards the most posterior reaches of the occipital lobe, the \gls[noindex=false]{or} forms part of the \gls[noindex=false]{ss}, a confluence of fibres superficial to the lateral ventricle, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes\autocite{Maldonado2021}.
+As a projection tract, the \glsreset{or}[noindex=false]\gls{or} is among the more easily definable in terms of its end points.
+Arising from the \glsreset{lgn}\gls[noindex=false]{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named \glsreset{ml}\gls[noindex=false]{ml} (Fig. \ref{fig:or})\autocite{Sarubbo2015}, the extent and shape of which vary significantly between individuals\autocite{Ebeling1988,Yogarajah2009}.%first
+As it projects towards the most posterior reaches of the occipital lobe, the \gls{or} forms part of the \gls[noindex=false]{ss}, a confluence of fibres superficial to the lateral ventricle, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes\autocite{Maldonado2021}.
 The fibres of the \gls{or}, conferring low-level visual data on contrast, colour and shapes, then terminate in the primary visual areas of the occipital cortex surrounding the calcarine fissure, a sulcus on the medial surface of the occipital lobe.
 
 The \gls{or} is naturally an integral structure for visual function and thus quality of life.
@@ -283,16 +283,16 @@ The absolute number of retained streamlines is of little consequence to subseque
   \begin{tabularx}{\textwidth}{llllll X}\toprule
       &      & Original & Filtered & Reduction & Reasons for discarding \\
    \midrule
-  CST & left & 148833 & 145300 & 2.37\% & \multirow{3}{0.45\textwidth}{Contamination from: AF, SLF, SFOF, CC, CrP} \\
+  CST & left & 148833 & 145300 & 2.37\% & \multirow{3}{0.42\textwidth}{Contamination from: AF, SLF, SFOF, CC, CrP} \\
    & right & 144759 & 139019 & 3.97\% &  \\
    & total & 293592 & 284319 & 3.16\% &  \\ \addlinespace
-  AF & left & 61922 & 49778 & 19.61\% & \multirow{3}{0.45\textwidth}{Contamination from:  EC, CST, CC Overextension into: Motor, anterior temporal, and superior frontal cortex} \\
+  AF & left & 61922 & 49778 & 19.61\% & \multirow{3}{0.42\textwidth}{Contamination from:  EC, CST, CC Overextension into: Motor, anterior temporal, and superior frontal cortex} \\
    & right & 61834 & 43027 & 30.42\% &  \\
    & total & 123756 & 92805 & 25.01\% &  \\ \addlinespace
-  OR & left & 123842 & 99984 & 19.26\% & \multirow{3}{0.45\textwidth}{Contamination from: Tapetum of CC, SLF} \\
+  OR & left & 123842 & 99984 & 19.26\% & \multirow{3}{0.42\textwidth}{Contamination from: Tapetum of CC, SLF} \\
    & right & 122534 & 109265 & 10.83\% &  \\
    & total & 246376 & 209249 & 15.07\% & \\ \addlinespace
-  IFOF & left & 80000 & 44224 & 44.72\% & \multirow{3}{0.45\textwidth}{Contamination from: Tapetum of CC, VOF, superior frontal cortex} \\
+  IFOF & left & 80000 & 44224 & 44.72\% & \multirow{3}{0.42\textwidth}{Contamination from: Tapetum of CC, VOF, superior frontal cortex} \\
    & right & 80000 & 31753 & 60.31\% &  \\
    & total & 160000 & 75977 & 52.51 \% & \\ \toprule
  \end{tabularx}
@@ -330,30 +330,31 @@ The purpose of the atlas is to capture only the likelihood of a tract's presence
 If the spatial prior is to be determined by considering the spatial variation of the tract between subjects, then the only information needed for each individual subject is a binary visitation map for the bundle, and orientational data.
 Thus to remove the streamline density component, the \gls{tod} maps for each subject are normalised.
 The spherical integral of each \gls{sh} basis function $Y_{l,m}$ is
-
+%
 \begin{align}
   \int_{\Omega} Y^m_l(\theta, \phi) = \begin{cases}
    \sqrt{4\pi} & \text{ if } l=m=0\\
    0 & \text{ otherwise. }
   \end{cases}
 \end{align}
-
+%
 Using the sum and constant rules of integration, the spherical integral of $T(\theta,\phi)$ is
+%
 \begin{align}
-  \int_{\Omega} T(\theta,\phi) = t_0 \sqrt{4\pi}
+  \int_{\Omega} T(\theta,\phi) = t_0 \sqrt{4\pi},
 \end{align}
-
+%
 where $t_0$ is the first \gls{sh} coefficient for $l=m=0$. Thus to remove density information the \gls{tod} map is normalised to unit integral as
-
+%
 \begin{align}
-  \widetilde{T}(\theta, \phi) = \frac{T(\theta,\phi)}{\sqrt{4\pi} t_0}
+  \widetilde{T}(\theta, \phi) = \frac{T(\theta,\phi)}{\sqrt{4\pi} t_0}.
 \end{align}
-
+%
 After each individual \gls{tod} map has been normalised in MNI space, the resulting image contains only information about the tract's streamline orientations, and none about the number of streamlines passing through a given voxel in the original reconstruction.
 
 \begin{SCfigure}
   \includesvg[width=0.5\textwidth]{chapter_3/tod_mean.svg}
-  \caption[TOD averaging to create and atlas]{Averaging the \gls{tod} contributions from all subjects (smaller cutouts) produces a smooth map of voxel-wise orientation distributions (large cutout), illustrated here in the anterior point of Meyer's loop, a part of the \gls{or} with significant inter-subject variation. Adapted from \textcite{Young2024}}
+  \caption[TOD averaging to create and atlas]{Averaging the \glsentrylong{tod} contributions from all subjects (smaller cutouts) produces a smooth map of voxel-wise orientation distributions (large cutout), illustrated here in the anterior point of Meyer's loop, a part of the \glsentrylong{or} with significant inter-subject variation. Adapted from \textcite{Young2024}}
   \label{fig:todmean}
 \end{SCfigure}
 

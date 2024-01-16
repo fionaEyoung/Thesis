@@ -37,7 +37,7 @@ The similar orientations of the the \gls{af} and tapetum in this region, togethe
 
 \begin{SCfigure}[][h!]
   \includesvg[width=0.6\textwidth,pretex=\ttfamily\small]{chapter_4/tpfia.svg}
-  \caption[Atlas misalignment with linear registration]{Example of potential for atlas misalignment. The \gls{af} (A) and tapetum (T) are proximal and parallel at the temporoparietal fibre intersection area. Linearly registered right \gls{af} atlas \glspl{tod} may overlap with the tapetum (arrowhead).}
+  \caption[Atlas misalignment with linear registration]{Example of potential for atlas misalignment. The \glsentrylong{af} (A) and tapetum (T) are proximal and parallel at the temporoparietal fibre intersection area. Linearly registered right \glsentrylong{af} atlas \glsentrylongpl{tod} may overlap with the tapetum (arrowhead).}
   \label{fig:tpfia}
 \end{SCfigure}
 
@@ -47,10 +47,10 @@ Note that the atlases themselves are unchanged from those previously described a
 There is no discernible difference in the scores, indicating that non-linear registration does not improve the final output.
 This comparison originally appeared as supplementary material in \textcite{Young2024}.
 
-\begin{figure}
+\begin{figure}[hbt!]
   \makebox[\linewidth][r]{%
   \includegraphics{chapter_4/registration_2.pdf}}
-  \caption[Comparing linear and non-linear atlas registration]{Difference in tractfinder performance when using either affine or non-linear atlas registration, compared with targeted \gls{roi} tractography, in the \textit{TractoInferno} dataset of healthy subjects. For the \gls{dice} a threshold of 0.05 applies.}\label{fig:nrr}
+  \caption[Comparing linear and non-linear atlas registration]{Difference in tractfinder performance when using either affine or non-linear atlas registration, compared with targeted \glsentrylong{roi} tractography, in the \textit{TractoInferno} dataset of healthy subjects. For the \glsentrylong{dice} a threshold of 0.05 applies.}\label{fig:nrr}
 \end{figure}
 
 In conclusion, affine registration between template and subject space is preferred in most applications, including for healthy subjects and clinical subjects without large space-occupying lesions.

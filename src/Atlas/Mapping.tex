@@ -41,10 +41,10 @@ Using the distributive law for the product of sums and and the sum rule for inte
     =& \int_0^{\pi} \int_0^{2\pi} F(\theta, \phi) T(\theta, \phi) sin(\theta) d\theta d\phi \\
     = & \int_0^{\pi} \int_0^{2\pi} (\sum_j f_jY_j(\theta, \phi)) (\sum_k t_kY_k(\theta, \phi)) sin(\theta) d\theta d\phi \\
     = & \int_0^{\pi} \int_0^{2\pi}  (\sum_{j=0}^N (\sum_{k=0}^N f_jY_j t_kY_k )) sin(\theta) d\theta d\phi \\
-    = & \sum_{j=0}^N (\sum_{k=0}^N f_j t_k \int_0^{\pi} \int_0^{2\pi}  Y_j Y_k sin(\theta) d\theta d\phi )
+    = & \sum_{j=0}^N (\sum_{k=0}^N f_j t_k \int_0^{\pi} \int_0^{2\pi}  Y_j Y_k sin(\theta) d\theta d\phi ).
   \end{split}\label{eq:ip1}
 \end{align}
-
+%
 The spherical harmonics form an orthonormal system, such that the inner product of two basis functions $Y_{l_1,m_1}$ and $Y_{l_2,m_2}$ is
 \begin{equation}
   \langle Y_{l_1,m_1}, Y_{l_2,m_2} \rangle
@@ -53,11 +53,11 @@ The spherical harmonics form an orthonormal system, such that the inner product 
 \end{equation}
 where $\delta_{i,j}$ is the Kronecker delta defined as $\delta_{i,j} = 1 \text{ if } i = j \text{ else } 0$.
 Using this property, (\ref{eq:ip1}) simplifies to
-
+%
 \begin{align}
-  \langle F(\theta, \phi), T(\theta, \phi) \rangle = \sum_{k,j} f_j t_k \delta_{jk}
+  \langle F(\theta, \phi), T(\theta, \phi) \rangle = \sum_{k,j} f_j t_k \delta_{jk}.
 \end{align}\label{eq:ip2}
-
+%
 Thus for two distributions represented by a vector of their spherical harmonic coefficients, the inner product of their functions is equal to the inner product of the two coefficient vectors.
 The resulting image can be regarded as a pseudo-probability map of tract location, in arbitrary and dimensionless units with values typically in the range 0--0.5.
 This measure of similarity, computed voxel-wise for the registered \gls{tod} atlas and subject \gls{fod} images, is the mapping used in tractfinder and all analyses presented in Chapters \ref{chap:eval}--\ref{chap:applications}.
@@ -145,5 +145,6 @@ To address the concern that renormalising each $I_p$ could excessively amplify n
   \textbf{\sffamily c.} By computing the inner product with each fixel separately, weighted by the overall \gls{fod} amplitude, and taking the maximum value, a smooth tract reconstruction is achieved.
   \textbf{\sffamily e.} \glspl{fod} in a second crossing area, showing the brown and purple tracts intersecting at an oblique angle.
   \textbf{\sffamily f.} First segmented fixel.
-  \textbf{\sffamily g.} Second segmented fixel. \textbf{h.} \Gls{tod} atlas for the brown tract.}\label{fig:fixip}
+  \textbf{\sffamily g.} Second segmented fixel.
+  \textbf{\sffamily h.} \Gls{tod} atlas for the brown tract.}\label{fig:fixip}
 \end{figure}

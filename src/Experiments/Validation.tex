@@ -89,7 +89,8 @@ In addition to the binary \gls{dice} measure, we therefore utilise the density c
 \begin{SCfigure}[50][htbp!]
   \centering
   \includegraphics[width=0.3\textwidth]{chapter_5/segmentations_distance_euc.pdf}
-  \caption[Bundle distance calculation]{Illustration of regions involved in calculating the bundle distance metric. The light grey area is $A\setminus B$, dark grey is $B\setminus A$, and in each grey voxel is written its minimum Euclidean distance to the black intersection. Distance sign is negative outside of the reference segmentation ($B$ in this example) and positive inside. To compute the bundle distance $BD(A,B)$ (Eq. \ref{eq:bd}), the mean minimum absolute distance is taken across all 17 voxels in the two grey areas $BD(A,B) = (14+4\sqrt{2}+3\sqrt{5})/17 = 1.55$. To compute the signed bundle distance $BD_s(A,B)$ (Eq. \ref{eq:bds}), the signed distances relative to the reference set $B$ are used: $BD_s(A,B) = (2-2\sqrt{2}-\sqrt{5})/17 = -0.18$. The \gls{dice} for these two segmentations would be $DSC = 2*4/(13+12) = 0.32$}
+  \caption[Bundle distance calculation]{Illustration of regions involved in calculating the bundle distance metric. The light grey area is $A\setminus B$, dark grey is $B\setminus A$, and in each grey voxel is written its minimum Euclidean distance to the black intersection. Distance sign is negative outside of the reference segmentation ($B$ in this example) and positive inside. To compute the bundle distance $BD(A,B)$ (Eq. \ref{eq:bd}), the mean minimum absolute distance is taken across all 17 voxels in the two grey areas $BD(A,B) = (14+4\sqrt{2}+3\sqrt{5})/17 = 1.55$. To compute the signed bundle distance $BD_s(A,B)$ (Eq. \ref{eq:bds}), the signed distances relative to the reference set $B$ are used: $BD_s(A,B) = (2-2\sqrt{2}-\sqrt{5})/17 = -0.18$.
+  The \glsentrylong{dice} for these two segmentations would be $DSC = 2*4/(13+12) = 0.32$}
   \label{fig:BD}
 \end{SCfigure}
 
@@ -129,7 +130,7 @@ Thus combining information from the atlas and data-derived \glspl{fod} improves 
 
 \begin{SCfigure}
   \includegraphics{chapter_5/score_mats_group.pdf}
-  \caption[Pairwise DSC and density correlations for the \textit{TractoInferno}, HCP, and clinical datasets]{Pairwise \gls{dice} and density correlations for the \textit{TractoInferno} (top) HCP49 (middle) and clinical (bottom) datasets. For each pair of methods, the metric distributions across all subjects are shown for each tract (from left to right: \gls{af}, \gls{cst}, \gls{ifof}, \gls{or}), with background colours corresponding to mean score value. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}
+  \caption[Pairwise DSC and density correlations for the \textit{TractoInferno}, HCP, and clinical datasets]{Pairwise \glsentrylong{dice} and density correlations for the \textit{TractoInferno} (top) HCP49 (middle) and clinical (bottom) datasets. For each pair of methods, the metric distributions across all subjects are shown for each tract (from left to right: \glsentryshort{af}, \glsentryshort{cst}, \glsentryshort{ifof}, \glsentryshort{or}), with background colours corresponding to mean score value. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd, tgr}
   \label{fig:dscmats}}
 \end{SCfigure}
 
@@ -167,7 +168,7 @@ Alignment of an atlas with this shape is particularly sensitive to individual an
 
 \begin{SCfigure}
   \includegraphics{chapter_5/hcp_box.pdf}
-  \caption[Signed bundle distances to streamline tractography, HCP dataset]{Signed bundle distances for all methods compared against targeted tractography in the \gls{hcp} dataset. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd}}
+  \caption[Signed bundle distances to streamline tractography, HCP dataset]{Signed bundle distances for all methods compared against targeted tractography in the \glsentryshort{hcp} dataset. \acrolist{af, cst, or, ifof, tf, at, tsx, tsd}}
   \label{fig:hcpbox}
 \end{SCfigure}
 
@@ -183,28 +184,28 @@ Measured \glspl{dice} between TractSeg DKFZ and the TractoInferno reference bund
 \begin{figure}[hp!]
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_AF.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\scriptsize]{chapter_5/LB_AF.svg}}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_IFOF.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\scriptsize]{chapter_5/LB_IFOF.svg}}
   \end{subfigure}
-  \caption[AF and IFOF tract segmentations in all benchmark evaluation methods]{Segmentations for the left \gls{af} (top) and \gls{ifof} (bottom) in a representative subject from the \textit{TractoInferno} dataset, shown on slices at 5~mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colour scales are drawn once for each method category (tractfinder, tractography and TractSeg).}
+  \caption[AF and IFOF tract segmentations in all benchmark evaluation methods]{Segmentations for the left \glsentrylong{af} (top) and \glsentrylong{ifof} (bottom) in a representative subject from the \textit{TractoInferno} dataset, shown on slices at 5~mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colour scales are drawn once for each method category (tractfinder, tractography and TractSeg).}
   \label{fig:lb.afifof}
 \end{figure}
 \begin{figure}[htb!]
   \centering
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_CST.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\scriptsize]{chapter_5/LB_CST.svg}}
   \end{subfigure}
   \begin{subfigure}{\textwidth}
     \makebox[\linewidth][r]{%
-    \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_OR.svg}}
+    \includesvg[width=\textwidth,pretex=\sffamily\scriptsize]{chapter_5/LB_OR.svg}}
   \end{subfigure}
 \end{figure}
 \clearpage\addtocounter{figure}{-1} %flush
-{\captionof{figure}[CST and OR tract segmentations in all benchmark evaluation methods]{\textit{[Previous page]} Segmentations for the the projection tracts \gls{cst} (top) and \gls{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset shown on slices at 5~mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colour scales are drawn once for each method category (tractfinder, tractography and TractSeg). \label{fig:lb.cstor}}
+{\captionof{figure}[CST and OR tract segmentations in all benchmark evaluation methods]{\textit{[Previous page]} Segmentations for the the projection tracts \glsentrylong{cst} (top) and \glsentrylong{or} (bottom) in a representative subject from the \textit{TractoInferno} dataset shown on slices at 5~mm intervals and as volumes in the last column. Segmentations have been thresholded according to Table \ref{tab:thresh}, and colour scales are drawn once for each method category (tractfinder, tractography and TractSeg). \label{fig:lb.cstor}}
 }
 
 \paragraph*{Tract variability}
@@ -243,10 +244,10 @@ Further investigation into these outliers revealed numerous subjects with incomp
 For example, in several cases, \gls{or} streamlines only reach the superior portion of the occipital lobe (Fig. \ref{fig:duds}).
 In others, the right \gls{af} is significantly smaller than the left (Fig. \ref{fig:duds}).
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{chapter_5/badti.png}
-  \caption[Incomplete bundles in the \textit{TractoInferno} reference data]{Incomplete and conspicuously asymmetric \gls{af} (top row) and \gls{or} (bottom row) bundles in the \textit{TractoInferno} dataset. Examples shown from subjects 1078, 1117, 1114, 1131, 1222, 1170, and 1088.}
+  \caption[Incomplete bundles in the \textit{TractoInferno} reference data]{Incomplete and conspicuously asymmetric \glsentrylong{af} (top row) and \glsentrylong{or} (bottom row) bundles in the \textit{TractoInferno} dataset. Examples shown from subjects 1078, 1117, 1114, 1131, 1222, 1170, and 1088.}
   \label{fig:duds}
 \end{figure}
 
@@ -275,14 +276,14 @@ Further examples of tract reconstructions in intraoperative imaging can be viewe
 
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
-  \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_NHNN_5.svg}}
-  \caption[CST segmentations in all benchmark evaluation methods for an adult intraoperative case in the clinical dataset]{Intraoperative imaging for an adult right frontal \gls{who} grade 2 oligodendroglioma patient from the clinical dataset, with right \gls{cst} segmentations (thresholded according to Table \ref{tab:thresh}) shown in coronal slices at 5~mm intervals and as full volumes in the right-most column. White arrowheads indicate the precentral sulcus.}
+  \includesvg[width=\textwidth,pretex=\sffamily\scriptsize]{chapter_5/LB_NHNN_5.svg}}
+  \caption[CST segmentations in all benchmark evaluation methods for an adult intraoperative case in the clinical dataset]{Intraoperative imaging for an adult right frontal \glsentryshort{who} grade 2 oligodendroglioma patient from the clinical dataset, with right \glsentrylong{cst} segmentations (thresholded according to Table \ref{tab:thresh}) shown in coronal slices at 5~mm intervals and as full volumes in the right-most column. White arrowheads indicate the precentral sulcus.}
   \label{fig:lb.nh}
 \end{figure}
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
-  \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_5/LB_GOSH_3.svg}}
-  \caption[OR segmentations in all benchmark evaluation methods for a paediatric intraoperative case in the clinical dataset]{Intraoperative imaging for a paediatric temporal diffuse low-grade astrocytoma patient, with bilateral \gls{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5~mm intervals and as full volumes in the right-most column.}
+  \includesvg[width=\textwidth,pretex=\sffamily\scriptsize]{chapter_5/LB_GOSH_3.svg}}
+  \caption[OR segmentations in all benchmark evaluation methods for a paediatric intraoperative case in the clinical dataset]{Intraoperative imaging for a paediatric temporal diffuse low-grade astrocytoma patient, with bilateral \glsentrylong{or} segmentations (thresholded according to Table \ref{tab:thresh}) shown in axial slices at 5~mm intervals and as full volumes in the right-most column.}
   \label{fig:lb.gosh}
 \end{figure}
 
@@ -301,7 +302,7 @@ However, since the time taken depends greatly on several factors, including numb
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape}
 \begin{table}[ht!]
-  \caption[Measured preprocessing times for different tract segmentation pipelines]{Measured processing times (mean and standard deviation) for each step and average total for each pipeline, measured in the \textit{TractoInferno} dataset. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography \glspl{roi} were drawn once for the whole dataset, whereas for clinical datasets manual \gls{roi} delineation will have to be repeated for each subject. \dag Desktop iMac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, one node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60 GHz cores per node.}
+  \caption[Measured preprocessing times for different tract segmentation pipelines]{Measured processing times (mean and standard deviation) for each step and average total for each pipeline, measured in the \textit{TractoInferno} dataset. Note that the tractography pipeline was partially run on a high performance computing cluster, so the reported total time is not representative of a typical setup. Further note that for the present study, tractography \glsentrylongpl{roi} were drawn once for the whole dataset, whereas for clinical datasets manual \glsentryshort{roi} delineation will have to be repeated for each subject. \dag Desktop iMac with 4 GHz Quad-Core Intel Core i7 \ddag High performance computing cluster, one node per subject, 36 Intel(R) Xeon(R) Gold 6240 CPU @ 2.60 GHz cores per node.}
   \label{tab:time}
   \small
   \begin{tabularx}{\linewidth}{>{\raggedright}X >{\centering}X ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c ^>{\sffamily}c}
@@ -355,19 +356,19 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 
 \begin{figure}[h!]
   \includegraphics{chapter_5/ts_scatter.pdf}
-  \caption[Direct comparison between tractfinder and TractSeg, in all tracts]{\Gls{dice} and density correlation scores for tractfinder and TractSeg using the same training and testing streamlines from the HCP105 dataset. Mean over all subjects is shown for each tract. For abbreviations see \textcite{Wasserthal2018}}
+  \caption[Direct comparison between tractfinder and TractSeg, in all tracts]{\Glsentrylong{dice} and density correlation scores for tractfinder and TractSeg using the same training and testing streamlines from the HCP105 dataset. Mean over all subjects is shown for each tract. For abbreviations see \textcite{Wasserthal2018}}
   \label{fig:ts_all_tracts}
 \end{figure}
 
 \begin{figure}
   \includesvg[width=\textwidth,pretex=\sffamily\small]{chapter_5/tumours.svg}
-  \caption[Example tractfinder results in tumour patients]{Tractfinder maps for selected \gls{btc} and clinical subjects. Tumours or resection cavities are marked with asterisks (*), where a double asterisk (**) indicates that tumour deformation modelling was applied.
+  \caption[Example tractfinder results in tumour patients]{Tractfinder maps for selected \glsentryshort{btc} and clinical subjects. Tumours or resection cavities are marked with asterisks (*), where a double asterisk (**) indicates that tumour deformation modelling was applied.
   \textbf{\sffamily a.} Right \gls{or} mapped in \gls{btc} subject PAT16 with a right fronto-temporal anaplastic astrocytoma (\gls{who} grade 2--3).
   \textbf{\sffamily b.} Right \gls{cst} mapped in \gls{btc} subject PAT26 with a right temporal anaplastic astrocytoma (\gls{who} grade 3).
-  \textbf{\sffamily c.} Right \gls{or} mapped in \gls{nhnn} subject 6, intraoperative scan, with a right temporal oligodendroglioma (\gls{who} grade 2).
-  \textbf{\sffamily d.} Right \gls{af} mapped in \gls{btc} subject PAT03 with a right parietal meningioma (\gls{who} grade 1).
-  \textbf{\sffamily e.} Left \gls{af} mapped in \gls{gosh} subject 4, intraoperative scan, with a left temporal pleomorphic xanthoastrocytoma (\gls{who} grade 2).
-  \textbf{\sffamily f.} Left \gls{ifof} mapped in \gls{btc} subject PAT07 with left temporal ependymoma (\gls{who} grade 2)}
+  \textbf{\sffamily c.} Right \gls{or} mapped in \gls{nhnn} subject 6, intraoperative scan, with a right temporal oligodendroglioma (\glsentryshort{who} grade 2).
+  \textbf{\sffamily d.} Right \gls{af} mapped in \gls{btc} subject PAT03 with a right parietal meningioma (\glsentryshort{who} grade 1).
+  \textbf{\sffamily e.} Left \gls{af} mapped in \gls{gosh} subject 4, intraoperative scan, with a left temporal pleomorphic xanthoastrocytoma (\glsentryshort{who} grade 2).
+  \textbf{\sffamily f.} Left \gls{ifof} mapped in \gls{btc} subject PAT07 with left temporal ependymoma (\glsentryshort{who} grade 2)}
   \label{fig:tumours}
 \end{figure}
 
@@ -383,7 +384,7 @@ Across the whole dataset, including both deforming and non-deforming tumours, tr
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
   \includegraphics{chapter_5/btcd_box.pdf}}
-  \caption[Similarity scores against tractography for tractfinder and TractSeg in the BTC dataset]{Similarity scores for tractfinder and TractSeg DKFZ in the \gls{btc} dataset, compared with filtered manual tractography.}
+  \caption[Similarity scores against tractography for tractfinder and TractSeg in the BTC dataset]{Similarity scores for tractfinder and TractSeg DKFZ in the \glsentryshort{btc} dataset, compared with filtered manual tractography.}
   \label{fig:btcd_box}
 \end{figure}
 

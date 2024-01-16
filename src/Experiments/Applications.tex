@@ -23,13 +23,13 @@ Adjusting the value of $s$ and reusing preoperatively computed values of $D_t$ a
 \begin{figure}[h!]
   \centering
   \includesvg[width=\textwidth,pretex=\sffamily]{chapter_6/shrink.svg}
-  \caption[Intraoperative tumour deformation and brain shift modelling]{Demonstration of successful pre- and intraoperative tract imaging using only preoperative tumour segmentation (blue outline). Setting $s=0.8$ (green outline) simulates intraoperative decompression and models accurate atlas deformation to align with intraoperative anatomy after brain shift. The resulting \gls{cst} tractfinder segmentations are in strong agreement with streamline tractography. An earlier version of this figure was first published in \textcite{Young2022}.}
+  \caption[Intraoperative tumour deformation and brain shift modelling]{Demonstration of successful pre- and intraoperative tract imaging using only preoperative tumour segmentation (blue outline). Setting $s=0.8$ (green outline) simulates intraoperative decompression and models accurate atlas deformation to align with intraoperative anatomy after brain shift. The resulting \glsentrylong{cst} tractfinder segmentations are in strong agreement with streamline tractography. An earlier version of this figure was first published in \textcite{Young2022}.}
   \label{fig:shrink}
 \end{figure}
 
 \subsection{Tumour deformation and oedema}
 
-In this example case of \pgls{nhnn} patient with a tumour embedded within the right precentral gyrus (tumour histology information is unavailable for this subject) we will consider the combination of tumour mass effect and peritumoural oedema on tract reconstruction.
+In this example case of an \gls{nhnn} patient with a tumour embedded within the right precentral gyrus (tumour histology information is unavailable for this subject) we will consider the combination of tumour mass effect and peritumoural oedema on tract reconstruction.
 Not only is there substantial distortion to the \gls{cst} and cortical topology, the tumour is also surrounded with oedema, which is affecting diffusion measurements.
 Due to the large free water compartment within the \gls{wm}, the usual \gls{msmt} \gls{csd} approach with \gls{wm} and \gls{gm} compartments is unsuitable in this situation.
 Instead, \gls{wm} and \gls{csf} compartments were modelled, allowing modelling of \gls{wm} \glspl{fod} within oedema while reducing noise slightly compared to \gls{ssst} \gls{csd}.
@@ -84,7 +84,7 @@ A strong degree of mass effect called for tumour deformation modelling, so the l
   \centering
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_t1.png}
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_preop_def.png}
-  \caption[GOSH iMRI patient 8, preoperative imaging]{Preoperative $T_1$-weighted imaging (top) of patient 8 with high-grade left thalamic glioma. Bottom: Tumour deformation modelling in a co-registered MNI template image. No \gls{dmri} acquired preoperatively was available.}
+  \caption[GOSH iMRI patient 8, preoperative imaging]{Preoperative $T_1$-weighted imaging (top) of patient 8 with high-grade left thalamic glioma. Bottom: Tumour deformation modelling in a co-registered MNI template image. No \glsentrylong{dmri} acquired preoperatively was available.}
   \label{fig:8p}
 \end{figure}
 
@@ -99,7 +99,7 @@ Over the following weeks the patient's hemiparesis persisted but improved slowly
   \centering
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_t1.png}
   \includesvg[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_fa.svg}
-  \caption[GOSH iMRI patient 8, intraoperative imaging]{Intraoperative imaging showing transcallosal approach to patient 8's thalamic glioma. Top: $T_1$-weighted imaging. Bottom: \gls{dti} \gls{dec} \gls{fa} map. Arrowheads indicate partially infiltrated and displaced internal capsule.}
+  \caption[GOSH iMRI patient 8, intraoperative imaging]{Intraoperative imaging showing transcallosal approach to patient 8's thalamic glioma. Top: $T_1$-weighted imaging. Bottom: \glsentrylong{dti} \glsentrylong{dec} \glsentrylong{fa} map. Arrowheads indicate partially infiltrated and displaced internal capsule.}
   \label{fig:8i}
 \end{figure}
 
@@ -114,9 +114,9 @@ Visualising the fibre \glspl{odf} using \gls{csd} gives us further insight (Fig.
   \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_csd.png}\,%
   \includegraphics[width=0.33\textwidth]{chapter_6/case_studies/gosh_8_close_atlas.png}
   \caption[GOSH iMRI patient 8, intraoperative imaging, internal capsule detail]{Magnified coronal view of partially resected tumour and internal capsule and modelled fibre orientations.
-  \textbf{\sffamily a.} \Gls{dt}.
-  \textbf{\sffamily b.} \Gls{csd} \glspl{fod} (\gls{msmt} \gls{csd} with \gls{wm} and \gls{csf} compartments).
-  \textbf{\sffamily c.} Deformed \gls{tod} \gls{cst} atlas. While the main body of the tract is well defined in all three images, the boundaries between intact fibres, infiltrated \gls{wm}, and tumour are indiscernible.}
+  \textbf{\sffamily a.} \Glsentrylong{dt}.
+  \textbf{\sffamily b.} \Glsentrylong{csd} \glsentrylongpl{fod} (\glsentrylong{msmt} \glsentrylong{csd} with \glsentrylong{wm} and \glsentrylong{csf} compartments).
+  \textbf{\sffamily c.} Deformed \glsentrylong{tod} \glsentrylong{cst} atlas. While the main body of the tract is well defined in all three images, the boundaries between intact fibres, infiltrated \glsentrylong{wm}, and tumour are indiscernible.}
   \label{fig:8i_fod}
 \end{figure}
 
@@ -129,7 +129,7 @@ It is unclear what led to failure in this particular subject, as TractSeg has sh
   % 5~mm slice increments
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tg.png}
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_8_iop_tf.png}
-  \caption[GOSH iMRI patient 8, intraoperative imaging, corticospinal tract reconstructions]{Coronal slices in 5~mm increments with \gls{cst} reconstructions on intraoperative imaging for patient 8. Top: Probabilistic streamline tractography, Bottom: Tractfinder \gls{cst} with tumour deformation modelling based on preoperative tumour segmentation.}
+  \caption[GOSH iMRI patient 8, intraoperative imaging, corticospinal tract reconstructions]{Coronal slices in 5~mm increments with \glsentrylong{cst} reconstructions on intraoperative imaging for patient 8. Top: Probabilistic streamline tractography, Bottom: Tractfinder \glsentrylong{cst} with tumour deformation modelling based on preoperative tumour segmentation.}
   \label{fig:8i_tf}
 \end{figure}
 
@@ -143,7 +143,7 @@ This being a low-grade and well-encapsulated tumour, confirming the location of 
   \centering
   \includesvg[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_t1.svg}
   \includesvg[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_fa.svg}
-  \caption[GOSH iMRI patient 5, preoperative imaging]{Preoperative radiological presentation of \gls{gosh} patient 5, with a low-grade astrocytoma of the left thalamus. Top: $T_1$-weighted scan. Bottom: \gls{dti} \gls{dec} \gls{fa} map. Arrowheads indicate the \gls{cst}, partially located within the tumour.}
+  \caption[GOSH iMRI patient 5, preoperative imaging]{Preoperative radiological presentation of \glsentrylong{gosh} patient 5, with a low-grade astrocytoma of the left thalamus. Top: $T_1$-weighted scan. Bottom: \glsentrylong{dti} \glsentrylong{dec} \glsentrylong{fa} map. Arrowheads indicate the \glsentrylong{cst}, partially located within the tumour.}
   \label{fig:5p}
 \end{figure}
 
@@ -159,7 +159,7 @@ As such, this is a case in which tractfinder was unsuited to the complex anatomy
   \centering
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_tg_5mm.png}
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_preop_tf_5mm.png}
-  \caption[GOSH iMRI patient 5, preoperative imaging, corticospinal tract reconstruction]{Reconstruction of the left \gls{cst} on preoperative imaging for patient 5. Top: Streamline tractography \gls{tdi} map, thresholded at ten streamlines. Bottom: Tractfinder with and without deformation modelling merged into a single segmentation.}
+  \caption[GOSH iMRI patient 5, preoperative imaging, corticospinal tract reconstruction]{Reconstruction of the left \glsentrylong{cst} on preoperative imaging for patient 5. Top: Streamline tractography \glsentrylong{tdi} map, thresholded at ten streamlines. Bottom: Tractfinder with and without deformation modelling merged into a single segmentation.}
   \label{fig:5p_cst}
 \end{figure}
 
@@ -172,7 +172,7 @@ The patient went on to receive adjuvant chemotherapy and showed further improvem
   \centering
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_t1.png}
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_fa.png}
-  \caption[GOSH iMRI patient 5, intraoperative imaging]{Intraoperative $T_1$-weighted (top) and \gls{dec} \gls{fa} (bottom) for patient 5, showing left craniotomy and surgical corridor through the temporal lobe}
+  \caption[GOSH iMRI patient 5, intraoperative imaging]{Intraoperative $T_1$-weighted (top) and \glsentrylong{dec} \glsentrylong{fa} (bottom) for patient 5, showing left craniotomy and surgical corridor through the temporal lobe}
   \label{fig:5i}
 \end{figure}
 
@@ -180,7 +180,7 @@ The patient went on to receive adjuvant chemotherapy and showed further improvem
   \centering
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_tg_5mm.png}
   \includegraphics[width=\textwidth]{chapter_6/case_studies/gosh_5_iop_tf_5mm.png}
-  \caption[GOSH iMRI patient 5, intraoperative imaging, corticospinal tract reconstruction]{Reconstruction of the \gls{cst} on intraoperative imaging using tractography (top) and tractfinder (bottom) with standard affine registration.}
+  \caption[GOSH iMRI patient 5, intraoperative imaging, corticospinal tract reconstruction]{Reconstruction of the \glsentrylong{cst} on intraoperative imaging using tractography (top) and tractfinder (bottom) with standard affine registration.}
   \label{fig:5i_cst}
 \end{figure}
 

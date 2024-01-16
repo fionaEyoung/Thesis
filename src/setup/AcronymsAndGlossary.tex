@@ -3,21 +3,14 @@
 \usepackage[acronym,
             toc=false,
             style=super,
-            nogroupskip=true,
             seeautonumberlist,
-            nopostdot]
+            nogroupskip=true]
             {glossaries-extra}
-\usepackage{glossaries-prefix}
+\setabbreviationstyle[acronym]{long-short}
 \GlsXtrSetDefaultGlsOpts{noindex}
-\makeglossaries
+\renewcommand*\glspostdescription{\quad}
 \preto\chapter{\glsresetall}
 \makeglossaries
-\preto\chapter{\glsresetall}
-% \AtBeginEnvironment{figure}{\glslocalresetall}
-% \AtBeginEnvironment{SCfigure}{\glslocalresetall}
-% \NewCommandCopy{\oldcaption}{\caption}
-% \renewcommand{\caption}[1]{\oldcaption{{\protect\glslocalresetall#1}}}
-
 %% MRI
 \newacronym{mri}{MRI}{magnetic resonance imaging}
 \newacronym{nmr}{NMR}{nuclear magnetic resonance}
@@ -29,7 +22,7 @@
 \newacronym{epi}{EPI}{echo planar imaging}
 \newacronym{rsepi}{RS-EPI}{readout-segmented \protect\ifglsused{epi}{EPI}{echo planar imaging}}
 \newacronym{ssepi}{SS-EPI}{single-shot \protect\ifglsused{epi}{EPI}{echo planar imaging}}
-\newacronym[prefixfirst={a~},prefix={an\space}]{rf}{RF}{radio frequency}
+\newacronym{rf}{RF}{radio frequency}
 \newacronym{snr}{SNR}{signal to noise ratio}
 \newacronym{fid}{FID}{free induction decay}
 \newacronym{2dft}{2DFT}{two dimensional \protect\ifglsused{ft}{FT}{Fourier transform}}
@@ -38,14 +31,14 @@
 \newacronym{pe}{PE}{phase encoding}
 \newacronym[longplural={proton densities}]{pd}{PD}{proton density}
 \newacronym{ir}{IR}{inversion recovery}
-\newacronym[prefixfirst={a~},prefix={an\space}]{mprage}{MPRAGE}{magnetization prepared rapid gradient echo}
+\newacronym{mprage}{MPRAGE}{magnetization prepared rapid gradient echo}
 \newacronym{dce}{DCE}{dynamic contrast enhanced}
 % Image computing
 \newacronym{csd}{CSD}{constrained spherical deconvolution}
 \newacronym{odf}{ODF}{orientation distribution function}
 \newacronym{dodf}{dODF}{diffusion orientation distribution function}
 \newacronym{fodf}{fODF}{fibre \protect\ifglsused{odf}{ODF}{orientation distribution function}}
-\newacronym[prefixfirst={a~},prefix={an\space}]{fod}{FOD}{fibre orientation distribution}
+\newacronym{fod}{FOD}{fibre orientation distribution}
 \newacronym{tod}{TOD}{track orientation distribution}
 \newacronym{dti}{DTI}{diffusion tensor imaging}
 \newacronym{dt}{DT}{diffusion tensor}
@@ -106,7 +99,7 @@
 \newacronym{sh}{SH}{spherical harmonic}
 \newacronym{fsl}{FSL}{FMRIB software library}
 \newacronym{gosh}{GOSH}{Great Ormond Street Hospital}
-\newacronym[prefixfirst={a~},prefix={an\space}]{nhnn}{NHNN}{National Hospital for Neurology and Neurosurgery}
+\newacronym{nhnn}{NHNN}{National Hospital for Neurology and Neurosurgery}
 
 %% Here we set up a new command to generate a list of abbreviations, e.g. for
 %% float captions, formatted in a consistent way
