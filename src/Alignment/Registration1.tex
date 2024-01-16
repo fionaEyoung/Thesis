@@ -1,16 +1,16 @@
 \chapter{Aligning atlas and data}
 \label{chap:reg}
 
-Each tract atlas is constructed in a standard template space, and before being used to estimate the location of a tract in a new patient it must first be aligned with that patient's anatomy.
+Each tract atlas is constructed in a standard template space, an averaged, idealised brain image in standardised reference coordinates, and before being used to estimate the location of a tract in a new subject it must first be aligned with that individual's anatomy.
 In order to achieve this, some sort of registration strategy is needed, with the most appropriate registration approach depending on the type of application.
 In healthy subjects, it is sufficient to use affine registration to transform the atlas from template into subject space, before the inner product (or whichever comparison is used) is calculated.
 However, in some patient data, more advanced processing may be necessary to ensure satisfactory alignment with target anatomy.
-The following sections will describe the registration methods used in tractfinder for different scenarios, and including the use of tumour deformation modelling to account for space-occupying lesions.
+The following sections, some elements of which have been previously published in \textcite{Young2022}, will describe the registration methods used in tractfinder for different scenarios, including the use of tumour deformation modelling to account for space-occupying lesions.
 
 \section{Registration from standard space}
 \label{sec:reg1}
 
-There are two categories of image registration.
+There are two main categories of image registration.
 In global registration, a single transform applies to the entire image, preserving its topology.
 Different degrees of freedom define some commonly used terms:
 Rigid body registration comprises just translation and rotation, while affine registration further includes scaling and shearing (up to 12 degrees of freedom on $\mathbb{R}^3$).
@@ -24,9 +24,9 @@ Computing a non-linear registration between atlas and subject at the point of ap
 Maintaining practicality is a key requisite of tractfinder, and various non-linear registration tools were found during prototyping to either be too unstable (requiring manual adjustment of parameters in difficult cases such as some clinical scans) or having too long a computation time\autocite{Visser2020}.
 
 As we shall see in the range of evaluations presented in Chapters \ref{chap:eval}--\ref{chap:applications}, the use of affine registration does not result in significant segmentation inaccuracies or errors, thus there is no credible incentive to favour the use of non-linear registration at the cost of increased processing time and potential instabilities.
-Indeed, \textcite{Visser2020} showed that subject-to-standard registration accuracy of the tumoural region in low- and high-grade gliomas is not significantly improved using non-linear registration across a range of different packages, concluding there is little to justify the additional time cost and lack of robust automation.
+Indeed, \textcite{Visser2020} showed that subject--to--standard registration accuracy of the tumoural region in low- and high-grade gliomas is not significantly improved using non-linear registration across a range of different packages, concluding there is little to justify the additional time cost and lack of robust automation.
 Nevertheless, the trade-offs associated with relying on affine registration must be acknowledged.
-Particularly in brains with modest deformations or other lesions, the accuracy of anatomical alignment can be impacted, and there follows the risk of suboptimal spatial and / or orientational alignment, resulting in missed areas (false negative) or erroneously included regions (false positives).
+Particularly in brains with modest deformations or other lesions, the accuracy of anatomical alignment can be impacted, and there follows the risk of suboptimal spatial and/or orientational alignment, resulting in missed areas (false negatives) or erroneously included regions (false positives).
 
 The risk of misalignment is especially high for small structures, such as the fornix or anterior commissure, both narrow bundles which are reliably difficult to segment.
 For these cases, the construction of the atlas with spatial inter-subject smoothing is advantageous, as even with slight misalignment there is still a good chance that enough of the atlas will overlap with the structure in the target image to achieve detection.
@@ -37,12 +37,12 @@ The similar orientations of the the \gls{af} and tapetum in this region, togethe
 
 \begin{SCfigure}[][h!]
   \includesvg[width=0.6\textwidth,pretex=\ttfamily\small]{chapter_4/tpfia.svg}
-  \caption{Example of potential for atlas misalignment. The \gls{af} (A) and tapetum (T) are proximal and parallel at the temporoparietal fibre intersection area. Linearly registered right \gls{af} atlas \glspl{tod} may overlap with tapetum (arrowhead).}
+  \caption[Atlas misalignment with linear registration]{Example of potential for atlas misalignment. The \gls{af} (A) and tapetum (T) are proximal and parallel at the temporoparietal fibre intersection area. Linearly registered right \gls{af} atlas \glspl{tod} may overlap with the tapetum (arrowhead).}
   \label{fig:tpfia}
 \end{SCfigure}
 
 Fortunately, such misalignment effects are small and unlikely to impact the overall segmentation quality, in part because only the margins of the atlas are likely to ``spill'' into neighbouring tracts, and the low spatial probability will result in very low or sub-threshold mapped values.
-To confirm this assessment, Figure \ref{fig:nrr} shows segmentation similarity scores compared with probabilistic targeted tractography when using either affine (FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002}) or non-linear (ANTs registration package Symmetric Normalisation algorithm\autocite{Tustison2013,Avants2011}) atlas registration in 71 healthy subjects (\textit{TractoInferno} dataset, see Section \ref{sec:data} for more details).
+To confirm this assessment, Figure \ref{fig:nrr} shows tractfinder segmentation similarity scores compared with probabilistic targeted tractography when using either affine (FMRIB's Linear Image Registration Tool\autocite{Jenkinson2002}) or non-linear (ANTs registration package Symmetric Normalisation algorithm\autocite{Tustison2013,Avants2011}) atlas registration in 71 healthy subjects (\textit{TractoInferno} dataset, see Section \ref{sec:data} for more details).
 Note that the atlases themselves are unchanged from those previously described and used in subsequent analyses, meaning the generation of the atlases still involves only affine registration between training subjects.
 There is no discernible difference in the scores, indicating that non-linear registration does not improve the final output.
 This comparison originally appeared as supplementary material in \textcite{Young2024}.
@@ -50,8 +50,7 @@ This comparison originally appeared as supplementary material in \textcite{Young
 \begin{figure}
   \makebox[\linewidth][r]{%
   \includegraphics{chapter_4/registration_2.pdf}}
-  \caption{Difference in tractfinder performance when using either affine (plain) or non-linear (hatched) atlas registration, compared with targeted \gls{roi} tractography, in the \textit{TractoInferno} dataset of healthy subjects. For binary measures, a threshold of 0.05 applies.}
-  \label{fig:nrr}
+  \caption[Comparing linear and non-linear atlas registration]{Difference in tractfinder performance when using either affine or non-linear atlas registration, compared with targeted \gls{roi} tractography, in the \textit{TractoInferno} dataset of healthy subjects. For the \gls{dice} a threshold of 0.05 applies.}\label{fig:nrr}
 \end{figure}
 
 In conclusion, affine registration between template and subject space is preferred in most applications, including for healthy subjects and clinical subjects without large space-occupying lesions.

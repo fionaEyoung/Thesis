@@ -3,31 +3,31 @@
 
 % \note{\normalsize Chapter overview: More qualitative validation in as many sample datasets as possible, including intraoperative data, tumour deformation and debulking cases. Show specific cases where differs from e.g. tractography or TractSeg in specific areas like peritumoural oedema. Also analyse failure cases.}
 % \note{Would be nice to also have e.g. epilepsy cases in here?}
-In previous chapters, we have, in large part, focussed on applying and evaluating tractfinder in relatively idealised environments and datasets.
+In previous chapters, we have, in large part, focussed on testing and evaluating tractfinder in relatively idealised environments and datasets.
 Much of the quantitative evaluation in Chapter \ref{chap:eval} was concerted with research-quality acquisitions of healthy subjects, while even the \gls{btc} data are multi-shell \gls{hardi} scans.
-We will next consider some of the realities of real-world clinical data and environments, discussing technical limitations and illustrating the technique in a selection of case studies.
+We will next consider some of the realities of real-world clinical data and environments, discussing technical limitations and illustrating the technique's applicability in a selection of case studies.
 
 \section{Technical considerations}\label{sec:technical}
 
-The technical feasibility of tractfinder for intraoperative application depends not only on the capabilities of the method itself in terms of speed and reliability, but also on the achievable image quality.
+The technical feasibility of tractfinder for intraoperative application depends not only on features of the method itself in terms of speed and reliability, but also on its reliance on a certain minimum raw image quality.
 Intraoperative scanning must occur under significant time pressure, and the concessions made to achieve this will have profound consequences for the image quality and subsequent image processing.
 In general, two strategies exist for reducing \gls{dmri} scan time:
 The first is to reduce the information content of the acquisition, which could mean lower spatial resolution (larger voxels), lower angular resolution (fewer diffusion-weighted directions), shorter diffusion weightings (lower $b$-values) or fewer unique $b$-values (``shells'').
 The second is to use accelerated imaging techniques to achieve the (notionally) same image parameters in shorter time.
-These two possibilities are investigated in the following sections, beginning with an investigation into the effect of diffusion-weighting scan parameters on tract segmentations, in work first published in \textcite{Young2022a}.
+These two possibilities are explored in the following sections, beginning with an investigation into the effect of diffusion-weighting scan parameters on tract segmentations, in work first published in \textcite{Young2022a} and since expanded to include the \gls{ifof}.
 
 \subsection{Data requirements}\label{sec:ismrmdiff}
 
 It is important to assess the applicability of image processing techniques developed with research quality data in acquisitions more typical of a clinical setting.
-Advanced \gls{dmri} processing techniques may sometimes set constraints on the input data, such as a recommended or required minimum number of diffusion-weighted volumes (angular resolution), $b$-values or spatial resolution.
+Advanced \gls{dmri} processing techniques may sometimes set constraints on the input data, such as a recommended or required minimum number of diffusion-weighted volumes (angular resolution), $b$-values, or spatial resolution.
 If it can be demonstrated that an image processing pipeline produces excellent results in a high quality research dataset, which can be interpreted with confidence, then the question follows:
 Were one to acquire a lower quality dataset of the same subject and perform the same data processing, how comparable would the resulting segmentation be to that of the high quality scan?
-This is the question explored in the following study, which makes use of the high quality \gls{hcp} \gls{dmri} data (Section \ref{sec:data}) to determine the minimum data requirements to obtain successful segmentation, comparing different numbers of direction samples, $b$-values and post-processing strategies, as well as the affects of decreasing data quality on segmentation stability for three different methods (tractfinder, tractography and TractSeg; see Section \ref{sec:methods} for further details).
+This is the question explored in the following study, which makes use of the high quality \gls{hcp} \gls{dmri} data to determine the minimum acceptable data requirements to obtain successful segmentation, comparing different numbers of direction samples, $b$-values and post-processing strategies, as well as the affects of decreasing data quality on segmentation stability for three different methods (tractfinder, tractography and TractSeg; see Section \ref{sec:methods} for further details).
 
 % \paragraph*{Data and methods}
 
-49 preprocessed \gls{dmri} scans from the WU-Minn \gls{hcp} Young Adult S1200 data release were spatially resampled to 2.5~mm isotropic voxel size (from the original of 1~mm isotropic), a resolution far more typical in both clinical and research settings.
-Then, for each subject, the following five subsampled diffusion schemes were extracted from the full acquisition (Tab. \ref{tab:subschemes}):
+The downsampled HCP49 dataset (see Section \ref{sec:data} for full details) was used for this study.
+In addition to the preprocessing previously described, for each subject, the following five subsampled diffusion schemes were extracted from the full acquisition (Tab. \ref{tab:subschemes}):
 60 directions each at $b=1000$~s~mm$^{-2}$ and $b=2000$~s~mm$^{-2}$ (120 directions total, ``DWI-1”), 30 directions each at $b=1000$~s~mm$^{-2}$ and $b=2000$~s~mm$^{-2}$ (60 directions total, ``DWI-2”), 60 directions at $b=1000$~s~mm$^{-2}$ (``DWI-3”), 30 directions at $b=1000$~s~mm$^{-2}$ (``DWI-4”) and 12 directions at $b=1000$~s~mm$^{-2}$ (``DWI-5”).
 
 \begin{table}
@@ -41,20 +41,20 @@ Then, for each subject, the following five subsampled diffusion schemes were ext
     DWI-4 & 30 &    \\
     DWI-5 & 12 &    \\ \bottomrule
   \end{tabular}
-  \caption{Subsampled diffusion schemes, number of directions}
+  \caption[Subsampled diffusion schemes for data stability analysis]{Subsampled diffusion schemes, number of directions}
   \label{tab:subschemes}
 \end{table}
 
 Four different tract segmentations were produced in each subject using the three different approaches described in Section \ref{sec:methods}: Tractfinder, targeted \gls{roi}-based, probabilistic streamline tractography, and TractSeg (DKFZ and XTRACT models).
 Segmentations were compared for the three tracts most commonly reconstructed in neurosurgical applications:
-The \gls{cst}, \gls{af} and \gls{or} (this study was conducted before an atlas for the \gls{ifof} was completed).
-All tract segmentation methods are predicated on \glspl{fod} modelled from diffusion data with \gls{csd}, although tractography and TractSeg could both use fibre orientations estimated via other techniques such as BedpostX\autocite{Behrens2007}.
+The \gls{cst}, \gls{af}, \gls{or}, and \gls{ifof}.
+All compared tract segmentation methods are predicated on \glspl{fod} modelled from diffusion data with \gls{csd}, although tractography and TractSeg could both use fibre orientations estimated via other techniques such as BedpostX\autocite{Behrens2007}.
 For the two-shelled datasets, \gls{msmt} \gls{csd} can be run to separate the signal contributions from \gls{wm}, \gls{gm} and \gls{csf} and thus obtain an optimal \gls{wm} \gls{fod} image free of noisy extraneous signal in non-\gls{wm} regions.
 For the single-shelled datasets, full, direct \gls{msmt} \gls{csd} with all three tissue compartments is not possible.
 Instead, the following approaches were compared: 1) Modelling two tissue types with \gls{msmt}.
 \Gls{msmt} \gls{csd} is performed twice, once modelling \gls{wm} and \gls{gm} compartments, and once modelling \gls{wm} and \gls{csf} compartments; 2) Standard \gls{ssst} \gls{csd}.
 
-To investigate the effects of different data quality and modelling on a given method, the \gls{dice} \autocite{Dice1945} was computed between each segmentation in datasets DWI-2--5 and the corresponding segmentation of the same method in DWI-1 using three-tissue \gls{msmt} \gls{csd} (considered the benchmark segmentation).
+To investigate the effects of different data quality and modelling on a given method, the \gls{dice} \autocite{Dice1945} was computed between each segmentation in datasets DWI-2--5 and the corresponding segmentation of the same method in DWI-1 using \gls{msmt} \gls{csd} (considered the benchmark segmentation).
 This ``self-similarity'' approach is intended to answer the question put forward above:
 How close to the results produced from an ``ideal'' acquisition can be achieved from a lower quality scan.
 This comparison was made for each combination of diffusion scheme and \gls{csd} approach.
@@ -64,28 +64,27 @@ This comparison was made for each combination of diffusion scheme and \gls{csd} 
 \begin{figure}
   \centering
   \includesvg[width=\textwidth,pretex=\sffamily\footnotesize]{chapter_6/self_dice.svg}
-  \caption{Self Dice scores for all tracts and methods. Each datapoint represents a comparison with the corresponding segmentation in DWI-1, the highest quality acquisition scheme. Outlined markers represent the mean over all subjects.}
+  \caption[Self-similarity scores for data stability analysis]{Self Dice scores for all tracts and methods. Each datapoint represents a comparison with the corresponding segmentation in DWI-1, the highest quality acquisition scheme. Outlined markers represent the mean over all subjects.}
   \label{fig:self_dice}
 \end{figure}
 
 Self-similarity results are plotted in Figure \ref{fig:self_dice}.
 Each datapoint corresponds to the segmentation produced for a given \gls{dmri} direction scheme, method and pipeline \textit{compared against} the result obtained from the highest quality scheme (DWI-1).
-The consistency in segmentation results differed significantly with both data quality and \gls{csd} approach.
-In particular, a high sensitivity to \gls{csd} technique is apparent in the tractography and Tractfinder results, with particularly large differences between \gls{msmt} \gls{wm}+\gls{csf} / \gls{ssst} and \gls{msmt} \gls{wm}+\gls{gm}, which can be attributed to the inclusion of \gls{gm} signal in the \gls{wm} \gls{fod} reconstructions.
-In those two approaches, the \gls{gm} compartment is not as strongly suppressed from the \gls{wm} reconstruction, resulting in high \gls{wm} \gls{fod} amplitudes in the cortex and subcortical \gls{gm}, leading in turn to more extensive segmentations:
-In tractography via the further propagation of streamlines into \gls{gm}, and in Tractfinder by increasing the inner product values.
+The consistency in segmentation results differed with both data quality and \gls{csd} approach.
+In particular, a high sensitivity to \gls{csd} technique is apparent in the tractography and tractfinder results, with particularly large differences between \gls{msmt} \gls{wm}+\gls{csf} / \gls{ssst} and \gls{msmt} \gls{wm}+\gls{gm}, which can be attributed to the inclusion of \gls{gm} signal in the \gls{wm} \gls{fod} reconstructions.
+In the first two approaches, the \gls{gm} compartment is not as strongly suppressed from the \gls{wm} reconstruction, resulting in high \gls{wm} \gls{fod} amplitudes in the cortex and subcortical \gls{gm}, leading in turn to more extensive segmentations:
+In tractography via the further propagation of streamlines into \gls{gm}, and in tractfinder by increasing the inner product values.
 
-TractSeg, while not immune, appears less sensitive to differences in \gls{csd} reconstruction.
-When considering only the best results (\gls{msmt} in DWI-2 and, in the single-shelled datasets, \gls{msmt} \gls{wm}+\gls{gm} for tractography and Tractfinder and \gls{ssst} for TractSeg, \ref{fig:self_dice}), tractography displays the greatest instability with decreasing data quality, with the similarity score between DWI-5 \gls{msmt} \gls{wm}+\gls{gm} and DWI-1 \gls{msmt} falling as low as 0.78 (subject and cerebral hemisphere mean) for the \gls{af}.
-TractSeg is trained on \gls{ssst} \gls{csd} in single-shelled data as well as multi-shelled data, explaining why it does best with either \gls{ssst} or \gls{msmt} \gls{wm}+\gls{csf} in our single-shell results, and has learned to not pay too much attention to fibre orientation peak magnitudes.
+TractSeg is appears less sensitive to differences in \gls{csd} reconstruction.
+When considering only the best results (\gls{msmt} in DWI-2 and, in the single-shelled datasets, \gls{msmt} \gls{wm}+\gls{gm} for tractography and tractfinder and \gls{ssst} for TractSeg, Fig. \ref{fig:self_dice}), tractography displays the greatest instability with decreasing data quality, with the similarity score between DWI-5 \gls{msmt} \gls{wm}+\gls{gm} and DWI-1 \gls{msmt} falling as low as 0.78 (subject and cerebral hemisphere mean) for the \gls{af}.
+TractSeg is trained on \gls{ssst} \gls{csd} in single-shelled data as well as multi-shelled data, explaining why it does best with either \gls{ssst} or \gls{msmt} \gls{wm}+\gls{csf} in the single-shell results.
 
-The comparatively high sensitivity of probabilistic tractography to acquisition and processing pipelines is consistent with the well-established reproducibility and noise sensitivity problems associated with tractography.
+Probabilistic tractography's comparatively high sensitivity to acquisition and processing pipelines is consistent with the well-established reproducibility and noise sensitivity problems associated with tractography.
 Meanwhile, voxel-wise segmentation methods are not susceptible to error propagation along the tract and are more robust to lower angular resolution:
 When the number of directions in a multi-shelled acquisition was halved (DWI-2), average tractfinder self-similarity was 0.98 or above, while for tractography it was substantially lower at around 0.9.
-Although tractfinder with \gls{ssst} \gls{csd} exhibits lower self-similarity with three-tissue \gls{msmt} \gls{csd}, scores remained steady across all single-shelled schemes.
 Overall, these results motivate the use of \gls{msmt} \gls{wm}+\gls{gm} for tractfinder in all single-shelled acquisitions, with the caveat that particular care must be taken when interpreting segmentations in \gls{wm}/\gls{csf} partial volume areas.
 Understanding the behaviour of different tract segmentation techniques when applied to varying qualities of \gls{dmri} acquisition and post-processing approaches is important if segmentation methods developed in research settings are to be consistently and reproducibly applied to clinical quality acquisitions.
-It is useful to know how comparable segmentation results in a single-shelled, 30 direction dataset are to those one might have obtained with a \gls{hardi} dataset and state-of-the-art post-processing.
+It is useful to know how comparable segmentation results in a single-shelled, 30 direction dataset are to those one might have obtained with a much higher angular resolution dataset and optimal post-processing.
 This is particularly relevant for longitudinal studies, or when comparing different acquisitions of the same subject in a clinical context (for example, for monitoring disease progressions or post-operative changes).
 
 \subsection{Fast imaging and artefacts}
@@ -98,17 +97,17 @@ However, not only can the distortions around resection cavities be especially se
 
 \begin{figure}[h!]
   \includegraphics[width=\textwidth]{chapter_6/epidist.pdf}
-  \caption{Examples of strong susceptibility distortions (arrowheads) on intraoperative \gls{epi} acquisitions obtained on the Siemens MAGNETOM Vida system at \gls{gosh}. Effects this extreme are not present in all cases, but neither are they uncommon.}
+  \caption[EPI distortion artefacts]{Examples of strong susceptibility distortions (arrowheads) on intraoperative \gls{epi} acquisitions obtained on the Siemens MAGNETOM Vida system at \gls{gosh}. Effects this extreme are not present in all cases, but neither are they uncommon.}
   \label{fig:epi}
 \end{figure}
 
-Typical \gls{dmri} acquisitions are based on \gls{ssepi}, in which an entire slice's worth of data is sampled in a single excitation-readout sequence.
+Typical \gls{dmri} acquisitions are based on \gls[noindex=false]{ssepi}, in which an entire slice's worth of data is sampled in a single excitation-readout sequence.
 As an alternative to \gls{ssepi}, multi-shot sequences have been proposed.
-These include interleaved and \gls{rsepi} sequences which, in general, only traverse a portion of $k$-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) while increasing scan time\autocite{Wang2018}.
+These include interleaved and \gls[noindex=false]{rsepi} sequences which, in general, only traverse a segment of $k$-space per echo train, increasing the bandwidth along the phase-encoding direction (and thus reducing field inhomogeneity induced phase accumulation) while increasing scan time\autocite{Wang2018}.
 RESOLVE (readout segmentation of long variable echo-trains), a Siemens product, is one example of a commonly used \gls{rsepi} sequence for high quality three-scan trace weighted images with high in-plane resolution.
 
 While RS sequences can be combined with acceleration techniques including generalised autocalibrating partially parallel acquisition (GRAPPA) and simultaneous multi-slice (SMS), they nevertheless result in significantly longer scan times, which, in clinical applications, must be weighed against any gains in image quality and distortion reduction.
-For example, in \textcite{Wang2018} authors compared interleaved and \gls{rsepi} sequences with \textit{in vivo} scan times of around ten minutes, while only acquiring four slices of 4~mm thickness!
+For example, in \textcite{Wang2018} authors compared interleaved and \gls{rsepi} sequences with \textit{in vivo} scan times of around ten minutes to acquire only four slices of 4~mm thickness!
 In \textcite{Elliott2020}, \gls{ssepi} was compared with a RESOLVE sequence with 15 segments, six diffusion-weighted directions, and a scan time of 10:34 minutes.
 For comparison, the clinical \gls{ssepi} \gls{dti} sequence currently used intraoperatively at \gls{gosh} is a 30 direction $b=1000$~s~mm$^{-2}$ acquisition lasting just 4:57~minutes with 2.3~mm isotropic voxels.
 
@@ -116,7 +115,7 @@ We set out to explore the feasibility of setting up a \gls{rsepi} \gls{dti} sequ
 An (approximately) isotropic voxel size is generally considered optimal for \gls{dti} modelling and tractography \autocite{Vos2011, Neher2013}, although tractography with high in plane resolution and thick slices is certainly possible.
 Additionally, a sufficient number of diffusion-weighted directions for crossing fibre modelling (e.g \gls{csd}) would be ideal, potentially as few as 12 directions given the results from Section \ref{sec:ismrmdiff}.
 In the end, we tested three different \gls{dti} sequences as well as several different three-scan trace RESOLVE sequences (not discussed here), all acquired from a healthy adult volunteer on the intraoperative Siemens MAGNETOM Vida (3T) system at \gls{gosh}.
-The acquisition parameters of the three test sequences, along with the standard \gls{gosh} \gls{dmri} sequences for comparison, are shown in Table \ref{tab:rsepi}.
+The acquisition parameters of the three test sequences, along with the routine \gls{gosh} \gls{dmri} sequences for comparison, are shown in Table \ref{tab:rsepi}.
 
 % [1] Yang, J. Y.-M. *et al.* Assessment of intraoperative diffusion \gls{epi} distortion and its impact on estimation of supratentorial white matter tract positions in pediatric epilepsy surgery. *NeuroImage: Clinical* **35**, 103097 (2022).  https://www.sciencedirect.com/science/article/pii/S2213158222001620
 % [2] Wang, Y. *et al.* A comparison of readout segmented \gls{epi} and interleaved \gls{epi} in high-resolution diffusion-weighted imaging. *Magnetic Resonance Imaging* **47**, 39–47 (2018). DOI: 10.1016/j.mri.2017.11.011
@@ -125,12 +124,12 @@ The acquisition parameters of the three test sequences, along with the standard 
 % [5] https://www.researchgate.net/publication/236022704_Analysis_of_tractography_biases_introduced_by_anisotropic_voxels
 
 \begin{table}
-  \caption{\Gls{rsepi} test scan parameters}
+  \caption[RS-EPI test scan acquisition parameters]{\Gls{rsepi} test scan parameters}
   \label{tab:rsepi}
   % \setlength{\tabcolsep}{0.3em}
   \footnotesize
   \begin{tabularx}{\textwidth}{l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X} \toprule
-    & \gls{gosh} VIDA “clinical” (RESOLVE) & \gls{gosh} VIDA Clinical \gls{dti} & Test scan 1: 7seg 6\x b800 & Test scan 2: 3seg 12\x b1000 & Test scan 3: 3seg 20\x b1000 \\
+    & RESOLVE & Routine clinical \gls{dti} & Test scan 1: 7seg 6\x $b$800 & Test scan 2: 3seg 12\x $b$1000 & Test scan 3: 3seg 20\x $b$1000 \\
   \midrule
    $n$ directions & 3 & 30 & 6 & 12 & 20 \\
    b values & 0, 800 & 0, 1000 & 0, 800 & 0, 1000 & 0, 1000 \\
@@ -151,13 +150,16 @@ For each scan, minimal preprocessing was conducted using MRtrix3\autocite{Tourni
 \Gls{mppca} denoising and bias field correction, followed by \gls{dt} modelling and \gls{dec} mapping, and \gls{ssst} \gls{csd}.
 For \gls{csd}, $l_{max}$ was set to 8 except for the six direction scan where $l_{max}=6$ was used.
 No distortion correction was applied.
-Finally, the \gls{cst} was reconstructed with a simple probabilistic tractography protocol, using the internal capsule as a seed region and an inclusion \gls{roi} at brain stem level, along with exclusion \glspl{roi} for common false positives.
+Finally, the left \gls{cst} was reconstructed with a simple probabilistic tractography protocol, using the internal capsule as a seed region and an inclusion \gls{roi} at brain stem level, along with exclusion \glspl{roi} for common false positives.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=\textwidth]{chapter_6/rsepi.png}
-  \caption{Baseline \gls{ssepi} diffusion sequence and three \gls{rsepi} test sequences. From top: Baseline (30\x b1000 \gls{ssepi} \gls{dti}), 7seg 6\x b800, 3seg 12\x b1000, 3seg 20\x b1000}
-  \label{fig:rsepi}
+  \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_6/rsepi.svg}
+  \caption[RS-EPI test scan results]{Baseline \gls{ssepi} diffusion sequence and three \gls{rsepi} test sequences
+    \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \gls{ssepi} \gls{dti})
+    \textbf{\sffamily b.} 7seg 6\x{}$b$800
+    \textbf{\sffamily c.} 3seg 12\x{}$b$b1000
+    \textbf{\sffamily d.} 3seg 20\x{}$b$1000}\label{fig:rsepi}
 \end{figure}
 
 Based on visual assessment alone, the degree of distortion reduction is difficult to evaluate for all compared sequences (Fig. \ref{fig:rsepi}).
@@ -168,27 +170,19 @@ The third test scan additionally used SMS acceleration which appears to have sig
 
 \begin{figure}[h!]
   \centering
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth]{chapter_6/0_fod_tg.png}
-  \end{subfigure}%
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth]{chapter_6/1_fod_tg.png}
-  \end{subfigure}
-  %
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth]{chapter_6/2_fod_tg.png}
-  \end{subfigure}%
-  \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=\textwidth]{chapter_6/3_fod_tg.png}
-  \end{subfigure}
-  \caption{\Glspl{fod} at the centrum semiovale and full \gls{cst} tractography streamlines. From left to right, top to bottom: Baseline (30\x{}b1000 \gls{ssepi} \gls{dti}), 7seg 6\x{}b800, 3seg 12\x{}b1000, 3seg 20\x{}b1000}
+  \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_6/rsepi_fod_tg.svg}
+  \caption[RS-EPI test scan fibre orientation and CST reconstructions]{\Glspl{fod} at the centrum semiovale and left \gls{cst} tractography streamlines.
+  \textbf{\sffamily a.} Baseline (30\x{}$b$1000 \gls{ssepi} \gls{dti})
+  \textbf{\sffamily b.} 7seg 6\x{}$b$800
+  \textbf{\sffamily c.} 3seg 12\x{}$b$1000
+  \textbf{\sffamily d.} 3seg 20\x{}$b$1000}
   \label{fig:rsepi-fod}
 \end{figure}
 
 Figure \ref{fig:rsepi-fod} demonstrates the \glspl{fod} and tractography reconstructions obtained from each sequence.
-The six direction scan results in poorly resolved \glspl{fod} and correspondingly noisy streamlines, while the third test scan which was degraded due to the use of SMS produced entirely unusable \glspl{fod}.
+The six direction scan resulted in poorly resolved \glspl{fod} and correspondingly noisy streamlines, while the third test scan which was degraded due to the use of SMS produced entirely unusable \glspl{fod}.
 Most promising are the results obtained from the 12 direction scan, despite the low angular resolution, although there is certainly still a lot of noise.
-The findings presented in \ref{sec:ismrmdiff} indicate that a 12 direction scan, while far from ideal, could still be used to obtained reliable tract segmentations (Fig. \ref{fig:ssepi2}).
+The findings presented in Section \ref{sec:ismrmdiff} indicate that a 12 direction scan, while far from ideal, could still be used to obtained reliable tract segmentations (Fig. \ref{fig:ssepi2}).
 It is simply a question of priority:
 Is the achievable reduction in susceptibility distortion worth the implications of lower angular resolution?
 This is a question that cannot be answered from such exploratory data, and indeed the answer is likely to be case-specific, given that the amount of distortion varies significantly from scan to scan depending on the specific patient and surgical setup.
@@ -202,6 +196,6 @@ While further exploration of distortion reduction was not a priority of this pro
   \begin{subfigure}{0.4\textwidth}
     \includegraphics[width=\textwidth]{chapter_6/2_glass_tf.png}
   \end{subfigure}
-  \caption{Tractfinder reconstruction of the left \gls{cst} in the 12 direction, three segment \gls{rsepi} scan compared with streamline tractography.}
+  \caption[RS-EPI 12 direction test scan CST reconstructions with tractography and tractfinder]{Tractfinder reconstruction (right) of the left \gls{cst} in the 12 direction, three segment \gls{rsepi} scan compared with streamline tractography (left).}
   \label{fig:ssepi2}
 \end{figure}

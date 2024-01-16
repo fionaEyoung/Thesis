@@ -71,11 +71,10 @@
 %    e.g. Section 2.3.1.5.6.3
 %  and how many of those will get put into the contents pages.
 \setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
+\setcounter{tocdepth}{2}
 
 \newcommand\note[1]{\ifdraft{{\large\textcolor{red}{#1}}}{}}
 %TC:macro \note [ignore]
-
 \begin{document}
 
 % \nobibliography*
@@ -86,12 +85,9 @@
 % For more information, see: http://stefaanlippens.net/bibentry
 
 \include{FrontBack/Preamble}
-\printglossary[type=\acronymtype]
-% \glsaddallunused[main]
-\printglossary
 
 \epipage{I'll tell you where the real road lies\\
-Between your ears, behind your eyes}{Anais Mitchell, Hermes in \textit{Wait For Me (Reprise)}}
+Between your ears, behind your eyes}{Anais Mitchell, \textit{Wait For Me (Reprise)}}
 \include{Introduction/Introduction}
 
 

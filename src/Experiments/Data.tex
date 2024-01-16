@@ -1,10 +1,10 @@
 \chapter{Methodological evaluation}\label{chap:eval}
 
 The following sections set out to provide an evaluation of the tractfinder method from a range of perspectives.
-A common complaint in the white matter imaging field is over the lack of reliable ground truth information for fibre tract identification.
+A common complaint in the \gls{wm} imaging field is over the lack of reliable ground truth information for fibre tract identification.
 This goes deeper than the limitations of our scientific instruments:
 Micrometer-resolution \gls{mri} or infallible tractography algorithms are not the answer.
-As was explored in Chapter \ref{chap:atlas}, our understanding of white matter anatomy, connection, and function is neither fixed nor universal, meaning for many tracts a single definition that can be agreed upon by all does not even exist in a given moment, nor one to last over time.
+As was explored in Chapter \ref{chap:atlas}, our understanding of \gls{wm} anatomy, connection, and function is neither fixed nor universal, meaning for many tracts a single definition that can be agreed upon by all does not even exist in a given moment, nor one to last over time.
 We can nonetheless arrive at a reasonable assessment of tractfinder's accuracy, reliability and applicability by making justifiable assumptions and comparing it, quantitatively and visually, with benchmark methods in a variety of datasets and case studies.
 
 The missing ground truth problem comes to the fore when comparing different methods, as we will see in Section \ref{sec:validation}, but the results are still instructive in assessing their respective characteristics.
@@ -19,27 +19,27 @@ Subsequently, in Chapter \ref{chap:applications}, we'll move on from similarity 
 
 A range of datasets are considered in which to compare the tractfinder approach against alternative tract segmentation methods, covering adult and paediatric, healthy and clinical populations (Tab. \ref{tab:datasets}).
 Each dataset and any dataset-specific preprocessing is described in the following subsections.
-In addition, the following default preprocessing steps were applied to all scans, unless otherwise specified:\footnote[2]{software versions: MRtrix3 v3.0.2--3.0.3 (\url{https://www.mrtrix.org/}), \gls{fsl} v.6.0}
+In addition, the following default preprocessing steps were applied to all scans, unless otherwise specified:\footnote[2]{software versions: MRtrix3 v3.0.2--3.0.3 (\url{https://www.mrtrix.org/}), \gls{fsl} v.6.0 (\url{https://fsl.fmrib.ox.ac.uk/})}
 
 \textit{Brain masking}\autocite{Tournier2019}
 using a heuristic algorithm based on thresholding the mean of each diffusion-weighted shell described in \textcite{Dhollander2016}, implemented in MRtrix3\autocite{Tournier2019} as \verb|dwi2mask|.
 
 \textit{Affine registration} between subject space and MNI152\autocite{Fonov2011} template space using the \gls{fsl} Linear Image Registration Tool (FLIRT)\autocite{Jenkinson2001,Jenkinson2002}.
 
-\textit{\Gls{csd}}. Depending on the dataset and / or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd}\autocite{Tournier2007,Tournier2019} (``original flavour'') and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to \gls{wm} and \gls{gm} tissue compartments for single-shelled acquisitions (those with a single nonzero $b$-value),
+\textit{\Gls{csd}}. Depending on the dataset and/or application, two different versions of \gls{csd} applied: \gls{ssst} \gls{csd}\autocite{Tournier2007,Tournier2019} (``original flavour'') and \gls{msmt} \gls{csd}\autocite{Jeurissen2014} restricted to \gls{wm} and \gls{gm} tissue compartments for single-shelled acquisitions (those with a single nonzero $b$-value),
 and \gls{msmt} \gls{csd} with three tissue compartments (\gls{wm}, \gls{gm}, \gls{csf}) for multi-shelled acquisitions (see Section \ref{sec:ismrmdiff} for further context on these choices).
 In all cases, response functions were obtained using the Dhollander unsupervised 3-tissue response function estimation algorithm\autocite{Dhollander2016,Dhollander2019}.
 All \gls{csd} was performed using the MRtrix3 image processing software package\autocite{Tournier2019}.
 
 \subsection{HCP}
 
-The first large healthy adult dataset (``HCP49'') comprised 49 scans from the WU-Minn \gls{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
+The first large healthy adult dataset (``HCP49'') comprised 49 scans from the WU-Minn \gls[noindex=false]{hcp} Young Adult S1200 data release (\url{https://www.humanconnectome.org/study/hcp-young-adult/document/1200-subjects-data-release}) \autocite{VanEssen2013}.
 The original data comprises high resolution $T_1$-weighted and diffusion-weighted \gls{mri} acquired on a modified Siemens 3T Skyra scanner.
 Raw diffusion data contains three diffusion-weighted shells at $b=$ 1000, 2000 and 3000~s~mm$^{-2}$ with 90 directions each and 18 $b=0$ volumes\autocite{Sotiropoulos2013}.
-These images have been preprocessed as documented in \textcite{Glasser2013,Sotiropoulos2013},
+These images have been preprocessed as documented in \textcite{Glasser2013} and \textcite{Sotiropoulos2013},
 and additionally for this analysis they were downsampled to 2.5~mm isotropic voxels (from the original resolution of 1.25~mm isotropic) and a subset of 60 optimally distributed directions at $b=1000$~s~mm$^{-2}$ were extracted, emulating a typical clinical acquisition in spatial and angular resolution.
 
-A different set of 105 \gls{hcp} subjects (``HCP105'') were used to train and test the deep learning segmentation method TractSeg\autocite{Wasserthal2018}.
+A different set of 105 \gls{hcp} subjects (``HCP105'') were used in \textcite{Wasserthal2018} to train and test the deep learning segmentation method TractSeg.
 The curated TractSeg reference streamline bundles for these subjects are publicly available\autocite{Wasserthal2018b} and were used in a separate analysis to directly compare tractfinder and TractSeg.
 For these subjects, the same preprocessing steps were applied as in the set of 49 subjects, with the exception of selecting a subset of 30 instead of 60 $b=1000$~s~mm$^{-2}$ directions, to match the \textit{clinical quality} data described in \textcite{Wasserthal2018}.
 
@@ -48,46 +48,46 @@ For these subjects, the same preprocessing steps were applied as in the set of 4
 The recently released \textit{TractoInferno} database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1})\autocite{Poulin2022a,Poulin2022}, created as an open dataset to support the training and comparison of machine learning tractography algorithms, contains diffusion and $T_1$-weighted \gls{mri} scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography bundle reconstructions produced using four different tracking algorithms and the RecoBundlesX automatic streamline clustering method \autocite{Garyfallidis2018,Rheault2020a}, followed by semi-automatic quality control.
 Of the 284 subjects included in the full \textit{TractoInferno} database, the 80 subjects with tractography of all of the \gls{cst}, \gls{or}, \gls{ifof} and \gls{af} were selected.
 Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed targeted \gls{roi} tractography (see Section \ref{sec:methods}), leaving a final 71 subjects.
-Diffusion acquisition parameters and preprocessing steps are described in detail in \textcite{Poulin2022} and summarised in Table \ref{tab:datasets}, and all data was additionally resampled to 2.3~mm isotropic voxels, the lowest resolution present in the dataset and one in line with clinical acquisitions.
+Diffusion acquisition parameters and preprocessing steps are described in detail in \textcite{Poulin2022} and summarised in Table \ref{tab:datasets}, and all data was additionally resampled to 2.3~mm isotropic voxels, the lowest resolution present in the dataset and one in line with the other datasets.
 
 \subsection{Clinical (GOSH \& NHNN)}
 
-To validate tractfinder in real clinical patient scans, a dataset of 15 individual scans from eight different subjects and two different institutions was collated.
-They include four adult glioma subjects acquired in 2009 at the \gls{nhnn}, London (cases 4 and 5 from \textcite{Mancini2022}, others unpublished data),
-three paediatric subjects from \gls{gosh} (each with one preoperative and one intraoperative scan),
+To validate tractfinder in real clinical patient imaging, a dataset of 15 individual scans from eight different subjects and two different institutions was collated.
+They include four adult glioma subjects acquired in 2009 at the \gls[noindex=false]{nhnn}, London (cases 4 and 5 from \textcite{Mancini2022}, others unpublished data),
+three paediatric subjects from \gls[noindex=false]{gosh} (each with one preoperative and one intraoperative scan),
 a mock “intraoperative” scan on a healthy adult volunteer acquired with the \gls{gosh} intraoperative \gls{dti} protocol and using a simulated intraoperative setup (flex-coils wrapped around the head instead of a head coil, head significantly displaced from scanner isocenter etc.),
 and a partridge in a pear tree.
 The three \gls{gosh} paediatric patients all had low-grade astrocytoma (pilocytic astrocytoma, diffuse astrocytoma, and pleomorphic xanthoastrocytoma).
-For fully acquisition details see Table \ref{tab:datasets}.
-All clinical scans used in the systematic comparison with benchmark methods involved non-deforming tumours, in the sense that any lesions did not appreciably displace white matter structures from their typical positions.
+Two of the \gls{nhnn} subjects had oligodendroglioma, histology types for the other two tumours was not available.
+For full acquisition details see Table \ref{tab:datasets}.
+All clinical scans used in the systematic comparison with benchmark methods involved non-deforming tumours, in the sense that any lesions did not appreciably displace \gls{wm} structures from their typical positions.
 Further \gls{gosh} and \gls{nhnn} scans with substantial tumours were analysed on a case-by case basis, as the low sample size and high tumour heterogeneity precluded a systematic quantitative evaluation.
 
-Each \gls{dmri} scan was minimally preprocessed with \gls{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction\autocite{Zhang2001, Smith2004}, as implemented in MRtrix3 \autocite{Tournier2019}.
-Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} (MRtrix3 v3.0.3 and FMRIB Software Library (\gls{fsl}, \url{https://fsl.fmrib.ox.ac.uk}) v6.0) applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
+Each \gls{dmri} scan was minimally preprocessed with \gls[noindex=false]{mppca} denoising\autocite{Veraart2016, Cordero-Grande2019} Gibbs-ringing correction\autocite{Kellner2016} and bias field correction\autocite{Zhang2001, Smith2004}, as implemented in MRtrix3 \autocite{Tournier2019}.
+Preoperative scans additionally had eddy current and motion distortion correction\autocite{Andersson2016a, Smith2004} applied, while this step was omitted for intraoperative scans to maintain a clinically realistic timeline.
 No \gls{epi} distortion correction was performed, as it is frequently omitted from clinical pipelines due to lack of requisite reverse phase encoding or field map information and long processing times\autocite{Yang2022}.
 
 \subsection{BTCD}
 \label{sec:data_btcd}
 
-The \gls{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
-Of the total 25 patients in the original dataset, ten with macroscopic, non-infiltrating lesions were selected for the validation of tractfinder in tumour patients.
+The \gls[noindex=false]{btc} dataset\autocite{Aerts2020a,Aerts2022a,Aerts2022} comprises a series of pre- and postoperative structural, functional, and diffusion-weighted \gls{mri} scans of glioma and meningioma patients.
+Of the total 25 patients in the original dataset, ten with macroscopic, non-infiltrating lesions were selected for further validation of tractfinder in tumour patients.
 In one of the ten subjects (sub-PAT22), only a preoperative session is available, giving a total of 19 unique scan sessions used for this dataset.
 The data consists of high quality \gls{hardi} acquisitions, including reverse phase encoding for susceptibility distortion correction, and structural $T_1$-weighted images.
-In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which can be used for tumour deformation modelling in those patients with strong tumour deformation.
-The ten selected subjects include four with tumours large enough (thee meningioma and one anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
+In addition, tumour segmentation masks for each preoperative scan are available in the original dataset, which could be used for tumour deformation modelling.
+The ten selected subjects included four with tumours large enough (three meningioma and one anaplastic astrocytoma) to warrant the use of deformation modelling to improve atlas alignment.
 Of these four subjects, one had a large midline frontal meningioma affecting both hemispheres, and for this subject all tracts were considered ``ipsilateral'' tracts.
 In all other subjects, the tracts were labelled ipsilateral or contralateral if they were in the same or opposite hemisphere as the tumour respectively.
 
-\Gls{dmri} data was preprocessed with \gls{mppca} denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of \gls{fsl} v.6.0.4).
-\Gls{msmt}-\gls{csd}, tractfinder, TractSeg and manual tractography of the \gls{af}, \gls{cst}, \gls{ifof} and \gls{or} were performed as previously described.
+Diffusion \gls{mri} data was preprocessed with \gls{mppca} denoising, bias field correction and \gls{epi} distortion correction (eddy for CUDA 9.1, part of \gls{fsl} v.6.0.4), followed by \gls{msmt}-\gls{csd} as previously described.
 Given the disruption caused by the space-occupying and in cases infiltrating lesions, manual tractography using multi-\gls{roi} targeting alone did not produce acceptable results.
-Instead, the bundles were manually filtered to remove spurious and implausible streamlines using the same process as was used when curating the atlas training data.
+Instead, the streamlines were manually filtered to remove spurious and implausible streamlines using the same process as was used when curating the atlas training data.
 These filtered bundles are used as reference segmentations for the 10 \gls{btc} subjects.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{landscape}
 \begin{table}[t]
-  \caption{Overview of acquisition parameters for the datasets included in quantitative benchmark evaluation. \dag Resampled from original, see text for details.}
+  \caption[Benchmark evaluation datasets]{Overview of acquisition parameters for the datasets included in quantitative benchmark evaluation. \dag Resampled from original, see text for details.}
   \label{tab:datasets}
   \footnotesize
   \begin{tabularx}{\linewidth}{l c c c c c c c c} \toprule

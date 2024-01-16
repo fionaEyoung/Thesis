@@ -1,16 +1,22 @@
 %%
 %% Set up abbreviations and definitions
 \usepackage[acronym,
+            toc=false,
             style=super,
             nogroupskip=true,
-            nonumberlist,
             seeautonumberlist,
             nopostdot]
-            {glossaries}
+            {glossaries-extra}
+\usepackage{glossaries-prefix}
+\GlsXtrSetDefaultGlsOpts{noindex}
 \makeglossaries
 \preto\chapter{\glsresetall}
-\AtBeginEnvironment{figure}{\glslocalresetall}
-\AtBeginEnvironment{SCfigure}{\glslocalresetall}
+\makeglossaries
+\preto\chapter{\glsresetall}
+% \AtBeginEnvironment{figure}{\glslocalresetall}
+% \AtBeginEnvironment{SCfigure}{\glslocalresetall}
+% \NewCommandCopy{\oldcaption}{\caption}
+% \renewcommand{\caption}[1]{\oldcaption{{\protect\glslocalresetall#1}}}
 
 %% MRI
 \newacronym{mri}{MRI}{magnetic resonance imaging}
@@ -23,23 +29,23 @@
 \newacronym{epi}{EPI}{echo planar imaging}
 \newacronym{rsepi}{RS-EPI}{readout-segmented \protect\ifglsused{epi}{EPI}{echo planar imaging}}
 \newacronym{ssepi}{SS-EPI}{single-shot \protect\ifglsused{epi}{EPI}{echo planar imaging}}
-\newacronym{rf}{RF}{radio frequency}
+\newacronym[prefixfirst={a~},prefix={an\space}]{rf}{RF}{radio frequency}
 \newacronym{snr}{SNR}{signal to noise ratio}
 \newacronym{fid}{FID}{free induction decay}
 \newacronym{2dft}{2DFT}{two dimensional \protect\ifglsused{ft}{FT}{Fourier transform}}
 \newacronym{ft}{FT}{Fourier transform}
 \newacronym{fe}{FE}{frequency encoding}
 \newacronym{pe}{PE}{phase encoding}
-\newacronym{pd}{PD}{proton density}
+\newacronym[longplural={proton densities}]{pd}{PD}{proton density}
 \newacronym{ir}{IR}{inversion recovery}
-\newacronym{mprage}{MPRAGE}{magnetization prepared rapid gradient echo}
+\newacronym[prefixfirst={a~},prefix={an\space}]{mprage}{MPRAGE}{magnetization prepared rapid gradient echo}
 \newacronym{dce}{DCE}{dynamic contrast enhanced}
 % Image computing
 \newacronym{csd}{CSD}{constrained spherical deconvolution}
 \newacronym{odf}{ODF}{orientation distribution function}
 \newacronym{dodf}{dODF}{diffusion orientation distribution function}
 \newacronym{fodf}{fODF}{fibre \protect\ifglsused{odf}{ODF}{orientation distribution function}}
-\newacronym{fod}{FOD}{fibre orientation distribution}
+\newacronym[prefixfirst={a~},prefix={an\space}]{fod}{FOD}{fibre orientation distribution}
 \newacronym{tod}{TOD}{track orientation distribution}
 \newacronym{dti}{DTI}{diffusion tensor imaging}
 \newacronym{dt}{DT}{diffusion tensor}
@@ -59,32 +65,31 @@
 \newacronym{bbb}{BBB}{blood-brain barrier}
 \newacronym{cst}{CST}{corticospinal tract}
 \newacronym{or}{OR}{optic radiation}
-\newacronym{lgn}{LGN}{lateral geniculate nucleus}
+\newacronym[longplural={lateral geniculate nuclei}]{lgn}{LGN}{lateral geniculate nucleus}
 \newacronym{ml}{ML}{Meyer's loop}
-\newacronym{af}{AF}{arcuate fasciculus}
-\newacronym{ifof}{IFOF}{inferior fronto-occipital fasciculus}
-\newacronym{uf}{UF}{uncinate fasciculus}
+\newacronym[longplural={arcuate fasciculi}]{af}{AF}{arcuate fasciculus}
+\newacronym[longplural={inferior fronto-occipital fasciculi}]{ifof}{IFOF}{inferior fronto-occipital fasciculus}
+\newacronym[longplural={uncinate fasciculi}]{uf}{UF}{uncinate fasciculus}
 \newacronym{wm}{WM}{white matter}
 \newacronym{gm}{GM}{grey matter}
 \newacronym{csf}{CSF}{cerebrospinal fluid}
-\newacronym{crp}{CrP}{cerebellar peduncles}
-\newacronym{cp}{CP}{cerebral peduncles}
+\newacronym{crp}{CrP}{cerebellar peduncle}
+\newacronym{cp}{CP}{cerebral peduncle}
 \newacronym{cc}{CC}{corpus callosum}
 \newacronym{ec}{EC}{external capsule}
-\newacronym{slf}{SLF}{superior longitudinal fasciculus}
-\newacronym{sfof}{SFOF}{superior fronto-occipital fasciculus}
-\newacronym{vof}{VOF}{vertical occipital fasciculus}
+\newacronym[longplural={superior longitudinal fasciculi}]{slf}{SLF}{superior longitudinal fasciculus}
+\newacronym[longplural={superior fronto-occipital fasciculi}]{sfof}{SFOF}{superior fronto-occipital fasciculus}
+\newacronym[longplural={vertical occipital fasciculi}]{vof}{VOF}{vertical occipital fasciculus}
 \newacronym{ss}{SS}{sagittal stratum}
 %% Neurosurgery & Neurology
 \newacronym{dbs}{DBS}{deep brain stimulation}
-\newacronym{eor}{EOR}{extent of resection}
+\newacronym[longplural={extents of resection}]{eor}{EOR}{extent of resection}
 \newacronym{gtr}{GTR}{gross total resection}
 \newacronym{str}{STR}{subtotal resection}
 \newacronym{hgg}{HGG}{high-grade glioma}
 \newacronym{lgg}{LGG}{low-grade glioma}
 \newacronym{eeg}{EEG}{electroencephalography}
 \newacronym{ct}{CT}{computed tomography}
-\newacronym{us}{US}{ultrasound}
 \newacronym{des}{DES}{direct electrical stimulation}
 \newacronym{who}{WHO}{World Health Organisation}
 %% Tractography et al.
@@ -101,40 +106,7 @@
 \newacronym{sh}{SH}{spherical harmonic}
 \newacronym{fsl}{FSL}{FMRIB software library}
 \newacronym{gosh}{GOSH}{Great Ormond Street Hospital}
-\newacronym{nhnn}{NHNN}{National Hospital for Neurology and Neurosurgery}
-%% Definitions
-\newglossaryentry{tract}{
-name=tract,
-description={an anatomical structure of a group of neuron fibres with a common functional or anatomical organisation}
-}
-\newglossaryentry{fibrebundle}{
-name=fibre bundle,
-description={\emph{see} \gls{tract}}
-}
-\newglossaryentry{streamline}{
-name=streamline,
-description={a collection of points, in the context of tractography forming an abstraction of a single fibre}
-}
-\newglossaryentry{track}{
-name=track,
-description={\emph{see} \gls{streamline}}
-}
-\newglossaryentry{bundle}{
-name=bundle,
-description={\emph{see} \gls{streamlinebundle}}
-}
-\newglossaryentry{streamlinebundle}{
-name=streamline bundle,
-description={a collection of tractography streamlines, usually serving as a representation of, but not synonymous with, a corresponding anatomical tract}
-}
-\newglossaryentry{voxel}{
-name=voxel,
-description={``volume pixel"; the smallest spatial unit of a 3D digital image, akin to an image pixel in three dimensions }
-}
-\newglossaryentry{trigone}{
-name=trigone,
-description={also called ``atrium", the part of the lateral ventricle formed at the junction between the main body and the temporal and occipital horns}
-}
+\newacronym[prefixfirst={a~},prefix={an\space}]{nhnn}{NHNN}{National Hospital for Neurology and Neurosurgery}
 
 %% Here we set up a new command to generate a list of abbreviations, e.g. for
 %% float captions, formatted in a consistent way

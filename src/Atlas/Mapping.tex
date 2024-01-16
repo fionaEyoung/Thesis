@@ -2,13 +2,13 @@
 \label{sec:mapping}
 
 The methodological description of the preceding section was concerned with capturing prior information about tracts.
-Assuming this prior information can be brought into anatomical alignment with the target image (this problem is tackled in chapter \ref{chap:reg}), it remains to compare those priors with the information present in the target diffusion data itself.
+Assuming this prior information can be brought into anatomical alignment with the target image (this problem is tackled in Chapter \ref{chap:reg}), it remains to compare those priors with the information present in the target diffusion data itself.
 This process, of comparing a prior with the information in the acquired data and computing a similarity measure from them, will be generally referred to as ``tract mapping'', and encompasses both spatial and angular components.
 
-Frequently, atlas-based segmentation techniques rely entirely on accurate registration of the atlas to the novel data, with the registered atlas forming the final segmentation without any further refinement.
+Frequently, general atlas-based segmentation techniques rely entirely on accurate registration of the atlas to the novel data, with the registered atlas forming the final segmentation without any further refinement.
 This strategy is strongly dependent on the accuracy of registration and assumes a one-to-one correspondence can be found between the template and subject anatomies.
 The approach taken here is a different one.
-Rather than expecting perfect and robust registration, which is a particularly tall order for clinical subjects, we instead make use of the rich information obtainable in \gls{dmri} to refine the initial estimate indicated by a ``close enough'' registration.
+Rather than expecting perfect and robust registration, which is a particularly tall order for clinical applications, we instead make use of the rich information obtainable in \gls{dmri} to refine the initial estimate indicated by a ``close enough'' registration.
 
 The tract atlas intentionally conveys a degree of spatial tolerance to account for individual variations in tract location, with the final mapping step acting to refine the estimate according to observed local information in the target image.
 The latter, derived from raw \gls{dmri} data, could conceivably take any form.
@@ -18,7 +18,7 @@ However, given that conceptually the \gls{tod} represents a tract specific \gls{
 \subsection{Inner product}\label{sec:ip}
 
 Consider two frequency distributions defined over the same domain.
-A straightforward method for quantifying the degree of similarity between them is to multiply the two functions together, where the resulting product will be high wherever both the compared functions were high, and low otherwise.
+A straightforward method for quantifying the degree of similarity between them is to multiply the two functions together, where the resulting product will be high wherever both the compared functions were high, and low elsewhere.
 By integrating that product over the entire domain we obtain a measure of total congruence across both functions.
 This is the functional analogue to taking the dot product (or inner product) of two vectors, which is a commonly seen similarity metric employed in statistical and machine learning contexts.
 We define the inner product of two functions $f$ and $g$ over the closed interval $[a \geq x \geq b]$ as
@@ -28,14 +28,12 @@ We define the inner product of two functions $f$ and $g$ over the closed interva
 \end{align}
 
 In our scenario, we are comparing two spherical functions defined over the angular domain parameterised by the azimuthal ($\phi$) and polar ($\theta$) angles, $F(\theta, \phi)$ and $T(\theta, \phi)$.
-Both are represented in the modified \gls{sh} basis introduced in section \ref{sec:sh}:
-
+Both are represented in the modified \gls{sh} basis (\ref{eq:sh}) introduced in Section \ref{sec:sh}:
 \begin{align}
-  F(\theta, \phi) = \sum_{l=0}^{l_{max}} \sum_{m=-l}^l f_{l,m} Y_{l,m}(\theta, \phi) = \sum_j f_jY_j(\theta, \phi)
+  F(\theta, \phi) = \sum_{l=0}^{l_{max}} \sum_{m=-l}^l f_{l,m} Y_{l,m}(\theta, \phi) = \sum_j f_jY_j(\theta, \phi),
 \end{align}
-
-In this way, the continuous function $F(\theta, \phi)$ is defined by a vector of \gls{sh} coefficients $\mathbf{f} = [f_0, ..., f_j, ..., f_N]^T$ where $N = \frac{1}{2}(l_{max}+1)(l_{max}+2)$.
-Using the distributive law for the product of sums and and the sum rule for integration, we can simplify the inner product of two such functions $\langle F(\theta, \phi), T(\theta, \phi) \rangle$ as follows:
+defined by a vector of \gls{sh} coefficients $\mathbf{f} = [f_0, ..., f_j, ..., f_N]^T$ where $N = \frac{1}{2}(l_{max}+1)(l_{max}+2)$.
+Using the distributive law for the product of sums and and the sum rule for integration, we can simplify the inner product of the two functions $\langle F(\theta, \phi), T(\theta, \phi) \rangle$ as follows:
 
 \begin{align}
   \begin{split}
@@ -48,13 +46,12 @@ Using the distributive law for the product of sums and and the sum rule for inte
 \end{align}
 
 The spherical harmonics form an orthonormal system, such that the inner product of two basis functions $Y_{l_1,m_1}$ and $Y_{l_2,m_2}$ is
-
 \begin{equation}
   \langle Y_{l_1,m_1}, Y_{l_2,m_2} \rangle
     = \int_0^{\pi} \int_0^{2\pi} Y_{l_1,m_1}(\theta, \phi) Y_{l_2,m_2}(\theta, \phi) sin(\theta) d\theta d\phi
-    = \delta_{m_1, m_2} \delta_{l_1, l_2}
+    = \delta_{m_1, m_2} \delta_{l_1, l_2},
 \end{equation}
-
+where $\delta_{i,j}$ is the Kronecker delta defined as $\delta_{i,j} = 1 \text{ if } i = j \text{ else } 0$.
 Using this property, (\ref{eq:ip1}) simplifies to
 
 \begin{align}
@@ -64,11 +61,11 @@ Using this property, (\ref{eq:ip1}) simplifies to
 Thus for two distributions represented by a vector of their spherical harmonic coefficients, the inner product of their functions is equal to the inner product of the two coefficient vectors.
 The resulting image can be regarded as a pseudo-probability map of tract location, in arbitrary and dimensionless units with values typically in the range 0--0.5.
 This measure of similarity, computed voxel-wise for the registered \gls{tod} atlas and subject \gls{fod} images, is the mapping used in tractfinder and all analyses presented in Chapters \ref{chap:eval}--\ref{chap:applications}.
-It is favoured for its computationally simplicity and relatively intuitive meaning, although alternative comparison approaches are also explored below.
+It is favoured for its computational simplicity and relatively intuitive meaning, although alternative comparison approaches are also explored below.
 
 The tract atlases and \gls{fod} data contain both scalar and directional information, all of which contribute to the final inner product value.
 The combined effects of these factors means that a lower mapped value could be driven by a low degree of overlap in the angular domain (``the fibre orientations here to not match what would be expected for the tract''), low amplitude in the atlas (``tract is unlikely to be found here''), or low amplitude in the \gls{fod} (``there is not much white matter signal here'').
-In \gls{sh} terms, the scalar component is total amplitude, or spherical integral, of the \gls{odf} and is given by the first \gls{sh} coefficient ($Y_{0,0}$ term).
+In \gls{sh} terms, the scalar component is the total amplitude, or spherical integral, of the \gls{odf} and is given by the first \gls{sh} coefficient ($Y_{0,0}$ term).
 In the atlas, this amplitude represents the spatial probability, or the likelihood across the training population of a tract being located within a specific voxel.
 Within the target \gls{fod} image, the amplitude is not tract specific, but rather reflects the \gls{afd} and by extension the likelihood that \textit{any} tract is present within a voxel, rather than grey matter or \gls{csf}.
 However, it is crucial to note that this assumption only holds under specific circumstances, depending on the strength of diffusion weighting of the input data ($b$-value(s)) and \gls{csd} algorithm used to model the \glspl{fod}.
@@ -78,21 +75,20 @@ This results in far more extensive segmentations based on the inner product in p
 Therefore when using lower $b$-value acquisitions (which remain the norm in clinical applications), \gls{msmt} \gls{csd} should be used to estimate the volume fraction of different tissues and thus achieve better \gls{wm} specificity.
 If only one diffusion-weighted shell (in addition to $b_0$) is available, then at most two tissues can be modelled using \gls{msmt} \gls{csd}.
 The choice of whether to use either \gls{gm} or \gls{csf} as the second response function should be made as appropriate to the situation: If good specificity between \gls{wm} and \gls{gm} is desired, then those tissues should be used.
-If, on the other hand, the tract of interest is adjacent to \gls{csf}, then the \gls{wm}+\gls{gm} strategy should be avoided, as the \gls{wm} \gls{fod} signal will be excessively attenuated in partial volume voxels with \gls{csf} (see Section \ref{sec:ismrmdiff} for further discussion).
+If, on the other hand, the tract of interest is adjacent to \gls{csf}, then the \gls{wm}+\gls{gm} strategy should be avoided, as the \gls{wm} \gls{fod} amplitude will be excessively attenuated in partial volume voxels with \gls{csf} (see Section \ref{sec:ismrmdiff} for further discussion).
 
 Of further note is the behaviour in voxels containing multiple crossing fibre populations.
 Given two voxels with equal \gls{fod} integrals (or equal \gls{afd}), in one containing two fibre populations that total \gls{afd} will be distributed among two \gls{fod} peaks, compared with one where the total \gls{afd} is contained within a single peak.
 The presence of crossing fibres will therefore tend to reduce the total inner product amplitude, even if one of the \gls{fod} fibre populations aligns well with the atlas.
-If the objective is to obtain a likelihood score for a particular tract, regardless of whether or not the tract is sharing a voxel with another fibre population, then the inner product framework, which slightly penalises crossing fibre voxels over single fibre ones, is inadequate (see also section \ref{sec:fixel}). %\note{expand on this?}
+If the objective is to obtain a likelihood score for a particular tract, regardless of whether or not the tract is sharing a voxel with another fibre population, then the inner product framework, which slightly penalises crossing fibre voxels over single fibre ones, is inadequate (see also Section \ref{sec:fixel}). %\note{expand on this?}
 
 \subsection{Alternative similarity metrics}
 
 The inner product is a simple comparison metric for the similarity of two vectors or distributions, each being equally weighted.
 There are plenty of other possible similarity measures which could be computed, each with slightly different interpretations.
-One option considered (although not strictly speaking a similarity metric) is the Kullback-Leibler (KL) divergence, a type of statistical distance for determining the information gained by approximating a measured reference distribution $Q$ with an estimated model distribution $P$.
-
+One option considered (although not strictly speaking a similarity metric) is the Kullback-Leibler (KL) divergence, a type of statistical distance for determining the information gained by approximating a measured reference distribution $Q$ with an estimated model distribution $P$, and is given by
 \begin{equation}
-  D_{KL}(P||Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)} \label{eq:kl}
+  D_{KL}(P||Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)}. \label{eq:kl}
 \end{equation}
 
 KL divergence is an asymmetric quantity, meaning $D_{KL}(P||Q) \neq D_{KL}(Q||P)$, where $D_{KL}(Q||P)$ can be called the reverse KL divergence.
@@ -104,12 +100,12 @@ This is effectively what the reverse KL divergence $D_{KL}(T||F) = \sum_x T(x) \
 After initial investigations, however, the use of a KL divergence-based mapping hasn't been further pursued for a few reasons.
 Firstly, the interpretation of the computed value is difficult, as higher similarity is indicated by lower divergence, and the values can be infinitely high.
 Secondly, as $D_{KL}$ is defined for probability distributions (with unit integral), it could be only used for measuring angular agreement (after normalising $F$ and $T$), leaving the question of how to reintroduce the spatial information in the \gls{tod} and \gls{fod} amplitudes.
-Prototyping experiments indicated that in practice, little useful information could be conferred from considering the KL  divergence over the inner product or other options (see \ref{sec:fixel}).
+Prototyping experiments indicated that in practice, little useful information could be conferred from considering the KL  divergence over the inner product or other options (see Section \ref{sec:fixel}).
 Finally, an analytical expression for the multiplication of two arbitrary \gls{sh} functions, which would be needed to compute the metric for continuous spherical distributions, is not known for the real spherical harmonics used in \gls{dmri} analysis, meaning it can currently only be calculated discretely, requiring the distributions to be densely sampled at great computational cost.
 
 \subsection{Fixel analysis}\label{sec:fixel}
 
-As described in Section \ref{sec:ip}, the inner product value between an estimated orientation distribution representing a mixture of fibre populations and the expected orientation distribution for a specific isolated population will depend on a range of interacting components, making interpretation of the final value a complicated task.
+As described in Section \ref{sec:ip}, the inner product value between an estimated orientation distribution representing a mixture of fibre populations and the expected orientation distribution for a specific isolated population will depend on a range of interacting components.
 To disentangle the competing effects in crossing fibre voxels, we consider an extension of the inner product analysis using the concept of fixels.
 A portmanteau of ``fibre'' and ``voxel'', a fixel describes a sub-voxel element representing a single fibre population\autocite{Raffelt2015,Raffelt2017}.
 A voxel can contain any number of fixels, and each can be analysed in isolation with fixel-level properties such as peak orientation, dispersion and fibre density.
@@ -117,26 +113,23 @@ By segmenting a full \gls{fod} into individual lobes and computing properties on
 
 The fixel framework has been adapted here to extend the inner product to consider individual \gls{fod} lobes in isolation.
 \Gls{fod} segmentation is achieved as described in \textcite{Smith2013} by sampling the \gls{sh} distribution on a dense set of directions (\textgreater 1000).
-Each of these direction samples is binned into a fixel based on its neighbourhood using a fast-marching level set algorithm, resulting in each fixel being represented by a collection of directional samples and the associated amplitudes of the original \gls{fod} (Fig. \ref{fig:fixip} \textbf{f-g}).
-Each fixel is then converted to a \gls{sh} representation via a linear least-squares fit to the sampled amplitudes, producing separate \gls{sh} distributions $I_p(\theta, \phi)$ per voxel for each fibre population $p$.
+Each of these direction samples is binned into a fixel based on its neighbourhood using a fast-marching level set algorithm, resulting in each fixel being represented by a collection of directional samples and the associated amplitudes of the original \gls{fod} (Fig. \ref{fig:fixip}f--g).
+Each fixel is then converted to \gls{sh} representation via a linear least-squares fit to the sampled amplitudes, producing separate \gls{sh} distributions $I_p(\theta, \phi)$ per voxel for each fibre population $p$.
 
-The amplitude of the fixel \glspl{odf} will reflect that of the corresponding lobe in the original full multi-fibre distribution, and thus the amplitude of the fixel \gls{odf} will always be smaller or equal to that of the original \gls{fod}.
+The amplitude of the fixel \glspl{odf} will reflect that of the corresponding lobe in the original full multi-fibre distribution, and thus will always be smaller or equal to that of the original \gls{fod}.
 However, we are interested in whether the fibre population of interest is present in a voxel based on orientation alone, regardless of its relative weight to the other fibres occupying the same voxel.
 The location probability, in other words, should be influenced only by the expected location probability $t_0$ and the overall white matter signal integral $f_0$.
 To remove the relative weighting effect of crossing fibres, we re-normalise each fixel \gls{odf} to the overall \gls{fod} amplitude:
-
 \begin{align}
   \widetilde{I} = f_0\frac{I}{i_0}
 \end{align}
-
 where the fixel \gls{odf} is $I(\theta, \phi) = \sum_j i_j Y_j(\theta,\phi)$.
-Then we compute the inner product of the atlas \gls{tod} and each fixel \gls{odf} $I_p$, taking the maximum value as the result:
-
+Then we compute the inner product of the atlas \gls{tod} and each fixel \gls{odf} $I_p$ separately, before taking the maximum value as the result:
 \begin{align}
   P = \operatorname*{argmax}_k \langle \widetilde{I}_k(\theta,\phi), T(\theta,\phi) \rangle
 \end{align}
 
-The result is improved tract sensitivity in areas of crossing fibres where there is otherwise sufficient evidence that the tract is present in the voxel, and less ambiguity in the interpretation of a low mapped value.
+The result is improved tract sensitivity in areas of crossing fibres where there is still sufficient evidence that the tract is present in the voxel, and less ambiguity in the interpretation of a low mapped value.
 The fixel inner product framework was tested in a synthetic image known as the Fibre Cup phantom, after a tractography challenge held for the 12th international conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI) in 2009\autocite{Fillard2011}.
 The phantom features seven bundles arranged in a way that aims to mimic the range of configurations found in the brain, including sharp curves, multi-way crossings, kissing and fanning fibres.
 A digital recreation of the original data and accompanying ground truth streamlines are openly available\autocite{NITRC}.
@@ -146,5 +139,11 @@ To address the concern that renormalising each $I_p$ could excessively amplify n
 \begin{figure}[tbh!]
   \centering
   \includesvg[width=1.08\textwidth,pretex=\small\sffamily]{chapter_3/fixel.svg}
-  \caption{Demonstration of fixel-wise inner product using the synthetic Fibre Cup Phantom. \textbf{a.} Seven ground truth streamline bundles intersect throughout the phantom. \textbf{b.} The brown tract intersects with three other parallel bundles. The crossing fibres are denser and therefore dominate the \gls{fod} reconstruction (\textbf{d.}), resulting in a drop in tractfinder amplitude. \textbf{c.} By computing the inner product with each fixel separately, weighted by the overall \gls{fod} amplitude, and taking the maximum value, a smooth tract reconstruction is achieved. \textbf{e.} \glspl{fod} in a second crossing area, showing the brown and purple tracts intersecting at an oblique angle. \textbf{f.} First segmented fixel. \textbf{g.} Second segmented fixel. \textbf{h.} \Gls{tod} atlas for the brown tract.}\label{fig:fixip}
+  \caption[Fixel inner product]{Demonstration of fixel-wise inner product using the synthetic Fibre Cup Phantom.
+  \textbf{\sffamily a.} Seven ground truth streamline bundles intersect throughout the phantom.
+  \textbf{\sffamily b.} The brown tract intersects with three other parallel bundles. The crossing fibres are denser and therefore dominate the \gls{fod} reconstruction (\textbf{\sffamily d.}), resulting in a drop in tractfinder amplitude.
+  \textbf{\sffamily c.} By computing the inner product with each fixel separately, weighted by the overall \gls{fod} amplitude, and taking the maximum value, a smooth tract reconstruction is achieved.
+  \textbf{\sffamily e.} \glspl{fod} in a second crossing area, showing the brown and purple tracts intersecting at an oblique angle.
+  \textbf{\sffamily f.} First segmented fixel.
+  \textbf{\sffamily g.} Second segmented fixel. \textbf{h.} \Gls{tod} atlas for the brown tract.}\label{fig:fixip}
 \end{figure}

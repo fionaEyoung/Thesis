@@ -2,26 +2,27 @@
 \label{chapterlabel3}
 
 Tract orientation atlases represent the expected orientation and location of a tract in typical healthy subjects.
-In the previous chapter we asserted that, for subjects with little structural divergence from the norm, linear registration is sufficient for aligning the atlas and target data.
-However, in cases with large mass-effect, affine registration becomes clearly inadequate, as the distances between expected and actual location of brain structures is simply too great.
-In order to correct for displacement of white matter tracts due to space-occupying lesions, the atlas will need to be deformed more dramatically before comparing with the native \gls{fod} map.
+In the previous section we asserted that, for subjects with little structural divergence from the norm, linear registration is sufficient for aligning the atlas and target data.
+However, in cases with large mass-effect, affine registration becomes clearly inadequate, as the distances between brain structures' expected and actual locations are simply too great.
+In order to correct for displacement of \gls{wm} tracts due to space-occupying lesions, the atlas will need to be deformed more dramatically before comparing with the native \gls{fod} map.
 
-Anatomical non-correspondence between subject and template images caused by space-occupying lesions poses a substantial challenge to the use of atlas-based white matter segmentation methods in clinical subjects.
+Anatomical non-correspondence between subject and template images caused by space-occupying lesions poses a substantial challenge to the use of atlas-based \gls{wm} segmentation methods in clinical subjects.
 While nonlinear deformation tools can produce accurate registration in clinical images, they require usually manual adjustment of many input and regularisation parameters on a case by case basis, and a robust automation of this process is not available to best knowledge.
 More significantly, in the case of registration between a normative template and a scan with a brain tumour, a fundamental assumption of many registration algorithms, that of topological equivalence between the two images, does not hold\autocite{Zacharaki2009}.
-The core of the problem is that one image---the template---depicts the anatomy of an average, healthy brain, and the other that of a diseased brain harbouring a tumour, presenting two potential scenarios.
+The core of the problem is that one image---the template---depicts the anatomy of an average, healthy brain, and the other that of a diseased brain affected by a tumour, presenting two potential scenarios.
 Either the lesion exists \textit{in addition} to all the structures and tissue expected of a healthy brain, which have been displaced or compressed to accommodate it, or it has \textit{replaced} brain landmarks or rendered them otherwise unrecognisable through the effects of oedema or differing MR properties between tumour and healthy brain tissue.
 In either case, a non-linear registration algorithm is tasked with finding a mapping between two images with different sets of anatomical landmarks, with finding anatomical correspondence between tissue in one image which is nonexistent in the other.
 The result of this violation of the topological equivalence assumption is often ridiculously contorted images, and particularly in the peritumoural zone, which is rather problematic for neurosurgical applications.
 
-Deformable registration alone is thus largely insufficient for handling the anatomical mismatch problem. \autocite{Elazab2018, Visser2020}
+Deformable registration alone is thus largely insufficient for handling the anatomical mismatch problem\autocite{Elazab2018, Visser2020}.
 It has long been proposed that an acceptable registration between atlas and tumour data can only be obtained with an additional step of artificially implanting or modelling a representation of the tumour in the atlas\autocite{Cabezas2011,Mang2020}.
-This can be in the form of a seeded atlas deformation\autocite{Dawant2002}, in which a small seed is placed in the atlas before deformable registration, acting as a region of tissue which can be warped to match the full tumour in patient space.
-Alternatively, the seed can be artificially ``grown'' using a biophysical or mathematical model of tumour proliferation to simulate deformation, with optional further nonlinear registration of the deformed atlas to the patient image\autocite{Cuadra2004, Zacharaki2009}.
+This can be in the form of a seeded atlas deformation\autocite{Dawant2002}, where a small seed is placed in the atlas before deformable registration, which acts as a region of tissue which can be warped to match the full tumour in patient space.
+Alternatively, the seed can be artificially ``grown'' using a biophysical or mathematical model of tumour proliferation to simulate deformation, followed by registration of the deformed atlas to the patient image\autocite{Cuadra2004, Zacharaki2009}.
 Many proposed tumour deformation models aim to achieve highly accurate modelling of tumour growth dynamics and the effects on surrounding tissues, by taking into account elastic tissue properties and microscopic tumour growth modelling (see \textcite{Elazab2018} for a comprehensive review).
-Generally models will consider one or a coupling\autocite{Clatz2005,Hogea2007,Prastawa2009} of tumour cellular proliferation and infiltration into surrounding tissues using a reaction diffusion or similar framework,\autocite{Tunc2021,Scheufele2019b,Elaff2018}
-or the biomechanical forces acting between tissues.\autocite{Mohamed2006,Hogea2007a,Zacharaki2009}.
-The resulting algorithms are often mathematically complex and implemented using finite element methods\autocite{Elazab2018}, require optimisation of tumour parameters through problem inversion or by other means \autocite{Mohamed2006, Zacharaki2009, Mang2020} and take anywhere between one and 36 hours to run, even on high performance computing setups.\autocite{Zacharaki2009,Bauer2012,Gooya2012,Bauer2013,Mang2012}
+Generally models will consider one or a coupling\autocite{Clatz2005,Hogea2007,Prastawa2009} of tumour cellular proliferation and infiltration into surrounding tissues using a reaction diffusion or similar framework
+\autocite{Tunc2021,Scheufele2019b,Elaff2018},
+or the biomechanical forces acting between tissues\autocite{Mohamed2006,Hogea2007a,Zacharaki2009}.
+The resulting algorithms are often mathematically complex and implemented using finite element methods\autocite{Elazab2018}, require optimisation of tumour parameters through problem inversion or by other means \autocite{Mohamed2006, Zacharaki2009, Mang2020} and take anywhere between one and 36 hours to run, even on high performance computing setups\autocite{Zacharaki2009,Bauer2012,Gooya2012,Bauer2013,Mang2012}.
 This is entirely reasonable for studies in which accuracy is a far greater priority than speed.
 Typical applications of tumour deformation modelling include intra-patient longitudinal studies of tumour growth, and inter-patient registration and spatial normalisation for atlas-based segmentation or statistical analysis across patient populations (see \textcite{Bauer2013} and \textcite{Cabezas2011} for overviews).
 Given the time constraints of intraoperative imaging and the practical constraints of the computing capacity which can reasonably be assumed to be available in a clinical setup, the aim for this project was to achieve an estimate of tract displacement with low computational complexity.
@@ -29,10 +30,10 @@ Given the time constraints of intraoperative imaging and the practical constrain
 The tract orientation atlas described in the previous chapter provides a degree of spatial tolerance that alleviates the need for voxel-perfect registration and deformation, allowing the implementation of a minimal deformation algorithm.
 The idea is to obtain a deformation model which is simple enough to compute using few temporal and computational resources, and use it in combination with affine registration, as before, to achieve spatial alignment between atlas and patient space.
 To this end we will interest ourselves solely in the macroscopic spatial effects of tumour growth:
-What effect does the presence of a tumour have on the physical position of and the fibre orientations within a given volume unit of tissue?
+What effect does the presence of a tumour have on the physical position of, and the fibre orientations within, a given volume unit of tissue?
 Of course, this question cannot be fully answered without considering the complicated factors described above, such as whether a tumour is encapsulated or infiltrating.
 Nevertheless, as all models are wrong, and some are useful, the utility of our model will be measured by its ease of computation and accurate capturing of tract displacement.
-Whether performance in the latter criteria is satisfactory will be measured through the resulting improvement in tract mapping as compared with patient-native methods such as streamline tractography (see Section \ref{sec:btcd}).
+Whether performance in the latter criteria is satisfactory will be measured through the resulting improvement in tract mapping as compared with non-atlas methods such as streamline tractography (see Section \ref{sec:btcd}).
 We will consider a radial model of tumour deformation, previously described in \textcite{Young2022}, assuming the tumour has expanded outwards from a central seed, and that surrounding tissue is displaced along the same radial directions.
 \textcite{Cuadra2004} similarly used a radial expansion assumption, but for modelling the interior tumour region (rather than outside the tumour), while an optical flow algorithm was implemented for image matching outside the tumour.
 
@@ -50,16 +51,14 @@ Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarro
 \begin{figure}[htp]
   \centering
   \includesvg[inkscapelatex=true]{chapter_4/virtue_vars.svg}
-  \caption{Graphical schema of the variables defined in the radial deformation model}
+  \caption[Tumour deformation model variables]{Graphical schema of the variables defined in the radial deformation model}
   \label{fig:virtue}
 \end{figure}
 
 Then for a point in the original image $P = (x,y,z)$ the transformed location in the deformed image $P' = (x',y',z')$ is
-
 \begin{align}\label{eq:forwardP}
   P' = f(P) = P + \mathbf{\hat{e}}kD_ts.
 \end{align}
-
 The amount of displacement $\Delta P = kD_ts$ is thus determined by $D_t$, a scale factor $0<s \leq 1$ and a spatially varying displacement factor $k(P)$.
 In \textcite{Nowinski2005}, $k$ is a linear function of $D_p$: $k = 1-\frac{D_p}{D_b}$. \footnote[2]{In the original \textcite{Nowinski2005} article, the deformation is described in reverse, as a shrinking model, and the variables there look a little different. They are consistent with the formulation used here, which has been chosen for ease of conceptualisation. Note that both forward and reverse models are required for different types of image transformation, and will be derived later.}
 This can be conceptualised as a displacement force radiating from the centre of the tumour and decaying linearly with distance, reaching 0 only at the brain boundary.
@@ -73,7 +72,6 @@ There are two boundary conditions:
 Points on the brain surface should not be displaced ($k(D_p = D_b) = 0$) and points at the centre of the tumour should be displaced by exactly $D_t$ ($k(D_p = 0) = 1$).
 Note that the latter boundary condition is an assumption reflecting a fully encapsulated tumour, where no normal tissue remains inside the final tumour boundary after displacement.
 Solving for these boundary conditions gives us a normalisation constant:
-
 \begin{align}
   k &= a e^{-\lambda x} + c &\text{ where } x = D_p / D_b \nonumber \\
   k(x=0)=1 \longrightarrow 1 &= a e^{-0} + c = a + c \nonumber \\
@@ -81,9 +79,7 @@ Solving for these boundary conditions gives us a normalisation constant:
   -c &= (1-c) e^{-\lambda} \nonumber \\
   c &= \frac{e^{-\lambda}}{e^{-\lambda} - 1} \label{eq:c}
 \end{align}
-
 giving
-
 \begin{align}\label{eq:forwardk}
   k(P) = (1-c)e^{-\lambda \frac{D_p}{D_b}} +c.
 \end{align}
@@ -91,118 +87,115 @@ giving
 Equations (\ref{eq:forwardP}) and (\ref{eq:forwardk}) describe the forward deformation transform $P'=f(P)$, which maps a point in the original image $P$ to a new position $P'$ in the deformed image.
 Forward warping works well for continuous valued data such as streamlines:
 As the transformed image is also defined in continuous coordinates, each vertex can be ``pushed'' to its exact location in the warped output.
-When transforming discreet image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes''), or voxels being assigned values from multiple overlapping mapped points.
+When transforming discrete image data defined on a pixel (or voxel) grid, however, the transformed coordinate $P'$ will not generally correspond to a grid point, resulting in voxels in the transformed image with no assigned value (``holes''), or voxels being assigned values from multiple overlapping mapped points.
 To produce the transformed image, the value of $P'$ has to be distributed among the neighbouring voxel grid points (within a predefined kernel) using a process called ``splatting''\autocite{Niklaus2020}, where each voxel is assigned the value weighted by its distance to $P'$ (Fig. \ref{fig:warp}).
 As each voxel value will be determined by a weighted sum of all transformed values, this method requires an intermediate buffer to store all transformed points and distributed weights before the final voxel values can be determined, and filling techniques may be required to fill in any holes.
 
 \begin{figure}[h!]
   \centering
   \includesvg[width=0.7\textwidth]{chapter_4/warping.svg}
-  \caption{Forward image warping maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting'' (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
+  \caption[Forward and reverse image warping]{Forward image warping $f(P)$ maps from original to transformed coordinates, where the transformed value is distributed among neighbourhood grid points in a process called ``splatting'' (orange). Reverse image warping uses the inverse transform $f^{-1}(P')$ to determine the source position in the original image, with the appropriate value interpolated from the neighbourhood of $P$ (blue).}
   \label{fig:warp}
 \end{figure}
 
-It is therefore usually preferable, if the inverse transform $P = f^{-1}(P')$ is known, to use reverse warping, in which each grid point value in the transformed image is ``pulled'' from the corresponding continuous-valued point in the source image.
-As with forward warping, the reverse mapped point $f^{-1}(P')$ will not generally fall exactly on a grid point in the source image, so the appropriate value is interpolated from the neighbourhood (Fig. \ref{fig:warp}).
+It is therefore usually preferable, if the inverse transform $P = f^{-1}(P')$ is known, to use reverse warping, in which each grid point value in the transformed image is ``pulled'' from the corresponding continuous-valued point in the source image (Fig. \ref{fig:warp}).
+As with forward warping, the reverse mapped point $f^{-1}(P')$ will not generally fall exactly on a grid point in the source image, so the appropriate value is interpolated from the neighbourhood.
 Reverse warp convention is preferred in medical image manipulation packages to smoothly deform (and resample) a gridded image, and so we need to obtain the inverse mapping $P = f^{-1}(P')$.
-The inverse function for the linear model is (as formulated in \textcite{Nowinski2005}):
-
+The inverse function for the linear model (as formulated in \textcite{Nowinski2005}) is
 \begin{align}
-  P = P' - \mathbf{\hat{e}}(1-\frac{D_{P'}-D_t}{D_b-D_t})D_ts
+  P = P' - \mathbf{\hat{e}}(1-\frac{D_{p'}-D_t}{D_b-D_t})D_ts.
 \end{align}
-
-To obtain the inverse mapping for the exponential model, we solve equation (\ref{eq:forwardP}) for $P$, using the exponential $k(P)$ given by (\ref{eq:forwardk}):
-
+To obtain the inverse mapping for the exponential model, we solve equation (\ref{eq:forwardP}) for $P$, using the exponential $k(P)$ given by (\ref{eq:forwardk}) to get:
 \begin{align}
   P = P' - \mathbf{\hat{e}}(D_t s c - \frac{D_b}{\lambda}\mathcal{W}_0(\frac{-\lambda D_t s (1-c) e^{-\lambda(D_{p'}-D_tsc)/D_b}}{D_b}))
 \end{align}
-
 where $\mathcal{W}_0(y)$ is the principal branch of the lambert $\mathcal{W}$ function, defined as the inverse function of $ y(x) = xe^x $ for $x,y \in \mathbb{R}$.
 
 The most appropriate value for the exponential decay parameter $\lambda$ will depend on characteristics of the specific lesion being modelled.
 For example, smaller lesions (20--30~mm diameter) typically displace tissue only in their immediate surroundings, with distant tissue remaining virtually unmoved.
-In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger fall-off in displacement force, would be appropriate.% (Fig. \note{fig:examples}).
+In such cases, a higher value of $\lambda$ ($\geq 3$), indicating stronger fall-off in displacement force, would be appropriate.
 In any case, in order to keep the transforms well-behaved, we need to enforce the boundary condition that every point $P$ in the source image that is within the tumour perimeter ends up strictly outside the tumour in the eventual deformed image.
 In other words,
-
+%
 \begin{equation}\label{eq:lambdabound}
-  k(P) \geq 1 - \frac{D_P}{D_t} = g(P)
+  k(P) \geq 1 - \frac{D_p}{D_t} = g(P)
 \end{equation}
-
+%
 must hold for all $P$ (Fig. \ref{fig:k}).
-
-Given that the gradient of $k$ is strictly decreasing and $g(P) = 1 - \frac{D_P}{D_t}$ is linear, it is sufficient to set
+Given that the gradient of $k$ is strictly decreasing and $g(P) = 1 - \frac{D_p}{D_t}$ is linear, it is sufficient to set
 \begin{align*}
-  \frac{d}{dP}\bigg\rvert_{D_P=0}k(P) &= \frac{d}{dP}\bigg\rvert_{D_P=0}g(P) &\text{ where } \frac{dk}{dP} &= -\frac{\lambda}{D_b}(1-c)e^{-D_p/D_b} &\text{ and } \frac{dg}{dP} &= -\frac{1}{D_t}
+  \frac{d}{dP}\bigg\rvert_{D_p=0}k(P) &= \frac{d}{dP}\bigg\rvert_{D_p=0}g(P) &\text{ where } \frac{dk}{dP} &= -\frac{\lambda}{D_b}(1-c)e^{-D_p/D_b} &\text{ and } \frac{dg}{dP} &= -\frac{1}{D_t}
 \end{align*}
-
+%
 We solve for $\lambda$:
-
+%
 \begin{align*}
   -\frac{\lambda_{max}}{D_b}(1-c) &= -\frac{1}{D_t} \\
   \lambda_{max} &= \frac{D_b}{D_t (1-c)}
 \end{align*}
-
+%
 where $c$ is itself a function of $\lambda$ as defined in (\ref{eq:c}). This value can be determined iteratively, or with the expression
-
+%
 \begin{equation}
-  \lambda_{max} = \mathfrak{Re} \left[ \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t}) \right] +\frac{D_b}{D_t}
+  \lambda_{max} = \mathfrak{Re} \left[ \mathcal{W}_0(-\frac{D_b}{D_t}e^{-D_b/D_t}) \right] +\frac{D_b}{D_t}.
 \end{equation}
-
+%
 Thus for strictly non-infiltrating lesions, we set $\lambda \leq \lambda_{max}$ to satisfy equation (\ref{eq:lambdabound}), where $\lambda_{max}$ is used as the default value if none is specified (referred to as ``adaptive $\lambda$'').
 Note that $\lambda_{max}$ varies throughout the brain, being a function of the relative distances to brain and tumour surfaces for each specific $P$.
 
 \begin{SCfigure}[][h!]
   \includegraphics{chapter_4/k.pdf}
-  \caption{Deformation factor $k$ as a function of $D_P$. $\lambda$ must be small enough such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_P}{D_t})$ (dashed line). An exponential $k$ with $\lambda_{max}$ is plotted in solid black, compared with a linear $k$ as proposed in \textcite{Nowinski2005} (dotted line).}
+  \caption[Deformation factor k]{Deformation factor $k$ as a function of $D_p$. $\lambda$ must be small enough such that $k_{\lambda}$ is strictly above the line $1-(\frac{D_p}{D_t})$ (dashed line). An exponential $k$ with $\lambda_{max}$ is plotted in solid black, compared with a linear $k$ as proposed in \textcite{Nowinski2005} (dotted line).}
   \label{fig:k}
 \end{SCfigure}
 
 The tumour deformation model is implemented in Python, and full execution takes on average 1~minute for a 208\x{}256\x{}256 voxel image.
 If lookup tables for $ D_t$ and $D_b$ are precomputed and saved, then subsequent executions of the model (e.g. with different values for $\lambda$ and $s$, as appropriate for a given tumour) take less than 10~seconds, as long as the tumour and brain segmentations remain unchanged.
 
-\subsection{Limitations and future progress}
+\subsection{Limitations}
 
 Due to its mathematical simplicity and crudeness in assumptions about tissue mechanics, the model described above naturally comes with several limitations, of which two in particular have a noticeable effect on real clinical applications and generalisability.
-One is the inbuilt assumption of full tumour encapsulation, as expressed in the boundary condition that all existing tissue in the template brain remain outside the tumour in the deformed image.
-Through this assumption we have explicitly excluded the modelling of infiltrative tumours, which may expand existing structures but not necessarily wholesale shunt them outside the tumour boundary.
+One is the inbuilt assumption of full tumour encapsulation, as expressed in the boundary condition that all existing tissue in the template brain end up outside the tumour perimeter in the deformed image.
+Through this assumption we have explicitly excluded the modelling of infiltrative tumours, which may distort existing structures but not necessarily wholesale shunt them outside the tumour boundary.
 
 The difficulty with modelling tumour infiltration under the current framework is in the appropriate demarcation of the lesion in the subject scan.
 We can broadly categorise tumour regions into three components based on their interaction with the non-tumour environment:
 A tumour core, non-infiltrating and possibly cystic or necrotic, an infiltrating component, and finally peritumoural oedema.
 These distinctions are not enough to predict the mass effect of a tumour.
-Some tumours that are entirely infiltrative exert no perceivable mass effect, while others do.
+Some tumours that are entirely infiltrative exert no visually perceivable mass effect (although infiltration and oedema will always act to raise intracranial pressure), while others do.
 % If a tumour comprises both an infiltrating and non-infiltrating component, should both be included in the segmentation?
 % Given that the aim here is to capture neighbourhood displacement, it seems reasonable to suggest that only a segmentation of the volume exerting mass effect should be considered.
 In a lesion comprising both infiltrating and non-infiltrating parts, the latter may well be the only cause of mass effect, and readily demarcated, but not necessarily.
-Hence even if it were practical to more finely segment a tumour, separately labelling oedema, infiltration and core tumour components, exploiting this information to more accurately model the full mass effect would be by no means straightforward, and perhaps not possible in a way that generalises to all tumours without resorting to the in-depth modelling described in the introduction to this chapter.
+Hence even if it were practical to more finely segment a tumour, separately labelling oedema, infiltration and core tumour components, exploiting this information to more accurately model the full mass effect would be by no means straightforward, and perhaps not possible in a way that generalises to all tumours without resorting to the in-depth modelling described in the introduction to this section.
 
 This is not to say that the tumour deformation model in its present form cannot handle any form of infiltrative tumour (indeed, we will see examples in Chapter \ref{chap:applications} of such cases), for example by adjusting the scale parameter $s$ if the segmentation partially includes infiltrative tumour.
-However, tumours which are more or less wholly infiltrative, for example cases 4 and 5 in Figure \ref{fig:fa_hist}, cannot be modelled.
+However, tumours which are more or less wholly infiltrating, for example cases 4 and 5 in Figure \ref{fig:fa_hist}, cannot be modelled.
 An alternative form of $k(P)$ could be considered, such as the radial polynomial models used in optics and digital imaging to describe and correct for lens distortions\autocite{Zhang2000a}.
 The magnification effect near the centre of a radial distortion field is comparable with the distending of tissue seen in some infiltrative tumours, see for example case 5 in Figure \ref{fig:fa_hist}.
-In depth exploration of such additional distortion models was not pursued for this project, principally because the relevant clinical cases are far less likely to be indicated for surgical resection owing to the grave risk to infiltrated structures.
-Nevertheless, accurate white matter imaging could still be informative in assessing the lesion and informing treatment plans such as radiotherapy targeting\autocite{Jena2005,Berberat2014}, so the extension of this framework to include robust handling of infiltration could be an interesting avenue for future work.
+If using different deformation models and parameters for infiltrating and encapsulated tumours, then an means for automatically determining which model applies in a given case would be required to keep user input to a minimum.
+This could be achieved by comparing the \gls{fa} values inside the tumour with those in the brain as a whole, as an indication of whether anisotropic \gls{wm} is present within the tumour boundary (Fig. \ref{fig:fa_hist}).
+In-depth exploration of such additional distortion models was not pursued for this project, principally because the relevant clinical cases are far less likely to be indicated for surgical resection owing to the grave risk to infiltrated structures.
+Nevertheless, accurate \gls{wm} imaging could still be informative in assessing the lesion and informing treatment plans such as radiotherapy targeting\autocite{Jena2005,Berberat2014}, so the extension of this framework to include robust handling of infiltration could be an interesting avenue for future work.
 
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
   \includegraphics{chapter_4/tumour_fa.pdf}}
-  \caption{A series of paediatric brain tumour cases. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived directionally encoded colour maps overlaid. Patients 4 and 5 have infiltrating tumours centred on the left and right basal ganglia respectively. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 4 and 5, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
+  \caption[Intra-tumoural FA indicates infiltration]{A series of paediatric brain tumour cases from retrospective \gls{gosh} data. For each subject an axial slice through the tumour centre is displayed, with \gls{dti}-derived \gls{dec} \gls{fa} maps overlaid. Patients 4 and 5 have infiltrating tumours centred on the left and right basal ganglia respectively. Histograms depict the \gls{fa} values within the entire brain volume (including the tumour) and tumour volume only. The two infiltrating tumours, 4 and 5, have higher overall \gls{fa} values than the rest of the brain, indicating the presence of infiltrated anisotropic white matter within the tumour.}
   \label{fig:fa_hist}
 \end{figure}
 
 \begin{figure}[htb!]
   \includesvg[width=\textwidth,pretex=\small\sffamily]{chapter_4/ventricles.svg}
-  \caption{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. Arrows indicate ventricle compression not fully captured in the deformation model. \textbf{a.} \gls{btc} sub-PAT03. \textbf{b.} \gls{btc} sub-PAT26}
+  \caption[Ventricle deformation examples]{Examples of ventricle deformation under tumour pressure, and tumour deformation modelling in template image. Arrows indicate ventricle compression not fully captured in the deformation model. \textbf{\sffamily a.} \gls{btc} sub-PAT03. \textbf{\sffamily b.} \gls{btc} sub-PAT26}
   \label{fig:ventricles}
 \end{figure}
 
 A second key limitation of the present deformation model relates to the characteristics of the surrounding tissues rather than the tumour itself.
-The displacement of a position in the brain $P$ depends only on the distances between it, the tumour, and the brain surface.
+The displacement of a position $P$ in the brain depends only on the distances between it, the tumour, and the brain surface.
 Otherwise, the brain is treated as a homogenous mass, when in reality it comprises regions with very different mechanical properties.
 This becomes most apparent when we observe the deformations involving the ventricles.
 The ventricles, forming a part of the wider \gls{csf} network, are far more compressible than \gls{wm} or \gls{gm}, allowing them to often absorb to a large extent the compressive forces exerted by the tumour and causing them to collapse more than the adjacent tissue.
 These tissue-dependent effects are completely omitted from the presented model, leading to mis-estimations of the deformations surrounding ventricles in some cases (Fig. \ref{fig:ventricles}).
 Controlling the magnitude of deformation adjacent to the tumour by adjusting the deformation decay constant $\lambda$ can mitigate this affect to an extent, however this increases the need for case-by-case manual parameter adjustment, which we wish to avoid.
 Ultimately, accurate registration throughout the brain cannot be achieved with such a simple model, as indeed was never the aim.
-Future work could investigate the feasibility of combining the radial deformation with adaptable tissue-dependent elasticity, modelled on previous similar works in the registration space\autocite{Rohde2003,Duay2004}.
+Future work could investigate the feasibility of combining the radial deformation with adaptable tissue-dependent elasticity, modelled on previous similar works within the registration literature\autocite{Rohde2003,Duay2004}.
