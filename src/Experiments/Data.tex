@@ -47,7 +47,9 @@ For these subjects, the same preprocessing steps were applied as in the set of 4
 
 The recently released \textit{TractoInferno} database (v1.1.1, available at \url{https://openneuro.org/datasets/ds003900/versions/1.1.1})\autocite{Poulin2022a,Poulin2022}, created as an open dataset to support the training and comparison of machine learning tractography algorithms, contains diffusion and $T_1$-weighted \gls{mri} scans for 284 subjects pooled from several studies, accompanied by reference streamline tractography bundle reconstructions produced using four different tracking algorithms and the RecoBundlesX automatic streamline clustering method \autocite{Garyfallidis2018,Rheault2020a}, followed by semi-automatic quality control.
 Of the 284 subjects included in the full \textit{TractoInferno} database, the 80 subjects with tractography of all of the \gls{cst}, \gls{or}, \gls{ifof} and \gls{af} were selected.
-Nine subjects were excluded from the final analysis due to inadequate non-linear registration performance resulting in failed targeted \gls{roi} tractography (see Section \ref{sec:methods}), leaving a final 71 subjects.
+Nine subjects were excluded from the final analysis due to poor non-linear registration performance resulting in failed targeted \gls{roi} tractography (see Section \ref{sec:methods}), leaving a final 71 subjects.
+Excluding these subjects was preferable to manually tweaking the \gls{roi} registration to ensure all data was processed equally and reproducibly.
+Note that the non-linear registration in question was independent from the linear registration required to align the tractfinder atlases to each subject.
 Diffusion acquisition parameters and preprocessing steps are described in detail in \textcite{Poulin2022} and summarised in Table \ref{tab:datasets}, and all data was additionally resampled to 2.3~mm isotropic voxels, the lowest resolution present in the dataset and one in line with the other datasets.
 
 \subsection{Clinical (GOSH \& NHNN)}
