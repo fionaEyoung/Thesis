@@ -334,6 +334,7 @@ While the anatomical fidelity of the resulting atlases represents a particular s
 In order to produce a direct and objective comparison with TractSeg, a new set of tract atlases were created from the TractSeg DKFZ reference bundles\autocite{Wasserthal2018b} in the HCP105 dataset, using the same split into training and testing subjects as used in the deep learning model (published version).
 TractSeg was trained on 63 subjects and tested on the remaining 42, and here the same was done for tractfinder (where ``training'' means constructing the atlas from individual bundles as described in Chapter \ref{chap:atlas}), even though tractfinder atlases can be constructed from just 10-15 subjects (see Section \ref{sec:ntrain}).
 Since the original TractSeg paper includes 72 tracts (including both left and right instances of non-commissural tracts and multiple subdivisions of tracts such as the corpus callosum or anterior thalamic radiation) and the performance varied substantially across tracts, tractfinder was run for all tracts for completeness as well as the four (\gls{af}, \gls{cst}, \gls{ifof}, \gls{or}) studied thus far.
+For this experiment, a tractfinder binarisation threshold of 0.01 applies, to more closely approximate the behaviour of TractSeg, which favours larger segmentation volumes.
 
 \begin{figure}[htb!]
   \makebox[\linewidth][r]{%
@@ -363,8 +364,8 @@ Tractfinder based on \gls{ssst} \gls{csd} is much more sensitive to these small 
 \begin{figure}
   \includesvg[width=\textwidth,pretex=\sffamily\small]{chapter_5/tumours.svg}
   \caption[Example tractfinder results in tumour patients]{Tractfinder maps for selected \glsentryshort{btc} and clinical subjects. Tumours or resection cavities are marked with asterisks (*), where a double asterisk (**) indicates that tumour deformation modelling was applied.
-  \textbf{\sffamily a.} Right \gls{or} mapped in \gls{btc} subject PAT16 with a right fronto-temporal anaplastic astrocytoma (\gls{who} grade 2--3).
-  \textbf{\sffamily b.} Right \gls{cst} mapped in \gls{btc} subject PAT26 with a right temporal anaplastic astrocytoma (\gls{who} grade 3).
+  \textbf{\sffamily a.} Right \gls{or} mapped in \gls{btc} subject PAT16 with a right fronto-temporal anaplastic astrocytoma (\glsentryshort{who} grade 2--3).
+  \textbf{\sffamily b.} Right \gls{cst} mapped in \gls{btc} subject PAT26 with a right temporal anaplastic astrocytoma (\glsentryshort{who} grade 3).
   \textbf{\sffamily c.} Right \gls{or} mapped in \gls{nhnn} subject 6, intraoperative scan, with a right temporal oligodendroglioma (\glsentryshort{who} grade 2).
   \textbf{\sffamily d.} Right \gls{af} mapped in \gls{btc} subject PAT03 with a right parietal meningioma (\glsentryshort{who} grade 1).
   \textbf{\sffamily e.} Left \gls{af} mapped in \gls{gosh} subject 4, intraoperative scan, with a left temporal pleomorphic xanthoastrocytoma (\glsentryshort{who} grade 2).
