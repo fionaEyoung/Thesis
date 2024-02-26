@@ -1,7 +1,10 @@
 \chapter{Tract orientation atlases and mapping}
 \label{chap:atlas}
 
-The chosen approach to fulfil the aims laid out in Chapter \ref{chap:problem} combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation, and is named \textit{tractfinder}.
+To fulfil the aims laid out in Chapter \ref{chap:problem}, a framework loosely modelled on Bayesian statistics was initially proposed, in which the voxel-wise probability of identifying a tract in a given location is determined by neuroanatomically informed prior expectations and the \gls{dmri}-derived evidence supporting those expectations.
+Some early explorations which formed the basis for the work covered in this chapter are described in \textcite{Young2020}.
+The final method combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation, and is named \textit{tractfinder}.
+
 It is simultaneously clear that the task of \gls{wm} tract identification cannot be accomplished without incorporating anatomical priors, and that those priors cannot account for all individual differences.
 Anatomical priors can be automatically incorporated for streamline tractography, as is done for several prior works including the \gls{fsl} tool XTRACT\autocite{Warrington2020} and the white matter query language (WMQL) framework\autocite{Wassermann2016}.
 These approaches still rely on tractography as the means for parsing the local orientation information in the test subject, and consequently inherit many associated drawbacks such as the computational time and power required for whole brain tractography, or the difficulties tracking through oedema or around tumours.
