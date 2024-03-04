@@ -3,11 +3,35 @@
 The growing availability of advanced \gls{mri} capabilities in health centres is bringing attention to the shortcomings of current image processing techniques in fully exploiting potential benefits for patients.
 In a small internal survey of five neuroradiologists and neurosurgeons at \gls{gosh}, all respondents expressed that they would find a tool for intraoperative imaging of \gls{wm} bundles after brain shift to be either slightly (2/5) or very (3/5) useful, while confirming reservations about the reliability or accuracy of tractography.
 Against this background, this thesis has set out to explore the current capabilities of \gls{dmri} to map brain \gls{wm} for surgical planning and neuronavigation, and propose a novel technique to fulfil the requirements for rapid and robust \gls{wm} tract detection.
-Guided by the objectives set out in Chapter \ref{chap:problem}, the proposed pipeline, called tractfinder, involves constructing tract-specific orientation atlases which are compared with a subject's \gls{fod} image, to achieve direct voxel-wise segmentation with incorporated \textit{a priori} anatomical knowledge.
+The proposed pipeline, called tractfinder, involves constructing tract-specific orientation atlases which are compared with a subject's \gls{fod} image, to achieve direct voxel-wise segmentation with incorporated \textit{a priori} anatomical knowledge.
+Chapter \ref{chap:problem} set out four specific objectives to guide the developement process, which have each been addressed as follows:
+
+\begin{itemize}
+
+
+\item[--]\textit{Streamline tracking at the point of application is to be avoided, owing to its demands on resources and expertise and vulnerability to pathology.
+Instead the rich orientation information available in \gls{dmri} acquisitions should be directly compared with} a priori \textit{tract feature knowledge to infer the tract's likely location in the target subject.}
+
 Each atlas is constructed from meticulously filtered training streamlines based on available consensus neuroanatomical definitions which are then mapped to voxel-wise orientation distributions using \gls{tod} imaging and averaged over the training population (Chapter \ref{chap:atlas}).
 Upon registration with the target image, the tract's location is estimated by comparing the voxel-wise tract orientation and spatial priors with the \gls{fod} modelled from \gls{dmri} data, which can be achieved by taking the inner product of the two spherical distributions.
+Thus although streamline tractography plays a role in the one-time creation of the atlases, it is not employed in subsequent application to subject data.
 If large tumour deformation effects are present in the image, then the atlas is adjusted accordingly with an exponential radial deformation model (Chapter \ref{chap:reg}) prior to computing the tract map.
 Through detailed evaluation against benchmark methods presented in Chapter \ref{chap:eval}, tractfinder has been shown to produce consistent and accurate segmentations at a standard comparable with streamline tractography and deep learning, issues with variable tract definitions and reference data quality notwithstanding.
+
+\item[--]\textit{Applicability and robustness to clinical data and specifically brain tumour patient data featuring large spatial distortions is paramount.}
+
+The addition of tumour deformation modelling introduces explicit patient-specific lesion awareness unique to tractfinder among state-of-the-art \gls{wm} tract reconstruction techniques.\autocite{Coenen2005a}
+Even so, challenges remain in the translation to real-world clinical application.
+Given that tumour infiltration and oedema affect diffusion measurements and thus all downstream processing and modelling, we cannot claim that these effects do not impact tract mapping using tractfinder.
+In addition, while steroid medications, commonly administered to control oedema, are known to influence $T_2$-w and \gls{dmri} signals\autocite{Steens2005,Moll2020}, little is understood about their effects on \gls{dmri}-based \gls{wm} connectivity imaging or tractography\autocite{Coenen2005a}.
+Indeed, it has been hypothesised that by decreasing peri-tumoural oedema and thereby increasing \gls{fa} in affected areas, steroids may serve to improve fibre imaging quality\autocite{Coenen2005a}, though without further investigation the influence of steroid treatment on \gls{dmri} parameters should be treated as unknown and possibly significant.
+
+However, a voxel-wise approach is not susceptible to a compounding of errors in the same way streamline tractography is, where oedema in one part of the tract can derail tracking for the entire bundle, including parts not directly affected by infiltration.
+Where disturbed diffusion does result in lower tractfinder values, they can be interpreted in the context of other imaging and even provide clinically useful information about \gls{wm} integrity.
+By contrast, we have seen examples of the deep learning method TractSeg failing to fully recognise tracts disturbed by tumours (Sections \ref{sec:quant}, \ref{sec:case}), displaying a lack of explainability that is unacceptable for effective clinical translation.
+In this way, the requirement of a clinically applicable and robust method is achieved, although this has yet to be rigorously verified in a prospective study (see Section \ref{sec:future}).
+
+\item[--]\textit{A pipeline compatible with the specific constraints of the intraoperative environment, including an acquisition--to--result timescale of under ten minutes, and minimal to no reliance on user input.}
 
 Several design choices in the tractfinder pipeline are supported by the objective to keep point-of-application processing time and user-interaction to a minimum.
 The anatomical priors, which would for tractography either be drawn by hand or automatically via cortical parcellation or deformable registration, are provided by the tract atlases which also account for a degree of inter-subject variability.
@@ -16,14 +40,10 @@ It is also applicable to challenging clinical data without need for manually adj
 Using the \gls{sh} basis for representing orientation distribution data allows for efficient inner product computation, and could flexibly support alternative comparison metrics.
 Overall, the full pipeline can be run in under five minutes for a single tract including minimal preprocessing, with the only potential need for user input being the choice of tumour deformation model parameter $\lambda$, if the default adaptive value produces suboptimal results.
 
-Given that tumour infiltration and oedema affect diffusion measurements and thus all downstream processing and modelling, we cannot claim that these effects do not impact tract mapping using tractfinder.
-However, a voxel-wise approach is not susceptible to a compounding of errors in the same way streamline tractography is, where oedema in one part of the tract can derail tracking for the entire bundle, including parts not directly affected by infiltration.
-Where disturbed diffusion does result in lower tractfinder values, they can be interpreted in the context of other imaging and even provide clinically useful information about \gls{wm} integrity.
-By contrast, we have seen examples of the deep learning method TractSeg failing to fully recognise tracts disturbed by tumours (Sections \ref{sec:quant}, \ref{sec:case}), displaying a lack of explainability that is unacceptable for effective clinical translation.
-In this way, the requirement of a clinically applicable and robust method is achieved, although this has yet to be rigorously verified in a prospective study (see Section \ref{sec:future}).
+\item[--]\textit{The training data requirements should be kept to a minimum, to allow flexibility and adaptability to new tracts or modified tract definitions in an environment where obtaining and curating high quality reference data is restricted.}
 
-A final stipulation was to keep reference data requirements for atlas creation to a minimum, to accommodate evolving neuroanatomical definitions and the difficulty in producing high quality reconstructions.
 With only 16 training subjects used for the original atlases, and subsequent analysis presented in Section \ref{sec:ntrain} indicating that as few as ten may be sufficient, tractfinder has a significant advantage over more data-intensive statistical and deep learning alternatives.
+This minimal reference data dependence should enable tractfinder to accommodate evolving neuroanatomical definitions and the difficulty in producing high quality reconstructions.
 
 The work described in this thesis came about during a time when increasingly sizeable contingents of the research and medical communities are focussing minds on the potential of machine learning techniques to disrupt hitherto intractable problems.
 In the \gls{wm} imaging space, machine learning is gaining traction both for direct segmentation methods and as a means for finally overcoming the fundamental roadblocks in streamline tractography which have entangled researchers for years.
@@ -36,6 +56,8 @@ We have seen this in Section \ref{sec:quant} with the \textit{TractoInferno} dat
 Work on single-shot and transfer learning as discussed in Section \ref{sec:ntrain} has underscored the need for methods which can easily be retrained or extended to support new tracts as and when they become relevant.
 In addition, a key concern in the translation of complex ``black box'' models is that clinical decision making must remain traceable and transparent, including when aided by computers.
 In this light, a flexible atlas, which can be re-trained if needed using only a handful of exemplar datasets and which leads to intuitive and interpretable results can play a unique role alongside machine learning.
+
+\end{itemize}
 
 \section{Limitations and future directions}\label{sec:future}
 
