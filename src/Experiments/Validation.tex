@@ -157,6 +157,11 @@ This indicates that, while if only considering the bundle distance metric, both 
   \label{fig:combobox}
 \end{figure}
 
+It should be noted that this analysis does not attempt to define minimum metric scores acceptable for clinical use, as there are no standards for \gls{wm} tract segmentation accuracy given the difficulties in defining a ground truth.
+The \gls{dice}, for example, does not allow for prioritisation of either sensitivity or specificity, as these are judgements that could currently only be made by an interpreting radiologist on a case-by-case basis.
+Furthermore, a single score for an entire metric does not capture information about spatially varying accuracy.
+If the reconstruction where accurate new the tumour, but not in the brain stem due to the limitations of linear registration, then the resulting overall accuracy score would not fully reflect the clinical usefulness of the reconstruction.
+
 With all this in mind, we find that tractfinder does indeed reliably perform well against targeted streamline tractography across all metrics, with the exception of the \gls{af} and a lesser extent the \gls{ifof} when measured on \gls{dice} or distance metrics.
 There are a couple possible factors which may account for the worse performance for the \gls{af}.
 One is the difficulty in consistently reconstructing association tracts using only \gls{wm} based \glspl{roi} (as opposed to cortical \glspl{roi} which necessitate more extensive image preprocessing), which are unable to adequately constrain the streamlines as they fan out into numerous cortical regions.
