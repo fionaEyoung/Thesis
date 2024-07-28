@@ -22,8 +22,8 @@ jobs:
 
       - name: Get figures from OneDrive
         run: |
-          rclone copy OneDriveReadonly:UCL/Thesis/src/figures ${{ github.workspace }}/src/figs
-          rclone copy OneDriveReadonly:UCL/Thesis/src/draft_figures ${{ github.workspace }}/src/draft_figs
+          rclone copy OneDriveReadonly:UCL/PhD/Thesis/src/figures ${{ github.workspace }}/src/figs
+          rclone copy OneDriveReadonly:UCL/PhD/Thesis/src/draft_figures ${{ github.workspace }}/src/draft_figs
           ls ${{ github.workspace }}/src/*figs
 
       - name: Create an integrated figs source file
