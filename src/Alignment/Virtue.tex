@@ -46,7 +46,7 @@ The required model inputs are the segmentations of the tumour and brain volumes.
 We define the direction $\mathbf{\hat{e}}$, which is the unit vector along the line connecting a point $P(x,y,z)$ anywhere within the brain to the tumour centre of mass, $S$.
 This is the direction along which we assume the tissue at that point to be shifted by the tumour:
 Radially outward from the tumour centre.
-Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarrow{SP}\|$, $D_b$ as the distance from $S$ to the brain surface and $D_t$ as the distance from $S$ to the tumour surface (Fig. \ref{fig:virtue}).
+Along $\mathbf{\hat{e}}$ we also define $D_p$ as the distance  $\|\overrightarrow{SP}\|$, $D_b$ as the distance from $S$ to the brain surface, and $D_t$ as the distance from $S$ to the tumour surface (Fig. \ref{fig:virtue}).
 
 \begin{figure}[htp]
   \centering
@@ -61,13 +61,13 @@ Then for a point in the original image $P = (x,y,z)$ the transformed location in
 \end{align}
 The amount of displacement $\Delta P = kD_ts$ is thus determined by $D_t$, a scale factor $0<s \leq 1$ and a spatially varying displacement factor $k(P)$.
 In \textcite{Nowinski2005}, $k$ is a linear function of $D_p$: $k = 1-\frac{D_p}{D_b}$. \footnote[2]{In the original \textcite{Nowinski2005} article, the deformation is described in reverse, as a shrinking model, and the variables there look a little different. They are consistent with the formulation used here, which has been chosen for ease of conceptualisation. Note that both forward and reverse models are required for different types of image transformation, and will be derived later.}
-This can be conceptualised as a displacement force radiating from the centre of the tumour and decaying linearly with distance, reaching 0 only at the brain boundary.
+This can be conceptualised as a displacement force radiating from the centre of the tumour and decaying linearly with distance, reaching 0 only at the brain boundary (Fig. \ref{fig:k}).
 However, initial experimentations with this model revealed that such a linearly decaying force doesn't do well at capturing the displacement fields observed in real tumour cases.
 The elasticity and compressibility of brain tissue means that the radial force is absorbed by surrounding tissue more rapidly than a linear function accounts for.
 Even with very large tumours, it is common for parts of the brain some distance from the tumour surface to experience no displacement at all, suggesting a  more rapidly decaying function would be a more appropriate choice for $k$.
 
-An exponentially decaying function captures this well, while remaining easily computable, close-form and invertible.
-We begin with a function in the form $k(P) \propto e^{-\lambda \frac{D_p}{D_t}}$.
+An exponentially decaying function captures this well, while remaining easily computable, close-form, and invertible.
+We begin with a function in the form $k(P) \propto e^{-\lambda \frac{D_p}{D_b}}$.
 There are two boundary conditions:
 Points on the brain surface should not be displaced ($k(D_p = D_b) = 0$) and points at the centre of the tumour should be displaced by exactly $D_t$ ($k(D_p = 0) = 1$).
 Note that the latter boundary condition is an assumption reflecting a fully encapsulated tumour, where no normal tissue remains inside the final tumour boundary after displacement.

@@ -15,11 +15,13 @@ Finally, a methodology dependent on large volumes of training data is arguably l
 
 This thesis describes the conceptualisation and implementation of a \gls{wm} tract imaging method tailored to neurosurgical application in light of all considerations laid out above.
 The preceding sections reviewing the current state of the art motivate the following guiding principles and objectives for the proposed method:
-Of course, applicability and robustness to clinical data and specifically brain tumour patient data featuring large spatial distortions is paramount.
-Secondly, streamline tracking at the point of application is to be avoided, owing to its demands on resources and expertise and vulnerability to pathology.
+\begin{itemize}[itemsep=0pt,parsep=0pt]
+\item[--] Streamline tracking at the point of application is to be avoided, owing to its demands on resources and expertise and vulnerability to pathology.
 Instead the rich orientation information available in \gls{dmri} acquisitions should be directly compared with \textit{a priori} tract feature knowledge to infer the tract's likely location in the target subject.
-More generally we require a pipeline compatible with the specific constraints of the intraoperative environment, including an acquisition--to--result timescale of under ten minutes, and minimal to no reliance on user input.
-Finally, the training data requirements should be kept to a minimum, to allow flexibility and adaptability to new tracts or modified tract definitions in an environment where obtaining and curating high quality reference data is restricted.
+\item[--] Applicability and robustness to clinical data and specifically brain tumour patient data featuring large spatial distortions is paramount.
+\item[--] More generally we require a pipeline compatible with the specific constraints of the intraoperative environment, including an acquisition--to--result timescale of under ten minutes, and minimal to no reliance on user input.
+\item[--] The training data requirements should be kept to a minimum, to allow flexibility and adaptability to new tracts or modified tract definitions in an environment where obtaining and curating high quality reference data is restricted.
+\end{itemize}
 
 The remainder of this thesis is divided into two parts.
 A proposed methodology is presented next, consisting of a tract specific statistical atlas expressing priors on spatial and orientational distributions to guide inference in the target image, and a tumour deformation model for adaptability to patient-specific tumour distortions.

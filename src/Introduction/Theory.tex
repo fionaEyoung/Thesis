@@ -81,7 +81,7 @@ The pons also houses a dense arrangement of nuclei and tracts, connecting and in
 The forebrain consists of the diencephalon (thalamus and hypothalamus) and the telencephalon (cerebral hemispheres).
 Central both in importance and in location, the thalamus forms the gateway through which almost all afferent inputs to the forebrain are channeled.
 Its cluster of nuclei relay sensory inputs to their relevant cortical regions, and project diffusely to all regions of the cortex to regulate, it is thought, widespread arousal and attention, and form a feedback loop for sensory and motor integration.
-Ventral to the thalamus, in the suprasellar region, sits the hypothalamus, a centre for endocrine and metabolic regulation.
+Ventral to the thalamus, in the suprasellar region, sits the hypothalamus, a centre for neuroendocrine and metabolic regulation.
 
 Evolutionarily speaking, the cerebral hemispheres are the youngest developments, responsible for much of the complex neural functionality we associate with the general intelligence of modern humans, as well as memory, sensorimotor control, and personality.
 The surface of the cerebral hemispheres, called the cortex, is the site of integration of neural signals and complex neural computation, and is divided into the frontal, parietal, occipital and temporal lobes (Fig. \ref{fig:anat1}).
@@ -116,7 +116,7 @@ Physicians of the 18th and 19th centuries popularised the study of bumps and dip
 Significant advances in the theory of functional localisation came with the seminal studies of aphasia, or disorders of language function, undertaken by Pierre Paul Broca (1824--1880) and Carl Wernicke (1848--1905).
 Each gave their names to regions of the frontal and temporal cortex respectively, after consistently linking specific patterns of aphasia with lesions caused by stroke or injury to those regions.
 Historically, much of the understanding of functions seated in a given cortical area was in this way predicated on case studies involving injury (e.g. through trauma or stroke) to that region.
-This resulted in inevitably imperfect understanding of the affected areas and functions, given that such random injuries are unlikely to precisely hit one isolated functional centre.
+This resulted in an inevitably imperfect understanding of the affected areas and functions, given that such random injuries are unlikely to precisely hit one isolated functional centre.
 Modern non-invasive imaging and measuring techniques have accelerated and refined our study of the brain, however clinical case studies remain significant contributors to the field.
 
 Some cortical regions have been studied and mapped extensively, particularly those associated with easily measured quantities such as external stimuli and motor outputs.
@@ -124,7 +124,7 @@ Consequently, the organisation of the visual, motor, auditory and somatosensory 
 The precise localisation of higher-level functions, on the other hand, such as advanced language, memory, planning, and personality remains elusive, not least because such complex multifaceted phenomena are unlikely to be associated with just a single structural-functional unit\autocite{Catani2007}.
 Indeed, modern neuroscience understands that even seemingly primitive functions, such as visual object identification, involve the integration of information and processing across multiple, often distant cortical loci\autocite{ffytche2005}, and thus there can be no complete understanding of any cognitive function by considering only demarcated cortical areas in isolation:
 The brain is a network, and the unit of connection between nodes is the neural axon.
-%first
+
 Medium and long range connecting axons project from the cortex into a dense subcortical network, in aggregate forming a substance named ``white matter'' (\glsunset{wm}\gls[noindex=false]{wm}) after the pale appearance given by the abundance of insulating myelin.
 \Gls{wm} axons, rather than existing in an unordered tangle, form coherent bundles, or tracts, of fibres connecting similar brain regions (Fig. \ref{fig:ardnoldX4}).
 There are three categories of \gls{wm} tracts:
@@ -147,7 +147,7 @@ In Chapter \ref{chap:atlas} we will further explore difficulties of defining \gl
 
 Neuroscientists, anatomists, and neurologists have increasingly come to recognise the importance of looking beyond the purely localisationist models that focus on cortico-functional organisation, towards the integration of \gls{wm} connectivity into our understanding of cognitive function\autocite{ffytche2005,Catani2007}.
 After all, the axons in \gls{wm} are extensions of the cells that make up \gls{gm}, so there can be no activity of the latter that does not involve the former.
-Indeed, far from being a mere philosophical question about under what framework we study and write about the brain, the so-called hodological view (from Greek \textit{hodos} ``path'') has profound translational implications.
+The study of white matter connectivity, termed ``hodology" (from Greek \textit{hodos} ``path'') and more recently ``connectomics", far from being a mere philosophical question about under what framework we study and write about the brain, has profound translational implications.
 Traditional localisationist approaches to neurosurgery hold, crudely put, that tumours seated within or in close association to ``eloquent'' areas of cortex subserving well studied functions of language, low-level sensory processing and movement, are fundamentally inoperable.
 Meanwhile tumours in areas of ``non-eloquent'' cortex with no known overt functional correlates can be radically resected with few substantial neurological consequences.
 Much of the study into and tools for functional preservation of so-called eloquent areas that will be discussed in Chapter \ref{chap:neurosurgery} adopts this framing.
@@ -159,12 +159,14 @@ As frameworks of neural function continue to evolve alongside our technological 
 Modern neuroscience is a blend of cognitive, systems, computational, psychological, anatomical and molecular domains, each influencing and adding context to the others.
 As such, while the methodologies and experiments presented in the thesis are rooted in \textit{in vivo} structural imaging of individual \gls{wm} tracts, questions around functional tract definitions and surgical relevance will recur throughout.
 
+\vfill
 \begin{figure}[hb!]
   \centering
   \includegraphics[width=0.8\textwidth]{chapter_1/xkcd_1163_debugger.png}
-  \caption*{\href{xkcd \#1163: ``Debugger''}{https://xkcd.com/1163/}}
+  \caption*{\href{https://xkcd.com/1163/}{xkcd \#1163: ``Debugger''}}
   \label{fig:xkcd}
 \end{figure}
+\vfill
 
 \chapter{MRI physics}
 \label{chap:NMR}
@@ -176,14 +178,14 @@ Throughout this section, vector quantities and their associated scalar magnitude
 \section{Nuclei and spin}
 
 \Gls{nmr} is a phenomenon and a technique, in which the interactions between atomic nuclei and external magnetic fields produce characteristic electromagnetic signals.
-Atomic nuclei are made up of protons and neutrons (collectively termed nucleons) held together, despite the electrostatic forces repelling the positively charged protons, by the nuclear force, or residual strong force.
+Atomic nuclei are made up of protons and neutrons (collectively termed nucleons) held together, despite the electrostatic forces repelling the positively charged protons, by the nuclear force.
 The number of protons, or atomic number, in a nucleus determines the element: Every hydrogen atom has exactly one proton, every oxygen atom exactly eight, and so on.
 A given element can have a variable number of neutrons, with the total number of nucleons determining the \textit{isotope} of that atom.
 While \gls{nmr} applies to any atomic species with the appropriate quantum nuclear properties, the vast majority of \gls{mri} applied to human imaging concerns itself only with one:
 The nucleus of a hydrogen atom which, in its most abundant isotope (protium, $^1$H), is a single, positively charged proton.
 
 The particular combination of nucleons determines that nucleus' spin and quantum magnetic moment, properties which in turn determine the effects wrought by an external magnetic field on that nucleus.
-Spin (or spin angular momentum) $\mathbf{S}$ is an intrinsic property of elemental particles, and of their composites, including nuclei\autocite{Eisberg1961}.\footnote[2]{The unique spin quantity of nuclei $I$ arises non-trivially from the interactions of its constituent nucleons' individual spins, however we are concerning ourselves here only with individual protons.}
+Spin (or spin angular momentum) $\mathbf{S}$ is an intrinsic property of elemental particles, and of their composites, including nuclei\autocite{Eisberg1961}.\footnote[2]{The unique spin quantity of nuclei $\mathbf{I}$ arises non-trivially from the interactions of its constituent nucleons' individual spins, however we are concerning ourselves here only with individual protons.}
 Each particle has a fixed, dimensionless spin quantum number $s$ ($\frac{1}{2}$ for single electrons, protons and neutrons) which determines the spin vector's magnitude given by $S = \hslash \sqrt{s(s+1)}$, where $\hslash$ is the reduced Planck constant.
 However, according to the uncertainty principle of quantum mechanics, which posits that the location and momentum of a quantum system cannot be known simultaneously, the total spin angular momentum vector (magnitude \textit{and} direction) cannot be measured.
 Instead, the associated observable quantity is the component of $\mathbf{S}$ along the observed direction, typically arbitrarily designated the $z$-axis, which is determined by another quantum number $S_z = \hslash m_s$.
@@ -197,12 +199,12 @@ Under quantum mechanics, a spin system can only inhabit a quantised set of possi
 In the absence of an external magnetic field, the spin eigenstates $m_s = \pm \frac{1}{2}$ are degenerate, meaning their energies are equal and neither is more likely than the other, but they split into different energy levels, in a phenomenon called the Zeemann effect, under the influence of an external magnetic field $\mathbf{B}_0$.
 The ratio of spins in spin-up vs spin-down state is given by the Boltzmann distribution, which describes the expected value of the energy states over all possible quantum superpositions:
 \begin{align}
-  \frac{N_{\uparrow}}{N_{\downarrow}} = e^{\Delta E / k T} = e^{\gamma \hslash B / k T}, \label{eq:boltzmann}
+  \frac{N_{\uparrow}}{N_{\downarrow}} = e^{\Delta E / k T} = e^{\gamma \hslash B_0 / k T}, \label{eq:boltzmann}
 \end{align}
-where $\Delta E$ is the difference in energy between the two states and is proportional to the external field strength $B$.
+where $\Delta E$ is the difference in energy between the two states and is proportional to the external field strength $B_0$.
 The external magnetic field also exerts a torque on the spin magnetic moments, causing them to precess about $\mathbf{B}_0$, in a phenomenon known as \textit{Larmor precession} (Fig. \ref{fig:larmor}), at an angular frequency of
 \begin{equation}
-  \omega = \gamma B
+  \omega = \gamma B_0
 \end{equation}
 
 \begin{figure}
@@ -210,7 +212,7 @@ The external magnetic field also exerts a torque on the spin magnetic moments, c
     \includesvg[height=0.4\textwidth,pretex=\small\sffamily]{chapter_1/nmr.svg}\qquad%
     \includesvg[height=0.4\textwidth,pretex=\small\sffamily]{chapter_1/relaxation.svg}
   \caption[Larmor precession and magnetisation relaxation]{\Glsentrylong{mri} depends on quantum interactions between nuclei and magnetic fields.
-  \textbf{\sffamily a.} Larmor precession of nucleus with spin magnetic moment $\bm{\mu}$ around external magnetic field $\mathbf{B}_0$.
+  \textbf{\sffamily a.} Larmor precession of a nucleus with spin magnetic moment $\bm{\mu}$ about an external magnetic field $\mathbf{B}_0$.
   \textbf{\sffamily b.} Immediately after a 90\textdegree\ radio frequency excitation into the $xy$-plane, the bulk magnetisation $\mathbf{M}$ relaxes back to equilibrium where $\mathbf{M}_z=\mathbf{M}_0$ and $\mathbf{M}_{xy}=0$ in a spiral pattern, inducing an oscillating electrical signal in the \glsentryshort{mri} receiver equipment.}\label{fig:larmor}
 \end{figure}
 
@@ -349,7 +351,7 @@ Finally if both $TR\gg T_1$ and $TE\ll T_2$ then contrast derived from different
 Sequences with $T_1$- or $T_2$-weighted contrast are some of the most common sequences employed in clinical and research \gls{mri} as they can produce images with high resolution and anatomical detail (Fig. \ref{fig:ortho}).
 Alongside these so-called ``conventional'' contrasts exist a large collection of advanced imaging techniques that are sensitive to particular tissue properties or activity.%
 \footnote[2]{The term ``contrast'' is also associated in clinical contexts with the use of external agents (typically injected) with paramagnetic properties that shorten local $T_1$ times and increase image brightness particularly in blood vessels and in areas of \gls{bbb} disruption, making it an important tool in oncological imaging. This will be referred to specifically as \gls[noindex=false]{dce} \gls{mri}, or simply contrast enhancement, where applicable, while here we will use ``contrast'' more generally to refer to manipulation of pulse sequence elements to highlight different tissue properties.}
-\gls{fmri}, for example, involves the detection of subtle contrast changes produced by changes in the relative concentrations of oxygenated and deoxygenated blood, which have different magnetic properties and influence the local magnetic field accordingly.
+\Gls{fmri}, for example, involves the detection of subtle contrast changes produced by changes in the relative concentrations of oxygenated and deoxygenated blood, which have different magnetic properties and influence the local magnetic field accordingly.
 A spike in neural activity within a particular region causes increased flow of oxygen-rich blood to that area, and the resulting local magnetic field disturbances have a measurable effect on proton relaxation, producing a \textit{blood oxygentation level dependent} (BOLD) signal.
 \Gls{fmri} is an important clinical and research tool for measuring association between activity in particular brain areas and observable behaviour or stimuli, such as motor activity, speech, or visual inputs.
 Additionally, by analysing temporal correlations between activation in different brain regions, we can deduce functional connectivity between them and establish a model of a brain's functional network.

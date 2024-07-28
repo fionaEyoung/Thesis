@@ -9,6 +9,7 @@
             maxcitenames=1,
             maxbibnames=50,
             style=nature,
+            defernumbers=true,
             backend=bibtex]{biblatex} % Add citation styles as needed (see docs for biblatex)
 \IfFileExists{bibliographies/Neuroimaging.bib}
           {\addbibresource{bibliographies/Neuroimaging.bib}}
@@ -47,3 +48,16 @@
      {\thefield{entrytype}}.}
   {\multicitedelim}
   {\usebibmacro{postnote}}
+
+
+\newrobustcmd*{\nextcitefullname}{%
+  \AtNextCite{%
+    \DeclareNameAlias{labelname}{given-family}%
+    \togglefalse{abx@bool@giveninits}}}
+
+\newcommand\citeauthorfullname{%
+  \nextcitefullname\citeauthor}
+
+\newcommand\Citeauthorfullname{%
+  \nextcitefullname
+  \Citeauthor}

@@ -1,7 +1,10 @@
 \chapter{Tract orientation atlases and mapping}
 \label{chap:atlas}
 
-The chosen approach to fulfil the aims laid out in Chapter \ref{chap:problem} combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation, and is named \textit{tractfinder}.
+To fulfil the aims laid out in Chapter \ref{chap:problem}, a framework loosely modelled on Bayesian statistics was initially proposed, in which the voxel-wise probability of identifying a tract in a given location is determined by neuroanatomically informed prior expectations and the \gls{dmri}-derived evidence supporting those expectations.
+Some early explorations which formed the basis for the work covered in this chapter are described in \textcite{Young2020}.
+The final method combines aspects of both traditional atlas-based and direct data-driven approaches to segmentation, and is named \textit{tractfinder}.
+
 It is simultaneously clear that the task of \gls{wm} tract identification cannot be accomplished without incorporating anatomical priors, and that those priors cannot account for all individual differences.
 Anatomical priors can be automatically incorporated for streamline tractography, as is done for several prior works including the \gls{fsl} tool XTRACT\autocite{Warrington2020} and the white matter query language (WMQL) framework\autocite{Wassermann2016}.
 These approaches still rely on tractography as the means for parsing the local orientation information in the test subject, and consequently inherit many associated drawbacks such as the computational time and power required for whole brain tractography, or the difficulties tracking through oedema or around tumours.
@@ -96,7 +99,7 @@ Atlases have been created for the most commonly indicated pathways in neurosurgi
   \label{fig:or}
 \end{SCfigure}
 
-As a projection tract, the \glsreset{or}[noindex=false]\gls{or} is among the more easily definable in terms of its end points.
+As a projection tract, the \glsreset{or}\gls[noindex=false]{or} is among the more easily definable in terms of its end points.
 Arising from the \glsreset{lgn}\gls[noindex=false]{lgn} of the thalamus, its fibres swoop around the lateral ventricle, some directly and some in an elaborate arc reaching as far forward as the tip of the lateral ventricle's temporal pole before curving back towards the occipital lobe in a formation named \glsreset{ml}\gls[noindex=false]{ml} (Fig. \ref{fig:or})\autocite{Sarubbo2015}, the extent and shape of which vary significantly between individuals\autocite{Ebeling1988,Yogarajah2009}.%first
 As it projects towards the most posterior reaches of the occipital lobe, the \gls{or} forms part of the \gls[noindex=false]{ss}, a confluence of fibres superficial to the lateral ventricle, comprising the antero-posteriorly oriented fibres of association and projection fibres of the occipital, temporal and frontal lobes\autocite{Maldonado2021}.
 The fibres of the \gls{or}, conferring low-level visual data on contrast, colour and shapes, then terminate in the primary visual areas of the occipital cortex surrounding the calcarine fissure, a sulcus on the medial surface of the occipital lobe.
@@ -277,7 +280,7 @@ The absolute number of retained streamlines is of little consequence to subseque
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table*}[t]
-  \caption[Streamline filtering statistics]{Streamline filtering statistics. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof,vof}}
+  \caption[Streamline filtering statistics]{Total streamline counts (all atlas subjects combined) before and after bulk filtering. Abbreviations: \acrolist{af,crp,cc,cst,ec,slf,sfof,vof}}
   \label{tab:filt}
   \small
   \begin{tabularx}{\textwidth}{llllll X}\toprule
