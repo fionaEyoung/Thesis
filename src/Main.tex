@@ -46,8 +46,10 @@
 %  you intend to print double-sided. Note that this is
 %  *specifically permitted* by the UCL thesis formatting
 %  guidelines.
-\documentclass[12pt,phd,a4paper,twoside]{ucl_thesis}
-
+\documentclass[12pt,phd,twoside]{ucl_thesis_executive}
+% \usepackage[]{geometry}
+\usepackage{layout}
+\usepackage{showframe}
 % Package configuration:
 \input{setup/MainPackages}
 
@@ -75,6 +77,7 @@
 
 \newcommand\note[1]{\ifdraft{{\large\textcolor{red}{#1}}}{}}
 %TC:macro \note [ignore]
+\includeonly{Frontback/Preamble,Introduction/Introduction,Introduction/Theory}
 \begin{document}
 
 % \nobibliography*
