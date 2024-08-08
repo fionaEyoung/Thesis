@@ -109,15 +109,19 @@
 % This can be useful for wide graphs or other figures.
 %\usepackage{isorot}
 
+\newlength{\figwidth}\setlength{\figwidth}{\dimexpr \textwidth + \marginparwidth + \marginparsep\relax}
+
 % The caption package adds more options for caption formatting.
 % This set-up makes hanging labels, makes the caption text smaller
 %  than the body text, and makes the label bold.
 % Highly recommended.
-\usepackage[format=hang,font=small,labelfont={bf,sf},labelsep=quad]{caption}
+\usepackage[format=plain,font=small,labelfont={bf,sf},labelsep=quad]{caption}
 \usepackage[labelformat=simple]{subcaption}
-\usepackage[innercaption,raggedright]{sidecap}
+\usepackage[outercaption,raggedright]{sidecap}
 \sidecaptionvpos{figure}{t}
-\AtBeginEnvironment{SCfigure}{\captionsetup{format=plain}}
+% \AtBeginEnvironment{SCfigure}{\captionsetup{format=plain}}
+\captionsetup{margin={0pt,-\dimexpr\marginparwidth + \marginparsep},twoside}
+\captionsetup[SCfigure]{margin={0pt,-\dimexpr\marginparwidth + \marginparsep},twoside}
 
 % If you're getting into defining your own commands, you might want
 %  to check out the etoolbox package -- it defines a few commands

@@ -147,14 +147,14 @@
 %  flag and ensure that the appropriate options are passed onto the superclass.
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[1997/12/01]
-\ProvidesClass{ucl_thesis}[\filedate\space\fileversion\space UCL MRes/MPhil/PhD Thesis class]
+\ProvidesClass{ucl_thesis_executive}[\filedate\space\fileversion\space UCL MRes/MPhil/PhD Thesis class]
 \DeclareOption{mres}{\renewcommand\@degree@string{\@mres}}
 \DeclareOption{MRes}{\renewcommand\@degree@string{\@mres}}
 \DeclareOption{mphil}{\renewcommand\@degree@string{\@master}}
 \DeclareOption{MPhil}{\renewcommand\@degree@string{\@master}}
 \DeclareOption{phd}{\renewcommand\@degree@string{\@doctor}}
 \DeclareOption{PhD}{\renewcommand\@degree@string{\@doctor}}
-\DeclareOption{twocolumn}{\ClassError{ucl_thesis}{Option `twocolumn' not supported for UCL theses}{}}
+\DeclareOption{twocolumn}{\ClassError{ucl_thesis_executive}{Option `twocolumn' not supported for UCL theses}{}}
 \newif \if@draftmode
 \@draftmodefalse
 \DeclareOption{draft}{\@draftmodetrue\PassOptionsToClass{draft}{book}}
@@ -186,18 +186,19 @@
 %      not less than 20 mm (.75 inches)."
 %
 %    \begin{macrocode}
-
-\setlength \hoffset{-21.5mm}
-\setlength \voffset{-21.5mm}
-\setlength \textwidth{118.5mm}
-\setlength \textheight{198.5mm} % I think you need some extra vertical space for headers and page numbers
-\setlength \topmargin{17.1mm}
-\setlength \oddsidemargin {33mm} % Allow a mm for the bleed.
-\if@twoside
-  \setlength \evensidemargin {17mm}
-\else
-  \setlength \evensidemargin {33mm}
-\fi
+%
+% \setlength \hoffset{-1in}
+% \setlength \voffset{-1in}
+\setlength \textwidth{140mm}
+\setlength \textheight{200mm} % I think you need some extra vertical space for headers and page numbers
+\setlength \topmargin{-10mm}
+\setlength \marginparsep{0mm}
+% \setlength \oddsidemargin {33mm} % Allow a mm for the bleed.
+% \if@twoside
+%   \setlength \evensidemar gin {17mm}
+% \else
+%   \setlength \evensidemargin {33mm}
+% \fi
 %    \end{macrocode}
 %  \begin{macro}{\ps@headings}
 %  Define a new style so that all the standard styles are available.
