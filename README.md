@@ -2,7 +2,7 @@
 
 ## Fibre tract imaging with intraoperative diffusion MRI for neurosurgical navigation
 
-A doctoral research project by Fiona Young.
+A doctoral research project by Fiona Young. Full thesis available for download [here](https://discovery.ucl.ac.uk/id/eprint/10188778/).
 
 Undertaken at University College London, funded by the UCL EPSRC Centre for Doctoral Training in Intelligent, Integrated Imaging In Healthcare [(i4health)](https://www.ucl.ac.uk/intelligent-imaging-healthcare/epsrc-centre-doctoral-training-intelligent-integrated-imaging-healthcare-i4health)
 
